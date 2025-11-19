@@ -17,7 +17,8 @@ export default function Home() {
 
   const searchMutation = useMutation({
     mutationFn: async (params: SearchJobRequest) => {
-      return apiRequest<SearchResult[]>("POST", "/api/search", params);
+      const response = await apiRequest("POST", "/api/search", params);
+      return await response.json() as SearchResult[];
     },
     onSuccess: (data) => {
       console.log("Search response data:", data);
