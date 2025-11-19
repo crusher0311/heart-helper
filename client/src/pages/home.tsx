@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 import { SearchInterface } from "@/components/search-interface";
 import { JobCard } from "@/components/job-card";
 import { JobDetailPanel } from "@/components/job-detail-panel";
 import { EmptyState } from "@/components/empty-state";
 import { JobCardSkeleton, JobDetailSkeleton } from "@/components/loading-skeleton";
+import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles } from "lucide-react";
 import type { SearchJobRequest, SearchResult } from "@shared/schema";
 
@@ -20,6 +21,7 @@ export default function Home() {
     },
     onSuccess: (data) => {
       setResults(data);
+      queryClient.invalidateQueries({ queryKey: ["/api/search"] });
     },
   });
 
@@ -38,7 +40,7 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-card sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-primary-foreground" />
@@ -106,9 +108,11 @@ export default function Home() {
                 matchScore={selectedResult.matchScore}
               />
             ) : results && results.length > 0 ? (
-              <div className="sticky top-24 p-8 rounded-lg border border-dashed text-center text-muted-foreground">
-                <p className="text-sm">Select a job to view details</p>
-              </div>
+              <Card className="sticky top-24">
+                <CardContent className="p-8 text-center">
+                  <p className="text-sm text-muted-foreground">Select a job to view details</p>
+                </CardContent>
+              </Card>
             ) : isLoading ? (
               <div data-testid="loading-detail">
                 <JobDetailSkeleton />
