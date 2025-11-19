@@ -37,31 +37,43 @@ export function registerRoutes(app: Express) {
         totalCost: job.subtotal,
       }));
 
-      // Use AI to score and rank matches
-      const matches = await scoreJobMatches(
-        {
-          vehicleMake: params.vehicleMake,
-          vehicleModel: params.vehicleModel,
-          vehicleYear: params.vehicleYear,
-          vehicleEngine: params.vehicleEngine,
-          repairType: params.repairType,
-        },
-        candidatesForAI
-      );
+      // Try AI scoring, but fall back to simple results if it fails
+      let results: SearchResult[];
+      
+      try {
+        const matches = await scoreJobMatches(
+          {
+            vehicleMake: params.vehicleMake,
+            vehicleModel: params.vehicleModel,
+            vehicleYear: params.vehicleYear,
+            vehicleEngine: params.vehicleEngine,
+            repairType: params.repairType,
+          },
+          candidatesForAI
+        );
 
-      // Combine AI scores with job data
-      const results: SearchResult[] = matches
-        .map((match) => {
-          const job = candidates.find((c) => c.id === match.jobId);
-          if (!job) return null;
+        // Combine AI scores with job data
+        results = matches
+          .map((match) => {
+            const job = candidates.find((c) => c.id === match.jobId);
+            if (!job) return null;
 
-          return {
-            job,
-            matchScore: match.matchScore,
-            matchReason: match.matchReason,
-          };
-        })
-        .filter((r): r is SearchResult => r !== null);
+            return {
+              job,
+              matchScore: match.matchScore,
+              matchReason: match.matchReason,
+            };
+          })
+          .filter((r): r is SearchResult => r !== null);
+      } catch (aiError) {
+        console.log("AI scoring unavailable, returning unscored results:", aiError);
+        // Return results without AI scoring
+        results = candidates.slice(0, 20).map((job) => ({
+          job,
+          matchScore: 85,
+          matchReason: "Match based on repair type (AI scoring unavailable)",
+        }));
+      }
 
       // Log search request
       await storage.createSearchRequest({
