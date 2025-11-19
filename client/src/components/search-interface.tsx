@@ -53,6 +53,12 @@ export function SearchInterface({ onSearch, isLoading }: SearchInterfaceProps) {
         <p className="text-sm text-muted-foreground mt-2">
           Find similar repairs from your historical data
         </p>
+        <div className="mt-3 p-2 rounded-md bg-muted/50 border border-border">
+          <p className="text-xs text-muted-foreground">
+            <strong>Note:</strong> Vehicle filters are currently informational only. 
+            Search results are based on repair type across all vehicles.
+          </p>
+        </div>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">

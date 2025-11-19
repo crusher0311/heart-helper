@@ -41,24 +41,13 @@ export class DatabaseStorage implements IStorage {
       ilike(repairOrderJobs.name, `%${params.repairType}%`)
     );
 
-    // If vehicle filters provided, use them to filter via JSONB
-    if (params.vehicleMake) {
-      conditions.push(
-        sql`${repairOrders.rawData}->>'vehicleMake' ILIKE ${`%${params.vehicleMake}%`}`
-      );
-    }
-
-    if (params.vehicleModel) {
-      conditions.push(
-        sql`${repairOrders.rawData}->>'vehicleModel' ILIKE ${`%${params.vehicleModel}%`}`
-      );
-    }
-
-    if (params.vehicleYear) {
-      conditions.push(
-        sql`(${repairOrders.rawData}->>'vehicleYear')::int = ${params.vehicleYear}`
-      );
-    }
+    // NOTE: Vehicle filtering disabled - vehicle data not in database
+    // Vehicle details (make/model/year/engine) are NOT stored in repair_orders.raw_data
+    // Only vehicleId references exist. To enable vehicle filtering:
+    // 1. Create a vehicles table
+    // 2. Sync vehicle data from Tekmetric
+    // 3. Join against vehicles table
+    // For now, search is repair-type only which still returns relevant results
 
     // Execute base query joining jobs with repair orders
     let query = db
