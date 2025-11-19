@@ -1,0 +1,153 @@
+import { useState } from "react";
+import { Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import type { SearchJobRequest } from "@shared/schema";
+
+interface SearchInterfaceProps {
+  onSearch: (params: SearchJobRequest) => void;
+  isLoading?: boolean;
+}
+
+const currentYear = new Date().getFullYear();
+const years = Array.from({ length: 30 }, (_, i) => currentYear - i);
+
+const makes = [
+  "Ford", "Chevrolet", "Toyota", "Honda", "Nissan", "Dodge", "RAM", "Jeep",
+  "GMC", "Subaru", "Hyundai", "Kia", "Mazda", "Volkswagen", "BMW", "Mercedes-Benz",
+  "Audi", "Lexus", "Acura", "Infiniti", "Cadillac", "Lincoln", "Buick", "Chrysler"
+].sort();
+
+export function SearchInterface({ onSearch, isLoading }: SearchInterfaceProps) {
+  const [make, setMake] = useState<string>("");
+  const [model, setModel] = useState<string>("");
+  const [year, setYear] = useState<string>("");
+  const [engine, setEngine] = useState<string>("");
+  const [repairType, setRepairType] = useState<string>("");
+
+  const handleSearch = () => {
+    if (!repairType.trim()) return;
+
+    onSearch({
+      vehicleMake: make || undefined,
+      vehicleModel: model || undefined,
+      vehicleYear: year ? parseInt(year) : undefined,
+      vehicleEngine: engine || undefined,
+      repairType: repairType.trim(),
+    });
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && repairType.trim()) {
+      handleSearch();
+    }
+  };
+
+  return (
+    <Card className="h-fit sticky top-4" data-testid="search-interface">
+      <CardHeader className="space-y-0 pb-4">
+        <CardTitle className="text-lg font-semibold">Search Job History</CardTitle>
+        <p className="text-sm text-muted-foreground mt-2">
+          Find similar repairs from your historical data
+        </p>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="year" className="text-xs font-medium uppercase tracking-wide">
+            Year
+          </Label>
+          <Select value={year} onValueChange={setYear}>
+            <SelectTrigger id="year" data-testid="select-year">
+              <SelectValue placeholder="Select year" />
+            </SelectTrigger>
+            <SelectContent>
+              {years.map((y) => (
+                <SelectItem key={y} value={y.toString()}>
+                  {y}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="make" className="text-xs font-medium uppercase tracking-wide">
+            Make
+          </Label>
+          <Select value={make} onValueChange={setMake}>
+            <SelectTrigger id="make" data-testid="select-make">
+              <SelectValue placeholder="Select make" />
+            </SelectTrigger>
+            <SelectContent>
+              {makes.map((m) => (
+                <SelectItem key={m} value={m}>
+                  {m}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="model" className="text-xs font-medium uppercase tracking-wide">
+            Model
+          </Label>
+          <Input
+            id="model"
+            value={model}
+            onChange={(e) => setModel(e.target.value)}
+            placeholder="e.g., F-150, Camry, Civic"
+            onKeyDown={handleKeyDown}
+            data-testid="input-model"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="engine" className="text-xs font-medium uppercase tracking-wide">
+            Engine <span className="text-muted-foreground font-normal">(Optional)</span>
+          </Label>
+          <Input
+            id="engine"
+            value={engine}
+            onChange={(e) => setEngine(e.target.value)}
+            placeholder="e.g., 3.5L V6, 2.0L I4"
+            onKeyDown={handleKeyDown}
+            data-testid="input-engine"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="repairType" className="text-xs font-medium uppercase tracking-wide">
+            Repair Type <span className="text-destructive">*</span>
+          </Label>
+          <Input
+            id="repairType"
+            value={repairType}
+            onChange={(e) => setRepairType(e.target.value)}
+            placeholder="e.g., front struts, oil change"
+            onKeyDown={handleKeyDown}
+            data-testid="input-repair-type"
+            className="font-medium"
+          />
+        </div>
+
+        <Button
+          onClick={handleSearch}
+          disabled={!repairType.trim() || isLoading}
+          className="w-full font-semibold"
+          data-testid="button-search"
+        >
+          <Search className="w-4 h-4 mr-2" />
+          {isLoading ? "Searching..." : "Search Similar Jobs"}
+        </Button>
+
+        <p className="text-xs text-muted-foreground text-center">
+          AI will find similar vehicles and repair types
+        </p>
+      </CardContent>
+    </Card>
+  );
+}
