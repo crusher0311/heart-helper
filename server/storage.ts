@@ -1,124 +1,33 @@
-// Reference: javascript_database blueprint
-import {
-  vehicles,
-  repairOrders,
-  jobs,
-  laborItems,
-  parts,
-  searchRequests,
-  type Vehicle,
-  type InsertVehicle,
-  type RepairOrder,
-  type InsertRepairOrder,
-  type Job,
-  type InsertJob,
-  type LaborItem,
-  type InsertLaborItem,
-  type Part,
-  type InsertPart,
-  type JobWithDetails,
-  type SearchRequest,
-  type InsertSearchRequest,
+import type {
+  RepairOrder,
+  RepairOrderJob,
+  RepairOrderJobPart,
+  InsertSearchRequest,
+  SearchRequest,
+  SearchJobRequest,
+  JobWithDetails,
+  VehicleInfo,
+  LaborItem,
 } from "@shared/schema";
 import { db } from "./db";
+import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests } from "@shared/schema";
 import { eq, and, or, like, ilike, sql, desc } from "drizzle-orm";
 
 export interface IStorage {
-  // Vehicles
-  getVehicle(id: number): Promise<Vehicle | undefined>;
-  createVehicle(vehicle: InsertVehicle): Promise<Vehicle>;
+  // Search jobs based on criteria
+  searchJobs(params: SearchJobRequest): Promise<JobWithDetails[]>;
   
-  // Repair Orders
-  getRepairOrder(id: number): Promise<RepairOrder | undefined>;
-  createRepairOrder(order: InsertRepairOrder): Promise<RepairOrder>;
-  
-  // Jobs
-  getJob(id: number): Promise<Job | undefined>;
-  getJobWithDetails(id: number): Promise<JobWithDetails | undefined>;
-  searchJobs(params: {
-    vehicleMake?: string;
-    vehicleModel?: string;
-    vehicleYear?: number;
-    repairType: string;
-    limit?: number;
-  }): Promise<JobWithDetails[]>;
-  createJob(job: InsertJob): Promise<Job>;
-  
-  // Labor Items
-  createLaborItem(item: InsertLaborItem): Promise<LaborItem>;
-  getLaborItemsByJobId(jobId: number): Promise<LaborItem[]>;
-  
-  // Parts
-  createPart(part: InsertPart): Promise<Part>;
-  getPartsByJobId(jobId: number): Promise<Part[]>;
-  
-  // Search Requests
-  createSearchRequest(request: InsertSearchRequest): Promise<SearchRequest>;
+  // Create search request log
+  createSearchRequest(data: InsertSearchRequest): Promise<SearchRequest>;
 }
 
 export class DatabaseStorage implements IStorage {
-  // Vehicles
-  async getVehicle(id: number): Promise<Vehicle | undefined> {
-    const [vehicle] = await db.select().from(vehicles).where(eq(vehicles.id, id));
-    return vehicle || undefined;
-  }
-
-  async createVehicle(insertVehicle: InsertVehicle): Promise<Vehicle> {
-    const [vehicle] = await db
-      .insert(vehicles)
-      .values(insertVehicle)
-      .returning();
-    return vehicle;
-  }
-
-  // Repair Orders
-  async getRepairOrder(id: number): Promise<RepairOrder | undefined> {
-    const [order] = await db.select().from(repairOrders).where(eq(repairOrders.id, id));
-    return order || undefined;
-  }
-
-  async createRepairOrder(insertOrder: InsertRepairOrder): Promise<RepairOrder> {
-    const [order] = await db
-      .insert(repairOrders)
-      .values(insertOrder)
-      .returning();
-    return order;
-  }
-
-  // Jobs
-  async getJob(id: number): Promise<Job | undefined> {
-    const [job] = await db.select().from(jobs).where(eq(jobs.id, id));
-    return job || undefined;
-  }
-
-  async getJobWithDetails(id: number): Promise<JobWithDetails | undefined> {
-    const [job] = await db.select().from(jobs).where(eq(jobs.id, id));
-    if (!job) return undefined;
-
-    const [vehicle] = job.vehicleId
-      ? await db.select().from(vehicles).where(eq(vehicles.id, job.vehicleId))
-      : [undefined];
-
-    const [repairOrder] = job.repairOrderId
-      ? await db.select().from(repairOrders).where(eq(repairOrders.id, job.repairOrderId))
-      : [undefined];
-
-    const laborItemsList = await db.select().from(laborItems).where(eq(laborItems.jobId, id));
-    const partsList = await db.select().from(parts).where(eq(parts.jobId, id));
-
-    return {
-      ...job,
-      vehicle,
-      repairOrder,
-      laborItems: laborItemsList,
-      parts: partsList,
-    };
-  }
-
+  
   async searchJobs(params: {
     vehicleMake?: string;
     vehicleModel?: string;
     vehicleYear?: number;
+    vehicleEngine?: string;
     repairType: string;
     limit?: number;
   }): Promise<JobWithDetails[]> {
@@ -129,113 +38,105 @@ export class DatabaseStorage implements IStorage {
 
     // Search repair type in job name (broad search, case-insensitive)
     conditions.push(
-      or(
-        ilike(jobs.name, `%${params.repairType}%`),
-        ilike(jobs.jobCategoryName, `%${params.repairType}%`)
-      )
+      ilike(repairOrderJobs.name, `%${params.repairType}%`)
     );
 
-    // Execute base query
-    let query = db
-      .select()
-      .from(jobs)
-      .where(and(...conditions))
-      .orderBy(desc(jobs.createdDate))
-      .limit(limit);
-
-    const jobsList = await query;
-
-    // Enrich with related data
-    const enrichedJobs: JobWithDetails[] = await Promise.all(
-      jobsList.map(async (job) => {
-        const [vehicle] = job.vehicleId
-          ? await db.select().from(vehicles).where(eq(vehicles.id, job.vehicleId))
-          : [undefined];
-
-        const [repairOrder] = job.repairOrderId
-          ? await db.select().from(repairOrders).where(eq(repairOrders.id, job.repairOrderId))
-          : [undefined];
-
-        const laborItemsList = await db.select().from(laborItems).where(eq(laborItems.jobId, job.id));
-        const partsList = await db.select().from(parts).where(eq(parts.jobId, job.id));
-
-        return {
-          ...job,
-          vehicle,
-          repairOrder,
-          laborItems: laborItemsList,
-          parts: partsList,
-        };
-      })
-    );
-
-    // Filter by vehicle criteria if provided (post-query filtering for more flexibility)
-    let filtered = enrichedJobs;
-
+    // If vehicle filters provided, use them to filter via JSONB
     if (params.vehicleMake) {
-      filtered = filtered.filter(
-        (j) => j.vehicle?.make?.toLowerCase().includes(params.vehicleMake!.toLowerCase())
+      conditions.push(
+        sql`${repairOrders.rawData}->>'vehicleMake' ILIKE ${`%${params.vehicleMake}%`}`
       );
     }
 
     if (params.vehicleModel) {
-      filtered = filtered.filter(
-        (j) => j.vehicle?.model?.toLowerCase().includes(params.vehicleModel!.toLowerCase())
+      conditions.push(
+        sql`${repairOrders.rawData}->>'vehicleModel' ILIKE ${`%${params.vehicleModel}%`}`
       );
     }
 
     if (params.vehicleYear) {
-      // Allow +/- 2 years for flexibility
-      filtered = filtered.filter(
-        (j) => j.vehicle?.year && Math.abs(j.vehicle.year - params.vehicleYear!) <= 2
+      conditions.push(
+        sql`(${repairOrders.rawData}->>'vehicleYear')::int = ${params.vehicleYear}`
       );
     }
 
-    return filtered;
+    // Execute base query joining jobs with repair orders
+    let query = db
+      .select()
+      .from(repairOrderJobs)
+      .innerJoin(repairOrders, eq(repairOrderJobs.repairOrderId, repairOrders.id))
+      .where(and(...conditions))
+      .orderBy(desc(repairOrders.completedDate))
+      .limit(limit);
+
+    const results = await query;
+
+    // Fetch parts for each job
+    const jobsWithDetails: JobWithDetails[] = [];
+
+    for (const row of results) {
+      const job = row.repair_order_jobs;
+      const repairOrder = row.repair_orders;
+      
+      // Fetch parts for this job
+      const partsRaw = await db
+        .select()
+        .from(repairOrderJobParts)
+        .where(eq(repairOrderJobParts.jobId, job.id));
+      
+      // Extract additional part info from raw_data
+      const parts = partsRaw.map(part => ({
+        ...part,
+        brand: (part.rawData as any)?.brand,
+        partNumber: (part.rawData as any)?.partNumber,
+        retail: (part.rawData as any)?.retail,
+      }));
+
+      // Extract vehicle info from repair order raw_data
+      const rawData = repairOrder.rawData as any;
+      const vehicle: VehicleInfo | undefined = rawData ? {
+        id: rawData.vehicleId,
+        make: rawData.vehicleMake,
+        model: rawData.vehicleModel,
+        year: rawData.vehicleYear ? parseInt(rawData.vehicleYear) : undefined,
+        engine: rawData.vehicleEngine,
+        vin: rawData.vin,
+      } : undefined;
+
+      // Extract labor items from job raw_data
+      const jobRawData = job.rawData as any;
+      const laborItems: LaborItem[] = jobRawData?.labor?.map((labor: any) => ({
+        id: labor.id,
+        name: labor.name,
+        hours: parseFloat(labor.hours) || 0,
+        rate: labor.rate || 0,
+        technicianId: labor.technicianId,
+      })) || [];
+
+      jobsWithDetails.push({
+        id: job.id,
+        repairOrderId: job.repairOrderId,
+        name: job.name || "",
+        laborHours: job.laborHours || 0,
+        laborCost: job.laborCost || 0,
+        partsCost: job.partsCost || 0,
+        status: job.status || "",
+        authorized: job.authorized === 1,
+        vehicle,
+        laborItems,
+        parts,
+        repairOrder,
+        subtotal: (job.laborCost || 0) + (job.partsCost || 0),
+      });
+    }
+
+    return jobsWithDetails;
   }
 
-  async createJob(insertJob: InsertJob): Promise<Job> {
-    const [job] = await db
-      .insert(jobs)
-      .values(insertJob)
-      .returning();
-    return job;
-  }
-
-  // Labor Items
-  async createLaborItem(insertItem: InsertLaborItem): Promise<LaborItem> {
-    const [item] = await db
-      .insert(laborItems)
-      .values(insertItem)
-      .returning();
-    return item;
-  }
-
-  async getLaborItemsByJobId(jobId: number): Promise<LaborItem[]> {
-    return db.select().from(laborItems).where(eq(laborItems.jobId, jobId));
-  }
-
-  // Parts
-  async createPart(insertPart: InsertPart): Promise<Part> {
-    const [part] = await db
-      .insert(parts)
-      .values(insertPart)
-      .returning();
-    return part;
-  }
-
-  async getPartsByJobId(jobId: number): Promise<Part[]> {
-    return db.select().from(parts).where(eq(parts.jobId, jobId));
-  }
-
-  // Search Requests
-  async createSearchRequest(insertRequest: InsertSearchRequest): Promise<SearchRequest> {
-    const [request] = await db
-      .insert(searchRequests)
-      .values(insertRequest)
-      .returning();
-    return request;
+  async createSearchRequest(data: InsertSearchRequest): Promise<SearchRequest> {
+    const [result] = await db.insert(searchRequests).values(data).returning();
+    return result;
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage: IStorage = new DatabaseStorage();
