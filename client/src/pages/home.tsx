@@ -20,7 +20,12 @@ export default function Home() {
       return apiRequest<SearchResult[]>("POST", "/api/search", params);
     },
     onSuccess: (data) => {
-      setResults(data);
+      console.log("Search response data:", data);
+      console.log("Is array:", Array.isArray(data));
+      // Ensure data is an array before setting results
+      const resultsArray = Array.isArray(data) ? data : [];
+      console.log("Setting results to:", resultsArray);
+      setResults(resultsArray);
       queryClient.invalidateQueries({ queryKey: ["/api/search"] });
     },
   });
@@ -28,7 +33,9 @@ export default function Home() {
   const isLoading = searchMutation.isPending;
   const error = searchMutation.error;
 
-  const selectedResult = results?.find((r) => r.job.id === selectedJobId);
+  const selectedResult = Array.isArray(results) 
+    ? results.find((r) => r.job.id === selectedJobId)
+    : undefined;
 
   const handleSearch = (params: SearchJobRequest) => {
     setSearchParams(params);
@@ -52,7 +59,7 @@ export default function Home() {
               <p className="text-xs text-muted-foreground">AI-Powered Job History</p>
             </div>
           </div>
-          {results && results.length > 0 && (
+          {Array.isArray(results) && results.length > 0 && (
             <div className="text-sm text-muted-foreground" data-testid="text-results-count">
               {results.length} {results.length === 1 ? "result" : "results"} found
             </div>
@@ -84,7 +91,7 @@ export default function Home() {
                 type="error"
                 message={error instanceof Error ? error.message : "An error occurred"}
               />
-            ) : !results || results.length === 0 ? (
+            ) : !Array.isArray(results) || results.length === 0 ? (
               <EmptyState type="no-results" />
             ) : (
               <div className="space-y-3" data-testid="results-list">
@@ -107,7 +114,7 @@ export default function Home() {
                 job={selectedResult.job}
                 matchScore={selectedResult.matchScore}
               />
-            ) : results && results.length > 0 ? (
+            ) : Array.isArray(results) && results.length > 0 ? (
               <Card className="sticky top-24">
                 <CardContent className="p-8 text-center">
                   <p className="text-sm text-muted-foreground">Select a job to view details</p>
