@@ -9,6 +9,7 @@ export function registerRoutes(app: Express) {
   app.post("/api/search", async (req, res) => {
     try {
       const params = searchJobSchema.parse(req.body);
+      console.log("🔍 Search request:", JSON.stringify(params, null, 2));
 
       // Get candidate jobs from database
       const candidates = await storage.searchJobs({
@@ -20,7 +21,10 @@ export function registerRoutes(app: Express) {
         limit: 50,
       });
 
+      console.log(`✅ Found ${candidates.length} candidate jobs`);
+      
       if (candidates.length === 0) {
+        console.log("❌ No candidates found, returning empty results");
         return res.json([]);
       }
 
