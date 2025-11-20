@@ -101,7 +101,7 @@ TOTAL: ${formatCurrency(job.subtotal)}
                     Mileage
                   </p>
                   <p className="text-sm font-mono font-semibold">
-                    {repairOrder.milesIn?.toLocaleString() || "N/A"}
+                    {(repairOrder as any).milesIn?.toLocaleString() || "N/A"}
                   </p>
                 </div>
               </div>
@@ -225,7 +225,7 @@ TOTAL: ${formatCurrency(job.subtotal)}
                       {part.quantity}
                     </TableCell>
                     <TableCell className="text-sm font-mono font-semibold text-right">
-                      {formatCurrency(part.retail * part.quantity)}
+                      {formatCurrency((part.retail || 0) * (part.quantity || 0))}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -253,10 +253,10 @@ TOTAL: ${formatCurrency(job.subtotal)}
               <span className="text-muted-foreground">Parts</span>
               <span className="font-mono">{formatCurrency(job.partsTotal)}</span>
             </div>
-            {job.feeTotal > 0 && (
+            {(job.feeTotal || 0) > 0 && (
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Fees</span>
-                <span className="font-mono">{formatCurrency(job.feeTotal)}</span>
+                <span className="font-mono">{formatCurrency(job.feeTotal || 0)}</span>
               </div>
             )}
             <Separator />

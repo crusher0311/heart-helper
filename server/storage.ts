@@ -118,6 +118,16 @@ export class DatabaseStorage implements IStorage {
         technicianId: labor.technicianId,
       })) || [];
 
+      // Calculate labor total from labor items (hours * rate)
+      const laborTotal = laborItems.reduce((sum, item) => {
+        return sum + (item.hours * item.rate);
+      }, 0);
+
+      // Calculate parts total from parts (cost * quantity)
+      const partsTotal = parts.reduce((sum, part) => {
+        return sum + ((part.cost || 0) * (part.quantity || 0));
+      }, 0);
+
       jobsWithDetails.push({
         id: job.id,
         repairOrderId: job.repairOrderId || 0,
@@ -131,7 +141,10 @@ export class DatabaseStorage implements IStorage {
         laborItems,
         parts,
         repairOrder,
-        subtotal: (job.laborCost || 0) + (job.partsCost || 0),
+        laborTotal,
+        partsTotal,
+        subtotal: laborTotal + partsTotal,
+        feeTotal: 0,
       });
     }
 

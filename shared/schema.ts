@@ -174,6 +174,11 @@ export type JobWithDetails = {
   parts: RepairOrderJobPart[];
   repairOrder?: RepairOrder;
   subtotal: number;
+  laborTotal: number;  // Computed: sum of labor hours * rates
+  partsTotal: number;  // Computed: sum of parts cost * quantity
+  feeTotal?: number;   // For future use
+  jobCategoryName?: string;  // For future use
+  note?: string;  // For future use
 };
 
 export type SearchResult = {
