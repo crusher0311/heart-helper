@@ -213,11 +213,14 @@ TOTAL: ${formatCurrency(job.subtotal)}
       },
     };
 
+    // Try to send via Chrome extension (cross-tab)
     window.postMessage(jobData, window.location.origin);
 
     toast({
-      title: "Sent to Tekmetric Extension",
-      description: "Open a Tekmetric estimate to auto-fill the job details",
+      title: "Sent to extension",
+      description: repairOrderId 
+        ? `Job will be added to RO #${repairOrderId}. Switch back to the Tekmetric tab.`
+        : "Switch to your Tekmetric repair order tab to see the job auto-fill",
     });
 
     setTimeout(() => setSending(false), 2000);
