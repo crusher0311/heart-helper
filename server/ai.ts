@@ -114,6 +114,8 @@ Return ONLY valid JSON array format:
       throw new Error("No response from AI");
     }
 
+    console.log("🤖 AI raw response:", content.substring(0, 500));
+
     // Parse the response - it might be wrapped in an object or be a direct array
     let parsed = JSON.parse(content);
     
@@ -121,16 +123,22 @@ Return ONLY valid JSON array format:
     let matches: JobMatch[];
     if (Array.isArray(parsed)) {
       matches = parsed;
+      console.log("📋 Parsed as direct array");
     } else if (parsed.matches && Array.isArray(parsed.matches)) {
       matches = parsed.matches;
+      console.log("📋 Parsed from .matches property");
     } else if (parsed.results && Array.isArray(parsed.results)) {
       matches = parsed.results;
+      console.log("📋 Parsed from .results property");
     } else {
       // If it's an object with job IDs as keys, convert to array
       matches = Object.values(parsed).filter((item: any) => 
         item && typeof item === 'object' && 'jobId' in item
       );
+      console.log("📋 Parsed from object values");
     }
+    
+    console.log(`📊 Parsed ${matches.length} potential matches before validation`);
 
     // Validate and sanitize the matches
     return matches
