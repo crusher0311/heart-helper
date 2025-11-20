@@ -7,7 +7,9 @@ import { JobDetailPanel } from "@/components/job-detail-panel";
 import { EmptyState } from "@/components/empty-state";
 import { JobCardSkeleton, JobDetailSkeleton } from "@/components/loading-skeleton";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sparkles, Settings } from "lucide-react";
+import { Link } from "wouter";
 import type { SearchJobRequest, SearchResult } from "@shared/schema";
 
 export default function Home() {
@@ -60,11 +62,18 @@ export default function Home() {
               <p className="text-xs text-muted-foreground">AI-Powered Job History</p>
             </div>
           </div>
-          {Array.isArray(results) && results.length > 0 && (
-            <div className="text-sm text-muted-foreground" data-testid="text-results-count">
-              {results.length} {results.length === 1 ? "result" : "results"} found
-            </div>
-          )}
+          <div className="flex items-center gap-3">
+            {Array.isArray(results) && results.length > 0 && (
+              <div className="text-sm text-muted-foreground" data-testid="text-results-count">
+                {results.length} {results.length === 1 ? "result" : "results"} found
+              </div>
+            )}
+            <Link href="/settings">
+              <Button variant="ghost" size="icon" data-testid="button-settings">
+                <Settings className="w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
 

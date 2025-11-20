@@ -3,6 +3,8 @@ import { createServer } from "http";
 import { storage } from "./storage";
 import { searchJobSchema, type SearchResult } from "@shared/schema";
 import { scoreJobMatches } from "./ai";
+import archiver from "archiver";
+import { join } from "path";
 
 export function registerRoutes(app: Express) {
   // Search endpoint
@@ -88,6 +90,36 @@ export function registerRoutes(app: Express) {
     } catch (error) {
       console.error("Search error:", error);
       res.status(500).json({ error: "Search failed" });
+    }
+  });
+
+  // Download Chrome extension endpoint
+  app.get("/api/download-extension", (req, res) => {
+    try {
+      const extensionPath = join(process.cwd(), "chrome-extension");
+      
+      res.setHeader('Content-Type', 'application/zip');
+      res.setHeader('Content-Disposition', 'attachment; filename=tekmetric-job-importer.zip');
+
+      const archive = archiver('zip', {
+        zlib: { level: 9 }
+      });
+
+      archive.on('error', (err) => {
+        console.error('Archive error:', err);
+        res.status(500).send('Error creating extension archive');
+      });
+
+      archive.pipe(res);
+
+      archive.directory(extensionPath, 'tekmetric-job-importer');
+
+      archive.finalize();
+      
+      console.log('Extension download started');
+    } catch (error: any) {
+      console.error("Extension download error:", error);
+      res.status(500).json({ error: error.message });
     }
   });
 
