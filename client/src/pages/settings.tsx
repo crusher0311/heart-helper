@@ -42,11 +42,8 @@ export default function Settings() {
 
   const updateSettingsMutation = useMutation({
     mutationFn: async (data: { defaultShopId: ShopLocation }) => {
-      return apiRequest("/api/settings", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await apiRequest("POST", "/api/settings", data);
+      return response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/settings"] });
@@ -66,11 +63,8 @@ export default function Settings() {
 
   const testConnectionMutation = useMutation({
     mutationFn: async (shopLocation: ShopLocation) => {
-      return apiRequest("/api/tekmetric/test", {
-        method: "POST",
-        body: JSON.stringify({ shopLocation }),
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await apiRequest("POST", "/api/tekmetric/test", { shopLocation });
+      return response.json();
     },
     onSuccess: (data: { success: boolean }) => {
       if (data.success) {

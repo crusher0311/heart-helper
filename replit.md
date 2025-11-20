@@ -6,16 +6,32 @@ An AI-powered repair order search application that helps automotive shops find s
 
 The application imports repair order data from Tekmetric (a shop management system) and provides a fast, productivity-focused interface for searching through historical job data.
 
-**Chrome Extension Integration**: A companion Chrome extension allows users to send job details directly from the search tool to Tekmetric estimates, automatically filling in labor items and parts to streamline the estimating workflow.
+**Tekmetric Integration**: Dual-mode integration with Tekmetric:
+1. **Direct API Integration** (Recommended): Create estimates directly in Tekmetric via API with one click
+2. **Chrome Extension** (Legacy): Browser extension for manual copy/paste workflow
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
 
-## Chrome Extension
+## Tekmetric Integration
 
-A Chrome extension (`chrome-extension/`) integrates the search tool with Tekmetric:
-- **Send to Tekmetric** button in job detail panel sends complete job data to the extension
+### Direct API Integration (Primary Method)
+
+Configure via Settings page (requires API credentials):
+- **Shop Selection**: Support for multiple shop locations (Northbrook, Wilmette, Evanston)
+- **Create Estimate**: One-click estimate creation directly in Tekmetric with all labor items and parts
+- **Refresh Pricing**: Check current Tekmetric pricing for parts (informational comparison with historical costs)
+- **Graceful Fallback**: Falls back to Chrome extension method when API not configured
+
+Configuration requires:
+- `TEKMETRIC_API_KEY` - Bearer token for Tekmetric API
+- `TM_SHOP_ID_NB`, `TM_SHOP_ID_WM`, `TM_SHOP_ID_EV` - Shop IDs for each location
+
+### Chrome Extension (Legacy/Fallback Method)
+
+A Chrome extension (`chrome-extension/`) provides manual integration when API is not configured:
+- **Send to Extension** button in job detail panel sends complete job data to the extension
 - Extension auto-fills Tekmetric estimate forms with labor items and parts
 - Popup UI shows pending and last imported job status
 - Secure message passing with origin validation
@@ -49,11 +65,16 @@ A Chrome extension (`chrome-extension/`) integrates the search tool with Tekmetr
 
 **Runtime**: Node.js with Express.js server
 
-**API Design**: REST endpoints for search operations
+**API Design**: REST endpoints for search and Tekmetric integration
 - `/api/search` - AI-powered job search with vehicle filtering and similarity scoring
   - Supports filtering by vehicle make, model, year, and engine
   - Joins against vehicles table synced from Tekmetric
   - Falls back to unscored results if AI is unavailable
+- `/api/tekmetric/create-estimate` - Create repair order estimates directly in Tekmetric
+- `/api/tekmetric/refresh-pricing` - Fetch current parts pricing from Tekmetric (informational)
+- `/api/tekmetric/test` - Test API connection for specific shop location
+- `/api/tekmetric/status` - Check API configuration status and available shops
+- `/api/settings` - Manage user preferences (default shop location)
 
 **Database ORM**: Drizzle ORM with type-safe query building
 - Schema-first approach with TypeScript types generated from database schema
@@ -90,6 +111,7 @@ A Chrome extension (`chrome-extension/`) integrates the search tool with Tekmetr
 - `labor_items` - Labor line items with hours and rates
 - `parts` - Parts used in jobs with pricing
 - `search_requests` - Audit log of search queries
+- `settings` - User preferences (default shop ID for Tekmetric API)
 
 **ID Strategy**: Uses Tekmetric's external IDs as primary keys to maintain referential integrity with source system
 

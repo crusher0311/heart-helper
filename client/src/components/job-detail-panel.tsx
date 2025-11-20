@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import type { JobWithDetails } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 
 type ShopLocation = "NB" | "WM" | "EV";
 
@@ -64,21 +64,11 @@ export function JobDetailPanel({ job, matchScore }: JobDetailPanelProps) {
 
   const createEstimateMutation = useMutation({
     mutationFn: async (shopLocation: ShopLocation) => {
-      const response = await fetch("/api/tekmetric/create-estimate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          jobId: job.id,
-          shopLocation,
-        }),
+      const response = await apiRequest("POST", "/api/tekmetric/create-estimate", {
+        jobId: job.id,
+        shopLocation,
       });
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || "Failed to create estimate");
-      }
-      
-      return response.json();
+      return await response.json() as { repairOrderId: number; url: string };
     },
     onSuccess: (data: { repairOrderId: number; url: string }) => {
       toast({
@@ -107,7 +97,50 @@ export function JobDetailPanel({ job, matchScore }: JobDetailPanelProps) {
     },
   });
 
+  const refreshPricingMutation = useMutation({
+    mutationFn: async (shopLocation: ShopLocation) => {
+      const partNumbers = job.parts
+        .map(part => part.partNumber)
+        .filter((pn): pn is string => !!pn);
+
+      if (partNumbers.length === 0) {
+        return {};
+      }
+
+      const response = await apiRequest("POST", "/api/tekmetric/refresh-pricing", {
+        partNumbers,
+        shopLocation,
+      });
+      
+      return await response.json() as Record<string, { cost: number; retail: number }>;
+    },
+    onSuccess: (data: Record<string, { cost: number; retail: number }>) => {
+      const updatedCount = Object.keys(data).length;
+      if (updatedCount === 0) {
+        toast({
+          title: "No pricing updates",
+          description: "Could not find current pricing for any parts",
+        });
+      } else {
+        toast({
+          title: "Pricing refreshed",
+          description: `Retrieved current pricing for ${updatedCount} part${updatedCount === 1 ? '' : 's'}. Note: Prices shown are historical from the original job.`,
+        });
+      }
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Error refreshing pricing",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
   const shopToUse = selectedShop || settings?.defaultShopId;
+  
+  const partNumbersCount = job.parts.filter(part => !!part.partNumber).length;
+  const canRefreshPricing = status?.configured && shopToUse && partNumbersCount > 0;
 
   const handleCopyToClipboard = () => {
     const laborDetails = job.laborItems
@@ -317,7 +350,26 @@ TOTAL: ${formatCurrency(job.subtotal)}
       {job.parts.length > 0 && (
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-base font-semibold">Parts</CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-base font-semibold">Parts</CardTitle>
+              {canRefreshPricing && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => shopToUse && refreshPricingMutation.mutate(shopToUse)}
+                  disabled={refreshPricingMutation.isPending}
+                  data-testid="button-refresh-pricing"
+                  title="Fetch current Tekmetric pricing for parts with part numbers"
+                >
+                  {refreshPricingMutation.isPending ? (
+                    <Loader2 className="w-3 h-3 mr-1 animate-spin" />
+                  ) : (
+                    <RefreshCw className="w-3 h-3 mr-1" />
+                  )}
+                  Refresh
+                </Button>
+              )}
+            </div>
           </CardHeader>
           <CardContent>
             <Table>
