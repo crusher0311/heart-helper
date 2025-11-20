@@ -453,63 +453,15 @@ TOTAL: ${formatCurrency(job.subtotal)}
       {/* Actions */}
       <Card>
         <CardContent className="pt-6 space-y-3">
-          {status?.configured && status.availableShops.length > 0 && (
-            <>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Shop Location</label>
-                <Select
-                  value={shopToUse || undefined}
-                  onValueChange={(value) => setSelectedShop(value as ShopLocation)}
-                >
-                  <SelectTrigger data-testid="select-shop-location">
-                    <SelectValue placeholder="Select shop" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {status.availableShops.map((shop) => (
-                      <SelectItem key={shop.id} value={shop.id}>
-                        {shop.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <Button
-                onClick={() => {
-                  if (shopToUse) {
-                    createEstimateMutation.mutate(shopToUse);
-                  }
-                }}
-                className="w-full"
-                data-testid="button-create-estimate-api"
-                disabled={!shopToUse || createEstimateMutation.isPending}
-              >
-                {createEstimateMutation.isPending ? (
-                  <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Creating...
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-4 h-4 mr-2" />
-                    Create Estimate in Tekmetric
-                  </>
-                )}
-              </Button>
-            </>
-          )}
-
-          {(!status?.configured || status.availableShops.length === 0) && (
-            <Button
-              onClick={handleSendToTekmetric}
-              className="w-full"
-              data-testid="button-send-tekmetric-extension"
-              disabled={sending}
-            >
-              <Send className="w-4 h-4 mr-2" />
-              {sending ? "Sent!" : "Send to Extension"}
-            </Button>
-          )}
+          <Button
+            onClick={handleSendToTekmetric}
+            className="w-full"
+            data-testid="button-send-tekmetric-extension"
+            disabled={sending}
+          >
+            <Send className="w-4 h-4 mr-2" />
+            {sending ? "Sent!" : "Send to Extension"}
+          </Button>
 
           <Button
             onClick={handleCopyToClipboard}
