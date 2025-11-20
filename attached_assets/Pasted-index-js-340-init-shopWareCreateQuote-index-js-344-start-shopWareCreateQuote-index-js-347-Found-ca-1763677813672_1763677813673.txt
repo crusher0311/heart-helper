@@ -1,0 +1,111 @@
+index.js:340 init shopWareCreateQuote
+index.js:344 start shopWareCreateQuote
+index.js:347 Found carvisNoteId in URL: null
+index.js:350 No carvisNoteId found in URL
+index.js:252 shopWareAskCarvis init
+index.js:256 shopWareAskCarvis checkUrl
+index.js:260 shopWareAskCarvis - Not a Shopware work order URL, exiting
+index.js:143 init hiddenDiv
+index.js:110 URL actually changed from:  to: https://app.carvis.ai/?typeConcern=TECHNICIAN&concern=Ignition%20System&finding=Replacing%20spark%20plugs&search=Ignition%20System%20Replacing%20spark%20plugs&source=chrome-extension-tekmetric&repairOrderNumberTekmetric=141298&urlSource=https%3A%2F%2Fshop.tekmetric.com%2Fadmin%2Fshop%2F469%2Frepair-orders%2F275076696%2Festimate&shopTekmetricId=469&externalShopId=469&repairOrderTekmetricId=275076696&vin=5TDYZ3DC0KS009831&odometer=99748
+incoming-dialog.f2b6b5ea.js:1 TypeError: Cannot read properties of undefined (reading 'callState')
+    at t.default (incoming-dialog.f2b6b5ea.js:1:150081)
+    at aw (incoming-dialog.f2b6b5ea.js:1:71191)
+    at u (incoming-dialog.f2b6b5ea.js:1:129694)
+    at iD (incoming-dialog.f2b6b5ea.js:1:109363)
+    at incoming-dialog.f2b6b5ea.js:1:109229
+    at ij (incoming-dialog.f2b6b5ea.js:1:109237)
+    at i_ (incoming-dialog.f2b6b5ea.js:1:105988)
+    at iE (incoming-dialog.f2b6b5ea.js:1:104543)
+    at C (incoming-dialog.f2b6b5ea.js:1:140536)
+    at MessagePort.T (incoming-dialog.f2b6b5ea.js:1:141066)
+a9 @ incoming-dialog.f2b6b5ea.js:1
+incoming-dialog.f2b6b5ea.js:1 Uncaught TypeError: Cannot read properties of undefined (reading 'callState')
+    at t.default (incoming-dialog.f2b6b5ea.js:1:150081)
+    at aw (incoming-dialog.f2b6b5ea.js:1:71191)
+    at u (incoming-dialog.f2b6b5ea.js:1:129694)
+    at iD (incoming-dialog.f2b6b5ea.js:1:109363)
+    at incoming-dialog.f2b6b5ea.js:1:109229
+    at ij (incoming-dialog.f2b6b5ea.js:1:109237)
+    at i_ (incoming-dialog.f2b6b5ea.js:1:105988)
+    at iE (incoming-dialog.f2b6b5ea.js:1:104543)
+    at C (incoming-dialog.f2b6b5ea.js:1:140536)
+    at MessagePort.T (incoming-dialog.f2b6b5ea.js:1:141066)
+content.js:9 [Settings] No generalSettings settings found, using defaults
+ns @ content.js:9
+content.js:105 Creating handle element
+content.js:105 [Handle] Updating badge: Object
+content.js:105 [Handle] Badge hidden (count is 0)
+content.js:105 [Handle] Updating unread data: Object
+content.js:105 [Handle] Updating badge: Object
+content.js:105 [Handle] Badge hidden (count is 0)
+index.js:110 URL actually changed from: https://app.carvis.ai/?typeConcern=TECHNICIAN&concern=Ignition%20System&finding=Replacing%20spark%20plugs&search=Ignition%20System%20Replacing%20spark%20plugs&source=chrome-extension-tekmetric&repairOrderNumberTekmetric=141298&urlSource=https%3A%2F%2Fshop.tekmetric.com%2Fadmin%2Fshop%2F469%2Frepair-orders%2F275076696%2Festimate&shopTekmetricId=469&externalShopId=469&repairOrderTekmetricId=275076696&vin=5TDYZ3DC0KS009831&odometer=99748 to: https://app.carvis.ai/conversation/f377799d-d5ef-4712-af74-5af43d85d2b8?typeConcern=TECHNICIAN&concern=Ignition%20System&finding=Replacing%20spark%20plugs&search=Ignition%20System%20Replacing%20spark%20plugs&source=chrome-extension-tekmetric&repairOrderNumberTekmetric=141298&urlSource=https%3A%2F%2Fshop.tekmetric.com%2Fadmin%2Fshop%2F469%2Frepair-orders%2F275076696%2Festimate&shopTekmetricId=469&externalShopId=469&repairOrderTekmetricId=275076696&vin=5TDYZ3DC0KS009831&odometer=99748
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"COMPLETED"} Thu Nov 20 2025 16:28:08 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"IN_PROGRESS","info":"Working on the quote"} Thu Nov 20 2025 16:28:08 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"COMPLETED"} Thu Nov 20 2025 16:28:08 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"IN_PROGRESS","info":"Working on the quote"} Thu Nov 20 2025 16:28:08 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"IN_PROGRESS","info":"Getting guidelines"} Thu Nov 20 2025 16:28:13 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"IN_PROGRESS","info":"Getting guidelines"} Thu Nov 20 2025 16:28:13 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"IN_PROGRESS","info":"Getting labor guides"} Thu Nov 20 2025 16:28:14 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"IN_PROGRESS","info":"Getting labor guides"} Thu Nov 20 2025 16:28:14 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"IN_PROGRESS","info":"Gathering information"} Thu Nov 20 2025 16:28:15 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"IN_PROGRESS","info":"Getting documents"} Thu Nov 20 2025 16:28:15 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"IN_PROGRESS","info":"Gathering information"} Thu Nov 20 2025 16:28:15 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"IN_PROGRESS","info":"Getting documents"} Thu Nov 20 2025 16:28:15 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"IN_PROGRESS","info":"Processing with Carvis AI"} Thu Nov 20 2025 16:28:15 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"IN_PROGRESS","info":"Processing with Carvis AI"} Thu Nov 20 2025 16:28:15 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"IN_PROGRESS","info":"Finalizing quote"} Thu Nov 20 2025 16:28:20 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"IN_PROGRESS","info":"Finalizing quote"} Thu Nov 20 2025 16:28:20 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"MESSAGE_CREATED","message":{"id":"d270f588-de73-475d-acd1-c193f2c5ae81","content":"For your 2019 Toyota Sienna XLE (VIN: 5TDYZ3DC0KS009831) with a technician finding of replacing spark plugs, the job involves removing and replacing all six spark plugs. Based on the labor guide, the operation takes 3.9 labor hours and is billed at $170 per hour, giving a total labor cost of $663. The spark plugs are typically replaced as a set of six and we apply a 50% markup according to shop policy. Assuming the shop cost is $12.00 per plug, the retail per plug is $18.00, totaling $108 for six plugs. No additional parts or services are strictly required beyond this replacement. Optional service could include inspecting or cleaning the ignition coils to ensure smooth operation. Therefore, the total estimate includes 3.9 hours of labor and six spark plugs with proper markup.","created_at":"2025-11-20T22:28:21.967Z","created_by_id":null,"created_by":null,"conversation_id":"f377799d-d5ef-4712-af74-5af43d85d2b8","quote":{"id":"aeb7d612-6ff6-4aad-aebe-db860fb8046e","shortTitle":"Spark Plug Replacement","vehicle_id":"29023d8d-44ea-478f-8add-a1d75b0e1820"}}} Thu Nov 20 2025 16:28:22 GMT-0600 (Central Standard Time)
+index-DxTq-OSD.js:25 addMessage {id: 'd270f588-de73-475d-acd1-c193f2c5ae81', content: 'For your 2019 Toyota Sienna XLE (VIN: 5TDYZ3DC0KS0… of labor and six spark plugs with proper markup.', created_at: '2025-11-20T22:28:21.967Z', created_by_id: null, created_by: null, …}
+index-DxTq-OSD.js:25 navigate to quote aeb7d612-6ff6-4aad-aebe-db860fb8046e
+index-DxTq-OSD.js:25 SSE Stream Data: {"type":"COMPLETED"} Thu Nov 20 2025 16:28:22 GMT-0600 (Central Standard Time)
+index.js:110 URL actually changed from: https://app.carvis.ai/conversation/f377799d-d5ef-4712-af74-5af43d85d2b8?typeConcern=TECHNICIAN&concern=Ignition%20System&finding=Replacing%20spark%20plugs&search=Ignition%20System%20Replacing%20spark%20plugs&source=chrome-extension-tekmetric&repairOrderNumberTekmetric=141298&urlSource=https%3A%2F%2Fshop.tekmetric.com%2Fadmin%2Fshop%2F469%2Frepair-orders%2F275076696%2Festimate&shopTekmetricId=469&externalShopId=469&repairOrderTekmetricId=275076696&vin=5TDYZ3DC0KS009831&odometer=99748 to: https://app.carvis.ai/conversation/f377799d-d5ef-4712-af74-5af43d85d2b8/quote/aeb7d612-6ff6-4aad-aebe-db860fb8046e?typeConcern=TECHNICIAN&concern=Ignition%20System&finding=Replacing%20spark%20plugs&search=Ignition%20System%20Replacing%20spark%20plugs&source=chrome-extension-tekmetric&repairOrderNumberTekmetric=141298&urlSource=https%3A%2F%2Fshop.tekmetric.com%2Fadmin%2Fshop%2F469%2Frepair-orders%2F275076696%2Festimate&shopTekmetricId=469&externalShopId=469&repairOrderTekmetricId=275076696&vin=5TDYZ3DC0KS009831&odometer=99748
+index-DxTq-OSD.js:31  POST https://app-api.carvis.ai/trpc/quote.createJobInTekmetricAi 500 (Internal Server Error)
+fetch @ index-DxTq-OSD.js:31
+VM @ vendor-CaBgCJoh.js:49
+await in VM
+Pg @ vendor-CaBgCJoh.js:49
+qM @ vendor-CaBgCJoh.js:49
+QM @ vendor-CaBgCJoh.js:49
+(anonymous) @ vendor-CaBgCJoh.js:49
+subscribe @ vendor-CaBgCJoh.js:49
+(anonymous) @ vendor-CaBgCJoh.js:49
+subscribe @ vendor-CaBgCJoh.js:49
+(anonymous) @ vendor-CaBgCJoh.js:49
+subscribe @ vendor-CaBgCJoh.js:49
+(anonymous) @ vendor-CaBgCJoh.js:49
+subscribe @ vendor-CaBgCJoh.js:49
+l @ vendor-CaBgCJoh.js:49
+(anonymous) @ vendor-CaBgCJoh.js:49
+subscribe @ vendor-CaBgCJoh.js:49
+(anonymous) @ vendor-CaBgCJoh.js:49
+KA @ vendor-CaBgCJoh.js:49
+requestAsPromise @ vendor-CaBgCJoh.js:49
+mutation @ vendor-CaBgCJoh.js:49
+(anonymous) @ vendor-CaBgCJoh.js:49
+g @ vendor-CaBgCJoh.js:49
+fn @ vendor-CaBgCJoh.js:49
+S @ vendor-CaBgCJoh.js:49
+start @ vendor-CaBgCJoh.js:49
+execute @ vendor-CaBgCJoh.js:49
+await in execute
+mutate @ vendor-CaBgCJoh.js:49
+m @ index-DxTq-OSD.js:25
+L_ @ vendor-CaBgCJoh.js:48
+(anonymous) @ vendor-CaBgCJoh.js:48
+qy @ vendor-CaBgCJoh.js:48
+ov @ vendor-CaBgCJoh.js:48
+wv @ vendor-CaBgCJoh.js:49
+YO @ vendor-CaBgCJoh.js:49
+index-DxTq-OSD.js:25 Error creating job: TRPCClientError: Integration not found
+    at ad.from (vendor-CaBgCJoh.js:49:100237)
+    at vendor-CaBgCJoh.js:49:103831
+(anonymous) @ rrweb-plugin-console-record.js:2447
+m @ index-DxTq-OSD.js:25
+await in m
+L_ @ vendor-CaBgCJoh.js:48
+(anonymous) @ vendor-CaBgCJoh.js:48
+qy @ vendor-CaBgCJoh.js:48
+ov @ vendor-CaBgCJoh.js:48
+wv @ vendor-CaBgCJoh.js:49
+YO @ vendor-CaBgCJoh.js:49
