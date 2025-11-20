@@ -128,7 +128,7 @@ export async function createTekmetricEstimate(
 
 export async function testConnection(shopLocation: ShopLocation): Promise<boolean> {
   try {
-    await tekmetricRequest("/shops/current", "GET", undefined, shopLocation);
+    await tekmetricRequest("/shops", "GET", undefined, shopLocation);
     return true;
   } catch (error) {
     console.error("Tekmetric connection test failed:", error);
