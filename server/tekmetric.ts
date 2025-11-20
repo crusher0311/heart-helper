@@ -1,6 +1,6 @@
 import { JobWithDetails } from "@shared/schema";
 
-const TEKMETRIC_BASE_URL = "https://api.tekmetric.com/api/v1";
+const TEKMETRIC_BASE_URL = "https://shop.tekmetric.com/api/v1";
 
 export type ShopLocation = "NB" | "WM" | "EV";
 
