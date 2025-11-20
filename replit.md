@@ -37,10 +37,11 @@ Preferred communication style: Simple, everyday language.
 
 **Runtime**: Node.js with Express.js server
 
-**API Design**: REST endpoints for data import and search operations
-- `/api/import/repair-order` - Import Tekmetric repair order data
-- `/api/import/vehicle` - Import vehicle information
-- `/api/search` - AI-powered job search with similarity scoring
+**API Design**: REST endpoints for search operations
+- `/api/search` - AI-powered job search with vehicle filtering and similarity scoring
+  - Supports filtering by vehicle make, model, year, and engine
+  - Joins against vehicles table synced from Tekmetric
+  - Falls back to unscored results if AI is unavailable
 
 **Database ORM**: Drizzle ORM with type-safe query building
 - Schema-first approach with TypeScript types generated from database schema
@@ -52,11 +53,11 @@ Preferred communication style: Simple, everyday language.
 - Scores candidates and provides reasoning for match quality
 
 **Data Flow**:
-1. Tekmetric data imported via POST endpoints
-2. Data normalized and stored in PostgreSQL
-3. Search queries fetch candidate jobs from database
-4. AI service scores and ranks candidates based on similarity
-5. Results returned with match scores and explanations
+1. Tekmetric data synced continuously via external sync tool
+2. Vehicle data joined from vehicles table (last 2 years populated)
+3. Search queries filter jobs by vehicle specs and repair type
+4. AI service scores and ranks candidates (optional - degrades gracefully)
+5. Results returned with match scores and vehicle details
 
 ### Data Storage
 
