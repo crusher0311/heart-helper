@@ -56,11 +56,16 @@ export function registerRoutes(app: Express) {
           candidatesForAI
         );
 
+        console.log(`🤖 AI returned ${matches.length} scored matches`);
+
         // Combine AI scores with job data
         results = matches
           .map((match) => {
             const job = candidates.find((c) => c.id === match.jobId);
-            if (!job) return null;
+            if (!job) {
+              console.log(`⚠️  AI returned jobId ${match.jobId} but not found in candidates`);
+              return null;
+            }
 
             return {
               job,
@@ -69,6 +74,8 @@ export function registerRoutes(app: Express) {
             };
           })
           .filter((r): r is SearchResult => r !== null);
+        
+        console.log(`📊 Final results after matching: ${results.length}`);
       } catch (aiError) {
         console.log("AI scoring unavailable, returning unscored results:", aiError);
         // Return results without AI scoring
