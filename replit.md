@@ -6,9 +6,21 @@ An AI-powered repair order search application that helps automotive shops find s
 
 The application imports repair order data from Tekmetric (a shop management system) and provides a fast, productivity-focused interface for searching through historical job data.
 
+**Chrome Extension Integration**: A companion Chrome extension allows users to send job details directly from the search tool to Tekmetric estimates, automatically filling in labor items and parts to streamline the estimating workflow.
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+
+## Chrome Extension
+
+A Chrome extension (`chrome-extension/`) integrates the search tool with Tekmetric:
+- **Send to Tekmetric** button in job detail panel sends complete job data to the extension
+- Extension auto-fills Tekmetric estimate forms with labor items and parts
+- Popup UI shows pending and last imported job status
+- Secure message passing with origin validation
+- Installation: Load unpacked extension from `chrome-extension/` folder in Chrome
+- See `chrome-extension/INSTALL.md` for setup instructions
 
 ## System Architecture
 
