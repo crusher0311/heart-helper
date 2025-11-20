@@ -12,8 +12,8 @@ export function registerRoutes(app: Express) {
     try {
       const params = searchJobSchema.parse(req.body);
 
-      // Get candidate jobs from database
-      const candidates = await storage.searchJobs({
+      // Get candidate jobs from database - try exact match first
+      let candidates = await storage.searchJobs({
         vehicleMake: params.vehicleMake,
         vehicleModel: params.vehicleModel,
         vehicleYear: params.vehicleYear,
@@ -21,6 +21,20 @@ export function registerRoutes(app: Express) {
         repairType: params.repairType,
         limit: 50,
       });
+
+      // If no results and year was specified, try expanding year range by ±2 years
+      if (candidates.length === 0 && params.vehicleYear) {
+        console.log(`No exact year matches for ${params.vehicleYear}, trying year range...`);
+        candidates = await storage.searchJobs({
+          vehicleMake: params.vehicleMake,
+          vehicleModel: params.vehicleModel,
+          vehicleYear: params.vehicleYear,
+          vehicleEngine: params.vehicleEngine,
+          repairType: params.repairType,
+          limit: 50,
+          yearRange: 2,
+        });
+      }
 
       if (candidates.length === 0) {
         return res.json([]);

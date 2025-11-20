@@ -11,11 +11,11 @@ import type {
 } from "@shared/schema";
 import { db } from "./db";
 import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles } from "@shared/schema";
-import { eq, and, or, like, ilike, sql, desc } from "drizzle-orm";
+import { eq, and, or, like, ilike, sql, desc, gte, lte } from "drizzle-orm";
 
 export interface IStorage {
   // Search jobs based on criteria
-  searchJobs(params: SearchJobRequest): Promise<JobWithDetails[]>;
+  searchJobs(params: SearchJobRequest & { yearRange?: number }): Promise<JobWithDetails[]>;
   
   // Create search request log
   createSearchRequest(data: InsertSearchRequest): Promise<SearchRequest>;
@@ -30,6 +30,7 @@ export class DatabaseStorage implements IStorage {
     vehicleEngine?: string;
     repairType: string;
     limit?: number;
+    yearRange?: number;
   }): Promise<JobWithDetails[]> {
     const limit = params.limit || 50;
 
@@ -51,7 +52,18 @@ export class DatabaseStorage implements IStorage {
     }
 
     if (params.vehicleYear) {
-      conditions.push(eq(vehicles.year, params.vehicleYear));
+      if (params.yearRange) {
+        // Use year range (e.g., ±2 years)
+        conditions.push(
+          and(
+            gte(vehicles.year, params.vehicleYear - params.yearRange),
+            lte(vehicles.year, params.vehicleYear + params.yearRange)
+          )
+        );
+      } else {
+        // Exact year match
+        conditions.push(eq(vehicles.year, params.vehicleYear));
+      }
     }
 
     if (params.vehicleEngine) {
