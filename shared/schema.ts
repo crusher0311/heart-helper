@@ -55,6 +55,22 @@ export const repairOrderJobParts = pgTable("repair_order_job_parts", {
   createdAt: timestamp("created_at"),
 });
 
+// Using existing vehicles table from Tekmetric sync
+export const vehicles = pgTable("vehicles", {
+  id: integer("id").primaryKey(),
+  make: text("make"),
+  model: text("model"),
+  year: integer("year"),
+  engine: text("engine"),
+  vin: text("vin"),
+  licensePlate: text("license_plate"),
+  color: text("color"),
+  customerId: integer("customer_id"),
+  rawData: jsonb("raw_data"),
+  createdAt: timestamp("created_at"),
+  updatedAt: timestamp("updated_at"),
+});
+
 // Search requests table to store search history
 export const searchRequests = pgTable("search_requests", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -121,6 +137,8 @@ export type SearchRequest = typeof searchRequests.$inferSelect;
 export type InsertSearchRequest = z.infer<typeof insertSearchRequestSchema>;
 
 export type SearchJobRequest = z.infer<typeof searchJobSchema>;
+
+export type Vehicle = typeof vehicles.$inferSelect;
 
 // Vehicle info extracted from raw_data
 export type VehicleInfo = {

@@ -10,7 +10,7 @@ import type {
   LaborItem,
 } from "@shared/schema";
 import { db } from "./db";
-import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests } from "@shared/schema";
+import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles } from "@shared/schema";
 import { eq, and, or, like, ilike, sql, desc } from "drizzle-orm";
 
 export interface IStorage {
@@ -41,31 +41,48 @@ export class DatabaseStorage implements IStorage {
       ilike(repairOrderJobs.name, `%${params.repairType}%`)
     );
 
-    // NOTE: Vehicle filtering disabled - vehicle data not in database
-    // Vehicle details (make/model/year/engine) are NOT stored in repair_orders.raw_data
-    // Only vehicleId references exist. To enable vehicle filtering:
-    // 1. Create a vehicles table
-    // 2. Sync vehicle data from Tekmetric
-    // 3. Join against vehicles table
-    // For now, search is repair-type only which still returns relevant results
+    // Add vehicle filters if provided
+    if (params.vehicleMake) {
+      conditions.push(ilike(vehicles.make, `%${params.vehicleMake}%`));
+    }
 
-    // Execute base query joining jobs with repair orders
-    let query = db
-      .select()
+    if (params.vehicleModel) {
+      conditions.push(ilike(vehicles.model, `%${params.vehicleModel}%`));
+    }
+
+    if (params.vehicleYear) {
+      conditions.push(eq(vehicles.year, params.vehicleYear));
+    }
+
+    if (params.vehicleEngine) {
+      conditions.push(ilike(vehicles.engine, `%${params.vehicleEngine}%`));
+    }
+
+    // Execute query with triple join: jobs -> repair_orders -> vehicles
+    // We need to extract vehicleId from the job's raw_data
+    const results = await db
+      .select({
+        job: repairOrderJobs,
+        repairOrder: repairOrders,
+        vehicle: vehicles,
+      })
       .from(repairOrderJobs)
       .innerJoin(repairOrders, eq(repairOrderJobs.repairOrderId, repairOrders.id))
+      .leftJoin(
+        vehicles,
+        sql`${vehicles.id} = (${repairOrderJobs.rawData}->>'vehicleId')::int`
+      )
       .where(and(...conditions))
       .orderBy(desc(repairOrders.completedDate))
       .limit(limit);
-
-    const results = await query;
 
     // Fetch parts for each job
     const jobsWithDetails: JobWithDetails[] = [];
 
     for (const row of results) {
-      const job = row.repair_order_jobs;
-      const repairOrder = row.repair_orders;
+      const job = row.job;
+      const repairOrder = row.repairOrder;
+      const vehicleData = row.vehicle;
       
       // Fetch parts for this job
       const partsRaw = await db
@@ -81,15 +98,14 @@ export class DatabaseStorage implements IStorage {
         retail: (part.rawData as any)?.retail,
       }));
 
-      // Extract vehicle info from repair order raw_data
-      const rawData = repairOrder.rawData as any;
-      const vehicle: VehicleInfo | undefined = rawData ? {
-        id: rawData.vehicleId,
-        make: rawData.vehicleMake,
-        model: rawData.vehicleModel,
-        year: rawData.vehicleYear ? parseInt(rawData.vehicleYear) : undefined,
-        engine: rawData.vehicleEngine,
-        vin: rawData.vin,
+      // Use actual vehicle data from vehicles table
+      const vehicle: VehicleInfo | undefined = vehicleData ? {
+        id: vehicleData.id,
+        make: vehicleData.make || undefined,
+        model: vehicleData.model || undefined,
+        year: vehicleData.year || undefined,
+        engine: vehicleData.engine || undefined,
+        vin: vehicleData.vin || undefined,
       } : undefined;
 
       // Extract labor items from job raw_data
