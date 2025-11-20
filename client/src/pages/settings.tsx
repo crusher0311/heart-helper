@@ -1,12 +1,114 @@
-import { Download, Chrome, CheckCircle2, Circle, ArrowLeft, Sparkles, Search, Send, Zap } from "lucide-react";
+import { Download, Chrome, CheckCircle2, Circle, ArrowLeft, Sparkles, Search, Send, Zap, Settings as SettingsIcon, XCircle, Loader2 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { queryClient, apiRequest } from "@/lib/queryClient";
+import { useState } from "react";
+
+type ShopLocation = "NB" | "WM" | "EV";
+
+type ShopInfo = {
+  id: ShopLocation;
+  name: string;
+};
+
+type TekmetricStatus = {
+  configured: boolean;
+  availableShops: ShopInfo[];
+};
+
+type Settings = {
+  id: string;
+  defaultShopId: ShopLocation | null;
+  updatedAt: string;
+};
 
 export default function Settings() {
   const { toast } = useToast();
+  const [selectedShop, setSelectedShop] = useState<ShopLocation | null>(null);
+
+  const { data: status, isLoading: statusLoading } = useQuery<TekmetricStatus>({
+    queryKey: ["/api/tekmetric/status"],
+  });
+
+  const { data: settings, isLoading: settingsLoading } = useQuery<Settings>({
+    queryKey: ["/api/settings"],
+  });
+
+  const updateSettingsMutation = useMutation({
+    mutationFn: async (data: { defaultShopId: ShopLocation }) => {
+      return apiRequest("/api/settings", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/settings"] });
+      toast({
+        title: "Settings saved",
+        description: "Your default shop location has been updated.",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const testConnectionMutation = useMutation({
+    mutationFn: async (shopLocation: ShopLocation) => {
+      return apiRequest("/api/tekmetric/test", {
+        method: "POST",
+        body: JSON.stringify({ shopLocation }),
+        headers: { "Content-Type": "application/json" },
+      });
+    },
+    onSuccess: (data: { success: boolean }) => {
+      if (data.success) {
+        toast({
+          title: "Connection successful",
+          description: "Successfully connected to Tekmetric API.",
+        });
+      } else {
+        toast({
+          title: "Connection failed",
+          description: "Could not connect to Tekmetric API.",
+          variant: "destructive",
+        });
+      }
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Connection failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleSaveSettings = () => {
+    if (selectedShop) {
+      updateSettingsMutation.mutate({ defaultShopId: selectedShop });
+    }
+  };
+
+  const handleTestConnection = () => {
+    const shopToTest = selectedShop || settings?.defaultShopId;
+    if (shopToTest) {
+      testConnectionMutation.mutate(shopToTest);
+    }
+  };
+
+  const currentShop = selectedShop || settings?.defaultShopId;
 
   const handleDownloadExtension = () => {
     window.location.href = "/api/download-extension";
@@ -41,6 +143,104 @@ export default function Settings() {
       </header>
 
       <div className="container mx-auto max-w-4xl py-8 px-4">
+        {/* Tekmetric API Configuration */}
+        <Card className="mb-6">
+          <CardHeader>
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                <SettingsIcon className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <CardTitle>Tekmetric API Integration</CardTitle>
+                <CardDescription>
+                  Configure your API connection to create estimates directly in Tekmetric
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {statusLoading || settingsLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+              </div>
+            ) : (
+              <>
+                <div className="flex items-center gap-2">
+                  {status?.configured ? (
+                    <>
+                      <CheckCircle2 className="h-5 w-5 text-green-600" />
+                      <span className="text-sm text-muted-foreground">API credentials configured</span>
+                    </>
+                  ) : (
+                    <>
+                      <XCircle className="h-5 w-5 text-destructive" />
+                      <span className="text-sm text-muted-foreground">
+                        API credentials not configured. Add TEKMETRIC_API_KEY and shop ID secrets in Tools → Secrets.
+                      </span>
+                    </>
+                  )}
+                </div>
+
+                {status?.configured && status.availableShops.length > 0 && (
+                  <>
+                    <div className="space-y-2">
+                      <Label htmlFor="default-shop">Default Shop Location</Label>
+                      <Select
+                        value={currentShop || undefined}
+                        onValueChange={(value) => setSelectedShop(value as ShopLocation)}
+                      >
+                        <SelectTrigger id="default-shop" data-testid="select-default-shop">
+                          <SelectValue placeholder="Select a shop" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {status.availableShops.map((shop) => (
+                            <SelectItem key={shop.id} value={shop.id}>
+                              {shop.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <p className="text-sm text-muted-foreground">
+                        This shop will be selected by default when creating estimates
+                      </p>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <Button
+                        onClick={handleSaveSettings}
+                        disabled={!selectedShop || updateSettingsMutation.isPending}
+                        data-testid="button-save-settings"
+                      >
+                        {updateSettingsMutation.isPending && (
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        )}
+                        Save Settings
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={handleTestConnection}
+                        disabled={!currentShop || testConnectionMutation.isPending}
+                        data-testid="button-test-connection"
+                      >
+                        {testConnectionMutation.isPending && (
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        )}
+                        Test Connection
+                      </Button>
+                    </div>
+                  </>
+                )}
+
+                {status?.configured && status.availableShops.length === 0 && (
+                  <div className="text-sm text-muted-foreground">
+                    No shop IDs configured. Add TM_SHOP_ID_NB, TM_SHOP_ID_WM, or TM_SHOP_ID_EV secrets.
+                  </div>
+                )}
+              </>
+            )}
+          </CardContent>
+        </Card>
+
         {/* Chrome Extension Section */}
         <Card className="mb-6">
         <CardHeader>
