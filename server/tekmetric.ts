@@ -84,8 +84,9 @@ export async function createTekmetricEstimate(
   job: JobWithDetails,
   shopLocation: ShopLocation,
   customerId?: number,
-  vehicleId?: number
-): Promise<{ repairOrderId: number; url: string }> {
+  vehicleId?: number,
+  repairOrderId?: string
+): Promise<{ repairOrderId: string; url: string }> {
   const laborItems = job.laborItems.map((labor) => ({
     name: labor.name,
     laborTime: labor.hours,
@@ -101,27 +102,39 @@ export async function createTekmetricEstimate(
     retail: part.retail || part.cost,
   }));
 
-  const payload = {
-    customerId,
-    vehicleId,
-    jobs: [
-      {
-        name: job.name,
-        authorized: false,
-        laborItems,
-        parts,
-        note: `Imported from historical job #${job.id}`,
-      },
-    ],
+  const jobData = {
+    name: job.name,
+    authorized: false,
+    laborItems,
+    parts,
+    note: `Imported from historical job #${job.id}`,
   };
 
-  const result = await tekmetricRequest("/repair-orders", "POST", payload, shopLocation);
+  let targetRepairOrderId: string;
+  
+  if (repairOrderId) {
+    const payload = {
+      jobs: [jobData],
+    };
+    
+    await tekmetricRequest(`/repair-orders/${repairOrderId}`, "PATCH", payload, shopLocation);
+    targetRepairOrderId = repairOrderId;
+  } else {
+    const payload = {
+      customerId,
+      vehicleId,
+      jobs: [jobData],
+    };
+
+    const result = await tekmetricRequest("/repair-orders", "POST", payload, shopLocation);
+    targetRepairOrderId = result.id.toString();
+  }
   
   const shopId = getShopId(shopLocation);
-  const repairOrderUrl = `https://shop.tekmetric.com/shop/${shopId}/repair-orders/${result.id}`;
+  const repairOrderUrl = `https://shop.tekmetric.com/shop/${shopId}/repair-orders/${targetRepairOrderId}`;
 
   return {
-    repairOrderId: result.id,
+    repairOrderId: targetRepairOrderId,
     url: repairOrderUrl,
   };
 }

@@ -252,10 +252,17 @@ function extractVehicleData() {
     model: '',
     year: '',
     engine: '',
-    concerns: ''
+    concerns: '',
+    repairOrderId: ''
   };
 
   const allText = document.body.innerText;
+  
+  const urlMatch = window.location.href.match(/repair-orders\/(\d+)/);
+  if (urlMatch) {
+    data.repairOrderId = urlMatch[1];
+    console.log("Extracted RO ID from URL:", data.repairOrderId);
+  }
   
   const vinMatch = allText.match(/VIN[:\s]*([A-HJ-NPR-Z0-9]{17})/i);
   if (vinMatch) {
@@ -357,6 +364,7 @@ function injectCheckHistoryButton() {
     if (vehicleData.year) params.set('year', vehicleData.year);
     if (vehicleData.engine) params.set('engine', vehicleData.engine);
     if (vehicleData.concerns) params.set('search', vehicleData.concerns);
+    if (vehicleData.repairOrderId) params.set('roId', vehicleData.repairOrderId);
     
     chrome.storage.local.get(['appUrl'], (result) => {
       if (!result.appUrl) {

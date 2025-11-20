@@ -208,16 +208,17 @@ export function registerRoutes(app: Express) {
         shopLocation: z.enum(["NB", "WM", "EV"]),
         customerId: z.number().optional(),
         vehicleId: z.number().optional(),
+        repairOrderId: z.string().optional(),
       });
       
-      const { jobId, shopLocation, customerId, vehicleId } = schema.parse(req.body);
+      const { jobId, shopLocation, customerId, vehicleId, repairOrderId } = schema.parse(req.body);
       
       const job = await storage.getJobById(jobId);
       if (!job) {
         return res.status(404).json({ error: "Job not found" });
       }
 
-      const result = await createTekmetricEstimate(job, shopLocation, customerId, vehicleId);
+      const result = await createTekmetricEstimate(job, shopLocation, customerId, vehicleId, repairOrderId);
       res.json(result);
     } catch (error: any) {
       console.error("Create estimate error:", error);

@@ -32,6 +32,7 @@ type Settings = {
 interface JobDetailPanelProps {
   job: JobWithDetails;
   matchScore?: number;
+  repairOrderId?: string;
 }
 
 function formatCurrency(cents: number | null | undefined): string {
@@ -45,7 +46,7 @@ function formatDate(date: Date | string | null | undefined): string {
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
-export function JobDetailPanel({ job, matchScore }: JobDetailPanelProps) {
+export function JobDetailPanel({ job, matchScore, repairOrderId }: JobDetailPanelProps) {
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
   const [sending, setSending] = useState(false);
@@ -67,12 +68,13 @@ export function JobDetailPanel({ job, matchScore }: JobDetailPanelProps) {
       const response = await apiRequest("POST", "/api/tekmetric/create-estimate", {
         jobId: job.id,
         shopLocation,
+        repairOrderId,
       });
-      return await response.json() as { repairOrderId: number; url: string };
+      return await response.json() as { repairOrderId: string; url: string };
     },
-    onSuccess: (data: { repairOrderId: number; url: string }) => {
+    onSuccess: (data: { repairOrderId: string; url: string }) => {
       toast({
-        title: "Estimate created",
+        title: repairOrderId ? "Job added to repair order" : "Estimate created",
         description: (
           <div className="flex items-center gap-2">
             <span>Created in Tekmetric</span>

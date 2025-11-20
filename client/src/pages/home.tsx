@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { SearchInterface } from "@/components/search-interface";
@@ -16,6 +16,16 @@ export default function Home() {
   const [searchParams, setSearchParams] = useState<SearchJobRequest | null>(null);
   const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
   const [results, setResults] = useState<SearchResult[] | null>(null);
+  const [repairOrderId, setRepairOrderId] = useState<string | null>(null);
+  
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const roId = urlParams.get('roId');
+    if (roId) {
+      setRepairOrderId(roId);
+      console.log("Extracted RO ID from URL:", roId);
+    }
+  }, []);
 
   const searchMutation = useMutation({
     mutationFn: async (params: SearchJobRequest) => {
@@ -123,6 +133,7 @@ export default function Home() {
               <JobDetailPanel
                 job={selectedResult.job}
                 matchScore={selectedResult.matchScore}
+                repairOrderId={repairOrderId || undefined}
               />
             ) : Array.isArray(results) && results.length > 0 ? (
               <Card className="sticky top-24">
