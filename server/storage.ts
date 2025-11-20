@@ -120,7 +120,7 @@ export class DatabaseStorage implements IStorage {
 
       jobsWithDetails.push({
         id: job.id,
-        repairOrderId: job.repairOrderId,
+        repairOrderId: job.repairOrderId || 0,
         name: job.name || "",
         laborHours: job.laborHours || 0,
         laborCost: job.laborCost || 0,
