@@ -53,11 +53,11 @@ Preferred communication style: Simple, everyday language.
 - Scores candidates and provides reasoning for match quality
 
 **Data Flow**:
-1. Tekmetric data synced continuously via external sync tool
-2. Vehicle data joined from vehicles table (last 2 years populated)
-3. Search queries filter jobs by vehicle specs and repair type
-4. AI service scores and ranks candidates (optional - degrades gracefully)
-5. Results returned with match scores and vehicle details
+1. Tekmetric data synced continuously via external sync tool (109,423 repair orders, 610,698 jobs, 38,471 vehicles)
+2. Vehicle data joined from vehicles table using vehicleId from job raw_data JSONB field
+3. Search queries filter jobs by vehicle specs (make, model, year, engine) and repair type
+4. AI service scores and ranks candidates using OpenAI (degrades gracefully to 85% default score)
+5. Results returned with match scores, reasoning, and complete job details including calculated labor/parts totals
 
 ### Data Storage
 

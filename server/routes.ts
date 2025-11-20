@@ -9,7 +9,6 @@ export function registerRoutes(app: Express) {
   app.post("/api/search", async (req, res) => {
     try {
       const params = searchJobSchema.parse(req.body);
-      console.log("🔍 Search request:", JSON.stringify(params, null, 2));
 
       // Get candidate jobs from database
       const candidates = await storage.searchJobs({
@@ -21,10 +20,7 @@ export function registerRoutes(app: Express) {
         limit: 50,
       });
 
-      console.log(`✅ Found ${candidates.length} candidate jobs`);
-      
       if (candidates.length === 0) {
-        console.log("❌ No candidates found, returning empty results");
         return res.json([]);
       }
 
@@ -56,16 +52,11 @@ export function registerRoutes(app: Express) {
           candidatesForAI
         );
 
-        console.log(`🤖 AI returned ${matches.length} scored matches`);
-
         // Combine AI scores with job data
         results = matches
           .map((match) => {
             const job = candidates.find((c) => c.id === match.jobId);
-            if (!job) {
-              console.log(`⚠️  AI returned jobId ${match.jobId} but not found in candidates`);
-              return null;
-            }
+            if (!job) return null;
 
             return {
               job,
@@ -74,10 +65,7 @@ export function registerRoutes(app: Express) {
             };
           })
           .filter((r): r is SearchResult => r !== null);
-        
-        console.log(`📊 Final results after matching: ${results.length}`);
       } catch (aiError) {
-        console.log("AI scoring unavailable, returning unscored results:", aiError);
         // Return results without AI scoring
         results = candidates.slice(0, 20).map((job) => ({
           job,
