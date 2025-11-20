@@ -38,12 +38,16 @@ export function registerRoutes(app: Express) {
         
         // Search again with broader year criteria
         // Drop the engine filter to avoid format mismatches
+        console.log(`Searching for: make=${params.vehicleMake}, model=${params.vehicleModel}, repair=${params.repairType}`);
+        
         candidates = await storage.searchJobs({
           vehicleMake: params.vehicleMake,
           vehicleModel: params.vehicleModel,
           repairType: params.repairType,
           limit: 100, // Get more candidates since we'll filter
         });
+        
+        console.log(`Raw search found ${candidates.length} candidates before year filter`);
         
         // Filter candidates to only include compatible years
         candidates = candidates.filter(job => 
