@@ -38,6 +38,114 @@ interface JobCandidate {
  * Uses AI to score and rank job candidates based on similarity to search criteria
  * Returns matches with scores and reasoning
  */
+/**
+ * Uses AI to determine which model years are mechanically compatible
+ * based on powertrain, platform, and repair type
+ */
+export async function getCompatibleYears(
+  vehicleMake: string,
+  vehicleModel: string,
+  vehicleYear: number,
+  vehicleEngine?: string,
+  repairType?: string
+): Promise<number[]> {
+  const prompt = `You are an automotive expert. Determine which model years of the ${vehicleYear} ${vehicleMake} ${vehicleModel} are mechanically compatible for repair purposes.
+
+Vehicle Details:
+- Year: ${vehicleYear}
+- Make: ${vehicleMake}
+- Model: ${vehicleModel}
+${vehicleEngine ? `- Engine: ${vehicleEngine}` : ""}
+${repairType ? `- Repair Type: ${repairType}` : ""}
+
+Consider:
+1. Powertrain compatibility (same engine/transmission across years)
+2. Platform generations (when did major redesigns happen?)
+3. Component interchangeability for this repair type
+4. Mid-cycle refreshes that changed mechanical components
+
+Return ONLY years within ±5 years of ${vehicleYear} (${vehicleYear - 5} to ${vehicleYear + 5}) that share:
+- Same or very similar powertrain
+- Compatible parts for the specified repair type
+- Same platform/generation
+
+Return ONLY valid JSON:
+{
+  "compatibleYears": [2016, 2017, 2018, 2019, 2020],
+  "reasoning": "Brief explanation of why these years are compatible"
+}`;
+
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-5",
+      messages: [
+        {
+          role: "system",
+          content: "You are an automotive expert specializing in vehicle platform generations and powertrain compatibility. Always respond with valid JSON only."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      response_format: { type: "json_object" },
+      max_completion_tokens: 500,
+    });
+
+    const content = response.choices[0]?.message?.content;
+    if (!content) {
+      throw new Error("No response from AI");
+    }
+
+    const parsed = JSON.parse(content);
+    
+    if (parsed.compatibleYears && Array.isArray(parsed.compatibleYears)) {
+      console.log(`AI year compatibility: ${parsed.compatibleYears.join(', ')} - ${parsed.reasoning}`);
+      
+      // Coerce to numbers and filter valid years
+      const aiYears = parsed.compatibleYears
+        .map((year: any) => typeof year === 'number' ? year : parseInt(String(year), 10))
+        .filter((year: number) => 
+          !isNaN(year) && 
+          year >= vehicleYear - 5 && 
+          year <= vehicleYear + 5
+        );
+      
+      // If AI returned empty or doesn't include original year, blend in fallback
+      if (aiYears.length === 0) {
+        console.log("AI returned no valid years, using ±2 fallback");
+        return [
+          vehicleYear - 2,
+          vehicleYear - 1,
+          vehicleYear,
+          vehicleYear + 1,
+          vehicleYear + 2
+        ];
+      }
+      
+      // Ensure original year is included and deduplicate
+      const allYears = Array.from(new Set([...aiYears, vehicleYear])).sort((a, b) => a - b);
+      return allYears;
+    }
+    
+    throw new Error("Invalid response format");
+  } catch (error) {
+    console.error("AI year compatibility error:", error);
+    // Fallback to ±2 years
+    return [
+      vehicleYear - 2,
+      vehicleYear - 1,
+      vehicleYear,
+      vehicleYear + 1,
+      vehicleYear + 2
+    ];
+  }
+}
+
+/**
+ * Uses AI to score and rank job candidates based on similarity to search criteria
+ * Returns matches with scores and reasoning
+ */
 export async function scoreJobMatches(
   searchContext: SearchContext,
   candidates: JobCandidate[]
@@ -129,7 +237,7 @@ Return ONLY valid JSON array format:
       // If it's an object with job IDs as keys, convert to array
       matches = Object.values(parsed).filter((item: any) => 
         item && typeof item === 'object' && 'jobId' in item
-      );
+      ) as JobMatch[];
     }
 
     // Validate and sanitize the matches

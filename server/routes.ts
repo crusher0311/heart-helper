@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
 import { searchJobSchema, type SearchResult } from "@shared/schema";
-import { scoreJobMatches } from "./ai";
+import { scoreJobMatches, getCompatibleYears } from "./ai";
 import archiver from "archiver";
 import { join } from "path";
 
@@ -22,18 +22,33 @@ export function registerRoutes(app: Express) {
         limit: 50,
       });
 
-      // If no results and year was specified, try expanding year range by ±2 years
-      if (candidates.length === 0 && params.vehicleYear) {
-        console.log(`No exact year matches for ${params.vehicleYear}, trying year range...`);
+      // If no results and year was specified, use AI to find compatible model years
+      if (candidates.length === 0 && params.vehicleYear && params.vehicleMake && params.vehicleModel) {
+        console.log(`No exact year matches for ${params.vehicleYear}, using AI to find compatible years...`);
+        
+        // Get AI-determined compatible years
+        const compatibleYears = await getCompatibleYears(
+          params.vehicleMake,
+          params.vehicleModel,
+          params.vehicleYear,
+          params.vehicleEngine,
+          params.repairType
+        );
+        
+        // Search again with broader year criteria, but no specific yearRange
+        // We'll filter by compatible years after the query
         candidates = await storage.searchJobs({
           vehicleMake: params.vehicleMake,
           vehicleModel: params.vehicleModel,
-          vehicleYear: params.vehicleYear,
           vehicleEngine: params.vehicleEngine,
           repairType: params.repairType,
-          limit: 50,
-          yearRange: 2,
+          limit: 100, // Get more candidates since we'll filter
         });
+        
+        // Filter candidates to only include compatible years
+        candidates = candidates.filter(job => 
+          job.vehicle?.year && compatibleYears.includes(job.vehicle.year)
+        ).slice(0, 50); // Limit to top 50
       }
 
       if (candidates.length === 0) {
