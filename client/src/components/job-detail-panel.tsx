@@ -1,12 +1,33 @@
-import { Copy, Check, Calendar, Gauge, FileText, Send } from "lucide-react";
+import { Copy, Check, Calendar, Gauge, FileText, Send, Loader2, ExternalLink, RefreshCw } from "lucide-react";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import type { JobWithDetails } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+
+type ShopLocation = "NB" | "WM" | "EV";
+
+type ShopInfo = {
+  id: ShopLocation;
+  name: string;
+};
+
+type TekmetricStatus = {
+  configured: boolean;
+  availableShops: ShopInfo[];
+};
+
+type Settings = {
+  id: string;
+  defaultShopId: ShopLocation | null;
+  updatedAt: string;
+};
 
 interface JobDetailPanelProps {
   job: JobWithDetails;
@@ -28,9 +49,65 @@ export function JobDetailPanel({ job, matchScore }: JobDetailPanelProps) {
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
   const [sending, setSending] = useState(false);
+  const [selectedShop, setSelectedShop] = useState<ShopLocation | null>(null);
 
   const vehicle = job.vehicle;
   const repairOrder = job.repairOrder;
+
+  const { data: status } = useQuery<TekmetricStatus>({
+    queryKey: ["/api/tekmetric/status"],
+  });
+
+  const { data: settings } = useQuery<Settings>({
+    queryKey: ["/api/settings"],
+  });
+
+  const createEstimateMutation = useMutation({
+    mutationFn: async (shopLocation: ShopLocation) => {
+      const response = await fetch("/api/tekmetric/create-estimate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          jobId: job.id,
+          shopLocation,
+        }),
+      });
+      
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Failed to create estimate");
+      }
+      
+      return response.json();
+    },
+    onSuccess: (data: { repairOrderId: number; url: string }) => {
+      toast({
+        title: "Estimate created",
+        description: (
+          <div className="flex items-center gap-2">
+            <span>Created in Tekmetric</span>
+            <a 
+              href={data.url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary underline flex items-center gap-1"
+            >
+              Open <ExternalLink className="w-3 h-3" />
+            </a>
+          </div>
+        ),
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Error creating estimate",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const shopToUse = selectedShop || settings?.defaultShopId;
 
   const handleCopyToClipboard = () => {
     const laborDetails = job.laborItems
@@ -317,26 +394,77 @@ TOTAL: ${formatCurrency(job.subtotal)}
       </Card>
 
       {/* Actions */}
-      <div className="flex flex-col gap-2">
-        <Button
-          onClick={handleSendToTekmetric}
-          className="w-full"
-          data-testid="button-send-tekmetric"
-          disabled={sending}
-        >
-          <Send className="w-4 h-4 mr-2" />
-          {sending ? "Sent!" : "Send to Tekmetric"}
-        </Button>
-        <Button
-          onClick={handleCopyToClipboard}
-          variant="outline"
-          className="w-full"
-          data-testid="button-copy-clipboard"
-        >
-          {copied ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
-          {copied ? "Copied!" : "Copy Details"}
-        </Button>
-      </div>
+      <Card>
+        <CardContent className="pt-6 space-y-3">
+          {status?.configured && status.availableShops.length > 0 && (
+            <>
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Shop Location</label>
+                <Select
+                  value={shopToUse || undefined}
+                  onValueChange={(value) => setSelectedShop(value as ShopLocation)}
+                >
+                  <SelectTrigger data-testid="select-shop-location">
+                    <SelectValue placeholder="Select shop" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {status.availableShops.map((shop) => (
+                      <SelectItem key={shop.id} value={shop.id}>
+                        {shop.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <Button
+                onClick={() => {
+                  if (shopToUse) {
+                    createEstimateMutation.mutate(shopToUse);
+                  }
+                }}
+                className="w-full"
+                data-testid="button-create-estimate-api"
+                disabled={!shopToUse || createEstimateMutation.isPending}
+              >
+                {createEstimateMutation.isPending ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Creating...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4 mr-2" />
+                    Create Estimate in Tekmetric
+                  </>
+                )}
+              </Button>
+            </>
+          )}
+
+          {(!status?.configured || status.availableShops.length === 0) && (
+            <Button
+              onClick={handleSendToTekmetric}
+              className="w-full"
+              data-testid="button-send-tekmetric-extension"
+              disabled={sending}
+            >
+              <Send className="w-4 h-4 mr-2" />
+              {sending ? "Sent!" : "Send to Extension"}
+            </Button>
+          )}
+
+          <Button
+            onClick={handleCopyToClipboard}
+            variant="outline"
+            className="w-full"
+            data-testid="button-copy-clipboard"
+          >
+            {copied ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
+            {copied ? "Copied!" : "Copy Details"}
+          </Button>
+        </CardContent>
+      </Card>
     </div>
   );
 }
