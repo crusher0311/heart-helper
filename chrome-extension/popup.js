@@ -83,6 +83,54 @@ function updatePopup() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', updatePopup);
+function loadAppUrl() {
+  chrome.storage.local.get(['appUrl'], (result) => {
+    const appUrlInput = document.getElementById('app-url');
+    const urlStatus = document.getElementById('url-status');
+    
+    if (result.appUrl) {
+      appUrlInput.value = result.appUrl;
+      urlStatus.textContent = 'Current URL configured';
+      urlStatus.style.color = '#10b981';
+    } else {
+      urlStatus.textContent = 'No URL configured - please set your app URL';
+      urlStatus.style.color = '#ef4444';
+    }
+  });
+}
+
+function saveAppUrl() {
+  const appUrlInput = document.getElementById('app-url');
+  const urlStatus = document.getElementById('url-status');
+  const url = appUrlInput.value.trim();
+  
+  if (!url) {
+    urlStatus.textContent = 'Please enter a valid URL';
+    urlStatus.style.color = '#ef4444';
+    return;
+  }
+  
+  try {
+    new URL(url);
+    
+    chrome.storage.local.set({ appUrl: url }, () => {
+      urlStatus.textContent = '✓ URL saved successfully';
+      urlStatus.style.color = '#10b981';
+      setTimeout(() => {
+        urlStatus.textContent = 'Current URL configured';
+      }, 2000);
+    });
+  } catch (e) {
+    urlStatus.textContent = 'Invalid URL format';
+    urlStatus.style.color = '#ef4444';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updatePopup();
+  loadAppUrl();
+  
+  document.getElementById('save-url').addEventListener('click', saveAppUrl);
+});
 
 setInterval(updatePopup, 2000);

@@ -59,7 +59,7 @@ export default function Settings() {
         <CardContent className="space-y-4">
           <Alert>
             <AlertDescription>
-              The Chrome extension allows you to automatically fill Tekmetric estimate forms with labor items and parts from your search results.
+              The Chrome extension adds two powerful features: (1) A "Check History" button on Tekmetric repair orders that instantly searches for similar jobs, and (2) Auto-fill for estimate forms with labor items and parts from your search results.
             </AlertDescription>
           </Alert>
 
@@ -133,6 +133,16 @@ export default function Settings() {
               </div>
 
               <div className="flex items-start gap-3">
+                <Circle className="w-4 h-4 mt-1 text-muted-foreground" />
+                <div>
+                  <p className="font-medium">Configure app URL</p>
+                  <p className="text-sm text-muted-foreground">
+                    Click the extension icon, copy this page's URL from your browser, paste it in the Settings section, and click Save
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
                 <CheckCircle2 className="w-4 h-4 mt-1 text-green-600" />
                 <div>
                   <p className="font-medium text-green-600">You're all set!</p>
@@ -156,9 +166,9 @@ export default function Settings() {
               <div className="flex items-start gap-3">
                 <Search className="w-5 h-5 mt-0.5 text-primary" />
                 <div>
-                  <p className="font-medium">Search for a job</p>
+                  <p className="font-medium">Quick search from Tekmetric</p>
                   <p className="text-sm text-muted-foreground">
-                    Use the search tool to find similar historical jobs
+                    On any Tekmetric repair order page, click the "Check History" button to instantly search for similar jobs with pre-filled vehicle information
                   </p>
                 </div>
               </div>
@@ -168,7 +178,7 @@ export default function Settings() {
                 <div>
                   <p className="font-medium">Send to Tekmetric</p>
                   <p className="text-sm text-muted-foreground">
-                    Click the "Send to Tekmetric" button in the job detail panel
+                    After finding a similar job, click "Send to Tekmetric" in the job detail panel
                   </p>
                 </div>
               </div>
@@ -178,7 +188,7 @@ export default function Settings() {
                 <div>
                   <p className="font-medium">Auto-fill estimate</p>
                   <p className="text-sm text-muted-foreground">
-                    Open a Tekmetric estimate page - the extension will automatically fill in labor items and parts
+                    Open a Tekmetric estimate page - the extension automatically fills in labor items and parts
                   </p>
                 </div>
               </div>

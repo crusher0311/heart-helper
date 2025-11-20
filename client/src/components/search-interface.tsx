@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,6 +27,37 @@ export function SearchInterface({ onSearch, isLoading }: SearchInterfaceProps) {
   const [year, setYear] = useState<string>("");
   const [engine, setEngine] = useState<string>("");
   const [repairType, setRepairType] = useState<string>("");
+  const [autoSearchTriggered, setAutoSearchTriggered] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    
+    const urlMake = params.get('make');
+    const urlModel = params.get('model');
+    const urlYear = params.get('year');
+    const urlEngine = params.get('engine');
+    const urlSearch = params.get('search');
+
+    if (urlMake) setMake(urlMake);
+    if (urlModel) setModel(urlModel);
+    if (urlYear) setYear(urlYear);
+    if (urlEngine) setEngine(urlEngine);
+    if (urlSearch) setRepairType(urlSearch);
+
+    if (urlSearch && !autoSearchTriggered) {
+      setAutoSearchTriggered(true);
+      setTimeout(() => {
+        onSearch({
+          vehicleMake: urlMake || undefined,
+          vehicleModel: urlModel || undefined,
+          vehicleYear: urlYear ? parseInt(urlYear) : undefined,
+          vehicleEngine: urlEngine || undefined,
+          repairType: urlSearch,
+          limit: 20,
+        });
+      }, 500);
+    }
+  }, [onSearch, autoSearchTriggered]);
 
   const handleSearch = () => {
     if (!repairType.trim()) return;
@@ -37,6 +68,7 @@ export function SearchInterface({ onSearch, isLoading }: SearchInterfaceProps) {
       vehicleYear: year ? parseInt(year) : undefined,
       vehicleEngine: engine || undefined,
       repairType: repairType.trim(),
+      limit: 20,
     });
   };
 

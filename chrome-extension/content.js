@@ -1,5 +1,7 @@
 console.log("Tekmetric Job Importer: Content script loaded");
 
+let checkHistoryButton = null;
+
 function waitForElement(selector, timeout = 10000) {
   return new Promise((resolve, reject) => {
     if (document.querySelector(selector)) {
@@ -243,3 +245,166 @@ observer.observe(document.body, {
   childList: true,
   subtree: true
 });
+
+function extractVehicleData() {
+  const data = {
+    make: '',
+    model: '',
+    year: '',
+    engine: '',
+    concerns: ''
+  };
+
+  const allText = document.body.innerText;
+  
+  const vinMatch = allText.match(/VIN[:\s]*([A-HJ-NPR-Z0-9]{17})/i);
+  if (vinMatch) {
+    data.vin = vinMatch[1];
+  }
+
+  const yearMatch = allText.match(/\b(19|20)\d{2}\b/);
+  if (yearMatch) {
+    data.year = yearMatch[0];
+  }
+
+  const makeModelRegex = /(Toyota|Honda|Ford|Chevrolet|Nissan|Hyundai|Kia|Jeep|Ram|GMC|Subaru|Mazda|Volkswagen|BMW|Mercedes-Benz|Audi|Lexus|Acura|Infiniti|Cadillac|Buick|Lincoln|Chrysler|Dodge|Mitsubishi|Volvo|Porsche|Tesla|Land Rover|Jaguar|Mini|Fiat|Alfa Romeo)\s+([A-Za-z0-9\s-]+?)(?=\s+\d{4}|\s+Sport|\s+\d\.\d)/i;
+  const makeModelMatch = allText.match(makeModelRegex);
+  if (makeModelMatch) {
+    data.make = makeModelMatch[1];
+    data.model = makeModelMatch[2].trim();
+  }
+
+  const engineMatch = allText.match(/(\d\.\d+[LT]?)\s*(V\d+|I\d+|L\d+|Turbo|Diesel)?/i);
+  if (engineMatch) {
+    data.engine = engineMatch[0].trim();
+  }
+
+  const concernsElements = document.querySelectorAll('[class*="concern" i], [class*="customer" i] textarea, [class*="issue" i] textarea');
+  if (concernsElements.length > 0) {
+    data.concerns = Array.from(concernsElements)
+      .map(el => el.value || el.textContent)
+      .filter(text => text && text.length > 5)
+      .join(', ')
+      .substring(0, 200);
+  }
+
+  if (!data.concerns) {
+    const textAreas = document.querySelectorAll('textarea');
+    for (const textarea of textAreas) {
+      const text = textarea.value || textarea.textContent;
+      if (text && text.length > 10 && text.length < 500) {
+        data.concerns = text.substring(0, 200);
+        break;
+      }
+    }
+  }
+
+  console.log("Extracted vehicle data:", data);
+  return data;
+}
+
+function injectCheckHistoryButton() {
+  if (checkHistoryButton || !window.location.href.includes('/repair-orders/')) {
+    return;
+  }
+
+  const targetContainer = document.querySelector('[data-testid="ro-header"]') ||
+                          document.querySelector('header') ||
+                          document.querySelector('[class*="header" i]');
+
+  if (!targetContainer) {
+    console.log("Could not find suitable container for Check History button");
+    return;
+  }
+
+  checkHistoryButton = document.createElement('button');
+  checkHistoryButton.textContent = 'Check History';
+  checkHistoryButton.style.cssText = `
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    transition: all 0.2s ease;
+    margin-left: 12px;
+    font-family: system-ui, -apple-system, sans-serif;
+    z-index: 9999;
+  `;
+
+  checkHistoryButton.addEventListener('mouseenter', () => {
+    checkHistoryButton.style.transform = 'translateY(-1px)';
+    checkHistoryButton.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.4)';
+  });
+
+  checkHistoryButton.addEventListener('mouseleave', () => {
+    checkHistoryButton.style.transform = 'translateY(0)';
+    checkHistoryButton.style.boxShadow = '0 2px 8px rgba(102, 126, 234, 0.3)';
+  });
+
+  checkHistoryButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const vehicleData = extractVehicleData();
+    
+    const params = new URLSearchParams();
+    if (vehicleData.make) params.set('make', vehicleData.make);
+    if (vehicleData.model) params.set('model', vehicleData.model);
+    if (vehicleData.year) params.set('year', vehicleData.year);
+    if (vehicleData.engine) params.set('engine', vehicleData.engine);
+    if (vehicleData.concerns) params.set('search', vehicleData.concerns);
+    
+    chrome.storage.local.get(['appUrl'], (result) => {
+      if (!result.appUrl) {
+        showErrorNotification('Extension not configured. Click the extension icon and set your app URL in Settings.');
+        return;
+      }
+      
+      const searchUrl = `${result.appUrl}/?${params.toString()}`;
+      
+      console.log("Opening search with URL:", searchUrl);
+      console.log("Vehicle data:", vehicleData);
+      window.open(searchUrl, '_blank');
+    });
+  });
+
+  targetContainer.appendChild(checkHistoryButton);
+  console.log("Check History button injected");
+}
+
+function observePageChanges() {
+  const checkAndInject = () => {
+    if (window.location.href.includes('/repair-orders/') && !checkHistoryButton) {
+      setTimeout(injectCheckHistoryButton, 1000);
+    } else if (!window.location.href.includes('/repair-orders/') && checkHistoryButton) {
+      checkHistoryButton?.remove();
+      checkHistoryButton = null;
+    }
+  };
+
+  checkAndInject();
+
+  const urlObserver = new MutationObserver(checkAndInject);
+  urlObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+  let lastUrl = window.location.href;
+  setInterval(() => {
+    if (lastUrl !== window.location.href) {
+      lastUrl = window.location.href;
+      checkAndInject();
+    }
+  }, 1000);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', observePageChanges);
+} else {
+  observePageChanges();
+}

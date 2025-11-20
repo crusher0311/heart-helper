@@ -7,6 +7,18 @@ if (window.location.hostname.endsWith('.replit.dev')) {
   allowedOrigins.push(window.location.origin);
 }
 
+chrome.storage.local.get(['appUrl'], (result) => {
+  if (!result.appUrl) {
+    chrome.storage.local.set({ 
+      appUrl: window.location.origin 
+    }, () => {
+      console.log("Inject: Saved app URL to storage (first time):", window.location.origin);
+    });
+  } else {
+    console.log("Inject: App URL already configured, not overwriting:", result.appUrl);
+  }
+});
+
 window.addEventListener("message", (event) => {
   if (event.source !== window) return;
   
