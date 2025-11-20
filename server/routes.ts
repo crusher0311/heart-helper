@@ -22,21 +22,22 @@ export function registerRoutes(app: Express) {
         limit: 50,
       });
 
-      // If no results and year was specified, use AI to find compatible model years
+      // If no results and year was specified, try expanding year range by ±2 years
+      // TODO: Re-enable AI year compatibility once token issue is resolved
       if (candidates.length === 0 && params.vehicleYear && params.vehicleMake && params.vehicleModel) {
-        console.log(`No exact year matches for ${params.vehicleYear}, using AI to find compatible years...`);
+        console.log(`No exact year matches for ${params.vehicleYear}, trying ±2 year range...`);
         
-        // Get AI-determined compatible years
-        const compatibleYears = await getCompatibleYears(
-          params.vehicleMake,
-          params.vehicleModel,
+        // Simple fallback: ±2 years
+        const compatibleYears = [
+          params.vehicleYear - 2,
+          params.vehicleYear - 1,
           params.vehicleYear,
-          params.vehicleEngine,
-          params.repairType
-        );
+          params.vehicleYear + 1,
+          params.vehicleYear + 2
+        ];
         
         // Search again with broader year criteria
-        // Drop the engine filter since AI already verified powertrain compatibility
+        // Drop the engine filter to avoid format mismatches
         candidates = await storage.searchJobs({
           vehicleMake: params.vehicleMake,
           vehicleModel: params.vehicleModel,
@@ -48,6 +49,8 @@ export function registerRoutes(app: Express) {
         candidates = candidates.filter(job => 
           job.vehicle?.year && compatibleYears.includes(job.vehicle.year)
         ).slice(0, 50); // Limit to top 50
+        
+        console.log(`Found ${candidates.length} candidates in years ${compatibleYears.join(', ')}`);
       }
 
       if (candidates.length === 0) {
