@@ -274,7 +274,7 @@ function extractVehicleData() {
     data.model = makeModelMatch[2].trim();
   }
 
-  const engineMatch = allText.match(/(\d\.\d+[LT]?)\s*(V\d+|I\d+|L\d+|Turbo|Diesel)?/i);
+  const engineMatch = allText.match(/(\d\.\d+L)\s*(V\d+|I\d+|H\d+)?/i);
   if (engineMatch) {
     data.engine = engineMatch[0].trim();
   }
