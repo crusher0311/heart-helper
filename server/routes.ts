@@ -35,12 +35,11 @@ export function registerRoutes(app: Express) {
           params.repairType
         );
         
-        // Search again with broader year criteria, but no specific yearRange
-        // We'll filter by compatible years after the query
+        // Search again with broader year criteria
+        // Drop the engine filter since AI already verified powertrain compatibility
         candidates = await storage.searchJobs({
           vehicleMake: params.vehicleMake,
           vehicleModel: params.vehicleModel,
-          vehicleEngine: params.vehicleEngine,
           repairType: params.repairType,
           limit: 100, // Get more candidates since we'll filter
         });

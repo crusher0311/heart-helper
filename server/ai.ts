@@ -92,8 +92,11 @@ Return ONLY valid JSON:
       max_completion_tokens: 500,
     });
 
+    console.log("AI year compatibility response:", JSON.stringify(response, null, 2));
+    
     const content = response.choices[0]?.message?.content;
     if (!content) {
+      console.error("AI returned empty content. Full response:", response);
       throw new Error("No response from AI");
     }
 
