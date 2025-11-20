@@ -1,4 +1,4 @@
-import { Copy, Check, Calendar, Gauge, FileText } from "lucide-react";
+import { Copy, Check, Calendar, Gauge, FileText, Send } from "lucide-react";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,7 @@ function formatDate(date: Date | string | null | undefined): string {
 export function JobDetailPanel({ job, matchScore }: JobDetailPanelProps) {
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const vehicle = job.vehicle;
   const repairOrder = job.repairOrder;
@@ -63,6 +64,51 @@ TOTAL: ${formatCurrency(job.subtotal)}
     });
 
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSendToTekmetric = () => {
+    setSending(true);
+
+    const jobData = {
+      action: "SEND_TO_TEKMETRIC",
+      payload: {
+        jobName: job.name,
+        vehicle: vehicle ? {
+          year: vehicle.year,
+          make: vehicle.make,
+          model: vehicle.model,
+          engine: vehicle.engine,
+          vin: vehicle.vin,
+        } : null,
+        laborItems: job.laborItems.map((item) => ({
+          name: item.name,
+          hours: Number(item.hours),
+          rate: item.rate / 100,
+        })),
+        parts: job.parts.map((part) => ({
+          name: part.name,
+          brand: part.brand,
+          partNumber: part.partNumber,
+          quantity: part.quantity,
+          cost: (part.cost || 0) / 100,
+          retail: (part.retail || 0) / 100,
+        })),
+        totals: {
+          labor: job.laborTotal / 100,
+          parts: job.partsTotal / 100,
+          total: job.subtotal / 100,
+        },
+      },
+    };
+
+    window.postMessage(jobData, window.location.origin);
+
+    toast({
+      title: "Sent to Tekmetric Extension",
+      description: "Open a Tekmetric estimate to auto-fill the job details",
+    });
+
+    setTimeout(() => setSending(false), 2000);
   };
 
   return (
@@ -271,11 +317,20 @@ TOTAL: ${formatCurrency(job.subtotal)}
       </Card>
 
       {/* Actions */}
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-2">
+        <Button
+          onClick={handleSendToTekmetric}
+          className="w-full"
+          data-testid="button-send-tekmetric"
+          disabled={sending}
+        >
+          <Send className="w-4 h-4 mr-2" />
+          {sending ? "Sent!" : "Send to Tekmetric"}
+        </Button>
         <Button
           onClick={handleCopyToClipboard}
           variant="outline"
-          className="flex-1"
+          className="w-full"
           data-testid="button-copy-clipboard"
         >
           {copied ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}

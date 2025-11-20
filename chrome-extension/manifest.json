@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "Tekmetric Job Importer",
+  "version": "1.0.0",
+  "description": "Import job details from repair search tool into Tekmetric estimates",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://shop.tekmetric.com/*",
+    "http://localhost:5000/*",
+    "*://*.replit.dev/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://shop.tekmetric.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://localhost:5000/*",
+        "*://*.replit.dev/*"
+      ],
+      "js": ["inject.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

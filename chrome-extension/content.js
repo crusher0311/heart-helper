@@ -1,0 +1,245 @@
+console.log("Tekmetric Job Importer: Content script loaded");
+
+function waitForElement(selector, timeout = 10000) {
+  return new Promise((resolve, reject) => {
+    if (document.querySelector(selector)) {
+      return resolve(document.querySelector(selector));
+    }
+
+    const observer = new MutationObserver(() => {
+      if (document.querySelector(selector)) {
+        observer.disconnect();
+        resolve(document.querySelector(selector));
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    setTimeout(() => {
+      observer.disconnect();
+      reject(new Error(`Timeout waiting for ${selector}`));
+    }, timeout);
+  });
+}
+
+function fillInput(selector, value) {
+  const element = document.querySelector(selector);
+  if (!element) return false;
+  
+  element.value = value;
+  element.dispatchEvent(new Event('input', { bubbles: true }));
+  element.dispatchEvent(new Event('change', { bubbles: true }));
+  element.dispatchEvent(new Event('blur', { bubbles: true }));
+  
+  return true;
+}
+
+function clickElement(selector) {
+  const element = document.querySelector(selector);
+  if (!element) return false;
+  
+  element.click();
+  return true;
+}
+
+async function fillTekmetricEstimate(jobData) {
+  console.log("Starting to fill Tekmetric estimate with job data:", jobData);
+  
+  try {
+    if (!window.location.href.includes('shop.tekmetric.com')) {
+      console.log("Not on Tekmetric page, skipping auto-fill");
+      return;
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    for (const laborItem of jobData.laborItems) {
+      console.log(`Adding labor item: ${laborItem.name}`);
+      
+      const addLaborButton = document.querySelector('[data-testid="add-labor-button"]') || 
+                             Array.from(document.querySelectorAll('button')).find(btn => {
+                               const text = btn.textContent.toLowerCase();
+                               return text.includes('labor') || text.includes('add labor');
+                             });
+      
+      if (addLaborButton) {
+        console.log('Found Add Labor button, clicking...');
+        addLaborButton.click();
+        await new Promise(resolve => setTimeout(resolve, 500));
+      } else {
+        console.warn('Add Labor button not found');
+      }
+
+      const filled = fillInput('input[name="labor-description"]', laborItem.name) ||
+                     fillInput('input[placeholder*="escription" i]', laborItem.name) ||
+                     fillInput('textarea[name="labor-description"]', laborItem.name);
+      
+      fillInput('input[name="labor-hours"]', laborItem.hours.toString()) ||
+        fillInput('input[placeholder*="ours" i]', laborItem.hours.toString());
+        
+      fillInput('input[name="labor-rate"]', laborItem.rate.toString()) ||
+        fillInput('input[placeholder*="ate" i]', laborItem.rate.toString());
+      
+      if (!filled) {
+        console.warn('Could not find labor input fields');
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, 300));
+    }
+
+    for (const part of jobData.parts) {
+      console.log(`Adding part: ${part.name}`);
+      
+      const addPartButton = document.querySelector('[data-testid="add-part-button"]') ||
+                            Array.from(document.querySelectorAll('button')).find(btn => {
+                              const text = btn.textContent.toLowerCase();
+                              return text.includes('part') || text.includes('add part');
+                            });
+      
+      if (addPartButton) {
+        console.log('Found Add Part button, clicking...');
+        addPartButton.click();
+        await new Promise(resolve => setTimeout(resolve, 500));
+      } else {
+        console.warn('Add Part button not found');
+      }
+
+      fillInput('input[name="part-number"]', part.partNumber || '') ||
+        fillInput('input[placeholder*="umber" i]', part.partNumber || '');
+        
+      fillInput('input[name="part-description"]', part.name) ||
+        fillInput('input[placeholder*="escription" i]', part.name) ||
+        fillInput('textarea[name="part-description"]', part.name);
+        
+      fillInput('input[name="part-quantity"]', part.quantity.toString()) ||
+        fillInput('input[placeholder*="uantity" i]', part.quantity.toString());
+        
+      fillInput('input[name="part-cost"]', part.cost.toString()) ||
+        fillInput('input[placeholder*="ost" i]', part.cost.toString());
+        
+      fillInput('input[name="part-retail"]', part.retail.toString()) ||
+        fillInput('input[placeholder*="etail" i]', part.retail.toString()) ||
+        fillInput('input[placeholder*="rice" i]', part.retail.toString());
+        
+      if (part.brand) {
+        fillInput('input[name="part-brand"]', part.brand) ||
+          fillInput('input[placeholder*="rand" i]', part.brand);
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, 300));
+    }
+
+    console.log("Successfully filled Tekmetric estimate");
+    
+    chrome.runtime.sendMessage({ action: "CLEAR_PENDING_JOB" });
+    
+    showSuccessNotification(jobData);
+    
+  } catch (error) {
+    console.error("Error filling Tekmetric estimate:", error);
+    showErrorNotification(error.message);
+  }
+}
+
+function showSuccessNotification(jobData) {
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #10b981;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    max-width: 400px;
+  `;
+  
+  const title = document.createElement('div');
+  title.style.fontWeight = 'bold';
+  title.style.marginBottom = '4px';
+  title.textContent = '✓ Job Imported Successfully';
+  
+  const details = document.createElement('div');
+  details.textContent = `${jobData.jobName} - ${jobData.laborItems.length} labor items, ${jobData.parts.length} parts`;
+  
+  notification.appendChild(title);
+  notification.appendChild(details);
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.style.transition = 'opacity 0.3s';
+    notification.style.opacity = '0';
+    setTimeout(() => notification.remove(), 300);
+  }, 5000);
+}
+
+function showErrorNotification(message) {
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ef4444;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    max-width: 400px;
+  `;
+  
+  const title = document.createElement('div');
+  title.style.fontWeight = 'bold';
+  title.style.marginBottom = '4px';
+  title.textContent = '⚠ Import Failed';
+  
+  const details = document.createElement('div');
+  details.textContent = message;
+  
+  notification.appendChild(title);
+  notification.appendChild(details);
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.style.transition = 'opacity 0.3s';
+    notification.style.opacity = '0';
+    setTimeout(() => notification.remove(), 300);
+  }, 7000);
+}
+
+function checkForPendingJob() {
+  chrome.runtime.sendMessage({ action: "GET_PENDING_JOB" }, (response) => {
+    if (response && response.jobData) {
+      console.log("Found pending job data, auto-filling...");
+      fillTekmetricEstimate(response.jobData);
+    }
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(checkForPendingJob, 2000);
+  });
+} else {
+  setTimeout(checkForPendingJob, 2000);
+}
+
+const observer = new MutationObserver(() => {
+  if (window.location.href.includes('/estimates/') || window.location.href.includes('/repair-orders/')) {
+    checkForPendingJob();
+  }
+});
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});

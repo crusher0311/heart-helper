@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tekmetric Job Importer</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tekmetric Job Importer</h1>
+      <p class="subtitle">Auto-fill estimates from repair search</p>
+    </header>
+
+    <div id="status-section">
+      <div id="no-job" class="status-card">
+        <div class="icon">📋</div>
+        <h2>No Job Data</h2>
+        <p>Search for a job in your repair search tool and click "Send to Tekmetric"</p>
+      </div>
+
+      <div id="job-ready" class="status-card" style="display: none;">
+        <div class="icon success">✓</div>
+        <h2>Job Ready to Import</h2>
+        <div id="job-info"></div>
+        <p class="hint">Open a Tekmetric estimate page to auto-fill</p>
+      </div>
+    </div>
+
+    <div id="last-job-section" style="display: none;">
+      <h3>Last Imported Job</h3>
+      <div id="last-job-info" class="job-details"></div>
+    </div>
+
+    <footer>
+      <p class="help-text">
+        Need help? Make sure you're on a Tekmetric estimate page.
+      </p>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
