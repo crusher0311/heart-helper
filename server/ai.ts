@@ -89,7 +89,7 @@ Return ONLY valid JSON:
         }
       ],
       response_format: { type: "json_object" },
-      max_completion_tokens: 500,
+      max_completion_tokens: 1000,
     });
 
     console.log("AI year compatibility response:", JSON.stringify(response, null, 2));
