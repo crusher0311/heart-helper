@@ -83,6 +83,13 @@ export const searchRequests = pgTable("search_requests", {
   resultsCount: integer("results_count"),
 });
 
+// User settings table for app configuration
+export const settings = pgTable("settings", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  defaultShopId: text("default_shop_id"), // "NB", "WM", or "EV"
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 // Relations
 export const repairOrdersRelations = relations(repairOrders, ({ many }) => ({
   jobs: many(repairOrderJobs),
@@ -108,6 +115,7 @@ export const insertRepairOrderSchema = createInsertSchema(repairOrders);
 export const insertRepairOrderJobSchema = createInsertSchema(repairOrderJobs);
 export const insertRepairOrderJobPartSchema = createInsertSchema(repairOrderJobParts);
 export const insertSearchRequestSchema = createInsertSchema(searchRequests).omit({ id: true, createdDate: true });
+export const insertSettingsSchema = createInsertSchema(settings).omit({ id: true, updatedAt: true });
 
 // Search request schema
 export const searchJobSchema = z.object({
@@ -139,6 +147,9 @@ export type InsertSearchRequest = z.infer<typeof insertSearchRequestSchema>;
 export type SearchJobRequest = z.infer<typeof searchJobSchema>;
 
 export type Vehicle = typeof vehicles.$inferSelect;
+
+export type Settings = typeof settings.$inferSelect;
+export type InsertSettings = z.infer<typeof insertSettingsSchema>;
 
 // Vehicle info extracted from raw_data
 export type VehicleInfo = {

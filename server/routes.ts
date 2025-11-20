@@ -1,10 +1,20 @@
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
-import { searchJobSchema, type SearchResult } from "@shared/schema";
+import { searchJobSchema, type SearchResult, insertSettingsSchema } from "@shared/schema";
 import { scoreJobMatches, getCompatibleYears } from "./ai";
 import archiver from "archiver";
 import { join } from "path";
+import { 
+  createTekmetricEstimate, 
+  testConnection, 
+  fetchCurrentPricing,
+  isTekmetricConfigured,
+  getAvailableShops,
+  SHOP_NAMES,
+  type ShopLocation
+} from "./tekmetric";
+import { z } from "zod";
 
 export function registerRoutes(app: Express) {
   // Search endpoint
@@ -160,6 +170,97 @@ export function registerRoutes(app: Express) {
       console.log('Extension download started');
     } catch (error: any) {
       console.error("Extension download error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Get Tekmetric configuration status
+  app.get("/api/tekmetric/status", (req, res) => {
+    const configured = isTekmetricConfigured();
+    const availableShops = getAvailableShops();
+    
+    res.json({
+      configured,
+      availableShops: availableShops.map(shop => ({
+        id: shop,
+        name: SHOP_NAMES[shop],
+      })),
+    });
+  });
+
+  // Test Tekmetric connection for a specific shop
+  app.post("/api/tekmetric/test", async (req, res) => {
+    try {
+      const { shopLocation } = z.object({ shopLocation: z.enum(["NB", "WM", "EV"]) }).parse(req.body);
+      const success = await testConnection(shopLocation);
+      res.json({ success });
+    } catch (error: any) {
+      console.error("Tekmetric connection test error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Create Tekmetric estimate from job
+  app.post("/api/tekmetric/create-estimate", async (req, res) => {
+    try {
+      const schema = z.object({
+        jobId: z.number(),
+        shopLocation: z.enum(["NB", "WM", "EV"]),
+        customerId: z.number().optional(),
+        vehicleId: z.number().optional(),
+      });
+      
+      const { jobId, shopLocation, customerId, vehicleId } = schema.parse(req.body);
+      
+      const job = await storage.getJobById(jobId);
+      if (!job) {
+        return res.status(404).json({ error: "Job not found" });
+      }
+
+      const result = await createTekmetricEstimate(job, shopLocation, customerId, vehicleId);
+      res.json(result);
+    } catch (error: any) {
+      console.error("Create estimate error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Refresh pricing for parts
+  app.post("/api/tekmetric/refresh-pricing", async (req, res) => {
+    try {
+      const schema = z.object({
+        partNumbers: z.array(z.string()),
+        shopLocation: z.enum(["NB", "WM", "EV"]),
+      });
+      
+      const { partNumbers, shopLocation } = schema.parse(req.body);
+      const pricing = await fetchCurrentPricing(partNumbers, shopLocation);
+      res.json(pricing);
+    } catch (error: any) {
+      console.error("Refresh pricing error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Get settings
+  app.get("/api/settings", async (req, res) => {
+    try {
+      const settings = await storage.getSettings();
+      res.json(settings);
+    } catch (error: any) {
+      console.error("Get settings error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Update settings
+  app.post("/api/settings", async (req, res) => {
+    try {
+      const data = insertSettingsSchema.parse(req.body);
+      const settings = await storage.updateSettings(data);
+      res.json(settings);
+    } catch (error: any) {
+      console.error("Update settings error:", error);
       res.status(500).json({ error: error.message });
     }
   });
