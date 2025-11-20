@@ -63,13 +63,19 @@ A Chrome extension (`chrome-extension/`) integrates the search tool with Tekmetr
 - OpenAI API accessed through Replit's AI Integrations service
 - LLM used for semantic matching of repair jobs based on vehicle specs and repair type
 - Scores candidates and provides reasoning for match quality
+- **Smart Year Compatibility**: AI determines which model years are mechanically compatible
+  - Considers powertrain generations, platform changes, and component interchangeability
+  - Replaces blind ±2 year expansion with intelligent year selection
+  - Example: Search for 2018 Toyota Sienna → AI identifies 2016-2020 share same 3.5L V6 powertrain
+  - Falls back to ±2 years if AI unavailable or returns no results
 
 **Data Flow**:
 1. Tekmetric data synced continuously via external sync tool (109,423 repair orders, 610,698 jobs, 38,471 vehicles)
 2. Vehicle data joined from vehicles table using vehicleId from job raw_data JSONB field
 3. Search queries filter jobs by vehicle specs (make, model, year, engine) and repair type
-4. AI service scores and ranks candidates using OpenAI (degrades gracefully to 85% default score)
-5. Results returned with match scores, reasoning, and complete job details including calculated labor/parts totals
+4. If no exact year matches found, AI determines compatible model years based on powertrain/platform
+5. AI service scores and ranks candidates using OpenAI (degrades gracefully to 85% default score)
+6. Results returned with match scores, reasoning, and complete job details including calculated labor/parts totals
 
 ### Data Storage
 
