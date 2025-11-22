@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { Search } from "lucide-react";
+import { Search, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 import type { SearchJobRequest } from "@shared/schema";
 
 interface SearchInterfaceProps {
@@ -28,6 +29,7 @@ export function SearchInterface({ onSearch, isLoading }: SearchInterfaceProps) {
   const [engine, setEngine] = useState<string>("");
   const [repairType, setRepairType] = useState<string>("");
   const [autoSearchTriggered, setAutoSearchTriggered] = useState(false);
+  const [isPreFilled, setIsPreFilled] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -42,7 +44,10 @@ export function SearchInterface({ onSearch, isLoading }: SearchInterfaceProps) {
     if (urlModel) setModel(urlModel);
     if (urlYear) setYear(urlYear);
     if (urlEngine) setEngine(urlEngine);
-    if (urlSearch) setRepairType(urlSearch);
+    if (urlSearch) {
+      setRepairType(urlSearch);
+      setIsPreFilled(true);
+    }
 
     if (urlSearch && !autoSearchTriggered) {
       setAutoSearchTriggered(true);
@@ -152,13 +157,24 @@ export function SearchInterface({ onSearch, isLoading }: SearchInterfaceProps) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="repairType" className="text-xs font-medium uppercase tracking-wide">
-            Repair Type <span className="text-destructive">*</span>
-          </Label>
+          <div className="flex items-center justify-between">
+            <Label htmlFor="repairType" className="text-xs font-medium uppercase tracking-wide">
+              Repair Type <span className="text-destructive">*</span>
+            </Label>
+            {isPreFilled && (
+              <Badge variant="secondary" className="text-xs gap-1" data-testid="badge-prefilled">
+                <Sparkles className="w-3 h-3" />
+                From Tekmetric
+              </Badge>
+            )}
+          </div>
           <Input
             id="repairType"
             value={repairType}
-            onChange={(e) => setRepairType(e.target.value)}
+            onChange={(e) => {
+              setRepairType(e.target.value);
+              setIsPreFilled(false);
+            }}
             placeholder="e.g., front struts, oil change"
             onKeyDown={handleKeyDown}
             data-testid="input-repair-type"

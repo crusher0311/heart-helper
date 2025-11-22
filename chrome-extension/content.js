@@ -397,22 +397,53 @@ function extractVehicleData() {
     data.engine = engineMatch[0].trim();
   }
 
-  const concernsElements = document.querySelectorAll('[class*="concern" i], [class*="customer" i] textarea, [class*="issue" i] textarea');
+  const concernsElements = document.querySelectorAll('[class*="concern" i], [class*="customer" i] textarea, [class*="complaint" i] textarea, [class*="issue" i] textarea');
   if (concernsElements.length > 0) {
     data.concerns = Array.from(concernsElements)
       .map(el => el.value || el.textContent)
-      .filter(text => text && text.length > 5)
+      .filter(text => text && text.trim().length > 5)
       .join(', ')
+      .trim()
       .substring(0, 200);
+  }
+
+  if (!data.concerns) {
+    const labels = Array.from(document.querySelectorAll('label, div'));
+    for (const label of labels) {
+      const labelText = label.textContent.toLowerCase();
+      if (labelText.includes('concern') || labelText.includes('complaint') || labelText.includes('customer') || labelText.includes('reason for visit')) {
+        const nextElement = label.nextElementSibling;
+        if (nextElement && (nextElement.tagName === 'TEXTAREA' || nextElement.tagName === 'INPUT')) {
+          const text = nextElement.value || nextElement.textContent;
+          if (text && text.trim().length > 5) {
+            data.concerns = text.trim().substring(0, 200);
+            break;
+          }
+        }
+        
+        const textarea = label.querySelector('textarea') || label.querySelector('input[type="text"]');
+        if (textarea) {
+          const text = textarea.value || textarea.textContent;
+          if (text && text.trim().length > 5) {
+            data.concerns = text.trim().substring(0, 200);
+            break;
+          }
+        }
+      }
+    }
   }
 
   if (!data.concerns) {
     const textAreas = document.querySelectorAll('textarea');
     for (const textarea of textAreas) {
       const text = textarea.value || textarea.textContent;
-      if (text && text.length > 10 && text.length < 500) {
-        data.concerns = text.substring(0, 200);
-        break;
+      if (text && text.trim().length > 10 && text.trim().length < 500) {
+        const trimmedText = text.trim();
+        if (!trimmedText.toLowerCase().includes('internal note') && 
+            !trimmedText.toLowerCase().includes('technician note')) {
+          data.concerns = trimmedText.substring(0, 200);
+          break;
+        }
       }
     }
   }
