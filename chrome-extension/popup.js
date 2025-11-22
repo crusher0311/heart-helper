@@ -50,6 +50,13 @@ function displayJobInfo(jobData, elementId) {
 }
 
 function updatePopup() {
+  // Display version number
+  const manifest = chrome.runtime.getManifest();
+  const versionEl = document.getElementById('version');
+  if (versionEl) {
+    versionEl.textContent = `v${manifest.version}`;
+  }
+
   chrome.runtime.sendMessage({ action: "GET_PENDING_JOB" }, (pendingResponse) => {
     if (pendingResponse && pendingResponse.jobData) {
       document.getElementById('no-job').style.display = 'none';

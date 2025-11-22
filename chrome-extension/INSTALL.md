@@ -1,5 +1,7 @@
 # Quick Installation Guide
 
+**Current Version: 1.1.0** - See [CHANGELOG.md](CHANGELOG.md) for version history
+
 ## Install the Chrome Extension
 
 1. **Open Chrome Extensions**
@@ -54,10 +56,34 @@ Click the extension icon in Chrome to see:
 2. Reload the repair search tool page
 3. Try searching for a job again
 
+## Updating the Extension
+
+When a new version is released:
+
+1. **Check Current Version**
+   - Click the extension icon
+   - Look at the top-right corner of the popup (e.g., "v1.1.0")
+
+2. **Update to Latest Version**
+   - Go to `chrome://extensions/`
+   - Find "Tekmetric Job Importer"
+   - Click the **reload icon** (↻) to reload the extension
+   - The version number in the popup will update
+
+3. **Download New Version** (if needed)
+   - Pull latest changes from git repository
+   - Follow installation steps above
+   - No need to uninstall - just reload!
+
+## Version History
+
+See [CHANGELOG.md](CHANGELOG.md) for full version history and release notes.
+
 ## Notes
 
 - The extension stores the last imported job in Chrome storage for reference
 - Icon files can be customized (see create-icons.md)
 - All data is processed locally - nothing is sent to external servers
+- Version number is displayed in the extension popup (top-right corner)
 
 For detailed documentation, see README.md

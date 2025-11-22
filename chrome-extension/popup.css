@@ -18,6 +18,16 @@ body {
 header {
   margin-bottom: 20px;
   text-align: center;
+  position: relative;
+}
+
+.version {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 11px;
+  color: #999;
+  font-weight: 500;
 }
 
 h1 {
