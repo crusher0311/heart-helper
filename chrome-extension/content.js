@@ -91,12 +91,28 @@ async function fillTekmetricEstimate(jobData) {
       throw new Error('Could not find job name input field');
     }
     
-    console.log('Filling job name:', jobData.jobName);
+    console.log('✓ Filling job name:', jobData.jobName);
     jobNameInput.focus();
     jobNameInput.value = jobData.jobName;
     jobNameInput.dispatchEvent(new Event('input', { bubbles: true }));
     jobNameInput.dispatchEvent(new Event('change', { bubbles: true }));
-    await new Promise(resolve => setTimeout(resolve, 700));
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    // After filling job name, we need to SAVE/CREATE the job
+    console.log('Looking for Save/Create/Add button...');
+    const jobSaveButton = Array.from(document.querySelectorAll('button')).find(btn => {
+      const text = btn.textContent.trim().toLowerCase();
+      return text === 'save' || text === 'create' || text === 'add' || text === 'ok' || text.includes('create job');
+    });
+    
+    if (jobSaveButton) {
+      console.log('✓ Clicking save button:', jobSaveButton.textContent.trim());
+      jobSaveButton.click();
+      await new Promise(resolve => setTimeout(resolve, 1500));
+    } else {
+      console.log('⚠️ No save button found, trying to proceed anyway...');
+      console.log('Available buttons:', Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim()).filter(t => t));
+    }
 
     for (const laborItem of jobData.laborItems) {
       console.log(`Adding labor item: ${laborItem.name}`);
@@ -106,7 +122,8 @@ async function fillTekmetricEstimate(jobData) {
       );
       
       if (!addLaborButton) {
-        console.error('ADD LABOR button not found - stopping automation');
+        console.error('❌ ADD LABOR button not found - stopping automation');
+        console.log('Available buttons:', Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim()).filter(t => t));
         isFillingJob = false;
         throw new Error('Could not find ADD LABOR button');
       }
@@ -161,7 +178,20 @@ async function fillTekmetricEstimate(jobData) {
         console.log('✓ Filled rate:', laborItem.rate);
       }
       
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // Look for and click Save button after filling each labor item
+      await new Promise(resolve => setTimeout(resolve, 600));
+      const laborSaveBtn = Array.from(document.querySelectorAll('button')).find(btn => {
+        const text = btn.textContent.trim().toLowerCase();
+        return text === 'save' || text === 'add' || text === 'ok';
+      });
+      if (laborSaveBtn) {
+        console.log('✓ Saving labor item...');
+        laborSaveBtn.click();
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      } else {
+        console.log('⚠️ No save button found for labor item');
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
     }
 
     for (const part of jobData.parts) {
@@ -250,20 +280,34 @@ async function fillTekmetricEstimate(jobData) {
         retailField.value = part.retail.toString();
         retailField.dispatchEvent(new Event('input', { bubbles: true }));
         retailField.dispatchEvent(new Event('change', { bubbles: true }));
+        console.log('✓ Filled retail:', part.retail);
       }
       
-      await new Promise(resolve => setTimeout(resolve, 400));
+      // Look for and click Save button after filling each part
+      await new Promise(resolve => setTimeout(resolve, 600));
+      const partSaveBtn = Array.from(document.querySelectorAll('button')).find(btn => {
+        const text = btn.textContent.trim().toLowerCase();
+        return text === 'save' || text === 'add' || text === 'ok';
+      });
+      if (partSaveBtn) {
+        console.log('✓ Saving part...');
+        partSaveBtn.click();
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      } else {
+        console.log('⚠️ No save button found for part');
+        await new Promise(resolve => setTimeout(resolve, 400));
+      }
     }
 
     await new Promise(resolve => setTimeout(resolve, 800));
     
-    const saveButton = Array.from(document.querySelectorAll('button')).find(btn => 
+    const finalSaveButton = Array.from(document.querySelectorAll('button')).find(btn => 
       btn.textContent.trim() === 'SAVE'
     );
     
-    if (saveButton) {
-      console.log('Clicking SAVE button...');
-      saveButton.click();
+    if (finalSaveButton) {
+      console.log('Clicking final SAVE button...');
+      finalSaveButton.click();
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
 

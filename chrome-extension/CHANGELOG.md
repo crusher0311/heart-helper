@@ -2,6 +2,27 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.2.0] - 2024-11-22
+
+### Fixed
+- **Critical**: Added missing Save/Create button click after filling job name
+- **Critical**: Added Save button clicks after each labor item and part to ensure data persists
+- Fixed "ADD LABOR button not found" error by properly saving the job first
+
+### Added
+- Comprehensive debugging output showing available buttons when elements can't be found
+- Better console logging with ✓ success and ⚠️ warning indicators
+- Shows all available buttons in console when Save/ADD LABOR/ADD PART buttons not found
+
+### Changed
+- Increased timeout after clicking job save button to 1.5s for reliability
+- Added 1s delays after saving each labor item and part
+- Better error messages showing exactly which buttons are available
+
+### Notes
+- This should fix the issue where changes weren't visible without refreshing Tekmetric
+- The extension now properly saves at each step: Job → Labor Items → Parts
+
 ## [1.1.0] - 2024-11-22
 
 ### Fixed

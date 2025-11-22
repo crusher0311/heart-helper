@@ -1,0 +1,1351 @@
+[Violation] Potential permissions policy violation: microphone is not allowed in this document.
+estimate:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Sending CUSTOMER_PHONE_LIST_REQUEST for phone link updated: 11145565 shopId: 469
+ Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 11145565
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+ ❌ Error filling Tekmetric estimate: 
+fillTekmetricEstimate @ content.js:278
+ Found pending job data, auto-filling...
+ Starting to fill Tekmetric estimate with job data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Clicking Job button...
+ Skipping tracking for Repair Order page
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Found pending job data, auto-filling...
+ Already filling a job, skipping duplicate request
+ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:102 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:109 ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+content.js:278 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:111:15)
+fillTekmetricEstimate @ content.js:278
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:359 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: Object
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-BGFfkwL7.js:263 Skipping tracking for Repair Order page
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:94 Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:102 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:109 ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+content.js:278 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:111:15)
+fillTekmetricEstimate @ content.js:278
+content.js:359 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: Object
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-BGFfkwL7.js:263 Skipping tracking for Repair Order page
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:94 Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:102 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:109 ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+content.js:278 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:111:15)
+fillTekmetricEstimate @ content.js:278
+content.js:359 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-BGFfkwL7.js:263 Skipping tracking for Repair Order page
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:94 Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:359 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:102 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:109 ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:109
+await in fillTekmetricEstimate
+(anonymous) @ content.js:360
+content.js:278 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:111:15)
+fillTekmetricEstimate @ content.js:278
+await in fillTekmetricEstimate
+(anonymous) @ content.js:360
+content.js:359 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
