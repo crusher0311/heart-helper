@@ -56,85 +56,196 @@ async function fillTekmetricEstimate(jobData) {
       return;
     }
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    const jobButton = Array.from(document.querySelectorAll('button')).find(btn => {
+      const icon = btn.querySelector('svg');
+      return btn.textContent.trim() === 'Job' || (icon && btn.getAttribute('aria-label')?.includes('Job'));
+    });
+    
+    if (!jobButton) {
+      throw new Error('Could not find Job button. Make sure you are on the Estimate tab.');
+    }
+    
+    console.log('Clicking Job button...');
+    jobButton.click();
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    const jobNameInput = document.querySelector('input[type="text"]') || 
+                         Array.from(document.querySelectorAll('input')).find(inp => 
+                           inp.type === 'text' && !inp.disabled && inp.offsetParent !== null
+                         );
+    
+    if (jobNameInput) {
+      console.log('Filling job name:', jobData.jobName);
+      jobNameInput.focus();
+      jobNameInput.value = jobData.jobName;
+      jobNameInput.dispatchEvent(new Event('input', { bubbles: true }));
+      jobNameInput.dispatchEvent(new Event('change', { bubbles: true }));
+      await new Promise(resolve => setTimeout(resolve, 500));
+    }
 
     for (const laborItem of jobData.laborItems) {
       console.log(`Adding labor item: ${laborItem.name}`);
       
-      const addLaborButton = document.querySelector('[data-testid="add-labor-button"]') || 
-                             Array.from(document.querySelectorAll('button')).find(btn => {
-                               const text = btn.textContent.toLowerCase();
-                               return text.includes('labor') || text.includes('add labor');
-                             });
+      const addLaborButton = Array.from(document.querySelectorAll('button')).find(btn => 
+        btn.textContent.includes('ADD LABOR')
+      );
       
-      if (addLaborButton) {
-        console.log('Found Add Labor button, clicking...');
-        addLaborButton.click();
-        await new Promise(resolve => setTimeout(resolve, 500));
-      } else {
-        console.warn('Add Labor button not found');
+      if (!addLaborButton) {
+        console.warn('ADD LABOR button not found');
+        continue;
       }
+      
+      console.log('Clicking ADD LABOR button...');
+      addLaborButton.click();
+      await new Promise(resolve => setTimeout(resolve, 600));
 
-      const filled = fillInput('input[name="labor-description"]', laborItem.name) ||
-                     fillInput('input[placeholder*="escription" i]', laborItem.name) ||
-                     fillInput('textarea[name="labor-description"]', laborItem.name);
+      const inputs = Array.from(document.querySelectorAll('input, textarea'));
       
-      fillInput('input[name="labor-hours"]', laborItem.hours.toString()) ||
-        fillInput('input[placeholder*="ours" i]', laborItem.hours.toString());
-        
-      fillInput('input[name="labor-rate"]', laborItem.rate.toString()) ||
-        fillInput('input[placeholder*="ate" i]', laborItem.rate.toString());
-      
-      if (!filled) {
-        console.warn('Could not find labor input fields');
+      const descriptionField = inputs.find(inp => 
+        inp.placeholder?.toLowerCase().includes('description') || 
+        inp.getAttribute('aria-label')?.toLowerCase().includes('description')
+      );
+      if (descriptionField) {
+        descriptionField.focus();
+        descriptionField.value = laborItem.name;
+        descriptionField.dispatchEvent(new Event('input', { bubbles: true }));
+        descriptionField.dispatchEvent(new Event('change', { bubbles: true }));
       }
       
-      await new Promise(resolve => setTimeout(resolve, 300));
+      const hoursField = inputs.find(inp => 
+        inp.type === 'number' && (
+          inp.placeholder?.toLowerCase().includes('hour') ||
+          inp.getAttribute('aria-label')?.toLowerCase().includes('hour')
+        )
+      );
+      if (hoursField) {
+        hoursField.focus();
+        hoursField.value = laborItem.hours.toString();
+        hoursField.dispatchEvent(new Event('input', { bubbles: true }));
+        hoursField.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      
+      const rateField = inputs.find(inp => 
+        inp.type === 'number' && (
+          inp.placeholder?.toLowerCase().includes('rate') ||
+          inp.getAttribute('aria-label')?.toLowerCase().includes('rate')
+        )
+      );
+      if (rateField) {
+        rateField.focus();
+        rateField.value = laborItem.rate.toString();
+        rateField.dispatchEvent(new Event('input', { bubbles: true }));
+        rateField.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, 400));
     }
 
     for (const part of jobData.parts) {
       console.log(`Adding part: ${part.name}`);
       
-      const addPartButton = document.querySelector('[data-testid="add-part-button"]') ||
-                            Array.from(document.querySelectorAll('button')).find(btn => {
-                              const text = btn.textContent.toLowerCase();
-                              return text.includes('part') || text.includes('add part');
-                            });
+      const addPartButton = Array.from(document.querySelectorAll('button')).find(btn => 
+        btn.textContent.includes('ADD PART')
+      );
       
-      if (addPartButton) {
-        console.log('Found Add Part button, clicking...');
-        addPartButton.click();
-        await new Promise(resolve => setTimeout(resolve, 500));
-      } else {
-        console.warn('Add Part button not found');
+      if (!addPartButton) {
+        console.warn('ADD PART button not found');
+        continue;
+      }
+      
+      console.log('Clicking ADD PART button...');
+      addPartButton.click();
+      await new Promise(resolve => setTimeout(resolve, 600));
+
+      const addManuallyOption = Array.from(document.querySelectorAll('div, button, li')).find(el => 
+        el.textContent.includes('Add part manually')
+      );
+      
+      if (addManuallyOption) {
+        console.log('Clicking "Add part manually"...');
+        addManuallyOption.click();
+        await new Promise(resolve => setTimeout(resolve, 600));
       }
 
-      fillInput('input[name="part-number"]', part.partNumber || '') ||
-        fillInput('input[placeholder*="umber" i]', part.partNumber || '');
-        
-      fillInput('input[name="part-description"]', part.name) ||
-        fillInput('input[placeholder*="escription" i]', part.name) ||
-        fillInput('textarea[name="part-description"]', part.name);
-        
-      fillInput('input[name="part-quantity"]', part.quantity.toString()) ||
-        fillInput('input[placeholder*="uantity" i]', part.quantity.toString());
-        
-      fillInput('input[name="part-cost"]', part.cost.toString()) ||
-        fillInput('input[placeholder*="ost" i]', part.cost.toString());
-        
-      fillInput('input[name="part-retail"]', part.retail.toString()) ||
-        fillInput('input[placeholder*="etail" i]', part.retail.toString()) ||
-        fillInput('input[placeholder*="rice" i]', part.retail.toString());
-        
-      if (part.brand) {
-        fillInput('input[name="part-brand"]', part.brand) ||
-          fillInput('input[placeholder*="rand" i]', part.brand);
+      const inputs = Array.from(document.querySelectorAll('input, textarea'));
+      
+      const partNumberField = inputs.find(inp => 
+        inp.placeholder?.toLowerCase().includes('part number') ||
+        inp.placeholder?.toLowerCase().includes('number')
+      );
+      if (partNumberField && part.partNumber) {
+        partNumberField.focus();
+        partNumberField.value = part.partNumber;
+        partNumberField.dispatchEvent(new Event('input', { bubbles: true }));
+        partNumberField.dispatchEvent(new Event('change', { bubbles: true }));
       }
       
-      await new Promise(resolve => setTimeout(resolve, 300));
+      const brandField = inputs.find(inp => 
+        inp.placeholder?.toLowerCase().includes('brand') ||
+        inp.placeholder?.toLowerCase().includes('description')
+      );
+      if (brandField) {
+        const brandName = part.brand ? `${part.brand} ${part.name}` : part.name;
+        brandField.focus();
+        brandField.value = brandName;
+        brandField.dispatchEvent(new Event('input', { bubbles: true }));
+        brandField.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      
+      const qtyField = inputs.find(inp => 
+        inp.type === 'number' && (
+          inp.placeholder?.toLowerCase().includes('qty') ||
+          inp.placeholder?.toLowerCase().includes('quantity')
+        )
+      );
+      if (qtyField) {
+        qtyField.focus();
+        qtyField.value = part.quantity.toString();
+        qtyField.dispatchEvent(new Event('input', { bubbles: true }));
+        qtyField.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      
+      const costField = inputs.find(inp => 
+        inp.type === 'number' && inp.placeholder?.toLowerCase().includes('cost')
+      );
+      if (costField) {
+        costField.focus();
+        costField.value = part.cost.toString();
+        costField.dispatchEvent(new Event('input', { bubbles: true }));
+        costField.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      
+      const retailField = inputs.find(inp => 
+        inp.type === 'number' && (
+          inp.placeholder?.toLowerCase().includes('retail') ||
+          inp.placeholder?.toLowerCase().includes('price')
+        )
+      );
+      if (retailField) {
+        retailField.focus();
+        retailField.value = part.retail.toString();
+        retailField.dispatchEvent(new Event('input', { bubbles: true }));
+        retailField.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, 400));
     }
 
-    console.log("Successfully filled Tekmetric estimate");
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
+    const saveButton = Array.from(document.querySelectorAll('button')).find(btn => 
+      btn.textContent.trim() === 'SAVE'
+    );
+    
+    if (saveButton) {
+      console.log('Clicking SAVE button...');
+      saveButton.click();
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+
+    console.log("Successfully filled and saved Tekmetric job");
     
     chrome.runtime.sendMessage({ action: "CLEAR_PENDING_JOB" });
     
