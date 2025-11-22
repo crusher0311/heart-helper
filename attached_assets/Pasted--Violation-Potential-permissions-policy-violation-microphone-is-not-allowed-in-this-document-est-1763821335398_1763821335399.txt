@@ -1,0 +1,1677 @@
+[Violation] Potential permissions policy violation: microphone is not allowed in this document.
+estimate:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 409 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 409 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 409 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 409 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 409 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 409 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 409 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 409 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+/api/shop/469/job:1  Failed to load resource: the server responded with a status of 500 ()
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Object
+ Object
+estimate:1 Uncaught (in promise) Object
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+estimate:1 Uncaught (in promise) Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+estimate:1 Uncaught (in promise) Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+estimate:1 Uncaught (in promise) Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+estimate:1 Uncaught (in promise) Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Object
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+estimate:1 Uncaught (in promise) Object
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Object
+ Object
+ Object
+ Object
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+estimate:1 Uncaught (in promise) Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+estimate:1 Uncaught (in promise) Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found
+fillTekmetricEstimate @ content.js:96
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found
+fillTekmetricEstimate @ content.js:96
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found
+fillTekmetricEstimate @ content.js:96
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found
+fillTekmetricEstimate @ content.js:96
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found
+fillTekmetricEstimate @ content.js:96
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found
+fillTekmetricEstimate @ content.js:96
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found
+fillTekmetricEstimate @ content.js:96
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+ ADD LABOR button not found
+fillTekmetricEstimate @ content.js:96
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+ ADD PART button not found
+fillTekmetricEstimate @ content.js:154
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+estimate:1 Uncaught (in promise) Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+estimate:1 Uncaught (in promise) Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+estimate:1 Uncaught (in promise) Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+estimate:1 Uncaught (in promise) Object
+estimate:1 Uncaught (in promise) Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ Successfully filled and saved Tekmetric job
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469

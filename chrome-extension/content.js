@@ -47,16 +47,25 @@ function clickElement(selector) {
   return true;
 }
 
+let isFillingJob = false;
+
 async function fillTekmetricEstimate(jobData) {
+  if (isFillingJob) {
+    console.log("Already filling a job, skipping duplicate request");
+    return;
+  }
+  
+  isFillingJob = true;
   console.log("Starting to fill Tekmetric estimate with job data:", jobData);
   
   try {
     if (!window.location.href.includes('shop.tekmetric.com')) {
       console.log("Not on Tekmetric page, skipping auto-fill");
+      isFillingJob = false;
       return;
     }
 
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise(resolve => setTimeout(resolve, 2000));
 
     const jobButton = Array.from(document.querySelectorAll('button')).find(btn => {
       const icon = btn.querySelector('svg');
@@ -64,26 +73,30 @@ async function fillTekmetricEstimate(jobData) {
     });
     
     if (!jobButton) {
+      isFillingJob = false;
       throw new Error('Could not find Job button. Make sure you are on the Estimate tab.');
     }
     
     console.log('Clicking Job button...');
     jobButton.click();
-    await new Promise(resolve => setTimeout(resolve, 800));
+    await new Promise(resolve => setTimeout(resolve, 1200));
 
     const jobNameInput = document.querySelector('input[type="text"]') || 
                          Array.from(document.querySelectorAll('input')).find(inp => 
                            inp.type === 'text' && !inp.disabled && inp.offsetParent !== null
                          );
     
-    if (jobNameInput) {
-      console.log('Filling job name:', jobData.jobName);
-      jobNameInput.focus();
-      jobNameInput.value = jobData.jobName;
-      jobNameInput.dispatchEvent(new Event('input', { bubbles: true }));
-      jobNameInput.dispatchEvent(new Event('change', { bubbles: true }));
-      await new Promise(resolve => setTimeout(resolve, 500));
+    if (!jobNameInput) {
+      isFillingJob = false;
+      throw new Error('Could not find job name input field');
     }
+    
+    console.log('Filling job name:', jobData.jobName);
+    jobNameInput.focus();
+    jobNameInput.value = jobData.jobName;
+    jobNameInput.dispatchEvent(new Event('input', { bubbles: true }));
+    jobNameInput.dispatchEvent(new Event('change', { bubbles: true }));
+    await new Promise(resolve => setTimeout(resolve, 700));
 
     for (const laborItem of jobData.laborItems) {
       console.log(`Adding labor item: ${laborItem.name}`);
@@ -93,13 +106,14 @@ async function fillTekmetricEstimate(jobData) {
       );
       
       if (!addLaborButton) {
-        console.warn('ADD LABOR button not found');
-        continue;
+        console.error('ADD LABOR button not found - stopping automation');
+        isFillingJob = false;
+        throw new Error('Could not find ADD LABOR button');
       }
       
       console.log('Clicking ADD LABOR button...');
       addLaborButton.click();
-      await new Promise(resolve => setTimeout(resolve, 600));
+      await new Promise(resolve => setTimeout(resolve, 800));
 
       const inputs = Array.from(document.querySelectorAll('input, textarea'));
       
@@ -107,12 +121,17 @@ async function fillTekmetricEstimate(jobData) {
         inp.placeholder?.toLowerCase().includes('description') || 
         inp.getAttribute('aria-label')?.toLowerCase().includes('description')
       );
-      if (descriptionField) {
-        descriptionField.focus();
-        descriptionField.value = laborItem.name;
-        descriptionField.dispatchEvent(new Event('input', { bubbles: true }));
-        descriptionField.dispatchEvent(new Event('change', { bubbles: true }));
+      if (!descriptionField) {
+        console.error('Labor description field not found - stopping automation');
+        console.log('Available inputs:', inputs.map(i => ({tag: i.tagName, type: i.type, placeholder: i.placeholder, label: i.getAttribute('aria-label')})));
+        isFillingJob = false;
+        throw new Error('Could not find labor description field');
       }
+      descriptionField.focus();
+      descriptionField.value = laborItem.name;
+      descriptionField.dispatchEvent(new Event('input', { bubbles: true }));
+      descriptionField.dispatchEvent(new Event('change', { bubbles: true }));
+      console.log('✓ Filled labor description:', laborItem.name);
       
       const hoursField = inputs.find(inp => 
         inp.type === 'number' && (
@@ -125,6 +144,7 @@ async function fillTekmetricEstimate(jobData) {
         hoursField.value = laborItem.hours.toString();
         hoursField.dispatchEvent(new Event('input', { bubbles: true }));
         hoursField.dispatchEvent(new Event('change', { bubbles: true }));
+        console.log('✓ Filled hours:', laborItem.hours);
       }
       
       const rateField = inputs.find(inp => 
@@ -138,9 +158,10 @@ async function fillTekmetricEstimate(jobData) {
         rateField.value = laborItem.rate.toString();
         rateField.dispatchEvent(new Event('input', { bubbles: true }));
         rateField.dispatchEvent(new Event('change', { bubbles: true }));
+        console.log('✓ Filled rate:', laborItem.rate);
       }
       
-      await new Promise(resolve => setTimeout(resolve, 400));
+      await new Promise(resolve => setTimeout(resolve, 500));
     }
 
     for (const part of jobData.parts) {
@@ -151,13 +172,14 @@ async function fillTekmetricEstimate(jobData) {
       );
       
       if (!addPartButton) {
-        console.warn('ADD PART button not found');
-        continue;
+        console.error('ADD PART button not found - stopping automation');
+        isFillingJob = false;
+        throw new Error('Could not find ADD PART button');
       }
       
       console.log('Clicking ADD PART button...');
       addPartButton.click();
-      await new Promise(resolve => setTimeout(resolve, 600));
+      await new Promise(resolve => setTimeout(resolve, 800));
 
       const addManuallyOption = Array.from(document.querySelectorAll('div, button, li')).find(el => 
         el.textContent.includes('Add part manually')
@@ -245,15 +267,17 @@ async function fillTekmetricEstimate(jobData) {
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
-    console.log("Successfully filled and saved Tekmetric job");
+    console.log("✓ Successfully filled and saved Tekmetric job");
     
     chrome.runtime.sendMessage({ action: "CLEAR_PENDING_JOB" });
     
     showSuccessNotification(jobData);
+    isFillingJob = false;
     
   } catch (error) {
-    console.error("Error filling Tekmetric estimate:", error);
+    console.error("❌ Error filling Tekmetric estimate:", error);
     showErrorNotification(error.message);
+    isFillingJob = false;
   }
 }
 
