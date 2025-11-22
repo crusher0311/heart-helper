@@ -23,7 +23,7 @@ export function registerRoutes(app: Express) {
       const params = searchJobSchema.parse(req.body);
       
       // Strip common trim levels from model name for better matching
-      const trimLevels = /\s+(XLE|LE|SE|XSE|Limited|Sport|Premium|Touring|EX|LX|DX|SV|SL|SR|Platinum|Denali|LTZ|High Country|King Ranch|Lariat|STX|Big Horn|Laramie|Rebel|TRD|Off-Road|Trail|Base)$/i;
+      const trimLevels = /\s+(XLE|LE|SE|XSE|Limited|Sport|Premium|Touring|EX|LX|DX|SV|SL|SR|Platinum|Denali|LTZ|LT|LS|L|S|High Country|King Ranch|Lariat|STX|Big Horn|Laramie|Rebel|TRD|Off-Road|Trail|Base|Value|Classic|Work Truck|WT)$/i;
       if (params.vehicleModel) {
         params.vehicleModel = params.vehicleModel.replace(trimLevels, '').trim();
       }
