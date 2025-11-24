@@ -1,0 +1,22 @@
+content.js:507 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9951","controllerAppFrameId":"__privateStripeController9951","message":{"action":"stripe-controller-action-response","payload":{"nonce":"846dd082-cbf3-4ed4-bc80-f4fb912086bd"}},"__stripeJsV3":true}
+content.js:511 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:507 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9951","controllerAppFrameId":"__privateStripeController9951","message":{"action":"stripe-controller-action-response","payload":{"nonce":"ae414d2f-6881-43b6-868a-b03302bb5457"}},"__stripeJsV3":true}
+content.js:511 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:568 Extracted RO ID from URL: 274639316
+content.js:644 Extracted vehicle data: {make: 'Toyota', model: 'Corolla L', year: '2017', engine: '1.8L', concerns: '', …}
+content.js:712 Opening search with URL: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev//?make=Toyota&model=Corolla+L&year=2017&engine=1.8L&roId=274639316
+content.js:713 Vehicle data: {make: 'Toyota', model: 'Corolla L', year: '2017', engine: '1.8L', concerns: '', …}
+content.js:507 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9951","controllerAppFrameId":"__privateStripeController9951","message":{"action":"stripe-controller-action-response","payload":{"nonce":"6d7c5c37-e553-45c4-85e2-bc35a366e4d4"}},"__stripeJsV3":true}
+content.js:511 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:507 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9951","controllerAppFrameId":"__privateStripeController9951","message":{"action":"stripe-controller-action-response","payload":{"nonce":"92ffaafe-a8dc-4dd7-860e-8a2aecf91ad7"}},"__stripeJsV3":true}
+content.js:511 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:507 📬 Received window message: {action: 'dismissFrame'}
+content.js:511 ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
+content.js:507 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9951","controllerAppFrameId":"__privateStripeController9951","message":{"action":"stripe-controller-action-response","payload":{"nonce":"1ae00597-1082-41e3-8b15-5651788df706"}},"__stripeJsV3":true}
+content.js:511 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:507 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9951","controllerAppFrameId":"__privateStripeController9951","message":{"action":"stripe-controller-action-response","payload":{"nonce":"cb0be7b2-3a4f-4493-a8a7-ff0b32babc2f"}},"__stripeJsV3":true}
+content.js:511 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:507 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9951","controllerAppFrameId":"__privateStripeController9951","message":{"action":"stripe-controller-action-response","payload":{"nonce":"d415527f-aca0-4eba-90b0-e609582aed3f"}},"__stripeJsV3":true}
+content.js:511 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:507 📬 Received window message: {action: 'dismissFrame'}
+content.js:511 ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
