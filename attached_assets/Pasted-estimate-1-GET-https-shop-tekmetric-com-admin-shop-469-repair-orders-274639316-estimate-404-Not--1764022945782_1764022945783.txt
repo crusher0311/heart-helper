@@ -1,0 +1,370 @@
+estimate:1  GET https://shop.tekmetric.com/admin/shop/469/repair-orders/274639316/estimate 404 (Not Found)
+TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.
+    at index.ts-cd54bfbc.js:1:3292
+Promise.catch
+(anonymous) @ index.ts-loader3.js:11
+(anonymous) @ index.ts-loader3.js:13
+[Violation] Potential permissions policy violation: microphone is not allowed in this document.
+content.js:36 [MaintenanceModule] Initializing...
+content.js:102 [TekmetricStorageModule] Initializing...
+content.js:1 Tekmetric Job Importer: Content script loaded
+content.js:462 📋 Tekmetric Job Importer initialized, document ready state: interactive
+content.js:470 📄 Document already loaded - checking for pending jobs in 2s...
+content.js:439 📬 Received window message: {type: 'gcdeggbbhghacnodhgdffajmijjkknbi:content:wxt:content-script-started', contentScriptName: 'content', messageId: 'eut4zbc6b08'}
+make-phone-link.abc00f32.js:1 Error: Minified React error #130; visit https://reactjs.org/docs/error-decoder.html?invariant=130&args[]=undefined&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at iJ (make-phone-link.abc00f32.js:1:126329)
+    at i (make-phone-link.abc00f32.js:1:67679)
+    at oi (make-phone-link.abc00f32.js:1:81398)
+    at u (make-phone-link.abc00f32.js:1:131513)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+a7 @ make-phone-link.abc00f32.js:1
+n.callback @ make-phone-link.abc00f32.js:1
+lW @ make-phone-link.abc00f32.js:1
+oK @ make-phone-link.abc00f32.js:1
+e @ make-phone-link.abc00f32.js:1
+(anonymous) @ make-phone-link.abc00f32.js:1
+ij @ make-phone-link.abc00f32.js:1
+iC @ make-phone-link.abc00f32.js:1
+E @ make-phone-link.abc00f32.js:1
+I @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught Error: Minified React error #130; visit https://reactjs.org/docs/error-decoder.html?invariant=130&args[]=undefined&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at iJ (make-phone-link.abc00f32.js:1:126329)
+    at i (make-phone-link.abc00f32.js:1:67679)
+    at oi (make-phone-link.abc00f32.js:1:81398)
+    at u (make-phone-link.abc00f32.js:1:131513)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+iJ @ make-phone-link.abc00f32.js:1
+i @ make-phone-link.abc00f32.js:1
+oi @ make-phone-link.abc00f32.js:1
+u @ make-phone-link.abc00f32.js:1
+iF @ make-phone-link.abc00f32.js:1
+(anonymous) @ make-phone-link.abc00f32.js:1
+iA @ make-phone-link.abc00f32.js:1
+i_ @ make-phone-link.abc00f32.js:1
+iC @ make-phone-link.abc00f32.js:1
+E @ make-phone-link.abc00f32.js:1
+I @ make-phone-link.abc00f32.js:1
+content.js:439 📬 Received window message: 
+content.js:9 [Settings] No profitabilitySettings settings found, using defaults
+ns @ content.js:9
+await in ns
+loadAbilitySettings @ content.js:19
+initSettings @ content.js:19
+(anonymous) @ content.js:19
+setTimeout
+Z @ content.js:19
+$ @ content.js:19
+retainModule @ content.js:117
+z @ content.js:1
+uo @ content.js:95
+createContentManager @ content.js:117
+kn @ content.js:117
+main @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+content.js:9 [Settings] No customerMaintenanceSettings settings found, using defaults
+ns @ content.js:9
+await in ns
+loadAbilitySettings @ content.js:19
+initSettings @ content.js:19
+(anonymous) @ content.js:19
+setTimeout
+Z @ content.js:19
+ne @ content.js:23
+ao @ content.js:23
+je @ content.js:36
+retainModule @ content.js:117
+z @ content.js:1
+uo @ content.js:95
+createContentManager @ content.js:117
+kn @ content.js:117
+main @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+content.js:9 [Settings] No generalSettings settings found, using defaults
+ns @ content.js:9
+await in ns
+loadAbilitySettings @ content.js:19
+initSettings @ content.js:19
+(anonymous) @ content.js:19
+setTimeout
+Z @ content.js:19
+Ln @ content.js:105
+retainModule @ content.js:117
+z @ content.js:1
+wo @ content.js:117
+createContentManager @ content.js:117
+kn @ content.js:117
+main @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+make-phone-link.abc00f32.js:1 TypeError: Cannot read properties of undefined (reading 'callState')
+    at n.default (handle.2fe6b368.js:469:5458)
+    at aw (make-phone-link.abc00f32.js:1:71191)
+    at u (make-phone-link.abc00f32.js:1:129694)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+    at MessagePort.I (make-phone-link.abc00f32.js:1:141066)
+a7 @ make-phone-link.abc00f32.js:1
+n.callback @ make-phone-link.abc00f32.js:1
+lW @ make-phone-link.abc00f32.js:1
+oK @ make-phone-link.abc00f32.js:1
+e @ make-phone-link.abc00f32.js:1
+(anonymous) @ make-phone-link.abc00f32.js:1
+ij @ make-phone-link.abc00f32.js:1
+iC @ make-phone-link.abc00f32.js:1
+E @ make-phone-link.abc00f32.js:1
+I @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught TypeError: Cannot read properties of undefined (reading 'callState')
+    at n.default (handle.2fe6b368.js:469:5458)
+    at aw (make-phone-link.abc00f32.js:1:71191)
+    at u (make-phone-link.abc00f32.js:1:129694)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+    at MessagePort.I (make-phone-link.abc00f32.js:1:141066)
+n.default @ handle.2fe6b368.js:469
+aw @ make-phone-link.abc00f32.js:1
+u @ make-phone-link.abc00f32.js:1
+iF @ make-phone-link.abc00f32.js:1
+(anonymous) @ make-phone-link.abc00f32.js:1
+iA @ make-phone-link.abc00f32.js:1
+i_ @ make-phone-link.abc00f32.js:1
+iC @ make-phone-link.abc00f32.js:1
+E @ make-phone-link.abc00f32.js:1
+I @ make-phone-link.abc00f32.js:1
+handle.2fe6b368.js:23 [OutboundCall] Menu state changed: false
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:105 Creating handle element
+content.js:105 [Handle] Updating badge: {count: 0, visible: false}
+content.js:105 [Handle] Badge hidden (count is 0)
+content.js:424 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: null, previousShopId: null
+content.js:105 [Handle] Updating unread data: {totalUnread: 0, conversationsCount: 0}
+content.js:105 [Handle] Updating badge: {count: 0, visible: false}
+content.js:105 [Handle] Badge hidden (count is 0)
+content.js:424 🔍 Checking for pending job data...
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:424 🔍 Checking for pending job data...
+estimate:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+content.js:439 📬 Received window message: {action: 'pendo::connect', frameId: 'strFD7y9v1ICa22P'}
+content.js:439 📬 Received window message: {type: 'announce-frame-initialized', destination: 'pendo-designer-agent', source: 'pendo-designer-agent', localStorageRouter: true}
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+handle.2fe6b368.js:23 Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 11145565
+content.js:439 📬 Received window message: {action: 'pendo::connect', frameId: 'strFD7y9v1ICa22P'}
+content.js:424 🔍 Checking for pending job data...
+content.js:424 🔍 Checking for pending job data...
+content.js:424 🔍 Checking for pending job data...
+content.js:439 📬 Received window message: {cbEvent: true, targetWindowName: '__HOST__', srcWindowName: '__HOST__', message: {…}}
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+main-DsvBPogw.js:257 Event "payments_service_status" doesn't have any listeners. Putting it in the stack.
+content.js:424 🔍 Checking for pending job data...
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:439 📬 Received window message: {cbEvent: true, targetWindowName: '__HOST__', srcWindowName: 'cb-master-frame', message: {…}}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.chargebee.com
+content.js:439 📬 Received window message: {replyId: 'c31a95ae-4b42-4b21-aded-88afc1c7d97a', message: {…}, cbEvent: true, targetWindowName: '__HOST__'}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.chargebee.com
+content.js:424 🔍 Checking for pending job data...
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:424 🔍 Checking for pending job data...
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:424 🔍 Checking for pending job data...
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:439 📬 Received window message: {replyId: 'e3becaad-c3d5-4e74-83ac-21e8b6218164', message: {…}, cbEvent: true, targetWindowName: '__HOST__'}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.chargebee.com
+content.js:651 Check History button injected
+content.js:424 🔍 Checking for pending job data...
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:424 🔍 Checking for pending job data...
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:424 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:24 [Handle] Phone link updated event received customerId: 11145565, shopId: 469
+content.js:424 🔍 Checking for pending job data...
+content.js:424 🔍 Checking for pending job data...
+content.js:424 🔍 Checking for pending job data...
+content.js:439 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4431","controllerAppFrameId":"__privateStripeController4431","message":{"action":"stripe-controller-load","payload":{"controllerMetrics":{"resource_timings":{"shared.js":{"raw_size":813425,"transfer_size":0,"duration":0},"controller-with-preconnect.js":{"raw_size":1090091,"transfer_size":0,"duration":0}}}}},"__stripeJsV3":true}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.stripe.com
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:424 🔍 Checking for pending job data...
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:424 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:424 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:24 [Handle] Sending CUSTOMER_PHONE_LIST_REQUEST for phone link updated: 11145565 shopId: 469
+content.js:439 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4431","controllerAppFrameId":"__privateStripeController4431","message":{"action":"stripe-controller-action-response","payload":{"nonce":"fd057cd9-18d0-41f1-8563-46ee83a53b89"}},"__stripeJsV3":true}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:424 🔍 Checking for pending job data...
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:424 🔍 Checking for pending job data...
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:424 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+content.js:439 📬 Received window message: {"originatingScript":"m2","payload":{"guid":"cb64f5f7-386b-46b0-948b-ec66ed5d6999ea1d00","muid":"34668a3d-e2c7-40c0-9117-16e3a2f648ab1c6239","sid":"d7038074-7a00-4f04-ae59-8fd8b93da25c260f40"}}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:424 🔍 Checking for pending job data...
+content.js:439 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4431","controllerAppFrameId":"__privateStripeController4431","message":{"action":"stripe-controller-action-response","payload":{"nonce":"4c87bc85-6bc8-4313-bac7-5ae5f740b522"}},"__stripeJsV3":true}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:439 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4431","controllerAppFrameId":"__privateStripeController4431","message":{"action":"stripe-controller-action-response","payload":{"nonce":"1424f86a-e321-4d3b-abe8-2c605c78d690"}},"__stripeJsV3":true}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:426 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:432 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:439 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4431","controllerAppFrameId":"__privateStripeController4431","message":{"action":"stripe-controller-action-response","payload":{"nonce":"6ffccad3-6b24-4855-a873-44e99b886e2d"}},"__stripeJsV3":true}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:439 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4431","controllerAppFrameId":"__privateStripeController4431","message":{"action":"stripe-controller-action-response","payload":{"nonce":"92dca292-b939-4f2a-a944-e69d205d8467"}},"__stripeJsV3":true}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:439 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4431","controllerAppFrameId":"__privateStripeController4431","message":{"action":"stripe-controller-action-response","payload":{"nonce":"a2c92d71-31ab-4de3-9e61-6484cd2dfe8f"}},"__stripeJsV3":true}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:439 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4431","controllerAppFrameId":"__privateStripeController4431","message":{"action":"stripe-controller-action-response","payload":{"nonce":"bd31775d-9f8d-4ed4-bcbd-c4b4a1776378"}},"__stripeJsV3":true}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:439 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4431","controllerAppFrameId":"__privateStripeController4431","message":{"action":"stripe-controller-action-response","payload":{"nonce":"62f248c4-c26c-4dbd-987b-85f3392b5383"}},"__stripeJsV3":true}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:439 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4431","controllerAppFrameId":"__privateStripeController4431","message":{"action":"stripe-controller-action-response","payload":{"nonce":"d6c64cef-8363-4fc0-8f31-4c1f04f7ca43"}},"__stripeJsV3":true}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:439 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4431","controllerAppFrameId":"__privateStripeController4431","message":{"action":"stripe-controller-action-response","payload":{"nonce":"09f7103e-810f-48d9-ac02-5d9219dc878e"}},"__stripeJsV3":true}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:439 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4431","controllerAppFrameId":"__privateStripeController4431","message":{"action":"stripe-controller-action-response","payload":{"nonce":"222054fa-e208-447d-bd0a-b321843542b5"}},"__stripeJsV3":true}
+content.js:443 ⚠️ Ignoring message from different origin: https://js.stripe.com
