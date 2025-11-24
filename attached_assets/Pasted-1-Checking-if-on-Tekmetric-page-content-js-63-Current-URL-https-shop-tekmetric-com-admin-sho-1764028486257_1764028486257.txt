@@ -1,0 +1,73 @@
+1️⃣ Checking if on Tekmetric page...
+content.js:63 Current URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/274639316/estimate
+content.js:71 ✅ On Tekmetric page, waiting 2 seconds for page to stabilize...
+content.js:72 Setting timeout for 2000ms...
+content.js:79 Timeout set with ID: 1197
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"ad09e193-aa4f-4e4f-bc16-40aaaf62de11"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:76 2️⃣ Wait complete after 2 seconds!
+content.js:81 2️⃣ Wait complete, now looking for Job button...
+content.js:97 ✓ Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:101 3️⃣ Using the currently focused element (job name input auto-focuses after clicking Job)...
+content.js:110 ✓ Found active element: {tagName: 'BUTTON', type: 'submit', id: '', className: '', contentEditable: 'inherit'}
+content.js:117 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:132 Using simple typing simulation...
+2content.js:478 🔍 Checking for pending job data...
+content.js:480 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:482 ✅ Found pending job data, auto-filling...
+content.js:483 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:480 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:482 ✅ Found pending job data, auto-filling...
+content.js:483 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:140 ✓ Job name filled successfully
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"75b151ca-449a-4b2a-ba01-a2c95383f545"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+2content.js:478 🔍 Checking for pending job data...
+content.js:480 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:482 ✅ Found pending job data, auto-filling...
+content.js:483 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:480 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:482 ✅ Found pending job data, auto-filling...
+content.js:483 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:149 Looking for Save/Create/Add button...
+content.js:160 ⚠️ No save button found, trying to proceed anyway...
+content.js:161 Available buttons: (1220) ['Recent ROs', 'HEART Certified Auto Care - Evanston', 'Message00', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues', 'Declined Jobs', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', …]
+content.js:165 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:169 Searching through 2712 buttons for ADD LABOR...
+content.js:177 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:177
+await in fillTekmetricEstimate
+(anonymous) @ content.js:484Understand this error
+content.js:179 Buttons containing "LABOR": (2) ['Labor Guide', 'Reassign Labor & Parts']
+content.js:180 Buttons containing "ADD": (295) ['In:Add odometer  |  Out:Add odometer', 'Add Favorite', 'Add Concern', 'Add Concern', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', …]
+content.js:181 First 50 button texts: (50) ['Recent ROs', 'HEART Certified Auto Care - Evanston', 'Message00', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues', 'Declined Jobs', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.']
+content.js:387 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:183:15)
+fillTekmetricEstimate @ content.js:387
+await in fillTekmetricEstimate
+(anonymous) @ content.js:484Understand this error
+content.js:388 Error details: {message: 'Could not find ADD LABOR button', stack: 'Error: Could not find ADD LABOR button\n    at fill…fkekimphekfdbgdlhfaejadenppgeb/content.js:183:15)', name: 'Error'}
+fillTekmetricEstimate @ content.js:388
+await in fillTekmetricEstimate
+(anonymous) @ content.js:484Understand this error
+content.js:478 🔍 Checking for pending job data...
+content.js:183 Uncaught (in promise) Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:183:15)
+fillTekmetricEstimate @ content.js:183
+await in fillTekmetricEstimate
+(anonymous) @ content.js:484Understand this error
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:396 📦 Cleared pending job after error: {success: true}
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
