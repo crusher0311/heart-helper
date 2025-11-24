@@ -258,12 +258,20 @@ async function fillTekmetricEstimate(jobData) {
     for (const part of jobData.parts) {
       console.log(`Adding part: ${part.name}`);
       
-      const addPartButton = Array.from(document.querySelectorAll('button')).find(btn => 
-        btn.textContent.includes('ADD PART')
-      );
+      // Look for ADD PART button with flexible matching
+      const allButtons = Array.from(document.querySelectorAll('button'));
+      console.log(`Searching through ${allButtons.length} buttons for ADD PART...`);
+      
+      const addPartButton = allButtons.find(btn => {
+        const text = btn.textContent.trim().toUpperCase();
+        return text.includes('ADD PART') || text.includes('ADD_PART') || text === 'PART';
+      });
       
       if (!addPartButton) {
-        console.error('ADD PART button not found - stopping automation');
+        console.error('❌ ADD PART button not found - stopping automation');
+        const buttonTexts = allButtons.map(b => b.textContent.trim()).filter(t => t && t.length < 50);
+        console.log('Buttons containing "PART":', buttonTexts.filter(t => t.toUpperCase().includes('PART')));
+        console.log('Buttons containing "ADD":', buttonTexts.filter(t => t.toUpperCase().includes('ADD')));
         isFillingJob = false;
         throw new Error('Could not find ADD PART button');
       }

@@ -2,6 +2,27 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.5.0] - 2024-11-22
+
+### 🎉 MAJOR MILESTONE: Labor Items Working!
+The automation now successfully:
+- ✅ Retrieves job data from background storage
+- ✅ Fills job name in dialog
+- ✅ Clicks Save to create job
+- ✅ Finds and clicks ADD LABOR button
+- ✅ Fills labor description
+- ✅ Fills labor hours
+- ✅ Saves labor item
+
+### Added
+- **ADD PART button detection**: Same flexible matching as ADD LABOR
+  - Searches for "ADD PART", "ADD_PART", or just "PART"
+  - Case-insensitive search
+  - Better error logging shows buttons containing "PART" or "ADD"
+
+### Progress
+This is the final piece! After this, the complete automation flow works end-to-end.
+
 ## [1.4.2] - 2024-11-22
 
 ### Fixed
