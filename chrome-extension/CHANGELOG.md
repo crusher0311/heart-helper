@@ -2,6 +2,19 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.4.1] - 2024-11-22
+
+### 🐛 CRITICAL FIX: Service Worker Persistence
+- **Fixed**: Content script getting `{jobData: null}` despite background receiving data
+- **Root cause**: Chrome unloads service workers after ~30 seconds, resetting in-memory variables
+- **Solution**: GET_PENDING_JOB now reads from chrome.storage.local instead of memory
+- **Solution**: CLEAR_PENDING_JOB now removes from chrome.storage.local
+- Both actions now return `true` for async responses
+
+### Impact
+This was preventing the automation from ever starting on the Tekmetric page!
+Background would receive and store job data, but content script would always get null.
+
 ## [1.4.0] - 2024-11-22
 
 ### 🎉 MILESTONE: Job Creation Working!

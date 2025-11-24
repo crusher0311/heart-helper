@@ -26,15 +26,22 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   
   if (message.action === "GET_PENDING_JOB") {
     console.log("Background: Content script requesting pending job");
-    sendResponse({ jobData: pendingJobData });
-    // No return true - responding synchronously
+    // Get from storage instead of memory (service worker may have been reloaded)
+    chrome.storage.local.get(['lastJobData'], (result) => {
+      console.log("Background: Retrieved from storage:", result.lastJobData ? "Job found" : "No job");
+      sendResponse({ jobData: result.lastJobData || null });
+    });
+    return true; // Async response
   }
   
   if (message.action === "CLEAR_PENDING_JOB") {
     console.log("Background: Clearing pending job");
     pendingJobData = null;
-    sendResponse({ success: true });
-    // No return true - responding synchronously
+    chrome.storage.local.remove(['lastJobData'], () => {
+      console.log("Background: Cleared job data from storage");
+      sendResponse({ success: true });
+    });
+    return true; // Async response
   }
   
   if (message.action === "GET_LAST_JOB") {
