@@ -2,6 +2,28 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.3.2] - 2024-11-22
+
+### Added
+- **Ultra-verbose debugging**: Step-by-step logging with emoji markers
+  - Shows current URL when checking Tekmetric page
+  - Logs each stage: URL check → wait → button search → input search
+  - Numbered steps (1️⃣ 2️⃣ 3️⃣) to track execution flow
+  - Will identify exactly where automation stops
+
+### Purpose
+Data IS flowing to Tekmetric tab, automation STARTS, but then stops silently.
+These logs will show exactly which line is failing.
+
+Expected console output:
+```
+🚀 Starting to fill Tekmetric estimate with job data...
+1️⃣ Checking if on Tekmetric page...
+Current URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/...
+✅ On Tekmetric page, waiting 2 seconds...
+2️⃣ Wait complete, now looking for Job button...
+```
+
 ## [1.3.1] - 2024-11-22
 
 ### Fixed

@@ -1,0 +1,46 @@
+TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.
+    at index.ts-cd54bfbc.js:1:3292
+chunk-WERSD76P.js?v=36610d68:21551 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+home.tsx:26 Extracted RO ID from URL: 274639316
+inject.js:42 Tekmetric Job Importer: Inject script loaded on repair search app
+inject.js:18 Inject: App URL already configured, not overwriting: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/
+incoming-dialog.f2b6b5ea.js:1 TypeError: Cannot read properties of undefined (reading 'callState')
+    at t.default (incoming-dialog.f2b6b5ea.js:1:150081)
+    at aw (incoming-dialog.f2b6b5ea.js:1:71191)
+    at u (incoming-dialog.f2b6b5ea.js:1:129694)
+    at iD (incoming-dialog.f2b6b5ea.js:1:109363)
+    at incoming-dialog.f2b6b5ea.js:1:109229
+    at ij (incoming-dialog.f2b6b5ea.js:1:109237)
+    at i_ (incoming-dialog.f2b6b5ea.js:1:105988)
+    at iE (incoming-dialog.f2b6b5ea.js:1:104543)
+    at C (incoming-dialog.f2b6b5ea.js:1:140536)
+    at MessagePort.T (incoming-dialog.f2b6b5ea.js:1:141066)
+a9 @ incoming-dialog.f2b6b5ea.js:1
+incoming-dialog.f2b6b5ea.js:1 Uncaught TypeError: Cannot read properties of undefined (reading 'callState')
+    at t.default (incoming-dialog.f2b6b5ea.js:1:150081)
+    at aw (incoming-dialog.f2b6b5ea.js:1:71191)
+    at u (incoming-dialog.f2b6b5ea.js:1:129694)
+    at iD (incoming-dialog.f2b6b5ea.js:1:109363)
+    at incoming-dialog.f2b6b5ea.js:1:109229
+    at ij (incoming-dialog.f2b6b5ea.js:1:109237)
+    at i_ (incoming-dialog.f2b6b5ea.js:1:105988)
+    at iE (incoming-dialog.f2b6b5ea.js:1:104543)
+    at C (incoming-dialog.f2b6b5ea.js:1:140536)
+    at MessagePort.T (incoming-dialog.f2b6b5ea.js:1:141066)
+content.js:9 [Settings] No generalSettings settings found, using defaults
+ns @ content.js:9
+content.js:105 Creating handle element
+content.js:105 [Handle] Updating badge: Object
+content.js:105 [Handle] Badge hidden (count is 0)
+content.js:105 [Handle] Updating unread data: Object
+content.js:105 [Handle] Updating badge: Object
+content.js:105 [Handle] Badge hidden (count is 0)
+?make=Toyota&model=C…EQUIRED&roId=274…:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+?make=Toyota&model=C…EQUIRED&roId=274…:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+?make=Toyota&model=Corolla+L&year=2017&engine=1.8L&search=REAR+STRUTS+-+ALIGNMENT+REQUIRED&roId=274…:1 Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+?make=Toyota&model=C…EQUIRED&roId=274…:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+home.tsx:36 Search response data: (4) [{…}, {…}, {…}, {…}]
+home.tsx:37 Is array: true
+home.tsx:40 Setting results to: (4) [{…}, {…}, {…}, {…}]
+inject.js:35 Inject: Forwarding job data to background {action: 'SEND_TO_TEKMETRIC', payload: {…}}
+inject.js:37 Inject: Background response: {success: true}

@@ -51,21 +51,26 @@ let isFillingJob = false;
 
 async function fillTekmetricEstimate(jobData) {
   if (isFillingJob) {
-    console.log("Already filling a job, skipping duplicate request");
+    console.log("⏸️ Already filling a job, skipping duplicate request");
     return;
   }
   
   isFillingJob = true;
-  console.log("Starting to fill Tekmetric estimate with job data:", jobData);
+  console.log("🚀 Starting to fill Tekmetric estimate with job data:", jobData);
   
   try {
+    console.log("1️⃣ Checking if on Tekmetric page...");
+    console.log("Current URL:", window.location.href);
+    
     if (!window.location.href.includes('shop.tekmetric.com')) {
-      console.log("Not on Tekmetric page, skipping auto-fill");
+      console.log("❌ Not on Tekmetric page, skipping auto-fill");
       isFillingJob = false;
       return;
     }
-
+    
+    console.log("✅ On Tekmetric page, waiting 2 seconds for page to stabilize...");
     await new Promise(resolve => setTimeout(resolve, 2000));
+    console.log("2️⃣ Wait complete, now looking for Job button...");
 
     const jobButton = Array.from(document.querySelectorAll('button')).find(btn => {
       const icon = btn.querySelector('svg');
