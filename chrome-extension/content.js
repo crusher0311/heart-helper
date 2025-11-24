@@ -390,7 +390,9 @@ async function fillTekmetricEstimate(jobData) {
 
     console.log("✅ Successfully filled and saved Tekmetric job!");
     
-    chrome.runtime.sendMessage({ action: "CLEAR_PENDING_JOB" });
+    chrome.runtime.sendMessage({ action: "CLEAR_PENDING_JOB" }, (response) => {
+      console.log("📦 Cleared pending job after success:", response);
+    });
     
     showSuccessNotification(jobData);
     isFillingJob = false;
@@ -402,6 +404,12 @@ async function fillTekmetricEstimate(jobData) {
       stack: error.stack,
       name: error.name
     });
+    
+    // CRITICAL: Clear job data even on error to prevent infinite loop
+    chrome.runtime.sendMessage({ action: "CLEAR_PENDING_JOB" }, (response) => {
+      console.log("📦 Cleared pending job after error:", response);
+    });
+    
     showErrorNotification(error.message);
     isFillingJob = false;
     throw error; // Re-throw to ensure it appears in console

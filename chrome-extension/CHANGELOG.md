@@ -2,6 +2,19 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.5.2] - 2024-11-24
+
+### 🐛 CRITICAL FIX: Infinite Loop Prevention
+- **Fixed**: Extension kept trying to fill job repeatedly, never stopping
+- **Root cause**: Job data was cleared on success but NOT on error
+- **Solution**: Now clears job data from storage in BOTH success and error paths
+- Added callback logging to confirm job data clearing
+
+### Impact
+Previous version would get stuck in infinite loop if automation hit any error.
+Job data stayed in chrome.storage.local and extension kept retrying every 2 seconds.
+Page refresh didn't help because storage persists across refreshes.
+
 ## [1.5.1] - 2024-11-22
 
 ### 🐛 CRITICAL FIX: Job Name Field Detection
