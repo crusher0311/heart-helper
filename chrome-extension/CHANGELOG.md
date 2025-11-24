@@ -2,6 +2,24 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.5.4] - 2024-11-24
+
+### 🎯 BREAKTHROUGH: Use Active Element!
+- **User insight**: Cursor is already in job title field after clicking Job button
+- **Root cause**: Job title input is NOT a regular input field - it's either:
+  - A contenteditable div
+  - An input masked by React
+  - A field that doesn't show up in querySelectorAll('input')
+- **Solution**: Use `document.activeElement` to get the currently focused element
+- Added support for:
+  - contenteditable elements (using textContent)
+  - Regular inputs (using .value)
+  - Fallback: document.execCommand('insertText') for typing simulation
+- Now logs the active element's tagName, type, id, className, and contentEditable status
+
+### Impact
+Previous version searched through 884 inputs but couldn't find the job title field because it's not a standard input. This approach leverages Tekmetric's UX where the title field is auto-focused after clicking Job.
+
 ## [1.5.3] - 2024-11-24
 
 ### 🐛 FIX: Job Name Input Detection

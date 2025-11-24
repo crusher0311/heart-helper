@@ -98,81 +98,46 @@ async function fillTekmetricEstimate(jobData) {
     jobButton.click();
     await new Promise(resolve => setTimeout(resolve, 2500));
 
-    console.log('3️⃣ Looking for job name input field...');
-    const allInputs = Array.from(document.querySelectorAll('input'));
-    const visibleInputs = allInputs.filter(i => i.offsetParent !== null);
-    
-    console.log(`Found ${allInputs.length} total inputs, ${visibleInputs.length} visible`);
-    console.log('First 20 visible inputs:', visibleInputs.slice(0, 20).map(i => ({
-      type: i.type, 
-      placeholder: i.placeholder,
-      id: i.id,
-      name: i.name
-    })));
-
-    // Strategy 1: Look for input with placeholder containing "title" or "job" (but NOT "search")
-    let jobNameInput = visibleInputs.find(inp => 
-      inp.type === 'text' && 
-      !inp.disabled &&
-      inp.placeholder && (
-        inp.placeholder.toLowerCase().includes('title') ||
-        inp.placeholder.toLowerCase().includes('job')
-      ) &&
-      !inp.placeholder.toLowerCase().includes('search')
-    );
-    
-    // Strategy 2: If not found, look for text input with EMPTY placeholder (might be the job name field)
-    if (!jobNameInput) {
-      console.log('⚠️ Strategy 1 failed, trying Strategy 2: looking for text input with empty placeholder...');
-      const textInputsWithoutPlaceholder = visibleInputs.filter(inp => 
-        inp.type === 'text' && 
-        !inp.disabled &&
-        !inp.placeholder
-      );
-      console.log('Found text inputs without placeholder:', textInputsWithoutPlaceholder.map(i => ({
-        id: i.id,
-        name: i.name,
-        className: i.className
-      })));
-      
-      // Take the first one that's not the search box
-      jobNameInput = textInputsWithoutPlaceholder.find(inp => 
-        !inp.className.includes('search') &&
-        !inp.id.includes('search')
-      );
-    }
+    console.log('3️⃣ Using the currently focused element (job name input auto-focuses after clicking Job)...');
+    const jobNameInput = document.activeElement;
     
     if (!jobNameInput) {
-      console.error('❌ Job name input not found');
-      console.log('Looking for input with placeholder containing "title" or "job" (excluding search)');
-      console.log('All visible text inputs:', visibleInputs.filter(i => i.type === 'text').map(i => ({
-        type: i.type,
-        placeholder: i.placeholder,
-        id: i.id,
-        name: i.name,
-        disabled: i.disabled
-      })));
+      console.error('❌ No focused element found');
       isFillingJob = false;
-      throw new Error('Could not find job name input field');
+      throw new Error('No active element found after clicking Job button');
     }
     
-    console.log('✓ Found job title input:', {
+    console.log('✓ Found active element:', {
+      tagName: jobNameInput.tagName,
       type: jobNameInput.type,
-      placeholder: jobNameInput.placeholder,
-      id: jobNameInput.id
+      id: jobNameInput.id,
+      className: jobNameInput.className,
+      contentEditable: jobNameInput.contentEditable
     });
     console.log('✓ Filling job name:', jobData.jobName);
     
     try {
-      jobNameInput.focus();
-      await new Promise(resolve => setTimeout(resolve, 100));
-      jobNameInput.value = '';
-      jobNameInput.value = jobData.jobName;
-      jobNameInput.dispatchEvent(new Event('input', { bubbles: true }));
-      jobNameInput.dispatchEvent(new Event('change', { bubbles: true }));
-      jobNameInput.dispatchEvent(new Event('blur', { bubbles: true }));
-      await new Promise(resolve => setTimeout(resolve, 100));
-      console.log('✓ Job name filled, value is now:', jobNameInput.value);
+      // Check if it's a contenteditable element or an input
+      if (jobNameInput.contentEditable === 'true') {
+        console.log('Using contenteditable approach...');
+        jobNameInput.textContent = jobData.jobName;
+        jobNameInput.dispatchEvent(new Event('input', { bubbles: true }));
+      } else if (jobNameInput.tagName === 'INPUT' || jobNameInput.tagName === 'TEXTAREA') {
+        console.log('Using input/textarea approach...');
+        jobNameInput.value = '';
+        jobNameInput.value = jobData.jobName;
+        jobNameInput.dispatchEvent(new Event('input', { bubbles: true }));
+        jobNameInput.dispatchEvent(new Event('change', { bubbles: true }));
+      } else {
+        console.log('Using simple typing simulation...');
+        // Just type the text character by character
+        document.execCommand('selectAll', false, null);
+        document.execCommand('delete', false, null);
+        document.execCommand('insertText', false, jobData.jobName);
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, 200));
+      console.log('✓ Job name filled successfully');
     } catch (err) {
       console.error('❌ Error filling job name:', err);
       throw err;
