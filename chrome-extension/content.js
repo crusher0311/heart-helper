@@ -69,8 +69,20 @@ async function fillTekmetricEstimate(jobData) {
     }
     
     console.log("✅ On Tekmetric page, waiting 2 seconds for page to stabilize...");
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    console.log("2️⃣ Wait complete, now looking for Job button...");
+    console.log("Setting timeout for 2000ms...");
+    try {
+      await new Promise((resolve, reject) => {
+        const timeoutId = setTimeout(() => {
+          console.log("2️⃣ Wait complete after 2 seconds!");
+          resolve();
+        }, 2000);
+        console.log("Timeout set with ID:", timeoutId);
+      });
+      console.log("2️⃣ Wait complete, now looking for Job button...");
+    } catch (err) {
+      console.error("❌ Error during wait:", err);
+      throw err;
+    }
 
     const jobButton = Array.from(document.querySelectorAll('button')).find(btn => {
       const icon = btn.querySelector('svg');

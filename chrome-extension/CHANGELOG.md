@@ -2,6 +2,21 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.3.3] - 2024-11-22
+
+### Fixed
+- **Timeout hanging bug**: Added detailed logging around setTimeout
+  - Logs when timeout is SET
+  - Logs timeout ID
+  - Logs when timeout COMPLETES  
+  - Added try/catch around wait
+  - Will show if setTimeout is being called but never completing
+
+### Debug
+Previous version showed automation starts, waits 2 seconds, then STOPS.
+Never reached "2️⃣ Wait complete" log.
+This version will show if setTimeout fires at all.
+
 ## [1.3.2] - 2024-11-22
 
 ### Added
