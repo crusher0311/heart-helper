@@ -2,6 +2,34 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.3.0] - 2024-11-22
+
+### Fixed
+- **CRITICAL BUG**: Added missing window message listener!
+  - Extension was checking for pending jobs but never received them
+  - Search tool sends via `window.postMessage()` but extension wasn't listening
+  - Added `window.addEventListener('message')` to receive job data
+
+### Added
+- Origin validation for security (only accepts messages from same origin)
+- Logs when receiving messages from search tool
+- Confirmation when job data is stored in extension storage
+
+### How It Works Now
+1. User clicks "Send to Extension" in search tool
+2. Search tool sends job data via `window.postMessage()`
+3. **Extension NOW listens and receives the message** ← This was missing!
+4. Extension stores job data via `chrome.runtime.sendMessage()`
+5. User switches to Tekmetric tab
+6. Extension auto-fills the job
+
+Expected console output in search tool:
+```
+📬 Received window message: {action: "SEND_TO_TEKMETRIC", payload: {...}}
+✅ Received job data from search tool!
+📦 Job data stored in extension storage
+```
+
 ## [1.2.2] - 2024-11-22
 
 ### Added

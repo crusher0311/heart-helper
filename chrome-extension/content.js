@@ -434,6 +434,31 @@ function checkForPendingJob() {
   });
 }
 
+// Listen for messages from the search tool (cross-tab communication)
+window.addEventListener('message', (event) => {
+  console.log("📬 Received window message:", event.data);
+  
+  // Verify origin for security
+  if (event.origin !== window.location.origin) {
+    console.log("⚠️ Ignoring message from different origin:", event.origin);
+    return;
+  }
+  
+  // Check if it's a job data message
+  if (event.data && event.data.action === 'SEND_TO_TEKMETRIC' && event.data.payload) {
+    console.log("✅ Received job data from search tool!");
+    console.log("Job data:", event.data.payload);
+    
+    // Store the job data for cross-tab access
+    chrome.runtime.sendMessage({
+      action: "STORE_PENDING_JOB",
+      jobData: event.data.payload
+    }, (response) => {
+      console.log("📦 Job data stored in extension storage:", response);
+    });
+  }
+});
+
 console.log("📋 Tekmetric Job Importer initialized, document ready state:", document.readyState);
 
 if (document.readyState === 'loading') {
