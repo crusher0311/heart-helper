@@ -77,16 +77,33 @@ async function fillTekmetricEstimate(jobData) {
       throw new Error('Could not find Job button. Make sure you are on the Estimate tab.');
     }
     
-    console.log('Clicking Job button...');
+    console.log('✓ Clicking Job button...');
     jobButton.click();
-    await new Promise(resolve => setTimeout(resolve, 1200));
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    console.log('Looking for job name input field...');
+    const allInputs = Array.from(document.querySelectorAll('input'));
+    console.log('Found inputs:', allInputs.map(i => ({
+      type: i.type, 
+      placeholder: i.placeholder,
+      disabled: i.disabled,
+      visible: i.offsetParent !== null,
+      value: i.value
+    })));
 
     const jobNameInput = document.querySelector('input[type="text"]') || 
-                         Array.from(document.querySelectorAll('input')).find(inp => 
+                         allInputs.find(inp => 
                            inp.type === 'text' && !inp.disabled && inp.offsetParent !== null
                          );
     
     if (!jobNameInput) {
+      console.error('❌ Job name input not found');
+      console.log('Available visible inputs:', allInputs.filter(i => i.offsetParent !== null).map(i => ({
+        type: i.type,
+        placeholder: i.placeholder,
+        id: i.id,
+        name: i.name
+      })));
       isFillingJob = false;
       throw new Error('Could not find job name input field');
     }
@@ -311,7 +328,7 @@ async function fillTekmetricEstimate(jobData) {
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
-    console.log("✓ Successfully filled and saved Tekmetric job");
+    console.log("✅ Successfully filled and saved Tekmetric job!");
     
     chrome.runtime.sendMessage({ action: "CLEAR_PENDING_JOB" });
     
@@ -320,8 +337,14 @@ async function fillTekmetricEstimate(jobData) {
     
   } catch (error) {
     console.error("❌ Error filling Tekmetric estimate:", error);
+    console.error("Error details:", {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    });
     showErrorNotification(error.message);
     isFillingJob = false;
+    throw error; // Re-throw to ensure it appears in console
   }
 }
 

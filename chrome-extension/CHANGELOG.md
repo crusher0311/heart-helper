@@ -2,6 +2,22 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.2.1] - 2024-11-22
+
+### Added
+- **Enhanced Debugging**: Shows all available inputs after clicking Job button
+- Detailed error stack traces and error details in console
+- Logs what inputs are found (type, placeholder, disabled status, visibility)
+- Better error messages showing exactly what elements are available
+
+### Changed
+- Increased timeout after Job button click to 1.5s (from 1.2s)
+- Errors now re-thrown to ensure they appear in console
+- More descriptive success message (✅ instead of ✓)
+
+### Purpose
+This debugging release helps identify why automation gets stuck after clicking Job button. Console will show exactly what inputs are found and why job name input isn't being detected.
+
 ## [1.2.0] - 2024-11-22
 
 ### Fixed

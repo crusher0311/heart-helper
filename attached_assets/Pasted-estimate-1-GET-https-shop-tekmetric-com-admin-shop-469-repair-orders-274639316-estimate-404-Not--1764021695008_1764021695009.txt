@@ -1,0 +1,1676 @@
+estimate:1  GET https://shop.tekmetric.com/admin/shop/469/repair-orders/274639316/estimate 404 (Not Found)
+TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.
+    at index.ts-cd54bfbc.js:1:3292
+Promise.catch
+(anonymous) @ index.ts-loader3.js:11
+(anonymous) @ index.ts-loader3.js:13
+[Violation] Potential permissions policy violation: microphone is not allowed in this document.
+content.js:36 [MaintenanceModule] Initializing...
+content.js:102 [TekmetricStorageModule] Initializing...
+content.js:1 Tekmetric Job Importer: Content script loaded
+make-phone-link.abc00f32.js:1 Error: Minified React error #130; visit https://reactjs.org/docs/error-decoder.html?invariant=130&args[]=undefined&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at iJ (make-phone-link.abc00f32.js:1:126329)
+    at i (make-phone-link.abc00f32.js:1:67679)
+    at oi (make-phone-link.abc00f32.js:1:81398)
+    at u (make-phone-link.abc00f32.js:1:131513)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+a7 @ make-phone-link.abc00f32.js:1
+n.callback @ make-phone-link.abc00f32.js:1
+lW @ make-phone-link.abc00f32.js:1
+oK @ make-phone-link.abc00f32.js:1
+e @ make-phone-link.abc00f32.js:1
+(anonymous) @ make-phone-link.abc00f32.js:1
+ij @ make-phone-link.abc00f32.js:1
+iC @ make-phone-link.abc00f32.js:1
+E @ make-phone-link.abc00f32.js:1
+I @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught Error: Minified React error #130; visit https://reactjs.org/docs/error-decoder.html?invariant=130&args[]=undefined&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at iJ (make-phone-link.abc00f32.js:1:126329)
+    at i (make-phone-link.abc00f32.js:1:67679)
+    at oi (make-phone-link.abc00f32.js:1:81398)
+    at u (make-phone-link.abc00f32.js:1:131513)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+iJ @ make-phone-link.abc00f32.js:1
+i @ make-phone-link.abc00f32.js:1
+oi @ make-phone-link.abc00f32.js:1
+u @ make-phone-link.abc00f32.js:1
+iF @ make-phone-link.abc00f32.js:1
+(anonymous) @ make-phone-link.abc00f32.js:1
+iA @ make-phone-link.abc00f32.js:1
+i_ @ make-phone-link.abc00f32.js:1
+iC @ make-phone-link.abc00f32.js:1
+E @ make-phone-link.abc00f32.js:1
+I @ make-phone-link.abc00f32.js:1
+content.js:9 [Settings] No profitabilitySettings settings found, using defaults
+ns @ content.js:9
+await in ns
+loadAbilitySettings @ content.js:19
+initSettings @ content.js:19
+(anonymous) @ content.js:19
+setTimeout
+Z @ content.js:19
+$ @ content.js:19
+retainModule @ content.js:117
+z @ content.js:1
+uo @ content.js:95
+createContentManager @ content.js:117
+kn @ content.js:117
+main @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+content.js:9 [Settings] No customerMaintenanceSettings settings found, using defaults
+ns @ content.js:9
+await in ns
+loadAbilitySettings @ content.js:19
+initSettings @ content.js:19
+(anonymous) @ content.js:19
+setTimeout
+Z @ content.js:19
+ne @ content.js:23
+ao @ content.js:23
+je @ content.js:36
+retainModule @ content.js:117
+z @ content.js:1
+uo @ content.js:95
+createContentManager @ content.js:117
+kn @ content.js:117
+main @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+content.js:9 [Settings] No generalSettings settings found, using defaults
+ns @ content.js:9
+await in ns
+loadAbilitySettings @ content.js:19
+initSettings @ content.js:19
+(anonymous) @ content.js:19
+setTimeout
+Z @ content.js:19
+Ln @ content.js:105
+retainModule @ content.js:117
+z @ content.js:1
+wo @ content.js:117
+createContentManager @ content.js:117
+kn @ content.js:117
+main @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+make-phone-link.abc00f32.js:1 TypeError: Cannot read properties of undefined (reading 'callState')
+    at n.default (handle.2fe6b368.js:469:5458)
+    at aw (make-phone-link.abc00f32.js:1:71191)
+    at u (make-phone-link.abc00f32.js:1:129694)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+    at MessagePort.I (make-phone-link.abc00f32.js:1:141066)
+a7 @ make-phone-link.abc00f32.js:1
+n.callback @ make-phone-link.abc00f32.js:1
+lW @ make-phone-link.abc00f32.js:1
+oK @ make-phone-link.abc00f32.js:1
+e @ make-phone-link.abc00f32.js:1
+(anonymous) @ make-phone-link.abc00f32.js:1
+ij @ make-phone-link.abc00f32.js:1
+iC @ make-phone-link.abc00f32.js:1
+E @ make-phone-link.abc00f32.js:1
+I @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught TypeError: Cannot read properties of undefined (reading 'callState')
+    at n.default (handle.2fe6b368.js:469:5458)
+    at aw (make-phone-link.abc00f32.js:1:71191)
+    at u (make-phone-link.abc00f32.js:1:129694)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+    at MessagePort.I (make-phone-link.abc00f32.js:1:141066)
+n.default @ handle.2fe6b368.js:469
+aw @ make-phone-link.abc00f32.js:1
+u @ make-phone-link.abc00f32.js:1
+iF @ make-phone-link.abc00f32.js:1
+(anonymous) @ make-phone-link.abc00f32.js:1
+iA @ make-phone-link.abc00f32.js:1
+i_ @ make-phone-link.abc00f32.js:1
+iC @ make-phone-link.abc00f32.js:1
+E @ make-phone-link.abc00f32.js:1
+I @ make-phone-link.abc00f32.js:1
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [OutboundCall] Menu state changed: false
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:105 Creating handle element
+content.js:105 [Handle] Updating badge: {count: 0, visible: false}
+content.js:105 [Handle] Badge hidden (count is 0)
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: null, previousShopId: null
+content.js:105 [Handle] Updating unread data: {totalUnread: 0, conversationsCount: 0}
+content.js:105 [Handle] Updating badge: {count: 0, visible: false}
+content.js:105 [Handle] Badge hidden (count is 0)
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+estimate:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 11145565
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+main-DsvBPogw.js:257 Event "payments_service_status" doesn't have any listeners. Putting it in the stack.
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:594 Check History button injected
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:24 [Handle] Phone link updated event received customerId: 11145565, shopId: 469
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+handle.2fe6b368.js:24 [Handle] Sending CUSTOMER_PHONE_LIST_REQUEST for phone link updated: 11145565 shopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 11145565
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:102 Looking for Save/Create/Add button...
+content.js:113 ⚠️ No save button found, trying to proceed anyway...
+content.js:114 Available buttons: (543) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (543) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (565) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (576) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (587) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (598) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (609) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (620) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (631) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (642) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (653) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (664) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (675) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (686) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (697) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (708) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (719) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:80 Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:94 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:102 Looking for Save/Create/Add button...
+content.js:109 ✓ Clicking save button: Save
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:118 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:125 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:125
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+content.js:126 Available buttons: (730) ['Recent ROs', 'HEART Certified Auto Care - Evanston', '0', 'Message', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub4', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues0', 'Declined Jobs0', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', …]
+content.js:322 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:128:15)
+fillTekmetricEstimate @ content.js:322
+await in fillTekmetricEstimate
+(anonymous) @ content.js:404
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:59 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', vehicle: {…}, laborItems: Array(1), parts: Array(2), totals: {…}}
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:403 Found pending job data, auto-filling...
+content.js:54 Already filling a job, skipping duplicate request
