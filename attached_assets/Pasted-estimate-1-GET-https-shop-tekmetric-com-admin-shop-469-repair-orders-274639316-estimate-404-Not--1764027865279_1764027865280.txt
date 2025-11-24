@@ -1,0 +1,456 @@
+estimate:1  GET https://shop.tekmetric.com/admin/shop/469/repair-orders/274639316/estimate 404 (Not Found)
+TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.
+    at index.ts-cd54bfbc.js:1:3292
+Promise.catch
+(anonymous) @ index.ts-loader3.js:11
+(anonymous) @ index.ts-loader3.js:13
+[Violation] Potential permissions policy violation: microphone is not allowed in this document.
+content.js:36 [MaintenanceModule] Initializing...
+content.js:102 [TekmetricStorageModule] Initializing...
+content.js:1 Tekmetric Job Importer: Content script loaded
+content.js:551 📋 Tekmetric Job Importer initialized, document ready state: interactive
+content.js:559 📄 Document already loaded - checking for pending jobs in 2s...
+content.js:513 🔍 Checking for pending job data...
+content.js:528 📬 Received window message: {type: 'gcdeggbbhghacnodhgdffajmijjkknbi:content:wxt:content-script-started', contentScriptName: 'content', messageId: 'j99x09xynur'}
+make-phone-link.abc00f32.js:1 Error: Minified React error #130; visit https://reactjs.org/docs/error-decoder.html?invariant=130&args[]=undefined&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at iJ (make-phone-link.abc00f32.js:1:126329)
+    at i (make-phone-link.abc00f32.js:1:67679)
+    at oi (make-phone-link.abc00f32.js:1:81398)
+    at u (make-phone-link.abc00f32.js:1:131513)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+a7 @ make-phone-link.abc00f32.js:1
+n.callback @ make-phone-link.abc00f32.js:1
+lW @ make-phone-link.abc00f32.js:1
+oK @ make-phone-link.abc00f32.js:1
+e @ make-phone-link.abc00f32.js:1
+(anonymous) @ make-phone-link.abc00f32.js:1
+ij @ make-phone-link.abc00f32.js:1
+iC @ make-phone-link.abc00f32.js:1
+E @ make-phone-link.abc00f32.js:1
+I @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught Error: Minified React error #130; visit https://reactjs.org/docs/error-decoder.html?invariant=130&args[]=undefined&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at iJ (make-phone-link.abc00f32.js:1:126329)
+    at i (make-phone-link.abc00f32.js:1:67679)
+    at oi (make-phone-link.abc00f32.js:1:81398)
+    at u (make-phone-link.abc00f32.js:1:131513)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+iJ @ make-phone-link.abc00f32.js:1
+i @ make-phone-link.abc00f32.js:1
+oi @ make-phone-link.abc00f32.js:1
+u @ make-phone-link.abc00f32.js:1
+iF @ make-phone-link.abc00f32.js:1
+(anonymous) @ make-phone-link.abc00f32.js:1
+iA @ make-phone-link.abc00f32.js:1
+i_ @ make-phone-link.abc00f32.js:1
+iC @ make-phone-link.abc00f32.js:1
+E @ make-phone-link.abc00f32.js:1
+I @ make-phone-link.abc00f32.js:1
+content.js:528 📬 Received window message: 
+content.js:9 [Settings] No profitabilitySettings settings found, using defaults
+ns @ content.js:9
+await in ns
+loadAbilitySettings @ content.js:19
+initSettings @ content.js:19
+(anonymous) @ content.js:19
+setTimeout
+Z @ content.js:19
+$ @ content.js:19
+retainModule @ content.js:117
+z @ content.js:1
+uo @ content.js:95
+createContentManager @ content.js:117
+kn @ content.js:117
+main @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+content.js:9 [Settings] No customerMaintenanceSettings settings found, using defaults
+ns @ content.js:9
+await in ns
+loadAbilitySettings @ content.js:19
+initSettings @ content.js:19
+(anonymous) @ content.js:19
+setTimeout
+Z @ content.js:19
+ne @ content.js:23
+ao @ content.js:23
+je @ content.js:36
+retainModule @ content.js:117
+z @ content.js:1
+uo @ content.js:95
+createContentManager @ content.js:117
+kn @ content.js:117
+main @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+content.js:9 [Settings] No generalSettings settings found, using defaults
+ns @ content.js:9
+await in ns
+loadAbilitySettings @ content.js:19
+initSettings @ content.js:19
+(anonymous) @ content.js:19
+setTimeout
+Z @ content.js:19
+Ln @ content.js:105
+retainModule @ content.js:117
+z @ content.js:1
+wo @ content.js:117
+createContentManager @ content.js:117
+kn @ content.js:117
+main @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+(anonymous) @ content.js:117
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:59 🚀 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:62 1️⃣ Checking if on Tekmetric page...
+content.js:63 Current URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/274639316/estimate
+content.js:71 ✅ On Tekmetric page, waiting 2 seconds for page to stabilize...
+content.js:72 Setting timeout for 2000ms...
+content.js:79 Timeout set with ID: 51
+make-phone-link.abc00f32.js:1 TypeError: Cannot read properties of undefined (reading 'callState')
+    at n.default (handle.2fe6b368.js:469:5458)
+    at aw (make-phone-link.abc00f32.js:1:71191)
+    at u (make-phone-link.abc00f32.js:1:129694)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+    at MessagePort.I (make-phone-link.abc00f32.js:1:141066)
+a7 @ make-phone-link.abc00f32.js:1
+n.callback @ make-phone-link.abc00f32.js:1
+lW @ make-phone-link.abc00f32.js:1
+oK @ make-phone-link.abc00f32.js:1
+e @ make-phone-link.abc00f32.js:1
+(anonymous) @ make-phone-link.abc00f32.js:1
+ij @ make-phone-link.abc00f32.js:1
+iC @ make-phone-link.abc00f32.js:1
+E @ make-phone-link.abc00f32.js:1
+I @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught TypeError: Cannot read properties of undefined (reading 'callState')
+    at n.default (handle.2fe6b368.js:469:5458)
+    at aw (make-phone-link.abc00f32.js:1:71191)
+    at u (make-phone-link.abc00f32.js:1:129694)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+    at MessagePort.I (make-phone-link.abc00f32.js:1:141066)
+n.default @ handle.2fe6b368.js:469
+aw @ make-phone-link.abc00f32.js:1
+u @ make-phone-link.abc00f32.js:1
+iF @ make-phone-link.abc00f32.js:1
+(anonymous) @ make-phone-link.abc00f32.js:1
+iA @ make-phone-link.abc00f32.js:1
+i_ @ make-phone-link.abc00f32.js:1
+iC @ make-phone-link.abc00f32.js:1
+E @ make-phone-link.abc00f32.js:1
+I @ make-phone-link.abc00f32.js:1
+content.js:513 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [OutboundCall] Menu state changed: false
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:105 Creating handle element
+content.js:105 [Handle] Updating badge: {count: 0, visible: false}
+content.js:105 [Handle] Badge hidden (count is 0)
+content.js:513 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: null, previousShopId: null
+content.js:105 [Handle] Updating unread data: {totalUnread: 0, conversationsCount: 0}
+content.js:105 [Handle] Updating badge: {count: 0, visible: false}
+content.js:105 [Handle] Badge hidden (count is 0)
+content.js:513 🔍 Checking for pending job data...
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 11145565
+estimate:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+content.js:513 🔍 Checking for pending job data...
+content.js:528 📬 Received window message: {action: 'pendo::connect', frameId: 'zW949JKBSrfBd4sg'}
+content.js:528 📬 Received window message: {type: 'announce-frame-initialized', destination: 'pendo-designer-agent', source: 'pendo-designer-agent', localStorageRouter: true}
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:528 📬 Received window message: {action: 'pendo::connect', frameId: 'zW949JKBSrfBd4sg'}
+content.js:513 🔍 Checking for pending job data...
+content.js:513 🔍 Checking for pending job data...
+content.js:513 🔍 Checking for pending job data...
+content.js:528 📬 Received window message: {cbEvent: true, targetWindowName: '__HOST__', srcWindowName: '__HOST__', message: {…}}
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+main-DsvBPogw.js:257 Event "payments_service_status" doesn't have any listeners. Putting it in the stack.
+content.js:513 🔍 Checking for pending job data...
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:528 📬 Received window message: {cbEvent: true, targetWindowName: '__HOST__', srcWindowName: 'cb-master-frame', message: {…}}
+content.js:532 ⚠️ Ignoring message from different origin: https://js.chargebee.com
+content.js:513 🔍 Checking for pending job data...
+content.js:528 📬 Received window message: {replyId: '677a9865-6ce0-44f2-ab92-8d16c7e8c710', message: {…}, cbEvent: true, targetWindowName: '__HOST__'}
+content.js:532 ⚠️ Ignoring message from different origin: https://js.chargebee.com
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:513 🔍 Checking for pending job data...
+content.js:513 🔍 Checking for pending job data...
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:528 📬 Received window message: {replyId: 'b990c5b7-c49a-42dc-882b-240338278cb1', message: {…}, cbEvent: true, targetWindowName: '__HOST__'}
+content.js:532 ⚠️ Ignoring message from different origin: https://js.chargebee.com
+content.js:740 Check History button injected
+content.js:513 🔍 Checking for pending job data...
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:513 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:24 [Handle] Phone link updated event received customerId: 11145565, shopId: 469
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:528 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9061","controllerAppFrameId":"__privateStripeController9061","message":{"action":"stripe-controller-load","payload":{"controllerMetrics":{"resource_timings":{"shared.js":{"raw_size":813425,"transfer_size":0,"duration":0},"controller-with-preconnect.js":{"raw_size":1090091,"transfer_size":0,"duration":0}}}}},"__stripeJsV3":true}
+content.js:532 ⚠️ Ignoring message from different origin: https://js.stripe.com
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+content.js:528 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9061","controllerAppFrameId":"__privateStripeController9061","message":{"action":"stripe-controller-action-response","payload":{"nonce":"8cb949d8-ec50-45f7-9c66-5ab2bbfb9131"}},"__stripeJsV3":true}
+content.js:532 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:513 🔍 Checking for pending job data...
+content.js:513 🔍 Checking for pending job data...
+content.js:513 🔍 Checking for pending job data...
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:513 🔍 Checking for pending job data...
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:513 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:513 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:76 2️⃣ Wait complete after 2 seconds!
+content.js:81 2️⃣ Wait complete, now looking for Job button...
+content.js:97 ✓ Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+handle.2fe6b368.js:24 [Handle] Sending CUSTOMER_PHONE_LIST_REQUEST for phone link updated: 11145565 shopId: 469
+content.js:513 🔍 Checking for pending job data...
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:513 🔍 Checking for pending job data...
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+content.js:528 📬 Received window message: {"originatingScript":"m2","payload":{"guid":"cb64f5f7-386b-46b0-948b-ec66ed5d6999ea1d00","muid":"34668a3d-e2c7-40c0-9117-16e3a2f648ab1c6239","sid":"d7038074-7a00-4f04-ae59-8fd8b93da25c260f40"}}
+content.js:532 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 
+content.js:513 🔍 Checking for pending job data...
+content.js:528 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9061","controllerAppFrameId":"__privateStripeController9061","message":{"action":"stripe-controller-action-response","payload":{"nonce":"525efd3f-3a0e-4f36-b8fc-0d2696a3ba0c"}},"__stripeJsV3":true}
+content.js:532 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:528 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9061","controllerAppFrameId":"__privateStripeController9061","message":{"action":"stripe-controller-action-response","payload":{"nonce":"4454de5f-7dc6-47dc-bcf9-732cb677a242"}},"__stripeJsV3":true}
+content.js:532 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:513 🔍 Checking for pending job data...
+content.js:515 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:517 ✅ Found pending job data, auto-filling...
+content.js:518 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:528 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9061","controllerAppFrameId":"__privateStripeController9061","message":{"action":"stripe-controller-action-response","payload":{"nonce":"271b204d-a941-4385-a7fa-79f5350fb11e"}},"__stripeJsV3":true}
+content.js:532 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:101 3️⃣ Looking for job name input field...
+content.js:105 Found 884 total inputs, 884 visible
+content.js:106 First 20 visible inputs: (20) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+content.js:126 ⚠️ Strategy 1 failed, trying Strategy 2: looking for text input with empty placeholder...
+content.js:132 Found text inputs without placeholder: []
+content.js:146 ❌ Job name input not found
+fillTekmetricEstimate @ content.js:146
+await in fillTekmetricEstimate
+(anonymous) @ content.js:519
+content.js:147 Looking for input with placeholder containing "title" or "job" (excluding search)
+content.js:148 All visible text inputs: (2) [{…}, {…}]
+content.js:422 ❌ Error filling Tekmetric estimate: Error: Could not find job name input field
+    at fillTekmetricEstimate (content.js:156:13)
+fillTekmetricEstimate @ content.js:422
+await in fillTekmetricEstimate
+(anonymous) @ content.js:519
+content.js:423 Error details: {message: 'Could not find job name input field', stack: 'Error: Could not find job name input field\n    at …fkekimphekfdbgdlhfaejadenppgeb/content.js:156:13)', name: 'Error'}
+fillTekmetricEstimate @ content.js:423
+await in fillTekmetricEstimate
+(anonymous) @ content.js:519
+content.js:513 🔍 Checking for pending job data...
+content.js:156 Uncaught (in promise) Error: Could not find job name input field
+    at fillTekmetricEstimate (content.js:156:13)
+fillTekmetricEstimate @ content.js:156
+await in fillTekmetricEstimate
+(anonymous) @ content.js:519
+content.js:431 📦 Cleared pending job after error: {success: true}
+content.js:515 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:521 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:513 🔍 Checking for pending job data...
+content.js:513 🔍 Checking for pending job data...
+content.js:515 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:521 ⚠️ No pending job data found
+content.js:515 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:521 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:513 🔍 Checking for pending job data...
