@@ -98,38 +98,57 @@ async function fillTekmetricEstimate(jobData) {
     jobButton.click();
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    console.log('Looking for job name input field...');
+    console.log('3️⃣ Looking for job name input field...');
     const allInputs = Array.from(document.querySelectorAll('input'));
-    console.log('Found inputs:', allInputs.map(i => ({
+    const visibleInputs = allInputs.filter(i => i.offsetParent !== null);
+    
+    console.log(`Found ${allInputs.length} total inputs, ${visibleInputs.length} visible`);
+    console.log('First 5 visible inputs:', visibleInputs.slice(0, 5).map(i => ({
       type: i.type, 
       placeholder: i.placeholder,
-      disabled: i.disabled,
-      visible: i.offsetParent !== null,
-      value: i.value
+      id: i.id,
+      name: i.name
     })));
 
-    const jobNameInput = document.querySelector('input[type="text"]') || 
-                         allInputs.find(inp => 
-                           inp.type === 'text' && !inp.disabled && inp.offsetParent !== null
-                         );
+    const jobNameInput = visibleInputs.find(inp => 
+      inp.type === 'text' && !inp.disabled
+    ) || document.querySelector('input[type="text"]:not([disabled])');
     
     if (!jobNameInput) {
       console.error('❌ Job name input not found');
-      console.log('Available visible inputs:', allInputs.filter(i => i.offsetParent !== null).map(i => ({
+      console.log('All visible inputs:', visibleInputs.map(i => ({
         type: i.type,
         placeholder: i.placeholder,
         id: i.id,
-        name: i.name
+        name: i.name,
+        disabled: i.disabled
       })));
       isFillingJob = false;
       throw new Error('Could not find job name input field');
     }
     
+    console.log('✓ Found input:', {
+      type: jobNameInput.type,
+      placeholder: jobNameInput.placeholder,
+      id: jobNameInput.id
+    });
     console.log('✓ Filling job name:', jobData.jobName);
-    jobNameInput.focus();
-    jobNameInput.value = jobData.jobName;
-    jobNameInput.dispatchEvent(new Event('input', { bubbles: true }));
-    jobNameInput.dispatchEvent(new Event('change', { bubbles: true }));
+    
+    try {
+      jobNameInput.focus();
+      await new Promise(resolve => setTimeout(resolve, 100));
+      jobNameInput.value = '';
+      jobNameInput.value = jobData.jobName;
+      jobNameInput.dispatchEvent(new Event('input', { bubbles: true }));
+      jobNameInput.dispatchEvent(new Event('change', { bubbles: true }));
+      jobNameInput.dispatchEvent(new Event('blur', { bubbles: true }));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      console.log('✓ Job name filled, value is now:', jobNameInput.value);
+    } catch (err) {
+      console.error('❌ Error filling job name:', err);
+      throw err;
+    }
+    
     await new Promise(resolve => setTimeout(resolve, 800));
 
     // After filling job name, we need to SAVE/CREATE the job

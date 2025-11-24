@@ -2,6 +2,20 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.4.2] - 2024-11-22
+
+### Fixed
+- **Job name input detection**: Better logging and field detection
+  - Now shows first 5 visible inputs to debug field selection
+  - Added blur event after filling (helps trigger React/validation)
+  - Clear field before setting value (fixes some form validation)
+  - Shows confirmation of filled value
+  - Better error messages showing all visible inputs
+
+### Changed
+- Added step number (3️⃣) to job name filling logs
+- More detailed logging of input field properties
+
 ## [1.4.1] - 2024-11-22
 
 ### 🐛 CRITICAL FIX: Service Worker Persistence
