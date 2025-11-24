@@ -1,0 +1,498 @@
+TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.
+    at index.ts-cd54bfbc.js:1:3292
+[Violation] Potential permissions policy violation: microphone is not allowed in this document.
+content.js:102 [TekmetricStorageModule] Initializing...
+content.js:1 Tekmetric Job Importer: Content script loaded
+content.js:516 📋 Tekmetric Job Importer initialized, document ready state: interactive
+content.js:524 📄 Document already loaded - checking for pending jobs in 2s...
+content.js:493 📬 Received window message: Object
+make-phone-link.abc00f32.js:1 Error: Minified React error #130; visit https://reactjs.org/docs/error-decoder.html?invariant=130&args[]=undefined&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at iJ (make-phone-link.abc00f32.js:1:126329)
+    at i (make-phone-link.abc00f32.js:1:67679)
+    at oi (make-phone-link.abc00f32.js:1:81398)
+    at u (make-phone-link.abc00f32.js:1:131513)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+a7 @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught Error: Minified React error #130; visit https://reactjs.org/docs/error-decoder.html?invariant=130&args[]=undefined&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at iJ (make-phone-link.abc00f32.js:1:126329)
+    at i (make-phone-link.abc00f32.js:1:67679)
+    at oi (make-phone-link.abc00f32.js:1:81398)
+    at u (make-phone-link.abc00f32.js:1:131513)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+content.js:493 📬 Received window message: 
+content.js:9 [Settings] No generalSettings settings found, using defaults
+ns @ content.js:9
+make-phone-link.abc00f32.js:1 TypeError: Cannot read properties of undefined (reading 'callState')
+    at n.default (handle.2fe6b368.js:469:5458)
+    at aw (make-phone-link.abc00f32.js:1:71191)
+    at u (make-phone-link.abc00f32.js:1:129694)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+    at MessagePort.I (make-phone-link.abc00f32.js:1:141066)
+a7 @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught TypeError: Cannot read properties of undefined (reading 'callState')
+    at n.default (handle.2fe6b368.js:469:5458)
+    at aw (make-phone-link.abc00f32.js:1:71191)
+    at u (make-phone-link.abc00f32.js:1:129694)
+    at iF (make-phone-link.abc00f32.js:1:109363)
+    at make-phone-link.abc00f32.js:1:109229
+    at iA (make-phone-link.abc00f32.js:1:109237)
+    at i_ (make-phone-link.abc00f32.js:1:105988)
+    at iC (make-phone-link.abc00f32.js:1:104543)
+    at E (make-phone-link.abc00f32.js:1:140536)
+    at MessagePort.I (make-phone-link.abc00f32.js:1:141066)
+handle.2fe6b368.js:23 [OutboundCall] Menu state changed: false
+handle.2fe6b368.js:23 customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+content.js:105 Creating handle element
+content.js:105 [Handle] Updating badge: Object
+content.js:105 [Handle] Badge hidden (count is 0)
+content.js:105 [Handle] Updating unread data: Object
+content.js:105 [Handle] Updating badge: Object
+content.js:105 [Handle] Badge hidden (count is 0)
+content.js:493 📬 Received window message: Object
+content.js:497 ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
+content.js:493 📬 Received window message: Object
+content.js:493 📬 Received window message: Object
+/admin/org/124/shops:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+content.js:493 📬 Received window message: Object
+handle.2fe6b368.js:23 customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+handle.2fe6b368.js:23 customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+handle.2fe6b368.js:23 customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+handle.2fe6b368.js:23 customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+handle.2fe6b368.js:23 customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+handle.2fe6b368.js:23 customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+handle.2fe6b368.js:23 customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+content.js:478 🔍 Checking for pending job data...
+content.js:480 📬 GET_PENDING_JOB response: Object
+content.js:486 ⚠️ No pending job data found
+content.js:493 📬 Received window message: Object
+main-DsvBPogw.js:257 Event "payments_service_status" doesn't have any listeners. Putting it in the stack.
+content.js:493 📬 Received window message: Object
+content.js:497 ⚠️ Ignoring message from different origin: https://js.chargebee.com
+content.js:493 📬 Received window message: Object
+content.js:497 ⚠️ Ignoring message from different origin: https://js.chargebee.com
+main-DsvBPogw.js:188 Deprecation warning: use moment.updateLocale(localeName, config) to change an existing locale. moment.defineLocale(localeName, config) should only be used for creating a new locale See http://momentjs.com/guides/#/warnings/define-locale/ for more info.
+jB @ main-DsvBPogw.js:188
+index-DirMR5SF.js:1 MUI: The SpeedDial component was moved from the lab to the core.
+
+You should use `import { SpeedDial } from '@mui/material'`
+or `import SpeedDial from '@mui/material/SpeedDial'`
+eo @ index-DirMR5SF.js:1
+index-DirMR5SF.js:3 MUI: The SpeedDialIcon component was moved from the lab to the core.
+
+You should use `import { SpeedDialIcon } from '@mui/material'`
+or `import SpeedDialIcon from '@mui/material/SpeedDialIcon'`
+ho @ index-DirMR5SF.js:3
+index-DirMR5SF.js:2 MUI: The SpeedDialAction component was moved from the lab to the core.
+
+You should use `import { SpeedDialAction } from '@mui/material'`
+or `import SpeedDialAction from '@mui/material/SpeedDialAction'`
+co @ index-DirMR5SF.js:2
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-load","payload":{"controllerMetrics":{"resource_timings":{"shared.js":{"raw_size":813425,"transfer_size":0,"duration":0},"controller-with-preconnect.js":{"raw_size":1090091,"transfer_size":0,"duration":0}}}}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"df623103-410a-4fcf-a341-9b46c8f92334"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+content.js:493 📬 Received window message: Object
+content.js:497 ⚠️ Ignoring message from different origin: https://js.chargebee.com
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"be22ef88-5ab5-4982-8c03-c83a1d44933e"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: null
+handle.2fe6b368.js:23 customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+handle.2fe6b368.js:23 customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+handle.2fe6b368.js:23 customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+handle.2fe6b368.js:23 customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+handle.2fe6b368.js:23 customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+content.js:478 🔍 Checking for pending job data...
+content.js:478 🔍 Checking for pending job data...
+content.js:480 📬 GET_PENDING_JOB response: Object
+content.js:486 ⚠️ No pending job data found
+content.js:480 📬 GET_PENDING_JOB response: Object
+content.js:486 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 11145565
+content.js:478 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:478 🔍 Checking for pending job data...
+content.js:480 📬 GET_PENDING_JOB response: Object
+content.js:486 ⚠️ No pending job data found
+content.js:480 📬 GET_PENDING_JOB response: Object
+content.js:486 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:478 🔍 Checking for pending job data...
+content.js:480 📬 GET_PENDING_JOB response: Object
+content.js:486 ⚠️ No pending job data found
+content.js:478 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:24 [Handle] Phone link updated event received customerId: 11145565, shopId: 469
+content.js:480 📬 GET_PENDING_JOB response: Object
+content.js:486 ⚠️ No pending job data found
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"b0af39b1-36e5-47ab-8853-44e5e4e575f1"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+content.js:36 [MaintenanceModule] Initializing...
+content.js:9 [Settings] No profitabilitySettings settings found, using defaults
+ns @ content.js:9
+content.js:9 [Settings] No customerMaintenanceSettings settings found, using defaults
+ns @ content.js:9
+content.js:478 🔍 Checking for pending job data...
+content.js:478 🔍 Checking for pending job data...
+content.js:478 🔍 Checking for pending job data...
+content.js:493 📬 Received window message: {"originatingScript":"m2","payload":{"guid":"cb64f5f7-386b-46b0-948b-ec66ed5d6999ea1d00","muid":"34668a3d-e2c7-40c0-9117-16e3a2f648ab1c6239","sid":"d7038074-7a00-4f04-ae59-8fd8b93da25c260f40"}}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:480 📬 GET_PENDING_JOB response: Object
+content.js:486 ⚠️ No pending job data found
+content.js:478 🔍 Checking for pending job data...
+content.js:705 Check History button injected
+content.js:478 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:480 📬 GET_PENDING_JOB response: Object
+content.js:486 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:24 [Handle] Sending CUSTOMER_PHONE_LIST_REQUEST for phone link updated: 11145565 shopId: 469
+content.js:480 📬 GET_PENDING_JOB response: Object
+content.js:486 ⚠️ No pending job data found
+content.js:478 🔍 Checking for pending job data...
+content.js:478 🔍 Checking for pending job data...
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"456fd13b-3db6-4ec4-849b-3f5f2a257641"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"f75c890b-f3a0-4bc3-bc75-33046ec27759"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:486 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:486 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:478 🔍 Checking for pending job data...
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:486 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:486 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:486 ⚠️ No pending job data found
+content.js:478 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:478 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:478 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"ad2c7d6f-b11f-4f6b-814c-ff7599b33759"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:486 ⚠️ No pending job data found
+content.js:493 📬 Received window message: {"originatingScript":"m2","payload":{"guid":"cb64f5f7-386b-46b0-948b-ec66ed5d6999ea1d00","muid":"34668a3d-e2c7-40c0-9117-16e3a2f648ab1c6239","sid":"d7038074-7a00-4f04-ae59-8fd8b93da25c260f40"}}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:486 ⚠️ No pending job data found
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:486 ⚠️ No pending job data found
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"e191baa1-320c-480e-8288-b8ebcec81d22"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"422ffaeb-ec91-4e7d-bc97-3e0b6fbdadbe"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"543feead-718c-459b-afb3-1003fa85bf7c"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:554 Extracted RO ID from URL: 274639316
+content.js:630 Extracted vehicle data: {make: 'Toyota', model: 'Corolla L', year: '2017', engine: '1.8L', concerns: '', …}
+content.js:698 Opening search with URL: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev//?make=Toyota&model=Corolla+L&year=2017&engine=1.8L&roId=274639316
+content.js:699 Vehicle data: {make: 'Toyota', model: 'Corolla L', year: '2017', engine: '1.8L', concerns: '', …}
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"f76eadd9-0da5-46db-ba58-edd3b27a0813"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:493 📬 Received window message: {action: 'dismissFrame'}
+content.js:497 ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"b2768556-95cb-4990-8ec8-97cd01b7e39f"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"45a582bf-08ca-4afa-9e49-42cc2258a72c"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"0341a292-0ad5-4fc6-8512-adbd285c1599"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:478 🔍 Checking for pending job data...
+content.js:480 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:482 ✅ Found pending job data, auto-filling...
+content.js:483 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:59 🚀 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:62 1️⃣ Checking if on Tekmetric page...
+content.js:63 Current URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/274639316/estimate
+content.js:71 ✅ On Tekmetric page, waiting 2 seconds for page to stabilize...
+content.js:72 Setting timeout for 2000ms...
+content.js:79 Timeout set with ID: 1197
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"ad09e193-aa4f-4e4f-bc16-40aaaf62de11"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:76 2️⃣ Wait complete after 2 seconds!
+content.js:81 2️⃣ Wait complete, now looking for Job button...
+content.js:97 ✓ Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:101 3️⃣ Using the currently focused element (job name input auto-focuses after clicking Job)...
+content.js:110 ✓ Found active element: {tagName: 'BUTTON', type: 'submit', id: '', className: '', contentEditable: 'inherit'}
+content.js:117 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:132 Using simple typing simulation...
+content.js:478 🔍 Checking for pending job data...
+content.js:478 🔍 Checking for pending job data...
+content.js:480 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:482 ✅ Found pending job data, auto-filling...
+content.js:483 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:480 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:482 ✅ Found pending job data, auto-filling...
+content.js:483 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:140 ✓ Job name filled successfully
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"75b151ca-449a-4b2a-ba01-a2c95383f545"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:478 🔍 Checking for pending job data...
+content.js:478 🔍 Checking for pending job data...
+content.js:480 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:482 ✅ Found pending job data, auto-filling...
+content.js:483 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:480 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:482 ✅ Found pending job data, auto-filling...
+content.js:483 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:54 ⏸️ Already filling a job, skipping duplicate request
+content.js:149 Looking for Save/Create/Add button...
+content.js:160 ⚠️ No save button found, trying to proceed anyway...
+content.js:161 Available buttons: (1220) ['Recent ROs', 'HEART Certified Auto Care - Evanston', 'Message00', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues', 'Declined Jobs', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.', 'Needed', 'Needed', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', 'Add Category', 'Assign', 'click here', 'click here', …]
+content.js:165 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:169 Searching through 2712 buttons for ADD LABOR...
+content.js:177 ❌ ADD LABOR button not found - stopping automation
+fillTekmetricEstimate @ content.js:177
+await in fillTekmetricEstimate
+(anonymous) @ content.js:484
+content.js:179 Buttons containing "LABOR": (2) ['Labor Guide', 'Reassign Labor & Parts']
+content.js:180 Buttons containing "ADD": (295) ['In:Add odometer  |  Out:Add odometer', 'Add Favorite', 'Add Concern', 'Add Concern', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', 'Add Category', …]
+content.js:181 First 50 button texts: (50) ['Recent ROs', 'HEART Certified Auto Care - Evanston', 'Message00', 'Active Time Clocks', 'Check History', 'H - Pending Approval', 'In:Add odometer  |  Out:Add odometer', 'Job', 'Sublet', 'Discount', 'Fee', 'Labor Guide', 'Maintenance ScheduleMaint. Schedule', 'Build', 'Parts Hub', 'Add Favorite', 'View All', 'Disable Estimate Link', 'Vehicle Issues', 'Declined Jobs', 'Job History', 'Detect Auto', 'Add Concern', 'Copy to Estimate (0)', 'Add Concern', 'Copy to Estimate (0)', 'Reorder Jobs', 'Reassign Labor & Parts', 'Collapse All', 'Add Category', 'ALEX YANQUI', 'ALEX Y.', 'Quoted', 'Quoted', 'ALIGN', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BRAKE', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'TIRES', 'ALEX YANQUI', 'ALEX Y.', 'click here', 'BG', 'ALEX YANQUI', 'ALEX Y.', 'ALEX Y.']
+content.js:387 ❌ Error filling Tekmetric estimate: Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:183:15)
+fillTekmetricEstimate @ content.js:387
+await in fillTekmetricEstimate
+(anonymous) @ content.js:484
+content.js:388 Error details: {message: 'Could not find ADD LABOR button', stack: 'Error: Could not find ADD LABOR button\n    at fill…fkekimphekfdbgdlhfaejadenppgeb/content.js:183:15)', name: 'Error'}
+fillTekmetricEstimate @ content.js:388
+await in fillTekmetricEstimate
+(anonymous) @ content.js:484
+content.js:478 🔍 Checking for pending job data...
+content.js:183 Uncaught (in promise) Error: Could not find ADD LABOR button
+    at fillTekmetricEstimate (content.js:183:15)
+fillTekmetricEstimate @ content.js:183
+await in fillTekmetricEstimate
+(anonymous) @ content.js:484
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:396 📦 Cleared pending job after error: {success: true}
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:486 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:478 🔍 Checking for pending job data...
+content.js:478 🔍 Checking for pending job data...
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:486 ⚠️ No pending job data found
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:486 ⚠️ No pending job data found
+content.js:493 📬 Received window message: {action: 'dismissFrame'}
+content.js:497 ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
+content.js:478 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:478 🔍 Checking for pending job data...
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:486 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:486 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:478 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"5e519d71-77b0-4f62-8218-d3bd7d13556a"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"9815093c-64dd-4f03-8613-e69f1ef3d047"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"3a8e7149-e06d-4a63-bdb6-35df7d44f7ae"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:480 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:486 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"3c9b9785-5357-4dee-9914-4ff9607d6f07"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"a9533a2f-147d-48d0-b046-be41112064ba"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"2e8bfcec-24e4-482f-927f-5bd44cbe7bba"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"fe939bbf-8d5f-4bb2-96ca-6d937a47dc78"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:493 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController5131","controllerAppFrameId":"__privateStripeController5131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"93efa9dd-88d9-4870-9e6c-d81d140ae75e"}},"__stripeJsV3":true}
+content.js:497 ⚠️ Ignoring message from different origin: https://js.stripe.com
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received

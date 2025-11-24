@@ -2,9 +2,26 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.5.5] - 2024-11-24
+
+### 🔍 FIX: Search All Field Types
+- **Problem**: v1.5.4's `document.activeElement` returned a BUTTON, not the job title field
+- **Discovery**: Job title field is NOT auto-focused after clicking Job button
+- **Root cause**: Field might be textarea, contenteditable div, or late-rendering input
+- **Solution**: Search for ALL field types (input, textarea, contenteditable)
+- Added 3 fallback strategies:
+  1. Empty textarea (most likely for job names)
+  2. Empty contenteditable div
+  3. Empty text input (excluding search boxes)
+- Increased wait time from 2.5s to 3s for dialog to fully render
+- Enhanced logging shows counts and details of all found fields
+
+### Impact
+v1.5.4 tried to type into a submit button. This version properly searches for the actual input field regardless of its type.
+
 ## [1.5.4] - 2024-11-24
 
-### 🎯 BREAKTHROUGH: Use Active Element!
+### 🎯 ATTEMPTED: Use Active Element (FAILED)
 - **User insight**: Cursor is already in job title field after clicking Job button
 - **Root cause**: Job title input is NOT a regular input field - it's either:
   - A contenteditable div
