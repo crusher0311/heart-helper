@@ -2,6 +2,19 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.5.3] - 2024-11-24
+
+### 🐛 FIX: Job Name Input Detection
+- **Fixed**: Couldn't find job name input field after clicking Job button
+- **Root cause**: Job title input wasn't in first 10 visible inputs and had NO placeholder text
+- **Solution 1**: Increased wait time after clicking Job button from 1.5s to 2.5s
+- **Solution 2**: Now shows first 20 inputs (instead of 10) for better debugging
+- **Solution 3**: Added fallback strategy to find text inputs with EMPTY placeholder
+- Added className and id checks to exclude search boxes
+
+### Impact
+Previous version would click Job button, create blank job, then fail silently because it couldn't find the title input. This created hundreds of blank "New Job" entries in Tekmetric.
+
 ## [1.5.2] - 2024-11-24
 
 ### 🐛 CRITICAL FIX: Infinite Loop Prevention

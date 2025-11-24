@@ -96,22 +96,22 @@ async function fillTekmetricEstimate(jobData) {
     
     console.log('✓ Clicking Job button...');
     jobButton.click();
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise(resolve => setTimeout(resolve, 2500));
 
     console.log('3️⃣ Looking for job name input field...');
     const allInputs = Array.from(document.querySelectorAll('input'));
     const visibleInputs = allInputs.filter(i => i.offsetParent !== null);
     
     console.log(`Found ${allInputs.length} total inputs, ${visibleInputs.length} visible`);
-    console.log('First 10 visible inputs:', visibleInputs.slice(0, 10).map(i => ({
+    console.log('First 20 visible inputs:', visibleInputs.slice(0, 20).map(i => ({
       type: i.type, 
       placeholder: i.placeholder,
       id: i.id,
       name: i.name
     })));
 
-    // Look for input with placeholder containing "title" or "job" (but NOT "search")
-    const jobNameInput = visibleInputs.find(inp => 
+    // Strategy 1: Look for input with placeholder containing "title" or "job" (but NOT "search")
+    let jobNameInput = visibleInputs.find(inp => 
       inp.type === 'text' && 
       !inp.disabled &&
       inp.placeholder && (
@@ -120,6 +120,27 @@ async function fillTekmetricEstimate(jobData) {
       ) &&
       !inp.placeholder.toLowerCase().includes('search')
     );
+    
+    // Strategy 2: If not found, look for text input with EMPTY placeholder (might be the job name field)
+    if (!jobNameInput) {
+      console.log('⚠️ Strategy 1 failed, trying Strategy 2: looking for text input with empty placeholder...');
+      const textInputsWithoutPlaceholder = visibleInputs.filter(inp => 
+        inp.type === 'text' && 
+        !inp.disabled &&
+        !inp.placeholder
+      );
+      console.log('Found text inputs without placeholder:', textInputsWithoutPlaceholder.map(i => ({
+        id: i.id,
+        name: i.name,
+        className: i.className
+      })));
+      
+      // Take the first one that's not the search box
+      jobNameInput = textInputsWithoutPlaceholder.find(inp => 
+        !inp.className.includes('search') &&
+        !inp.id.includes('search')
+      );
+    }
     
     if (!jobNameInput) {
       console.error('❌ Job name input not found');
