@@ -1,6 +1,6 @@
 # Quick Installation Guide
 
-**Current Version: 1.2.1** - See [CHANGELOG.md](CHANGELOG.md) for version history
+**Current Version: 1.2.2** - See [CHANGELOG.md](CHANGELOG.md) for version history
 
 ## Install the Chrome Extension
 

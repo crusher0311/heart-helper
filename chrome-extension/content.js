@@ -421,19 +421,28 @@ function showErrorNotification(message) {
 }
 
 function checkForPendingJob() {
+  console.log("🔍 Checking for pending job data...");
   chrome.runtime.sendMessage({ action: "GET_PENDING_JOB" }, (response) => {
+    console.log("📬 GET_PENDING_JOB response:", response);
     if (response && response.jobData) {
-      console.log("Found pending job data, auto-filling...");
+      console.log("✅ Found pending job data, auto-filling...");
+      console.log("Job data:", response.jobData);
       fillTekmetricEstimate(response.jobData);
+    } else {
+      console.log("⚠️ No pending job data found");
     }
   });
 }
 
+console.log("📋 Tekmetric Job Importer initialized, document ready state:", document.readyState);
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
+    console.log("📄 DOMContentLoaded - checking for pending jobs in 2s...");
     setTimeout(checkForPendingJob, 2000);
   });
 } else {
+  console.log("📄 Document already loaded - checking for pending jobs in 2s...");
   setTimeout(checkForPendingJob, 2000);
 }
 

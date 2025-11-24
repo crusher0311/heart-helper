@@ -2,6 +2,31 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.2.2] - 2024-11-22
+
+### Added
+- **Critical Debugging**: Logs every step of pending job detection
+- Shows when content script initializes
+- Shows when checking for pending jobs (even if none found)
+- Shows GET_PENDING_JOB message response
+- Logs whether job data exists or not
+
+### Purpose
+Diagnose why automation isn't starting - logs will show:
+1. If content script loads properly
+2. If it's checking for pending jobs
+3. What the background script returns
+4. Why fillTekmetricEstimate isn't being called
+
+Expected console output:
+```
+📋 Tekmetric Job Importer initialized
+📄 Document already loaded - checking for pending jobs in 2s...
+🔍 Checking for pending job data...
+📬 GET_PENDING_JOB response: {jobData: {...}}
+✅ Found pending job data, auto-filling...
+```
+
 ## [1.2.1] - 2024-11-22
 
 ### Added
