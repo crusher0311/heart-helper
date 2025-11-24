@@ -2,6 +2,19 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.3.1] - 2024-11-22
+
+### Fixed
+- **Background script message handling bug**: Fixed async/sync response mismatch
+  - `SEND_TO_TEKMETRIC` now properly waits for storage.set() before responding
+  - Removed `return true` from synchronous handlers to prevent channel closure errors
+  - Added `STORE_PENDING_JOB` handler for content script storage requests
+  - No more "message channel closed" errors
+
+### Changed
+- Background script now logs when job data is stored successfully
+- Only returns `true` for truly async operations (storage.get/set with callbacks)
+
 ## [1.3.0] - 2024-11-22
 
 ### Fixed

@@ -9,23 +9,32 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     chrome.storage.local.set({ 
       lastJobData: message.payload,
       timestamp: new Date().toISOString()
+    }, () => {
+      console.log("Background: Job data stored successfully");
+      sendResponse({ success: true });
     });
     
+    return true; // Keep this because storage.set is async
+  }
+  
+  if (message.action === "STORE_PENDING_JOB") {
+    console.log("Background: Storing pending job from content script", message.jobData);
+    pendingJobData = message.jobData;
     sendResponse({ success: true });
-    return true;
+    // No return true - responding synchronously
   }
   
   if (message.action === "GET_PENDING_JOB") {
     console.log("Background: Content script requesting pending job");
     sendResponse({ jobData: pendingJobData });
-    return true;
+    // No return true - responding synchronously
   }
   
   if (message.action === "CLEAR_PENDING_JOB") {
     console.log("Background: Clearing pending job");
     pendingJobData = null;
     sendResponse({ success: true });
-    return true;
+    // No return true - responding synchronously
   }
   
   if (message.action === "GET_LAST_JOB") {
@@ -35,7 +44,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         timestamp: result.timestamp
       });
     });
-    return true;
+    return true; // Keep this because storage.get is async
   }
 });
 
