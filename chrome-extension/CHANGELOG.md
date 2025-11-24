@@ -2,6 +2,27 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.4.0] - 2024-11-22
+
+### 🎉 MILESTONE: Job Creation Working!
+The automation successfully:
+- ✅ Receives job data from search tool
+- ✅ Clicks Job button
+- ✅ Fills job name
+- ✅ Clicks Save to create the job
+
+### Fixed
+- **ADD LABOR button search**: More flexible matching
+  - Now searches for "ADD LABOR", "ADD_LABOR", or just "LABOR"
+  - Case-insensitive search
+  - Better error logging shows buttons containing "LABOR" or "ADD"
+  - Shows first 50 button texts to help identify the right button
+
+### Changed
+- Enhanced button search logging
+- Filters out long button texts (>50 chars) for cleaner logs
+- Shows button count before searching
+
 ## [1.3.3] - 2024-11-22
 
 ### Fixed

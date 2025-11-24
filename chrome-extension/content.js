@@ -151,13 +151,21 @@ async function fillTekmetricEstimate(jobData) {
     for (const laborItem of jobData.laborItems) {
       console.log(`Adding labor item: ${laborItem.name}`);
       
-      const addLaborButton = Array.from(document.querySelectorAll('button')).find(btn => 
-        btn.textContent.includes('ADD LABOR')
-      );
+      // Look for ADD LABOR button with flexible matching
+      const allButtons = Array.from(document.querySelectorAll('button'));
+      console.log(`Searching through ${allButtons.length} buttons for ADD LABOR...`);
+      
+      const addLaborButton = allButtons.find(btn => {
+        const text = btn.textContent.trim().toUpperCase();
+        return text.includes('ADD LABOR') || text.includes('ADD_LABOR') || text === 'LABOR';
+      });
       
       if (!addLaborButton) {
         console.error('❌ ADD LABOR button not found - stopping automation');
-        console.log('Available buttons:', Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim()).filter(t => t));
+        const buttonTexts = allButtons.map(b => b.textContent.trim()).filter(t => t && t.length < 50);
+        console.log('Buttons containing "LABOR":', buttonTexts.filter(t => t.toUpperCase().includes('LABOR')));
+        console.log('Buttons containing "ADD":', buttonTexts.filter(t => t.toUpperCase().includes('ADD')));
+        console.log('First 50 button texts:', buttonTexts.slice(0, 50));
         isFillingJob = false;
         throw new Error('Could not find ADD LABOR button');
       }
