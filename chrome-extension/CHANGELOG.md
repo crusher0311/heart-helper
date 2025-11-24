@@ -2,6 +2,19 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.5.1] - 2024-11-22
+
+### 🐛 CRITICAL FIX: Job Name Field Detection
+- **Fixed**: Was filling global search box instead of job title input
+- **Root cause**: Code was finding first visible text input (the search bar)
+- **Solution**: Now specifically looks for input with placeholder containing "title" or "job"
+- **Solution**: Excludes inputs with "search" in placeholder
+- Shows first 10 inputs instead of 5 for better debugging
+
+### Impact
+Previous version filled the search box at top of page, causing "Name is required" error.
+Labor items were being added to nameless jobs.
+
 ## [1.5.0] - 2024-11-22
 
 ### 🎉 MAJOR MILESTONE: Labor Items Working!

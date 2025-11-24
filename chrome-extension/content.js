@@ -103,20 +103,28 @@ async function fillTekmetricEstimate(jobData) {
     const visibleInputs = allInputs.filter(i => i.offsetParent !== null);
     
     console.log(`Found ${allInputs.length} total inputs, ${visibleInputs.length} visible`);
-    console.log('First 5 visible inputs:', visibleInputs.slice(0, 5).map(i => ({
+    console.log('First 10 visible inputs:', visibleInputs.slice(0, 10).map(i => ({
       type: i.type, 
       placeholder: i.placeholder,
       id: i.id,
       name: i.name
     })));
 
+    // Look for input with placeholder containing "title" or "job" (but NOT "search")
     const jobNameInput = visibleInputs.find(inp => 
-      inp.type === 'text' && !inp.disabled
-    ) || document.querySelector('input[type="text"]:not([disabled])');
+      inp.type === 'text' && 
+      !inp.disabled &&
+      inp.placeholder && (
+        inp.placeholder.toLowerCase().includes('title') ||
+        inp.placeholder.toLowerCase().includes('job')
+      ) &&
+      !inp.placeholder.toLowerCase().includes('search')
+    );
     
     if (!jobNameInput) {
       console.error('❌ Job name input not found');
-      console.log('All visible inputs:', visibleInputs.map(i => ({
+      console.log('Looking for input with placeholder containing "title" or "job" (excluding search)');
+      console.log('All visible text inputs:', visibleInputs.filter(i => i.type === 'text').map(i => ({
         type: i.type,
         placeholder: i.placeholder,
         id: i.id,
@@ -127,7 +135,7 @@ async function fillTekmetricEstimate(jobData) {
       throw new Error('Could not find job name input field');
     }
     
-    console.log('✓ Found input:', {
+    console.log('✓ Found job title input:', {
       type: jobNameInput.type,
       placeholder: jobNameInput.placeholder,
       id: jobNameInput.id
