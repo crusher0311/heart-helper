@@ -1,0 +1,203 @@
+content.js:622 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9141","controllerAppFrameId":"__privateStripeController9141","message":{"action":"stripe-controller-action-response","payload":{"nonce":"7b8cbfac-0d6e-4246-8143-e3bbd1c1fe0d"}},"__stripeJsV3":true}
+content.js:626 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:622 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9141","controllerAppFrameId":"__privateStripeController9141","message":{"action":"stripe-controller-action-response","payload":{"nonce":"6491b76d-33af-4699-96d5-4f26206efa34"}},"__stripeJsV3":true}
+content.js:626 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:683 Extracted RO ID from URL: 274639316
+content.js:759 Extracted vehicle data: {make: 'Toyota', model: 'Corolla L', year: '2017', engine: '1.8L', concerns: '', …}
+content.js:827 Opening search with URL: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev//?make=Toyota&model=Corolla+L&year=2017&engine=1.8L&roId=274639316
+content.js:828 Vehicle data: {make: 'Toyota', model: 'Corolla L', year: '2017', engine: '1.8L', concerns: '', …}
+content.js:622 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9141","controllerAppFrameId":"__privateStripeController9141","message":{"action":"stripe-controller-action-response","payload":{"nonce":"3ab56c87-9515-45cc-86ca-b9d35fe92484"}},"__stripeJsV3":true}
+content.js:626 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:622 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9141","controllerAppFrameId":"__privateStripeController9141","message":{"action":"stripe-controller-action-response","payload":{"nonce":"a4125e1d-0b9e-43df-b77c-d2bd56588496"}},"__stripeJsV3":true}
+content.js:626 ⚠️ Ignoring message from different origin: https://js.stripe.com
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+content.js:622 📬 Received window message: {action: 'dismissFrame'}
+content.js:626 ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
+content.js:612 🔔 Storage changed - job data added!
+content.js:614 ⚡ Triggering automation immediately!
+content.js:139 🚀 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:142 1️⃣ Checking if on Tekmetric page...
+content.js:143 Current URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/274639316/estimate
+content.js:151 ✅ On Tekmetric page, starting automation immediately...
+content.js:165 ✓ Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:168 3️⃣ Waiting for Job modal to fully render...
+content.js:33 ⏳ Waiting for Job modal to fully render (can take 10-12 seconds)...
+content.js:98 ⏳ Still waiting for modal... (0s elapsed)
+content.js:596 🔍 Checking for pending job data...
+content.js:596 🔍 Checking for pending job data...
+content.js:598 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:600 ✅ Found pending job data, auto-filling...
+content.js:601 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:134 ⏸️ Already filling a job, skipping duplicate request
+content.js:598 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:600 ✅ Found pending job data, auto-filling...
+content.js:601 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:134 ⏸️ Already filling a job, skipping duplicate request
+content.js:596 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:596 🔍 Checking for pending job data...
+content.js:598 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:600 ✅ Found pending job data, auto-filling...
+content.js:601 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:134 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:598 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:600 ✅ Found pending job data, auto-filling...
+content.js:601 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:134 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:98 ⏳ Still waiting for modal... (12s elapsed)
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:622 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9141","controllerAppFrameId":"__privateStripeController9141","message":{"action":"stripe-controller-action-response","payload":{"nonce":"7e237d07-6be5-4955-8817-d271749ecd37"}},"__stripeJsV3":true}
+content.js:626 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:505 ❌ Error filling Tekmetric estimate: Error: Timeout after 15062ms waiting for Job modal to fully render
+    at checkForModal (content.js:93:23)
+fillTekmetricEstimate @ content.js:505
+await in fillTekmetricEstimate
+(anonymous) @ content.js:615
+content.js:506 Error details: {message: 'Timeout after 15062ms waiting for Job modal to fully render', stack: 'Error: Timeout after 15062ms waiting for Job modal…kfkekimphekfdbgdlhfaejadenppgeb/content.js:93:23)', name: 'Error'}
+fillTekmetricEstimate @ content.js:506
+await in fillTekmetricEstimate
+(anonymous) @ content.js:615
+content.js:596 🔍 Checking for pending job data...
+content.js:93 Uncaught (in promise) Error: Timeout after 15062ms waiting for Job modal to fully render
+    at checkForModal (content.js:93:23)
+checkForModal @ content.js:93
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+setTimeout
+checkForModal @ content.js:102
+content.js:612 🔔 Storage changed - job data added!
+content.js:514 📦 Cleared pending job after error: {success: true}
+content.js:598 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:604 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:596 🔍 Checking for pending job data...
+content.js:598 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:604 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469

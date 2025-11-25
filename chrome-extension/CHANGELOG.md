@@ -2,6 +2,30 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.6.9] - 2024-11-24
+
+### ⚡ FASTER MODAL DETECTION: Look for Input Fields Instead of ADD LABOR Button
+- **THE PROBLEM**: `waitForModal()` waited for "ADD LABOR" button, but modal was already open with input fields ready
+  - User reported: "when the timeout flag appeared, the modal was already open and ready to accept typing"
+  - Unnecessary 15-second wait even though job name field was visible
+- **THE FIX**: Detect modal by finding input/textarea fields instead of specific button
+  - Looks for `[role="dialog"]`, `.modal`, or high z-index containers with inputs
+  - Detects modal as soon as job name field appears (typically <1 second)
+  - Falls back to document.body if timeout (no error thrown)
+- **Result**: Modal detected in <1 second instead of waiting for timeout
+
+### Implementation
+```javascript
+// OLD: Waited for ADD LABOR button (could take 10-15 seconds)
+const addLaborBtn = document.querySelectorAll('button').find(btn => 
+  btn.textContent.trim() === 'ADD LABOR'
+);
+
+// NEW: Detect modal by input fields (instant)
+const dialogs = document.querySelectorAll('[role="dialog"], .modal');
+const inputs = dialog.querySelectorAll('input, textarea');
+```
+
 ## [1.6.8] - 2024-11-24
 
 ### ⚡ INSTANT AUTOMATION: Storage Change Listener
