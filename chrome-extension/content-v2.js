@@ -416,3 +416,245 @@ if (window.location.href.includes('shop.tekmetric.com')) {
 }
 
 debug('Content script v2 loaded - instant fill enabled');
+
+// =================================================================
+// CHECK HISTORY BUTTON: Extract vehicle data from Tekmetric RO page
+// =================================================================
+
+function extractVehicleData() {
+  const data = {
+    make: '',
+    model: '',
+    year: '',
+    engine: '',
+    concerns: '',
+    repairOrderId: ''
+  };
+
+  const allText = document.body.innerText;
+  
+  const urlMatch = window.location.href.match(/repair-orders\/(\d+)/);
+  if (urlMatch) {
+    data.repairOrderId = urlMatch[1];
+    console.log("Extracted RO ID from URL:", data.repairOrderId);
+  }
+  
+  const vinMatch = allText.match(/VIN[:\s]*([A-HJ-NPR-Z0-9]{17})/i);
+  if (vinMatch) {
+    data.vin = vinMatch[1];
+  }
+
+  const yearMatch = allText.match(/\b(19|20)\d{2}\b/);
+  if (yearMatch) {
+    data.year = yearMatch[0];
+  }
+
+  const makeModelRegex = /(Toyota|Honda|Ford|Chevrolet|Nissan|Hyundai|Kia|Jeep|Ram|GMC|Subaru|Mazda|Volkswagen|BMW|Mercedes-Benz|Audi|Lexus|Acura|Infiniti|Cadillac|Buick|Lincoln|Chrysler|Dodge|Mitsubishi|Volvo|Porsche|Tesla|Land Rover|Jaguar|Mini|Fiat|Alfa Romeo)\s+([A-Za-z0-9\s-]+?)(?=\s+\d{4}|\s+Sport|\s+\d\.\d)/i;
+  const makeModelMatch = allText.match(makeModelRegex);
+  if (makeModelMatch) {
+    data.make = makeModelMatch[1];
+    data.model = makeModelMatch[2].trim();
+  }
+
+  const engineMatch = allText.match(/(\d\.\d+L)\s*(V\d+|I\d+|H\d+)?/i);
+  if (engineMatch) {
+    data.engine = engineMatch[0].trim();
+  }
+
+  const concernsElements = document.querySelectorAll('[class*="concern" i], [class*="customer" i] textarea, [class*="complaint" i] textarea, [class*="issue" i] textarea');
+  if (concernsElements.length > 0) {
+    data.concerns = Array.from(concernsElements)
+      .map(el => el.value || el.textContent)
+      .filter(text => text && text.trim().length > 5)
+      .join(', ')
+      .trim()
+      .substring(0, 200);
+  }
+
+  if (!data.concerns) {
+    const labels = Array.from(document.querySelectorAll('label, div'));
+    for (const label of labels) {
+      const labelText = label.textContent.toLowerCase();
+      if (labelText.includes('concern') || labelText.includes('complaint') || labelText.includes('customer') || labelText.includes('reason for visit')) {
+        const nextElement = label.nextElementSibling;
+        if (nextElement && (nextElement.tagName === 'TEXTAREA' || nextElement.tagName === 'INPUT')) {
+          const text = nextElement.value || nextElement.textContent;
+          if (text && text.trim().length > 5) {
+            data.concerns = text.trim().substring(0, 200);
+            break;
+          }
+        }
+        
+        const textarea = label.querySelector('textarea') || label.querySelector('input[type="text"]');
+        if (textarea) {
+          const text = textarea.value || textarea.textContent;
+          if (text && text.trim().length > 5) {
+            data.concerns = text.trim().substring(0, 200);
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  if (!data.concerns) {
+    const textAreas = document.querySelectorAll('textarea');
+    for (const textarea of textAreas) {
+      const text = textarea.value || textarea.textContent;
+      if (text && text.trim().length > 10 && text.trim().length < 500) {
+        const trimmedText = text.trim();
+        if (!trimmedText.toLowerCase().includes('internal note') && 
+            !trimmedText.toLowerCase().includes('technician note')) {
+          data.concerns = trimmedText.substring(0, 200);
+          break;
+        }
+      }
+    }
+  }
+
+  console.log("Extracted vehicle data:", data);
+  return data;
+}
+
+function showErrorNotification(message) {
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ef4444;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    max-width: 400px;
+  `;
+  
+  const title = document.createElement('div');
+  title.style.fontWeight = 'bold';
+  title.style.marginBottom = '4px';
+  title.textContent = '⚠ Import Failed';
+  
+  const messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+  
+  notification.appendChild(title);
+  notification.appendChild(messageDiv);
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.style.transition = 'opacity 0.3s';
+    notification.style.opacity = '0';
+    setTimeout(() => notification.remove(), 300);
+  }, 5000);
+}
+
+function injectCheckHistoryButton() {
+  if (checkHistoryButton || !window.location.href.includes('/repair-orders/')) {
+    return;
+  }
+
+  const targetContainer = document.querySelector('[data-testid="ro-header"]') ||
+                          document.querySelector('header') ||
+                          document.querySelector('[class*="header" i]');
+
+  if (!targetContainer) {
+    console.log("Could not find suitable container for Check History button");
+    return;
+  }
+
+  checkHistoryButton = document.createElement('button');
+  checkHistoryButton.textContent = 'Check History';
+  checkHistoryButton.style.cssText = `
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    transition: all 0.2s ease;
+    margin-left: 12px;
+    font-family: system-ui, -apple-system, sans-serif;
+    z-index: 9999;
+  `;
+
+  checkHistoryButton.addEventListener('mouseenter', () => {
+    checkHistoryButton.style.transform = 'translateY(-1px)';
+    checkHistoryButton.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.4)';
+  });
+
+  checkHistoryButton.addEventListener('mouseleave', () => {
+    checkHistoryButton.style.transform = 'translateY(0)';
+    checkHistoryButton.style.boxShadow = '0 2px 8px rgba(102, 126, 234, 0.3)';
+  });
+
+  checkHistoryButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const vehicleData = extractVehicleData();
+    
+    const params = new URLSearchParams();
+    if (vehicleData.make) params.set('make', vehicleData.make);
+    if (vehicleData.model) params.set('model', vehicleData.model);
+    if (vehicleData.year) params.set('year', vehicleData.year);
+    if (vehicleData.engine) params.set('engine', vehicleData.engine);
+    if (vehicleData.concerns) params.set('search', vehicleData.concerns);
+    if (vehicleData.repairOrderId) params.set('roId', vehicleData.repairOrderId);
+    
+    chrome.storage.local.get(['appUrl'], (result) => {
+      if (!result.appUrl) {
+        showErrorNotification('Extension not configured. Click the extension icon and set your app URL in Settings.');
+        return;
+      }
+      
+      const searchUrl = `${result.appUrl}/?${params.toString()}`;
+      
+      console.log("Opening search with URL:", searchUrl);
+      console.log("Vehicle data:", vehicleData);
+      window.open(searchUrl, '_blank');
+    });
+  });
+
+  targetContainer.appendChild(checkHistoryButton);
+  console.log("Check History button injected");
+}
+
+function observePageChanges() {
+  const checkAndInject = () => {
+    if (window.location.href.includes('/repair-orders/') && !checkHistoryButton) {
+      setTimeout(injectCheckHistoryButton, 1000);
+    } else if (!window.location.href.includes('/repair-orders/') && checkHistoryButton) {
+      checkHistoryButton?.remove();
+      checkHistoryButton = null;
+    }
+  };
+
+  checkAndInject();
+
+  const urlObserver = new MutationObserver(checkAndInject);
+  urlObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+  let lastUrl = window.location.href;
+  setInterval(() => {
+    if (lastUrl !== window.location.href) {
+      lastUrl = window.location.href;
+      checkAndInject();
+    }
+  }, 1000);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', observePageChanges);
+} else {
+  observePageChanges();
+}
