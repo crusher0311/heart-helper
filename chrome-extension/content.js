@@ -963,14 +963,14 @@ function injectHeartIconForConcern(concernRow, concernText) {
     return;
   }
   
-  // Create the icon button with ❤️ emoji
+  // Create the icon button with ♥ in HEART Red
   const iconButton = document.createElement('button');
   iconButton.className = 'heart-helper-icon';
-  iconButton.textContent = '❤️';
+  iconButton.innerHTML = '♥'; // Use HTML heart entity that can be colored with CSS
   iconButton.style.cssText = `
     background: transparent;
     border: none;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -980,7 +980,9 @@ function injectHeartIconForConcern(concernRow, concernText) {
     margin-right: 4px;
     padding: 0;
     vertical-align: middle;
-    opacity: 0.7;
+    opacity: 0.8;
+    color: #ED1C24;
+    font-weight: bold;
   `;
   
   // Hover effects
