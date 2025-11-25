@@ -153,7 +153,7 @@ export default function Home() {
               </svg>
             </div>
             <div>
-              <h1 className="text-lg font-serif font-semibold" data-testid="text-app-title">
+              <h1 className="text-lg font-semibold" data-testid="text-app-title">
                 HEART Helper
               </h1>
               <p className="text-xs text-muted-foreground">AI-Powered Repair History</p>

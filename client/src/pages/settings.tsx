@@ -128,7 +128,7 @@ export default function Settings() {
                 <Sparkles className="w-5 h-5 text-primary-foreground" />
               </div>
               <div>
-                <h1 className="text-lg font-semibold">Settings</h1>
+                <h1 className="text-lg font-semibold">HEART Helper Settings</h1>
                 <p className="text-xs text-muted-foreground">Configure your tools</p>
               </div>
             </div>

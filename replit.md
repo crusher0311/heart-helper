@@ -1,10 +1,12 @@
-# Repair Order Search Tool
+# HEART Helper
 
 ## Overview
 
-An AI-powered repair order search application that helps automotive shops find similar historical jobs by matching vehicle details and repair types. The system uses OpenAI's API to intelligently score and rank job matches, enabling technicians to quickly estimate labor hours and parts costs based on past work.
+**HEART Helper** is an AI-powered repair order search tool designed specifically for HEART Certified Auto Care shops. Following HEART's mission of "Helping Everyone Achieve Reliable Transportation," this tool empowers technicians to find similar historical jobs by matching vehicle details and repair types, enabling faster and more accurate estimates.
 
-The application imports repair order data from Tekmetric (a shop management system) and provides a fast, productivity-focused interface for searching through historical job data.
+Built with HEART's brand values of **Integrity**, **Passion**, and **Transparency**, the application uses OpenAI's API to intelligently score and rank job matches, helping technicians quickly estimate labor hours and parts costs based on past work at HEART locations.
+
+The application integrates seamlessly with Tekmetric (HEART's shop management system) and features a fast, productivity-focused interface designed in HEART's brand colors and typography.
 
 **Tekmetric Integration**: Chrome extension integration that automates adding jobs to Tekmetric repair orders:
 1. **Chrome Extension**: Browser extension that auto-fills labor items and parts into Tekmetric by automating the UI
@@ -66,9 +68,11 @@ Note: Chrome extension UI automation is the only viable method for programmatica
 **Framework**: React with TypeScript using Vite as the build tool
 
 **UI Component Library**: shadcn/ui (Radix UI primitives) with Tailwind CSS for styling
-- Design system follows productivity tool patterns (Linear, Notion, Airtable)
-- Custom theme using CSS variables for consistent color system
-- Typography uses Inter for UI and JetBrains Mono for technical data (part numbers, pricing)
+- Design system follows HEART Certified Auto Care brand guidelines
+- **Brand Colors**: HEART Red (HSL 357° 85% 52%), Dark Gray (HSL 0° 0% 10%), Light Grey (HSL 0° 0% 95%)
+- **Typography**: Aleo (serif) for headlines per brand guide, Inter/Helvetica/Arial for body text
+- Custom theme using CSS variables for consistent color system aligned with HEART branding
+- JetBrains Mono for technical data (part numbers, VINs, pricing)
 
 **State Management**:
 - TanStack Query (React Query) for server state and API caching
