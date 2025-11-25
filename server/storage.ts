@@ -10,10 +10,13 @@ import type {
   LaborItem,
   Settings,
   InsertSettings,
+  SearchCache,
+  SearchResult,
 } from "@shared/schema";
 import { db } from "./db";
-import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings } from "@shared/schema";
+import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache } from "@shared/schema";
 import { eq, and, or, like, ilike, sql, desc, gte, lte } from "drizzle-orm";
+import crypto from "crypto";
 
 export interface IStorage {
   // Search jobs based on criteria
@@ -31,6 +34,12 @@ export interface IStorage {
   // Settings
   getSettings(): Promise<Settings | null>;
   updateSettings(data: InsertSettings): Promise<Settings>;
+  
+  // Search cache
+  getCachedSearch(params: SearchJobRequest): Promise<SearchResult[] | null>;
+  setCachedSearch(params: SearchJobRequest, results: SearchResult[]): Promise<void>;
+  getRecentSearches(limit?: number): Promise<SearchCache[]>;
+  cleanExpiredCache(): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -290,6 +299,83 @@ export class DatabaseStorage implements IStorage {
       const [result] = await db.insert(settings).values(data).returning();
       return result;
     }
+  }
+
+  // Generate a consistent hash for search params
+  private generateSearchHash(params: SearchJobRequest): string {
+    const normalized = {
+      make: params.vehicleMake?.toLowerCase().trim() || '',
+      model: params.vehicleModel?.toLowerCase().trim() || '',
+      year: params.vehicleYear || 0,
+      engine: params.vehicleEngine?.toLowerCase().trim() || '',
+      repairType: params.repairType.toLowerCase().trim(),
+    };
+    const key = JSON.stringify(normalized);
+    return crypto.createHash('sha256').update(key).digest('hex');
+  }
+
+  async getCachedSearch(params: SearchJobRequest): Promise<SearchResult[] | null> {
+    const searchHash = this.generateSearchHash(params);
+    
+    const results = await db
+      .select()
+      .from(searchCache)
+      .where(
+        and(
+          eq(searchCache.searchHash, searchHash),
+          gte(searchCache.expiresAt, new Date())
+        )
+      )
+      .limit(1);
+    
+    if (results.length === 0) {
+      return null;
+    }
+    
+    return results[0].results as SearchResult[];
+  }
+
+  async setCachedSearch(params: SearchJobRequest, results: SearchResult[]): Promise<void> {
+    const searchHash = this.generateSearchHash(params);
+    const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour TTL
+    
+    await db
+      .insert(searchCache)
+      .values({
+        searchHash,
+        vehicleMake: params.vehicleMake,
+        vehicleModel: params.vehicleModel,
+        vehicleYear: params.vehicleYear,
+        vehicleEngine: params.vehicleEngine,
+        repairType: params.repairType,
+        results: results as any,
+        resultsCount: results.length,
+        expiresAt,
+      })
+      .onConflictDoUpdate({
+        target: searchCache.searchHash,
+        set: {
+          results: results as any,
+          resultsCount: results.length,
+          createdAt: new Date(),
+          expiresAt,
+        },
+      });
+  }
+
+  async getRecentSearches(limit: number = 10): Promise<SearchCache[]> {
+    return await db
+      .select()
+      .from(searchCache)
+      .where(gte(searchCache.expiresAt, new Date()))
+      .orderBy(desc(searchCache.createdAt))
+      .limit(limit);
+  }
+
+  async cleanExpiredCache(): Promise<void> {
+    await db
+      .delete(searchCache)
+      .where(lte(searchCache.expiresAt, new Date()));
   }
 }
 
