@@ -6,11 +6,13 @@ import { JobCard } from "@/components/job-card";
 import { JobDetailPanel } from "@/components/job-detail-panel";
 import { EmptyState } from "@/components/empty-state";
 import { JobCardSkeleton, JobDetailSkeleton } from "@/components/loading-skeleton";
+import { RecentSearches } from "@/components/recent-searches";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Settings } from "lucide-react";
+import { Sparkles, Settings, RefreshCw, Clock } from "lucide-react";
 import { Link } from "wouter";
 import type { SearchJobRequest, SearchResult } from "@shared/schema";
+import { formatDistanceToNow } from "date-fns";
 
 export default function Home() {
   const [searchParams, setSearchParams] = useState<SearchJobRequest | null>(null);
@@ -18,6 +20,8 @@ export default function Home() {
   const [results, setResults] = useState<SearchResult[] | null>(null);
   const [repairOrderId, setRepairOrderId] = useState<string | null>(null);
   const [matchesFound, setMatchesFound] = useState<number>(0);
+  const [isCached, setIsCached] = useState(false);
+  const [cachedAt, setCachedAt] = useState<string | null>(null);
   
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -29,15 +33,18 @@ export default function Home() {
   }, []);
 
   const searchMutation = useMutation({
-    mutationFn: async (params: SearchJobRequest) => {
+    mutationFn: async (params: SearchJobRequest & { bypassCache?: boolean }) => {
       const response = await apiRequest("POST", "/api/search", params);
-      return await response.json() as SearchResult[];
+      return await response.json() as { results: SearchResult[]; cached: boolean; cachedAt: string };
     },
     onSuccess: (data) => {
       console.log("Search response data:", data);
-      console.log("Is array:", Array.isArray(data));
-      const resultsArray = Array.isArray(data) ? data : [];
-      console.log("Setting results to:", resultsArray);
+      
+      const resultsArray = data.results || [];
+      setIsCached(data.cached || false);
+      setCachedAt(data.cachedAt);
+      
+      console.log(`Got ${resultsArray.length} results (cached: ${data.cached})`);
       
       // Update counter immediately (high priority)
       setMatchesFound(resultsArray.length);
@@ -64,10 +71,16 @@ export default function Home() {
     ? results.find((r) => r.job.id === selectedJobId)
     : undefined;
 
-  const handleSearch = (params: SearchJobRequest) => {
+  const handleSearch = (params: SearchJobRequest, bypassCache: boolean = false) => {
     setSearchParams(params);
     setSelectedJobId(null);
-    searchMutation.mutate(params);
+    searchMutation.mutate({ ...params, bypassCache });
+  };
+
+  const handleRefresh = () => {
+    if (searchParams) {
+      handleSearch(searchParams, true);
+    }
   };
 
   return (
@@ -88,9 +101,26 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-3">
             {Array.isArray(results) && results.length > 0 && (
-              <div className="text-sm text-muted-foreground" data-testid="text-results-count">
-                {results.length} {results.length === 1 ? "result" : "results"} found
-              </div>
+              <>
+                <div className="text-sm text-muted-foreground" data-testid="text-results-count">
+                  {results.length} {results.length === 1 ? "result" : "results"} found
+                </div>
+                {isCached && cachedAt && (
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground" data-testid="cache-indicator">
+                    <Clock className="w-3 h-3" />
+                    Cached {formatDistanceToNow(new Date(cachedAt), { addSuffix: true })}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-6 w-6"
+                      onClick={handleRefresh}
+                      data-testid="button-refresh-cache"
+                    >
+                      <RefreshCw className="w-3 h-3" />
+                    </Button>
+                  </div>
+                )}
+              </>
             )}
             <Link href="/settings">
               <Button variant="ghost" size="icon" data-testid="button-settings">
@@ -105,8 +135,9 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Search Sidebar - Left Column */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 space-y-4">
             <SearchInterface onSearch={handleSearch} isLoading={isLoading} />
+            <RecentSearches onSearchSelect={handleSearch} />
           </div>
 
           {/* Results - Middle Column */}
