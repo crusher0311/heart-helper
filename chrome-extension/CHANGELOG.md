@@ -2,9 +2,27 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.5.8] - 2024-11-24
+
+### 🔧 FIX: Enhanced Modal Detection
+- **Problem**: v1.5.7 couldn't find modal - standard selectors failed
+- **Evidence**: "❌ Could not find Job dialog/modal" error
+- **Root cause**: Modal doesn't use `role="dialog"` or standard `.modal` class
+- **Solution**: Try 10+ different modal selector patterns:
+  - `[role="dialog"]`, `[role="alertdialog"]`
+  - `.modal`, `*Modal*`, `*modal*`
+  - `*dialog*`, `*Dialog*`
+  - `*overlay*`, `*Overlay*`
+  - `*popup*`, `*Popup*`
+  - **Fallback**: Find div with highest z-index (modals are always on top)
+- **Enhanced logging**: Shows total divs and divs with high z-index
+
+### Impact
+Standard modal selectors don't work on Tekmetric. The z-index fallback should find it since modals are always rendered on top.
+
 ## [1.5.7] - 2024-11-24
 
-### 🎯 BREAKTHROUGH: Search Inside Modal Only!
+### 🎯 ATTEMPTED: Search Inside Modal Only (MODAL NOT FOUND)
 - **Problem**: v1.5.6 found 896 inputs on ENTIRE page, couldn't identify which was job title field
 - **Discovery**: Job title field is inside a modal/dialog that opens when clicking "Job" button
 - **Evidence**: Console truncated array at input ~16, but 896 total inputs exist (including ALL page inputs)

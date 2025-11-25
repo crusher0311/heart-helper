@@ -100,14 +100,44 @@ async function fillTekmetricEstimate(jobData) {
 
     console.log('3️⃣ Finding the Job dialog/modal that just opened...');
     
-    // Find the modal - look for common modal/dialog patterns
-    const modal = document.querySelector('[role="dialog"]') || 
-                  document.querySelector('.modal') ||
-                  document.querySelector('[class*="Modal"]') ||
-                  document.querySelector('[class*="dialog"]');
+    // Log what's on the page to help debug
+    const allDivs = Array.from(document.querySelectorAll('div'));
+    console.log(`Page has ${allDivs.length} div elements total`);
+    
+    // Find the modal - try many different patterns
+    let modal = document.querySelector('[role="dialog"]');
+    if (!modal) modal = document.querySelector('[role="alertdialog"]');
+    if (!modal) modal = document.querySelector('.modal');
+    if (!modal) modal = document.querySelector('[class*="Modal"]');
+    if (!modal) modal = document.querySelector('[class*="modal"]');
+    if (!modal) modal = document.querySelector('[class*="dialog"]');
+    if (!modal) modal = document.querySelector('[class*="Dialog"]');
+    if (!modal) modal = document.querySelector('[class*="overlay"]');
+    if (!modal) modal = document.querySelector('[class*="Overlay"]');
+    if (!modal) modal = document.querySelector('[class*="popup"]');
+    if (!modal) modal = document.querySelector('[class*="Popup"]');
+    
+    // If still nothing, look for any div that appeared AFTER the click (has high z-index)
+    if (!modal) {
+      const highZIndexDivs = allDivs.filter(div => {
+        const zIndex = window.getComputedStyle(div).zIndex;
+        return zIndex && parseInt(zIndex) > 100;
+      });
+      console.log(`Found ${highZIndexDivs.length} divs with z-index > 100`);
+      if (highZIndexDivs.length > 0) {
+        // Use the one with highest z-index
+        modal = highZIndexDivs.reduce((max, div) => {
+          const maxZ = parseInt(window.getComputedStyle(max).zIndex) || 0;
+          const divZ = parseInt(window.getComputedStyle(div).zIndex) || 0;
+          return divZ > maxZ ? div : max;
+        });
+        console.log('Using highest z-index div as modal:', {zIndex: window.getComputedStyle(modal).zIndex});
+      }
+    }
     
     if (!modal) {
       console.error('❌ Could not find Job dialog/modal');
+      console.log('Tried: [role="dialog"], [role="alertdialog"], .modal, *Modal*, *dialog*, *overlay*, *popup*, and high z-index divs');
       isFillingJob = false;
       throw new Error('Could not find Job dialog after clicking Job button');
     }
