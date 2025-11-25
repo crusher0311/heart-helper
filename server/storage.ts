@@ -88,7 +88,15 @@ export class DatabaseStorage implements IStorage {
     }
 
     if (params.vehicleEngine) {
-      conditions.push(ilike(vehicles.engine, `%${params.vehicleEngine}%`));
+      // Allow matches where engine field is NULL/empty OR matches the search term
+      // This prevents filtering out valid jobs that don't have engine data populated
+      conditions.push(
+        or(
+          ilike(vehicles.engine, `%${params.vehicleEngine}%`),
+          sql`${vehicles.engine} IS NULL`,
+          sql`${vehicles.engine} = ''`
+        )
+      );
     }
 
     // Execute query with triple join: jobs -> repair_orders -> vehicles
