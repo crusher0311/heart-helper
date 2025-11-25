@@ -144,9 +144,10 @@ export class DatabaseStorage implements IStorage {
         return sum + (item.hours * item.rate);
       }, 0);
 
-      // Calculate parts total from parts (cost * quantity)
+      // Calculate parts total from parts (retail * quantity)
+      // Use retail price for customer-facing totals, not wholesale cost
       const partsTotal = parts.reduce((sum, part) => {
-        return sum + ((part.cost || 0) * (part.quantity || 0));
+        return sum + ((part.retail || part.cost || 0) * (part.quantity || 0));
       }, 0);
 
       jobsWithDetails.push({
@@ -236,8 +237,10 @@ export class DatabaseStorage implements IStorage {
       return sum + (item.hours * item.rate);
     }, 0);
 
+    // Calculate parts total from parts (retail * quantity)
+    // Use retail price for customer-facing totals, not wholesale cost
     const partsTotal = parts.reduce((sum, part) => {
-      return sum + ((part.cost || 0) * (part.quantity || 0));
+      return sum + ((part.retail || part.cost || 0) * (part.quantity || 0));
     }, 0);
 
     return {
