@@ -562,25 +562,32 @@ async function fillTekmetricEstimate(jobData) {
       if (descriptionField) {
         const description = part.brand ? `${part.brand} ${part.name}` : part.name;
         
-        // React-compatible filling strategy
+        // Simulate typing to trigger React's state updates
         descriptionField.focus();
+        await new Promise(resolve => setTimeout(resolve, 100));
         
-        // Use React's internal setter if available
-        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-        nativeInputValueSetter.call(descriptionField, description);
+        // Clear the field first
+        descriptionField.value = '';
+        descriptionField.dispatchEvent(new Event('input', { bubbles: true }));
+        await new Promise(resolve => setTimeout(resolve, 50));
         
-        // Trigger React's onChange handler
-        const inputEvent = new Event('input', { bubbles: true });
-        descriptionField.dispatchEvent(inputEvent);
+        // Type each character to trigger React's onChange
+        for (let i = 0; i < description.length; i++) {
+          descriptionField.value = description.substring(0, i + 1);
+          descriptionField.dispatchEvent(new InputEvent('input', { 
+            bubbles: true,
+            cancelable: true,
+            data: description[i]
+          }));
+          // Small delay between characters (10ms total for ~50 char string = 500ms)
+          if (i % 5 === 0) await new Promise(resolve => setTimeout(resolve, 10));
+        }
         
-        const changeEvent = new Event('change', { bubbles: true });
-        descriptionField.dispatchEvent(changeEvent);
-        
-        // Additional events for good measure
+        // Final events
+        descriptionField.dispatchEvent(new Event('change', { bubbles: true }));
         descriptionField.dispatchEvent(new Event('blur', { bubbles: true }));
         
-        console.log('✓ Filled description using React setter:', description);
-        console.log('  Field value after filling:', descriptionField.value);
+        console.log('✓ Typed description character-by-character:', description);
       } else {
         console.log('⚠️ Could not find description field');
       }

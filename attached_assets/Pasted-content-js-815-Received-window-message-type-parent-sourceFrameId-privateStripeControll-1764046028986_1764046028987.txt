@@ -1,0 +1,770 @@
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"c7bb331f-7614-4375-b26e-cf0ab9031c9e"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:876 Extracted RO ID from URL: 274639316
+content.js:952 Extracted vehicle data: {make: 'Toyota', model: 'Corolla L', year: '2017', engine: '1.8L', concerns: '', …}
+content.js:1020 Opening search with URL: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev//?make=Toyota&model=Corolla+L&year=2017&engine=1.8L&roId=274639316
+content.js:1021 Vehicle data: {make: 'Toyota', model: 'Corolla L', year: '2017', engine: '1.8L', concerns: '', …}
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"b11b6325-bd10-48f6-8a99-b761e6ee1760"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:815 📬 Received window message: {action: 'dismissFrame'}
+content.js:819 ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
+content.js:805 🔔 Storage changed - job data added!
+content.js:807 ⚡ Triggering automation immediately!
+content.js:115 🚀 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:118 1️⃣ Checking if on Tekmetric page...
+content.js:119 Current URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/274639316/estimate
+content.js:127 ✅ On Tekmetric page, starting automation immediately...
+content.js:141 ✓ Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:144 3️⃣ Waiting for Job modal to fully render...
+content.js:32 ⏳ Waiting for Job modal to appear...
+content.js:74 ⏳ Still waiting for modal... (0s elapsed)
+content.js:74 ⏳ Still waiting for modal... (4s elapsed)
+content.js:789 🔍 Checking for pending job data...
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:789 🔍 Checking for pending job data...
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:74 ⏳ Still waiting for modal... (10s elapsed)
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:74 ⏳ Still waiting for modal... (11s elapsed)
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"b78c350b-3494-4adf-9e0b-bbd00e3263d1"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:74 ⏳ Still waiting for modal... (13s elapsed)
+content.js:74 ⏳ Still waiting for modal... (14s elapsed)
+content.js:68 ⚠️ Modal detection timed out, using document.body as fallback
+content.js:148 ✓ Found modal: {tag: 'BODY', role: null, className: ''}
+content.js:149 4️⃣ Searching for inputs INSIDE the modal only...
+content.js:156 Found 881 inputs, 3 textareas, 0 contenteditable in modal
+content.js:157 Modal inputs: (881) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, …]
+content.js:158 Modal textareas: (3) [{…}, {…}, {…}]
+content.js:159 Modal contentEditables: []
+content.js:203 ✓ Found job name field: {tagName: 'TEXTAREA', type: 'textarea', id: 'name', className: 'input-base   resize-y max-h-64 ', contentEditable: 'inherit', …}
+content.js:211 ✓ Filling job name: REAR STRUTS - ALIGNMENT REQUIRED
+content.js:220 Using input/textarea approach...
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:234 ✓ Job name filled successfully
+content.js:243 🆕 Looking for "Add Labor" button in modal (no Save needed!)...
+content.js:246 
+📋 Adding labor item: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:264 ✓ Clicking "Add Labor" button
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"b11fab67-4f08-4192-b0a9-e059b17bb496"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:272 ✓ Detected 2 new input fields after clicking Add Labor
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:331 ✓ Filled labor description: Remove & Replace Rear Suspension Shock or Strut Assembly (Both Sides)
+content.js:344 ✓ Filled hours: 3.4
+content.js:362 ✓ Labor item filled (no save needed)
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"4e139fe2-aa96-476b-b89f-c666361c81d7"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:368 
+🔧 Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+content.js:383 ✓ Clicking "Add Parts" button
+content.js:387 ⏳ Waiting for "Add part manually" option to appear...
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:421 📊 Snapshot before Add part manually: 886 total form elements
+content.js:448 
+🔄 Attempt 1: Finding and clicking "Add part manually"...
+content.js:425 🖱️ Clicking "Add part manually" option: {tag: 'LI', className: 'MuiButtonBase-root MuiMenuItem-root MuiMenuItem-de… MuiMenuItem-dense MuiMenuItem-gutters css-olbtkk', text: 'Add part manually', role: 'menuitem'}
+content.js:440 ✓ Dispatched click events on "Add part manually" option
+content.js:452 ⏳ Waiting for part form to render...
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:789 🔍 Checking for pending job data...
+content.js:475 ✓ Detected 6 new visible input fields after 400ms on attempt 1
+content.js:524 
+📝 Filling part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+content.js:525 Available new input fields: (6) [{…}, {…}, {…}, {…}, {…}, {…}]
+content.js:542 ✓ Filled part number: 2701-660492
+content.js:582 ✓ Filled description using React setter: Autopart International Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+content.js:583   Field value after filling: Autopart International Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+content.js:613 ✓ Filled cost price: 101.74
+content.js:789 🔍 Checking for pending job data...
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"83a1d0ea-1d74-468d-8960-4998c93f0ecc"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"94ad7203-b612-4c2c-b50e-28199e14028c"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:641 ✓ Saving part...
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"7d48a786-a0df-4e52-9ab1-e884e7abc05f"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:368 
+🔧 Adding part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+content.js:383 ✓ Clicking "Add Parts" button
+content.js:387 ⏳ Waiting for "Add part manually" option to appear...
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:421 📊 Snapshot before Add part manually: 892 total form elements
+content.js:448 
+🔄 Attempt 1: Finding and clicking "Add part manually"...
+content.js:425 🖱️ Clicking "Add part manually" option: {tag: 'LI', className: 'MuiButtonBase-root MuiMenuItem-root MuiMenuItem-de… MuiMenuItem-dense MuiMenuItem-gutters css-olbtkk', text: 'Add part manually', role: 'menuitem'}
+content.js:440 ✓ Dispatched click events on "Add part manually" option
+content.js:452 ⏳ Waiting for part form to render...
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:789 🔍 Checking for pending job data...
+content.js:475 ✓ Detected 6 new visible input fields after 400ms on attempt 1
+content.js:524 
+📝 Filling part: Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+content.js:525 Available new input fields: (6) [{…}, {…}, {…}, {…}, {…}, {…}]
+content.js:542 ✓ Filled part number: 2701-660491
+content.js:582 ✓ Filled description using React setter: Autopart International Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+content.js:583   Field value after filling: Autopart International Pro-Strut Assembly Suspension Strut and Coil Spring Assembly
+content.js:613 ✓ Filled cost price: 101.74
+content.js:789 🔍 Checking for pending job data...
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"ee669ece-0f9b-4852-ada3-53208988a379"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:641 ✓ Saving part...
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"bd6e42a0-b08a-446a-9a77-61bb72a86ef0"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:653 
+💾 Looking for final SAVE button...
+content.js:681 ✓ Found SAVE button, clicking now...
+content.js:425 🖱️ Clicking final SAVE button: {tag: 'BUTTON', className: 'MuiButtonBase-root MuiButton-root MuiButton-contai…inedSizeMedium MuiButton-colorPrimary css-1ecyxow', text: 'Save', role: null}
+content.js:440 ✓ Dispatched click events on final SAVE button
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"bfc5400a-91ba-44d4-aff2-96e0c21cca0a"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:684 ✅ Successfully filled and saved Tekmetric job!
+content.js:789 🔍 Checking for pending job data...
+content.js:805 🔔 Storage changed - job data added!
+content.js:691 📦 Cleared pending job after success: {success: true}
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"d9784db9-c8fc-4d9a-b739-72b686b527f2"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:815 📬 Received window message: {action: 'dismissFrame'}
+content.js:819 ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
+content.js:805 🔔 Storage changed - job data added!
+content.js:807 ⚡ Triggering automation immediately!
+content.js:115 🚀 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:118 1️⃣ Checking if on Tekmetric page...
+content.js:119 Current URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/274639316/estimate
+content.js:127 ✅ On Tekmetric page, starting automation immediately...
+content.js:141 ✓ Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:144 3️⃣ Waiting for Job modal to fully render...
+content.js:32 ⏳ Waiting for Job modal to appear...
+content.js:74 ⏳ Still waiting for modal... (0s elapsed)
+content.js:74 ⏳ Still waiting for modal... (2s elapsed)
+content.js:74 ⏳ Still waiting for modal... (3s elapsed)
+content.js:74 ⏳ Still waiting for modal... (4s elapsed)
+content.js:789 🔍 Checking for pending job data...
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:789 🔍 Checking for pending job data...
+content.js:789 🔍 Checking for pending job data...
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"2d4b74cd-7c29-41fd-b8a9-3a27a3f99268"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:74 ⏳ Still waiting for modal... (10s elapsed)
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:74 ⏳ Still waiting for modal... (11s elapsed)
+content.js:74 ⏳ Still waiting for modal... (12s elapsed)
+content.js:74 ⏳ Still waiting for modal... (13s elapsed)
+content.js:74 ⏳ Still waiting for modal... (14s elapsed)
+content.js:68 ⚠️ Modal detection timed out, using document.body as fallback
+content.js:148 ✓ Found modal: {tag: 'BODY', role: null, className: ''}
+content.js:149 4️⃣ Searching for inputs INSIDE the modal only...
+content.js:156 Found 894 inputs, 6 textareas, 0 contenteditable in modal
+content.js:157 Modal inputs: (894) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, …]
+content.js:158 Modal textareas: (6) [{…}, {…}, {…}, {…}, {…}, {…}]
+content.js:159 Modal contentEditables: []
+content.js:203 ✓ Found job name field: {tagName: 'TEXTAREA', type: 'textarea', id: 'note', className: 'input-base   resize-y max-h-64 ', contentEditable: 'inherit', …}
+content.js:211 ✓ Filling job name: REAR STRUT ASSEMBLIES
+content.js:220 Using input/textarea approach...
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"6d6b9fb7-f2d7-49a1-9162-048a3bfa7234"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:234 ✓ Job name filled successfully
+content.js:243 🆕 Looking for "Add Labor" button in modal (no Save needed!)...
+content.js:246 
+📋 Adding labor item: REMOVE & REPLACE REAR STRUT ASSEMBLIES
+content.js:264 ✓ Clicking "Add Labor" button
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"3b6fd583-c0e8-4b40-abe4-5c38ac124eac"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:272 ✓ Detected 2 new input fields after clicking Add Labor
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:331 ✓ Filled labor description: REMOVE & REPLACE REAR STRUT ASSEMBLIES
+content.js:344 ✓ Filled hours: 3
+content.js:362 ✓ Labor item filled (no save needed)
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"8688fca5-2a18-4db9-8f13-6bae0bca286f"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:368 
+🔧 Adding part: Suspension Strut Assembly
+content.js:383 ✓ Clicking "Add Parts" button
+content.js:387 ⏳ Waiting for "Add part manually" option to appear...
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:421 📊 Snapshot before Add part manually: 902 total form elements
+content.js:448 
+🔄 Attempt 1: Finding and clicking "Add part manually"...
+content.js:425 🖱️ Clicking "Add part manually" option: {tag: 'LI', className: 'MuiButtonBase-root MuiMenuItem-root MuiMenuItem-de… MuiMenuItem-dense MuiMenuItem-gutters css-olbtkk', text: 'Add part manually', role: 'menuitem'}
+content.js:440 ✓ Dispatched click events on "Add part manually" option
+content.js:452 ⏳ Waiting for part form to render...
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:789 🔍 Checking for pending job data...
+content.js:475 ✓ Detected 6 new visible input fields after 400ms on attempt 1
+content.js:524 
+📝 Filling part: Suspension Strut Assembly
+content.js:525 Available new input fields: (6) [{…}, {…}, {…}, {…}, {…}, {…}]
+content.js:542 ✓ Filled part number: 172991L
+content.js:582 ✓ Filled description using React setter: NAPA Shocks Suspension Strut Assembly
+content.js:583   Field value after filling: NAPA Shocks Suspension Strut Assembly
+content.js:613 ✓ Filled cost price: 117.65
+content.js:789 🔍 Checking for pending job data...
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"09d58a97-f205-4df1-8482-339ef9f65cdb"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"ddd42ef7-3e97-4281-93b6-5373cbc6b8f4"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:641 ✓ Saving part...
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"3cac72ae-9283-42f5-a986-71cf57380352"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:368 
+🔧 Adding part: Suspension Strut Assembly
+content.js:383 ✓ Clicking "Add Parts" button
+content.js:387 ⏳ Waiting for "Add part manually" option to appear...
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:421 📊 Snapshot before Add part manually: 908 total form elements
+content.js:448 
+🔄 Attempt 1: Finding and clicking "Add part manually"...
+content.js:425 🖱️ Clicking "Add part manually" option: {tag: 'LI', className: 'MuiButtonBase-root MuiMenuItem-root MuiMenuItem-de… MuiMenuItem-dense MuiMenuItem-gutters css-olbtkk', text: 'Add part manually', role: 'menuitem'}
+content.js:440 ✓ Dispatched click events on "Add part manually" option
+content.js:452 ⏳ Waiting for part form to render...
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:789 🔍 Checking for pending job data...
+content.js:475 ✓ Detected 6 new visible input fields after 400ms on attempt 1
+content.js:524 
+📝 Filling part: Suspension Strut Assembly
+content.js:525 Available new input fields: (6) [{…}, {…}, {…}, {…}, {…}, {…}]
+content.js:542 ✓ Filled part number: 172991R
+content.js:582 ✓ Filled description using React setter: NAPA Shocks Suspension Strut Assembly
+content.js:583   Field value after filling: NAPA Shocks Suspension Strut Assembly
+content.js:613 ✓ Filled cost price: 117.65
+content.js:789 🔍 Checking for pending job data...
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"0d2e1d82-2fb5-42fc-bb9d-98e26a0fb101"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"f6d6d0df-9ff3-4342-9647-6f3f95858e4b"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:641 ✓ Saving part...
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"949d67f0-98ea-4b6d-9374-5da4813cf615"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:653 
+💾 Looking for final SAVE button...
+content.js:681 ✓ Found SAVE button, clicking now...
+content.js:425 🖱️ Clicking final SAVE button: {tag: 'BUTTON', className: 'MuiButtonBase-root MuiButton-root MuiButton-contai…inedSizeMedium MuiButton-colorPrimary css-1ecyxow', text: 'Save', role: null}
+content.js:440 ✓ Dispatched click events on final SAVE button
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:793 ✅ Found pending job data, auto-filling...
+content.js:794 Job data: {jobName: 'REAR STRUT ASSEMBLIES', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:110 ⏸️ Already filling a job, skipping duplicate request
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"1b1a976f-278c-41dc-a1bf-a44b35e42bcb"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"8c8dae0f-2361-41f2-b188-b76a7dc3b910"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:684 ✅ Successfully filled and saved Tekmetric job!
+content.js:789 🔍 Checking for pending job data...
+content.js:805 🔔 Storage changed - job data added!
+content.js:691 📦 Cleared pending job after success: {success: true}
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"fb644655-186e-469e-ac6c-fe2b623bc0ed"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:789 🔍 Checking for pending job data...
+content.js:789 🔍 Checking for pending job data...
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"a7ede2bb-8fc2-4b93-aba6-e75e3a9ffc44"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"e44c7fc2-cbf2-4a1f-b388-566303c7e108"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"4f703d3a-635f-401e-89e4-85090bf2d02f"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"584be770-9a8f-4b7a-b6c6-7f096b16b839"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:789 🔍 Checking for pending job data...
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:789 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:789 🔍 Checking for pending job data...
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"f2b5dddd-6499-4e81-9623-cdf051c9e8a5"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"d027990f-a63c-4aea-9f37-5ae2d4424054"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+content.js:789 🔍 Checking for pending job data...
+content.js:791 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:797 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"b206479c-bd3e-4221-a990-48203562ffd0"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:815 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9031","controllerAppFrameId":"__privateStripeController9031","message":{"action":"stripe-controller-action-response","payload":{"nonce":"2f9f844c-5cf8-4edd-9b50-3d3b155588a3"}},"__stripeJsV3":true}
+content.js:819 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:815 📬 Received window message: {action: 'dismissFrame'}
+content.js:819 ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
