@@ -114,6 +114,11 @@ async function fillTekmetricEstimate(jobData) {
   isFillingJob = true;
   console.log("🚀 Starting to fill Tekmetric estimate with job data:", jobData);
   
+  // CRITICAL: Clear job data immediately to prevent duplicate runs
+  chrome.runtime.sendMessage({ action: "CLEAR_PENDING_JOB" }, () => {
+    console.log("🧹 Cleared pending job data from storage");
+  });
+  
   try {
     console.log("1️⃣ Checking if on Tekmetric page...");
     console.log("Current URL:", window.location.href);
