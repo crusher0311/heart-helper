@@ -120,8 +120,15 @@ async function fillTekmetricEstimate(jobData) {
     jobButton.click();
     const modal = await waitForModal();
 
-    if (!modal) {
-      throw new Error('Modal failed to appear after clicking Job button');
+    // Verify we got a Tekmetric job modal (not settings/other dialogs)
+    const hasJobFormMarkers = modal.querySelector('button[aria-label*="labor"], button[aria-label*="Labor"]') ||
+                              Array.from(modal.querySelectorAll('button')).some(btn => 
+                                btn.textContent.toLowerCase().includes('add labor') || 
+                                btn.textContent.toLowerCase().includes('add part')
+                              );
+
+    if (!hasJobFormMarkers) {
+      throw new Error('Modal appeared but does not contain job form markers - may be wrong dialog type');
     }
 
     // Step 2: Fill job name
