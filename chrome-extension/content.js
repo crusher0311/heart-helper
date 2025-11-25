@@ -531,18 +531,18 @@ async function fillTekmetricEstimate(jobData) {
       })));
       
       // Tekmetric field order: Brand → Part Name → Part Number → Details → Quantity → Cost
-      // Strategy: Find first visible input, fill brand, then TAB through remaining fields
+      // Note: TAB simulation doesn't work - we must focus each field manually
       
-      const firstInput = inputs.find(inp => inp.offsetParent !== null);
-      if (!firstInput) {
-        console.error('❌ Could not find first input field');
-        isFillingJob = false;
-        return;
-      }
+      // Separate text inputs from number inputs
+      const textInputs = inputs.filter(inp => inp.type === 'text' && inp.offsetParent !== null);
+      const numberInputs = inputs.filter(inp => inp.type === 'number' && inp.offsetParent !== null);
       
-      // Helper to type text with events
-      async function typeIntoField(element, text, label) {
+      console.log('Found text inputs:', textInputs.length, 'number inputs:', numberInputs.length);
+      
+      // Helper to fill text field character-by-character
+      async function fillTextField(element, text, label) {
         element.focus();
+        await new Promise(resolve => setTimeout(resolve, 50));
         element.value = '';
         for (let i = 0; i < text.length; i++) {
           element.value = text.substring(0, i + 1);
@@ -553,72 +553,54 @@ async function fillTekmetricEstimate(jobData) {
           if (i % 10 === 0) await new Promise(resolve => setTimeout(resolve, 5));
         }
         element.dispatchEvent(new Event('change', { bubbles: true }));
+        element.dispatchEvent(new Event('blur', { bubbles: true }));
         console.log(`✓ Filled ${label}:`, text);
+        await new Promise(resolve => setTimeout(resolve, 100));
       }
       
-      // Helper to press TAB
-      async function pressTab(element) {
-        element.dispatchEvent(new KeyboardEvent('keydown', { 
-          key: 'Tab', 
-          code: 'Tab', 
-          keyCode: 9,
-          which: 9,
-          bubbles: true,
-          cancelable: true
-        }));
-        await new Promise(resolve => setTimeout(resolve, 200));
+      // Helper to fill number field
+      async function fillNumberField(element, value, label) {
+        element.focus();
+        await new Promise(resolve => setTimeout(resolve, 50));
+        element.value = value.toString();
+        element.dispatchEvent(new Event('input', { bubbles: true }));
+        element.dispatchEvent(new Event('change', { bubbles: true }));
+        element.dispatchEvent(new Event('blur', { bubbles: true }));
+        console.log(`✓ Filled ${label}:`, value);
+        await new Promise(resolve => setTimeout(resolve, 100));
       }
       
-      // Field 1: Brand
-      const brand = part.brand || '';
-      if (brand) {
-        await typeIntoField(firstInput, brand, 'brand');
-        await pressTab(firstInput);
+      // Fill text fields in order: Brand (0), Part Name (1), Part Number (2), Details (3)
+      if (textInputs.length >= 4) {
+        // Field 1: Brand
+        if (part.brand) {
+          await fillTextField(textInputs[0], part.brand, 'brand');
+        }
+        
+        // Field 2: Part Name (description)
+        await fillTextField(textInputs[1], part.name, 'part name');
+        
+        // Field 3: Part Number
+        if (part.partNumber) {
+          await fillTextField(textInputs[2], part.partNumber, 'part number');
+        }
+        
+        // Field 4: Additional Details - skip (textInputs[3])
       } else {
-        // If no brand, TAB past empty field
-        firstInput.focus();
-        await pressTab(firstInput);
+        console.error('❌ Expected at least 4 text inputs, found:', textInputs.length);
       }
       
-      // Field 2: Part Name (description)
-      let activeEl = document.activeElement;
-      if (activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA')) {
-        await typeIntoField(activeEl, part.name, 'part name');
-        await pressTab(activeEl);
-      }
-      
-      // Field 3: Part Number
-      activeEl = document.activeElement;
-      if (activeEl && part.partNumber) {
-        await typeIntoField(activeEl, part.partNumber, 'part number');
-        await pressTab(activeEl);
+      // Fill number fields in order: Quantity (0), Cost (1)
+      if (numberInputs.length >= 2) {
+        // Field 5: Quantity
+        await fillNumberField(numberInputs[0], part.quantity, 'quantity');
+        
+        // Field 6: Cost
+        if (part.cost) {
+          await fillNumberField(numberInputs[1], part.cost, 'cost');
+        }
       } else {
-        await pressTab(activeEl);
-      }
-      
-      // Field 4: Additional Details (skip - not used)
-      activeEl = document.activeElement;
-      await pressTab(activeEl);
-      
-      // Field 5: Quantity
-      activeEl = document.activeElement;
-      if (activeEl && activeEl.type === 'number') {
-        activeEl.focus();
-        activeEl.value = part.quantity.toString();
-        activeEl.dispatchEvent(new Event('input', { bubbles: true }));
-        activeEl.dispatchEvent(new Event('change', { bubbles: true }));
-        console.log('✓ Filled quantity:', part.quantity);
-        await pressTab(activeEl);
-      }
-      
-      // Field 6: Cost
-      activeEl = document.activeElement;
-      if (activeEl && activeEl.type === 'number' && part.cost) {
-        activeEl.focus();
-        activeEl.value = part.cost.toString();
-        activeEl.dispatchEvent(new Event('input', { bubbles: true }));
-        activeEl.dispatchEvent(new Event('change', { bubbles: true }));
-        console.log('✓ Filled cost:', part.cost);
+        console.error('❌ Expected at least 2 number inputs, found:', numberInputs.length);
       }
       
       // Fill sale/retail price field
