@@ -561,11 +561,27 @@ async function fillTekmetricEstimate(jobData) {
       
       if (descriptionField) {
         const description = part.brand ? `${part.brand} ${part.name}` : part.name;
+        
+        // More robust filling strategy for description field
         descriptionField.focus();
+        descriptionField.value = '';  // Clear first
+        descriptionField.dispatchEvent(new Event('input', { bubbles: true }));
+        
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
         descriptionField.value = description;
         descriptionField.dispatchEvent(new Event('input', { bubbles: true }));
         descriptionField.dispatchEvent(new Event('change', { bubbles: true }));
-        console.log('✓ Filled description:', description);
+        descriptionField.dispatchEvent(new Event('blur', { bubbles: true }));
+        descriptionField.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));
+        
+        // Verify it was set
+        await new Promise(resolve => setTimeout(resolve, 200));
+        if (descriptionField.value === description) {
+          console.log('✓ Filled description:', description);
+        } else {
+          console.log('⚠️ Description field value did not persist. Current value:', descriptionField.value);
+        }
       } else {
         console.log('⚠️ Could not find description field');
       }
