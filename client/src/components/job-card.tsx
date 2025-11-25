@@ -1,7 +1,8 @@
-import { Calendar, Gauge, Wrench, DollarSign, TrendingUp } from "lucide-react";
+import { Calendar, Gauge, Wrench, DollarSign, TrendingUp, MapPin, FileText } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import type { SearchResult } from "@shared/schema";
+import type { SearchResult, ShopLocation } from "@shared/schema";
+import { SHOP_NAMES } from "@shared/schema";
 
 interface JobCardProps {
   result: SearchResult;
@@ -25,6 +26,9 @@ export function JobCard({ result, isSelected, onClick }: JobCardProps) {
   const vehicle = job.vehicle;
   const laborHours = job.laborItems.reduce((sum, item) => sum + Number(item.hours), 0);
   const partsCount = job.parts.length;
+  const shopId = job.repairOrder?.shopId as ShopLocation | undefined;
+  const shopName = shopId ? SHOP_NAMES[shopId] : null;
+  const roNumber = job.repairOrderId;
 
   return (
     <Card
@@ -82,19 +86,33 @@ export function JobCard({ result, isSelected, onClick }: JobCardProps) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-t gap-2">
-          <div className="flex items-center gap-1.5">
-            <Calendar className="w-3 h-3 shrink-0" />
-            <span>{formatDate(job.completedDate || job.createdDate)}</span>
-          </div>
-          {job.repairOrder && (
+        <div className="space-y-2 pt-2 border-t">
+          <div className="flex items-center justify-between text-xs text-muted-foreground gap-2">
             <div className="flex items-center gap-1.5">
-              <Gauge className="w-3 h-3 shrink-0" />
-              <span className="font-mono">
-                {job.repairOrder.milesIn?.toLocaleString() || "N/A"} mi
-              </span>
+              <Calendar className="w-3 h-3 shrink-0" />
+              <span>{formatDate(job.completedDate || job.createdDate)}</span>
             </div>
-          )}
+            {job.repairOrder && (
+              <div className="flex items-center gap-1.5">
+                <Gauge className="w-3 h-3 shrink-0" />
+                <span className="font-mono">
+                  {job.repairOrder.milesIn?.toLocaleString() || "N/A"} mi
+                </span>
+              </div>
+            )}
+          </div>
+          <div className="flex items-center justify-between text-xs gap-2">
+            {shopName && (
+              <div className="flex items-center gap-1.5 text-muted-foreground">
+                <MapPin className="w-3 h-3 shrink-0" />
+                <span className="font-medium">{shopName}</span>
+              </div>
+            )}
+            <div className="flex items-center gap-1.5 text-muted-foreground ml-auto">
+              <FileText className="w-3 h-3 shrink-0" />
+              <span className="font-mono">RO #{roNumber}</span>
+            </div>
+          </div>
         </div>
       </CardContent>
     </Card>

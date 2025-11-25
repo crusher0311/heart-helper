@@ -197,3 +197,12 @@ export type SearchResult = {
   matchScore: number;
   matchReason: string;
 };
+
+// Shop location types and names
+export type ShopLocation = "NB" | "WM" | "EV";
+
+export const SHOP_NAMES: Record<ShopLocation, string> = {
+  NB: "Northbrook",
+  WM: "Wilmette",
+  EV: "Evanston",
+};
