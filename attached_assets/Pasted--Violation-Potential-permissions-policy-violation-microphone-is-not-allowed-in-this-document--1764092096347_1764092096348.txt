@@ -1,0 +1,378 @@
+
+[Violation] Potential permissions policy violation: microphone is not allowed in this document.
+ [TekmetricStorageModule] Initializing...
+ 
+a7 @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught 
+ [Settings] No generalSettings settings found, using defaults
+ns @ content.js:9
+ 
+a7 @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught 
+ [OutboundCall] Menu state changed: false
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ Creating handle element
+ [Handle] Updating badge: Object
+ [Handle] Badge hidden (count is 0)
+ [Handle] Updating unread data: Object
+ [Handle] Updating badge: Object
+ [Handle] Badge hidden (count is 0)
+/admin/dashboard:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ Event "payments_service_status" doesn't have any listeners. Putting it in the stack.
+ Deprecation warning: use moment.updateLocale(localeName, config) to change an existing locale. moment.defineLocale(localeName, config) should only be used for creating a new locale See http://momentjs.com/guides/#/warnings/define-locale/ for more info.
+jB @ main-DK7zafr-.js:188
+ MUI: The SpeedDial component was moved from the lab to the core.
+
+You should use `import { SpeedDial } from '@mui/material'`
+or `import SpeedDial from '@mui/material/SpeedDial'`
+eo @ index-C68Mr6Yj.js:1
+ MUI: The SpeedDialIcon component was moved from the lab to the core.
+
+You should use `import { SpeedDialIcon } from '@mui/material'`
+or `import SpeedDialIcon from '@mui/material/SpeedDialIcon'`
+ho @ index-C68Mr6Yj.js:3
+ MUI: The SpeedDialAction component was moved from the lab to the core.
+
+You should use `import { SpeedDialAction } from '@mui/material'`
+or `import SpeedDialAction from '@mui/material/SpeedDialAction'`
+co @ index-C68Mr6Yj.js:2
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ [Handle] Phone link updated event received customerId: 11145565, shopId: 469
+ [MaintenanceModule] Initializing...
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ [Settings] No profitabilitySettings settings found, using defaults
+ns @ content.js:9
+ [Settings] No customerMaintenanceSettings settings found, using defaults
+ns @ content.js:9
+ Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 11145565
+ Check History button injected
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Sending CUSTOMER_PHONE_LIST_REQUEST for phone link updated: 11145565 shopId: 469
+ Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 11145565
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ Extracted RO ID from URL: 274639316
+ Extracted vehicle data: Object
+ Opening search with URL: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev//?make=Toyota&model=Corolla+L&year=2017&engine=1.8L&roId=274639316
+ Vehicle data: Object
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+estimate:1 Uncaught (in promise) 
+ Extracted RO ID from URL: 274639316
+ Extracted vehicle data: Object
+ Opening search with URL: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev//?make=Toyota&model=Corolla+L&year=2017&engine=1.8L&roId=274639316
+ Vehicle data: Object
+ Skipping tracking for Repair Order page
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+content-v2.js:11 [HEART Helper ERROR] Auto-fill failed: Error: Modal failed to appear within timeout
+    at checkForModal (content-v2.js:58:23)
+debugError @ content-v2.js:11
+content-v2.js:11 [HEART Helper ERROR] Job data will remain pending for retry
+debugError @ content-v2.js:11
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:19 [DEBUG] Automatic cache refresh triggered
+main-DK7zafr-.js:257 Event "calendar_update" doesn't have any listeners. Putting it in the stack.
+main-DK7zafr-.js:257 Event "calendar_update" doesn't have any listeners. Putting it in the stack.
+main-DK7zafr-.js:257 Event "payable" doesn't have any listeners. Putting it in the stack.
+main-DK7zafr-.js:257 Event "calendar_update" doesn't have any listeners. Putting it in the stack.
+content.js:105 [Handle] 📨 Received CHAT_UNREAD_DATA_UPDATED: Object
+content.js:105 [Handle] Updating unread data: Object
+content.js:105 [Handle] Updating badge: Object
+content.js:105 [Handle] Badge hidden (count is 0)
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+main-DK7zafr-.js:257 Event "calendar_update" doesn't have any listeners. Putting it in the stack.
+main-DK7zafr-.js:257 Event "calendar_update" doesn't have any listeners. Putting it in the stack.
+main-DK7zafr-.js:257 Event "calendar_update" doesn't have any listeners. Putting it in the stack.
+content.js:19 [DEBUG] Automatic cache refresh triggered
+content.js:19 [DEBUG] Skipping automatic cache refresh - user inactive for more than 30 minutes
+main-DK7zafr-.js:257 Event "calendar_update" doesn't have any listeners. Putting it in the stack.
+main-DK7zafr-.js:257 Event "calendar_update" doesn't have any listeners. Putting it in the stack.
+main-DK7zafr-.js:257 Event "calendar_update" doesn't have any listeners. Putting it in the stack.
+main-DK7zafr-.js:263 Skipping tracking for Repair Order page
+content.js:105 [Handle] 📨 Received CHAT_UNREAD_DATA_UPDATED: Object
+content.js:105 [Handle] Updating unread data: Object
+content.js:105 [Handle] Updating badge: Object
+content.js:105 [Handle] Badge hidden (count is 0)
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content-v2.js:11 [HEART Helper ERROR] Auto-fill failed: Error: Modal failed to appear within timeout
+    at checkForModal (content-v2.js:58:23)
+debugError @ content-v2.js:11
+content-v2.js:11 [HEART Helper ERROR] Job data will remain pending for retry
+debugError @ content-v2.js:11
+main-DK7zafr-.js:263 Skipping tracking for Repair Order page
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469

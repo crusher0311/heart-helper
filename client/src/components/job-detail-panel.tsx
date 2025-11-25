@@ -213,6 +213,14 @@ TOTAL: ${formatCurrency(job.subtotal)}
       },
     };
 
+    // Debug logging
+    console.log('[HEART Helper Web] Sending job data to extension:', {
+      jobName: jobData.payload.jobName,
+      laborItems: jobData.payload.laborItems.length,
+      parts: jobData.payload.parts.length,
+      origin: window.location.origin,
+    });
+
     // Try to send via Chrome extension (cross-tab)
     window.postMessage(jobData, window.location.origin);
 
