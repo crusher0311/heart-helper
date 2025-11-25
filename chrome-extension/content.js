@@ -380,6 +380,9 @@ async function fillTekmetricEstimate(jobData) {
         throw new Error('Could not find "Add Parts" button');
       }
       
+      // Snapshot inputs BEFORE clicking "Add Parts" to detect new ones
+      const inputsBefore = new Set(document.querySelectorAll('input:not([type="hidden"]), textarea'));
+      
       console.log('✓ Clicking "Add Parts" button');
       addPartsButton.click();
       await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for dropdown
@@ -390,15 +393,13 @@ async function fillTekmetricEstimate(jobData) {
         return text.includes('add part manually') || text.includes('manually');
       });
       
-      // Snapshot inputs BEFORE clicking "Add part manually" to detect new ones
-      const inputsBefore = new Set(document.querySelectorAll('input:not([type="hidden"]), textarea'));
-      
       if (addManuallyOption) {
         console.log('✓ Clicking "Add part manually"');
         addManuallyOption.click();
         await new Promise(resolve => setTimeout(resolve, 800)); // Wait for UI to render
       } else {
         console.log('⚠️ "Add part manually" not found - trying to fill anyway');
+        await new Promise(resolve => setTimeout(resolve, 800)); // Wait anyway
       }
 
       // Find NEW inputs that appeared after the click
