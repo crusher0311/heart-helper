@@ -226,6 +226,31 @@ TOTAL: ${formatCurrency(job.subtotal)}
     setTimeout(() => setSending(false), 2000);
   };
 
+  const handleViewInTekmetric = async () => {
+    if (!job.repairOrderId) return;
+    
+    try {
+      const response = await fetch(`/api/tekmetric/ro-url/${job.repairOrderId}`);
+      const data = await response.json();
+      
+      if (response.ok && data.url) {
+        window.open(data.url, '_blank');
+      } else {
+        toast({
+          title: "Error",
+          description: "Could not generate Tekmetric URL",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to open Tekmetric RO",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="space-y-4 sticky top-4" data-testid="job-detail-panel">
       {/* Vehicle Summary */}
@@ -453,6 +478,18 @@ TOTAL: ${formatCurrency(job.subtotal)}
       {/* Actions */}
       <Card>
         <CardContent className="pt-6 space-y-3">
+          {job.repairOrderId && (
+            <Button
+              onClick={handleViewInTekmetric}
+              variant="secondary"
+              className="w-full"
+              data-testid="button-view-tekmetric-ro"
+            >
+              <ExternalLink className="w-4 h-4 mr-2" />
+              View Full RO in Tekmetric
+            </Button>
+          )}
+          
           <Button
             onClick={handleSendToTekmetric}
             className="w-full"

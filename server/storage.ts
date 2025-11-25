@@ -22,6 +22,9 @@ export interface IStorage {
   // Get a single job by ID
   getJobById(id: number): Promise<JobWithDetails | null>;
   
+  // Get a repair order by ID
+  getRepairOrderById(id: number): Promise<RepairOrder | null>;
+  
   // Create search request log
   createSearchRequest(data: InsertSearchRequest): Promise<SearchRequest>;
   
@@ -261,6 +264,11 @@ export class DatabaseStorage implements IStorage {
       subtotal: laborTotal + partsTotal,
       feeTotal: 0,
     };
+  }
+
+  async getRepairOrderById(id: number): Promise<RepairOrder | null> {
+    const results = await db.select().from(repairOrders).where(eq(repairOrders.id, id)).limit(1);
+    return results.length > 0 ? results[0] : null;
   }
 
   async getSettings(): Promise<Settings | null> {

@@ -163,6 +163,36 @@ export function registerRoutes(app: Express) {
     }
   });
 
+  // Get Tekmetric RO URL endpoint
+  app.get("/api/tekmetric/ro-url/:roId", async (req, res) => {
+    try {
+      const roId = parseInt(req.params.roId);
+      if (isNaN(roId)) {
+        return res.status(400).json({ error: "Invalid RO ID" });
+      }
+
+      // Fetch RO from database to get shop location
+      const ro = await storage.getRepairOrderById(roId);
+      if (!ro) {
+        return res.status(404).json({ error: "Repair order not found" });
+      }
+
+      const shopLocation = ro.shopId as ShopLocation;
+      const shopNumericId = {
+        "NB": process.env.TM_SHOP_ID_NB || "469",
+        "WM": process.env.TM_SHOP_ID_WM || "469",
+        "EV": process.env.TM_SHOP_ID_EV || "469",
+      }[shopLocation] || "469";
+
+      const url = `https://shop.tekmetric.com/admin/shop/${shopNumericId}/repair-orders/${roId}/estimate`;
+      
+      res.json({ url, shopLocation, shopName: SHOP_NAMES[shopLocation] });
+    } catch (error) {
+      console.error("Error getting RO URL:", error);
+      res.status(500).json({ error: "Failed to get RO URL" });
+    }
+  });
+
   // Download Chrome extension endpoint
   app.get("/api/download-extension", (req, res) => {
     try {
