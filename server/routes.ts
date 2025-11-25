@@ -56,7 +56,9 @@ export function registerRoutes(app: Express) {
         searchTerms = undefined; // Will fall back to exact match
       }
 
-      // Always try exact match first (now using AI-extracted terms for broader matching)
+      // Initial search strategy: use ±2 year range by default for better results
+      // Many repair jobs work across multiple model years (e.g., 2016-2018 share same parts)
+      // This prevents "0 results" when exact year doesn't match but compatible years exist
       let candidates = await storage.searchJobs({
         vehicleMake: params.vehicleMake,
         vehicleModel: params.vehicleModel,
@@ -64,6 +66,7 @@ export function registerRoutes(app: Express) {
         vehicleEngine: params.vehicleEngine,
         repairType: params.repairType,
         searchTerms, // AI-extracted terms for smarter database search
+        yearRange: params.vehicleYear ? 2 : undefined, // ±2 years if year specified
         limit: 50,
       });
 

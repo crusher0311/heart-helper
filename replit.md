@@ -16,6 +16,10 @@ The application integrates seamlessly with Tekmetric (HEART's shop management sy
   - Uses gpt-4o-mini to identify primary component and common terminology variations
   - Database search now uses OR logic to match ANY extracted term (much smarter than literal substring match)
   - Falls back to exact phrase if AI extraction fails
+- **Smart Year Matching**: Automatically searches ±2 years from specified year (e.g., 2016 → includes 2014-2018)
+  - Prevents "0 results" when exact year doesn't match but compatible model years exist
+  - Most parts/repairs work across multiple model years (2016-2018 often share same components)
+  - "Broaden Search" now uses AI to find even wider compatible years if needed
 - Fixed URL params overwriting user edits in repair type field (now loads only once on mount)
 - Chrome extension v2.3.0: Only injects ❤️ icons in concern sections (not jobs/labor/parts)
 - Switched from SVG to simple ❤️ emoji for cleaner UX
