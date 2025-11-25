@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Tekmetric Job Importer",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Import job details from repair search tool into Tekmetric estimates",
   "permissions": [
     "storage",

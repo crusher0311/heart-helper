@@ -538,6 +538,8 @@ async function fillTekmetricEstimate(jobData) {
       const numberInputs = inputs.filter(inp => inp.type === 'number' && inp.offsetParent !== null);
       
       console.log('Found text inputs:', textInputs.length, 'number inputs:', numberInputs.length);
+      console.log('Text input details:', textInputs.map(inp => ({placeholder: inp.placeholder, type: inp.type})));
+      console.log('Number input details:', numberInputs.map(inp => ({placeholder: inp.placeholder, type: inp.type})));
       
       // Helper to fill text field character-by-character
       async function fillTextField(element, text, label) {
@@ -571,36 +573,51 @@ async function fillTekmetricEstimate(jobData) {
       }
       
       // Fill text fields in order: Brand (0), Part Name (1), Part Number (2), Details (3)
-      if (textInputs.length >= 4) {
-        // Field 1: Brand
-        if (part.brand) {
-          await fillTextField(textInputs[0], part.brand, 'brand');
+      console.log('Starting text field fills...');
+      try {
+        if (textInputs.length >= 4) {
+          // Field 1: Brand
+          if (part.brand) {
+            console.log('About to fill brand:', part.brand);
+            await fillTextField(textInputs[0], part.brand, 'brand');
+          }
+          
+          // Field 2: Part Name (description)
+          console.log('About to fill part name:', part.name);
+          await fillTextField(textInputs[1], part.name, 'part name');
+          
+          // Field 3: Part Number
+          if (part.partNumber) {
+            console.log('About to fill part number:', part.partNumber);
+            await fillTextField(textInputs[2], part.partNumber, 'part number');
+          }
+          
+          // Field 4: Additional Details - skip (textInputs[3])
+        } else {
+          console.error('❌ Expected at least 4 text inputs, found:', textInputs.length);
         }
-        
-        // Field 2: Part Name (description)
-        await fillTextField(textInputs[1], part.name, 'part name');
-        
-        // Field 3: Part Number
-        if (part.partNumber) {
-          await fillTextField(textInputs[2], part.partNumber, 'part number');
-        }
-        
-        // Field 4: Additional Details - skip (textInputs[3])
-      } else {
-        console.error('❌ Expected at least 4 text inputs, found:', textInputs.length);
+      } catch (error) {
+        console.error('❌ Error filling text fields:', error);
       }
       
       // Fill number fields in order: Quantity (0), Cost (1)
-      if (numberInputs.length >= 2) {
-        // Field 5: Quantity
-        await fillNumberField(numberInputs[0], part.quantity, 'quantity');
-        
-        // Field 6: Cost
-        if (part.cost) {
-          await fillNumberField(numberInputs[1], part.cost, 'cost');
+      console.log('Starting number field fills...');
+      try {
+        if (numberInputs.length >= 2) {
+          // Field 5: Quantity
+          console.log('About to fill quantity:', part.quantity);
+          await fillNumberField(numberInputs[0], part.quantity, 'quantity');
+          
+          // Field 6: Cost
+          if (part.cost) {
+            console.log('About to fill cost:', part.cost);
+            await fillNumberField(numberInputs[1], part.cost, 'cost');
+          }
+        } else {
+          console.error('❌ Expected at least 2 number inputs, found:', numberInputs.length);
         }
-      } else {
-        console.error('❌ Expected at least 2 number inputs, found:', numberInputs.length);
+      } catch (error) {
+        console.error('❌ Error filling number fields:', error);
       }
       
       // Fill sale/retail price field
