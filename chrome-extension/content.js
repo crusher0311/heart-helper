@@ -1091,29 +1091,38 @@ function injectHeartIcons() {
   
   console.log("🔍 Searching for concern fields on repair order page...");
   
-  // Find all concern/complaint/customer textareas and inputs
+  // EXPANDED: Check for textareas, contenteditable divs, AND all textareas
   const selectors = [
+    // Standard textareas
     'textarea[class*="concern" i]',
     'textarea[class*="complaint" i]',
     'textarea[class*="customer" i]',
     'textarea[placeholder*="concern" i]',
     'textarea[placeholder*="complaint" i]',
     'textarea[placeholder*="customer" i]',
+    // Text inputs
     'input[type="text"][class*="concern" i]',
     'input[type="text"][class*="complaint" i]',
+    // Contenteditable divs (React/modern UI)
+    '[contenteditable="true"][class*="concern" i]',
+    '[contenteditable="true"][class*="complaint" i]',
+    '[contenteditable="true"][placeholder*="concern" i]',
+    '[contenteditable="true"][placeholder*="complaint" i]',
   ];
   
   const concernElements = document.querySelectorAll(selectors.join(', '));
   console.log(`📊 Found ${concernElements.length} concern fields using selectors`);
   
   if (concernElements.length === 0) {
-    console.log("⚠️ No concern fields found with selectors, trying fallback methods...");
+    console.log("⚠️ No concern fields found with selectors, trying aggressive fallback...");
     
-    // Debug: Show ALL textareas on page
+    // Debug: Show ALL textareas AND contenteditable elements
     const allTextareas = document.querySelectorAll('textarea');
-    console.log(`📝 Total textareas on page: ${allTextareas.length}`);
+    const allContentEditable = document.querySelectorAll('[contenteditable="true"]');
+    console.log(`📝 Total textareas: ${allTextareas.length}, contenteditable: ${allContentEditable.length}`);
+    
     if (allTextareas.length > 0) {
-      console.log("First 5 textareas:", Array.from(allTextareas).slice(0, 5).map(ta => ({
+      console.log("First 3 textareas:", Array.from(allTextareas).slice(0, 3).map(ta => ({
         placeholder: ta.placeholder,
         className: ta.className,
         name: ta.name,
@@ -1121,23 +1130,55 @@ function injectHeartIcons() {
       })));
     }
     
-    // Fallback: Look for labels that say concern/complaint, then find nearby textareas
-    const labels = Array.from(document.querySelectorAll('label, div'));
+    if (allContentEditable.length > 0) {
+      console.log("First 3 contenteditable:", Array.from(allContentEditable).slice(0, 3).map(ce => ({
+        className: ce.className,
+        placeholder: ce.getAttribute('placeholder'),
+        text: ce.textContent?.substring(0, 50)
+      })));
+    }
+    
+    // AGGRESSIVE FALLBACK 1: Just inject icons for ALL textareas (they're likely concern fields)
+    if (allTextareas.length > 0 && allTextareas.length <= 20) {
+      console.log(`✓ Injecting icons for ALL ${allTextareas.length} textareas on page`);
+      allTextareas.forEach(ta => {
+        if (!injectedIcons.has(ta)) {
+          injectHeartIconForConcern(ta);
+        }
+      });
+    }
+    
+    // AGGRESSIVE FALLBACK 2: Inject for all contenteditable elements
+    if (allContentEditable.length > 0 && allContentEditable.length <= 20) {
+      console.log(`✓ Injecting icons for ALL ${allContentEditable.length} contenteditable divs`);
+      allContentEditable.forEach(ce => {
+        if (!injectedIcons.has(ce)) {
+          injectHeartIconForConcern(ce);
+        }
+      });
+    }
+    
+    // FALLBACK 3: Look for labels with concern/complaint text
+    const labels = Array.from(document.querySelectorAll('label, div, span'));
     let foundViaLabels = 0;
     for (const label of labels) {
-      const labelText = label.textContent.toLowerCase();
+      const labelText = label.textContent?.toLowerCase() || '';
       if (labelText.includes('concern') || labelText.includes('complaint') || 
           labelText.includes('customer concern') || labelText.includes('reason for visit')) {
-        const textarea = label.querySelector('textarea') || 
-                        label.nextElementSibling?.tagName === 'TEXTAREA' ? label.nextElementSibling : null;
-        if (textarea && !injectedIcons.has(textarea)) {
+        // Look for textarea or contenteditable nearby
+        const field = label.querySelector('textarea, [contenteditable="true"]') || 
+                     (label.nextElementSibling?.tagName === 'TEXTAREA' ? label.nextElementSibling : null) ||
+                     (label.nextElementSibling?.getAttribute('contenteditable') === 'true' ? label.nextElementSibling : null);
+        if (field && !injectedIcons.has(field)) {
           console.log(`✓ Found concern field via label: "${labelText.substring(0, 50)}"`);
-          injectHeartIconForConcern(textarea);
+          injectHeartIconForConcern(field);
           foundViaLabels++;
         }
       }
     }
-    console.log(`📊 Injected ${foundViaLabels} icons via label search`);
+    if (foundViaLabels > 0) {
+      console.log(`📊 Injected ${foundViaLabels} icons via label search`);
+    }
   } else {
     console.log(`✓ Injecting icons for ${concernElements.length} concern fields...`);
     concernElements.forEach(element => {
@@ -1153,10 +1194,13 @@ function injectHeartIcons() {
 function observePageChanges() {
   const checkAndInject = () => {
     if (window.location.href.includes('/repair-orders/')) {
-      // Inject icons for all concern fields
+      // Try immediately
+      injectHeartIcons();
+      // Re-check after delays (fields load asynchronously in Tekmetric)
       setTimeout(injectHeartIcons, 1000);
-      // Re-check every 2 seconds in case new fields appear
+      setTimeout(injectHeartIcons, 2000);
       setTimeout(injectHeartIcons, 3000);
+      setTimeout(injectHeartIcons, 5000);
     } else {
       // Clear tracked icons when leaving repair order page
       injectedIcons.clear();
@@ -1179,12 +1223,12 @@ function observePageChanges() {
     }
   }, 1000);
   
-  // Also observe for dynamically added textareas
+  // Also observe for dynamically added textareas - check every 3 seconds
   setInterval(() => {
     if (window.location.href.includes('/repair-orders/')) {
       injectHeartIcons();
     }
-  }, 2000);
+  }, 3000);
 }
 
 if (document.readyState === 'loading') {
