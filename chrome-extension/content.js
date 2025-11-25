@@ -540,56 +540,44 @@ async function fillTekmetricEstimate(jobData) {
         partNumberField.dispatchEvent(new Event('input', { bubbles: true }));
         partNumberField.dispatchEvent(new Event('change', { bubbles: true }));
         console.log('✓ Filled part number:', part.partNumber);
-      }
-      
-      // Look for description/brand/name field - try multiple strategies
-      const descriptionField = inputs.find(inp => {
-        const placeholder = inp.placeholder?.toLowerCase() || '';
-        const name = inp.name?.toLowerCase() || '';
-        const id = inp.id?.toLowerCase() || '';
         
-        return placeholder.includes('part name') ||
-               placeholder.includes('description') ||
-               placeholder.includes('brand') ||
-               (placeholder.includes('name') && !placeholder.includes('customer')) ||
-               name.includes('description') ||
-               name.includes('brand') ||
-               name.includes('partname') ||
-               id.includes('description') ||
-               id.includes('partname');
-      });
-      
-      if (descriptionField) {
+        // TAB to description field (user discovered this works!)
+        await new Promise(resolve => setTimeout(resolve, 150));
+        partNumberField.dispatchEvent(new KeyboardEvent('keydown', { 
+          key: 'Tab', 
+          code: 'Tab', 
+          keyCode: 9,
+          which: 9,
+          bubbles: true,
+          cancelable: true
+        }));
+        
+        await new Promise(resolve => setTimeout(resolve, 250));
+        
+        // Description field should now be focused
         const description = part.brand ? `${part.brand} ${part.name}` : part.name;
+        const activeElement = document.activeElement;
         
-        // Simulate typing to trigger React's state updates
-        descriptionField.focus();
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
-        // Clear the field first
-        descriptionField.value = '';
-        descriptionField.dispatchEvent(new Event('input', { bubbles: true }));
-        await new Promise(resolve => setTimeout(resolve, 50));
-        
-        // Type each character to trigger React's onChange
-        for (let i = 0; i < description.length; i++) {
-          descriptionField.value = description.substring(0, i + 1);
-          descriptionField.dispatchEvent(new InputEvent('input', { 
-            bubbles: true,
-            cancelable: true,
-            data: description[i]
-          }));
-          // Small delay between characters (10ms total for ~50 char string = 500ms)
-          if (i % 5 === 0) await new Promise(resolve => setTimeout(resolve, 10));
+        if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
+          console.log('✓ TAB moved focus to field:', activeElement.placeholder || activeElement.name || activeElement.id);
+          
+          // Type description character by character
+          activeElement.value = '';
+          for (let i = 0; i < description.length; i++) {
+            activeElement.value = description.substring(0, i + 1);
+            activeElement.dispatchEvent(new InputEvent('input', { 
+              bubbles: true,
+              cancelable: true,
+              data: description[i]
+            }));
+            if (i % 10 === 0) await new Promise(resolve => setTimeout(resolve, 5));
+          }
+          
+          activeElement.dispatchEvent(new Event('change', { bubbles: true }));
+          console.log('✓ Filled description via TAB navigation:', description);
+        } else {
+          console.log('⚠️ TAB did not focus input. Active element:', activeElement?.tagName, activeElement?.placeholder);
         }
-        
-        // Final events
-        descriptionField.dispatchEvent(new Event('change', { bubbles: true }));
-        descriptionField.dispatchEvent(new Event('blur', { bubbles: true }));
-        
-        console.log('✓ Typed description character-by-character:', description);
-      } else {
-        console.log('⚠️ Could not find description field');
       }
       
       const qtyField = inputs.find(inp => 
