@@ -260,24 +260,43 @@ async function fillTekmetricEstimate(jobData) {
       
       console.log('✓ Clicking "Add Labor" button');
       addLaborButton.click();
-      await new Promise(resolve => setTimeout(resolve, 800));
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Give UI time to render
 
       const inputs = Array.from(document.querySelectorAll('input, textarea'));
       
-      const descriptionField = inputs.find(inp => 
-        inp.placeholder?.toLowerCase().includes('description') || 
-        inp.getAttribute('aria-label')?.toLowerCase().includes('description')
-      );
+      // Find labor description field - look for fields with "description" or "labor" in placeholder/label
+      const descriptionField = inputs.find(inp => {
+        const placeholder = inp.placeholder?.toLowerCase() || '';
+        const label = inp.getAttribute('aria-label')?.toLowerCase() || '';
+        const name = inp.name?.toLowerCase() || '';
+        
+        // Match description fields but avoid part-related fields
+        return (placeholder.includes('description') || label.includes('description') || 
+                placeholder.includes('labor') || label.includes('labor') || name.includes('labor')) &&
+               !placeholder.includes('part') && !label.includes('part');
+      });
+      
       if (!descriptionField) {
-        console.error('Labor description field not found - stopping automation');
-        console.log('Available inputs:', inputs.map(i => ({tag: i.tagName, type: i.type, placeholder: i.placeholder, label: i.getAttribute('aria-label')})));
+        console.error('❌ Labor description field not found');
+        console.log('Available inputs:', inputs.map(i => ({
+          tag: i.tagName, 
+          type: i.type, 
+          placeholder: i.placeholder, 
+          label: i.getAttribute('aria-label'),
+          name: i.name
+        })));
         isFillingJob = false;
         throw new Error('Could not find labor description field');
       }
+      
+      // Clear and fill the field, then blur to prevent autocomplete interference
       descriptionField.focus();
+      descriptionField.value = '';
+      await new Promise(resolve => setTimeout(resolve, 100));
       descriptionField.value = laborItem.name;
       descriptionField.dispatchEvent(new Event('input', { bubbles: true }));
       descriptionField.dispatchEvent(new Event('change', { bubbles: true }));
+      descriptionField.blur(); // Blur to commit the value and avoid autocomplete
       console.log('✓ Filled labor description:', laborItem.name);
       
       const hoursField = inputs.find(inp => 
