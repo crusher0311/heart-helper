@@ -2,9 +2,32 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.6.5] - 2024-11-24
+
+### 🔥 CRITICAL FIX: Removed setTimeout That Was Being Throttled
+- **Root Cause Found**: Chrome throttles setTimeout in background/inactive tabs
+- **Evidence**: User waited 2.5+ minutes, setTimeout(callback, 2000) never fired
+  - Logs showed "Timeout set with ID: 32" but callback never executed
+  - After page refresh → same code works immediately
+- **Why it happens**: When tab is in background, Chrome suspends/throttles timers to save resources
+  - Even after switching to tab, Chrome may keep it throttled for a period
+  - setTimeout can be delayed by minutes or never fire at all
+- **Solution**: Removed the 2-second artificial delay entirely
+  - Page is already loaded when user switches to tab
+  - No need to wait - can start automation immediately
+  - Automation now starts within 2-3 seconds of clicking "Send to Extension"
+- **Impact**: No more page refresh required! Automation starts immediately.
+
+### Technical Details
+Chrome's tab throttling is documented behavior:
+- Background tabs get timer budgets (1 wake per minute max)
+- Switching to tab doesn't immediately restore full timer privileges
+- Can take 30+ seconds for tab to become "unthrottled"
+- Workarounds: Use chrome.alarms API, requestAnimationFrame, or eliminate timers
+
 ## [1.6.4] - 2024-11-24
 
-### 🎯 THE REAL FIX: Modal Takes 10-12 Seconds to Render
+### 🎯 Wait for ADD LABOR Button (Modal Takes 10-12 Seconds to Render)
 - **Critical Discovery**: User reports modal takes 10-12 seconds to fully load!
 - **Problem**: v1.6.3 looked for canned jobs search (instant), but that's in the toolbar, not the modal
 - **Evidence from logs (lines 415-425)**:

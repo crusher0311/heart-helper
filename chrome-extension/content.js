@@ -148,21 +148,9 @@ async function fillTekmetricEstimate(jobData) {
       return;
     }
     
-    console.log("✅ On Tekmetric page, waiting 2 seconds for page to stabilize...");
-    console.log("Setting timeout for 2000ms...");
-    try {
-      await new Promise((resolve, reject) => {
-        const timeoutId = setTimeout(() => {
-          console.log("2️⃣ Wait complete after 2 seconds!");
-          resolve();
-        }, 2000);
-        console.log("Timeout set with ID:", timeoutId);
-      });
-      console.log("2️⃣ Wait complete, now looking for Job button...");
-    } catch (err) {
-      console.error("❌ Error during wait:", err);
-      throw err;
-    }
+    console.log("✅ On Tekmetric page, starting automation immediately...");
+    // No artificial delay needed - page is already loaded when user switches to tab
+    // Chrome throttles setTimeout in background tabs, causing 2.5min+ delays
 
     const jobButton = Array.from(document.querySelectorAll('button')).find(btn => {
       const icon = btn.querySelector('svg');
