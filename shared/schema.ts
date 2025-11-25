@@ -83,6 +83,21 @@ export const searchRequests = pgTable("search_requests", {
   resultsCount: integer("results_count"),
 });
 
+// Search cache table to store search results for fast retrieval
+export const searchCache = pgTable("search_cache", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  searchHash: text("search_hash").notNull().unique(), // Hash of search params for quick lookup
+  vehicleMake: text("vehicle_make"),
+  vehicleModel: text("vehicle_model"),
+  vehicleYear: integer("vehicle_year"),
+  vehicleEngine: text("vehicle_engine"),
+  repairType: text("repair_type").notNull(),
+  results: jsonb("results").notNull(), // Full SearchResult[] array
+  resultsCount: integer("results_count").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  expiresAt: timestamp("expires_at").notNull(), // Auto-expire after 1 hour
+});
+
 // User settings table for app configuration
 export const settings = pgTable("settings", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -115,6 +130,7 @@ export const insertRepairOrderSchema = createInsertSchema(repairOrders);
 export const insertRepairOrderJobSchema = createInsertSchema(repairOrderJobs);
 export const insertRepairOrderJobPartSchema = createInsertSchema(repairOrderJobParts);
 export const insertSearchRequestSchema = createInsertSchema(searchRequests).omit({ id: true, createdDate: true });
+export const insertSearchCacheSchema = createInsertSchema(searchCache).omit({ id: true, createdAt: true });
 export const insertSettingsSchema = createInsertSchema(settings).omit({ id: true, updatedAt: true });
 
 // Search request schema
@@ -143,6 +159,9 @@ export type InsertRepairOrderJobPart = z.infer<typeof insertRepairOrderJobPartSc
 
 export type SearchRequest = typeof searchRequests.$inferSelect;
 export type InsertSearchRequest = z.infer<typeof insertSearchRequestSchema>;
+
+export type SearchCache = typeof searchCache.$inferSelect;
+export type InsertSearchCache = z.infer<typeof insertSearchCacheSchema>;
 
 export type SearchJobRequest = z.infer<typeof searchJobSchema>;
 
