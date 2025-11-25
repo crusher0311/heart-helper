@@ -1133,69 +1133,62 @@ function injectHeartIcons() {
   
   console.log("🔍 Searching for concern items...");
   
-  // STRATEGY: Find rows that have text + 3-dot menu buttons
-  // These are typically concern/finding items in Tekmetric's UI
-  // Look for the specific structure: a row with text content and a kebab/3-dot menu
+  // STRATEGY: Look for rows that contain the "Add finding" text or similar patterns
+  // These are the actual concern/finding item rows in Tekmetric
   
   let iconsInjected = 0;
   
-  // Find all elements that look like list items with 3-dot menus
-  // Tekmetric uses these for concerns, findings, etc.
-  const allButtons = document.querySelectorAll('button');
+  // Find all elements that contain "Add finding" text - these are concern rows
+  const allElements = document.querySelectorAll('*');
+  const concernRows = new Set();
   
-  for (const btn of allButtons) {
-    // Look for 3-dot/kebab menu buttons (icon-only buttons with SVG)
-    const svg = btn.querySelector('svg');
-    const isIconButton = svg && btn.children.length === 1 && btn.textContent.trim() === '';
+  for (const el of allElements) {
+    // Look for elements with "Add finding" as direct text (not nested)
+    const directText = Array.from(el.childNodes)
+      .filter(n => n.nodeType === Node.TEXT_NODE)
+      .map(n => n.textContent.trim())
+      .join('');
     
-    if (!isIconButton) continue;
-    
-    // Find the parent row/container
-    let row = btn.closest('div[class*="flex"], div[class*="row"], li, tr');
-    if (!row) continue;
-    
-    // Skip if already processed
+    if (directText.toLowerCase() === 'add finding') {
+      // Found an "Add finding" link - the parent row is a concern item
+      let row = el.closest('div[class*="flex"]');
+      // Go up to find the row that contains both the concern text and the Add finding link
+      for (let i = 0; i < 5 && row; i++) {
+        const children = row.children.length;
+        const hasMultipleColumns = children >= 2;
+        if (hasMultipleColumns) {
+          concernRows.add(row);
+          break;
+        }
+        row = row.parentElement?.closest('div[class*="flex"]');
+      }
+    }
+  }
+  
+  console.log(`📊 Found ${concernRows.size} concern rows with "Add finding" pattern`);
+  
+  // Now inject hearts into these concern rows
+  for (const row of concernRows) {
     if (injectedIcons.has(row)) continue;
     
-    // Get the text content of this row (excluding button text)
+    // Get the concern text (first column, before "Add finding")
     const rowText = row.textContent?.trim() || '';
     
-    // Skip if too short or too long (likely not a concern/finding)
-    if (rowText.length < 3 || rowText.length > 500) continue;
-    
-    // Skip job/labor/parts sections - they have specific keywords
+    // Skip if it's a header row
     const lowerText = rowText.toLowerCase();
-    if (lowerText.includes('labor') && lowerText.includes('hours')) continue;
-    if (lowerText.includes('technician') && lowerText.includes('rate')) continue;
-    if (lowerText.includes('part') && (lowerText.includes('qty') || lowerText.includes('cost'))) continue;
-    if (lowerText.includes('demount') || lowerText.includes('computerize')) continue; // Labor items
-    if (lowerText.includes('$ assign')) continue; // Labor row
+    if (lowerText === 'customer concerns' || lowerText === 'technician concerns') continue;
+    if (lowerText.includes('customer concerns') && lowerText.includes('finding') && rowText.length < 50) continue;
     
-    // Check if this is in a concern-related section by looking at ancestors
-    let inConcernSection = false;
-    let ancestor = row.parentElement;
-    for (let i = 0; i < 10 && ancestor; i++) {
-      const ancestorText = ancestor.textContent?.toLowerCase().substring(0, 200) || '';
-      if (ancestorText.includes('customer concern') || 
-          ancestorText.includes('technician concern') ||
-          ancestorText.includes('finding')) {
-        inConcernSection = true;
-        break;
-      }
-      // Also check if we're in a job/labor section (to exclude)
-      if (ancestorText.includes('jobs') && ancestorText.includes('reorder')) {
-        inConcernSection = false;
-        break;
-      }
-      ancestor = ancestor.parentElement;
-    }
+    // Skip rows that are section headers (short text)
+    if (rowText.length < 10) continue;
     
-    if (!inConcernSection) continue;
+    // Extract just the concern description (before "Add finding")
+    let concernText = rowText.split(/add finding/i)[0].trim();
     
-    // Extract the actual concern text
-    const concernText = rowText.replace(/[\s]{2,}/g, ' ').trim().substring(0, 200);
+    // Clean up the text
+    concernText = concernText.replace(/[\s]{2,}/g, ' ').trim();
     
-    if (concernText.length > 3) {
+    if (concernText.length > 5 && concernText.length < 300) {
       injectHeartIconForConcern(row, concernText);
       iconsInjected++;
     }
