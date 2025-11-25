@@ -521,6 +521,15 @@ async function fillTekmetricEstimate(jobData) {
 
       const inputs = newInputs;
       
+      console.log(`\n📝 Filling part: ${part.name}`);
+      console.log('Available new input fields:', inputs.map(inp => ({
+        tag: inp.tagName,
+        type: inp.type,
+        placeholder: inp.placeholder,
+        name: inp.name,
+        id: inp.id
+      })));
+      
       const partNumberField = inputs.find(inp => 
         inp.placeholder?.toLowerCase().includes('part number') ||
         inp.placeholder?.toLowerCase().includes('number')
@@ -530,18 +539,32 @@ async function fillTekmetricEstimate(jobData) {
         partNumberField.value = part.partNumber;
         partNumberField.dispatchEvent(new Event('input', { bubbles: true }));
         partNumberField.dispatchEvent(new Event('change', { bubbles: true }));
+        console.log('✓ Filled part number:', part.partNumber);
       }
       
-      const brandField = inputs.find(inp => 
-        inp.placeholder?.toLowerCase().includes('brand') ||
-        inp.placeholder?.toLowerCase().includes('description')
-      );
-      if (brandField) {
-        const brandName = part.brand ? `${part.brand} ${part.name}` : part.name;
-        brandField.focus();
-        brandField.value = brandName;
-        brandField.dispatchEvent(new Event('input', { bubbles: true }));
-        brandField.dispatchEvent(new Event('change', { bubbles: true }));
+      // Look for description/brand field - try multiple strategies
+      const descriptionField = inputs.find(inp => {
+        const placeholder = inp.placeholder?.toLowerCase() || '';
+        const name = inp.name?.toLowerCase() || '';
+        const id = inp.id?.toLowerCase() || '';
+        
+        return placeholder.includes('description') ||
+               placeholder.includes('brand') ||
+               placeholder.includes('name') ||
+               name.includes('description') ||
+               name.includes('brand') ||
+               id.includes('description');
+      });
+      
+      if (descriptionField) {
+        const description = part.brand ? `${part.brand} ${part.name}` : part.name;
+        descriptionField.focus();
+        descriptionField.value = description;
+        descriptionField.dispatchEvent(new Event('input', { bubbles: true }));
+        descriptionField.dispatchEvent(new Event('change', { bubbles: true }));
+        console.log('✓ Filled description:', description);
+      } else {
+        console.log('⚠️ Could not find description field');
       }
       
       const qtyField = inputs.find(inp => 
