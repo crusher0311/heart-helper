@@ -28,57 +28,74 @@ function waitForElement(selector, timeout = 10000) {
 }
 
 // Wait for Job modal to appear after clicking Job button
-function waitForModal(timeout = 10000) {
-  console.log('⏳ Waiting for Job modal to appear...');
+// User reports modal takes 10-12 seconds to fully render!
+function waitForModal(timeout = 15000) {
+  console.log('⏳ Waiting for Job modal to fully render (can take 10-12 seconds)...');
   return new Promise((resolve, reject) => {
     const startTime = Date.now();
     
-    // Look for the canned jobs search input as signal that modal is ready
     const checkForModal = () => {
-      const cannedJobsInput = document.querySelector('input[placeholder*="canned"]');
+      // Strategy: Look for modal-specific fields that only appear when modal is FULLY loaded
+      // Canned jobs search is in toolbar (instant), but job title field is in modal (10-12s)
       
-      if (cannedJobsInput) {
-        console.log('✓ Found canned jobs search input - modal is ready!');
+      // Look for ADD LABOR button - only appears when modal is fully rendered
+      const addLaborBtn = Array.from(document.querySelectorAll('button')).find(btn => 
+        btn.textContent.trim() === 'ADD LABOR'
+      );
+      
+      if (addLaborBtn) {
+        console.log('✓ Found ADD LABOR button - modal is fully loaded!');
         
-        // Strategy: Walk up and find the FIRST container with 5-100 inputs
-        // Don't require z-index > 1000 since Tekmetric doesn't use it
-        let element = cannedJobsInput;
-        let candidateModal = null;
-        
+        // Walk up from button to find the modal container
+        let element = addLaborBtn;
         while (element && element !== document.body) {
           const inputs = element.querySelectorAll('input, textarea, [contenteditable="true"]');
           const zIndex = window.getComputedStyle(element).zIndex;
           
-          console.log(`Checking element: z-index=${zIndex}, inputs=${inputs.length}, tag=${element.tagName}, class=${element.className?.substring(0, 30)}`);
+          console.log(`Checking element: z-index=${zIndex}, inputs=${inputs.length}, tag=${element.tagName}`);
           
-          // Modal criteria: 5-100 inputs (reasonable form size)
-          // Store the FIRST match we find (closest to canned jobs input)
-          if (inputs.length >= 5 && inputs.length < 200) {
-            if (!candidateModal) {
-              candidateModal = element;
-              console.log(`✓ Found candidate modal with ${inputs.length} inputs`);
-            }
+          // Modal should have 10-50 inputs (job form fields)
+          if (inputs.length >= 10 && inputs.length < 100) {
+            console.log(`✓ Found modal container with ${inputs.length} input fields`);
+            return resolve(element);
           }
           
-          // If we hit a container with 200+ inputs, stop walking up
+          // Stop at page container
           if (inputs.length >= 200) {
-            console.log(`⚠️ Reached container with ${inputs.length} inputs - stopping`);
-            break;
+            console.log(`⚠️ Stopping at container with ${inputs.length} inputs`);
+            // Return the largest container we found before hitting the page
+            let parent = addLaborBtn.parentElement;
+            while (parent && parent !== document.body) {
+              const parentInputs = parent.querySelectorAll('input, textarea, [contenteditable="true"]');
+              if (parentInputs.length >= 10 && parentInputs.length < 200) {
+                console.log(`✓ Using parent container with ${parentInputs.length} inputs`);
+                return resolve(parent);
+              }
+              parent = parent.parentElement;
+            }
+            // Fallback: use the modal even if it has many inputs
+            console.log('⚠️ Using page container as fallback');
+            return resolve(element.parentElement || element);
           }
           
           element = element.parentElement;
         }
         
-        if (candidateModal) {
-          const inputs = candidateModal.querySelectorAll('input, textarea, [contenteditable="true"]');
-          console.log(`✓ Using modal container with ${inputs.length} input fields`);
-          return resolve(candidateModal);
-        }
+        // If we made it here, we found the button but couldn't find good container
+        // Just use the whole document as fallback
+        console.log('⚠️ Found button but no good container, using document.body');
+        return resolve(document.body);
       }
       
       // Check if timeout exceeded
-      if (Date.now() - startTime > timeout) {
-        return reject(new Error('Timeout waiting for Job modal to appear'));
+      const elapsed = Date.now() - startTime;
+      if (elapsed > timeout) {
+        return reject(new Error(`Timeout after ${elapsed}ms waiting for Job modal to fully render`));
+      }
+      
+      // Log progress every 2 seconds
+      if (elapsed % 2000 < 100) {
+        console.log(`⏳ Still waiting for modal... (${Math.floor(elapsed / 1000)}s elapsed)`);
       }
       
       // Keep polling every 100ms
@@ -160,9 +177,9 @@ async function fillTekmetricEstimate(jobData) {
     console.log('✓ Clicking Job button...');
     jobButton.click();
     
-    console.log('3️⃣ Waiting for Job modal to appear...');
-    // Use waitForModal to explicitly wait for the dialog to render
-    const modal = await waitForModal(10000); // Wait up to 10 seconds
+    console.log('3️⃣ Waiting for Job modal to fully render...');
+    // Use waitForModal to explicitly wait for the dialog to render (can take 10-12 seconds!)
+    const modal = await waitForModal(); // Uses default 15 second timeout
     
     console.log('✓ Found modal:', {tag: modal.tagName, role: modal.getAttribute('role'), className: modal.className});
     console.log('4️⃣ Searching for inputs INSIDE the modal only...');

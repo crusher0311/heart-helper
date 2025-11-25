@@ -2,9 +2,32 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.6.4] - 2024-11-24
+
+### 🎯 THE REAL FIX: Modal Takes 10-12 Seconds to Render
+- **Critical Discovery**: User reports modal takes 10-12 seconds to fully load!
+- **Problem**: v1.6.3 looked for canned jobs search (instant), but that's in the toolbar, not the modal
+- **Evidence from logs (lines 415-425)**:
+  - Found canned jobs input immediately
+  - Toolbar has 1 input, page has 922 inputs
+  - No container with 5-100 inputs exists - infinite loop!
+  - Extension waited 10s then timed out (causing refresh issue)
+- **Root cause**: Canned jobs search appears instantly (it's in toolbar), but actual modal with job fields takes 10-12 seconds to render
+- **Solution**: Wait for ADD LABOR button (only appears when modal fully loaded)
+  - Increased timeout to 15 seconds (10-12s render + buffer)
+  - Look for ADD LABOR button instead of canned jobs search
+  - Walk up from button to find modal container
+  - Progress logging every 2 seconds so user knows it's working
+- **Why it works**: ADD LABOR button is inside the modal form, not the toolbar
+  - Only appears after modal fully renders
+  - Guarantees we're querying the RIGHT container
+
+### Technical Details
+The "canned jobs" search is part of Tekmetric's sticky toolbar (z-900), not the Job modal. The modal is a heavy React component that takes 10-12s to mount and render all form fields.
+
 ## [1.6.3] - 2024-11-24
 
-### ✅ WORKING FIX: Tekmetric Modal Doesn't Use z-index > 1000
+### 🔧 ATTEMPTED: Find Container with 5-100 Inputs (NO SUCH CONTAINER)
 - **Problem**: v1.6.2 waited 10 seconds then timed out because NO element had z-index > 1000
 - **Evidence from logs**:
   - Logs show infinite loop: "Found canned jobs search input" repeating every 100ms
