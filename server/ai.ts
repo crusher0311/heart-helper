@@ -422,3 +422,262 @@ Return ONLY valid JSON array format:
     }).sort((a, b) => b.matchScore - a.matchScore);
   }
 }
+
+// ==========================================
+// Concern Intake AI Functions
+// ==========================================
+
+import type {
+  GenerateConcernQuestionsRequest,
+  GenerateConcernQuestionsResponse,
+  ReviewConcernConversationRequest,
+  ReviewConcernConversationResponse,
+  CleanConversationRequest,
+  CleanConversationResponse,
+} from "@shared/schema";
+
+/**
+ * Generates diagnostic follow-up questions based on customer's initial concern
+ * Helps service advisors gather complete information during the call
+ */
+export async function generateConcernFollowUpQuestions(
+  request: GenerateConcernQuestionsRequest
+): Promise<GenerateConcernQuestionsResponse> {
+  const { customerConcern, vehicleInfo } = request;
+
+  const vehicleContext = vehicleInfo
+    ? `Vehicle: ${vehicleInfo.year || ''} ${vehicleInfo.make || ''} ${vehicleInfo.model || ''}`.trim()
+    : '';
+
+  const prompt = `You are an experienced automotive service advisor at HEART Certified Auto Care. A customer has called with a concern and you need to ask follow-up questions to gather complete diagnostic information.
+
+Customer's Initial Concern: "${customerConcern}"
+${vehicleContext ? `\n${vehicleContext}` : ''}
+
+Generate 5 diagnostic follow-up questions that will help:
+1. Pinpoint the exact symptom (when, where, how often)
+2. Understand the conditions when it occurs (hot/cold, speed, weather)
+3. Check for related symptoms the customer might not have mentioned
+4. Gather safety-relevant information
+5. Determine urgency/severity
+
+GUIDELINES:
+- Keep questions conversational and friendly
+- Ask one thing at a time (not compound questions)
+- Start with the most important diagnostic info
+- Include at least one question about safety concerns
+- Avoid technical jargon - use everyday language
+
+Return ONLY valid JSON:
+{
+  "questions": [
+    "When did you first notice this?",
+    "Does it happen all the time or only in certain conditions?",
+    "Have you noticed any other changes with the vehicle?",
+    "Does the problem get worse when the engine is cold or hot?",
+    "Is it affecting your ability to drive safely?"
+  ]
+}`;
+
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: "You are a friendly, experienced automotive service advisor. Generate helpful diagnostic questions in everyday language. Always respond with valid JSON only."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      response_format: { type: "json_object" },
+      max_completion_tokens: 800,
+    });
+
+    const content = response.choices[0]?.message?.content;
+    if (!content) {
+      throw new Error("No response from AI");
+    }
+
+    const parsed = JSON.parse(content);
+    
+    if (parsed.questions && Array.isArray(parsed.questions)) {
+      return {
+        questions: parsed.questions.filter((q: any) => typeof q === 'string' && q.length > 0)
+      };
+    }
+    
+    throw new Error("Invalid response format");
+  } catch (error) {
+    console.error("AI concern questions error:", error);
+    // Fallback questions
+    return {
+      questions: [
+        "When did you first notice this issue?",
+        "Does it happen all the time or only sometimes?",
+        "Have you noticed any other changes with your vehicle?",
+        "Is this affecting your ability to drive safely?",
+        "Have you had any recent work done on the vehicle?"
+      ]
+    };
+  }
+}
+
+/**
+ * Reviews the conversation so far and suggests additional questions if needed
+ * Helps ensure complete information is gathered
+ */
+export async function reviewConcernConversation(
+  request: ReviewConcernConversationRequest
+): Promise<ReviewConcernConversationResponse> {
+  const { customerConcern, answeredQuestions, vehicleInfo } = request;
+
+  const vehicleContext = vehicleInfo
+    ? `Vehicle: ${vehicleInfo.year || ''} ${vehicleInfo.make || ''} ${vehicleInfo.model || ''}`.trim()
+    : '';
+
+  const qaHistory = answeredQuestions
+    .map((qa, i) => `Q${i + 1}: ${qa.question}\nA${i + 1}: ${qa.answer}`)
+    .join('\n\n');
+
+  const prompt = `You are an automotive service advisor reviewing a concern intake conversation. Determine if we have enough information or need to ask more questions.
+
+Customer's Initial Concern: "${customerConcern}"
+${vehicleContext ? `\n${vehicleContext}` : ''}
+
+Conversation So Far:
+${qaHistory}
+
+EVALUATE:
+1. Do we have enough information to diagnose the problem?
+2. Are there any important gaps in the diagnostic information?
+3. Did any answers raise new questions that should be explored?
+4. Is there safety information we should confirm?
+
+IF more questions are needed (max 3), ask ONLY for missing critical information.
+IF we have enough info, return empty array.
+
+Return ONLY valid JSON:
+{
+  "additionalQuestions": ["question1", "question2"],
+  "isComplete": false,
+  "reasoning": "Brief explanation of what's missing or why it's complete"
+}`;
+
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: "You are an automotive service advisor evaluating conversation completeness. Be concise - only ask for truly missing critical information. Always respond with valid JSON only."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      response_format: { type: "json_object" },
+      max_completion_tokens: 600,
+    });
+
+    const content = response.choices[0]?.message?.content;
+    if (!content) {
+      throw new Error("No response from AI");
+    }
+
+    const parsed = JSON.parse(content);
+    
+    return {
+      additionalQuestions: Array.isArray(parsed.additionalQuestions) 
+        ? parsed.additionalQuestions.filter((q: any) => typeof q === 'string' && q.length > 0)
+        : [],
+      isComplete: parsed.isComplete === true || (parsed.additionalQuestions?.length === 0)
+    };
+  } catch (error) {
+    console.error("AI conversation review error:", error);
+    return {
+      additionalQuestions: [],
+      isComplete: true
+    };
+  }
+}
+
+/**
+ * Cleans and formats the conversation into a professional paragraph
+ * suitable for adding to Tekmetric as a concern note
+ */
+export async function cleanConcernConversation(
+  request: CleanConversationRequest
+): Promise<CleanConversationResponse> {
+  const { customerConcern, answeredQuestions, conversationNotes } = request;
+
+  const qaHistory = answeredQuestions
+    .map((qa, i) => `Q: ${qa.question}\nA: ${qa.answer}`)
+    .join('\n\n');
+
+  const prompt = `You are an automotive service advisor. Convert this concern intake conversation into a clear, professional paragraph that can be added to a repair order.
+
+Customer's Initial Concern: "${customerConcern}"
+
+Conversation:
+${qaHistory}
+
+${conversationNotes ? `Additional Notes: ${conversationNotes}` : ''}
+
+GUIDELINES:
+1. Write in third person ("Customer reports..." not "I noticed...")
+2. Include all relevant diagnostic details from the conversation
+3. Organize logically: main concern → symptoms → conditions → duration → other details
+4. Be concise but complete (aim for 2-4 sentences)
+5. Use professional automotive terminology where appropriate
+6. Highlight any safety concerns if mentioned
+
+Return ONLY valid JSON:
+{
+  "cleanedText": "Customer reports [main concern]. [Symptoms and conditions]. [Additional relevant details]."
+}`;
+
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: "You are an automotive service advisor writing professional concern notes for repair orders. Always respond with valid JSON only."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      response_format: { type: "json_object" },
+      max_completion_tokens: 500,
+    });
+
+    const content = response.choices[0]?.message?.content;
+    if (!content) {
+      throw new Error("No response from AI");
+    }
+
+    const parsed = JSON.parse(content);
+    
+    if (parsed.cleanedText && typeof parsed.cleanedText === 'string') {
+      return { cleanedText: parsed.cleanedText };
+    }
+    
+    throw new Error("Invalid response format");
+  } catch (error) {
+    console.error("AI conversation cleaning error:", error);
+    // Fallback: simple concatenation
+    const parts = [
+      `Customer reports: ${customerConcern}`,
+      ...answeredQuestions.map(qa => `${qa.answer}`),
+      conversationNotes
+    ].filter(Boolean);
+    
+    return { cleanedText: parts.join('. ') };
+  }
+}

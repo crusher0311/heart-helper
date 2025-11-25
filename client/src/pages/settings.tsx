@@ -1,14 +1,16 @@
-import { Download, Chrome, CheckCircle2, Circle, ArrowLeft, Sparkles, Search, Send, Zap, Settings as SettingsIcon, XCircle, Loader2 } from "lucide-react";
+import { Download, Chrome, CheckCircle2, Circle, ArrowLeft, Sparkles, Search, Send, Zap, Settings as SettingsIcon, XCircle, Loader2, Phone, MessageSquare } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient, apiRequest } from "@/lib/queryClient";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ConcernIntakePanel } from "@/components/concern-intake-panel";
 
 type ShopLocation = "NB" | "WM" | "EV";
 
@@ -25,12 +27,15 @@ type TekmetricStatus = {
 type Settings = {
   id: string;
   defaultShopId: ShopLocation | null;
+  phoneAnswerScript: string | null;
   updatedAt: string;
 };
 
 export default function Settings() {
   const { toast } = useToast();
   const [selectedShop, setSelectedShop] = useState<ShopLocation | null>(null);
+  const [phoneScript, setPhoneScript] = useState("");
+  const [showConcernIntake, setShowConcernIntake] = useState(false);
 
   const { data: status, isLoading: statusLoading } = useQuery<TekmetricStatus>({
     queryKey: ["/api/tekmetric/status"],
@@ -40,17 +45,34 @@ export default function Settings() {
     queryKey: ["/api/settings"],
   });
 
+  useEffect(() => {
+    if (settings?.phoneAnswerScript) {
+      setPhoneScript(settings.phoneAnswerScript);
+    }
+  }, [settings]);
+
   const updateSettingsMutation = useMutation({
-    mutationFn: async (data: { defaultShopId: ShopLocation }) => {
+    mutationFn: async (data: { defaultShopId?: ShopLocation; phoneAnswerScript?: string }) => {
       const response = await apiRequest("POST", "/api/settings", data);
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "Failed to save settings");
+      }
       return response.json();
     },
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["/api/settings"] });
-      toast({
-        title: "Settings saved",
-        description: "Your default shop location has been updated.",
-      });
+      if (variables.phoneAnswerScript !== undefined) {
+        toast({
+          title: "Phone script saved",
+          description: "Your phone greeting script has been updated.",
+        });
+      } else if (variables.defaultShopId !== undefined) {
+        toast({
+          title: "Settings saved",
+          description: "Your default shop location has been updated.",
+        });
+      }
     },
     onError: (error: Error) => {
       toast({
@@ -93,6 +115,10 @@ export default function Settings() {
     if (selectedShop) {
       updateSettingsMutation.mutate({ defaultShopId: selectedShop });
     }
+  };
+
+  const handleSavePhoneScript = () => {
+    updateSettingsMutation.mutate({ phoneAnswerScript: phoneScript });
   };
 
   const handleTestConnection = () => {
@@ -231,6 +257,91 @@ export default function Settings() {
                   </div>
                 )}
               </>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Phone Answer Script Section */}
+        <Card className="mb-6">
+          <CardHeader>
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Phone className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <CardTitle>Phone Answer Script</CardTitle>
+                <CardDescription>
+                  Customize the greeting shown when taking calls with the Concern Intake tool
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="phone-script">Phone Greeting Script</Label>
+              <Textarea
+                id="phone-script"
+                placeholder="Thank you for calling HEART Certified Auto Care! My name is [Name], how can I help you today?"
+                value={phoneScript}
+                onChange={(e) => setPhoneScript(e.target.value)}
+                className="min-h-[100px]"
+                data-testid="input-phone-script"
+              />
+              <p className="text-sm text-muted-foreground">
+                This script appears at the top of the Concern Intake panel as a reminder
+              </p>
+            </div>
+
+            <Button
+              onClick={handleSavePhoneScript}
+              disabled={updateSettingsMutation.isPending}
+              data-testid="button-save-phone-script"
+            >
+              {updateSettingsMutation.isPending && (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              )}
+              Save Script
+            </Button>
+          </CardContent>
+        </Card>
+
+        {/* Concern Intake Demo Section */}
+        <Card className="mb-6">
+          <CardHeader>
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                <MessageSquare className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <CardTitle>AI Concern Intake</CardTitle>
+                <CardDescription>
+                  Use AI to gather diagnostic information during customer calls
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <Alert>
+              <AlertDescription>
+                The Concern Intake tool helps you ask the right follow-up questions when customers call about vehicle problems. It generates diagnostic questions and formats the conversation into a clean summary for the repair order.
+              </AlertDescription>
+            </Alert>
+
+            <Button
+              onClick={() => setShowConcernIntake(!showConcernIntake)}
+              variant={showConcernIntake ? "secondary" : "default"}
+              data-testid="button-toggle-concern-intake"
+            >
+              <MessageSquare className="w-4 h-4 mr-2" />
+              {showConcernIntake ? "Hide Demo" : "Try Concern Intake"}
+            </Button>
+
+            {showConcernIntake && (
+              <div className="border rounded-lg p-4 mt-4">
+                <ConcernIntakePanel
+                  phoneAnswerScript={settings?.phoneAnswerScript || undefined}
+                />
+              </div>
             )}
           </CardContent>
         </Card>

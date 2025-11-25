@@ -1,8 +1,23 @@
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
-import { searchJobSchema, type SearchResult, insertSettingsSchema } from "@shared/schema";
-import { scoreJobMatches, getCompatibleYears, getSimilarModels, extractRepairTerms } from "./ai";
+import { 
+  searchJobSchema, 
+  type SearchResult, 
+  insertSettingsSchema,
+  generateConcernQuestionsRequestSchema,
+  reviewConcernConversationRequestSchema,
+  cleanConversationRequestSchema,
+} from "@shared/schema";
+import { 
+  scoreJobMatches, 
+  getCompatibleYears, 
+  getSimilarModels, 
+  extractRepairTerms,
+  generateConcernFollowUpQuestions,
+  reviewConcernConversation,
+  cleanConcernConversation,
+} from "./ai";
 import archiver from "archiver";
 import { join } from "path";
 import { 
@@ -457,11 +472,75 @@ export function registerRoutes(app: Express) {
   // Update settings
   app.post("/api/settings", async (req, res) => {
     try {
-      const data = insertSettingsSchema.parse(req.body);
-      const settings = await storage.updateSettings(data);
+      const parseResult = insertSettingsSchema.safeParse(req.body);
+      if (!parseResult.success) {
+        return res.status(400).json({ 
+          error: "Invalid request", 
+          details: parseResult.error.issues 
+        });
+      }
+      const settings = await storage.updateSettings(parseResult.data);
       res.json(settings);
     } catch (error: any) {
       console.error("Update settings error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // ==========================================
+  // Concern Intake API Routes
+  // ==========================================
+
+  // Generate follow-up questions from initial customer concern
+  app.post("/api/concerns/generate-questions", async (req, res) => {
+    try {
+      const parseResult = generateConcernQuestionsRequestSchema.safeParse(req.body);
+      if (!parseResult.success) {
+        return res.status(400).json({ 
+          error: "Invalid request", 
+          details: parseResult.error.issues 
+        });
+      }
+      const result = await generateConcernFollowUpQuestions(parseResult.data);
+      res.json(result);
+    } catch (error: any) {
+      console.error("Generate concern questions error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Review conversation and suggest additional questions
+  app.post("/api/concerns/review", async (req, res) => {
+    try {
+      const parseResult = reviewConcernConversationRequestSchema.safeParse(req.body);
+      if (!parseResult.success) {
+        return res.status(400).json({ 
+          error: "Invalid request", 
+          details: parseResult.error.issues 
+        });
+      }
+      const result = await reviewConcernConversation(parseResult.data);
+      res.json(result);
+    } catch (error: any) {
+      console.error("Review conversation error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Clean and format conversation into paragraph
+  app.post("/api/concerns/clean-conversation", async (req, res) => {
+    try {
+      const parseResult = cleanConversationRequestSchema.safeParse(req.body);
+      if (!parseResult.success) {
+        return res.status(400).json({ 
+          error: "Invalid request", 
+          details: parseResult.error.issues 
+        });
+      }
+      const result = await cleanConcernConversation(parseResult.data);
+      res.json(result);
+    } catch (error: any) {
+      console.error("Clean conversation error:", error);
       res.status(500).json({ error: error.message });
     }
   });

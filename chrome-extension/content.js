@@ -1317,3 +1317,147 @@ if (document.readyState === 'loading') {
 } else {
   observePageChanges();
 }
+
+// ==========================================
+// Side Panel Message Handlers
+// ==========================================
+
+// Listen for messages from side panel
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // Get current vehicle info for side panel
+  if (message.type === 'GET_VEHICLE_INFO') {
+    const vehicleInfo = extractVehicleInfo();
+    sendResponse({ vehicleInfo });
+    return true;
+  }
+  
+  // Add cleaned concern text to the repair order
+  if (message.type === 'ADD_CONCERN_TO_RO') {
+    const concernText = message.concernText;
+    
+    // Find concern/complaint textarea on the page
+    const concernField = findConcernField();
+    
+    if (concernField) {
+      // Append to existing content if any
+      const existingValue = concernField.value || concernField.textContent || '';
+      const newValue = existingValue 
+        ? `${existingValue}\n\n${concernText}` 
+        : concernText;
+      
+      if (concernField.tagName === 'TEXTAREA' || concernField.tagName === 'INPUT') {
+        concernField.value = newValue;
+        concernField.dispatchEvent(new Event('input', { bubbles: true }));
+        concernField.dispatchEvent(new Event('change', { bubbles: true }));
+      } else {
+        concernField.textContent = newValue;
+        concernField.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      
+      console.log("✓ Added concern text to RO:", concernText.substring(0, 50) + '...');
+      sendResponse({ success: true });
+    } else {
+      console.log("❌ Could not find concern field on page");
+      sendResponse({ success: false, error: 'Concern field not found' });
+    }
+    return true;
+  }
+});
+
+// Extract vehicle info from Tekmetric page
+function extractVehicleInfo() {
+  let vehicleInfo = { year: null, make: null, model: null, engine: null };
+  
+  try {
+    // Look for vehicle info in various common locations
+    // Strategy 1: Look for vehicle header text
+    const headerElements = document.querySelectorAll('h1, h2, h3, h4, .vehicle-info, [class*="vehicle"], [class*="Vehicle"]');
+    for (const el of headerElements) {
+      const text = el.textContent?.trim() || '';
+      // Look for pattern like "2018 Toyota Sienna"
+      const match = text.match(/(\d{4})\s+([A-Za-z]+)\s+([A-Za-z0-9\s-]+)/);
+      if (match) {
+        vehicleInfo = {
+          year: parseInt(match[1]),
+          make: match[2],
+          model: match[3].trim(),
+          engine: null
+        };
+        break;
+      }
+    }
+    
+    // Strategy 2: Look for data attributes
+    if (!vehicleInfo.year) {
+      const vehicleEl = document.querySelector('[data-vehicle-year], [data-year]');
+      if (vehicleEl) {
+        vehicleInfo.year = parseInt(vehicleEl.getAttribute('data-vehicle-year') || vehicleEl.getAttribute('data-year'));
+      }
+      const makeEl = document.querySelector('[data-vehicle-make], [data-make]');
+      if (makeEl) {
+        vehicleInfo.make = makeEl.getAttribute('data-vehicle-make') || makeEl.getAttribute('data-make');
+      }
+      const modelEl = document.querySelector('[data-vehicle-model], [data-model]');
+      if (modelEl) {
+        vehicleInfo.model = modelEl.getAttribute('data-vehicle-model') || modelEl.getAttribute('data-model');
+      }
+    }
+    
+    // Strategy 3: Look for labeled fields
+    if (!vehicleInfo.year) {
+      const labels = document.querySelectorAll('label, span, div');
+      for (const label of labels) {
+        const text = label.textContent?.toLowerCase() || '';
+        const nextEl = label.nextElementSibling;
+        if (text.includes('year') && nextEl) {
+          const yearText = nextEl.textContent?.match(/\d{4}/)?.[0];
+          if (yearText) vehicleInfo.year = parseInt(yearText);
+        }
+        if (text.includes('make') && nextEl) {
+          vehicleInfo.make = nextEl.textContent?.trim();
+        }
+        if (text.includes('model') && nextEl) {
+          vehicleInfo.model = nextEl.textContent?.trim();
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Error extracting vehicle info:', error);
+  }
+  
+  return vehicleInfo;
+}
+
+// Find concern/complaint text field on the page
+function findConcernField() {
+  // Look for textareas with concern-related placeholders or labels
+  const textareas = document.querySelectorAll('textarea');
+  for (const textarea of textareas) {
+    const placeholder = textarea.placeholder?.toLowerCase() || '';
+    const label = textarea.getAttribute('aria-label')?.toLowerCase() || '';
+    const id = textarea.id?.toLowerCase() || '';
+    const name = textarea.name?.toLowerCase() || '';
+    
+    if (placeholder.includes('concern') || placeholder.includes('complaint') ||
+        placeholder.includes('customer') || placeholder.includes('issue') ||
+        label.includes('concern') || label.includes('complaint') ||
+        id.includes('concern') || id.includes('complaint') ||
+        name.includes('concern') || name.includes('complaint')) {
+      return textarea;
+    }
+  }
+  
+  // Fallback: look for any visible textarea that might be a notes field
+  for (const textarea of textareas) {
+    const style = window.getComputedStyle(textarea);
+    if (style.display !== 'none' && style.visibility !== 'hidden') {
+      // Check parent for concern-related classes
+      const parent = textarea.closest('[class*="concern"], [class*="complaint"], [class*="note"]');
+      if (parent) {
+        return textarea;
+      }
+    }
+  }
+  
+  return null;
+}

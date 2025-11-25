@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HEART Helper - Concern Intake</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <div class="panel-container">
+    <header class="panel-header">
+      <div class="logo">
+        <span class="heart-icon">&#10084;</span>
+        <span class="logo-text">HEART Helper</span>
+      </div>
+      <div class="header-subtitle">Concern Intake</div>
+    </header>
+
+    <div class="phone-script-section" id="phoneScriptSection" style="display: none;">
+      <div class="section-label">
+        <span class="label-icon">&#128222;</span>
+        Phone Greeting
+      </div>
+      <div class="phone-script" id="phoneScript"></div>
+    </div>
+
+    <div class="vehicle-info-section" id="vehicleInfoSection" style="display: none;">
+      <div class="section-label">Vehicle Info</div>
+      <div class="vehicle-info" id="vehicleInfo"></div>
+    </div>
+
+    <div class="step-indicator" id="stepIndicator">
+      <div class="step active" data-step="1">1. Concern</div>
+      <div class="step" data-step="2">2. Questions</div>
+      <div class="step" data-step="3">3. Summary</div>
+    </div>
+
+    <main class="panel-content">
+      <div id="step1" class="step-content active">
+        <div class="form-group">
+          <label for="customerConcern">What is the customer's concern?</label>
+          <textarea 
+            id="customerConcern" 
+            placeholder="e.g., Car makes a squeaking noise when braking..."
+            rows="4"
+          ></textarea>
+        </div>
+        <button id="generateQuestionsBtn" class="btn btn-primary">
+          <span class="btn-icon">&#10024;</span>
+          Generate Follow-up Questions
+        </button>
+      </div>
+
+      <div id="step2" class="step-content" style="display: none;">
+        <div class="question-section">
+          <div class="question-header">
+            <span>Question <span id="questionNum">1</span> of <span id="totalQuestions">5</span></span>
+          </div>
+          <div class="current-question" id="currentQuestion"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="customerAnswer">Customer's Answer</label>
+          <textarea 
+            id="customerAnswer" 
+            placeholder="Record what the customer says..."
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="button-row">
+          <button id="nextQuestionBtn" class="btn btn-primary flex-1">
+            Next <span class="btn-arrow">&#8594;</span>
+          </button>
+          <button id="skipQuestionBtn" class="btn btn-secondary">Skip</button>
+        </div>
+
+        <div class="answered-questions" id="answeredQuestions" style="display: none;">
+          <div class="section-label">Recorded Answers</div>
+          <div id="answeredList"></div>
+        </div>
+
+        <div class="form-group" style="margin-top: 12px;">
+          <label for="additionalNotes">Additional Notes (optional)</label>
+          <textarea 
+            id="additionalNotes" 
+            placeholder="Any other observations..."
+            rows="2"
+          ></textarea>
+        </div>
+
+        <button id="finalizeEarlyBtn" class="btn btn-outline">Finalize Now</button>
+      </div>
+
+      <div id="step3" class="step-content" style="display: none;">
+        <div class="summary-section">
+          <div class="section-label">Formatted Concern</div>
+          <div class="summary-text" id="summaryText"></div>
+        </div>
+
+        <div class="button-row">
+          <button id="copyBtn" class="btn btn-secondary flex-1">
+            <span class="btn-icon">&#128203;</span>
+            Copy
+          </button>
+          <button id="sendToTekmetricBtn" class="btn btn-primary flex-1">
+            <span class="btn-icon">&#128196;</span>
+            Add to RO
+          </button>
+        </div>
+
+        <button id="restartBtn" class="btn btn-outline">
+          <span class="btn-icon">&#8635;</span>
+          Start New Concern
+        </button>
+      </div>
+
+      <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Generating...</div>
+      </div>
+    </main>
+
+    <footer class="panel-footer">
+      <div class="connection-status" id="connectionStatus">
+        <span class="status-dot disconnected"></span>
+        <span>Not connected</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

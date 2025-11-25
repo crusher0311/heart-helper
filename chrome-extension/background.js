@@ -1,6 +1,24 @@
 let pendingJobData = null;
 
+// Enable side panel for Tekmetric pages
+chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: false })
+  .catch((error) => console.log('Side panel behavior not set:', error));
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // Open side panel for concern intake
+  if (message.action === "OPEN_SIDE_PANEL") {
+    chrome.sidePanel.open({ tabId: sender.tab.id })
+      .then(() => {
+        console.log("Side panel opened");
+        sendResponse({ success: true });
+      })
+      .catch((error) => {
+        console.error("Failed to open side panel:", error);
+        sendResponse({ success: false, error: error.message });
+      });
+    return true; // Async response
+  }
+  
   if (message.action === "SEND_TO_TEKMETRIC") {
     console.log("Background: Received job data from web app", message.payload);
     
