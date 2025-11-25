@@ -54,6 +54,8 @@ export class DatabaseStorage implements IStorage {
     yearRange?: number;
   }): Promise<JobWithDetails[]> {
     const limit = params.limit || 50;
+    
+    console.log('searchJobs called with params:', JSON.stringify(params));
 
     // Build the query conditions
     const conditions = [];
@@ -108,6 +110,16 @@ export class DatabaseStorage implements IStorage {
       .where(and(...conditions))
       .orderBy(desc(repairOrders.completedDate))
       .limit(limit);
+    
+    console.log(`Database query returned ${results.length} results`);
+    if (results.length > 0) {
+      console.log('First result:', {
+        jobName: results[0].job.name,
+        vehicleMake: results[0].vehicle?.make,
+        vehicleModel: results[0].vehicle?.model,
+        vehicleYear: results[0].vehicle?.year
+      });
+    }
 
     // Fetch parts for each job
     const jobsWithDetails: JobWithDetails[] = [];
