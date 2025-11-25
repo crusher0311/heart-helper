@@ -77,8 +77,27 @@ export function registerRoutes(app: Express) {
         return res.json([]);
       }
 
+      // Deduplicate candidates by job ID (same job may appear multiple times from different ROs)
+      const seenIds = new Set<number>();
+      const uniqueCandidates = candidates.filter(job => {
+        if (seenIds.has(job.id)) {
+          return false;
+        }
+        seenIds.add(job.id);
+        return true;
+      });
+      
+      console.log(`Deduplicated ${candidates.length} candidates to ${uniqueCandidates.length} unique jobs`);
+
+      // Limit to top 30 candidates for AI scoring to improve performance (40s → ~10-15s)
+      const candidatesForScoring = uniqueCandidates.slice(0, 30);
+      
+      if (candidatesForScoring.length < uniqueCandidates.length) {
+        console.log(`Limited AI scoring to top ${candidatesForScoring.length} of ${uniqueCandidates.length} candidates for performance`);
+      }
+
       // Prepare candidates for AI scoring
-      const candidatesForAI = candidates.map((job) => ({
+      const candidatesForAI = candidatesForScoring.map((job) => ({
         id: job.id,
         name: job.name,
         vehicleMake: job.vehicle?.make,
@@ -108,7 +127,7 @@ export function registerRoutes(app: Express) {
         // Combine AI scores with job data
         results = matches
           .map((match) => {
-            const job = candidates.find((c) => c.id === match.jobId);
+            const job = candidatesForScoring.find((c) => c.id === match.jobId);
             if (!job) return null;
 
             return {
@@ -120,7 +139,7 @@ export function registerRoutes(app: Express) {
           .filter((r): r is SearchResult => r !== null);
       } catch (aiError) {
         // Return results without AI scoring
-        results = candidates.slice(0, 20).map((job) => ({
+        results = candidatesForScoring.slice(0, 20).map((job) => ({
           job,
           matchScore: 85,
           matchReason: "Match based on repair type (AI scoring unavailable)",
