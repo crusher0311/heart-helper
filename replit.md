@@ -91,6 +91,11 @@ Note: Chrome extension UI automation is the only viable method for programmatica
   - Supports filtering by vehicle make, model, year, and engine
   - Joins against vehicles table synced from Tekmetric
   - Falls back to unscored results if AI is unavailable
+  - **Database-Backed Caching**: SHA256-hashed search params cache full results for 1 hour
+    - Cache HIT: <1 second response time (instant results, no AI cost)
+    - Cache MISS: 20-30 seconds (AI scoring required, results cached for future searches)
+    - Returns uniform format: `{results, cached, cachedAt}` for all responses
+- `/api/search/recent` - Fetch last 10 search queries from history with timestamps
 - `/api/tekmetric/create-estimate` - Create repair order estimates directly in Tekmetric
 - `/api/tekmetric/refresh-pricing` - Fetch current parts pricing from Tekmetric (informational)
 - `/api/tekmetric/test` - Test API connection for specific shop location
@@ -132,6 +137,11 @@ Note: Chrome extension UI automation is the only viable method for programmatica
 - `labor_items` - Labor line items with hours and rates
 - `parts` - Parts used in jobs with pricing
 - `search_requests` - Audit log of search queries
+- `search_cache` - Database-backed search result cache with 1-hour TTL
+  - Stores SHA256-hashed search params as key
+  - Full results stored as JSONB for instant retrieval
+  - Includes timestamp for cache age display and automatic expiration
+  - Reduces repeat search times from 20-30 seconds to <1 second
 - `settings` - User preferences (default shop ID for Tekmetric API)
 
 **ID Strategy**: Uses Tekmetric's external IDs as primary keys to maintain referential integrity with source system
