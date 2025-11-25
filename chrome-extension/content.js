@@ -107,19 +107,31 @@ let isFillingJob = false;
 
 async function fillTekmetricEstimate(jobData) {
   if (isFillingJob) {
+    console.log("⏸️ Already filling a job, skipping duplicate request");
     return;
   }
   
   isFillingJob = true;
+  console.log("🚀 Starting to fill Tekmetric estimate with job data:", jobData);
   
   // CRITICAL: Clear job data immediately to prevent duplicate runs
-  chrome.runtime.sendMessage({ action: "CLEAR_PENDING_JOB" });
+  chrome.runtime.sendMessage({ action: "CLEAR_PENDING_JOB" }, () => {
+    console.log("🧹 Cleared pending job data from storage");
+  });
   
   try {
+    console.log("1️⃣ Checking if on Tekmetric page...");
+    console.log("Current URL:", window.location.href);
+    
     if (!window.location.href.includes('shop.tekmetric.com')) {
+      console.log("❌ Not on Tekmetric page, skipping auto-fill");
       isFillingJob = false;
       return;
     }
+    
+    console.log("✅ On Tekmetric page, starting automation immediately...");
+    // No artificial delay needed - page is already loaded when user switches to tab
+    // Chrome throttles setTimeout in background tabs, causing 2.5min+ delays
 
     const jobButton = Array.from(document.querySelectorAll('button')).find(btn => {
       const icon = btn.querySelector('svg');

@@ -20,12 +20,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Chrome Extension (Primary Method)
 
-A Chrome extension (`chrome-extension/`) automates adding jobs to Tekmetric repair orders with **instant background fill**:
-- **Version 2.2.0**: Carvis-style instant auto-fill - job appears filled by time user switches tabs
-- **Tab Activation Monitoring**: Background script detects when user switches to Tekmetric tab
-- **Script Injection**: Uses `chrome.scripting.executeScript` to bypass Chrome's background tab throttling (10x faster)
-- **Batched DOM Operations**: Uses `requestAnimationFrame` for instant field updates (50-300ms delays vs old 500-1500ms)
-- **Debug Mode**: Toggle detailed logging with `localStorage.heartHelperDebug = 'true'`
+A Chrome extension (`chrome-extension/`) automates adding jobs to Tekmetric repair orders:
 - **Send to Extension** button in job detail panel sends complete job data to the extension
 - Extension auto-fills Tekmetric repair order forms with labor items and parts by automating UI interactions
 - Extracts current RO ID from Tekmetric URL when user clicks "Check History"
@@ -48,20 +43,13 @@ A Chrome extension (`chrome-extension/`) automates adding jobs to Tekmetric repa
 8. Switches back to Tekmetric RO tab
 9. Extension automatically fills in labor items and parts
 
-**Carvis-Style Features:**
-1. **Auto-Fill Search from Tekmetric:**
-   - Extension intelligently extracts customer concerns from Tekmetric RO page
-   - Looks for fields labeled "concern", "complaint", "customer", "reason for visit"
-   - Pre-populates search field with extracted text (up to 200 chars)
-   - Shows "From Tekmetric" badge in UI to indicate auto-fill
-   - Automatically triggers search when concerns are found
-   - User can edit pre-filled text if needed
-
-2. **Instant Background Fill (v2.2.0):**
-   - Job appears completely filled by the time user switches tabs
-   - Background script monitors tab activation and injects auto-fill at full speed
-   - No visible delays or progress messages (unless debug mode enabled)
-   - Total fill time: 2-4 seconds (appears instant to user)
+**Carvis-Style Auto-Fill:**
+- Extension intelligently extracts customer concerns from Tekmetric RO page
+- Looks for fields labeled "concern", "complaint", "customer", "reason for visit"
+- Pre-populates search field with extracted text (up to 200 chars)
+- Shows "From Tekmetric" badge in UI to indicate auto-fill
+- Automatically triggers search when concerns are found
+- User can edit pre-filled text if needed
 
 ### API Integration (Read-Only)
 

@@ -6,8 +6,7 @@
   "permissions": [
     "storage",
     "activeTab",
-    "scripting",
-    "tabs"
+    "scripting"
   ],
   "host_permissions": [
     "https://shop.tekmetric.com/*",
@@ -15,14 +14,14 @@
     "*://*.replit.dev/*"
   ],
   "background": {
-    "service_worker": "background-v2.js"
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
       "matches": [
         "https://shop.tekmetric.com/*"
       ],
-      "js": ["content-v2.js"],
+      "js": ["content.js"],
       "run_at": "document_idle"
     },
     {

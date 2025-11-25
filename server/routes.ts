@@ -33,12 +33,16 @@ export function registerRoutes(app: Express) {
       if (!bypassCache) {
         const cachedResults = await storage.getCachedSearch(params);
         if (cachedResults) {
+          console.log(`Cache hit! Returning ${cachedResults.length} cached results`);
           return res.json({
             results: cachedResults,
             cached: true,
             cachedAt: new Date().toISOString(),
           });
         }
+        console.log('Cache miss, running fresh search...');
+      } else {
+        console.log('Cache bypass requested, running fresh search...');
       }
 
       // Always try exact match first
@@ -55,6 +59,8 @@ export function registerRoutes(app: Express) {
       if (candidates.length === 0) {
         if (params.broadenStrategy === 'years' && params.vehicleYear && params.vehicleMake && params.vehicleModel) {
           // Stage 1: Broaden year ranges using AI
+          console.log(`Broadening year range for ${params.vehicleYear} ${params.vehicleMake} ${params.vehicleModel} using AI...`);
+          
           const compatibleYears = await getCompatibleYears(
             params.vehicleMake,
             params.vehicleModel,
@@ -62,6 +68,8 @@ export function registerRoutes(app: Express) {
             params.vehicleEngine,
             params.repairType
           );
+          
+          console.log(`AI determined compatible years: ${compatibleYears.join(', ')}`);
           
           // Search with broader year criteria (drop engine filter)
           const yearCandidates = await storage.searchJobs({
@@ -76,8 +84,11 @@ export function registerRoutes(app: Express) {
             job.vehicle?.year && compatibleYears.includes(job.vehicle.year)
           ).slice(0, 50);
           
+          console.log(`Found ${candidates.length} candidates in AI-compatible years`);
+          
           // Fallback if AI years produced zero results
           if (candidates.length === 0) {
+            console.log('AI year expansion found no results, falling back to removing year filter...');
             candidates = await storage.searchJobs({
               vehicleMake: params.vehicleMake,
               vehicleModel: params.vehicleModel,
