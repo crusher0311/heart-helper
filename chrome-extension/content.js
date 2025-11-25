@@ -1261,84 +1261,148 @@ function injectHeartIcons() {
   // Always inject floating button - this is the primary way to search
   injectFloatingHeartButton();
   
-  console.log("🔍 Searching for concern rows with 3-dot menus...");
+  console.log("🔍 Searching for concern rows...");
   
   let iconsInjected = 0;
   
-  // Find all 3-dot menu buttons (icon-only buttons with SVG, usually vertical dots)
+  // Strategy: Find all rows that have "Add finding" or actual finding text
+  // and look for the 3-dot menu button in those rows
+  
+  // First, find elements containing "Add finding" or concern-related content
+  const allElements = document.querySelectorAll('*');
+  const processedRows = new Set();
+  
+  for (const el of allElements) {
+    // Skip if this element has children with matching text (we want the leaf)
+    const directText = el.textContent?.trim() || '';
+    
+    // Look for "Add finding" text elements
+    if (directText.toLowerCase() === 'add finding') {
+      // Go up to find the row
+      let row = el;
+      for (let i = 0; i < 10 && row; i++) {
+        // Check if this row has a 3-dot button (button with just an SVG)
+        const buttons = row.querySelectorAll('button');
+        let threeDotsBtn = null;
+        
+        for (const btn of buttons) {
+          const svg = btn.querySelector('svg');
+          const btnText = btn.textContent?.trim() || '';
+          if (svg && btnText.length < 3) {
+            threeDotsBtn = btn;
+            break;
+          }
+        }
+        
+        if (threeDotsBtn && !processedRows.has(row)) {
+          // Check we're not in jobs section
+          const rowHtml = row.outerHTML?.toLowerCase() || '';
+          if (rowHtml.includes('reorder') || rowHtml.includes('reassign')) {
+            break;
+          }
+          
+          // Get the concern text
+          let rowText = row.textContent?.trim() || '';
+          let searchText = rowText
+            .replace(/add finding/gi, '')
+            .replace(/add concern/gi, '')
+            .replace(/copy to estimate/gi, '')
+            .replace(/\(\d+\)/g, '')
+            .replace(/[\s]{2,}/g, ' ')
+            .trim();
+          
+          // Skip if too short or is a header
+          if (searchText.length > 5 && 
+              !searchText.toLowerCase().startsWith('customer concern') &&
+              !searchText.toLowerCase().startsWith('technician concern')) {
+            
+            // Check if heart already exists
+            const parent = threeDotsBtn.parentElement;
+            if (parent && !parent.querySelector('.heart-helper-inline')) {
+              const heart = createHeartButton(searchText);
+              parent.insertBefore(heart, threeDotsBtn);
+              processedRows.add(row);
+              iconsInjected++;
+              console.log(`✓ Heart added: "${searchText.substring(0, 40)}..."`);
+            }
+          }
+          break;
+        }
+        
+        row = row.parentElement;
+      }
+    }
+  }
+  
+  // Also look for rows with actual findings (not just "Add finding")
+  // Find rows in technician/customer concern sections with 3-dot buttons
   const allButtons = document.querySelectorAll('button');
   
   for (const btn of allButtons) {
-    // Check if this is a 3-dot menu button (has SVG, no text, small size)
+    // Check if this looks like a 3-dot button (has SVG, minimal/no text)
     const svg = btn.querySelector('svg');
-    const hasNoText = btn.textContent?.trim() === '';
-    const isSmall = btn.offsetWidth < 50 && btn.offsetHeight < 50;
+    const btnText = btn.textContent?.trim() || '';
+    if (!svg || btnText.length > 3) continue;
     
-    if (!svg || !hasNoText || !isSmall) continue;
-    
-    // Skip if already has a heart sibling
     const parent = btn.parentElement;
-    if (!parent) continue;
-    if (parent.querySelector('.heart-helper-inline')) continue;
+    if (!parent || parent.querySelector('.heart-helper-inline')) continue;
     
-    // Check if this button is in a concern section (not in jobs/labor/parts)
-    let inConcernSection = false;
-    let inJobsSection = false;
-    let ancestor = btn;
-    
-    for (let i = 0; i < 20 && ancestor; i++) {
-      const text = ancestor.textContent?.toLowerCase() || '';
+    // Find the row
+    let row = btn.closest('div');
+    for (let i = 0; i < 5 && row; i++) {
+      if (processedRows.has(row)) break;
       
-      // Check for concern section markers
-      if (text.includes('customer concern') || text.includes('technician concern')) {
-        inConcernSection = true;
+      const rowText = row.textContent?.trim() || '';
+      
+      // Check if this row is in a concern section
+      let inConcern = false;
+      let ancestor = row.parentElement;
+      for (let j = 0; j < 15 && ancestor; j++) {
+        const aText = ancestor.textContent?.toLowerCase() || '';
+        if (aText.includes('customer concern') || aText.includes('technician concern')) {
+          inConcern = true;
+          break;
+        }
+        if (aText.includes('reorder jobs') || aText.includes('reassign labor')) {
+          break;
+        }
+        ancestor = ancestor.parentElement;
       }
       
-      // Check for job section markers (exclude these)
-      if (text.includes('reorder jobs') || 
-          text.includes('reassign labor') ||
-          text.includes('collapse all') ||
-          (text.includes('labor') && text.includes('technician') && text.includes('hours'))) {
-        inJobsSection = true;
-        break;
+      if (!inConcern) {
+        row = row.parentElement;
+        continue;
       }
       
-      ancestor = ancestor.parentElement;
+      // Skip headers
+      const lowerRow = rowText.toLowerCase();
+      if (lowerRow.startsWith('customer concern') || 
+          lowerRow.startsWith('technician concern') ||
+          lowerRow === 'finding' ||
+          rowText.length < 10) {
+        row = row.parentElement;
+        continue;
+      }
+      
+      // Clean up and create heart
+      let searchText = rowText
+        .replace(/add finding/gi, '')
+        .replace(/add concern/gi, '')
+        .replace(/copy to estimate/gi, '')
+        .replace(/sort by:?\s*rating/gi, '')
+        .replace(/\(\d+\)/g, '')
+        .replace(/[\s]{2,}/g, ' ')
+        .trim();
+      
+      if (searchText.length > 5 && !parent.querySelector('.heart-helper-inline')) {
+        const heart = createHeartButton(searchText);
+        parent.insertBefore(heart, btn);
+        processedRows.add(row);
+        iconsInjected++;
+        console.log(`✓ Heart added for finding: "${searchText.substring(0, 40)}..."`);
+      }
+      break;
     }
-    
-    if (!inConcernSection || inJobsSection) continue;
-    
-    // Find the row this button belongs to
-    let row = btn.closest('div[class*="flex"]');
-    if (!row) continue;
-    
-    // Get the row text for the search query
-    let rowText = row.textContent?.trim() || '';
-    
-    // Skip header rows
-    const lowerText = rowText.toLowerCase();
-    if (lowerText.startsWith('customer concern') && rowText.length < 50) continue;
-    if (lowerText.startsWith('technician concern') && rowText.length < 50) continue;
-    if (lowerText === 'finding') continue;
-    if (rowText.length < 5) continue;
-    
-    // Clean up the search text - remove common UI elements
-    let searchText = rowText
-      .replace(/add finding/gi, '')
-      .replace(/add concern/gi, '')
-      .replace(/copy to estimate/gi, '')
-      .replace(/sort by:?\s*rating/gi, '')
-      .replace(/\(\d+\)/g, '') // Remove counts like (12)
-      .replace(/[\s]{2,}/g, ' ')
-      .trim();
-    
-    if (searchText.length < 5) continue;
-    
-    // Create and insert heart before the 3-dot button
-    const heart = createHeartButton(searchText);
-    parent.insertBefore(heart, btn);
-    iconsInjected++;
-    console.log(`✓ Heart added: "${searchText.substring(0, 50)}..."`);
   }
   
   console.log(`✅ Total hearts injected: ${iconsInjected}`);
