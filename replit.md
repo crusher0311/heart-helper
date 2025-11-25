@@ -108,8 +108,13 @@ Note: Chrome extension UI automation is the only viable method for programmatica
 
 **AI Integration**: 
 - OpenAI API accessed through Replit's AI Integrations service
+- **Model**: gpt-4o-mini for fast, cost-effective scoring (~22 seconds per search)
 - LLM used for semantic matching of repair jobs based on vehicle specs and repair type
 - Scores candidates and provides reasoning for match quality
+- **Performance Optimizations**:
+  - Limits AI scoring to top 20 candidates (down from 30) for 30-40% speed improvement
+  - Uses 2000 max tokens (down from 4096) for faster responses
+  - Response parser handles multiple JSON formats from AI (jobs, matches, results, arrays)
 - **Smart Year Compatibility**: AI determines which model years are mechanically compatible
   - Considers powertrain generations, platform changes, and component interchangeability
   - Replaces blind ±2 year expansion with intelligent year selection
