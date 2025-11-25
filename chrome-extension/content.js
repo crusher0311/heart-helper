@@ -249,7 +249,40 @@ async function fillTekmetricEstimate(jobData) {
     if (jobSaveButton) {
       console.log('✓ Clicking save button:', jobSaveButton.textContent.trim());
       jobSaveButton.click();
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Wait for modal to close and job card to appear on estimate with "click here" links
+      console.log('⏳ Waiting for job card to appear with "click here" links...');
+      const waitForJobCard = async () => {
+        const startTime = Date.now();
+        const timeout = 10000; // 10 seconds max
+        
+        while (Date.now() - startTime < timeout) {
+          // Look for the "click here" text that appears in the job card
+          const clickHereLinks = Array.from(document.querySelectorAll('*')).filter(el => {
+            const text = el.textContent?.toLowerCase() || '';
+            return (text.includes('click') && text.includes('labor')) || 
+                   (text.includes('click') && text.includes('part'));
+          });
+          
+          if (clickHereLinks.length > 0) {
+            console.log('✓ Job card appeared with click here links!');
+            return true;
+          }
+          
+          // Log progress every 2 seconds
+          const elapsed = Date.now() - startTime;
+          if (elapsed % 2000 < 100) {
+            console.log(`⏳ Still waiting for job card... (${Math.floor(elapsed / 1000)}s elapsed)`);
+          }
+          
+          await new Promise(resolve => setTimeout(resolve, 200));
+        }
+        
+        console.log('⚠️ Timeout waiting for job card, proceeding anyway...');
+        return false;
+      };
+      
+      await waitForJobCard();
     } else {
       console.log('⚠️ No save button found, trying to proceed anyway...');
       console.log('Available buttons:', Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim()).filter(t => t));

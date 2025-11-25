@@ -2,6 +2,31 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.7.1] - 2024-11-24
+
+### ⏰ CRITICAL TIMING FIX: Wait for Job Card to Appear Before Adding Labor/Parts
+- **THE PROBLEM**: User reported "the red line click here only appears after the timeout"
+  - Script clicked Save → waited 1.5s → tried to find labor button
+  - But job card with "click here" links takes several seconds to render
+  - Error: "Could not find labor description field"
+- **THE ROOT CAUSE**: Timing issue in the automation flow:
+  1. ✅ Job name filled
+  2. ✅ Save button clicked → modal closes
+  3. ❌ Only waited 1.5s, job card not rendered yet!
+  4. ❌ Tried to find "click here" links that don't exist yet
+- **THE FIX**: Explicitly wait for job card to appear with "click here" links
+  - Polls every 200ms checking for "click here to add labor/parts" text
+  - Up to 10 second timeout
+  - Only proceeds to add labor/parts AFTER links are visible
+- **Result**: Automation waits for the right moment to click labor/parts buttons ✅
+
+### Technical Details
+After clicking Save, the DOM changes:
+1. Modal closes (animation takes ~500ms)
+2. Job card renders on estimate page (~2-5 seconds)
+3. **THEN** "No labor added, click here to add labor" appears
+4. **NOW** we can click it and fill labor fields
+
 ## [1.7.0] - 2024-11-24
 
 ### 🎯 MAJOR FIX: Find "click here" Links Instead of ADD LABOR/PART Buttons
