@@ -2,9 +2,32 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.6.2] - 2024-11-24
+
+### 🎯 CRITICAL FIX: Stop Walking Up to <body>
+- **Problem**: v1.6.1 walked up to `<body>` which has 916 inputs, not the actual modal
+- **Evidence from logs**:
+  - Line 300: `Found modal container with z-index auto and 916 input fields`
+  - Line 303: `Found 916 inputs` (entire page, not modal!)
+  - Line 307: `text-rewriter-0` found - the search bar, not job title field
+  - Line 431: `ADD LABOR button not found` - because we're querying wrong container
+- **Root cause**: Fallback logic accepted ANY element with 5+ inputs, including `<body>`
+- **Solution**: Much stricter modal criteria:
+  1. **MUST NOT** be `<body>` tag
+  2. **MUST** have z-index > 1000 (not "auto")
+  3. **MUST** have 5-200 inputs (not 1, not 900+)
+  4. Added debug logging to see each element checked
+- **Why it works**: 
+  - Real modal: z-index 1300, ~15 inputs ✓
+  - Body container: z-index auto, 916 inputs ✗
+  - Sticky toolbar: z-index 900, 1 input ✗
+
+### Technical Details
+This prevents the "walk up forever until you hit body" bug by requiring BOTH high z-index AND reasonable input count.
+
 ## [1.6.1] - 2024-11-24
 
-### ✅ THE REAL FIX: Wait for Modal to Actually Render
+### 🔧 ATTEMPTED: Wait for Modal to Actually Render (WALKED TOO FAR)
 - **Root Cause (identified by architect)**: Fixed 3-second timeout doesn't guarantee modal is rendered
   - Evidence: "Found 1 inputs" logs show we query DOM before modal appears
   - Result: We find pre-existing sticky toolbar (z-900) instead of actual modal

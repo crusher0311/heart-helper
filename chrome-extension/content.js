@@ -39,14 +39,26 @@ function waitForModal(timeout = 10000) {
       
       if (cannedJobsInput) {
         console.log('✓ Found canned jobs search input - modal is ready!');
-        // Walk up to find the container with many inputs
+        // Walk up to find the modal container
+        // The modal should have z-index > 1000 AND a reasonable number of inputs (10-100)
         let element = cannedJobsInput;
         while (element && element !== document.body) {
           const inputs = element.querySelectorAll('input, textarea, [contenteditable="true"]');
           const zIndex = window.getComputedStyle(element).zIndex;
+          const zNum = parseInt(zIndex);
           
-          // Modal will have z-index > 1000 OR contain 5+ input fields
-          if ((zIndex && parseInt(zIndex) > 1000) || inputs.length > 5) {
+          console.log(`Checking element: z-index=${zIndex}, inputs=${inputs.length}, tag=${element.tagName}`);
+          
+          // Modal criteria:
+          // 1. MUST have z-index > 1000 (not "auto" or < 1000)
+          // 2. MUST have 5-100 inputs (not 1, not 900+)
+          // 3. Should NOT be <body>
+          if (element.tagName !== 'BODY' && 
+              zIndex !== 'auto' && 
+              !isNaN(zNum) && 
+              zNum > 1000 && 
+              inputs.length >= 5 && 
+              inputs.length < 200) {
             console.log(`✓ Found modal container with z-index ${zIndex} and ${inputs.length} input fields`);
             return resolve(element);
           }
