@@ -1065,10 +1065,24 @@ function injectFloatingHeartButton() {
   const floatingBtn = document.createElement('button');
   floatingBtn.id = 'heart-helper-floating-btn';
   floatingBtn.innerHTML = '♥ HEART Helper';
+  
+  // Get saved position or use defaults
+  const savedPos = localStorage.getItem('heartHelperBtnPos');
+  let startX = window.innerWidth - 160;
+  let startY = window.innerHeight - 60;
+  
+  if (savedPos) {
+    try {
+      const pos = JSON.parse(savedPos);
+      startX = Math.min(pos.x, window.innerWidth - 140);
+      startY = Math.min(pos.y, window.innerHeight - 50);
+    } catch (e) {}
+  }
+  
   floatingBtn.style.cssText = `
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    left: ${startX}px;
+    top: ${startY}px;
     background: #ED1C24;
     color: white;
     border: none;
@@ -1076,24 +1090,84 @@ function injectFloatingHeartButton() {
     padding: 12px 20px;
     font-size: 14px;
     font-weight: bold;
-    cursor: pointer;
+    cursor: grab;
     box-shadow: 0 4px 12px rgba(237, 28, 36, 0.4);
     z-index: 999999;
-    transition: all 0.2s ease;
+    transition: box-shadow 0.2s ease;
     font-family: Arial, sans-serif;
+    user-select: none;
   `;
   
+  // Dragging functionality
+  let isDragging = false;
+  let dragStartX, dragStartY, btnStartX, btnStartY;
+  let hasMoved = false;
+  
+  floatingBtn.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    hasMoved = false;
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+    btnStartX = floatingBtn.offsetLeft;
+    btnStartY = floatingBtn.offsetTop;
+    floatingBtn.style.cursor = 'grabbing';
+    floatingBtn.style.transition = 'none';
+    e.preventDefault();
+  });
+  
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    
+    const deltaX = e.clientX - dragStartX;
+    const deltaY = e.clientY - dragStartY;
+    
+    if (Math.abs(deltaX) > 3 || Math.abs(deltaY) > 3) {
+      hasMoved = true;
+    }
+    
+    let newX = btnStartX + deltaX;
+    let newY = btnStartY + deltaY;
+    
+    // Keep within viewport
+    newX = Math.max(0, Math.min(newX, window.innerWidth - floatingBtn.offsetWidth));
+    newY = Math.max(0, Math.min(newY, window.innerHeight - floatingBtn.offsetHeight));
+    
+    floatingBtn.style.left = newX + 'px';
+    floatingBtn.style.top = newY + 'px';
+  });
+  
+  document.addEventListener('mouseup', () => {
+    if (isDragging) {
+      isDragging = false;
+      floatingBtn.style.cursor = 'grab';
+      floatingBtn.style.transition = 'box-shadow 0.2s ease';
+      
+      // Save position
+      localStorage.setItem('heartHelperBtnPos', JSON.stringify({
+        x: floatingBtn.offsetLeft,
+        y: floatingBtn.offsetTop
+      }));
+    }
+  });
+  
   floatingBtn.addEventListener('mouseenter', () => {
-    floatingBtn.style.transform = 'scale(1.05)';
-    floatingBtn.style.boxShadow = '0 6px 16px rgba(237, 28, 36, 0.5)';
+    if (!isDragging) {
+      floatingBtn.style.boxShadow = '0 6px 16px rgba(237, 28, 36, 0.5)';
+    }
   });
   
   floatingBtn.addEventListener('mouseleave', () => {
-    floatingBtn.style.transform = 'scale(1)';
     floatingBtn.style.boxShadow = '0 4px 12px rgba(237, 28, 36, 0.4)';
   });
   
   floatingBtn.addEventListener('click', (e) => {
+    // Only trigger click if we didn't drag
+    if (hasMoved) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    
     e.preventDefault();
     e.stopPropagation();
     
@@ -1118,7 +1192,61 @@ function injectFloatingHeartButton() {
   
   document.body.appendChild(floatingBtn);
   floatingButtonInjected = true;
-  console.log("✅ Floating HEART Helper button injected");
+  console.log("✅ Floating HEART Helper button injected (draggable)");
+}
+
+// Create a heart button with click handler
+function createHeartButton(searchText) {
+  const heartBtn = document.createElement('span');
+  heartBtn.className = 'heart-helper-inline';
+  heartBtn.innerHTML = '♥';
+  heartBtn.title = 'Search HEART Helper';
+  heartBtn.style.cssText = `
+    color: #ED1C24;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 6px;
+    margin-right: 6px;
+    opacity: 0.8;
+    transition: all 0.2s ease;
+    display: inline-block;
+  `;
+  
+  heartBtn.addEventListener('mouseenter', () => {
+    heartBtn.style.transform = 'scale(1.3)';
+    heartBtn.style.opacity = '1';
+  });
+  
+  heartBtn.addEventListener('mouseleave', () => {
+    heartBtn.style.transform = 'scale(1)';
+    heartBtn.style.opacity = '0.8';
+  });
+  
+  heartBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const vehicleData = extractVehicleData();
+    const params = new URLSearchParams();
+    if (vehicleData.make) params.set('make', vehicleData.make);
+    if (vehicleData.model) params.set('model', vehicleData.model);
+    if (vehicleData.year) params.set('year', vehicleData.year);
+    if (vehicleData.engine) params.set('engine', vehicleData.engine);
+    params.set('search', searchText.substring(0, 200));
+    if (vehicleData.repairOrderId) params.set('roId', vehicleData.repairOrderId);
+    
+    chrome.storage.local.get(['appUrl'], (result) => {
+      if (!result.appUrl) {
+        showErrorNotification('Extension not configured.');
+        return;
+      }
+      const searchUrl = `${result.appUrl}/?${params.toString()}`;
+      console.log("Opening HEART Helper:", searchText.substring(0, 50));
+      window.open(searchUrl, '_blank');
+    });
+  });
+  
+  return heartBtn;
 }
 
 // Find and inject icons for concern items
@@ -1131,42 +1259,127 @@ function injectHeartIcons() {
   // Always inject floating button - this is the primary way to search
   injectFloatingHeartButton();
   
-  console.log("🔍 Searching for concern items...");
-  
-  // STRATEGY: Find "Add finding" links and insert hearts right before them
-  // This gives precise placement next to each concern
+  console.log("🔍 Searching for concern/finding items...");
   
   let iconsInjected = 0;
   
-  // Find all elements that might be "Add finding" links
+  // STRATEGY 1: Find rows with actual findings text (not just "Add finding")
+  // Look for the Finding column cells that have real text content
+  const allCells = document.querySelectorAll('div, span, td');
+  
+  for (const cell of allCells) {
+    // Skip if already has a heart
+    if (cell.querySelector('.heart-helper-inline')) continue;
+    if (cell.classList.contains('heart-helper-inline')) continue;
+    
+    const cellText = cell.textContent?.trim() || '';
+    
+    // Skip empty, headers, or "Add finding" only cells
+    if (cellText.length < 10 || cellText.length > 300) continue;
+    if (cellText.toLowerCase() === 'add finding') continue;
+    if (cellText.toLowerCase() === 'finding') continue;
+    if (cellText.toLowerCase().includes('customer concern')) continue;
+    if (cellText.toLowerCase().includes('technician concern')) continue;
+    
+    // Check if this looks like a finding description
+    // These typically have repair-related keywords
+    const lowerText = cellText.toLowerCase();
+    const isRepairText = (
+      lowerText.includes('replace') ||
+      lowerText.includes('repair') ||
+      lowerText.includes('broken') ||
+      lowerText.includes('worn') ||
+      lowerText.includes('leak') ||
+      lowerText.includes('damage') ||
+      lowerText.includes('recommend') ||
+      lowerText.includes('need') ||
+      lowerText.includes('check') ||
+      lowerText.includes('inspect') ||
+      lowerText.includes('flush') ||
+      lowerText.includes('service') ||
+      lowerText.includes('tire') ||
+      lowerText.includes('brake') ||
+      lowerText.includes('oil') ||
+      lowerText.includes('filter') ||
+      lowerText.includes('strut') ||
+      lowerText.includes('shock') ||
+      lowerText.includes('align')
+    );
+    
+    if (!isRepairText) continue;
+    
+    // Make sure this cell is in a concern/finding section (not in jobs/labor)
+    let inConcernArea = false;
+    let ancestor = cell.parentElement;
+    for (let i = 0; i < 15 && ancestor; i++) {
+      const ancestorText = (ancestor.textContent || '').toLowerCase();
+      if (ancestorText.includes('customer concern') || ancestorText.includes('technician concern')) {
+        inConcernArea = true;
+      }
+      // Exclude if we're in jobs section
+      if (ancestor.textContent?.includes('REORDER JOBS') || 
+          ancestor.textContent?.includes('REASSIGN LABOR')) {
+        inConcernArea = false;
+        break;
+      }
+      ancestor = ancestor.parentElement;
+    }
+    
+    if (!inConcernArea) continue;
+    
+    // Check if this cell is a leaf (no child elements with substantial text)
+    const childTexts = Array.from(cell.children).map(c => c.textContent?.trim() || '');
+    const isLeaf = childTexts.every(t => t.length < 5) || cell.children.length === 0;
+    
+    if (!isLeaf) continue;
+    
+    // Get the full row text for context (concern name + finding)
+    let row = cell.closest('div[class*="flex"]');
+    let searchText = cellText;
+    
+    if (row) {
+      const rowText = row.textContent?.trim() || '';
+      // Try to get concern name + finding
+      const parts = rowText.split(/add finding/i);
+      if (parts[0] && parts[0].trim().length > 5) {
+        searchText = parts[0].trim() + ' ' + cellText;
+      }
+    }
+    
+    // Clean up
+    searchText = searchText.replace(/[\s]{2,}/g, ' ').trim().substring(0, 200);
+    
+    // Add heart after this cell
+    const heart = createHeartButton(searchText);
+    cell.appendChild(heart);
+    iconsInjected++;
+    console.log(`✓ Heart added for finding: "${cellText.substring(0, 40)}..."`);
+  }
+  
+  // STRATEGY 2: Also add hearts before "Add finding" links for empty findings
   const links = document.querySelectorAll('a, span, div, button');
   
   for (const link of links) {
-    // Check if this element contains exactly "Add finding" text
     const text = link.textContent?.trim().toLowerCase();
     if (text !== 'add finding') continue;
     
-    // Skip if already has a heart sibling
     const parent = link.parentElement;
     if (!parent) continue;
     if (parent.querySelector('.heart-helper-inline')) continue;
     
-    // Find the concern text - look at previous siblings or parent's text content
+    // Get concern text from the row
+    let row = link.closest('div[class*="flex"]');
     let concernText = '';
     
-    // Try to get text from the row (go up to find a flex container)
-    let row = link.closest('div[class*="flex"]');
     for (let i = 0; i < 3 && row; i++) {
       const rowText = row.textContent?.trim() || '';
-      if (rowText.length > 20) {
-        // Extract text before "Add finding"
+      if (rowText.length > 15) {
         concernText = rowText.split(/add finding/i)[0].trim();
         break;
       }
       row = row.parentElement?.closest('div[class*="flex"]');
     }
     
-    // Clean up concern text
     concernText = concernText.replace(/[\s]{2,}/g, ' ').trim();
     
     // Skip headers
@@ -1174,62 +1387,13 @@ function injectHeartIcons() {
     if (concernText.toLowerCase().includes('technician concerns') && concernText.length < 30) continue;
     if (concernText.length < 5) continue;
     
-    // Create inline heart button
-    const heartBtn = document.createElement('span');
-    heartBtn.className = 'heart-helper-inline';
-    heartBtn.innerHTML = '♥';
-    heartBtn.style.cssText = `
-      color: #ED1C24;
-      font-size: 16px;
-      cursor: pointer;
-      margin-right: 6px;
-      opacity: 0.8;
-      transition: all 0.2s ease;
-    `;
-    
-    heartBtn.addEventListener('mouseenter', () => {
-      heartBtn.style.transform = 'scale(1.3)';
-      heartBtn.style.opacity = '1';
-    });
-    
-    heartBtn.addEventListener('mouseleave', () => {
-      heartBtn.style.transform = 'scale(1)';
-      heartBtn.style.opacity = '0.8';
-    });
-    
-    // Store the concern text for this heart
-    const capturedConcern = concernText;
-    heartBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      const vehicleData = extractVehicleData();
-      const params = new URLSearchParams();
-      if (vehicleData.make) params.set('make', vehicleData.make);
-      if (vehicleData.model) params.set('model', vehicleData.model);
-      if (vehicleData.year) params.set('year', vehicleData.year);
-      if (vehicleData.engine) params.set('engine', vehicleData.engine);
-      params.set('search', capturedConcern.substring(0, 200));
-      if (vehicleData.repairOrderId) params.set('roId', vehicleData.repairOrderId);
-      
-      chrome.storage.local.get(['appUrl'], (result) => {
-        if (!result.appUrl) {
-          showErrorNotification('Extension not configured.');
-          return;
-        }
-        const searchUrl = `${result.appUrl}/?${params.toString()}`;
-        console.log("Opening HEART Helper:", capturedConcern.substring(0, 50));
-        window.open(searchUrl, '_blank');
-      });
-    });
-    
-    // Insert heart right before the "Add finding" link
-    parent.insertBefore(heartBtn, link);
+    const heart = createHeartButton(concernText);
+    parent.insertBefore(heart, link);
     iconsInjected++;
-    console.log(`✓ Heart added for: "${concernText.substring(0, 40)}..."`);
+    console.log(`✓ Heart added for concern: "${concernText.substring(0, 40)}..."`);
   }
   
-  console.log(`✅ Total inline hearts injected: ${iconsInjected}`);
+  console.log(`✅ Total hearts injected: ${iconsInjected}`);
 }
 
 function observePageChanges() {
