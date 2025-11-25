@@ -10,7 +10,12 @@ The application integrates seamlessly with Tekmetric (HEART's shop management sy
 
 **Current Status (Nov 25, 2025)**: Fully functional with complete HEART branding, working search with AI scoring, database-backed caching, and Chrome extension integration v2.3.0. All core features operational.
 
-**Latest Fixes (Nov 25, 2025)**:
+**Latest Improvements (Nov 25, 2025)**:
+- **AI Repair Term Extraction**: Intelligently extracts core repair terms from verbose descriptions
+  - Example: "Rear Suspension/Shocks leaking" → searches for ["rear shocks", "shock absorber", "suspension"]
+  - Uses gpt-4o-mini to identify primary component and common terminology variations
+  - Database search now uses OR logic to match ANY extracted term (much smarter than literal substring match)
+  - Falls back to exact phrase if AI extraction fails
 - Fixed URL params overwriting user edits in repair type field (now loads only once on mount)
 - Chrome extension v2.3.0: Only injects ❤️ icons in concern sections (not jobs/labor/parts)
 - Switched from SVG to simple ❤️ emoji for cleaner UX
@@ -122,6 +127,10 @@ Note: Chrome extension UI automation is the only viable method for programmatica
 **AI Integration**: 
 - OpenAI API accessed through Replit's AI Integrations service
 - **Model**: gpt-4o-mini for fast, cost-effective scoring (~22 seconds per search)
+- **Repair Term Extraction** (NEW): AI extracts searchable terms from customer language before database search
+  - Handles verbose/technical descriptions: "Rear Suspension/Shocks leaking will affect tire wear" → ["rear shocks", "shock absorber", "suspension"]
+  - Database uses OR logic to find jobs matching ANY extracted term (not literal substring match)
+  - Dramatically improves search recall for customer-written concerns from Tekmetric
 - LLM used for semantic matching of repair jobs based on vehicle specs and repair type
 - Scores candidates and provides reasoning for match quality
 - **Performance Optimizations**:

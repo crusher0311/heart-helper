@@ -28,6 +28,7 @@ export interface IStorage {
     repairType: string;
     limit?: number;
     yearRange?: number;
+    searchTerms?: string[]; // AI-extracted repair terms for smarter matching
   }): Promise<JobWithDetails[]>;
   
   // Get a single job by ID
@@ -60,6 +61,7 @@ export class DatabaseStorage implements IStorage {
     repairType: string;
     limit?: number;
     yearRange?: number;
+    searchTerms?: string[]; // Optional: pre-extracted search terms from AI
   }): Promise<JobWithDetails[]> {
     const limit = params.limit || 50;
     
@@ -69,9 +71,20 @@ export class DatabaseStorage implements IStorage {
     const conditions = [];
 
     // Search repair type in job name (broad search, case-insensitive)
-    conditions.push(
-      ilike(repairOrderJobs.name, `%${params.repairType}%`)
-    );
+    // If searchTerms are provided (from AI extraction), use OR logic to match ANY term
+    // Otherwise fall back to original behavior (exact phrase match)
+    if (params.searchTerms && params.searchTerms.length > 0) {
+      console.log(`Using AI-extracted search terms: ${params.searchTerms.join(', ')}`);
+      const termConditions = params.searchTerms.map(term => 
+        ilike(repairOrderJobs.name, `%${term}%`)
+      );
+      conditions.push(or(...termConditions));
+    } else {
+      // Fallback: use original repair type as-is
+      conditions.push(
+        ilike(repairOrderJobs.name, `%${params.repairType}%`)
+      );
+    }
 
     // Add vehicle filters if provided
     if (params.vehicleMake) {

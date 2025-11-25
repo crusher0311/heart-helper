@@ -221,6 +221,70 @@ Return ONLY valid JSON:
 }
 
 /**
+ * Uses AI to extract core repair terms from verbose customer language
+ * Example: "Rear Suspension/Shocks leaking will affect tire wear" → ["rear shocks", "shock absorber", "suspension"]
+ */
+export async function extractRepairTerms(repairDescription: string): Promise<string[]> {
+  const prompt = `You are an automotive repair expert. Extract the core repair terms from this customer description to help search historical job data.
+
+Customer Description: "${repairDescription}"
+
+Your task:
+1. Identify the PRIMARY repair component/system mentioned
+2. List common terminology variations technicians would use
+3. Include both specific (e.g., "rear shocks") and general (e.g., "suspension") terms
+4. Limit to 3-5 most relevant search terms
+
+Examples:
+- "Rear Suspension/Shocks leaking" → ["rear shocks", "shock absorber", "rear suspension", "shocks"]
+- "Front brake pads worn out" → ["front brake pads", "brake pads", "front brakes", "brake service"]
+- "Oil change needed" → ["oil change", "lube service", "engine oil"]
+- "Check engine light, rough idle" → ["check engine", "rough idle", "diagnostic", "engine misfire"]
+
+Return ONLY valid JSON:
+{
+  "searchTerms": ["term1", "term2", "term3"],
+  "primaryComponent": "Brief description of main repair"
+}`;
+
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: "You are an automotive repair terminology expert. Extract searchable repair terms from customer descriptions. Always respond with valid JSON only."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      response_format: { type: "json_object" },
+      max_completion_tokens: 500,
+    });
+
+    const content = response.choices[0]?.message?.content;
+    if (!content) {
+      throw new Error("No response from AI");
+    }
+
+    const parsed = JSON.parse(content);
+    
+    if (parsed.searchTerms && Array.isArray(parsed.searchTerms)) {
+      console.log(`AI extracted repair terms from "${repairDescription}": ${parsed.searchTerms.join(', ')} (Primary: ${parsed.primaryComponent})`);
+      return parsed.searchTerms.filter((term: any) => typeof term === 'string' && term.length > 0);
+    }
+    
+    throw new Error("Invalid response format");
+  } catch (error) {
+    console.error("AI repair term extraction error:", error);
+    // Fallback: return original description as single term
+    return [repairDescription];
+  }
+}
+
+/**
  * Uses AI to score and rank job candidates based on similarity to search criteria
  * Returns matches with scores and reasoning
  */

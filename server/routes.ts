@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
 import { searchJobSchema, type SearchResult, insertSettingsSchema } from "@shared/schema";
-import { scoreJobMatches, getCompatibleYears, getSimilarModels } from "./ai";
+import { scoreJobMatches, getCompatibleYears, getSimilarModels, extractRepairTerms } from "./ai";
 import archiver from "archiver";
 import { join } from "path";
 import { 
@@ -45,13 +45,25 @@ export function registerRoutes(app: Express) {
         console.log('Cache bypass requested, running fresh search...');
       }
 
-      // Always try exact match first
+      // Extract searchable repair terms using AI for smarter matching
+      // Example: "Rear Suspension/Shocks leaking" → ["rear shocks", "shock absorber", "suspension"]
+      let searchTerms: string[] | undefined;
+      try {
+        searchTerms = await extractRepairTerms(params.repairType);
+        console.log(`AI extracted ${searchTerms.length} search terms from "${params.repairType}"`);
+      } catch (error) {
+        console.log('AI term extraction failed, using exact repair type:', error);
+        searchTerms = undefined; // Will fall back to exact match
+      }
+
+      // Always try exact match first (now using AI-extracted terms for broader matching)
       let candidates = await storage.searchJobs({
         vehicleMake: params.vehicleMake,
         vehicleModel: params.vehicleModel,
         vehicleYear: params.vehicleYear,
         vehicleEngine: params.vehicleEngine,
         repairType: params.repairType,
+        searchTerms, // AI-extracted terms for smarter database search
         limit: 50,
       });
 
@@ -76,6 +88,7 @@ export function registerRoutes(app: Express) {
             vehicleMake: params.vehicleMake,
             vehicleModel: params.vehicleModel,
             repairType: params.repairType,
+            searchTerms, // Use AI-extracted terms
             limit: 100,
           });
           
@@ -93,6 +106,7 @@ export function registerRoutes(app: Express) {
               vehicleMake: params.vehicleMake,
               vehicleModel: params.vehicleModel,
               repairType: params.repairType,
+              searchTerms, // Use AI-extracted terms
               limit: 50,
             });
           }
@@ -116,6 +130,7 @@ export function registerRoutes(app: Express) {
                 vehicleMake: make,
                 vehicleModel: model,
                 repairType: params.repairType,
+                searchTerms, // Use AI-extracted terms
                 limit: 20,
               })
             );
@@ -125,6 +140,7 @@ export function registerRoutes(app: Express) {
               vehicleMake: params.vehicleMake,
               vehicleModel: params.vehicleModel,
               repairType: params.repairType,
+              searchTerms, // Use AI-extracted terms
               limit: 20,
             }));
             
@@ -139,6 +155,7 @@ export function registerRoutes(app: Express) {
             console.log('Similar models search found no results, falling back to all vehicles...');
             candidates = await storage.searchJobs({
               repairType: params.repairType,
+              searchTerms, // Use AI-extracted terms
               limit: 50,
             });
           }
@@ -149,6 +166,7 @@ export function registerRoutes(app: Express) {
           
           candidates = await storage.searchJobs({
             repairType: params.repairType,
+            searchTerms, // Use AI-extracted terms
             limit: 50,
           });
           
