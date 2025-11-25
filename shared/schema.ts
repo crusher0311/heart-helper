@@ -141,6 +141,7 @@ export const searchJobSchema = z.object({
   vehicleEngine: z.string().optional(),
   repairType: z.string().min(1, "Repair type is required"),
   limit: z.number().default(20),
+  broadenStrategy: z.enum(['years', 'models', 'all']).optional(),
 });
 
 // Types

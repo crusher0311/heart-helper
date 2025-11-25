@@ -37,7 +37,7 @@ export default function Home() {
       const response = await apiRequest("POST", "/api/search", params);
       return await response.json() as { results: SearchResult[]; cached: boolean; cachedAt: string };
     },
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
       console.log("Search response data:", data);
       console.log("Type of data:", typeof data, "Is array?", Array.isArray(data));
       console.log("data.results:", data.results);
@@ -61,6 +61,13 @@ export default function Home() {
       startTransition(() => {
         setResults(resultsArray);
       });
+      
+      // If broadening succeeded (got results), clear broadenStrategy for next search
+      // This ensures next "Broaden Search" click progresses to next stage
+      if (resultsArray.length > 0 && variables.broadenStrategy) {
+        console.log(`Broadening succeeded with strategy '${variables.broadenStrategy}', clearing for next attempt`);
+        setSearchParams(prev => prev ? { ...prev, broadenStrategy: undefined } : null);
+      }
       
       queryClient.invalidateQueries({ queryKey: ["/api/search"] });
     },
@@ -94,12 +101,33 @@ export default function Home() {
   const handleBroadenSearch = () => {
     if (!searchParams) return;
     
-    // Remove year, make, model, and engine filters to broaden the search
-    // Keep only the repair type which is required
-    const broadenedParams: SearchJobRequest = {
-      repairType: searchParams.repairType,
-      limit: 20,
-    };
+    // Progressive broadening strategy:
+    // 1. First try: Broaden years (AI determines compatible years)
+    // 2. If that was already done or no year filter, try: Find similar models (AI)
+    // 3. Last resort: Remove all vehicle filters
+    
+    let broadenedParams: SearchJobRequest;
+    
+    if (searchParams.vehicleYear && !searchParams.broadenStrategy) {
+      // Stage 1: Broaden year ranges using AI
+      broadenedParams = {
+        ...searchParams,
+        broadenStrategy: 'years',
+      };
+    } else if ((searchParams.vehicleMake || searchParams.vehicleModel) && searchParams.broadenStrategy !== 'models') {
+      // Stage 2: Find similar models using AI
+      broadenedParams = {
+        ...searchParams,
+        broadenStrategy: 'models',
+      };
+    } else {
+      // Stage 3: Remove all vehicle filters
+      broadenedParams = {
+        repairType: searchParams.repairType,
+        limit: 20,
+        broadenStrategy: 'all',
+      };
+    }
     
     handleSearch(broadenedParams, true); // Bypass cache for fresh results
   };

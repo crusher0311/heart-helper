@@ -120,6 +120,12 @@ Note: Chrome extension UI automation is the only viable method for programmatica
   - Replaces blind ±2 year expansion with intelligent year selection
   - Example: Search for 2018 Toyota Sienna → AI identifies 2016-2020 share same 3.5L V6 powertrain
   - Falls back to ±2 years if AI unavailable or returns no results
+- **Progressive Broadening**: When searches return zero results, users can click "Broaden Search" to progressively expand search scope
+  - Stage 1: Broaden year ranges using AI (getCompatibleYears)
+  - Stage 2: Find similar models using AI (getSimilarModels) - e.g., Honda Accord → Acura TLX, Toyota Camry
+  - Stage 3: Remove all vehicle filters and search across all vehicles
+  - Each stage includes fallbacks to ensure users get results
+  - Frontend automatically progresses through stages on consecutive clicks
 
 **Data Flow**:
 1. Tekmetric data synced continuously via external sync tool (109,423 repair orders, 610,698 jobs, 38,471 vehicles)

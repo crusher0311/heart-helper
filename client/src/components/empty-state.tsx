@@ -19,7 +19,7 @@ export function EmptyState({ type, message, onBroadenSearch, canBroaden }: Empty
       icon: Database,
       title: "No Matching Jobs Found",
       description: message || (canBroaden 
-        ? "No jobs found with your current vehicle filters. Try broadening the search to see results from all vehicles with similar repairs."
+        ? "No jobs found with your current filters. Click \"Broaden Search\" to find similar repairs using AI."
         : "Try adjusting your search criteria to see more results."),
     },
     error: {

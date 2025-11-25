@@ -67,6 +67,7 @@ export function SearchInterface({ onSearch, isLoading }: SearchInterfaceProps) {
   const handleSearch = () => {
     if (!repairType.trim()) return;
 
+    // Clear broadenStrategy on manual searches - only use it when "Broaden Search" button is clicked
     onSearch({
       vehicleMake: make || undefined,
       vehicleModel: model || undefined,
@@ -74,6 +75,7 @@ export function SearchInterface({ onSearch, isLoading }: SearchInterfaceProps) {
       vehicleEngine: engine || undefined,
       repairType: repairType.trim(),
       limit: 20,
+      broadenStrategy: undefined, // Explicitly clear broadening
     });
   };
 

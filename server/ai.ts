@@ -146,6 +146,81 @@ Return ONLY valid JSON:
 }
 
 /**
+ * Uses AI to find similar vehicle models that share platforms, powertrains, or components
+ * Example: Honda Accord → Acura TLX, Toyota Camry, Nissan Altima
+ */
+export async function getSimilarModels(
+  vehicleMake: string,
+  vehicleModel: string,
+  vehicleYear?: number
+): Promise<Array<{ make: string; model: string }>> {
+  const prompt = `You are an automotive expert. Find similar vehicle models that share platforms, components, or would have similar repair procedures.
+
+Vehicle:
+- Make: ${vehicleMake}
+- Model: ${vehicleModel}
+${vehicleYear ? `- Year: ${vehicleYear}` : ""}
+
+Find 5-8 similar models considering:
+1. Same manufacturer (e.g., Honda Accord → Honda Civic, Honda CR-V)
+2. Sister brands/badge engineering (e.g., Honda Accord → Acura TLX, Acura TSX)
+3. Same platform competitors (e.g., Honda Accord → Toyota Camry, Nissan Altima)
+4. Similar size/class vehicles that would use similar parts/procedures
+
+Return ONLY valid JSON:
+{
+  "similarModels": [
+    { "make": "Acura", "model": "TLX" },
+    { "make": "Honda", "model": "Civic" },
+    { "make": "Toyota", "model": "Camry" }
+  ],
+  "reasoning": "Brief explanation of why these models are similar"
+}`;
+
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: "You are an automotive expert. Analyze vehicle similarities and platform sharing. Always respond with valid JSON only."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      response_format: { type: "json_object" },
+      max_completion_tokens: 1000,
+    });
+
+    const content = response.choices[0]?.message?.content;
+    if (!content) {
+      throw new Error("No response from AI");
+    }
+
+    const parsed = JSON.parse(content);
+    
+    if (parsed.similarModels && Array.isArray(parsed.similarModels)) {
+      console.log(`AI similar models: ${parsed.similarModels.length} models - ${parsed.reasoning}`);
+      
+      // Validate structure
+      const validModels = parsed.similarModels.filter((m: any) => 
+        m && typeof m.make === 'string' && typeof m.model === 'string'
+      );
+      
+      return validModels;
+    }
+    
+    throw new Error("Invalid response format");
+  } catch (error) {
+    console.error("AI similar models error:", error);
+    // Return empty array on failure
+    return [];
+  }
+}
+
+/**
  * Uses AI to score and rank job candidates based on similarity to search criteria
  * Returns matches with scores and reasoning
  */

@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
 import { searchJobSchema, type SearchResult, insertSettingsSchema } from "@shared/schema";
-import { scoreJobMatches, getCompatibleYears } from "./ai";
+import { scoreJobMatches, getCompatibleYears, getSimilarModels } from "./ai";
 import archiver from "archiver";
 import { join } from "path";
 import { 
@@ -45,7 +45,7 @@ export function registerRoutes(app: Express) {
         console.log('Cache bypass requested, running fresh search...');
       }
 
-      // Get candidate jobs from database - try exact match first
+      // Always try exact match first
       let candidates = await storage.searchJobs({
         vehicleMake: params.vehicleMake,
         vehicleModel: params.vehicleModel,
@@ -55,39 +55,107 @@ export function registerRoutes(app: Express) {
         limit: 50,
       });
 
-      // If no results and year was specified, try expanding year range by ±2 years
-      // TODO: Re-enable AI year compatibility once token issue is resolved
-      if (candidates.length === 0 && params.vehicleYear && params.vehicleMake && params.vehicleModel) {
-        console.log(`No exact year matches for ${params.vehicleYear}, trying ±2 year range...`);
-        
-        // Simple fallback: ±2 years
-        const compatibleYears = [
-          params.vehicleYear - 2,
-          params.vehicleYear - 1,
-          params.vehicleYear,
-          params.vehicleYear + 1,
-          params.vehicleYear + 2
-        ];
-        
-        // Search again with broader year criteria
-        // Drop the engine filter to avoid format mismatches
-        console.log(`Searching for: make=${params.vehicleMake}, model=${params.vehicleModel}, repair=${params.repairType}`);
-        
-        candidates = await storage.searchJobs({
-          vehicleMake: params.vehicleMake,
-          vehicleModel: params.vehicleModel,
-          repairType: params.repairType,
-          limit: 100, // Get more candidates since we'll filter
-        });
-        
-        console.log(`Raw search found ${candidates.length} candidates before year filter`);
-        
-        // Filter candidates to only include compatible years
-        candidates = candidates.filter(job => 
-          job.vehicle?.year && compatibleYears.includes(job.vehicle.year)
-        ).slice(0, 50); // Limit to top 50
-        
-        console.log(`Found ${candidates.length} candidates in years ${compatibleYears.join(', ')}`);
+      // Only apply broadening if exact match returned zero results
+      if (candidates.length === 0) {
+        if (params.broadenStrategy === 'years' && params.vehicleYear && params.vehicleMake && params.vehicleModel) {
+          // Stage 1: Broaden year ranges using AI
+          console.log(`Broadening year range for ${params.vehicleYear} ${params.vehicleMake} ${params.vehicleModel} using AI...`);
+          
+          const compatibleYears = await getCompatibleYears(
+            params.vehicleMake,
+            params.vehicleModel,
+            params.vehicleYear,
+            params.vehicleEngine,
+            params.repairType
+          );
+          
+          console.log(`AI determined compatible years: ${compatibleYears.join(', ')}`);
+          
+          // Search with broader year criteria (drop engine filter)
+          const yearCandidates = await storage.searchJobs({
+            vehicleMake: params.vehicleMake,
+            vehicleModel: params.vehicleModel,
+            repairType: params.repairType,
+            limit: 100,
+          });
+          
+          // Filter to only AI-compatible years
+          candidates = yearCandidates.filter(job => 
+            job.vehicle?.year && compatibleYears.includes(job.vehicle.year)
+          ).slice(0, 50);
+          
+          console.log(`Found ${candidates.length} candidates in AI-compatible years`);
+          
+          // Fallback if AI years produced zero results
+          if (candidates.length === 0) {
+            console.log('AI year expansion found no results, falling back to removing year filter...');
+            candidates = await storage.searchJobs({
+              vehicleMake: params.vehicleMake,
+              vehicleModel: params.vehicleModel,
+              repairType: params.repairType,
+              limit: 50,
+            });
+          }
+          
+        } else if (params.broadenStrategy === 'models' && params.vehicleMake && params.vehicleModel) {
+          // Stage 2: Find similar models using AI
+          console.log(`Finding similar models to ${params.vehicleMake} ${params.vehicleModel} using AI...`);
+          
+          const similarModels = await getSimilarModels(
+            params.vehicleMake,
+            params.vehicleModel,
+            params.vehicleYear
+          );
+          
+          console.log(`AI found ${similarModels.length} similar models`);
+          
+          if (similarModels.length > 0) {
+            // Search across AI-recommended similar models
+            const searchPromises = similarModels.map(({ make, model }) =>
+              storage.searchJobs({
+                vehicleMake: make,
+                vehicleModel: model,
+                repairType: params.repairType,
+                limit: 20,
+              })
+            );
+            
+            // Also include original vehicle
+            searchPromises.push(storage.searchJobs({
+              vehicleMake: params.vehicleMake,
+              vehicleModel: params.vehicleModel,
+              repairType: params.repairType,
+              limit: 20,
+            }));
+            
+            const resultsArrays = await Promise.all(searchPromises);
+            candidates = resultsArrays.flat().slice(0, 50);
+            
+            console.log(`Found ${candidates.length} candidates across similar models`);
+          }
+          
+          // Only fall back to all vehicles if similar models search also failed
+          if (candidates.length === 0) {
+            console.log('Similar models search found no results, falling back to all vehicles...');
+            candidates = await storage.searchJobs({
+              repairType: params.repairType,
+              limit: 50,
+            });
+          }
+          
+        } else if (params.broadenStrategy === 'all') {
+          // Stage 3: Remove all vehicle filters
+          console.log(`Broadening to all vehicles for repair type: ${params.repairType}`);
+          
+          candidates = await storage.searchJobs({
+            repairType: params.repairType,
+            limit: 50,
+          });
+          
+          console.log(`Found ${candidates.length} candidates across all vehicles`);
+        }
+      } else {
+        console.log(`Exact match found ${candidates.length} candidates, skipping broadening`);
       }
 
       if (candidates.length === 0) {

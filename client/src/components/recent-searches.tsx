@@ -76,6 +76,7 @@ export function RecentSearches({ onSearchSelect }: RecentSearchesProps) {
                   vehicleEngine: search.vehicleEngine,
                   repairType: search.repairType,
                   limit: 20,
+                  broadenStrategy: undefined, // Clear broadening when selecting from history
                 })
               }
               data-testid={`recent-search-${index}`}
