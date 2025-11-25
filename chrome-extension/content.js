@@ -621,20 +621,9 @@ async function fillTekmetricEstimate(jobData) {
         console.log('✓ Filled sale price:', part.retail);
       }
       
-      // Look for and click Save button after filling each part
-      await new Promise(resolve => setTimeout(resolve, 600));
-      const partSaveBtn = Array.from(document.querySelectorAll('button')).find(btn => {
-        const text = btn.textContent.trim().toLowerCase();
-        return text === 'save' || text === 'add' || text === 'ok';
-      });
-      if (partSaveBtn) {
-        console.log('✓ Saving part...');
-        partSaveBtn.click();
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      } else {
-        console.log('⚠️ No save button found for part');
-        await new Promise(resolve => setTimeout(resolve, 400));
-      }
+      // Don't click save yet - wait until all parts are filled!
+      console.log(`✓ Part ${partIndex + 1}/${jobData.parts.length} filled successfully`);
+      await new Promise(resolve => setTimeout(resolve, 500));
     }
 
     await new Promise(resolve => setTimeout(resolve, 800));
