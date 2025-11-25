@@ -33,24 +33,26 @@ A Chrome extension (`chrome-extension/`) automates adding jobs to Tekmetric repa
 
 **User Workflow:**
 1. User is on Tekmetric repair order page (e.g., RO #275076696)
-2. Clicks "Check History" button (injected by extension)
-3. Extension extracts:
+2. **Carvis-Style UX**: HEART icons appear next to each concern/complaint textarea
+3. User clicks HEART icon next to specific concern they want to search
+4. Extension extracts:
    - Vehicle info (make, model, year, engine)
-   - Customer concerns/complaints from textarea fields
+   - That specific concern's text
    - Repair order ID
-4. Search tool opens in new tab with pre-filled data
-5. Search automatically executes with customer concerns as query
-6. User reviews results, clicks on a match
-7. Clicks "Send to Extension" to import selected job
-8. Switches back to Tekmetric RO tab
-9. Extension automatically fills in labor items and parts
+5. Search tool opens in new tab with pre-filled data
+6. Search automatically executes with that concern as query
+7. User reviews results, clicks on a match
+8. Clicks "Send to Extension" to import selected job
+9. Switches back to Tekmetric RO tab
+10. Extension automatically fills in labor items and parts
 
-**Carvis-Style Auto-Fill:**
-- Extension intelligently extracts customer concerns from Tekmetric RO page
-- Looks for fields labeled "concern", "complaint", "customer", "reason for visit"
-- Pre-populates search field with extracted text (up to 200 chars)
+**Carvis-Style Interface:**
+- Individual HEART icons (red heart, HEART brand color) appear next to each concern/complaint textarea
+- Icons positioned in top-right corner of each text field
+- Hover effect: Icon fills with HEART Red and scales up slightly
+- Click icon → opens HEART Helper with that specific concern pre-filled
+- Extension automatically detects concern fields by class/placeholder keywords
 - Shows "From Tekmetric" badge in UI to indicate auto-fill
-- Automatically triggers search when concerns are found
 - User can edit pre-filled text if needed
 
 ### API Integration (Read-Only)

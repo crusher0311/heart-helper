@@ -2,6 +2,31 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [2.2.0] - 2025-11-25
+
+### 🎯 MAJOR UX CHANGE: Carvis-Style Individual HEART Icons
+- **Removed**: Top bar "Check History" button
+- **Added**: Individual HEART icons next to each concern/complaint textarea
+- **User Experience**: Just like Carvis - click the HEART icon next to any concern to search for that specific issue
+- **Benefits**:
+  - Search each concern individually instead of all at once
+  - More intuitive - icon appears right where you're typing
+  - Visual HEART branding on every concern field
+  - Click icon → instant search with that concern's text
+
+### Implementation
+- HEART icon (red heart SVG, HSL 357° 85% 52%) appears in top-right of concern fields
+- Hover effect: Icon fills with HEART Red, scales up slightly
+- Automatically detects concern/complaint/customer textareas
+- Extracts vehicle data from page + specific concern text
+- Opens HEART Helper in new tab with pre-filled search
+
+### Technical Details
+- Injects icons for all textareas with "concern", "complaint", or "customer" in class/placeholder
+- Fallback: Searches for labels with these keywords and finds nearby textareas
+- Re-scans every 2 seconds to catch dynamically added fields
+- Prevents duplicate icons with tracked Set
+
 ## [1.7.1] - 2024-11-24
 
 ### ⏰ CRITICAL TIMING FIX: Wait for Job Card to Appear Before Adding Labor/Parts

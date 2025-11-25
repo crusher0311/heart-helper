@@ -1,6 +1,7 @@
 console.log("Tekmetric Job Importer: Content script loaded");
 
 let checkHistoryButton = null;
+let injectedIcons = new Set(); // Track which textareas already have icons
 
 function waitForElement(selector, timeout = 10000) {
   return new Promise((resolve, reject) => {
@@ -953,51 +954,100 @@ function extractVehicleData() {
   return data;
 }
 
-function injectCheckHistoryButton() {
-  if (checkHistoryButton || !window.location.href.includes('/repair-orders/')) {
+// Create HEART icon SVG
+function createHeartIcon() {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', '#ED1C24'); // HEART Red
+  svg.setAttribute('stroke-width', '2');
+  svg.setAttribute('stroke-linecap', 'round');
+  svg.setAttribute('stroke-linejoin', 'round');
+  svg.style.cssText = 'width: 20px; height: 20px;';
+  
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z');
+  svg.appendChild(path);
+  
+  return svg;
+}
+
+// Inject HEART icon next to a concern textarea
+function injectHeartIconForConcern(concernElement) {
+  // Check if already injected for this element
+  if (injectedIcons.has(concernElement)) {
     return;
   }
-
-  const targetContainer = document.querySelector('[data-testid="ro-header"]') ||
-                          document.querySelector('header') ||
-                          document.querySelector('[class*="header" i]');
-
-  if (!targetContainer) {
-    console.log("Could not find suitable container for Check History button");
-    return;
-  }
-
-  checkHistoryButton = document.createElement('button');
-  checkHistoryButton.textContent = 'Check History';
-  checkHistoryButton.style.cssText = `
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-    transition: all 0.2s ease;
-    margin-left: 12px;
-    font-family: system-ui, -apple-system, sans-serif;
-    z-index: 9999;
+  
+  // Find the parent container that we can position relative to
+  const parent = concernElement.parentElement;
+  if (!parent) return;
+  
+  // Create wrapper for icon and concern
+  const wrapper = document.createElement('div');
+  wrapper.style.cssText = `
+    position: relative;
+    display: inline-block;
+    width: 100%;
   `;
-
-  checkHistoryButton.addEventListener('mouseenter', () => {
-    checkHistoryButton.style.transform = 'translateY(-1px)';
-    checkHistoryButton.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.4)';
+  
+  // Create the icon button
+  const iconButton = document.createElement('button');
+  iconButton.className = 'heart-helper-icon';
+  iconButton.style.cssText = `
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    background: white;
+    border: 2px solid #ED1C24;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(237, 28, 36, 0.2);
+    transition: all 0.2s ease;
+    z-index: 1000;
+  `;
+  
+  iconButton.appendChild(createHeartIcon());
+  
+  // Hover effects
+  iconButton.addEventListener('mouseenter', () => {
+    iconButton.style.background = '#ED1C24';
+    iconButton.style.transform = 'scale(1.1)';
+    iconButton.style.boxShadow = '0 4px 12px rgba(237, 28, 36, 0.4)';
+    const svg = iconButton.querySelector('svg');
+    if (svg) {
+      svg.setAttribute('stroke', 'white');
+      svg.setAttribute('fill', 'white');
+    }
   });
-
-  checkHistoryButton.addEventListener('mouseleave', () => {
-    checkHistoryButton.style.transform = 'translateY(0)';
-    checkHistoryButton.style.boxShadow = '0 2px 8px rgba(102, 126, 234, 0.3)';
+  
+  iconButton.addEventListener('mouseleave', () => {
+    iconButton.style.background = 'white';
+    iconButton.style.transform = 'scale(1)';
+    iconButton.style.boxShadow = '0 2px 8px rgba(237, 28, 36, 0.2)';
+    const svg = iconButton.querySelector('svg');
+    if (svg) {
+      svg.setAttribute('stroke', '#ED1C24');
+      svg.setAttribute('fill', 'none');
+    }
   });
-
-  checkHistoryButton.addEventListener('click', (e) => {
+  
+  // Click handler - open search with this specific concern
+  iconButton.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
+    
+    const concernText = concernElement.value || concernElement.textContent || '';
+    if (!concernText.trim()) {
+      showErrorNotification('No concern text found. Please type a concern first.');
+      return;
+    }
     
     const vehicleData = extractVehicleData();
     
@@ -1006,7 +1056,7 @@ function injectCheckHistoryButton() {
     if (vehicleData.model) params.set('model', vehicleData.model);
     if (vehicleData.year) params.set('year', vehicleData.year);
     if (vehicleData.engine) params.set('engine', vehicleData.engine);
-    if (vehicleData.concerns) params.set('search', vehicleData.concerns);
+    params.set('search', concernText.trim().substring(0, 200)); // Use THIS concern text
     if (vehicleData.repairOrderId) params.set('roId', vehicleData.repairOrderId);
     
     chrome.storage.local.get(['appUrl'], (result) => {
@@ -1017,23 +1067,74 @@ function injectCheckHistoryButton() {
       
       const searchUrl = `${result.appUrl}/?${params.toString()}`;
       
-      console.log("Opening search with URL:", searchUrl);
-      console.log("Vehicle data:", vehicleData);
+      console.log("Opening HEART Helper with concern:", concernText.substring(0, 50));
+      console.log("Search URL:", searchUrl);
       window.open(searchUrl, '_blank');
     });
   });
+  
+  // Wrap the concern element and add the icon
+  parent.insertBefore(wrapper, concernElement);
+  wrapper.appendChild(concernElement);
+  wrapper.appendChild(iconButton);
+  
+  injectedIcons.add(concernElement);
+  console.log("HEART icon injected for concern field");
+}
 
-  targetContainer.appendChild(checkHistoryButton);
-  console.log("Check History button injected");
+// Find and inject icons for all concern textareas
+function injectHeartIcons() {
+  if (!window.location.href.includes('/repair-orders/')) {
+    return;
+  }
+  
+  // Find all concern/complaint/customer textareas and inputs
+  const selectors = [
+    'textarea[class*="concern" i]',
+    'textarea[class*="complaint" i]',
+    'textarea[class*="customer" i]',
+    'textarea[placeholder*="concern" i]',
+    'textarea[placeholder*="complaint" i]',
+    'textarea[placeholder*="customer" i]',
+    'input[type="text"][class*="concern" i]',
+    'input[type="text"][class*="complaint" i]',
+  ];
+  
+  const concernElements = document.querySelectorAll(selectors.join(', '));
+  
+  if (concernElements.length === 0) {
+    // Fallback: Look for labels that say concern/complaint, then find nearby textareas
+    const labels = Array.from(document.querySelectorAll('label, div'));
+    for (const label of labels) {
+      const labelText = label.textContent.toLowerCase();
+      if (labelText.includes('concern') || labelText.includes('complaint') || 
+          labelText.includes('customer concern') || labelText.includes('reason for visit')) {
+        const textarea = label.querySelector('textarea') || 
+                        label.nextElementSibling?.tagName === 'TEXTAREA' ? label.nextElementSibling : null;
+        if (textarea && !injectedIcons.has(textarea)) {
+          injectHeartIconForConcern(textarea);
+        }
+      }
+    }
+  } else {
+    concernElements.forEach(element => {
+      if (!injectedIcons.has(element)) {
+        injectHeartIconForConcern(element);
+      }
+    });
+  }
 }
 
 function observePageChanges() {
   const checkAndInject = () => {
-    if (window.location.href.includes('/repair-orders/') && !checkHistoryButton) {
-      setTimeout(injectCheckHistoryButton, 1000);
-    } else if (!window.location.href.includes('/repair-orders/') && checkHistoryButton) {
-      checkHistoryButton?.remove();
-      checkHistoryButton = null;
+    if (window.location.href.includes('/repair-orders/')) {
+      // Inject icons for all concern fields
+      setTimeout(injectHeartIcons, 1000);
+      // Re-check every 2 seconds in case new fields appear
+      setTimeout(injectHeartIcons, 3000);
+    } else {
+      // Clear tracked icons when leaving repair order page
+      injectedIcons.clear();
     }
   };
 
@@ -1052,6 +1153,13 @@ function observePageChanges() {
       checkAndInject();
     }
   }, 1000);
+  
+  // Also observe for dynamically added textareas
+  setInterval(() => {
+    if (window.location.href.includes('/repair-orders/')) {
+      injectHeartIcons();
+    }
+  }, 2000);
 }
 
 if (document.readyState === 'loading') {
