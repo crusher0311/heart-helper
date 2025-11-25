@@ -20,8 +20,18 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "STORE_PENDING_JOB") {
     console.log("Background: Storing pending job from content script", message.jobData);
     pendingJobData = message.jobData;
-    sendResponse({ success: true });
-    // No return true - responding synchronously
+    
+    // CRITICAL: Store in chrome.storage.local, not just memory!
+    // Service worker goes to sleep and memory is wiped
+    chrome.storage.local.set({ 
+      lastJobData: message.jobData,
+      timestamp: new Date().toISOString()
+    }, () => {
+      console.log("Background: Job data stored in persistent storage");
+      sendResponse({ success: true });
+    });
+    
+    return true; // Async response
   }
   
   if (message.action === "GET_PENDING_JOB") {

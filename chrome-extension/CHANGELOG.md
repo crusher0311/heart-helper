@@ -2,9 +2,41 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.6.6] - 2024-11-24
+
+### 🔥🔥 THE ACTUAL ROOT CAUSE: Service Worker Memory Loss
+- **THE BUG**: `STORE_PENDING_JOB` stored job data in memory, but service workers sleep and lose memory!
+- **Evidence**: User waited 3-4 minutes before automation started
+  - Content script kept checking storage: `⚠️ No pending job data found`
+  - Job data was in service worker memory but NOT in chrome.storage.local
+  - Service worker went to sleep → memory wiped → data lost
+  - Eventually something triggered service worker to store data properly
+- **Root Cause Analysis**:
+  ```javascript
+  // WRONG (line 20-24):
+  if (message.action === "STORE_PENDING_JOB") {
+    pendingJobData = message.jobData;  // Memory only!
+    sendResponse({ success: true });
+  }
+  
+  // But GET_PENDING_JOB reads from storage (line 30):
+  chrome.storage.local.get(['lastJobData'], ...)  // Empty!
+  ```
+- **The Fix**: Make `STORE_PENDING_JOB` write to `chrome.storage.local` (persistent) instead of just memory
+  - Now matches behavior of `SEND_TO_TEKMETRIC` handler
+  - Service worker can sleep/wake without losing data
+  - Content script finds job data immediately (within 2-3 seconds)
+
+### Technical Details
+Chrome Manifest V3 service workers:
+- Sleep after ~30 seconds of inactivity to save resources
+- All memory is cleared when sleeping
+- Only chrome.storage.local persists across sleep/wake cycles
+- Must use storage for any data that needs to survive service worker lifecycle
+
 ## [1.6.5] - 2024-11-24
 
-### 🔥 CRITICAL FIX: Removed setTimeout That Was Being Throttled
+### 🔧 Removed Unnecessary setTimeout (Was Being Throttled)
 - **Root Cause Found**: Chrome throttles setTimeout in background/inactive tabs
 - **Evidence**: User waited 2.5+ minutes, setTimeout(callback, 2000) never fired
   - Logs showed "Timeout set with ID: 32" but callback never executed
