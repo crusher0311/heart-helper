@@ -94,7 +94,7 @@ function batchFillFields(fields) {
 }
 
 // =================================================================
-// MAIN: Instant Tekmetric Auto-Fill
+// MAIN: Instant Tekmetric Auto-Fill (v1.7.x Flow)
 // =================================================================
 async function fillTekmetricEstimate(jobData) {
   if (isFillingJob) return;
@@ -108,8 +108,7 @@ async function fillTekmetricEstimate(jobData) {
 
     debug('Starting instant auto-fill for:', jobData.jobName);
 
-    // Step 1: Find and verify Job button exists
-    // Look for various button texts: "Job", "+ ADD CANNED JOB", "Add Canned Job", etc.
+    // Step 1: Find and click Job/Canned Job button
     const jobButton = Array.from(document.querySelectorAll('button')).find(btn => {
       const text = btn.textContent.trim().toLowerCase();
       const ariaLabel = btn.getAttribute('aria-label')?.toLowerCase() || '';
@@ -122,47 +121,46 @@ async function fillTekmetricEstimate(jobData) {
 
     if (!jobButton) {
       debug('Available buttons:', Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim()).slice(0, 20));
-      throw new Error('Job button not found - may already be in modal or page structure changed');
+      throw new Error('Job button not found');
     }
 
     debug('Found Job button:', jobButton.textContent.trim());
-
     jobButton.click();
+    
+    // Step 2: Wait for modal and fill job name
     const modal = await waitForModal();
-
-    // Verify we got a Tekmetric job modal (not settings/other dialogs)
-    const hasJobFormMarkers = modal.querySelector('button[aria-label*="labor"], button[aria-label*="Labor"]') ||
-                              Array.from(modal.querySelectorAll('button')).some(btn => 
-                                btn.textContent.toLowerCase().includes('add labor') || 
-                                btn.textContent.toLowerCase().includes('add part')
-                              );
-
-    if (!hasJobFormMarkers) {
-      throw new Error('Modal appeared but does not contain job form markers - may be wrong dialog type');
-    }
-
-    // Step 2: Fill job name
     const jobNameField = findJobNameField(modal);
     if (jobNameField) {
       await batchFillFields([{ element: jobNameField, value: jobData.jobName }]);
       await new Promise(r => setTimeout(r, 100));
     }
 
-    // Step 3: Batch fill all labor items
-    for (const laborItem of jobData.laborItems) {
-      await fillLaborItem(laborItem);
+    // Step 3: Click Save button to close modal
+    const saveButton = Array.from(modal.querySelectorAll('button')).find(btn =>
+      btn.textContent.trim().toLowerCase().includes('save')
+    );
+    if (saveButton) {
+      debug('Clicking Save button');
+      saveButton.click();
+      await new Promise(r => setTimeout(r, 500)); // Wait for modal to close
     }
 
-    // Step 4: Batch fill all parts
+    // Step 4: CRITICAL - Wait for job card to render on estimate page
+    debug('Waiting for job card to render with "click here" links...');
+    await waitForJobCard();
+
+    // Step 5: Add labor items via "click here" links
+    for (const laborItem of jobData.laborItems) {
+      await fillLaborItemViaCard(laborItem);
+    }
+
+    // Step 6: Add parts via "click here" links
     for (const part of jobData.parts) {
-      await fillPart(part);
+      await fillPartViaCard(part);
     }
 
     debug('Auto-fill complete - clearing pending job');
-    
-    // Clear pending job ONLY after successful fill
     chrome.runtime.sendMessage({ action: "CLEAR_PENDING_JOB" });
-    
     isFillingJob = false;
 
   } catch (error) {
@@ -170,6 +168,151 @@ async function fillTekmetricEstimate(jobData) {
     debugError('Job data will remain pending for retry');
     isFillingJob = false;
   }
+}
+
+// =================================================================
+// HELPER: Wait for job card to appear with "click here" links
+// =================================================================
+async function waitForJobCard() {
+  const maxAttempts = 50; // 50 x 200ms = 10 seconds max
+  let attempts = 0;
+
+  while (attempts < maxAttempts) {
+    // Look for "click here to add labor" or "click here to add parts" text
+    const allElements = Array.from(document.querySelectorAll('a, span, div, button'));
+    const clickHereLink = allElements.find(el => {
+      const text = el.textContent.toLowerCase();
+      return (text.includes('click here') || text.includes('click to add')) && 
+             (text.includes('labor') || text.includes('part'));
+    });
+
+    if (clickHereLink) {
+      debug('Job card rendered - found "click here" link');
+      return;
+    }
+
+    await new Promise(r => setTimeout(r, 200));
+    attempts++;
+  }
+
+  throw new Error('Job card did not appear after 10 seconds');
+}
+
+// =================================================================
+// HELPER: Fill labor item via job card "click here" link
+// =================================================================
+async function fillLaborItemViaCard(laborItem) {
+  debug(`Adding labor: ${laborItem.name}`);
+
+  // Find "click here to add labor" link
+  const allClickables = Array.from(document.querySelectorAll('a, span, div[role="button"], button'));
+  const laborLink = allClickables.find(el => {
+    const text = el.textContent.toLowerCase();
+    return (text.includes('click') || text.includes('add')) && text.includes('labor');
+  });
+
+  if (!laborLink) {
+    throw new Error('Could not find "click here to add labor" link');
+  }
+
+  debug('Clicking labor link');
+  laborLink.click();
+  await new Promise(r => setTimeout(r, 1500)); // Wait for fields to appear
+
+  // Find the labor description field (newest input/textarea)
+  const allInputs = Array.from(document.querySelectorAll('input, textarea'));
+  const descField = allInputs.reverse().find(inp => {
+    const placeholder = inp.placeholder?.toLowerCase() || '';
+    const label = inp.getAttribute('aria-label')?.toLowerCase() || '';
+    return placeholder.includes('description') || placeholder.includes('labor') ||
+           label.includes('description') || label.includes('labor');
+  });
+
+  if (descField) {
+    await batchFillFields([{ element: descField, value: laborItem.name }]);
+  }
+
+  // Fill hours and rate
+  const hoursField = allInputs.reverse().find(inp => {
+    const placeholder = inp.placeholder?.toLowerCase() || '';
+    return placeholder.includes('hour') || placeholder.includes('time');
+  });
+
+  const rateField = allInputs.reverse().find(inp => {
+    const placeholder = inp.placeholder?.toLowerCase() || '';
+    return placeholder.includes('rate') || placeholder.includes('price');
+  });
+
+  const fieldsToFill = [];
+  if (hoursField) fieldsToFill.push({ element: hoursField, value: laborItem.hours.toString() });
+  if (rateField) fieldsToFill.push({ element: rateField, value: laborItem.rate.toString() });
+
+  if (fieldsToFill.length > 0) {
+    await batchFillFields(fieldsToFill);
+  }
+
+  await new Promise(r => setTimeout(r, 100));
+}
+
+// =================================================================
+// HELPER: Fill part via job card "click here" link
+// =================================================================
+async function fillPartViaCard(part) {
+  debug(`Adding part: ${part.name}`);
+
+  // Find "click here to add part" link
+  const allClickables = Array.from(document.querySelectorAll('a, span, div[role="button"], button'));
+  const partLink = allClickables.find(el => {
+    const text = el.textContent.toLowerCase();
+    return (text.includes('click') || text.includes('add')) && text.includes('part');
+  });
+
+  if (!partLink) {
+    throw new Error('Could not find "click here to add part" link');
+  }
+
+  debug('Clicking part link');
+  partLink.click();
+  await new Promise(r => setTimeout(r, 1500)); // Wait for fields to appear
+
+  // Fill part fields
+  const allInputs = Array.from(document.querySelectorAll('input, textarea'));
+  
+  const nameField = allInputs.reverse().find(inp => {
+    const placeholder = inp.placeholder?.toLowerCase() || '';
+    return placeholder.includes('description') || placeholder.includes('part') || placeholder.includes('name');
+  });
+
+  const fieldsToFill = [];
+  if (nameField) fieldsToFill.push({ element: nameField, value: part.name });
+
+  // Look for brand, part#, quantity, cost, retail fields
+  const brandField = allInputs.find(inp => inp.placeholder?.toLowerCase().includes('brand'));
+  const partNumberField = allInputs.find(inp => {
+    const p = inp.placeholder?.toLowerCase() || '';
+    return p.includes('part number') || p.includes('part #') || p.includes('number');
+  });
+  const qtyField = allInputs.find(inp => {
+    const p = inp.placeholder?.toLowerCase() || '';
+    return p.includes('quantity') || p.includes('qty');
+  });
+  const costField = allInputs.find(inp => inp.placeholder?.toLowerCase().includes('cost'));
+  const retailField = allInputs.find(inp => {
+    const p = inp.placeholder?.toLowerCase() || '';
+    return p.includes('retail') || p.includes('price');
+  });
+
+  if (brandField) fieldsToFill.push({ element: brandField, value: part.brand });
+  if (partNumberField) fieldsToFill.push({ element: partNumberField, value: part.partNumber });
+  if (qtyField) fieldsToFill.push({ element: qtyField, value: part.quantity.toString() });
+  if (costField) fieldsToFill.push({ element: costField, value: part.cost.toString() });
+  if (retailField) fieldsToFill.push({ element: retailField, value: part.retail.toString() });
+
+  if (fieldsToFill.length > 0) {
+    await batchFillFields(fieldsToFill);
+  }
+
+  await new Promise(r => setTimeout(r, 100));
 }
 
 // =================================================================
