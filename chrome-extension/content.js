@@ -109,17 +109,40 @@ async function fillTekmetricEstimate(jobData) {
     if (cannedJobsSearch) {
       console.log('✓ Found canned jobs search input');
       // Walk up the DOM to find the modal container
+      // The REAL modal will have z-index > 1000, not just a sticky toolbar at 900
       let element = cannedJobsSearch;
       while (element && element !== document.body) {
         const zIndex = window.getComputedStyle(element).zIndex;
-        // The modal will have a high z-index and be positioned
-        if (zIndex && parseInt(zIndex) > 100) {
+        // The modal dialog will have a very high z-index (1000+), not just a toolbar (900)
+        if (zIndex && parseInt(zIndex) > 1000) {
           modal = element;
           console.log('Found modal container by walking up from canned jobs input');
           console.log('Modal z-index:', zIndex, 'Modal tag:', element.tagName, 'Modal class:', element.className.substring(0, 50));
           break;
         }
         element = element.parentElement;
+      }
+      
+      // If we didn't find z-index > 1000, look for the largest container we can find
+      if (!modal) {
+        console.log('No z-index > 1000 found, looking for largest container...');
+        element = cannedJobsSearch;
+        while (element && element !== document.body) {
+          const zIndex = window.getComputedStyle(element).zIndex;
+          if (zIndex && parseInt(zIndex) >= 100) {
+            // Count inputs inside this potential modal
+            const inputs = element.querySelectorAll('input, textarea, [contenteditable="true"]');
+            console.log(`Checking element with z-index ${zIndex}: ${inputs.length} input fields`);
+            // The real modal will have multiple inputs (job title, labor fields, etc.)
+            if (inputs.length > 5) {
+              modal = element;
+              console.log('Found modal with multiple input fields');
+              console.log('Modal z-index:', zIndex, 'Modal tag:', element.tagName, 'Modal class:', element.className.substring(0, 50));
+              break;
+            }
+          }
+          element = element.parentElement;
+        }
       }
     }
     

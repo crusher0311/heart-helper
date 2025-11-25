@@ -2,9 +2,24 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.6.0] - 2024-11-24
+
+### 🎯 FINAL FIX: Walk Higher Up the DOM Tree
+- **Problem**: v1.5.9 stopped at sticky toolbar (z-index 900) containing ONLY the search bar
+- **Evidence**: `Found 1 inputs` - only the canned jobs search field, not the job title field
+- **Root cause**: Walked up DOM until z-index > 100, but stopped at FIRST match (toolbar, not modal)
+- **Solution**: Two-tier approach:
+  1. **Primary**: Walk up until z-index > 1000 (true modal dialogs)
+  2. **Fallback**: If no z-index > 1000, walk up and find container with 5+ input fields (entire form)
+- **Why it works**: Real modal contains job title field, labor fields, parts fields = many inputs
+- **Toolbar only has**: 1 input (the canned jobs search bar we're using as anchor)
+
+### Technical Details
+Sticky toolbars (z-900) vs Modal dialogs (z-1000+). Input counting ensures we find the COMPLETE form, not just a search bar.
+
 ## [1.5.9] - 2024-11-24
 
-### 🎯 REAL FIX: Find Correct Modal by Content
+### 🔧 ATTEMPTED: Find Correct Modal by Content (STOPPED TOO EARLY)
 - **Problem**: v1.5.8 found WRONG modal (Handle.com chat widget with z-index 2147483647)
 - **Evidence**: `className: 'detect-auto-handle visible'` had 0 inputs inside it
 - **Root cause**: Highest z-index approach finds ANY overlay (chat widgets, tooltips, etc.)
