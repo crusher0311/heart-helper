@@ -1,12 +1,13 @@
 {
   "manifest_version": 3,
   "name": "HEART Helper - Tekmetric Integration",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "HEART Certified Auto Care repair history search and Tekmetric auto-fill tool",
   "permissions": [
     "storage",
     "activeTab",
-    "scripting"
+    "scripting",
+    "tabs"
   ],
   "host_permissions": [
     "https://shop.tekmetric.com/*",
@@ -14,14 +15,14 @@
     "*://*.replit.dev/*"
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background-v2.js"
   },
   "content_scripts": [
     {
       "matches": [
         "https://shop.tekmetric.com/*"
       ],
-      "js": ["content.js"],
+      "js": ["content-v2.js"],
       "run_at": "document_idle"
     },
     {
