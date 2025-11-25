@@ -2,6 +2,30 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [2.2.1] - 2025-11-25
+
+### 🔧 CRITICAL FIX: Inject Icons Next to 3-Dot Menus (Not Textareas)
+- **Problem**: Tekmetric concern fields have NO textareas or contenteditable elements
+- **Discovery**: Extension was searching for textareas that don't exist (found 0 every time)
+- **Root Cause**: Concerns are displayed as read-only list items with text + 3-dot menu
+- **Solution**: Complete rewrite to inject HEART icons next to existing 3-dot menus
+  - Finds all rows containing text + button (likely 3-dot menu)
+  - Injects HEART icon inline, right before the 3-dot button
+  - Extracts concern text from the row when user clicks icon
+  - Opens HEART Helper with that specific concern pre-filled
+
+### Implementation
+- Searches for `div, li, [role="listitem"]` with buttons and text content
+- Validates rows have 5-200 chars of text (filters out headers/footers)
+- Injects 28px circular HEART icon with same hover effects
+- Places icon using `insertBefore(threeDotsButton)` for perfect positioning
+- Fallback: appends to end of row if 3-dot menu not found
+
+### Why This Works
+- Each concern already has a 3-dot menu (⋮)
+- Just adding a HEART icon next to it
+- No need to find textareas that don't exist!
+
 ## [2.2.0] - 2025-11-25
 
 ### 🎯 MAJOR UX CHANGE: Carvis-Style Individual HEART Icons
