@@ -30,8 +30,13 @@ export function SearchInterface({ onSearch, isLoading }: SearchInterfaceProps) {
   const [repairType, setRepairType] = useState<string>("");
   const [autoSearchTriggered, setAutoSearchTriggered] = useState(false);
   const [isPreFilled, setIsPreFilled] = useState(false);
+  const [urlParamsLoaded, setUrlParamsLoaded] = useState(false);
 
+  // CRITICAL FIX: Only load URL params ONCE on initial mount
+  // Previously, this ran every time onSearch changed, overwriting user edits!
   useEffect(() => {
+    if (urlParamsLoaded) return; // Skip if already loaded
+    
     const params = new URLSearchParams(window.location.search);
     
     const urlMake = params.get('make');
@@ -49,6 +54,8 @@ export function SearchInterface({ onSearch, isLoading }: SearchInterfaceProps) {
       setIsPreFilled(true);
     }
 
+    setUrlParamsLoaded(true); // Mark as loaded
+
     if (urlSearch && !autoSearchTriggered) {
       setAutoSearchTriggered(true);
       setTimeout(() => {
@@ -62,7 +69,7 @@ export function SearchInterface({ onSearch, isLoading }: SearchInterfaceProps) {
         });
       }, 500);
     }
-  }, [onSearch, autoSearchTriggered]);
+  }, []); // Empty dependency array = run only once on mount
 
   const handleSearch = () => {
     if (!repairType.trim()) return;

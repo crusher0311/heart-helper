@@ -8,7 +8,12 @@ Built with HEART's brand values of **Integrity**, **Passion**, and **Transparenc
 
 The application integrates seamlessly with Tekmetric (HEART's shop management system) and features a fast, productivity-focused interface designed in HEART's brand colors and typography.
 
-**Current Status (Nov 25, 2025)**: Fully functional with complete HEART branding, working search with AI scoring, database-backed caching, and Chrome extension integration. All core features operational.
+**Current Status (Nov 25, 2025)**: Fully functional with complete HEART branding, working search with AI scoring, database-backed caching, and Chrome extension integration v2.3.0. All core features operational.
+
+**Latest Fixes (Nov 25, 2025)**:
+- Fixed URL params overwriting user edits in repair type field (now loads only once on mount)
+- Chrome extension v2.3.0: Only injects ❤️ icons in concern sections (not jobs/labor/parts)
+- Switched from SVG to simple ❤️ emoji for cleaner UX
 
 **Tekmetric Integration**: Chrome extension integration that automates adding jobs to Tekmetric repair orders:
 1. **Chrome Extension**: Browser extension that auto-fills labor items and parts into Tekmetric by automating the UI
