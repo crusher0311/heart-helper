@@ -954,23 +954,7 @@ function extractVehicleData() {
   return data;
 }
 
-// Create HEART icon SVG
-function createHeartIcon() {
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('viewBox', '0 0 24 24');
-  svg.setAttribute('fill', 'none');
-  svg.setAttribute('stroke', '#ED1C24'); // HEART Red
-  svg.setAttribute('stroke-width', '2');
-  svg.setAttribute('stroke-linecap', 'round');
-  svg.setAttribute('stroke-linejoin', 'round');
-  svg.style.cssText = 'width: 20px; height: 20px;';
-  
-  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  path.setAttribute('d', 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z');
-  svg.appendChild(path);
-  
-  return svg;
-}
+// No need for SVG - we'll use ❤️ emoji!
 
 // Inject HEART icon next to 3-dot menu for a concern line item
 function injectHeartIconForConcern(concernRow, concernText) {
@@ -979,50 +963,35 @@ function injectHeartIconForConcern(concernRow, concernText) {
     return;
   }
   
-  // Create the icon button
+  // Create the icon button with ❤️ emoji
   const iconButton = document.createElement('button');
   iconButton.className = 'heart-helper-icon';
+  iconButton.textContent = '❤️';
   iconButton.style.cssText = `
-    background: white;
-    border: 2px solid #ED1C24;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    padding: 4px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(237, 28, 36, 0.2);
     transition: all 0.2s ease;
-    margin-left: 8px;
+    margin-left: 4px;
     margin-right: 4px;
+    padding: 0;
     vertical-align: middle;
+    opacity: 0.7;
   `;
-  
-  iconButton.appendChild(createHeartIcon());
   
   // Hover effects
   iconButton.addEventListener('mouseenter', () => {
-    iconButton.style.background = '#ED1C24';
-    iconButton.style.transform = 'scale(1.1)';
-    iconButton.style.boxShadow = '0 4px 12px rgba(237, 28, 36, 0.4)';
-    const svg = iconButton.querySelector('svg');
-    if (svg) {
-      svg.setAttribute('stroke', 'white');
-      svg.setAttribute('fill', 'white');
-    }
+    iconButton.style.transform = 'scale(1.2)';
+    iconButton.style.opacity = '1';
   });
   
   iconButton.addEventListener('mouseleave', () => {
-    iconButton.style.background = 'white';
     iconButton.style.transform = 'scale(1)';
-    iconButton.style.boxShadow = '0 2px 8px rgba(237, 28, 36, 0.2)';
-    const svg = iconButton.querySelector('svg');
-    if (svg) {
-      svg.setAttribute('stroke', '#ED1C24');
-      svg.setAttribute('fill', 'none');
-    }
+    iconButton.style.opacity = '0.7';
   });
   
   // Click handler - open search with this specific concern
@@ -1078,74 +1047,71 @@ function injectHeartIconForConcern(concernRow, concernText) {
   injectedIcons.add(concernRow);
 }
 
-// Find and inject icons for all concern line items
+// Find and inject icons ONLY for customer concern items (not jobs/labor/parts)
 function injectHeartIcons() {
   if (!window.location.href.includes('/repair-orders/')) {
     console.log("❌ Not on repair orders page, skipping HEART icons");
     return;
   }
   
-  console.log("🔍 Searching for concern line items on repair order page...");
+  console.log("🔍 Searching for CUSTOMER CONCERN items only...");
   
-  // NEW APPROACH: Find concern list items (the rows with concern text + 3-dot menus)
-  // Look for common patterns in Tekmetric's UI
-  const concernRows = [];
+  // STRATEGY: Only inject hearts in the "Customer Concerns" or "Technician Concerns" section
+  // Find section headers or containers that indicate concerns (not jobs/labor/parts)
+  const concernSections = [];
   
-  // Strategy 1: Find all elements that contain both text and a button (likely 3-dot menu)
-  const allRows = document.querySelectorAll('[class*="row" i], [class*="item" i], [class*="line" i], li, div[role="listitem"]');
-  
-  for (const row of allRows) {
-    // Check if row has a button (likely 3-dot menu) and some text content
-    const hasButton = row.querySelector('button');
-    const text = row.textContent?.trim() || '';
-    
-    // Must have: button, text content (5-200 chars), and not be a header/title
-    if (hasButton && text.length > 5 && text.length < 200) {
-      // Additional check: text should not be just button text
-      const buttonTexts = Array.from(row.querySelectorAll('button')).map(b => b.textContent.trim()).join(' ');
-      const nonButtonText = text.replace(buttonTexts, '').trim();
-      
-      if (nonButtonText.length > 5) {
-        concernRows.push({ row, text: nonButtonText });
+  // Look for section headers with "concern" or "complaint" text
+  const allHeaders = document.querySelectorAll('h1, h2, h3, h4, h5, h6, div, span, label');
+  for (const header of allHeaders) {
+    const headerText = header.textContent?.toLowerCase() || '';
+    // Look for "Customer Concerns", "Technician Concerns", "Findings", etc.
+    if ((headerText.includes('concern') || headerText.includes('finding') || headerText.includes('complaint')) &&
+        headerText.length < 100) { // Must be short (a header, not a paragraph)
+      // Find the container after this header that holds the concern list
+      let container = header.nextElementSibling;
+      while (container && !container.querySelector('button')) {
+        container = container.nextElementSibling;
+      }
+      if (container) {
+        concernSections.push(container);
+        console.log(`✓ Found concern section: "${headerText.trim().substring(0, 50)}"`);
       }
     }
   }
   
-  console.log(`📊 Found ${concernRows.length} potential concern rows`);
+  if (concernSections.length === 0) {
+    console.log("⚠️ No concern sections found with headers");
+    // FALLBACK: Look for containers with "concern" in their class or id
+    const concernContainers = document.querySelectorAll('[class*="concern" i], [id*="concern" i], [class*="finding" i]');
+    concernContainers.forEach(c => concernSections.push(c));
+    console.log(`⚠️ Found ${concernSections.length} containers via class/id search`);
+  }
   
-  if (concernRows.length > 0) {
-    console.log("First 3 concern rows:", concernRows.slice(0, 3).map(c => ({
-      text: c.text.substring(0, 50),
-      className: c.row.className
-    })));
+  console.log(`📊 Found ${concernSections.length} concern sections to scan`);
+  
+  // Now find rows ONLY within these concern sections
+  let iconsInjected = 0;
+  concernSections.forEach(section => {
+    const rows = section.querySelectorAll('[class*="row" i], [class*="item" i], li, div[role="listitem"]');
     
-    // Inject HEART icons for each concern row
-    concernRows.forEach(({ row, text }) => {
-      if (!injectedIcons.has(row)) {
-        injectHeartIconForConcern(row, text);
-      }
-    });
-  } else {
-    console.log("⚠️ No concern rows found, trying alternative detection...");
-    
-    // FALLBACK: Look for any row with specific concern-related keywords
-    const allDivs = document.querySelectorAll('div, li');
-    for (const div of allDivs) {
-      const text = div.textContent?.toLowerCase() || '';
-      const keywords = ['concern', 'complaint', 'customer', 'finding', 'issue'];
+    for (const row of rows) {
+      const hasButton = row.querySelector('button');
+      const text = row.textContent?.trim() || '';
       
-      if (keywords.some(kw => text.includes(kw)) && text.length > 10 && text.length < 300) {
-        const hasButton = div.querySelector('button');
-        if (hasButton && !injectedIcons.has(div)) {
-          const cleanText = div.textContent?.trim() || '';
-          concernRows.push({ row: div, text: cleanText });
-          injectHeartIconForConcern(div, cleanText);
+      // Must have button and reasonable text length
+      if (hasButton && text.length > 5 && text.length < 200 && !injectedIcons.has(row)) {
+        const buttonTexts = Array.from(row.querySelectorAll('button')).map(b => b.textContent.trim()).join(' ');
+        const concernText = text.replace(buttonTexts, '').trim();
+        
+        if (concernText.length > 5) {
+          injectHeartIconForConcern(row, concernText);
+          iconsInjected++;
         }
       }
     }
-  }
+  });
   
-  console.log(`✅ Total HEART icons injected: ${injectedIcons.size}`);
+  console.log(`✅ Total HEART icons injected: ${iconsInjected} (only in concern sections)`);
 }
 
 function observePageChanges() {

@@ -2,6 +2,31 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [2.3.0] - 2025-11-25
+
+### 🎯 MAJOR IMPROVEMENT: Only Inject Hearts in Concern Sections
+- **Problem**: Hearts appearing EVERYWHERE (jobs, labor, parts, tires, etc.) - way too many!
+- **Root Cause**: Detection was too broad - found ANY row with button + text
+- **Solution**: Only inject hearts in actual "Customer Concerns" or "Technician Concerns" sections
+  - Finds section headers containing "concern", "finding", or "complaint"
+  - Only scans for rows within those specific sections
+  - Prevents hearts from appearing on jobs, labor items, parts, etc.
+
+### 🎨 UX IMPROVEMENT: Use ❤️ Emoji Instead of SVG
+- **Changed**: Replaced custom SVG heart with circle border with simple ❤️ emoji
+- **Benefits**: 
+  - Cleaner, more familiar icon
+  - No border needed
+  - Smaller file size
+  - Simpler code
+- **Styling**: 18px emoji, slight opacity (0.7), scales to 1.2x on hover
+
+### Technical Details
+- Searches for headers (h1-h6, div, span) with "concern"/"finding"/"complaint" text
+- Fallback: looks for containers with concern-related classes/IDs
+- Only injects hearts for rows within these identified sections
+- Much more selective = fewer, more relevant hearts
+
 ## [2.2.1] - 2025-11-25
 
 ### 🔧 CRITICAL FIX: Inject Icons Next to 3-Dot Menus (Not Textareas)
