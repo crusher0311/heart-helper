@@ -1128,73 +1128,108 @@ function injectHeartIcons() {
     return;
   }
   
-  // Always inject floating button as fallback for general searches
+  // Always inject floating button - this is the primary way to search
   injectFloatingHeartButton();
   
   console.log("🔍 Searching for concern items...");
   
-  // STRATEGY: Look for rows that contain the "Add finding" text or similar patterns
-  // These are the actual concern/finding item rows in Tekmetric
+  // STRATEGY: Find "Add finding" links and insert hearts right before them
+  // This gives precise placement next to each concern
   
   let iconsInjected = 0;
   
-  // Find all elements that contain "Add finding" text - these are concern rows
-  const allElements = document.querySelectorAll('*');
-  const concernRows = new Set();
+  // Find all elements that might be "Add finding" links
+  const links = document.querySelectorAll('a, span, div, button');
   
-  for (const el of allElements) {
-    // Look for elements with "Add finding" as direct text (not nested)
-    const directText = Array.from(el.childNodes)
-      .filter(n => n.nodeType === Node.TEXT_NODE)
-      .map(n => n.textContent.trim())
-      .join('');
+  for (const link of links) {
+    // Check if this element contains exactly "Add finding" text
+    const text = link.textContent?.trim().toLowerCase();
+    if (text !== 'add finding') continue;
     
-    if (directText.toLowerCase() === 'add finding') {
-      // Found an "Add finding" link - the parent row is a concern item
-      let row = el.closest('div[class*="flex"]');
-      // Go up to find the row that contains both the concern text and the Add finding link
-      for (let i = 0; i < 5 && row; i++) {
-        const children = row.children.length;
-        const hasMultipleColumns = children >= 2;
-        if (hasMultipleColumns) {
-          concernRows.add(row);
-          break;
-        }
-        row = row.parentElement?.closest('div[class*="flex"]');
+    // Skip if already has a heart sibling
+    const parent = link.parentElement;
+    if (!parent) continue;
+    if (parent.querySelector('.heart-helper-inline')) continue;
+    
+    // Find the concern text - look at previous siblings or parent's text content
+    let concernText = '';
+    
+    // Try to get text from the row (go up to find a flex container)
+    let row = link.closest('div[class*="flex"]');
+    for (let i = 0; i < 3 && row; i++) {
+      const rowText = row.textContent?.trim() || '';
+      if (rowText.length > 20) {
+        // Extract text before "Add finding"
+        concernText = rowText.split(/add finding/i)[0].trim();
+        break;
       }
+      row = row.parentElement?.closest('div[class*="flex"]');
     }
-  }
-  
-  console.log(`📊 Found ${concernRows.size} concern rows with "Add finding" pattern`);
-  
-  // Now inject hearts into these concern rows
-  for (const row of concernRows) {
-    if (injectedIcons.has(row)) continue;
     
-    // Get the concern text (first column, before "Add finding")
-    const rowText = row.textContent?.trim() || '';
-    
-    // Skip if it's a header row
-    const lowerText = rowText.toLowerCase();
-    if (lowerText === 'customer concerns' || lowerText === 'technician concerns') continue;
-    if (lowerText.includes('customer concerns') && lowerText.includes('finding') && rowText.length < 50) continue;
-    
-    // Skip rows that are section headers (short text)
-    if (rowText.length < 10) continue;
-    
-    // Extract just the concern description (before "Add finding")
-    let concernText = rowText.split(/add finding/i)[0].trim();
-    
-    // Clean up the text
+    // Clean up concern text
     concernText = concernText.replace(/[\s]{2,}/g, ' ').trim();
     
-    if (concernText.length > 5 && concernText.length < 300) {
-      injectHeartIconForConcern(row, concernText);
-      iconsInjected++;
-    }
+    // Skip headers
+    if (concernText.toLowerCase().includes('customer concerns') && concernText.length < 30) continue;
+    if (concernText.toLowerCase().includes('technician concerns') && concernText.length < 30) continue;
+    if (concernText.length < 5) continue;
+    
+    // Create inline heart button
+    const heartBtn = document.createElement('span');
+    heartBtn.className = 'heart-helper-inline';
+    heartBtn.innerHTML = '♥';
+    heartBtn.style.cssText = `
+      color: #ED1C24;
+      font-size: 16px;
+      cursor: pointer;
+      margin-right: 6px;
+      opacity: 0.8;
+      transition: all 0.2s ease;
+    `;
+    
+    heartBtn.addEventListener('mouseenter', () => {
+      heartBtn.style.transform = 'scale(1.3)';
+      heartBtn.style.opacity = '1';
+    });
+    
+    heartBtn.addEventListener('mouseleave', () => {
+      heartBtn.style.transform = 'scale(1)';
+      heartBtn.style.opacity = '0.8';
+    });
+    
+    // Store the concern text for this heart
+    const capturedConcern = concernText;
+    heartBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const vehicleData = extractVehicleData();
+      const params = new URLSearchParams();
+      if (vehicleData.make) params.set('make', vehicleData.make);
+      if (vehicleData.model) params.set('model', vehicleData.model);
+      if (vehicleData.year) params.set('year', vehicleData.year);
+      if (vehicleData.engine) params.set('engine', vehicleData.engine);
+      params.set('search', capturedConcern.substring(0, 200));
+      if (vehicleData.repairOrderId) params.set('roId', vehicleData.repairOrderId);
+      
+      chrome.storage.local.get(['appUrl'], (result) => {
+        if (!result.appUrl) {
+          showErrorNotification('Extension not configured.');
+          return;
+        }
+        const searchUrl = `${result.appUrl}/?${params.toString()}`;
+        console.log("Opening HEART Helper:", capturedConcern.substring(0, 50));
+        window.open(searchUrl, '_blank');
+      });
+    });
+    
+    // Insert heart right before the "Add finding" link
+    parent.insertBefore(heartBtn, link);
+    iconsInjected++;
+    console.log(`✓ Heart added for: "${concernText.substring(0, 40)}..."`);
   }
   
-  console.log(`✅ Total HEART icons injected: ${iconsInjected}`);
+  console.log(`✅ Total inline hearts injected: ${iconsInjected}`);
 }
 
 function observePageChanges() {
