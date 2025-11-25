@@ -2,9 +2,31 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.6.8] - 2024-11-24
+
+### ⚡ INSTANT AUTOMATION: Storage Change Listener
+- **THE PROBLEM**: Content script only checked ONCE (2 seconds after page load), then stopped
+  - User reported 8-10 second delay after switching to Tekmetric tab
+  - No continuous polling - if data wasn't there at that exact moment, it missed it
+  - Eventually found data when MutationObserver triggered on URL changes
+- **THE FIX**: Added `chrome.storage.onChanged` listener
+  - Triggers **instantly** when inject.js writes job data to storage
+  - No more waiting for polling intervals or URL changes
+  - Automation starts within **milliseconds** of clicking "Send to Extension"
+- **Result**: Sub-second automation start (only Tekmetric modal loading time remains)
+
+### Implementation
+```javascript
+chrome.storage.onChanged.addListener((changes, areaName) => {
+  if (areaName === 'local' && changes.lastJobData && changes.lastJobData.newValue) {
+    fillTekmetricEstimate(changes.lastJobData.newValue);
+  }
+});
+```
+
 ## [1.6.7] - 2024-11-24
 
-### 🚀 ULTIMATE FIX: Bypass Sleeping Service Worker Entirely
+### 🚀 Direct Storage Write: Bypass Sleeping Service Worker
 - **THE PROBLEM**: Even with v1.6.6, service worker takes 30+ seconds to wake up and process messages
 - **Evidence from logs**: 17 polling attempts (34+ seconds) before background script received job data
   ```

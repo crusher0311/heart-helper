@@ -606,6 +606,17 @@ function checkForPendingJob() {
   });
 }
 
+// Listen for storage changes to trigger automation instantly
+chrome.storage.onChanged.addListener((changes, areaName) => {
+  if (areaName === 'local' && changes.lastJobData) {
+    console.log("🔔 Storage changed - job data added!");
+    if (changes.lastJobData.newValue) {
+      console.log("⚡ Triggering automation immediately!");
+      fillTekmetricEstimate(changes.lastJobData.newValue);
+    }
+  }
+});
+
 // Listen for messages from the search tool (cross-tab communication)
 window.addEventListener('message', (event) => {
   console.log("📬 Received window message:", event.data);
