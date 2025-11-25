@@ -33,8 +33,22 @@ window.addEventListener("message", (event) => {
   
   if (event.data.action === "SEND_TO_TEKMETRIC") {
     console.log("Inject: Forwarding job data to background", event.data);
+    
+    // BACKUP: Also store directly to chrome.storage in case service worker is asleep
+    chrome.storage.local.set({ 
+      lastJobData: event.data.payload,
+      timestamp: new Date().toISOString()
+    }, () => {
+      console.log("✅ Inject: Stored job data directly to chrome.storage.local (backup)");
+    });
+    
+    // Forward to background script (primary method)
     chrome.runtime.sendMessage(event.data, (response) => {
-      console.log("Inject: Background response:", response);
+      if (chrome.runtime.lastError) {
+        console.error("❌ Inject: Error sending to background:", chrome.runtime.lastError);
+      } else {
+        console.log("✅ Inject: Background acknowledged:", response);
+      }
     });
   }
 });
