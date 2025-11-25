@@ -20,7 +20,15 @@ import crypto from "crypto";
 
 export interface IStorage {
   // Search jobs based on criteria
-  searchJobs(params: SearchJobRequest & { yearRange?: number }): Promise<JobWithDetails[]>;
+  searchJobs(params: {
+    vehicleMake?: string | null;
+    vehicleModel?: string | null;
+    vehicleYear?: number | null;
+    vehicleEngine?: string | null;
+    repairType: string;
+    limit?: number;
+    yearRange?: number;
+  }): Promise<JobWithDetails[]>;
   
   // Get a single job by ID
   getJobById(id: number): Promise<JobWithDetails | null>;
@@ -45,10 +53,10 @@ export interface IStorage {
 export class DatabaseStorage implements IStorage {
   
   async searchJobs(params: {
-    vehicleMake?: string;
-    vehicleModel?: string;
-    vehicleYear?: number;
-    vehicleEngine?: string;
+    vehicleMake?: string | null;
+    vehicleModel?: string | null;
+    vehicleYear?: number | null;
+    vehicleEngine?: string | null;
     repairType: string;
     limit?: number;
     yearRange?: number;

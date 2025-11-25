@@ -65,7 +65,7 @@ export function registerRoutes(app: Express) {
             params.vehicleMake,
             params.vehicleModel,
             params.vehicleYear,
-            params.vehicleEngine,
+            params.vehicleEngine || undefined,
             params.repairType
           );
           
@@ -104,7 +104,7 @@ export function registerRoutes(app: Express) {
           const similarModels = await getSimilarModels(
             params.vehicleMake,
             params.vehicleModel,
-            params.vehicleYear
+            params.vehicleYear || undefined
           );
           
           console.log(`AI found ${similarModels.length} similar models`);
@@ -206,10 +206,10 @@ export function registerRoutes(app: Express) {
       try {
         const matches = await scoreJobMatches(
           {
-            vehicleMake: params.vehicleMake,
-            vehicleModel: params.vehicleModel,
-            vehicleYear: params.vehicleYear,
-            vehicleEngine: params.vehicleEngine,
+            vehicleMake: params.vehicleMake || undefined,
+            vehicleModel: params.vehicleModel || undefined,
+            vehicleYear: params.vehicleYear || undefined,
+            vehicleEngine: params.vehicleEngine || undefined,
             repairType: params.repairType,
           },
           candidatesForAI
