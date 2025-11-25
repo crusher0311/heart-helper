@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, startTransition } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { SearchInterface } from "@/components/search-interface";
@@ -38,8 +38,15 @@ export default function Home() {
       console.log("Is array:", Array.isArray(data));
       const resultsArray = Array.isArray(data) ? data : [];
       console.log("Setting results to:", resultsArray);
-      setResults(resultsArray);
+      
+      // Update counter immediately (high priority)
       setMatchesFound(resultsArray.length);
+      
+      // Defer rendering cards to avoid blocking UI (low priority)
+      startTransition(() => {
+        setResults(resultsArray);
+      });
+      
       queryClient.invalidateQueries({ queryKey: ["/api/search"] });
     },
   });
