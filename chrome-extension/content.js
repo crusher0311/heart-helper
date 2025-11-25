@@ -562,26 +562,25 @@ async function fillTekmetricEstimate(jobData) {
       if (descriptionField) {
         const description = part.brand ? `${part.brand} ${part.name}` : part.name;
         
-        // More robust filling strategy for description field
+        // React-compatible filling strategy
         descriptionField.focus();
-        descriptionField.value = '';  // Clear first
-        descriptionField.dispatchEvent(new Event('input', { bubbles: true }));
         
-        await new Promise(resolve => setTimeout(resolve, 100));
+        // Use React's internal setter if available
+        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+        nativeInputValueSetter.call(descriptionField, description);
         
-        descriptionField.value = description;
-        descriptionField.dispatchEvent(new Event('input', { bubbles: true }));
-        descriptionField.dispatchEvent(new Event('change', { bubbles: true }));
+        // Trigger React's onChange handler
+        const inputEvent = new Event('input', { bubbles: true });
+        descriptionField.dispatchEvent(inputEvent);
+        
+        const changeEvent = new Event('change', { bubbles: true });
+        descriptionField.dispatchEvent(changeEvent);
+        
+        // Additional events for good measure
         descriptionField.dispatchEvent(new Event('blur', { bubbles: true }));
-        descriptionField.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));
         
-        // Verify it was set
-        await new Promise(resolve => setTimeout(resolve, 200));
-        if (descriptionField.value === description) {
-          console.log('✓ Filled description:', description);
-        } else {
-          console.log('⚠️ Description field value did not persist. Current value:', descriptionField.value);
-        }
+        console.log('✓ Filled description using React setter:', description);
+        console.log('  Field value after filling:', descriptionField.value);
       } else {
         console.log('⚠️ Could not find description field');
       }
