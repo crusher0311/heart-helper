@@ -1,0 +1,137 @@
+(async function deleteAllNewJobs() {
+  console.log('🗑️ Starting bulk cleanup of New Job entries...');
+  console.log('Found 1848 entries - this will take ~30-40 minutes');
+  
+  let deletedCount = 0;
+  let skipCount = 0;
+  
+  while (true) {
+    // Find visible "New Job" div elements
+    const newJobDivs = Array.from(document.querySelectorAll('div')).filter(el => {
+      return el.textContent?.trim() === 'New Job' && 
+             el.offsetParent !== null && 
+             el.className.includes('flex');
+    });
+    
+    if (newJobDivs.length === 0) {
+      console.log(`✅ COMPLETE! Deleted ${deletedCount} jobs, skipped ${skipCount}`);
+      break;
+    }
+    
+    if (deletedCount % 25 === 0) {
+      console.log(`📊 Progress: ${deletedCount} deleted, ${newJobDivs.length} remaining`);
+    }
+    
+    const firstDiv = newJobDivs[0];
+    
+    // Find parent row (go up the DOM tree)
+    let row = firstDiv;
+    for (let i = 0; i < 20; i++) {
+      row = row.parentElement;
+      if (!row) break;
+      
+      // Find all buttons in this row
+      const buttons = Array.from(row.querySelectorAll('button'));
+      
+      // The trash button is usually the last visible button with an SVG
+      const trashButton = buttons.reverse().find(btn => {
+        return btn.querySelector('svg') && btn.offsetParent !== null;
+      });
+      
+      if (trashButton) {
+        trashButton.click();
+        await new Promise(r => setTimeout(r, 600));
+        
+        // Find and click the red DELETE button in modal
+        const deleteBtn = Array.from(document.querySelectorAll('button')).find(btn => {
+          return btn.textContent.trim().toUpperCase() === 'DELETE';
+        });
+        
+        if (deleteBtn) {
+          deleteBtn.click();
+          deletedCount++;
+          await new Promise(r => setTimeout(r, 800));
+          break;
+        } else {
+          // Close modal and skip
+          const cancelBtn = Array.from(document.querySelectorAll('button')).find(b => 
+            b.textContent.trim() === 'CANCEL'
+          );
+          if (cancelBtn) cancelBtn.click();
+          skipCount++;
+          break;
+        }
+      }
+    }
+    
+    // If no button found, hide element to avoid infinite loop
+    if (!row || skipCount > deletedCount + 50) {
+      firstDiv.style.display = 'none';
+      skipCount++;
+    }
+    
+    // Safety limit
+    if (deletedCount + skipCount > 2000) {
+      console.log('⚠️ Safety limit reached');
+      break;
+    }
+  }
+  
+  console.log(`🎉 Final: ${deletedCount} deleted, ${skipCount} skipped`);
+})();
+VM988:2 🗑️ Starting bulk cleanup of New Job entries...
+VM988:3 Found 1848 entries - this will take ~30-40 minutes
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:570 🔍 Checking for pending job data...
+Promise {<pending>}
+content.js:572 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:578 ⚠️ No pending job data found
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"13bf1cef-f8e7-41e1-a310-4f406b6935a2"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+VM988:22 📊 Progress: 0 deleted, 924 remaining
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
