@@ -1,11 +1,14 @@
-import { Search, Database, Sparkles } from "lucide-react";
+import { Search, Database, Sparkles, RefreshCw } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface EmptyStateProps {
   type: "no-search" | "no-results" | "error";
   message?: string;
+  onBroadenSearch?: () => void;
+  canBroaden?: boolean;
 }
 
-export function EmptyState({ type, message }: EmptyStateProps) {
+export function EmptyState({ type, message, onBroadenSearch, canBroaden }: EmptyStateProps) {
   const configs = {
     "no-search": {
       icon: Search,
@@ -15,7 +18,9 @@ export function EmptyState({ type, message }: EmptyStateProps) {
     "no-results": {
       icon: Database,
       title: "No Matching Jobs Found",
-      description: message || "Try adjusting your search criteria or removing some filters to see more results.",
+      description: message || (canBroaden 
+        ? "No jobs found with your current vehicle filters. Try broadening the search to see results from all vehicles with similar repairs."
+        : "Try adjusting your search criteria to see more results."),
     },
     error: {
       icon: Sparkles,
@@ -34,7 +39,19 @@ export function EmptyState({ type, message }: EmptyStateProps) {
           <Icon className="w-8 h-8 text-muted-foreground" />
         </div>
         <h3 className="text-lg font-semibold mb-2">{config.title}</h3>
-        <p className="text-sm text-muted-foreground leading-relaxed">{config.description}</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mb-4">{config.description}</p>
+        
+        {type === "no-results" && canBroaden && onBroadenSearch && (
+          <Button 
+            onClick={onBroadenSearch}
+            variant="default"
+            className="mt-4"
+            data-testid="button-broaden-search"
+          >
+            <RefreshCw className="w-4 h-4 mr-2" />
+            Broaden Search
+          </Button>
+        )}
       </div>
     </div>
   );

@@ -91,6 +91,27 @@ export default function Home() {
     }
   };
 
+  const handleBroadenSearch = () => {
+    if (!searchParams) return;
+    
+    // Remove year, make, model, and engine filters to broaden the search
+    // Keep only the repair type which is required
+    const broadenedParams: SearchJobRequest = {
+      repairType: searchParams.repairType,
+      limit: 20,
+    };
+    
+    handleSearch(broadenedParams, true); // Bypass cache for fresh results
+  };
+
+  // Can broaden if there are vehicle filters that can be removed
+  const canBroadenSearch = searchParams && (
+    searchParams.vehicleYear !== undefined ||
+    searchParams.vehicleMake !== undefined ||
+    searchParams.vehicleModel !== undefined ||
+    searchParams.vehicleEngine !== undefined
+  );
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -185,7 +206,11 @@ export default function Home() {
                 message={error instanceof Error ? error.message : "An error occurred"}
               />
             ) : !Array.isArray(results) || results.length === 0 ? (
-              <EmptyState type="no-results" />
+              <EmptyState 
+                type="no-results" 
+                onBroadenSearch={handleBroadenSearch}
+                canBroaden={!!canBroadenSearch}
+              />
             ) : (
               <div className="space-y-3" data-testid="results-list">
                 {results.map((result) => (
