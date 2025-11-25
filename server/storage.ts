@@ -92,7 +92,24 @@ export class DatabaseStorage implements IStorage {
     }
 
     if (params.vehicleModel) {
-      conditions.push(ilike(vehicles.model, `%${params.vehicleModel}%`));
+      // Smart model matching: extract base model name and match flexibly
+      // "4Runner TRD Pro" should match "4Runner"
+      // "Camry SE" should match "Camry"
+      const modelWords = params.vehicleModel.split(/\s+/).filter(w => w.length > 0);
+      const baseModel = modelWords[0]; // First word is usually the model name
+      
+      if (modelWords.length > 1) {
+        // If multiple words, try to match either the full string OR the base model
+        conditions.push(
+          or(
+            ilike(vehicles.model, `%${params.vehicleModel}%`),
+            ilike(vehicles.model, `%${baseModel}%`)
+          )
+        );
+        console.log(`Model matching: "${params.vehicleModel}" OR base model "${baseModel}"`);
+      } else {
+        conditions.push(ilike(vehicles.model, `%${params.vehicleModel}%`));
+      }
     }
 
     if (params.vehicleYear) {

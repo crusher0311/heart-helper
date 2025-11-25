@@ -1278,9 +1278,9 @@ function injectHeartIcons() {
     
     // Look for "Add finding" text elements
     if (directText.toLowerCase() === 'add finding') {
-      // Go up to find the row
-      let row = el;
-      for (let i = 0; i < 10 && row; i++) {
+      // Go up to find the immediate concern row (not too far!)
+      let row = el.parentElement;
+      for (let i = 0; i < 5 && row; i++) {
         // Check if this row has a 3-dot button (button with just an SVG)
         const buttons = row.querySelectorAll('button');
         let threeDotsBtn = null;
@@ -1301,20 +1301,43 @@ function injectHeartIcons() {
             break;
           }
           
-          // Get the concern text
-          let rowText = row.textContent?.trim() || '';
-          let searchText = rowText
-            .replace(/add finding/gi, '')
-            .replace(/add concern/gi, '')
-            .replace(/copy to estimate/gi, '')
-            .replace(/\(\d+\)/g, '')
-            .replace(/[\s]{2,}/g, ' ')
-            .trim();
+          // BETTER TEXT EXTRACTION: Get only the visible text cells in this row
+          // Look for specific text containers - spans/divs that hold concern name and finding
+          let concernName = '';
+          let findingText = '';
+          
+          // Try to find the concern name (first column) and finding (second column)
+          const textElements = row.querySelectorAll('span, div');
+          for (const textEl of textElements) {
+            const text = textEl.textContent?.trim() || '';
+            // Skip tiny or too large elements
+            if (text.length < 3 || text.length > 100) continue;
+            // Skip UI elements
+            if (text.toLowerCase() === 'add finding' || 
+                text.toLowerCase() === 'add concern') continue;
+            // Skip if it contains nested complex elements
+            if (textEl.querySelectorAll('button, svg, input').length > 0) continue;
+            
+            // First meaningful text is usually concern name
+            if (!concernName && text.length > 3 && text.length < 60) {
+              concernName = text;
+            } else if (concernName && !findingText && text.length > 3) {
+              findingText = text;
+            }
+          }
+          
+          // Construct search text from concern name + finding
+          let searchText = concernName;
+          if (findingText && findingText !== 'Add finding') {
+            searchText = concernName + ' ' + findingText;
+          }
+          searchText = searchText.trim();
           
           // Skip if too short or is a header
           if (searchText.length > 5 && 
-              !searchText.toLowerCase().startsWith('customer concern') &&
-              !searchText.toLowerCase().startsWith('technician concern')) {
+              !searchText.toLowerCase().includes('customer concern') &&
+              !searchText.toLowerCase().includes('technician concern') &&
+              !searchText.toLowerCase().includes('vehicle issues')) {
             
             // Check if heart already exists
             const parent = threeDotsBtn.parentElement;
@@ -1352,8 +1375,6 @@ function injectHeartIcons() {
     for (let i = 0; i < 5 && row; i++) {
       if (processedRows.has(row)) break;
       
-      const rowText = row.textContent?.trim() || '';
-      
       // Check if this row is in a concern section
       let inConcern = false;
       let ancestor = row.parentElement;
@@ -1374,27 +1395,37 @@ function injectHeartIcons() {
         continue;
       }
       
-      // Skip headers
-      const lowerRow = rowText.toLowerCase();
-      if (lowerRow.startsWith('customer concern') || 
-          lowerRow.startsWith('technician concern') ||
-          lowerRow === 'finding' ||
-          rowText.length < 10) {
-        row = row.parentElement;
-        continue;
+      // BETTER TEXT EXTRACTION: Get concern name + finding from the row
+      let concernName = '';
+      let findingText = '';
+      
+      const textElements = row.querySelectorAll('span, div');
+      for (const textEl of textElements) {
+        const text = textEl.textContent?.trim() || '';
+        if (text.length < 3 || text.length > 100) continue;
+        if (text.toLowerCase() === 'add finding' || 
+            text.toLowerCase() === 'add concern') continue;
+        if (textEl.querySelectorAll('button, svg, input').length > 0) continue;
+        
+        if (!concernName && text.length > 3 && text.length < 60) {
+          concernName = text;
+        } else if (concernName && !findingText && text.length > 3) {
+          findingText = text;
+        }
       }
       
-      // Clean up and create heart
-      let searchText = rowText
-        .replace(/add finding/gi, '')
-        .replace(/add concern/gi, '')
-        .replace(/copy to estimate/gi, '')
-        .replace(/sort by:?\s*rating/gi, '')
-        .replace(/\(\d+\)/g, '')
-        .replace(/[\s]{2,}/g, ' ')
-        .trim();
+      let searchText = concernName;
+      if (findingText && findingText !== 'Add finding') {
+        searchText = concernName + ' ' + findingText;
+      }
+      searchText = searchText.trim();
       
-      if (searchText.length > 5 && !parent.querySelector('.heart-helper-inline')) {
+      // Skip if too short or is a header
+      if (searchText.length > 5 && 
+          !searchText.toLowerCase().includes('customer concern') &&
+          !searchText.toLowerCase().includes('technician concern') &&
+          !searchText.toLowerCase().includes('vehicle issues') &&
+          !parent.querySelector('.heart-helper-inline')) {
         const heart = createHeartButton(searchText);
         parent.insertBefore(heart, btn);
         processedRows.add(row);
