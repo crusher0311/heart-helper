@@ -972,45 +972,32 @@ function createHeartIcon() {
   return svg;
 }
 
-// Inject HEART icon next to a concern textarea
-function injectHeartIconForConcern(concernElement) {
+// Inject HEART icon next to 3-dot menu for a concern line item
+function injectHeartIconForConcern(concernRow, concernText) {
   // Check if already injected for this element
-  if (injectedIcons.has(concernElement)) {
+  if (injectedIcons.has(concernRow)) {
     return;
   }
-  
-  // Find the parent container that we can position relative to
-  const parent = concernElement.parentElement;
-  if (!parent) return;
-  
-  // Create wrapper for icon and concern
-  const wrapper = document.createElement('div');
-  wrapper.style.cssText = `
-    position: relative;
-    display: inline-block;
-    width: 100%;
-  `;
   
   // Create the icon button
   const iconButton = document.createElement('button');
   iconButton.className = 'heart-helper-icon';
   iconButton.style.cssText = `
-    position: absolute;
-    right: 8px;
-    top: 8px;
     background: white;
     border: 2px solid #ED1C24;
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     padding: 4px;
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 8px rgba(237, 28, 36, 0.2);
     transition: all 0.2s ease;
-    z-index: 1000;
+    margin-left: 8px;
+    margin-right: 4px;
+    vertical-align: middle;
   `;
   
   iconButton.appendChild(createHeartIcon());
@@ -1043,9 +1030,8 @@ function injectHeartIconForConcern(concernElement) {
     e.preventDefault();
     e.stopPropagation();
     
-    const concernText = concernElement.value || concernElement.textContent || '';
-    if (!concernText.trim()) {
-      showErrorNotification('No concern text found. Please type a concern first.');
+    if (!concernText || !concernText.trim()) {
+      showErrorNotification('No concern text found.');
       return;
     }
     
@@ -1073,119 +1059,90 @@ function injectHeartIconForConcern(concernElement) {
     });
   });
   
-  // Wrap the concern element and add the icon
-  parent.insertBefore(wrapper, concernElement);
-  wrapper.appendChild(concernElement);
-  wrapper.appendChild(iconButton);
+  // Find the 3-dot menu button in this row and insert HEART icon before it
+  const threeDotsButton = concernRow.querySelector('button[aria-label*="menu" i], button[aria-label*="more" i], button[aria-label*="options" i]') ||
+                          Array.from(concernRow.querySelectorAll('button')).find(btn => {
+                            const svg = btn.querySelector('svg');
+                            return svg && btn.children.length === 1; // Likely icon-only button
+                          });
   
-  injectedIcons.add(concernElement);
-  console.log("HEART icon injected for concern field");
+  if (threeDotsButton) {
+    threeDotsButton.parentElement.insertBefore(iconButton, threeDotsButton);
+    console.log("✓ HEART icon injected next to 3-dot menu");
+  } else {
+    // Fallback: append to end of row
+    concernRow.appendChild(iconButton);
+    console.log("✓ HEART icon injected at end of concern row");
+  }
+  
+  injectedIcons.add(concernRow);
 }
 
-// Find and inject icons for all concern textareas
+// Find and inject icons for all concern line items
 function injectHeartIcons() {
   if (!window.location.href.includes('/repair-orders/')) {
     console.log("❌ Not on repair orders page, skipping HEART icons");
     return;
   }
   
-  console.log("🔍 Searching for concern fields on repair order page...");
+  console.log("🔍 Searching for concern line items on repair order page...");
   
-  // EXPANDED: Check for textareas, contenteditable divs, AND all textareas
-  const selectors = [
-    // Standard textareas
-    'textarea[class*="concern" i]',
-    'textarea[class*="complaint" i]',
-    'textarea[class*="customer" i]',
-    'textarea[placeholder*="concern" i]',
-    'textarea[placeholder*="complaint" i]',
-    'textarea[placeholder*="customer" i]',
-    // Text inputs
-    'input[type="text"][class*="concern" i]',
-    'input[type="text"][class*="complaint" i]',
-    // Contenteditable divs (React/modern UI)
-    '[contenteditable="true"][class*="concern" i]',
-    '[contenteditable="true"][class*="complaint" i]',
-    '[contenteditable="true"][placeholder*="concern" i]',
-    '[contenteditable="true"][placeholder*="complaint" i]',
-  ];
+  // NEW APPROACH: Find concern list items (the rows with concern text + 3-dot menus)
+  // Look for common patterns in Tekmetric's UI
+  const concernRows = [];
   
-  const concernElements = document.querySelectorAll(selectors.join(', '));
-  console.log(`📊 Found ${concernElements.length} concern fields using selectors`);
+  // Strategy 1: Find all elements that contain both text and a button (likely 3-dot menu)
+  const allRows = document.querySelectorAll('[class*="row" i], [class*="item" i], [class*="line" i], li, div[role="listitem"]');
   
-  if (concernElements.length === 0) {
-    console.log("⚠️ No concern fields found with selectors, trying aggressive fallback...");
+  for (const row of allRows) {
+    // Check if row has a button (likely 3-dot menu) and some text content
+    const hasButton = row.querySelector('button');
+    const text = row.textContent?.trim() || '';
     
-    // Debug: Show ALL textareas AND contenteditable elements
-    const allTextareas = document.querySelectorAll('textarea');
-    const allContentEditable = document.querySelectorAll('[contenteditable="true"]');
-    console.log(`📝 Total textareas: ${allTextareas.length}, contenteditable: ${allContentEditable.length}`);
-    
-    if (allTextareas.length > 0) {
-      console.log("First 3 textareas:", Array.from(allTextareas).slice(0, 3).map(ta => ({
-        placeholder: ta.placeholder,
-        className: ta.className,
-        name: ta.name,
-        id: ta.id
-      })));
-    }
-    
-    if (allContentEditable.length > 0) {
-      console.log("First 3 contenteditable:", Array.from(allContentEditable).slice(0, 3).map(ce => ({
-        className: ce.className,
-        placeholder: ce.getAttribute('placeholder'),
-        text: ce.textContent?.substring(0, 50)
-      })));
-    }
-    
-    // AGGRESSIVE FALLBACK 1: Just inject icons for ALL textareas (they're likely concern fields)
-    if (allTextareas.length > 0 && allTextareas.length <= 20) {
-      console.log(`✓ Injecting icons for ALL ${allTextareas.length} textareas on page`);
-      allTextareas.forEach(ta => {
-        if (!injectedIcons.has(ta)) {
-          injectHeartIconForConcern(ta);
-        }
-      });
-    }
-    
-    // AGGRESSIVE FALLBACK 2: Inject for all contenteditable elements
-    if (allContentEditable.length > 0 && allContentEditable.length <= 20) {
-      console.log(`✓ Injecting icons for ALL ${allContentEditable.length} contenteditable divs`);
-      allContentEditable.forEach(ce => {
-        if (!injectedIcons.has(ce)) {
-          injectHeartIconForConcern(ce);
-        }
-      });
-    }
-    
-    // FALLBACK 3: Look for labels with concern/complaint text
-    const labels = Array.from(document.querySelectorAll('label, div, span'));
-    let foundViaLabels = 0;
-    for (const label of labels) {
-      const labelText = label.textContent?.toLowerCase() || '';
-      if (labelText.includes('concern') || labelText.includes('complaint') || 
-          labelText.includes('customer concern') || labelText.includes('reason for visit')) {
-        // Look for textarea or contenteditable nearby
-        const field = label.querySelector('textarea, [contenteditable="true"]') || 
-                     (label.nextElementSibling?.tagName === 'TEXTAREA' ? label.nextElementSibling : null) ||
-                     (label.nextElementSibling?.getAttribute('contenteditable') === 'true' ? label.nextElementSibling : null);
-        if (field && !injectedIcons.has(field)) {
-          console.log(`✓ Found concern field via label: "${labelText.substring(0, 50)}"`);
-          injectHeartIconForConcern(field);
-          foundViaLabels++;
-        }
+    // Must have: button, text content (5-200 chars), and not be a header/title
+    if (hasButton && text.length > 5 && text.length < 200) {
+      // Additional check: text should not be just button text
+      const buttonTexts = Array.from(row.querySelectorAll('button')).map(b => b.textContent.trim()).join(' ');
+      const nonButtonText = text.replace(buttonTexts, '').trim();
+      
+      if (nonButtonText.length > 5) {
+        concernRows.push({ row, text: nonButtonText });
       }
     }
-    if (foundViaLabels > 0) {
-      console.log(`📊 Injected ${foundViaLabels} icons via label search`);
-    }
-  } else {
-    console.log(`✓ Injecting icons for ${concernElements.length} concern fields...`);
-    concernElements.forEach(element => {
-      if (!injectedIcons.has(element)) {
-        injectHeartIconForConcern(element);
+  }
+  
+  console.log(`📊 Found ${concernRows.length} potential concern rows`);
+  
+  if (concernRows.length > 0) {
+    console.log("First 3 concern rows:", concernRows.slice(0, 3).map(c => ({
+      text: c.text.substring(0, 50),
+      className: c.row.className
+    })));
+    
+    // Inject HEART icons for each concern row
+    concernRows.forEach(({ row, text }) => {
+      if (!injectedIcons.has(row)) {
+        injectHeartIconForConcern(row, text);
       }
     });
+  } else {
+    console.log("⚠️ No concern rows found, trying alternative detection...");
+    
+    // FALLBACK: Look for any row with specific concern-related keywords
+    const allDivs = document.querySelectorAll('div, li');
+    for (const div of allDivs) {
+      const text = div.textContent?.toLowerCase() || '';
+      const keywords = ['concern', 'complaint', 'customer', 'finding', 'issue'];
+      
+      if (keywords.some(kw => text.includes(kw)) && text.length > 10 && text.length < 300) {
+        const hasButton = div.querySelector('button');
+        if (hasButton && !injectedIcons.has(div)) {
+          const cleanText = div.textContent?.trim() || '';
+          concernRows.push({ row: div, text: cleanText });
+          injectHeartIconForConcern(div, cleanText);
+        }
+      }
+    }
   }
   
   console.log(`✅ Total HEART icons injected: ${injectedIcons.size}`);
