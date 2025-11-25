@@ -1,0 +1,1016 @@
+
+[Violation] Potential permissions policy violation: microphone is not allowed in this document.
+ [MaintenanceModule] Initializing...
+ [TekmetricStorageModule] Initializing...
+ Tekmetric Job Importer: Content script loaded
+ 📋 Tekmetric Job Importer initialized, document ready state: interactive
+ 📄 Document already loaded - checking for pending jobs in 2s...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 Received window message: Object
+ 
+a7 @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught 
+ 📬 Received window message: 
+ 
+a7 @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught 
+ [Settings] No profitabilitySettings settings found, using defaults
+ns @ content.js:9
+ [Settings] No customerMaintenanceSettings settings found, using defaults
+ns @ content.js:9
+ [Settings] No generalSettings settings found, using defaults
+ns @ content.js:9
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ [OutboundCall] Menu state changed: false
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: null, previousShopId: null
+ Creating handle element
+ [Handle] Updating badge: Object
+ [Handle] Badge hidden (count is 0)
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Updating unread data: Object
+ [Handle] Updating badge: Object
+ [Handle] Badge hidden (count is 0)
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 2081190
+estimate:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+ 📬 Received window message: Object
+ 📬 Received window message: Object
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 Received window message: Object
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ Event "payments_service_status" doesn't have any listeners. Putting it in the stack.
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-load","payload":{"controllerMetrics":{"resource_timings":{"shared.js":{"raw_size":813387,"transfer_size":0,"duration":0},"controller-with-preconnect.js":{"raw_size":1090000,"transfer_size":0,"duration":0}}}}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"e232c102-c0cc-4f31-b0a5-4c91dcd46568"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"af9715e9-dc01-49cc-8e2f-35221ed2885f"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ [Handle] Customer ID retrieved from background: 2081190
+ [Handle] Phone link updated event received customerId: 2081190, shopId: 469
+ [Handle] Customer ID retrieved from background: 2081190
+ [Handle] Phone link updated event received customerId: 2081190, shopId: 469
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"64d8c963-877e-4562-90f6-42528de954de"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 📬 Received window message: {"originatingScript":"m2","payload":{"guid":"cb64f5f7-386b-46b0-948b-ec66ed5d6999ea1d00","muid":"34668a3d-e2c7-40c0-9117-16e3a2f648ab1c6239","sid":"83658bb4-3caf-4bee-8aa3-d45e1c655c91fd7f31"}}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"8d811a5a-1681-4b59-b349-c0f6d58d6d7f"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"4ea5c2c5-592c-4d34-a4b5-7a2f2c32d1dd"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 🔍 Checking for pending job data...
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"ac84a4a8-7b07-485b-80e8-a0b167446470"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"b52d3750-5f85-4312-98c7-d0058a653611"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Sending CUSTOMER_PHONE_LIST_REQUEST for phone link updated: 2081190 shopId: 469
+ [Handle] Sending CUSTOMER_PHONE_LIST_REQUEST for phone link updated: 2081190 shopId: 469
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 2081190
+ Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 2081190
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"9ec39f82-a7d6-4027-8ed1-7dc986e69157"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Repair order ID found, fetching customer data from background: 276432404
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ [Handle] Customer ID retrieved from background: 2081190
+ customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"a7ed6206-c433-4b70-b7cd-380be7087e44"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"73fe829d-8f2c-4e1e-b0fc-6cdb98dc476f"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"ad6ccbd1-ff8e-402a-a84d-5d73327c9c0d"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"a5a4d4c6-ad13-4f07-b3f4-71b0a236b557"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+ 🔍 Searching for CUSTOMER CONCERN items only...
+ ⚠️ No concern sections found with headers
+ ⚠️ Found 0 containers via class/id search
+ 📊 Found 0 concern sections to scan
+ ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:816 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"945b9d9d-0969-4cef-a250-8f057c55a950"}},"__stripeJsV3":true}
+content.js:820 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:790 🔍 Checking for pending job data...
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:792 📬 GET_PENDING_JOB response: Object
+content.js:798 ⚠️ No pending job data found
+content.js:816 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"2de486b1-1fc7-4b4b-8189-16fae4f7e971"}},"__stripeJsV3":true}
+content.js:820 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:816 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"03de9e59-d712-4378-a961-65a243c1eba0"}},"__stripeJsV3":true}
+content.js:820 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276432404
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2081190
+handle.2fe6b368.js:23 customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:790 🔍 Checking for pending job data...
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:790 🔍 Checking for pending job data...
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:792 📬 GET_PENDING_JOB response: Object
+content.js:798 ⚠️ No pending job data found
+content.js:792 📬 GET_PENDING_JOB response: Object
+content.js:798 ⚠️ No pending job data found
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:816 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6151","controllerAppFrameId":"__privateStripeController6151","message":{"action":"stripe-controller-action-response","payload":{"nonce":"9acf3c18-d5b5-40a1-bd6d-520f91382635"}},"__stripeJsV3":true}
+content.js:820 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276432404
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276432404
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2081190
+handle.2fe6b368.js:23 customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2081190
+handle.2fe6b368.js:23 customerId:", 2081190,shopId: 469,
+        previousCustomerId: 2081190, previousShopId: 469
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)
+content.js:1059 🔍 Searching for CUSTOMER CONCERN items only...
+content.js:1085 ⚠️ No concern sections found with headers
+content.js:1089 ⚠️ Found 0 containers via class/id search
+content.js:1092 📊 Found 0 concern sections to scan
+content.js:1116 ✅ Total HEART icons injected: 0 (only in concern sections)

@@ -8,7 +8,7 @@ Built with HEART's brand values of **Integrity**, **Passion**, and **Transparenc
 
 The application integrates seamlessly with Tekmetric (HEART's shop management system) and features a fast, productivity-focused interface designed in HEART's brand colors and typography.
 
-**Current Status (Nov 25, 2025)**: Fully functional with complete HEART branding, working search with AI scoring, database-backed caching, and Chrome extension integration v2.3.2. All core features operational.
+**Current Status (Nov 25, 2025)**: Fully functional with complete HEART branding, working search with AI scoring, database-backed caching, and Chrome extension integration v2.4.0. All core features operational.
 
 **Latest Improvements (Nov 25, 2025)**:
 - **AI Repair Term Extraction**: Intelligently extracts core repair terms from verbose descriptions
@@ -21,9 +21,12 @@ The application integrates seamlessly with Tekmetric (HEART's shop management sy
   - Most parts/repairs work across multiple model years (2016-2018 often share same components)
   - "Broaden Search" now uses AI to find even wider compatible years if needed
 - Fixed URL params overwriting user edits in repair type field (now loads only once on mount)
-- Chrome extension v2.3.1: Heart icons now explicitly HEART Red (#ED1C24)
-  - Uses ♥ character (CSS-styleable) instead of ❤️ emoji for consistent branding
-  - Only injects in concern sections (not jobs/labor/parts)
+- Chrome extension v2.4.0: Major UX improvements
+  - **Floating "HEART Helper" button** - Always visible in bottom-right corner on any RO page
+  - Works even when there are no concerns - click to search with just vehicle info
+  - Heart icons (♥) now HEART Red (#ED1C24) - CSS-styleable character
+  - Improved concern section detection using ancestor traversal
+  - Fixed navigation between ROs - properly resets when switching repair orders
 
 **Tekmetric Integration**: Chrome extension integration that automates adding jobs to Tekmetric repair orders:
 1. **Chrome Extension**: Browser extension that auto-fills labor items and parts into Tekmetric by automating the UI

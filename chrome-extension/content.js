@@ -1049,71 +1049,159 @@ function injectHeartIconForConcern(concernRow, concernText) {
   injectedIcons.add(concernRow);
 }
 
-// Find and inject icons ONLY for customer concern items (not jobs/labor/parts)
+// Create floating HEART Helper button for general searches (always visible on RO pages)
+let floatingButtonInjected = false;
+
+function injectFloatingHeartButton() {
+  if (floatingButtonInjected) return;
+  if (!window.location.href.includes('/repair-orders/')) return;
+  
+  // Check if already exists
+  if (document.getElementById('heart-helper-floating-btn')) {
+    floatingButtonInjected = true;
+    return;
+  }
+  
+  const floatingBtn = document.createElement('button');
+  floatingBtn.id = 'heart-helper-floating-btn';
+  floatingBtn.innerHTML = '♥ HEART Helper';
+  floatingBtn.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ED1C24;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(237, 28, 36, 0.4);
+    z-index: 999999;
+    transition: all 0.2s ease;
+    font-family: Arial, sans-serif;
+  `;
+  
+  floatingBtn.addEventListener('mouseenter', () => {
+    floatingBtn.style.transform = 'scale(1.05)';
+    floatingBtn.style.boxShadow = '0 6px 16px rgba(237, 28, 36, 0.5)';
+  });
+  
+  floatingBtn.addEventListener('mouseleave', () => {
+    floatingBtn.style.transform = 'scale(1)';
+    floatingBtn.style.boxShadow = '0 4px 12px rgba(237, 28, 36, 0.4)';
+  });
+  
+  floatingBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const vehicleData = extractVehicleData();
+    const params = new URLSearchParams();
+    if (vehicleData.make) params.set('make', vehicleData.make);
+    if (vehicleData.model) params.set('model', vehicleData.model);
+    if (vehicleData.year) params.set('year', vehicleData.year);
+    if (vehicleData.engine) params.set('engine', vehicleData.engine);
+    if (vehicleData.repairOrderId) params.set('roId', vehicleData.repairOrderId);
+    
+    chrome.storage.local.get(['appUrl'], (result) => {
+      if (!result.appUrl) {
+        showErrorNotification('Extension not configured. Click the extension icon and set your app URL in Settings.');
+        return;
+      }
+      const searchUrl = `${result.appUrl}/?${params.toString()}`;
+      console.log("Opening HEART Helper (general search):", searchUrl);
+      window.open(searchUrl, '_blank');
+    });
+  });
+  
+  document.body.appendChild(floatingBtn);
+  floatingButtonInjected = true;
+  console.log("✅ Floating HEART Helper button injected");
+}
+
+// Find and inject icons for concern items
 function injectHeartIcons() {
   if (!window.location.href.includes('/repair-orders/')) {
     console.log("❌ Not on repair orders page, skipping HEART icons");
     return;
   }
   
-  console.log("🔍 Searching for CUSTOMER CONCERN items only...");
+  // Always inject floating button as fallback for general searches
+  injectFloatingHeartButton();
   
-  // STRATEGY: Only inject hearts in the "Customer Concerns" or "Technician Concerns" section
-  // Find section headers or containers that indicate concerns (not jobs/labor/parts)
-  const concernSections = [];
+  console.log("🔍 Searching for concern items...");
   
-  // Look for section headers with "concern" or "complaint" text
-  const allHeaders = document.querySelectorAll('h1, h2, h3, h4, h5, h6, div, span, label');
-  for (const header of allHeaders) {
-    const headerText = header.textContent?.toLowerCase() || '';
-    // Look for "Customer Concerns", "Technician Concerns", "Findings", etc.
-    if ((headerText.includes('concern') || headerText.includes('finding') || headerText.includes('complaint')) &&
-        headerText.length < 100) { // Must be short (a header, not a paragraph)
-      // Find the container after this header that holds the concern list
-      let container = header.nextElementSibling;
-      while (container && !container.querySelector('button')) {
-        container = container.nextElementSibling;
-      }
-      if (container) {
-        concernSections.push(container);
-        console.log(`✓ Found concern section: "${headerText.trim().substring(0, 50)}"`);
-      }
-    }
-  }
+  // STRATEGY: Find rows that have text + 3-dot menu buttons
+  // These are typically concern/finding items in Tekmetric's UI
+  // Look for the specific structure: a row with text content and a kebab/3-dot menu
   
-  if (concernSections.length === 0) {
-    console.log("⚠️ No concern sections found with headers");
-    // FALLBACK: Look for containers with "concern" in their class or id
-    const concernContainers = document.querySelectorAll('[class*="concern" i], [id*="concern" i], [class*="finding" i]');
-    concernContainers.forEach(c => concernSections.push(c));
-    console.log(`⚠️ Found ${concernSections.length} containers via class/id search`);
-  }
-  
-  console.log(`📊 Found ${concernSections.length} concern sections to scan`);
-  
-  // Now find rows ONLY within these concern sections
   let iconsInjected = 0;
-  concernSections.forEach(section => {
-    const rows = section.querySelectorAll('[class*="row" i], [class*="item" i], li, div[role="listitem"]');
-    
-    for (const row of rows) {
-      const hasButton = row.querySelector('button');
-      const text = row.textContent?.trim() || '';
-      
-      // Must have button and reasonable text length
-      if (hasButton && text.length > 5 && text.length < 200 && !injectedIcons.has(row)) {
-        const buttonTexts = Array.from(row.querySelectorAll('button')).map(b => b.textContent.trim()).join(' ');
-        const concernText = text.replace(buttonTexts, '').trim();
-        
-        if (concernText.length > 5) {
-          injectHeartIconForConcern(row, concernText);
-          iconsInjected++;
-        }
-      }
-    }
-  });
   
-  console.log(`✅ Total HEART icons injected: ${iconsInjected} (only in concern sections)`);
+  // Find all elements that look like list items with 3-dot menus
+  // Tekmetric uses these for concerns, findings, etc.
+  const allButtons = document.querySelectorAll('button');
+  
+  for (const btn of allButtons) {
+    // Look for 3-dot/kebab menu buttons (icon-only buttons with SVG)
+    const svg = btn.querySelector('svg');
+    const isIconButton = svg && btn.children.length === 1 && btn.textContent.trim() === '';
+    
+    if (!isIconButton) continue;
+    
+    // Find the parent row/container
+    let row = btn.closest('div[class*="flex"], div[class*="row"], li, tr');
+    if (!row) continue;
+    
+    // Skip if already processed
+    if (injectedIcons.has(row)) continue;
+    
+    // Get the text content of this row (excluding button text)
+    const rowText = row.textContent?.trim() || '';
+    
+    // Skip if too short or too long (likely not a concern/finding)
+    if (rowText.length < 3 || rowText.length > 500) continue;
+    
+    // Skip job/labor/parts sections - they have specific keywords
+    const lowerText = rowText.toLowerCase();
+    if (lowerText.includes('labor') && lowerText.includes('hours')) continue;
+    if (lowerText.includes('technician') && lowerText.includes('rate')) continue;
+    if (lowerText.includes('part') && (lowerText.includes('qty') || lowerText.includes('cost'))) continue;
+    if (lowerText.includes('demount') || lowerText.includes('computerize')) continue; // Labor items
+    if (lowerText.includes('$ assign')) continue; // Labor row
+    
+    // Check if this is in a concern-related section by looking at ancestors
+    let inConcernSection = false;
+    let ancestor = row.parentElement;
+    for (let i = 0; i < 10 && ancestor; i++) {
+      const ancestorText = ancestor.textContent?.toLowerCase().substring(0, 200) || '';
+      if (ancestorText.includes('customer concern') || 
+          ancestorText.includes('technician concern') ||
+          ancestorText.includes('finding')) {
+        inConcernSection = true;
+        break;
+      }
+      // Also check if we're in a job/labor section (to exclude)
+      if (ancestorText.includes('jobs') && ancestorText.includes('reorder')) {
+        inConcernSection = false;
+        break;
+      }
+      ancestor = ancestor.parentElement;
+    }
+    
+    if (!inConcernSection) continue;
+    
+    // Extract the actual concern text
+    const concernText = rowText.replace(/[\s]{2,}/g, ' ').trim().substring(0, 200);
+    
+    if (concernText.length > 3) {
+      injectHeartIconForConcern(row, concernText);
+      iconsInjected++;
+    }
+  }
+  
+  console.log(`✅ Total HEART icons injected: ${iconsInjected}`);
 }
 
 function observePageChanges() {
@@ -1146,6 +1234,10 @@ function observePageChanges() {
       console.log(`🔄 URL changed: ${lastUrl} → ${window.location.href}`);
       // IMPORTANT: Clear tracked icons when navigating between ANY pages (including different ROs)
       injectedIcons.clear();
+      floatingButtonInjected = false; // Reset floating button flag for new page
+      // Remove old floating button if exists
+      const oldBtn = document.getElementById('heart-helper-floating-btn');
+      if (oldBtn) oldBtn.remove();
       lastUrl = window.location.href;
       checkAndInject();
     }
