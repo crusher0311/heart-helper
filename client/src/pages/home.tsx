@@ -13,6 +13,7 @@ import { Sparkles, Settings, RefreshCw, Clock } from "lucide-react";
 import { Link } from "wouter";
 import type { SearchJobRequest, SearchResult } from "@shared/schema";
 import { formatDistanceToNow } from "date-fns";
+import heartLogo from "@assets/HCAC_1764080802250.png";
 
 export default function Home() {
   const [searchParams, setSearchParams] = useState<SearchJobRequest | null>(null);
@@ -146,15 +147,15 @@ export default function Home() {
       <header className="border-b bg-card sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="HEART Logo">
-                <path d="M16 28C16 28 4 20 4 12C4 8.68629 6.68629 6 10 6C12.4 6 14.4 7.2 16 9C17.6 7.2 19.6 6 22 6C25.3137 6 28 8.68629 28 12C28 20 16 28 16 28Z" fill="hsl(357 85% 52%)" />
-                <path d="M9 9C9 9 12 6 16 9C16 9 20 6 23 9" stroke="white" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </div>
+            <img 
+              src={heartLogo} 
+              alt="HEART Certified Auto Care" 
+              className="h-12 w-auto"
+              data-testid="img-heart-logo"
+            />
             <div>
               <h1 className="text-lg font-semibold" data-testid="text-app-title">
-                HEART Helper
+                Helper
               </h1>
               <p className="text-xs text-muted-foreground">AI-Powered Repair History</p>
             </div>
