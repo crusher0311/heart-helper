@@ -1143,10 +1143,13 @@ function observePageChanges() {
   let lastUrl = window.location.href;
   setInterval(() => {
     if (lastUrl !== window.location.href) {
+      console.log(`🔄 URL changed: ${lastUrl} → ${window.location.href}`);
+      // IMPORTANT: Clear tracked icons when navigating between ANY pages (including different ROs)
+      injectedIcons.clear();
       lastUrl = window.location.href;
       checkAndInject();
     }
-  }, 1000);
+  }, 500); // Check more frequently for faster detection
   
   // Also observe for dynamically added textareas - check every 3 seconds
   setInterval(() => {

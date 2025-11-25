@@ -8,7 +8,7 @@ Built with HEART's brand values of **Integrity**, **Passion**, and **Transparenc
 
 The application integrates seamlessly with Tekmetric (HEART's shop management system) and features a fast, productivity-focused interface designed in HEART's brand colors and typography.
 
-**Current Status (Nov 25, 2025)**: Fully functional with complete HEART branding, working search with AI scoring, database-backed caching, and Chrome extension integration v2.3.1. All core features operational.
+**Current Status (Nov 25, 2025)**: Fully functional with complete HEART branding, working search with AI scoring, database-backed caching, and Chrome extension integration v2.3.2. All core features operational.
 
 **Latest Improvements (Nov 25, 2025)**:
 - **AI Repair Term Extraction**: Intelligently extracts core repair terms from verbose descriptions
