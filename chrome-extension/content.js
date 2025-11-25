@@ -380,8 +380,9 @@ async function fillTekmetricEstimate(jobData) {
         throw new Error('Could not find "Add Parts" button');
       }
       
-      // Snapshot inputs BEFORE clicking "Add Parts" to detect new ones
-      const inputsBefore = new Set(document.querySelectorAll('input:not([type="hidden"]), textarea'));
+      // Snapshot ALL form elements BEFORE clicking "Add Parts"
+      const elementsBefore = new Set(document.querySelectorAll('input, textarea, [contenteditable="true"]'));
+      console.log(`📊 Snapshot before Add Parts: ${elementsBefore.size} total form elements`);
       
       console.log('✓ Clicking "Add Parts" button');
       addPartsButton.click();
@@ -396,20 +397,37 @@ async function fillTekmetricEstimate(jobData) {
       if (addManuallyOption) {
         console.log('✓ Clicking "Add part manually"');
         addManuallyOption.click();
-        await new Promise(resolve => setTimeout(resolve, 800)); // Wait for UI to render
+        await new Promise(resolve => setTimeout(resolve, 1500)); // Longer wait for UI to render
       } else {
         console.log('⚠️ "Add part manually" not found - trying to fill anyway');
-        await new Promise(resolve => setTimeout(resolve, 800)); // Wait anyway
+        await new Promise(resolve => setTimeout(resolve, 1500)); // Wait anyway
       }
 
-      // Find NEW inputs that appeared after the click
-      const inputsAfter = Array.from(document.querySelectorAll('input:not([type="hidden"]), textarea'));
-      const newInputs = inputsAfter.filter(inp => !inputsBefore.has(inp));
+      // Find NEW elements that appeared after the clicks
+      const elementsAfter = Array.from(document.querySelectorAll('input, textarea, [contenteditable="true"]'));
+      console.log(`📊 Snapshot after Add part manually: ${elementsAfter.length} total form elements`);
       
-      console.log(`✓ Detected ${newInputs.length} new input fields after clicking Add part manually`);
+      const newElements = elementsAfter.filter(el => !elementsBefore.has(el));
+      console.log(`✓ Detected ${newElements.length} new form elements after clicking Add part manually`);
+      
+      // Filter to only visible, non-hidden inputs
+      const newInputs = newElements.filter(el => {
+        if (el.type === 'hidden') return false;
+        const style = window.getComputedStyle(el);
+        return style.display !== 'none' && style.visibility !== 'hidden';
+      });
+      
+      console.log(`✓ ${newInputs.length} of those are visible inputs`);
       
       if (newInputs.length === 0) {
-        console.error('❌ No new inputs detected after Add part manually click');
+        console.error('❌ No new visible inputs detected after Add part manually click');
+        console.log('📋 All new elements:', newElements.map(el => ({
+          tag: el.tagName,
+          type: el.type,
+          id: el.id,
+          name: el.name,
+          placeholder: el.placeholder
+        })));
         isFillingJob = false;
         throw new Error('Add part manually did not create new input fields - UI may have changed');
       }
