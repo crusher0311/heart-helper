@@ -411,39 +411,72 @@ async function fillTekmetricEstimate(jobData) {
       const elementsBefore = new Set(document.querySelectorAll('input, textarea, [contenteditable="true"]'));
       console.log(`📊 Snapshot before Add part manually: ${elementsBefore.size} total form elements`);
       
-      console.log('✓ Found "Add part manually" option, clicking now...');
-      addManuallyOption.click();
-      
-      // Wait progressively longer and check for new inputs
-      console.log('⏳ Waiting for part form to render...');
+      // Try clicking "Add part manually" with retry logic
       let newInputs = [];
-      let waitAttempts = 0;
-      const maxWaitAttempts = 15; // 15 attempts x 400ms = 6 seconds max
+      const maxClickRetries = 3;
       
-      while (newInputs.length === 0 && waitAttempts < maxWaitAttempts) {
-        await new Promise(resolve => setTimeout(resolve, 400));
-        const elementsAfter = Array.from(document.querySelectorAll('input, textarea, [contenteditable="true"]'));
-        const newElements = elementsAfter.filter(el => !elementsBefore.has(el));
+      for (let clickAttempt = 1; clickAttempt <= maxClickRetries; clickAttempt++) {
+        console.log(`✓ Attempt ${clickAttempt}: Clicking "Add part manually"...`);
+        addManuallyOption.click();
         
-        // Filter to only visible, non-hidden inputs
-        newInputs = newElements.filter(el => {
-          if (el.type === 'hidden') return false;
-          const style = window.getComputedStyle(el);
-          return style.display !== 'none' && style.visibility !== 'hidden';
-        });
+        // Wait progressively longer and check for new inputs
+        console.log('⏳ Waiting for part form to render...');
+        let waitAttempts = 0;
+        const maxWaitAttempts = 10; // 10 attempts x 400ms = 4 seconds max per attempt
         
-        waitAttempts++;
-        if (waitAttempts % 3 === 0) {
-          console.log(`⏳ Still waiting for part inputs... (${waitAttempts * 400}ms elapsed, ${newInputs.length} visible inputs so far)`);
+        while (newInputs.length === 0 && waitAttempts < maxWaitAttempts) {
+          await new Promise(resolve => setTimeout(resolve, 400));
+          const elementsAfter = Array.from(document.querySelectorAll('input, textarea, [contenteditable="true"]'));
+          const newElements = elementsAfter.filter(el => !elementsBefore.has(el));
+          
+          // Filter to only visible, non-hidden inputs
+          newInputs = newElements.filter(el => {
+            if (el.type === 'hidden') return false;
+            const style = window.getComputedStyle(el);
+            return style.display !== 'none' && style.visibility !== 'hidden';
+          });
+          
+          waitAttempts++;
+          if (waitAttempts % 3 === 0) {
+            console.log(`⏳ Still waiting for part inputs... (${waitAttempts * 400}ms elapsed, ${newInputs.length} visible inputs so far)`);
+          }
+        }
+        
+        if (newInputs.length > 0) {
+          console.log(`✓ Detected ${newInputs.length} new visible input fields after ${waitAttempts * 400}ms on attempt ${clickAttempt}`);
+          break; // Success! Exit retry loop
+        }
+        
+        // No inputs found, try again if we have retries left
+        if (clickAttempt < maxClickRetries) {
+          console.log(`⚠️ No inputs appeared after ${waitAttempts * 400}ms. Retrying click...`);
+          // Re-find the "Add part manually" option in case dropdown closed
+          await new Promise(resolve => setTimeout(resolve, 500));
+          addManuallyOption = Array.from(document.querySelectorAll('div, button, li, span, a')).find(el => {
+            const text = el.textContent?.toLowerCase() || '';
+            return text.includes('add part manually') || text.includes('manually');
+          });
+          
+          if (!addManuallyOption) {
+            console.log('⚠️ "Add part manually" option disappeared, clicking "Add Parts" again...');
+            addPartsButton.click();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            addManuallyOption = Array.from(document.querySelectorAll('div, button, li, span, a')).find(el => {
+              const text = el.textContent?.toLowerCase() || '';
+              return text.includes('add part manually') || text.includes('manually');
+            });
+            if (!addManuallyOption) {
+              console.error('❌ Could not re-find "Add part manually" option');
+              break;
+            }
+          }
         }
       }
       
-      console.log(`✓ Detected ${newInputs.length} new visible input fields after ${waitAttempts * 400}ms`);
-      
       if (newInputs.length === 0) {
-        console.error('❌ No new visible inputs detected after Add part manually click');
+        console.error(`❌ No new visible inputs detected after ${maxClickRetries} attempts`);
         isFillingJob = false;
-        throw new Error('Add part manually did not create new input fields after 6 seconds - UI may have changed');
+        throw new Error(`Add part manually did not create new input fields after ${maxClickRetries} attempts - UI may have changed`);
       }
 
       const inputs = newInputs;
