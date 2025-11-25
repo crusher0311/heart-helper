@@ -651,7 +651,7 @@ async function fillTekmetricEstimate(jobData) {
     await new Promise(resolve => setTimeout(resolve, 800));
     
     // Find and click the final SAVE button (multiple attempts with better detection)
-    console.log('\n💾 Looking for final SAVE button...');
+    console.log('\n💾 Looking for final SAVE button in modal...');
     let finalSaveButton = null;
     let saveAttempts = 0;
     const maxSaveAttempts = 5;
@@ -659,14 +659,13 @@ async function fillTekmetricEstimate(jobData) {
     while (!finalSaveButton && saveAttempts < maxSaveAttempts) {
       await new Promise(resolve => setTimeout(resolve, 300));
       
-      // Look for SAVE button with various criteria
-      const buttons = Array.from(document.querySelectorAll('button'));
+      // CRITICAL: Search only within modal to avoid clicking BUILD button at bottom of page
+      const buttons = Array.from(modal.querySelectorAll('button'));
       finalSaveButton = buttons.find(btn => {
         const text = btn.textContent?.trim().toUpperCase() || '';
         const isVisible = btn.offsetParent !== null; // Check if visible
         return isVisible && (
           text === 'SAVE' || 
-          text === 'BUILD' ||
           text.includes('SAVE') ||
           (btn.getAttribute('type') === 'submit' && text.length < 15)
         );
@@ -674,7 +673,7 @@ async function fillTekmetricEstimate(jobData) {
       
       saveAttempts++;
       if (!finalSaveButton && saveAttempts % 2 === 0) {
-        console.log(`⏳ Still looking for SAVE button... (attempt ${saveAttempts})`);
+        console.log(`⏳ Still looking for SAVE button in modal... (attempt ${saveAttempts})`);
       }
     }
     
