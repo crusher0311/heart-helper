@@ -111,8 +111,9 @@ export function registerRoutes(app: Express) {
       
       console.log(`Deduplicated ${candidates.length} candidates to ${uniqueCandidates.length} unique repair orders`);
 
-      // Limit to top 30 candidates for AI scoring to improve performance (40s → ~10-15s)
-      const candidatesForScoring = uniqueCandidates.slice(0, 30);
+      // Limit to top 20 candidates for AI scoring to improve performance
+      // Using gpt-4o-mini + 20 candidates = ~8-12 second response time
+      const candidatesForScoring = uniqueCandidates.slice(0, 20);
       
       if (candidatesForScoring.length < uniqueCandidates.length) {
         console.log(`Limited AI scoring to top ${candidatesForScoring.length} of ${uniqueCandidates.length} candidates for performance`);

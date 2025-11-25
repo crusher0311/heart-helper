@@ -77,7 +77,7 @@ Return ONLY valid JSON:
 
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-5",
+      model: "gpt-4o-mini", // Fast model for year compatibility analysis
       messages: [
         {
           role: "system",
@@ -205,7 +205,7 @@ Return ONLY valid JSON array format:
 
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-5", // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
+      model: "gpt-4o-mini", // Fast and cost-effective model for scoring repair job matches
       messages: [
         {
           role: "system",
@@ -217,7 +217,7 @@ Return ONLY valid JSON array format:
         }
       ],
       response_format: { type: "json_object" },
-      max_completion_tokens: 4096,
+      max_completion_tokens: 2000, // Reduced from 4096 for faster responses
     });
 
     const content = response.choices[0]?.message?.content;
