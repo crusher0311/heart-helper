@@ -91,7 +91,11 @@ export function registerRoutes(app: Express) {
       }
 
       if (candidates.length === 0) {
-        return res.json([]);
+        return res.json({
+          results: [],
+          cached: false,
+          cachedAt: new Date().toISOString(),
+        });
       }
 
       // Deduplicate by RO# - only show one job per repair order

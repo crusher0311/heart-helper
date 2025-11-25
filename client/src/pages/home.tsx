@@ -39,12 +39,20 @@ export default function Home() {
     },
     onSuccess: (data) => {
       console.log("Search response data:", data);
+      console.log("Type of data:", typeof data, "Is array?", Array.isArray(data));
+      console.log("data.results:", data.results);
+      console.log("data.cached:", data.cached);
+      console.log("data.cachedAt:", data.cachedAt);
       
       const resultsArray = data.results || [];
-      setIsCached(data.cached || false);
-      setCachedAt(data.cachedAt);
+      const cached = data.cached || false;
+      const cachedAt = data.cachedAt || null;
       
-      console.log(`Got ${resultsArray.length} results (cached: ${data.cached})`);
+      console.log(`Setting isCached=${cached}, cachedAt=${cachedAt}`);
+      setIsCached(cached);
+      setCachedAt(cachedAt);
+      
+      console.log(`Got ${resultsArray.length} results (cached: ${cached})`);
       
       // Update counter immediately (high priority)
       setMatchesFound(resultsArray.length);
