@@ -1,0 +1,315 @@
+(async function deleteNewJobs() {
+  console.log('🗑️ Starting cleanup of "New Job" entries...');
+  
+  let deletedCount = 0;
+  let errorCount = 0;
+  
+  while (true) {
+    // Find the checkbox label with text "New Job"
+    const newJobLabels = Array.from(document.querySelectorAll('label')).filter(label => {
+      const text = label.textContent?.trim() || '';
+      return text === 'New Job';
+    });
+    
+    if (newJobLabels.length === 0) {
+      console.log(`✅ Cleanup complete! Deleted ${deletedCount} jobs, ${errorCount} errors`);
+      break;
+    }
+    
+    console.log(`Found ${newJobLabels.length} "New Job" entries - deleting one (${deletedCount + 1})...`);
+    
+    // Get the first New Job label
+    const newJobLabel = newJobLabels[0];
+    
+    // Find the parent row/container
+    let jobRow = newJobLabel;
+    for (let i = 0; i < 15; i++) {
+      jobRow = jobRow.parentElement;
+      if (!jobRow) break;
+      
+      // Look for the trash/delete button (it's usually an SVG icon or button)
+      const trashButtons = Array.from(jobRow.querySelectorAll('button, [role="button"]')).filter(btn => {
+        // Check if button contains trash icon or has delete-related attributes
+        const svg = btn.querySelector('svg');
+        const hasTrashIcon = svg && (
+          svg.innerHTML.includes('trash') || 
+          svg.innerHTML.includes('delete') ||
+          svg.querySelector('path')
+        );
+        
+        return hasTrashIcon || 
+               btn.getAttribute('aria-label')?.toLowerCase().includes('delete') ||
+               btn.title?.toLowerCase().includes('delete');
+      });
+      
+      if (trashButtons.length > 0) {
+        // Usually the last button on the right is the trash
+        const trashButton = trashButtons[trashButtons.length - 1];
+        console.log('  ✓ Found trash button, clicking...');
+        trashButton.click();
+        await new Promise(r => setTimeout(r, 800));
+        
+        // Look for the red DELETE button in modal
+        const deleteButtons = Array.from(document.querySelectorAll('button')).filter(btn => {
+          const text = btn.textContent.trim().toUpperCase();
+          const style = window.getComputedStyle(btn);
+          const isRed = style.backgroundColor.includes('rgb(239') || // Red button
+                       style.backgroundColor.includes('rgb(220') ||
+                       btn.className.includes('danger') ||
+                       btn.className.includes('destructive');
+          
+          return text === 'DELETE' && isRed;
+        });
+        
+        if (deleteButtons.length > 0) {
+          console.log('  ✓ Clicking DELETE button...');
+          deleteButtons[0].click();
+          deletedCount++;
+          await new Promise(r => setTimeout(r, 1200)); // Wait for deletion
+          break;
+        } else {
+          console.log('  ⚠️ No DELETE button found in modal');
+          // Try to close modal
+          const cancelBtn = Array.from(document.querySelectorAll('button')).find(b => 
+            b.textContent.trim() === 'CANCEL'
+          );
+          if (cancelBtn) cancelBtn.click();
+          errorCount++;
+          await new Promise(r => setTimeout(r, 500));
+          break;
+        }
+      }
+    }
+    
+    // If still no trash button found
+    if (!jobRow || errorCount > 0) {
+      console.log('  ⚠️ Skipping this job...');
+      newJobLabel.style.opacity = '0.3'; // Mark as attempted
+      await new Promise(r => setTimeout(r, 300));
+      errorCount = 0; // Reset for next attempt
+    }
+    
+    // Progress update
+    if (deletedCount % 5 === 0 && deletedCount > 0) {
+      console.log(`📊 Progress: ${deletedCount} deleted`);
+    }
+    
+    // Safety break
+    if (deletedCount + errorCount > 500) {
+      console.log('⚠️ Reached safety limit (500), stopping...');
+      break;
+    }
+  }
+})();
+VM939:2 🗑️ Starting cleanup of "New Job" entries...
+VM939:15 ✅ Cleanup complete! Deleted 0 jobs, 0 errors
+Promise {<fulfilled>: undefined}
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"874f4ca3-34ec-4150-a655-7dfc8491c06b"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:570 🔍 Checking for pending job data...
+content.js:572 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:578 ⚠️ No pending job data found
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"f2ed4faa-576d-4f80-b3b7-97a23315cad8"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"fb54edcf-5dd6-4bc2-9104-ff41227fcd72"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"75cfdc8d-1271-4f5a-8b6c-d1eb1050f296"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:570 🔍 Checking for pending job data...
+content.js:572 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:578 ⚠️ No pending job data found
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"941a380f-1130-4d2c-8eb9-c4983c3e8312"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"dec882c3-01c4-4575-a9ea-847f85933f28"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"4ef7263f-09df-4611-8d32-45733a578766"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:570 🔍 Checking for pending job data...
+content.js:572 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:578 ⚠️ No pending job data found
+content.js:570 🔍 Checking for pending job data...
+content.js:572 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:578 ⚠️ No pending job data found
+content.js:570 🔍 Checking for pending job data...
+content.js:572 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:578 ⚠️ No pending job data found
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"91ac86e5-3d21-480a-8cd8-ad8ddda32404"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:570 🔍 Checking for pending job data...
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"8cfefeb6-836e-4761-ae47-725865500ddc"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:572 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:578 ⚠️ No pending job data found
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"66913dbc-9e87-4a96-a839-1a841d55e4a9"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"051b3465-ffd7-4b09-9d6a-561c29286b04"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"376b18e2-2631-4a4a-a933-4b4cb8410a9c"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"2ed68c21-8d67-4e98-8893-4690dc019c6d"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"8526e0a8-efad-46bd-9dfe-2e2c94b7ef70"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+(async function deleteNewJobs() {
+  console.log('🗑️ Starting cleanup of "New Job" entries...');
+  
+  let deletedCount = 0;
+  let errorCount = 0;
+  
+  while (true) {
+    // Find the checkbox label with text "New Job"
+    const newJobLabels = Array.from(document.querySelectorAll('label')).filter(label => {
+      const text = label.textContent?.trim() || '';
+      return text === 'New Job';
+    });
+    
+    if (newJobLabels.length === 0) {
+      console.log(`✅ Cleanup complete! Deleted ${deletedCount} jobs, ${errorCount} errors`);
+      break;
+    }
+    
+    console.log(`Found ${newJobLabels.length} "New Job" entries - deleting one (${deletedCount + 1})...`);
+    
+    // Get the first New Job label
+    const newJobLabel = newJobLabels[0];
+    
+    // Find the parent row/container
+    let jobRow = newJobLabel;
+    for (let i = 0; i < 15; i++) {
+      jobRow = jobRow.parentElement;
+      if (!jobRow) break;
+      
+      // Look for the trash/delete button (it's usually an SVG icon or button)
+      const trashButtons = Array.from(jobRow.querySelectorAll('button, [role="button"]')).filter(btn => {
+        // Check if button contains trash icon or has delete-related attributes
+        const svg = btn.querySelector('svg');
+        const hasTrashIcon = svg && (
+          svg.innerHTML.includes('trash') || 
+          svg.innerHTML.includes('delete') ||
+          svg.querySelector('path')
+        );
+        
+        return hasTrashIcon || 
+               btn.getAttribute('aria-label')?.toLowerCase().includes('delete') ||
+               btn.title?.toLowerCase().includes('delete');
+      });
+      
+      if (trashButtons.length > 0) {
+        // Usually the last button on the right is the trash
+        const trashButton = trashButtons[trashButtons.length - 1];
+        console.log('  ✓ Found trash button, clicking...');
+        trashButton.click();
+        await new Promise(r => setTimeout(r, 800));
+        
+        // Look for the red DELETE button in modal
+        const deleteButtons = Array.from(document.querySelectorAll('button')).filter(btn => {
+          const text = btn.textContent.trim().toUpperCase();
+          const style = window.getComputedStyle(btn);
+          const isRed = style.backgroundColor.includes('rgb(239') || // Red button
+                       style.backgroundColor.includes('rgb(220') ||
+                       btn.className.includes('danger') ||
+                       btn.className.includes('destructive');
+          
+          return text === 'DELETE' && isRed;
+        });
+        
+        if (deleteButtons.length > 0) {
+          console.log('  ✓ Clicking DELETE button...');
+          deleteButtons[0].click();
+          deletedCount++;
+          await new Promise(r => setTimeout(r, 1200)); // Wait for deletion
+          break;
+        } else {
+          console.log('  ⚠️ No DELETE button found in modal');
+          // Try to close modal
+          const cancelBtn = Array.from(document.querySelectorAll('button')).find(b => 
+            b.textContent.trim() === 'CANCEL'
+          );
+          if (cancelBtn) cancelBtn.click();
+          errorCount++;
+          await new Promise(r => setTimeout(r, 500));
+          break;
+        }
+      }
+    }
+    
+    // If still no trash button found
+    if (!jobRow || errorCount > 0) {
+      console.log('  ⚠️ Skipping this job...');
+      newJobLabel.style.opacity = '0.3'; // Mark as attempted
+      await new Promise(r => setTimeout(r, 300));
+      errorCount = 0; // Reset for next attempt
+    }
+    
+    // Progress update
+    if (deletedCount % 5 === 0 && deletedCount > 0) {
+      console.log(`📊 Progress: ${deletedCount} deleted`);
+    }
+    
+    // Safety break
+    if (deletedCount + errorCount > 500) {
+      console.log('⚠️ Reached safety limit (500), stopping...');
+      break;
+    }
+  }
+})();
+VM942:2 🗑️ Starting cleanup of "New Job" entries...
+VM942:15 ✅ Cleanup complete! Deleted 0 jobs, 0 errors
+Promise {<fulfilled>: undefined}
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"0ba9b16b-816c-4ae6-ae6f-5a288710a277"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:570 🔍 Checking for pending job data...
+content.js:572 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:578 ⚠️ No pending job data found
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"631a8931-ae67-42ea-9d3b-0903e9fa9187"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"aab21231-ecb2-4b06-8db7-bd0f8c4a87b7"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:570 🔍 Checking for pending job data...
+content.js:572 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:578 ⚠️ No pending job data found
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"9d70ddbd-12a3-4c6c-aba9-388c42eb6b7e"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"ad2034c1-cecf-45c7-8437-118f55618427"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:570 🔍 Checking for pending job data...
+content.js:572 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:578 ⚠️ No pending job data found
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"2efff56d-a6cd-48e7-949d-3c09442e6bc3"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
