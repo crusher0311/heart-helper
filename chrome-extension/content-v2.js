@@ -41,7 +41,7 @@ function waitForElement(selector, timeout = 10000) {
 // UTILITY: Wait for modal dialog to appear
 // =================================================================
 function waitForModal(timeout = 15000) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const startTime = Date.now();
     
     const checkForModal = () => {
@@ -55,7 +55,7 @@ function waitForModal(timeout = 15000) {
       }
       
       if (Date.now() - startTime > timeout) {
-        return resolve(document.body);
+        return reject(new Error('Modal failed to appear within timeout'));
       }
       
       requestAnimationFrame(checkForModal);
@@ -286,11 +286,34 @@ async function fillPart(part) {
   const nameField = textInputs.find(inp => {
     const ph = inp.placeholder?.toLowerCase() || '';
     const label = inp.getAttribute('aria-label')?.toLowerCase() || '';
-    return ph.includes('name') || ph.includes('description') || 
-           label.includes('name') || label.includes('description');
+    return (ph.includes('name') || ph.includes('description')) && 
+           !ph.includes('part') && !ph.includes('number') &&
+           (label.includes('name') || label.includes('description'));
   }) || textInputs[1] || textInputs[0];
   
   if (nameField) fieldsToFill.push({ element: nameField, value: part.name });
+  
+  // Part number
+  const partNumberField = textInputs.find(inp => {
+    const ph = inp.placeholder?.toLowerCase() || '';
+    const label = inp.getAttribute('aria-label')?.toLowerCase() || '';
+    return ph.includes('part') && (ph.includes('number') || ph.includes('num') || ph.includes('#')) ||
+           label.includes('part') && (label.includes('number') || label.includes('num'));
+  });
+  if (partNumberField && part.partNumber) {
+    fieldsToFill.push({ element: partNumberField, value: part.partNumber });
+  }
+  
+  // Brand
+  const brandField = textInputs.find(inp => {
+    const ph = inp.placeholder?.toLowerCase() || '';
+    const label = inp.getAttribute('aria-label')?.toLowerCase() || '';
+    return ph.includes('brand') || ph.includes('manufacturer') ||
+           label.includes('brand') || label.includes('manufacturer');
+  });
+  if (brandField && part.brand) {
+    fieldsToFill.push({ element: brandField, value: part.brand });
+  }
   
   // Quantity
   const qtyField = numberInputs.find(inp => {
@@ -301,16 +324,26 @@ async function fillPart(part) {
   });
   if (qtyField) fieldsToFill.push({ element: qtyField, value: (part.quantity || 1).toString() });
 
-  // Cost
+  // Cost (already in dollars from payload)
   const costField = numberInputs.find(inp => {
     const ph = inp.placeholder?.toLowerCase() || '';
     const label = inp.getAttribute('aria-label')?.toLowerCase() || '';
-    return ph.includes('cost') || ph.includes('price') || 
-           label.includes('cost') || label.includes('price');
+    return (ph.includes('cost') || ph.includes('wholesale')) && !ph.includes('retail') ||
+           (label.includes('cost') || label.includes('wholesale')) && !label.includes('retail');
   });
-  if (costField) {
-    const costValue = (part.cost / 100).toFixed(2);
-    fieldsToFill.push({ element: costField, value: costValue });
+  if (costField && part.cost != null) {
+    fieldsToFill.push({ element: costField, value: part.cost.toFixed(2) });
+  }
+  
+  // Retail price (already in dollars from payload)
+  const retailField = numberInputs.find(inp => {
+    const ph = inp.placeholder?.toLowerCase() || '';
+    const label = inp.getAttribute('aria-label')?.toLowerCase() || '';
+    return ph.includes('retail') || ph.includes('sell') || ph.includes('price') ||
+           label.includes('retail') || label.includes('sell') || label.includes('price');
+  });
+  if (retailField && part.retail != null) {
+    fieldsToFill.push({ element: retailField, value: part.retail.toFixed(2) });
   }
 
   if (fieldsToFill.length === 0) {
@@ -351,13 +384,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 // Listen for postMessage from injected script (for instant fill)
 window.addEventListener('message', (event) => {
-  // Validate source is same window (from our injected script)
+  // Strict validation: source must be same window, origin must match current page
   if (event.source !== window) return;
+  if (event.origin && event.origin !== window.location.origin) return;
   
-  if (event.data && event.data.type === 'HEART_HELPER_FILL') {
-    debug('Received fill request via postMessage (instant mode)');
-    fillTekmetricEstimate(event.data.jobData);
-  }
+  // Validate message structure
+  if (!event.data || event.data.type !== 'HEART_HELPER_FILL') return;
+  if (!event.data.jobData || typeof event.data.jobData !== 'object') return;
+  
+  debug('Received fill request via postMessage (instant mode)');
+  fillTekmetricEstimate(event.data.jobData);
 });
 
 // Auto-check for pending jobs when Tekmetric page loads
