@@ -84,7 +84,7 @@ export function SearchInterface({ onSearch, isLoading }: SearchInterfaceProps) {
   };
 
   return (
-    <Card className="h-fit sticky top-20 z-40 bg-card" data-testid="search-interface">
+    <Card className="h-fit" data-testid="search-interface">
       <CardHeader className="space-y-0 pb-4">
         <CardTitle className="text-lg font-semibold">Search Job History</CardTitle>
         <p className="text-sm text-muted-foreground mt-2">
