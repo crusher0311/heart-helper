@@ -100,9 +100,6 @@ async function fillTekmetricEstimate(jobData) {
   if (isFillingJob) return;
   isFillingJob = true;
 
-  // Clear pending job immediately
-  chrome.runtime.sendMessage({ action: "CLEAR_PENDING_JOB" });
-
   try {
     if (!window.location.href.includes('shop.tekmetric.com')) {
       isFillingJob = false;
@@ -111,17 +108,21 @@ async function fillTekmetricEstimate(jobData) {
 
     debug('Starting instant auto-fill for:', jobData.jobName);
 
-    // Step 1: Click Job button
+    // Step 1: Find and verify Job button exists
     const jobButton = Array.from(document.querySelectorAll('button')).find(btn =>
       btn.textContent.trim() === 'Job' || btn.getAttribute('aria-label')?.includes('Job')
     );
 
     if (!jobButton) {
-      throw new Error('Job button not found');
+      throw new Error('Job button not found - may already be in modal or page structure changed');
     }
 
     jobButton.click();
     const modal = await waitForModal();
+
+    if (!modal) {
+      throw new Error('Modal failed to appear after clicking Job button');
+    }
 
     // Step 2: Fill job name
     const jobNameField = findJobNameField(modal);
@@ -140,11 +141,16 @@ async function fillTekmetricEstimate(jobData) {
       await fillPart(part);
     }
 
-    debug('Auto-fill complete!');
+    debug('Auto-fill complete - clearing pending job');
+    
+    // Clear pending job ONLY after successful fill
+    chrome.runtime.sendMessage({ action: "CLEAR_PENDING_JOB" });
+    
     isFillingJob = false;
 
   } catch (error) {
     debugError('Auto-fill failed:', error);
+    debugError('Job data will remain pending for retry');
     isFillingJob = false;
   }
 }
@@ -174,31 +180,52 @@ async function fillLaborItem(laborItem) {
 
   const inputsBefore = new Set(document.querySelectorAll('input, textarea'));
   addLaborButton.click();
-  await new Promise(r => setTimeout(r, 300));
+  
+  // Wait for new fields to appear (deterministic check)
+  let newInputs = [];
+  for (let attempt = 0; attempt < 20; attempt++) {
+    await new Promise(r => setTimeout(r, 50));
+    const inputsAfter = Array.from(document.querySelectorAll('input, textarea'));
+    newInputs = inputsAfter.filter(inp => !inputsBefore.has(inp) && inp.type !== 'hidden');
+    if (newInputs.length > 0) break;
+  }
 
-  const inputsAfter = Array.from(document.querySelectorAll('input, textarea'));
-  const newInputs = inputsAfter.filter(inp => !inputsBefore.has(inp));
+  if (newInputs.length === 0) throw new Error('No new labor fields appeared after 1 second');
 
-  if (newInputs.length === 0) throw new Error('No new labor fields appeared');
-
-  // Find and batch fill fields
+  // Find fields by placeholder, aria-label, or nearby label
   const descField = newInputs.find(inp => {
     const ph = inp.placeholder?.toLowerCase() || '';
-    return (ph.includes('description') || ph.includes('labor')) && !ph.includes('part');
+    const label = inp.getAttribute('aria-label')?.toLowerCase() || '';
+    return (ph.includes('description') || ph.includes('labor') || label.includes('description')) && 
+           !ph.includes('part') && !label.includes('part');
   });
 
-  const hoursField = newInputs.find(inp =>
-    inp.type === 'number' && inp.placeholder?.toLowerCase().includes('hour')
-  );
+  const hoursField = newInputs.find(inp => {
+    const ph = inp.placeholder?.toLowerCase() || '';
+    const label = inp.getAttribute('aria-label')?.toLowerCase() || '';
+    return inp.type === 'number' && (ph.includes('hour') || label.includes('hour'));
+  });
 
-  const rateField = newInputs.find(inp =>
-    inp.type === 'number' && inp.placeholder?.toLowerCase().includes('rate')
-  );
+  const rateField = newInputs.find(inp => {
+    const ph = inp.placeholder?.toLowerCase() || '';
+    const label = inp.getAttribute('aria-label')?.toLowerCase() || '';
+    return inp.type === 'number' && (ph.includes('rate') || label.includes('rate') || ph.includes('price'));
+  });
 
   const fieldsToFill = [];
   if (descField) fieldsToFill.push({ element: descField, value: laborItem.name });
   if (hoursField) fieldsToFill.push({ element: hoursField, value: laborItem.hours.toString() });
   if (rateField) fieldsToFill.push({ element: rateField, value: laborItem.rate.toString() });
+
+  if (fieldsToFill.length === 0) {
+    debugError('Could not identify labor fields, filling first available fields as fallback');
+    // Fallback: fill first text, first two numbers
+    const textInputs = newInputs.filter(i => i.type === 'text' || i.tagName === 'TEXTAREA');
+    const numInputs = newInputs.filter(i => i.type === 'number');
+    if (textInputs[0]) fieldsToFill.push({ element: textInputs[0], value: laborItem.name });
+    if (numInputs[0]) fieldsToFill.push({ element: numInputs[0], value: laborItem.hours.toString() });
+    if (numInputs[1]) fieldsToFill.push({ element: numInputs[1], value: laborItem.rate.toString() });
+  }
 
   await batchFillFields(fieldsToFill);
   await new Promise(r => setTimeout(r, 100));
@@ -215,56 +242,79 @@ async function fillPart(part) {
   if (!addPartsButton) throw new Error('Add Parts button not found');
 
   addPartsButton.click();
-  await new Promise(r => setTimeout(r, 200));
-
-  // Find "Add part manually" option
+  
+  // Wait deterministically for "Add part manually" option
   let addManuallyOption = null;
-  for (let i = 0; i < 10; i++) {
-    await new Promise(r => setTimeout(r, 100));
-    const elements = Array.from(document.querySelectorAll('button, a, li, div[role="option"], span'));
+  for (let i = 0; i < 20; i++) {
+    await new Promise(r => setTimeout(r, 50));
+    const elements = Array.from(document.querySelectorAll('button, a, li, div[role="option"], span, [role="menuitem"]'));
     addManuallyOption = elements.find(el =>
-      el.textContent?.toLowerCase().includes('add part manually')
+      el.textContent?.toLowerCase().includes('add part manually') ||
+      el.textContent?.toLowerCase().includes('manual')
     );
     if (addManuallyOption) break;
   }
 
-  if (!addManuallyOption) throw new Error('Add part manually not found');
+  if (!addManuallyOption) {
+    debugError('Add part manually option not found - may need to update selector');
+    throw new Error('Add part manually not found');
+  }
 
   const elementsBefore = new Set(document.querySelectorAll('input, textarea'));
   addManuallyOption.click();
-  await new Promise(r => setTimeout(r, 300));
+  
+  // Wait for new part fields to appear
+  let newInputs = [];
+  for (let attempt = 0; attempt < 20; attempt++) {
+    await new Promise(r => setTimeout(r, 50));
+    const elementsAfter = Array.from(document.querySelectorAll('input, textarea'));
+    newInputs = elementsAfter.filter(el =>
+      !elementsBefore.has(el) && el.type !== 'hidden'
+    );
+    if (newInputs.length > 0) break;
+  }
 
-  const elementsAfter = Array.from(document.querySelectorAll('input, textarea'));
-  const newInputs = elementsAfter.filter(el =>
-    !elementsBefore.has(el) && el.type !== 'hidden'
-  );
+  if (newInputs.length === 0) throw new Error('No new part fields appeared after 1 second');
 
-  if (newInputs.length === 0) throw new Error('No new part fields appeared');
-
-  // Find and batch fill part fields
+  // Find fields using multiple strategies
   const textInputs = newInputs.filter(inp => inp.type === 'text' || inp.tagName === 'TEXTAREA');
   const numberInputs = newInputs.filter(inp => inp.type === 'number');
 
   const fieldsToFill = [];
   
-  // Part name (usually 2nd text field)
-  if (textInputs[1]) fieldsToFill.push({ element: textInputs[1], value: part.name });
+  // Part name - try to find by label/placeholder first, fallback to position
+  const nameField = textInputs.find(inp => {
+    const ph = inp.placeholder?.toLowerCase() || '';
+    const label = inp.getAttribute('aria-label')?.toLowerCase() || '';
+    return ph.includes('name') || ph.includes('description') || 
+           label.includes('name') || label.includes('description');
+  }) || textInputs[1] || textInputs[0];
+  
+  if (nameField) fieldsToFill.push({ element: nameField, value: part.name });
   
   // Quantity
-  const qtyField = numberInputs.find(inp =>
-    inp.placeholder?.toLowerCase().includes('quantity') ||
-    inp.getAttribute('aria-label')?.toLowerCase().includes('quantity')
-  );
+  const qtyField = numberInputs.find(inp => {
+    const ph = inp.placeholder?.toLowerCase() || '';
+    const label = inp.getAttribute('aria-label')?.toLowerCase() || '';
+    return ph.includes('quantity') || ph.includes('qty') || 
+           label.includes('quantity') || label.includes('qty');
+  });
   if (qtyField) fieldsToFill.push({ element: qtyField, value: (part.quantity || 1).toString() });
 
   // Cost
-  const costField = numberInputs.find(inp =>
-    inp.placeholder?.toLowerCase().includes('cost') ||
-    inp.getAttribute('aria-label')?.toLowerCase().includes('cost')
-  );
+  const costField = numberInputs.find(inp => {
+    const ph = inp.placeholder?.toLowerCase() || '';
+    const label = inp.getAttribute('aria-label')?.toLowerCase() || '';
+    return ph.includes('cost') || ph.includes('price') || 
+           label.includes('cost') || label.includes('price');
+  });
   if (costField) {
     const costValue = (part.cost / 100).toFixed(2);
     fieldsToFill.push({ element: costField, value: costValue });
+  }
+
+  if (fieldsToFill.length === 0) {
+    debugError('Could not identify part fields, using fallback positional strategy');
   }
 
   await batchFillFields(fieldsToFill);
@@ -301,6 +351,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 // Listen for postMessage from injected script (for instant fill)
 window.addEventListener('message', (event) => {
+  // Validate source is same window (from our injected script)
+  if (event.source !== window) return;
+  
   if (event.data && event.data.type === 'HEART_HELPER_FILL') {
     debug('Received fill request via postMessage (instant mode)');
     fillTekmetricEstimate(event.data.jobData);
