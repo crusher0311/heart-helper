@@ -8,6 +8,8 @@ Built with HEART's brand values of **Integrity**, **Passion**, and **Transparenc
 
 The application integrates seamlessly with Tekmetric (HEART's shop management system) and features a fast, productivity-focused interface designed in HEART's brand colors and typography.
 
+**Current Status (Nov 25, 2025)**: Fully functional with complete HEART branding, working search with AI scoring, database-backed caching, and Chrome extension integration. All core features operational.
+
 **Tekmetric Integration**: Chrome extension integration that automates adding jobs to Tekmetric repair orders:
 1. **Chrome Extension**: Browser extension that auto-fills labor items and parts into Tekmetric by automating the UI
 2. **API Integration**: Used for read-only operations (fetching pricing, shop data) - API does not support creating custom jobs
@@ -135,9 +137,10 @@ Note: Chrome extension UI automation is the only viable method for programmatica
 1. Tekmetric data synced continuously via external sync tool (109,423 repair orders, 610,698 jobs, 38,471 vehicles)
 2. Vehicle data joined from vehicles table using vehicleId from job raw_data JSONB field
 3. Search queries filter jobs by vehicle specs (make, model, year, engine) and repair type
-4. If no exact year matches found, AI determines compatible model years based on powertrain/platform
-5. AI service scores and ranks candidates using OpenAI (degrades gracefully to 85% default score)
-6. Results returned with match scores, reasoning, and complete job details including calculated labor/parts totals
+4. **Engine Filter Handling**: NULL/empty engine values are included in results to accommodate incomplete historical data
+5. If no exact year matches found, AI determines compatible model years based on powertrain/platform
+6. AI service scores and ranks candidates using OpenAI (degrades gracefully to 85% default score)
+7. Results returned with match scores, reasoning, and complete job details including calculated labor/parts totals
 
 ### Data Storage
 
