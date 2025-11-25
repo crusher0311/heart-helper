@@ -2,9 +2,24 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.5.9] - 2024-11-24
+
+### 🎯 REAL FIX: Find Correct Modal by Content
+- **Problem**: v1.5.8 found WRONG modal (Handle.com chat widget with z-index 2147483647)
+- **Evidence**: `className: 'detect-auto-handle visible'` had 0 inputs inside it
+- **Root cause**: Highest z-index approach finds ANY overlay (chat widgets, tooltips, etc.)
+- **Solution**: Find modal that contains **Job-specific content**:
+  1. Look for `input[placeholder*="canned"]` (canned jobs search field)
+  2. Walk up DOM from that input to find modal container with z-index > 100
+  3. This guarantees we find the ACTUAL Job modal, not random overlays
+- **Fallback**: Still tries standard modal selectors if canned jobs input not found
+
+### Impact
+Z-index alone is unreliable on complex pages with multiple overlays. Content-based detection ensures we find the correct modal.
+
 ## [1.5.8] - 2024-11-24
 
-### 🔧 FIX: Enhanced Modal Detection
+### 🔧 ATTEMPTED: Enhanced Modal Detection (FOUND WRONG MODAL)
 - **Problem**: v1.5.7 couldn't find modal - standard selectors failed
 - **Evidence**: "❌ Could not find Job dialog/modal" error
 - **Root cause**: Modal doesn't use `role="dialog"` or standard `.modal` class

@@ -100,44 +100,44 @@ async function fillTekmetricEstimate(jobData) {
 
     console.log('3️⃣ Finding the Job dialog/modal that just opened...');
     
-    // Log what's on the page to help debug
-    const allDivs = Array.from(document.querySelectorAll('div'));
-    console.log(`Page has ${allDivs.length} div elements total`);
+    // Strategy: Find the modal that contains the canned jobs search input
+    // This is unique to the Job modal and won't match other overlays
+    const cannedJobsSearch = document.querySelector('input[placeholder*="canned"]');
+    console.log('Looking for canned jobs search input...');
     
-    // Find the modal - try many different patterns
-    let modal = document.querySelector('[role="dialog"]');
-    if (!modal) modal = document.querySelector('[role="alertdialog"]');
-    if (!modal) modal = document.querySelector('.modal');
-    if (!modal) modal = document.querySelector('[class*="Modal"]');
-    if (!modal) modal = document.querySelector('[class*="modal"]');
-    if (!modal) modal = document.querySelector('[class*="dialog"]');
-    if (!modal) modal = document.querySelector('[class*="Dialog"]');
-    if (!modal) modal = document.querySelector('[class*="overlay"]');
-    if (!modal) modal = document.querySelector('[class*="Overlay"]');
-    if (!modal) modal = document.querySelector('[class*="popup"]');
-    if (!modal) modal = document.querySelector('[class*="Popup"]');
-    
-    // If still nothing, look for any div that appeared AFTER the click (has high z-index)
-    if (!modal) {
-      const highZIndexDivs = allDivs.filter(div => {
-        const zIndex = window.getComputedStyle(div).zIndex;
-        return zIndex && parseInt(zIndex) > 100;
-      });
-      console.log(`Found ${highZIndexDivs.length} divs with z-index > 100`);
-      if (highZIndexDivs.length > 0) {
-        // Use the one with highest z-index
-        modal = highZIndexDivs.reduce((max, div) => {
-          const maxZ = parseInt(window.getComputedStyle(max).zIndex) || 0;
-          const divZ = parseInt(window.getComputedStyle(div).zIndex) || 0;
-          return divZ > maxZ ? div : max;
-        });
-        console.log('Using highest z-index div as modal:', {zIndex: window.getComputedStyle(modal).zIndex});
+    let modal = null;
+    if (cannedJobsSearch) {
+      console.log('✓ Found canned jobs search input');
+      // Walk up the DOM to find the modal container
+      let element = cannedJobsSearch;
+      while (element && element !== document.body) {
+        const zIndex = window.getComputedStyle(element).zIndex;
+        // The modal will have a high z-index and be positioned
+        if (zIndex && parseInt(zIndex) > 100) {
+          modal = element;
+          console.log('Found modal container by walking up from canned jobs input');
+          console.log('Modal z-index:', zIndex, 'Modal tag:', element.tagName, 'Modal class:', element.className.substring(0, 50));
+          break;
+        }
+        element = element.parentElement;
       }
+    }
+    
+    // Fallback: If we can't find it via canned jobs search, try standard modal selectors
+    if (!modal) {
+      console.log('Trying standard modal selectors...');
+      modal = document.querySelector('[role="dialog"]');
+      if (!modal) modal = document.querySelector('[role="alertdialog"]');
+      if (!modal) modal = document.querySelector('.modal');
+      if (!modal) modal = document.querySelector('[class*="Modal"]');
+      if (!modal) modal = document.querySelector('[class*="modal"]');
+      if (!modal) modal = document.querySelector('[class*="dialog"]');
+      if (!modal) modal = document.querySelector('[class*="Dialog"]');
     }
     
     if (!modal) {
       console.error('❌ Could not find Job dialog/modal');
-      console.log('Tried: [role="dialog"], [role="alertdialog"], .modal, *Modal*, *dialog*, *overlay*, *popup*, and high z-index divs');
+      console.log('Tried: canned jobs search, [role="dialog"], [role="alertdialog"], .modal, *Modal*, *dialog*');
       isFillingJob = false;
       throw new Error('Could not find Job dialog after clicking Job button');
     }
