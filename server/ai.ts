@@ -222,6 +222,7 @@ Return ONLY valid JSON array format:
 
     const content = response.choices[0]?.message?.content;
     if (!content) {
+      console.error("AI returned empty content for job scoring");
       throw new Error("No response from AI");
     }
 
@@ -236,6 +237,8 @@ Return ONLY valid JSON array format:
       matches = parsed.matches;
     } else if (parsed.results && Array.isArray(parsed.results)) {
       matches = parsed.results;
+    } else if (parsed.jobs && Array.isArray(parsed.jobs)) {
+      matches = parsed.jobs; // Handle "jobs" key from AI response
     } else {
       // If it's an object with job IDs as keys, convert to array
       matches = Object.values(parsed).filter((item: any) => 
