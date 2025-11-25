@@ -2,9 +2,25 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.5.7] - 2024-11-24
+
+### 🎯 BREAKTHROUGH: Search Inside Modal Only!
+- **Problem**: v1.5.6 found 896 inputs on ENTIRE page, couldn't identify which was job title field
+- **Discovery**: Job title field is inside a modal/dialog that opens when clicking "Job" button
+- **Evidence**: Console truncated array at input ~16, but 896 total inputs exist (including ALL page inputs)
+- **Root cause**: Searching entire DOM instead of just the modal that opened
+- **Solution**: 
+  1. Find the modal (`[role="dialog"]`, `.modal`, etc.)
+  2. Search for inputs ONLY inside that modal
+  3. Added 4 fallback strategies specific to modal inputs
+- **Improved logging**: Shows modal details and all inputs INSIDE modal (much shorter list)
+
+### Impact
+Searching 896 inputs across the entire page was impossible. Now we search ~5-10 inputs inside the modal only.
+
 ## [1.5.6] - 2024-11-24
 
-### 🎯 FIX: Search ALL Input Types (Not Just type="text")
+### 🔍 ATTEMPTED: Search ALL Input Types (FOUND 896!)
 - **Problem**: v1.5.5 only found `<input type="text">`, but job title field has different type
 - **Discovery**: User's screenshot proves cursor IS in job title field after clicking "Job"
 - **Evidence**: v1.5.5 logs show "Found 1 text inputs" (global search only), "0 textareas", "0 contenteditable"

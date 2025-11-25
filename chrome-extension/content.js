@@ -96,47 +96,64 @@ async function fillTekmetricEstimate(jobData) {
     
     console.log('✓ Clicking Job button...');
     jobButton.click();
-    await new Promise(resolve => setTimeout(resolve, 3000)); // Increased to 3s
+    await new Promise(resolve => setTimeout(resolve, 3000));
 
-    console.log('3️⃣ Searching for job name field (ALL input types, textarea, contenteditable)...');
+    console.log('3️⃣ Finding the Job dialog/modal that just opened...');
     
-    // Get ALL inputs (not just type="text")
-    const allInputs = Array.from(document.querySelectorAll('input'));
-    const textareas = Array.from(document.querySelectorAll('textarea'));
-    const contentEditables = Array.from(document.querySelectorAll('[contenteditable]')); // ANY contenteditable value
+    // Find the modal - look for common modal/dialog patterns
+    const modal = document.querySelector('[role="dialog"]') || 
+                  document.querySelector('.modal') ||
+                  document.querySelector('[class*="Modal"]') ||
+                  document.querySelector('[class*="dialog"]');
     
-    console.log(`Found ${allInputs.length} inputs, ${textareas.length} textareas, ${contentEditables.length} contenteditable elements`);
-    console.log('All inputs:', allInputs.map(i => ({tag: 'INPUT', type: i.type, value: i.value?.substring(0, 30), placeholder: i.placeholder, id: i.id, name: i.name})));
-    console.log('Textareas:', textareas.map(t => ({tag: 'TEXTAREA', value: t.value?.substring(0, 30), placeholder: t.placeholder, id: t.id, name: t.name})));
-    console.log('ContentEditables:', contentEditables.map(c => ({tag: c.tagName, contentEditable: c.contentEditable, text: c.textContent?.substring(0, 30), id: c.id})));
+    if (!modal) {
+      console.error('❌ Could not find Job dialog/modal');
+      isFillingJob = false;
+      throw new Error('Could not find Job dialog after clicking Job button');
+    }
     
-    // Try to find job name field - prioritize empty fields that aren't search
+    console.log('✓ Found modal:', {tag: modal.tagName, role: modal.getAttribute('role'), className: modal.className});
+    console.log('4️⃣ Searching for inputs INSIDE the modal only...');
+    
+    // Search for inputs ONLY inside the modal
+    const modalInputs = Array.from(modal.querySelectorAll('input'));
+    const modalTextareas = Array.from(modal.querySelectorAll('textarea'));
+    const modalContentEditables = Array.from(modal.querySelectorAll('[contenteditable]'));
+    
+    console.log(`Found ${modalInputs.length} inputs, ${modalTextareas.length} textareas, ${modalContentEditables.length} contenteditable in modal`);
+    console.log('Modal inputs:', modalInputs.map(i => ({tag: 'INPUT', type: i.type, value: i.value, placeholder: i.placeholder, id: i.id, name: i.name})));
+    console.log('Modal textareas:', modalTextareas.map(t => ({tag: 'TEXTAREA', value: t.value, placeholder: t.placeholder})));
+    console.log('Modal contentEditables:', modalContentEditables.map(c => ({tag: c.tagName, text: c.textContent})));
+    
+    // Try to find job name field
     let jobNameInput = null;
     
-    // Strategy 1: Look for empty textarea first (most likely for job names)
-    jobNameInput = textareas.find(t => 
-      !t.value && 
-      !t.placeholder?.toLowerCase().includes('search') &&
-      !t.className.includes('search')
-    );
+    // Strategy 1: Look for empty textarea first
+    jobNameInput = modalTextareas.find(t => !t.value);
     
-    // Strategy 2: Look for empty contenteditable (check for 'true' or any truthy value)
+    // Strategy 2: Look for empty contenteditable
     if (!jobNameInput) {
-      jobNameInput = contentEditables.find(c => 
+      jobNameInput = modalContentEditables.find(c => 
         c.contentEditable && 
         c.contentEditable !== 'false' &&
-        !c.textContent.trim() &&
-        !c.className.includes('search')
+        !c.textContent.trim()
       );
     }
     
-    // Strategy 3: Look for ANY input with empty value (not search) - ANY TYPE
+    // Strategy 3: Look for ANY text-like input (exclude checkboxes, radios, hidden)
     if (!jobNameInput) {
-      jobNameInput = allInputs.find(i => 
+      jobNameInput = modalInputs.find(i => 
         !i.value &&
-        !i.placeholder?.toLowerCase().includes('search') &&
-        !i.name?.toLowerCase().includes('search') &&
-        !i.className.includes('search') &&
+        i.type !== 'hidden' &&
+        i.type !== 'checkbox' &&
+        i.type !== 'radio' &&
+        !i.placeholder?.toLowerCase().includes('search')
+      );
+    }
+    
+    // Strategy 4: If still nothing, just use the FIRST visible text input
+    if (!jobNameInput) {
+      jobNameInput = modalInputs.find(i => 
         i.type !== 'hidden' &&
         i.type !== 'checkbox' &&
         i.type !== 'radio'
