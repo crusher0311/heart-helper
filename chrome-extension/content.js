@@ -530,20 +530,35 @@ async function fillTekmetricEstimate(jobData) {
         id: inp.id
       })));
       
-      const partNumberField = inputs.find(inp => 
-        inp.placeholder?.toLowerCase().includes('part number') ||
-        inp.placeholder?.toLowerCase().includes('number')
-      );
-      if (partNumberField && part.partNumber) {
-        partNumberField.focus();
-        partNumberField.value = part.partNumber;
-        partNumberField.dispatchEvent(new Event('input', { bubbles: true }));
-        partNumberField.dispatchEvent(new Event('change', { bubbles: true }));
-        console.log('✓ Filled part number:', part.partNumber);
-        
-        // TAB to description field (user discovered this works!)
-        await new Promise(resolve => setTimeout(resolve, 150));
-        partNumberField.dispatchEvent(new KeyboardEvent('keydown', { 
+      // Tekmetric field order: Brand → Part Name → Part Number → Details → Quantity → Cost
+      // Strategy: Find first visible input, fill brand, then TAB through remaining fields
+      
+      const firstInput = inputs.find(inp => inp.offsetParent !== null);
+      if (!firstInput) {
+        console.error('❌ Could not find first input field');
+        isFillingJob = false;
+        return;
+      }
+      
+      // Helper to type text with events
+      async function typeIntoField(element, text, label) {
+        element.focus();
+        element.value = '';
+        for (let i = 0; i < text.length; i++) {
+          element.value = text.substring(0, i + 1);
+          element.dispatchEvent(new InputEvent('input', { 
+            bubbles: true,
+            data: text[i]
+          }));
+          if (i % 10 === 0) await new Promise(resolve => setTimeout(resolve, 5));
+        }
+        element.dispatchEvent(new Event('change', { bubbles: true }));
+        console.log(`✓ Filled ${label}:`, text);
+      }
+      
+      // Helper to press TAB
+      async function pressTab(element) {
+        element.dispatchEvent(new KeyboardEvent('keydown', { 
           key: 'Tab', 
           code: 'Tab', 
           keyCode: 9,
@@ -551,61 +566,59 @@ async function fillTekmetricEstimate(jobData) {
           bubbles: true,
           cancelable: true
         }));
-        
-        await new Promise(resolve => setTimeout(resolve, 250));
-        
-        // Description field should now be focused
-        const description = part.brand ? `${part.brand} ${part.name}` : part.name;
-        const activeElement = document.activeElement;
-        
-        if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
-          console.log('✓ TAB moved focus to field:', activeElement.placeholder || activeElement.name || activeElement.id);
-          
-          // Type description character by character
-          activeElement.value = '';
-          for (let i = 0; i < description.length; i++) {
-            activeElement.value = description.substring(0, i + 1);
-            activeElement.dispatchEvent(new InputEvent('input', { 
-              bubbles: true,
-              cancelable: true,
-              data: description[i]
-            }));
-            if (i % 10 === 0) await new Promise(resolve => setTimeout(resolve, 5));
-          }
-          
-          activeElement.dispatchEvent(new Event('change', { bubbles: true }));
-          console.log('✓ Filled description via TAB navigation:', description);
-        } else {
-          console.log('⚠️ TAB did not focus input. Active element:', activeElement?.tagName, activeElement?.placeholder);
-        }
+        await new Promise(resolve => setTimeout(resolve, 200));
       }
       
-      const qtyField = inputs.find(inp => 
-        inp.type === 'number' && (
-          inp.placeholder?.toLowerCase().includes('qty') ||
-          inp.placeholder?.toLowerCase().includes('quantity')
-        )
-      );
-      if (qtyField) {
-        qtyField.focus();
-        qtyField.value = part.quantity.toString();
-        qtyField.dispatchEvent(new Event('input', { bubbles: true }));
-        qtyField.dispatchEvent(new Event('change', { bubbles: true }));
+      // Field 1: Brand
+      const brand = part.brand || '';
+      if (brand) {
+        await typeIntoField(firstInput, brand, 'brand');
+        await pressTab(firstInput);
+      } else {
+        // If no brand, TAB past empty field
+        firstInput.focus();
+        await pressTab(firstInput);
       }
       
-      // Fill cost price field
-      const costField = inputs.find(inp => 
-        inp.type === 'number' && (
-          inp.placeholder?.toLowerCase().includes('cost') ||
-          inp.getAttribute('aria-label')?.toLowerCase().includes('cost')
-        )
-      );
-      if (costField && part.cost) {
-        costField.focus();
-        costField.value = part.cost.toString();
-        costField.dispatchEvent(new Event('input', { bubbles: true }));
-        costField.dispatchEvent(new Event('change', { bubbles: true }));
-        console.log('✓ Filled cost price:', part.cost);
+      // Field 2: Part Name (description)
+      let activeEl = document.activeElement;
+      if (activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA')) {
+        await typeIntoField(activeEl, part.name, 'part name');
+        await pressTab(activeEl);
+      }
+      
+      // Field 3: Part Number
+      activeEl = document.activeElement;
+      if (activeEl && part.partNumber) {
+        await typeIntoField(activeEl, part.partNumber, 'part number');
+        await pressTab(activeEl);
+      } else {
+        await pressTab(activeEl);
+      }
+      
+      // Field 4: Additional Details (skip - not used)
+      activeEl = document.activeElement;
+      await pressTab(activeEl);
+      
+      // Field 5: Quantity
+      activeEl = document.activeElement;
+      if (activeEl && activeEl.type === 'number') {
+        activeEl.focus();
+        activeEl.value = part.quantity.toString();
+        activeEl.dispatchEvent(new Event('input', { bubbles: true }));
+        activeEl.dispatchEvent(new Event('change', { bubbles: true }));
+        console.log('✓ Filled quantity:', part.quantity);
+        await pressTab(activeEl);
+      }
+      
+      // Field 6: Cost
+      activeEl = document.activeElement;
+      if (activeEl && activeEl.type === 'number' && part.cost) {
+        activeEl.focus();
+        activeEl.value = part.cost.toString();
+        activeEl.dispatchEvent(new Event('input', { bubbles: true }));
+        activeEl.dispatchEvent(new Event('change', { bubbles: true }));
+        console.log('✓ Filled cost:', part.cost);
       }
       
       // Fill sale/retail price field
