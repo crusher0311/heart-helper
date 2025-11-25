@@ -391,10 +391,19 @@ async function fillTekmetricEstimate(jobData) {
       
       while (!addManuallyOption && attempts < maxAttempts) {
         await new Promise(resolve => setTimeout(resolve, 250));
-        addManuallyOption = Array.from(document.querySelectorAll('div, button, li, span, a')).find(el => {
+        
+        // Try to find the most specific clickable element
+        const allElements = Array.from(document.querySelectorAll('button, a, li, div[role="option"], div[role="menuitem"], span'));
+        const candidates = allElements.filter(el => {
           const text = el.textContent?.toLowerCase() || '';
-          return text.includes('add part manually') || text.includes('manually');
+          return text.includes('add part manually') || (text.includes('manually') && text.length < 50);
         });
+        
+        // Prefer buttons/links over divs/spans
+        addManuallyOption = candidates.find(el => el.tagName === 'BUTTON' || el.tagName === 'A') || 
+                           candidates.find(el => el.getAttribute('role') === 'option' || el.getAttribute('role') === 'menuitem') ||
+                           candidates[0];
+        
         attempts++;
         if (!addManuallyOption && attempts % 4 === 0) {
           console.log(`⏳ Still waiting for dropdown... (${attempts * 250}ms elapsed)`);
@@ -411,13 +420,33 @@ async function fillTekmetricEstimate(jobData) {
       const elementsBefore = new Set(document.querySelectorAll('input, textarea, [contenteditable="true"]'));
       console.log(`📊 Snapshot before Add part manually: ${elementsBefore.size} total form elements`);
       
+      // Helper function to click element with multiple strategies
+      function clickElement(element, description) {
+        console.log(`🖱️ Clicking ${description}:`, {
+          tag: element.tagName,
+          className: element.className,
+          text: element.textContent?.substring(0, 50),
+          role: element.getAttribute('role')
+        });
+        
+        // Strategy 1: Regular click
+        element.click();
+        
+        // Strategy 2: Dispatch mouse events (more realistic)
+        element.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
+        element.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
+        element.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+        
+        console.log(`✓ Dispatched click events on ${description}`);
+      }
+      
       // Try clicking "Add part manually" with retry logic
       let newInputs = [];
       const maxClickRetries = 3;
       
       for (let clickAttempt = 1; clickAttempt <= maxClickRetries; clickAttempt++) {
-        console.log(`✓ Attempt ${clickAttempt}: Clicking "Add part manually"...`);
-        addManuallyOption.click();
+        console.log(`\n🔄 Attempt ${clickAttempt}: Finding and clicking "Add part manually"...`);
+        clickElement(addManuallyOption, '"Add part manually" option');
         
         // Wait progressively longer and check for new inputs
         console.log('⏳ Waiting for part form to render...');
@@ -452,19 +481,30 @@ async function fillTekmetricEstimate(jobData) {
           console.log(`⚠️ No inputs appeared after ${waitAttempts * 400}ms. Retrying click...`);
           // Re-find the "Add part manually" option in case dropdown closed
           await new Promise(resolve => setTimeout(resolve, 500));
-          addManuallyOption = Array.from(document.querySelectorAll('div, button, li, span, a')).find(el => {
+          
+          const allElements = Array.from(document.querySelectorAll('button, a, li, div[role="option"], div[role="menuitem"], span'));
+          const candidates = allElements.filter(el => {
             const text = el.textContent?.toLowerCase() || '';
-            return text.includes('add part manually') || text.includes('manually');
+            return text.includes('add part manually') || (text.includes('manually') && text.length < 50);
           });
+          addManuallyOption = candidates.find(el => el.tagName === 'BUTTON' || el.tagName === 'A') || 
+                             candidates.find(el => el.getAttribute('role') === 'option' || el.getAttribute('role') === 'menuitem') ||
+                             candidates[0];
           
           if (!addManuallyOption) {
             console.log('⚠️ "Add part manually" option disappeared, clicking "Add Parts" again...');
-            addPartsButton.click();
+            clickElement(addPartsButton, '"Add Parts" button (retry)');
             await new Promise(resolve => setTimeout(resolve, 500));
-            addManuallyOption = Array.from(document.querySelectorAll('div, button, li, span, a')).find(el => {
+            
+            const allElements2 = Array.from(document.querySelectorAll('button, a, li, div[role="option"], div[role="menuitem"], span'));
+            const candidates2 = allElements2.filter(el => {
               const text = el.textContent?.toLowerCase() || '';
-              return text.includes('add part manually') || text.includes('manually');
+              return text.includes('add part manually') || (text.includes('manually') && text.length < 50);
             });
+            addManuallyOption = candidates2.find(el => el.tagName === 'BUTTON' || el.tagName === 'A') || 
+                               candidates2.find(el => el.getAttribute('role') === 'option' || el.getAttribute('role') === 'menuitem') ||
+                               candidates2[0];
+            
             if (!addManuallyOption) {
               console.error('❌ Could not re-find "Add part manually" option');
               break;
