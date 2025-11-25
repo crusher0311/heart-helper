@@ -39,30 +39,40 @@ function waitForModal(timeout = 10000) {
       
       if (cannedJobsInput) {
         console.log('✓ Found canned jobs search input - modal is ready!');
-        // Walk up to find the modal container
-        // The modal should have z-index > 1000 AND a reasonable number of inputs (10-100)
+        
+        // Strategy: Walk up and find the FIRST container with 5-100 inputs
+        // Don't require z-index > 1000 since Tekmetric doesn't use it
         let element = cannedJobsInput;
+        let candidateModal = null;
+        
         while (element && element !== document.body) {
           const inputs = element.querySelectorAll('input, textarea, [contenteditable="true"]');
           const zIndex = window.getComputedStyle(element).zIndex;
-          const zNum = parseInt(zIndex);
           
-          console.log(`Checking element: z-index=${zIndex}, inputs=${inputs.length}, tag=${element.tagName}`);
+          console.log(`Checking element: z-index=${zIndex}, inputs=${inputs.length}, tag=${element.tagName}, class=${element.className?.substring(0, 30)}`);
           
-          // Modal criteria:
-          // 1. MUST have z-index > 1000 (not "auto" or < 1000)
-          // 2. MUST have 5-100 inputs (not 1, not 900+)
-          // 3. Should NOT be <body>
-          if (element.tagName !== 'BODY' && 
-              zIndex !== 'auto' && 
-              !isNaN(zNum) && 
-              zNum > 1000 && 
-              inputs.length >= 5 && 
-              inputs.length < 200) {
-            console.log(`✓ Found modal container with z-index ${zIndex} and ${inputs.length} input fields`);
-            return resolve(element);
+          // Modal criteria: 5-100 inputs (reasonable form size)
+          // Store the FIRST match we find (closest to canned jobs input)
+          if (inputs.length >= 5 && inputs.length < 200) {
+            if (!candidateModal) {
+              candidateModal = element;
+              console.log(`✓ Found candidate modal with ${inputs.length} inputs`);
+            }
           }
+          
+          // If we hit a container with 200+ inputs, stop walking up
+          if (inputs.length >= 200) {
+            console.log(`⚠️ Reached container with ${inputs.length} inputs - stopping`);
+            break;
+          }
+          
           element = element.parentElement;
+        }
+        
+        if (candidateModal) {
+          const inputs = candidateModal.querySelectorAll('input, textarea, [contenteditable="true"]');
+          console.log(`✓ Using modal container with ${inputs.length} input fields`);
+          return resolve(candidateModal);
         }
       }
       

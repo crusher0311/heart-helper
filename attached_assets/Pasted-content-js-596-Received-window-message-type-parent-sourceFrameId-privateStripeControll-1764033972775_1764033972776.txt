@@ -1,0 +1,1600 @@
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0631","controllerAppFrameId":"__privateStripeController0631","message":{"action":"stripe-controller-action-response","payload":{"nonce":"13c9ead7-5985-436d-bdd4-545bbc69ba6f"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:657 Extracted RO ID from URL: 274639316
+content.js:733 Extracted vehicle data: {make: 'Toyota', model: 'Corolla L', year: '2017', engine: '1.8L', concerns: '', …}
+content.js:801 Opening search with URL: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev//?make=Toyota&model=Corolla+L&year=2017&engine=1.8L&roId=274639316
+content.js:802 Vehicle data: {make: 'Toyota', model: 'Corolla L', year: '2017', engine: '1.8L', concerns: '', …}
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0631","controllerAppFrameId":"__privateStripeController0631","message":{"action":"stripe-controller-action-response","payload":{"nonce":"7bf0c334-ecde-45b4-a08a-91cc4ea0451a"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:596 📬 Received window message: {action: 'dismissFrame'}
+content.js:600 ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
+content.js:596 📬 Received window message: {action: 'dismissFrame'}
+content.js:600 ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0631","controllerAppFrameId":"__privateStripeController0631","message":{"action":"stripe-controller-action-response","payload":{"nonce":"548e831d-e07c-405a-924f-2d3fdbd8dbb4"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0631","controllerAppFrameId":"__privateStripeController0631","message":{"action":"stripe-controller-action-response","payload":{"nonce":"70ea3af9-744a-4c35-9e60-21d134129f8d"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0631","controllerAppFrameId":"__privateStripeController0631","message":{"action":"stripe-controller-action-response","payload":{"nonce":"86761735-f262-4eb3-97d7-9625d72cd335"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:581 🔍 Checking for pending job data...
+content.js:583 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:585 ✅ Found pending job data, auto-filling...
+content.js:586 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:112 🚀 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:115 1️⃣ Checking if on Tekmetric page...
+content.js:116 Current URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/274639316/estimate
+content.js:124 ✅ On Tekmetric page, waiting 2 seconds for page to stabilize...
+content.js:125 Setting timeout for 2000ms...
+content.js:132 Timeout set with ID: 1394
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0631","controllerAppFrameId":"__privateStripeController0631","message":{"action":"stripe-controller-action-response","payload":{"nonce":"0757468c-8966-46dc-8a43-4f66dbbd5c0a"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:129 2️⃣ Wait complete after 2 seconds!
+content.js:134 2️⃣ Wait complete, now looking for Job button...
+content.js:150 ✓ Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:153 3️⃣ Waiting for Job modal to appear...
+content.js:32 ⏳ Waiting for Job modal to appear...
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:596 📬 Received window message: {action: 'dismissFrame'}
+content.js:600 ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:581 🔍 Checking for pending job data...
+content.js:581 🔍 Checking for pending job data...
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=919, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=920, tag=DIV
+content.js:583 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:585 ✅ Found pending job data, auto-filling...
+content.js:586 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:107 ⏸️ Already filling a job, skipping duplicate request
+content.js:583 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:585 ✅ Found pending job data, auto-filling...
+content.js:586 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:107 ⏸️ Already filling a job, skipping duplicate request
+content.js:581 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:490 ❌ Error filling Tekmetric estimate: Error: Timeout waiting for Job modal to appear
+    at checkForModal (content.js:71:23)
+fillTekmetricEstimate @ content.js:490
+await in fillTekmetricEstimate
+(anonymous) @ content.js:587
+content.js:491 Error details: {message: 'Timeout waiting for Job modal to appear', stack: 'Error: Timeout waiting for Job modal to appear\n   …kfkekimphekfdbgdlhfaejadenppgeb/content.js:71:23)', name: 'Error'}
+fillTekmetricEstimate @ content.js:491
+await in fillTekmetricEstimate
+(anonymous) @ content.js:587
+content.js:581 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:581 🔍 Checking for pending job data...
+content.js:583 📬 GET_PENDING_JOB response: {jobData: {…}}
+content.js:585 ✅ Found pending job data, auto-filling...
+content.js:586 Job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:112 🚀 Starting to fill Tekmetric estimate with job data: {jobName: 'REAR STRUTS - ALIGNMENT REQUIRED', laborItems: Array(1), parts: Array(2), totals: {…}, vehicle: {…}}
+content.js:115 1️⃣ Checking if on Tekmetric page...
+content.js:116 Current URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/274639316/estimate
+content.js:124 ✅ On Tekmetric page, waiting 2 seconds for page to stabilize...
+content.js:125 Setting timeout for 2000ms...
+content.js:132 Timeout set with ID: 1495
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:71 Uncaught (in promise) Error: Timeout waiting for Job modal to appear
+    at checkForModal (content.js:71:23)
+checkForModal @ content.js:71
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+content.js:499 📦 Cleared pending job after error: {success: true}
+content.js:583 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:589 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:583 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:589 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:129 2️⃣ Wait complete after 2 seconds!
+content.js:134 2️⃣ Wait complete, now looking for Job button...
+content.js:150 ✓ Clicking Job button...
+main-DsvBPogw.js:263 Skipping tracking for Repair Order page
+content.js:153 3️⃣ Waiting for Job modal to appear...
+content.js:32 ⏳ Waiting for Job modal to appear...
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0631","controllerAppFrameId":"__privateStripeController0631","message":{"action":"stripe-controller-action-response","payload":{"nonce":"1221895c-04a4-41f4-aa21-f0c841165ffe"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0631","controllerAppFrameId":"__privateStripeController0631","message":{"action":"stripe-controller-action-response","payload":{"nonce":"f8cec422-ef50-42c3-807c-89f86a952f6f"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:581 🔍 Checking for pending job data...
+content.js:583 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:589 ⚠️ No pending job data found
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:581 🔍 Checking for pending job data...
+content.js:581 🔍 Checking for pending job data...
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=921, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=922, tag=DIV
+content.js:583 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:589 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:583 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:589 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:581 🔍 Checking for pending job data...
+content.js:581 🔍 Checking for pending job data...
+content.js:581 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:583 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:589 ⚠️ No pending job data found
+content.js:41 ✓ Found canned jobs search input - modal is ready!
+content.js:50 Checking element: z-index=auto, inputs=0, tag=INPUT
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=900, inputs=1, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=923, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=923, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=923, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=923, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=923, tag=MAIN
+content.js:50 Checking element: z-index=auto, inputs=924, tag=DIV
+content.js:50 Checking element: z-index=auto, inputs=924, tag=DIV
+content.js:490 ❌ Error filling Tekmetric estimate: Error: Timeout waiting for Job modal to appear
+    at checkForModal (content.js:71:23)
+fillTekmetricEstimate @ content.js:490
+await in fillTekmetricEstimate
+(anonymous) @ content.js:587
+content.js:491 Error details: {message: 'Timeout waiting for Job modal to appear', stack: 'Error: Timeout waiting for Job modal to appear\n   …kfkekimphekfdbgdlhfaejadenppgeb/content.js:71:23)', name: 'Error'}
+fillTekmetricEstimate @ content.js:491
+await in fillTekmetricEstimate
+(anonymous) @ content.js:587
+content.js:581 🔍 Checking for pending job data...
+content.js:583 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:589 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:581 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:583 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:589 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:71 Uncaught (in promise) Error: Timeout waiting for Job modal to appear
+    at checkForModal (content.js:71:23)
+checkForModal @ content.js:71
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+setTimeout
+checkForModal @ content.js:75
+content.js:499 📦 Cleared pending job after error: {success: true}
+content.js:583 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:589 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:583 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:589 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0631","controllerAppFrameId":"__privateStripeController0631","message":{"action":"stripe-controller-action-response","payload":{"nonce":"2de1dc1c-2532-4dfe-ad0e-9986e0241f2c"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0631","controllerAppFrameId":"__privateStripeController0631","message":{"action":"stripe-controller-action-response","payload":{"nonce":"d31daa92-0786-4084-8ccd-53d33a93a969"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0631","controllerAppFrameId":"__privateStripeController0631","message":{"action":"stripe-controller-action-response","payload":{"nonce":"ccc9b749-8bd8-4af2-9f65-b8c015fb962e"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0631","controllerAppFrameId":"__privateStripeController0631","message":{"action":"stripe-controller-action-response","payload":{"nonce":"c271ac72-8c21-4aa2-9887-9a882e902c6e"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:581 🔍 Checking for pending job data...
+content.js:583 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:589 ⚠️ No pending job data found
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0631","controllerAppFrameId":"__privateStripeController0631","message":{"action":"stripe-controller-action-response","payload":{"nonce":"fc50c481-f604-4cf9-ac8f-2fd8c57f69c9"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469

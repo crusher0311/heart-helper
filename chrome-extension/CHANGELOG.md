@@ -2,9 +2,33 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.6.3] - 2024-11-24
+
+### ✅ WORKING FIX: Tekmetric Modal Doesn't Use z-index > 1000
+- **Problem**: v1.6.2 waited 10 seconds then timed out because NO element had z-index > 1000
+- **Evidence from logs**:
+  - Logs show infinite loop: "Found canned jobs search input" repeating every 100ms
+  - Every element checked: either z-auto or z-900, never z-1000+
+  - User needed to refresh page because extension timed out after 10s
+  - Screenshot shows modal IS open, but extension couldn't detect it
+- **Root cause**: Tekmetric doesn't use z-index > 1000 for modals - they use different approach
+- **Solution**: Removed z-index requirement completely
+  - Find canned jobs input ✓
+  - Walk up DOM tree looking for first container with 5-100 inputs
+  - Stop when hitting 200+ inputs (entire page)
+  - Use the closest container to canned jobs input
+- **Why it works**: Real modal has ~15-50 inputs, page has 919 inputs
+  - Extension will find the modal before hitting the page container
+
+### Algorithm
+1. Find `input[placeholder*="canned"]` (canned jobs search)
+2. Walk up parents counting inputs in each
+3. Take FIRST match with 5-100 inputs (closest to input)
+4. Stop at 200+ inputs (entire page)
+
 ## [1.6.2] - 2024-11-24
 
-### 🎯 CRITICAL FIX: Stop Walking Up to <body>
+### 🔧 ATTEMPTED: Require z-index > 1000 (TEKMETRIC DOESN'T USE IT)
 - **Problem**: v1.6.1 walked up to `<body>` which has 916 inputs, not the actual modal
 - **Evidence from logs**:
   - Line 300: `Found modal container with z-index auto and 916 input fields`
