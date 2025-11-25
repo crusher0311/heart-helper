@@ -258,22 +258,51 @@ async function fillTekmetricEstimate(jobData) {
         throw new Error('Could not find "Add Labor" button');
       }
       
+      // Snapshot inputs BEFORE clicking to detect new ones
+      const inputsBefore = new Set(document.querySelectorAll('input:not([type="hidden"]), textarea'));
+      
       console.log('✓ Clicking "Add Labor" button');
       addLaborButton.click();
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Give UI time to render
+      await new Promise(resolve => setTimeout(resolve, 1500)); // Wait for UI to fully render
 
-      const inputs = Array.from(document.querySelectorAll('input, textarea'));
+      // Find NEW inputs that appeared after the click
+      const inputsAfter = Array.from(document.querySelectorAll('input:not([type="hidden"]), textarea'));
+      const newInputs = inputsAfter.filter(inp => !inputsBefore.has(inp));
       
-      // Find labor description field - look for fields with "description" or "labor" in placeholder/label
+      console.log(`✓ Detected ${newInputs.length} new input fields after clicking Add Labor`);
+      
+      if (newInputs.length === 0) {
+        console.error('❌ No new inputs detected after Add Labor click');
+        isFillingJob = false;
+        throw new Error('Add Labor did not create new input fields - UI may have changed');
+      }
+
+      const inputs = newInputs;
+      
+      // Find labor description field - be VERY specific to avoid part fields
       const descriptionField = inputs.find(inp => {
         const placeholder = inp.placeholder?.toLowerCase() || '';
         const label = inp.getAttribute('aria-label')?.toLowerCase() || '';
         const name = inp.name?.toLowerCase() || '';
+        const id = inp.id?.toLowerCase() || '';
         
-        // Match description fields but avoid part-related fields
-        return (placeholder.includes('description') || label.includes('description') || 
-                placeholder.includes('labor') || label.includes('labor') || name.includes('labor')) &&
-               !placeholder.includes('part') && !label.includes('part');
+        // MUST contain description/labor keywords AND NOT contain part/brand/number keywords
+        const hasLaborKeyword = placeholder.includes('description') || 
+                                label.includes('description') ||
+                                placeholder.includes('labor') || 
+                                label.includes('labor') || 
+                                name.includes('labor') ||
+                                name.includes('description');
+        
+        const hasPartKeyword = placeholder.includes('part') || 
+                              label.includes('part') ||
+                              name.includes('part') ||
+                              placeholder.includes('brand') ||
+                              name.includes('brand') ||
+                              placeholder.includes('number') ||
+                              id.includes('part');
+        
+        return hasLaborKeyword && !hasPartKeyword;
       });
       
       if (!descriptionField) {
@@ -292,11 +321,13 @@ async function fillTekmetricEstimate(jobData) {
       // Clear and fill the field, then blur to prevent autocomplete interference
       descriptionField.focus();
       descriptionField.value = '';
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise(resolve => setTimeout(resolve, 200));
       descriptionField.value = laborItem.name;
       descriptionField.dispatchEvent(new Event('input', { bubbles: true }));
       descriptionField.dispatchEvent(new Event('change', { bubbles: true }));
+      await new Promise(resolve => setTimeout(resolve, 300)); // Wait before blur
       descriptionField.blur(); // Blur to commit the value and avoid autocomplete
+      await new Promise(resolve => setTimeout(resolve, 500)); // Wait after blur to ensure commit
       console.log('✓ Filled labor description:', laborItem.name);
       
       const hoursField = inputs.find(inp => 
@@ -329,7 +360,7 @@ async function fillTekmetricEstimate(jobData) {
       
       // No Save button needed - labor stays in modal
       console.log('✓ Labor item filled (no save needed)');
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, 800)); // Longer wait before moving to parts
     }
 
     // Now add parts - each part needs "Add Parts" → "Add part manually" flow
@@ -351,7 +382,7 @@ async function fillTekmetricEstimate(jobData) {
       
       console.log('✓ Clicking "Add Parts" button');
       addPartsButton.click();
-      await new Promise(resolve => setTimeout(resolve, 600));
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for dropdown
 
       // Click "Add part manually" from dropdown
       const addManuallyOption = Array.from(document.querySelectorAll('div, button, li, span, a')).find(el => {
@@ -359,15 +390,30 @@ async function fillTekmetricEstimate(jobData) {
         return text.includes('add part manually') || text.includes('manually');
       });
       
+      // Snapshot inputs BEFORE clicking "Add part manually" to detect new ones
+      const inputsBefore = new Set(document.querySelectorAll('input:not([type="hidden"]), textarea'));
+      
       if (addManuallyOption) {
         console.log('✓ Clicking "Add part manually"');
         addManuallyOption.click();
-        await new Promise(resolve => setTimeout(resolve, 600));
+        await new Promise(resolve => setTimeout(resolve, 800)); // Wait for UI to render
       } else {
         console.log('⚠️ "Add part manually" not found - trying to fill anyway');
       }
 
-      const inputs = Array.from(document.querySelectorAll('input, textarea'));
+      // Find NEW inputs that appeared after the click
+      const inputsAfter = Array.from(document.querySelectorAll('input:not([type="hidden"]), textarea'));
+      const newInputs = inputsAfter.filter(inp => !inputsBefore.has(inp));
+      
+      console.log(`✓ Detected ${newInputs.length} new input fields after clicking Add part manually`);
+      
+      if (newInputs.length === 0) {
+        console.error('❌ No new inputs detected after Add part manually click');
+        isFillingJob = false;
+        throw new Error('Add part manually did not create new input fields - UI may have changed');
+      }
+
+      const inputs = newInputs;
       
       const partNumberField = inputs.find(inp => 
         inp.placeholder?.toLowerCase().includes('part number') ||

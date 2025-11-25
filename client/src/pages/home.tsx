@@ -17,6 +17,7 @@ export default function Home() {
   const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
   const [results, setResults] = useState<SearchResult[] | null>(null);
   const [repairOrderId, setRepairOrderId] = useState<string | null>(null);
+  const [matchesFound, setMatchesFound] = useState<number>(0);
   
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -35,16 +36,36 @@ export default function Home() {
     onSuccess: (data) => {
       console.log("Search response data:", data);
       console.log("Is array:", Array.isArray(data));
-      // Ensure data is an array before setting results
       const resultsArray = Array.isArray(data) ? data : [];
       console.log("Setting results to:", resultsArray);
       setResults(resultsArray);
+      setMatchesFound(resultsArray.length);
       queryClient.invalidateQueries({ queryKey: ["/api/search"] });
     },
   });
 
   const isLoading = searchMutation.isPending;
   const error = searchMutation.error;
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isLoading) {
+      setMatchesFound(0);
+      interval = setInterval(() => {
+        setMatchesFound(prev => {
+          // Cap at 20 to avoid overshooting (most searches return 10-20 results)
+          if (prev >= 20) return prev;
+          
+          // Slower increments as count gets higher to create anticipation
+          const increment = prev < 10 ? Math.floor(Math.random() * 3) + 1 : 1;
+          return prev + increment;
+        });
+      }, 150);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isLoading]);
 
   const selectedResult = Array.isArray(results) 
     ? results.find((r) => r.job.id === selectedJobId)
@@ -101,7 +122,27 @@ export default function Home() {
               <EmptyState type="no-search" />
             ) : isLoading ? (
               <div className="space-y-4" data-testid="loading-results">
-                <JobCardSkeleton />
+                <Card className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Sparkles className="w-5 h-5 text-primary animate-pulse" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-lg">Searching job history...</h3>
+                        <p className="text-sm text-muted-foreground">AI is analyzing similar repairs</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-3xl font-bold text-primary tabular-nums" data-testid="text-matches-counter">
+                        {matchesFound}
+                      </div>
+                      <div className="text-xs text-muted-foreground uppercase tracking-wide">
+                        Matches Found
+                      </div>
+                    </div>
+                  </div>
+                </Card>
                 <JobCardSkeleton />
                 <JobCardSkeleton />
                 <JobCardSkeleton />
