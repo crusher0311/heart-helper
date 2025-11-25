@@ -237,81 +237,28 @@ async function fillTekmetricEstimate(jobData) {
       throw err;
     }
     
-    await new Promise(resolve => setTimeout(resolve, 800));
+    await new Promise(resolve => setTimeout(resolve, 500));
 
-    // After filling job name, we need to SAVE/CREATE the job
-    console.log('Looking for Save/Create/Add button...');
-    const jobSaveButton = Array.from(document.querySelectorAll('button')).find(btn => {
-      const text = btn.textContent.trim().toLowerCase();
-      return text === 'save' || text === 'create' || text === 'add' || text === 'ok' || text.includes('create job');
-    });
-    
-    if (jobSaveButton) {
-      console.log('✓ Clicking save button:', jobSaveButton.textContent.trim());
-      jobSaveButton.click();
-      
-      // Wait for modal to close and NEW job card to appear with our job name
-      console.log('⏳ Waiting 15 seconds for modal to close and job card to fully render...');
-      await new Promise(resolve => setTimeout(resolve, 15000)); // Wait 15 seconds (user reports 12-15s delay)
-      
-      // Find the job card containing our job name
-      console.log(`🔍 Looking for job card containing: "${jobData.jobName}"`);
-      const allElements = Array.from(document.querySelectorAll('*'));
-      const jobCard = allElements.find(el => {
-        const text = el.textContent || '';
-        // Must contain our job name AND "click here" text
-        return text.includes(jobData.jobName) && 
-               text.toLowerCase().includes('click here') &&
-               (text.toLowerCase().includes('labor') || text.toLowerCase().includes('part'));
-      });
-      
-      if (!jobCard) {
-        console.error('❌ Could not find job card with name:', jobData.jobName);
-        console.log('Available job names on page:', 
-          Array.from(document.querySelectorAll('*'))
-            .map(el => el.textContent)
-            .filter(t => t && t.includes('STRUT') || t && t.includes('ALIGN'))
-            .slice(0, 5)
-        );
-        isFillingJob = false;
-        throw new Error(`Could not find job card for: ${jobData.jobName}`);
-      }
-      
-      console.log('✓ Found job card for:', jobData.jobName);
-      console.log('Job card element:', {tag: jobCard.tagName, class: jobCard.className});
-    } else {
-      console.log('⚠️ No save button found, trying to proceed anyway...');
-      console.log('Available buttons:', Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim()).filter(t => t));
-    }
-
-    // Store reference to job card for scoped searching
-    let scopedJobCard = jobCard || document.body;
+    // NEW WORKFLOW: No Save needed! Immediately click "Add Labor" button in modal
+    console.log('🆕 Looking for "Add Labor" button in modal (no Save needed!)...');
     
     for (const laborItem of jobData.laborItems) {
-      console.log(`Adding labor item: ${laborItem.name}`);
+      console.log(`\n📋 Adding labor item: ${laborItem.name}`);
       
-      // Look for labor add link ONLY within our job card
-      const cardClickables = Array.from(scopedJobCard.querySelectorAll('button, a, span, div, [role="button"]'));
-      console.log(`Searching through ${cardClickables.length} clickable elements WITHIN job card...`);
-      
-      const addLaborButton = cardClickables.find(elem => {
-        const text = elem.textContent.trim().toLowerCase();
-        // Match "click here" + "labor", "add labor", or just "labor" button
-        return (text.includes('click') && text.includes('labor')) || 
-               text.includes('add labor') || 
-               (text === 'labor' && elem.tagName === 'BUTTON');
+      // Find "Add Labor" button in the modal
+      const addLaborButton = Array.from(document.querySelectorAll('button')).find(btn => {
+        const text = btn.textContent.trim().toLowerCase();
+        return text.includes('add labor') || text === 'labor';
       });
       
       if (!addLaborButton) {
-        console.error('❌ Labor add button not found in job card - stopping automation');
-        const clickableTexts = cardClickables.map(e => e.textContent.trim()).filter(t => t && t.length < 100);
-        console.log('Clickables containing "labor":', clickableTexts.filter(t => t.toLowerCase().includes('labor')));
-        console.log('Clickables containing "click":', clickableTexts.filter(t => t.toLowerCase().includes('click')).slice(0, 10));
+        console.error('❌ "Add Labor" button not found in modal');
+        console.log('Available buttons:', Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim()));
         isFillingJob = false;
-        throw new Error('Could not find labor add button in job card');
+        throw new Error('Could not find "Add Labor" button');
       }
       
-      console.log('✓ Clicking labor add button:', addLaborButton.textContent.trim().substring(0, 50));
+      console.log('✓ Clicking "Add Labor" button');
       addLaborButton.click();
       await new Promise(resolve => setTimeout(resolve, 800));
 
@@ -361,58 +308,44 @@ async function fillTekmetricEstimate(jobData) {
         console.log('✓ Filled rate:', laborItem.rate);
       }
       
-      // Look for and click Save button after filling each labor item
-      await new Promise(resolve => setTimeout(resolve, 600));
-      const laborSaveBtn = Array.from(document.querySelectorAll('button')).find(btn => {
-        const text = btn.textContent.trim().toLowerCase();
-        return text === 'save' || text === 'add' || text === 'ok';
-      });
-      if (laborSaveBtn) {
-        console.log('✓ Saving labor item...');
-        laborSaveBtn.click();
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      } else {
-        console.log('⚠️ No save button found for labor item');
-        await new Promise(resolve => setTimeout(resolve, 500));
-      }
+      // No Save button needed - labor stays in modal
+      console.log('✓ Labor item filled (no save needed)');
+      await new Promise(resolve => setTimeout(resolve, 300));
     }
 
+    // Now add parts - each part needs "Add Parts" → "Add part manually" flow
     for (const part of jobData.parts) {
-      console.log(`Adding part: ${part.name}`);
+      console.log(`\n🔧 Adding part: ${part.name}`);
       
-      // Look for parts add link ONLY within our job card
-      const cardClickables = Array.from(scopedJobCard.querySelectorAll('button, a, span, div, [role="button"]'));
-      console.log(`Searching through ${cardClickables.length} clickable elements WITHIN job card...`);
-      
-      const addPartButton = cardClickables.find(elem => {
-        const text = elem.textContent.trim().toLowerCase();
-        // Match "click here" + "part", "add part", or just "part" button
-        return (text.includes('click') && text.includes('part')) || 
-               text.includes('add part') || 
-               (text === 'part' && elem.tagName === 'BUTTON');
+      // Find "Add Parts" button in modal
+      const addPartsButton = Array.from(document.querySelectorAll('button')).find(btn => {
+        const text = btn.textContent.trim().toLowerCase();
+        return text.includes('add part') || text === 'parts';
       });
       
-      if (!addPartButton) {
-        console.error('❌ Parts add button not found in job card - stopping automation');
-        const clickableTexts = cardClickables.map(e => e.textContent.trim()).filter(t => t && t.length < 100);
-        console.log('Clickables containing "part":', clickableTexts.filter(t => t.toLowerCase().includes('part')));
-        console.log('Clickables containing "click":', clickableTexts.filter(t => t.toLowerCase().includes('click')).slice(0, 10));
+      if (!addPartsButton) {
+        console.error('❌ "Add Parts" button not found in modal');
+        console.log('Available buttons:', Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim()));
         isFillingJob = false;
-        throw new Error('Could not find parts add button in job card');
+        throw new Error('Could not find "Add Parts" button');
       }
       
-      console.log('✓ Clicking parts add button:', addPartButton.textContent.trim().substring(0, 50));
-      addPartButton.click();
-      await new Promise(resolve => setTimeout(resolve, 800));
+      console.log('✓ Clicking "Add Parts" button');
+      addPartsButton.click();
+      await new Promise(resolve => setTimeout(resolve, 600));
 
-      const addManuallyOption = Array.from(document.querySelectorAll('div, button, li')).find(el => 
-        el.textContent.includes('Add part manually')
-      );
+      // Click "Add part manually" from dropdown
+      const addManuallyOption = Array.from(document.querySelectorAll('div, button, li, span, a')).find(el => {
+        const text = el.textContent?.toLowerCase() || '';
+        return text.includes('add part manually') || text.includes('manually');
+      });
       
       if (addManuallyOption) {
-        console.log('Clicking "Add part manually"...');
+        console.log('✓ Clicking "Add part manually"');
         addManuallyOption.click();
         await new Promise(resolve => setTimeout(resolve, 600));
+      } else {
+        console.log('⚠️ "Add part manually" not found - trying to fill anyway');
       }
 
       const inputs = Array.from(document.querySelectorAll('input, textarea'));
@@ -453,28 +386,37 @@ async function fillTekmetricEstimate(jobData) {
         qtyField.dispatchEvent(new Event('change', { bubbles: true }));
       }
       
+      // Fill cost price field
       const costField = inputs.find(inp => 
-        inp.type === 'number' && inp.placeholder?.toLowerCase().includes('cost')
+        inp.type === 'number' && (
+          inp.placeholder?.toLowerCase().includes('cost') ||
+          inp.getAttribute('aria-label')?.toLowerCase().includes('cost')
+        )
       );
-      if (costField) {
+      if (costField && part.cost) {
         costField.focus();
         costField.value = part.cost.toString();
         costField.dispatchEvent(new Event('input', { bubbles: true }));
         costField.dispatchEvent(new Event('change', { bubbles: true }));
+        console.log('✓ Filled cost price:', part.cost);
       }
       
+      // Fill sale/retail price field
       const retailField = inputs.find(inp => 
         inp.type === 'number' && (
           inp.placeholder?.toLowerCase().includes('retail') ||
-          inp.placeholder?.toLowerCase().includes('price')
+          inp.placeholder?.toLowerCase().includes('sale') ||
+          inp.placeholder?.toLowerCase().includes('price') ||
+          inp.getAttribute('aria-label')?.toLowerCase().includes('sale') ||
+          inp.getAttribute('aria-label')?.toLowerCase().includes('retail')
         )
       );
-      if (retailField) {
+      if (retailField && part.retail) {
         retailField.focus();
         retailField.value = part.retail.toString();
         retailField.dispatchEvent(new Event('input', { bubbles: true }));
         retailField.dispatchEvent(new Event('change', { bubbles: true }));
-        console.log('✓ Filled retail:', part.retail);
+        console.log('✓ Filled sale price:', part.retail);
       }
       
       // Look for and click Save button after filling each part
