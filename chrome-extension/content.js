@@ -386,21 +386,32 @@ async function fillTekmetricEstimate(jobData) {
       
       console.log('✓ Clicking "Add Parts" button');
       addPartsButton.click();
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for dropdown
-
-      // Click "Add part manually" from dropdown
-      const addManuallyOption = Array.from(document.querySelectorAll('div, button, li, span, a')).find(el => {
-        const text = el.textContent?.toLowerCase() || '';
-        return text.includes('add part manually') || text.includes('manually');
-      });
+      
+      // Wait for dropdown to appear and find "Add part manually" option
+      console.log('⏳ Waiting for "Add part manually" option to appear...');
+      let addManuallyOption = null;
+      let attempts = 0;
+      const maxAttempts = 20; // 20 attempts x 250ms = 5 seconds max
+      
+      while (!addManuallyOption && attempts < maxAttempts) {
+        await new Promise(resolve => setTimeout(resolve, 250));
+        addManuallyOption = Array.from(document.querySelectorAll('div, button, li, span, a')).find(el => {
+          const text = el.textContent?.toLowerCase() || '';
+          return text.includes('add part manually') || text.includes('manually');
+        });
+        attempts++;
+        if (!addManuallyOption && attempts % 4 === 0) {
+          console.log(`⏳ Still waiting for dropdown... (${attempts * 250}ms elapsed)`);
+        }
+      }
       
       if (addManuallyOption) {
-        console.log('✓ Clicking "Add part manually"');
+        console.log('✓ Found "Add part manually" option, clicking now...');
         addManuallyOption.click();
-        await new Promise(resolve => setTimeout(resolve, 1500)); // Longer wait for UI to render
+        await new Promise(resolve => setTimeout(resolve, 2000)); // 2 second wait for form to render
       } else {
-        console.log('⚠️ "Add part manually" not found - trying to fill anyway');
-        await new Promise(resolve => setTimeout(resolve, 1500)); // Wait anyway
+        console.log('⚠️ "Add part manually" not found after 5 seconds - trying to fill anyway');
+        await new Promise(resolve => setTimeout(resolve, 2000));
       }
 
       // Find NEW elements that appeared after the clicks
