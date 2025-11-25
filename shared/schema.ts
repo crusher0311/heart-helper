@@ -102,6 +102,7 @@ export const searchCache = pgTable("search_cache", {
 export const settings = pgTable("settings", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   defaultShopId: text("default_shop_id"), // "NB", "WM", or "EV"
+  phoneAnswerScript: text("phone_answer_script"), // Custom phone greeting script
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
@@ -225,4 +226,67 @@ export const SHOP_NAMES: Record<ShopLocation, string> = {
   NB: "Northbrook",
   WM: "Wilmette",
   EV: "Evanston",
+};
+
+// ==========================================
+// Concern Intake Types (AI-powered Q&A)
+// ==========================================
+
+// Question/answer pair for concern intake
+export type ConcernQuestionResponse = {
+  question: string;
+  answer: string;
+};
+
+// Request to generate follow-up questions from initial concern
+export const generateConcernQuestionsRequestSchema = z.object({
+  customerConcern: z.string().min(1, "Customer concern is required"),
+  vehicleInfo: z.object({
+    year: z.number().optional(),
+    make: z.string().optional(),
+    model: z.string().optional(),
+  }).optional(),
+});
+
+export type GenerateConcernQuestionsRequest = z.infer<typeof generateConcernQuestionsRequestSchema>;
+
+export type GenerateConcernQuestionsResponse = {
+  questions: string[];
+};
+
+// Request to review conversation and suggest more questions
+export const reviewConcernConversationRequestSchema = z.object({
+  customerConcern: z.string().min(1),
+  answeredQuestions: z.array(z.object({
+    question: z.string(),
+    answer: z.string(),
+  })),
+  vehicleInfo: z.object({
+    year: z.number().optional(),
+    make: z.string().optional(),
+    model: z.string().optional(),
+  }).optional(),
+});
+
+export type ReviewConcernConversationRequest = z.infer<typeof reviewConcernConversationRequestSchema>;
+
+export type ReviewConcernConversationResponse = {
+  additionalQuestions: string[];
+  isComplete: boolean;
+};
+
+// Request to clean/format conversation into readable paragraph
+export const cleanConversationRequestSchema = z.object({
+  customerConcern: z.string().min(1),
+  answeredQuestions: z.array(z.object({
+    question: z.string(),
+    answer: z.string(),
+  })),
+  conversationNotes: z.string().optional(),
+});
+
+export type CleanConversationRequest = z.infer<typeof cleanConversationRequestSchema>;
+
+export type CleanConversationResponse = {
+  cleanedText: string;
 };
