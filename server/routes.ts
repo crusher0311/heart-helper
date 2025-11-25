@@ -21,11 +21,28 @@ export function registerRoutes(app: Express) {
   app.post("/api/search", async (req, res) => {
     try {
       const params = searchJobSchema.parse(req.body);
+      const bypassCache = req.body.bypassCache === true;
       
       // Strip common trim levels from model name for better matching
       const trimLevels = /\s+(XLE|LE|SE|XSE|Limited|Sport|Premium|Touring|EX|LX|DX|SV|SL|SR|Platinum|Denali|LTZ|LT|LS|L|S|High Country|King Ranch|Lariat|STX|Big Horn|Laramie|Rebel|TRD|Off-Road|Trail|Base|Value|Classic|Work Truck|WT)$/i;
       if (params.vehicleModel) {
         params.vehicleModel = params.vehicleModel.replace(trimLevels, '').trim();
+      }
+
+      // Check cache first (unless bypass requested)
+      if (!bypassCache) {
+        const cachedResults = await storage.getCachedSearch(params);
+        if (cachedResults) {
+          console.log(`Cache hit! Returning ${cachedResults.length} cached results`);
+          return res.json({
+            results: cachedResults,
+            cached: true,
+            cachedAt: new Date().toISOString(),
+          });
+        }
+        console.log('Cache miss, running fresh search...');
+      } else {
+        console.log('Cache bypass requested, running fresh search...');
       }
 
       // Get candidate jobs from database - try exact match first
@@ -154,6 +171,10 @@ export function registerRoutes(app: Express) {
         }));
       }
 
+      // Cache results for future use (1 hour TTL)
+      await storage.setCachedSearch(params, results);
+      console.log(`Cached ${results.length} results for future searches`);
+
       // Log search request
       await storage.createSearchRequest({
         vehicleMake: params.vehicleMake,
@@ -164,10 +185,38 @@ export function registerRoutes(app: Express) {
         resultsCount: results.length,
       });
 
-      res.json(results);
+      res.json({
+        results,
+        cached: false,
+        cachedAt: new Date().toISOString(),
+      });
     } catch (error) {
       console.error("Search error:", error);
       res.status(500).json({ error: "Search failed" });
+    }
+  });
+
+  // Get recent searches endpoint
+  app.get("/api/search/recent", async (req, res) => {
+    try {
+      const limit = parseInt(req.query.limit as string) || 10;
+      const recentSearches = await storage.getRecentSearches(limit);
+      
+      // Map to simpler format for frontend
+      const searches = recentSearches.map(search => ({
+        vehicleMake: search.vehicleMake,
+        vehicleModel: search.vehicleModel,
+        vehicleYear: search.vehicleYear,
+        vehicleEngine: search.vehicleEngine,
+        repairType: search.repairType,
+        resultsCount: search.resultsCount,
+        createdAt: search.createdAt,
+      }));
+      
+      res.json(searches);
+    } catch (error) {
+      console.error("Error fetching recent searches:", error);
+      res.status(500).json({ error: "Failed to fetch recent searches" });
     }
   });
 
