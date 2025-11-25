@@ -1,0 +1,828 @@
+
+[Violation] Potential permissions policy violation: microphone is not allowed in this document.
+ [TekmetricStorageModule] Initializing...
+ Tekmetric Job Importer: Content script loaded
+ 📋 Tekmetric Job Importer initialized, document ready state: interactive
+ 📄 Document already loaded - checking for pending jobs in 2s...
+ 📬 Received window message: Object
+ 
+a7 @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught 
+ 📬 Received window message: 
+ [Settings] No generalSettings settings found, using defaults
+ns @ content.js:9
+ 
+a7 @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught 
+ [OutboundCall] Menu state changed: false
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ Creating handle element
+ [Handle] Updating badge: Object
+ [Handle] Badge hidden (count is 0)
+ [Handle] Updating unread data: Object
+ [Handle] Updating badge: Object
+ [Handle] Badge hidden (count is 0)
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ 🔍 Checking for pending job data...
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 Received window message: Object
+ ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
+ 📬 Received window message: Object
+ 📬 Received window message: Object
+/admin/org/124/shops:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+ 📬 Received window message: Object
+ Event "payments_service_status" doesn't have any listeners. Putting it in the stack.
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-load","payload":{"controllerMetrics":{"resource_timings":{"shared.js":{"raw_size":813387,"transfer_size":0,"duration":0},"controller-with-preconnect.js":{"raw_size":1090000,"transfer_size":0,"duration":0}}}}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"69e319df-9989-47fc-ba04-748e87dbfd14"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ Deprecation warning: use moment.updateLocale(localeName, config) to change an existing locale. moment.defineLocale(localeName, config) should only be used for creating a new locale See http://momentjs.com/guides/#/warnings/define-locale/ for more info.
+jB @ main-DK7zafr-.js:188
+ MUI: The SpeedDial component was moved from the lab to the core.
+
+You should use `import { SpeedDial } from '@mui/material'`
+or `import SpeedDial from '@mui/material/SpeedDial'`
+eo @ index-C68Mr6Yj.js:1
+ MUI: The SpeedDialIcon component was moved from the lab to the core.
+
+You should use `import { SpeedDialIcon } from '@mui/material'`
+or `import SpeedDialIcon from '@mui/material/SpeedDialIcon'`
+ho @ index-C68Mr6Yj.js:3
+ MUI: The SpeedDialAction component was moved from the lab to the core.
+
+You should use `import { SpeedDialAction } from '@mui/material'`
+or `import SpeedDialAction from '@mui/material/SpeedDialAction'`
+co @ index-C68Mr6Yj.js:2
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"6133f57e-2210-446b-978c-57262f0ba048"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"a81fc4a8-5507-4ab8-b026-1ca47ed699a8"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ [Handle] Customer ID retrieved from background: 90064336
+ customerId:", 90064336,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 90064336
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Customer ID retrieved from background: 90064336
+ customerId:", 90064336,shopId: 469,
+        previousCustomerId: 90064336, previousShopId: 469
+ [MaintenanceModule] Initializing...
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 90064336
+ customerId:", 90064336,shopId: 469,
+        previousCustomerId: 90064336, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 90064336
+ customerId:", 90064336,shopId: 469,
+        previousCustomerId: 90064336, previousShopId: 469
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"b9607242-6645-4f4c-a0dd-dbf3a5f8c4ae"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ [Settings] No profitabilitySettings settings found, using defaults
+ns @ content.js:9
+ [Settings] No customerMaintenanceSettings settings found, using defaults
+ns @ content.js:9
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ [Handle] Customer ID retrieved from background: 90064336
+ customerId:", 90064336,shopId: 469,
+        previousCustomerId: 90064336, previousShopId: 469
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 90064336, previousShopId: 469
+ Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 44036150
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ [Handle] Customer ID retrieved from background: 44036150
+ [Handle] Phone link updated event received customerId: 44036150, shopId: 469
+ [Handle] Customer ID retrieved from background: 44036150
+ [Handle] Phone link updated event received customerId: 44036150, shopId: 469
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"56b4cc74-cfec-4bd7-9eb0-cbefa2db3b6a"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 📬 Received window message: {"originatingScript":"m2","payload":{"guid":"cb64f5f7-386b-46b0-948b-ec66ed5d6999ea1d00","muid":"34668a3d-e2c7-40c0-9117-16e3a2f648ab1c6239","sid":"83658bb4-3caf-4bee-8aa3-d45e1c655c91fd7f31"}}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"d7747193-1b5d-421a-bd2d-3876c485e9b8"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"a42ac733-8f40-4293-865a-0ec040d32469"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"63e24f0c-5afe-4b61-84f1-6377ffbc7bab"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"a8cb365a-7b01-47d1-a438-640177e86c69"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 🔍 Checking for pending job data...
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"da091f58-51d1-4e54-8a64-0475216cb37e"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ [Handle] Sending CUSTOMER_PHONE_LIST_REQUEST for phone link updated: 44036150 shopId: 469
+ [Handle] Sending CUSTOMER_PHONE_LIST_REQUEST for phone link updated: 44036150 shopId: 469
+ Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 44036150
+ Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 44036150
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ [Handle] Repair order ID found, fetching customer data from background: 276364349
+ [Handle] Customer ID retrieved from background: 44036150
+ customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+ 📝 Total textareas: 0, contenteditable: 0
+ ✅ Total HEART icons injected: 0
+ 🔍 Searching for concern fields on repair order page...
+ 📊 Found 0 concern fields using selectors
+ ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:790 🔍 Checking for pending job data...
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:790 🔍 Checking for pending job data...
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:792 📬 GET_PENDING_JOB response: Object
+content.js:798 ⚠️ No pending job data found
+content.js:792 📬 GET_PENDING_JOB response: Object
+content.js:798 ⚠️ No pending job data found
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276364349
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276364349
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 44036150
+handle.2fe6b368.js:23 customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 44036150
+handle.2fe6b368.js:23 customerId:", 44036150,shopId: 469,
+        previousCustomerId: 44036150, previousShopId: 469
+content.js:816 📬 Received window message: {"originatingScript":"m2","payload":{"guid":"cb64f5f7-386b-46b0-948b-ec66ed5d6999ea1d00","muid":"34668a3d-e2c7-40c0-9117-16e3a2f648ab1c6239","sid":"83658bb4-3caf-4bee-8aa3-d45e1c655c91fd7f31"}}
+content.js:820 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:816 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"948d1351-e080-4fd9-bec6-1eab3890ad8a"}},"__stripeJsV3":true}
+content.js:820 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:816 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"c236f9d7-a69a-4024-87e7-90ce8ca59c71"}},"__stripeJsV3":true}
+content.js:820 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:816 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"b48869aa-c6c5-4324-b591-cf12b1e7c4b6"}},"__stripeJsV3":true}
+content.js:820 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:816 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"5654c3d1-0ddd-4484-8438-36001f8097be"}},"__stripeJsV3":true}
+content.js:820 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:816 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"9269796d-f235-4662-a4dd-b760a5dfe849"}},"__stripeJsV3":true}
+content.js:820 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:1092 🔍 Searching for concern fields on repair order page...
+content.js:1114 📊 Found 0 concern fields using selectors
+content.js:1117 ⚠️ No concern fields found with selectors, trying aggressive fallback...
+content.js:1122 📝 Total textareas: 0, contenteditable: 0
+content.js:1191 ✅ Total HEART icons injected: 0
+content.js:816 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController7941","controllerAppFrameId":"__privateStripeController7941","message":{"action":"stripe-controller-action-response","payload":{"nonce":"d530b4b4-dc90-415b-a917-fe08001550dd"}},"__stripeJsV3":true}
+content.js:820 ⚠️ Ignoring message from different origin: https://js.stripe.com
