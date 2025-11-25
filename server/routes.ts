@@ -77,17 +77,18 @@ export function registerRoutes(app: Express) {
         return res.json([]);
       }
 
-      // Deduplicate candidates by job ID (same job may appear multiple times from different ROs)
-      const seenIds = new Set<number>();
+      // Deduplicate by RO# - only show one job per repair order
+      // Users want to see different repair orders, not multiple jobs from same RO
+      const seenROs = new Set<number>();
       const uniqueCandidates = candidates.filter(job => {
-        if (seenIds.has(job.id)) {
+        if (!job.repairOrderId || seenROs.has(job.repairOrderId)) {
           return false;
         }
-        seenIds.add(job.id);
+        seenROs.add(job.repairOrderId);
         return true;
       });
       
-      console.log(`Deduplicated ${candidates.length} candidates to ${uniqueCandidates.length} unique jobs`);
+      console.log(`Deduplicated ${candidates.length} candidates to ${uniqueCandidates.length} unique repair orders`);
 
       // Limit to top 30 candidates for AI scoring to improve performance (40s → ~10-15s)
       const candidatesForScoring = uniqueCandidates.slice(0, 30);
