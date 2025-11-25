@@ -1,6 +1,6 @@
 # Quick Installation Guide
 
-**Current Version: 1.5.1** - See [CHANGELOG.md](CHANGELOG.md) for version history
+**Current Version: 2.2.0** - Instant Auto-Fill (Carvis-style) - See [CHANGELOG.md](CHANGELOG.md) for version history
 
 ## Install the Chrome Extension
 
@@ -27,14 +27,17 @@
 1. In the job detail panel, click **"Send to Tekmetric"**
 2. You'll see a confirmation: "Sent to Tekmetric Extension"
 
-### Step 3: Auto-Fill in Tekmetric
+### Step 3: Auto-Fill in Tekmetric (Instant Background Fill)
 1. Navigate to Tekmetric (https://shop.tekmetric.com)
-2. Open or create an estimate
-3. The extension will automatically:
-   - Detect the estimate page
-   - Fill in labor items (description, hours, rate)
-   - Fill in parts (name, part number, brand, quantity, cost, retail)
-4. You'll see a success notification when complete
+2. Open or create an estimate/repair order
+3. **Switch tabs** - by the time you return, the job is already filled in!
+4. The extension uses instant background fill:
+   - Detects when you switch to the Tekmetric tab
+   - Fills in labor items (description, hours, rate)
+   - Fills in parts (name, quantity, cost)
+   - **No visible delays** - appears instantly filled
+
+**Note:** This is similar to how Carvis works - instant auto-fill by the time you switch tabs.
 
 ## Check Extension Status
 
@@ -43,13 +46,28 @@ Click the extension icon in Chrome to see:
 - Last imported job details
 - Import timestamp
 
+## Advanced: Debug Mode
+
+To see detailed logging of the auto-fill process:
+
+1. Open DevTools on the Tekmetric page (F12)
+2. Go to Console tab
+3. Run: `localStorage.setItem('heartHelperDebug', 'true')`
+4. Refresh the page
+5. You'll now see detailed logs prefixed with `[HEART Helper]`
+
+To disable debug mode:
+```javascript
+localStorage.removeItem('heartHelperDebug')
+```
+
 ## Troubleshooting
 
 ### Extension Not Auto-Filling?
-1. Make sure you're on a Tekmetric estimate page
+1. Make sure you're on a Tekmetric estimate/repair order page
 2. Try refreshing the Tekmetric page
 3. Check the extension popup to verify data was received
-4. Open DevTools (F12) and check the Console for error messages
+4. Enable debug mode (see above) and check the Console for detailed logs
 
 ### Data Not Sending?
 1. Verify the extension is installed and enabled
