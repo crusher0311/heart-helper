@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Tekmetric Job Importer",
+  "name": "HEART Helper - Tekmetric Integration",
   "version": "2.1.1",
-  "description": "Import job details from repair search tool into Tekmetric estimates",
+  "description": "HEART Certified Auto Care repair history search and Tekmetric auto-fill tool",
   "permissions": [
     "storage",
     "activeTab",
