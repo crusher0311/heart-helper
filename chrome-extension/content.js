@@ -98,17 +98,17 @@ async function fillTekmetricEstimate(jobData) {
     jobButton.click();
     await new Promise(resolve => setTimeout(resolve, 3000)); // Increased to 3s
 
-    console.log('3️⃣ Searching for job name field (input, textarea, or contenteditable)...');
+    console.log('3️⃣ Searching for job name field (ALL input types, textarea, contenteditable)...');
     
-    // Get all possible input types
-    const textInputs = Array.from(document.querySelectorAll('input[type="text"]'));
+    // Get ALL inputs (not just type="text")
+    const allInputs = Array.from(document.querySelectorAll('input'));
     const textareas = Array.from(document.querySelectorAll('textarea'));
-    const contentEditables = Array.from(document.querySelectorAll('[contenteditable="true"]'));
+    const contentEditables = Array.from(document.querySelectorAll('[contenteditable]')); // ANY contenteditable value
     
-    console.log(`Found ${textInputs.length} text inputs, ${textareas.length} textareas, ${contentEditables.length} contenteditable divs`);
-    console.log('Text inputs:', textInputs.map(i => ({tag: 'INPUT', placeholder: i.placeholder, id: i.id, name: i.name, className: i.className})));
-    console.log('Textareas:', textareas.map(t => ({tag: 'TEXTAREA', placeholder: t.placeholder, id: t.id, name: t.name, className: t.className})));
-    console.log('ContentEditables:', contentEditables.map(c => ({tag: c.tagName, id: c.id, className: c.className, text: c.textContent?.substring(0, 50)})));
+    console.log(`Found ${allInputs.length} inputs, ${textareas.length} textareas, ${contentEditables.length} contenteditable elements`);
+    console.log('All inputs:', allInputs.map(i => ({tag: 'INPUT', type: i.type, value: i.value?.substring(0, 30), placeholder: i.placeholder, id: i.id, name: i.name})));
+    console.log('Textareas:', textareas.map(t => ({tag: 'TEXTAREA', value: t.value?.substring(0, 30), placeholder: t.placeholder, id: t.id, name: t.name})));
+    console.log('ContentEditables:', contentEditables.map(c => ({tag: c.tagName, contentEditable: c.contentEditable, text: c.textContent?.substring(0, 30), id: c.id})));
     
     // Try to find job name field - prioritize empty fields that aren't search
     let jobNameInput = null;
@@ -120,21 +120,26 @@ async function fillTekmetricEstimate(jobData) {
       !t.className.includes('search')
     );
     
-    // Strategy 2: Look for empty contenteditable
+    // Strategy 2: Look for empty contenteditable (check for 'true' or any truthy value)
     if (!jobNameInput) {
       jobNameInput = contentEditables.find(c => 
+        c.contentEditable && 
+        c.contentEditable !== 'false' &&
         !c.textContent.trim() &&
         !c.className.includes('search')
       );
     }
     
-    // Strategy 3: Look for text input with empty value (not search)
+    // Strategy 3: Look for ANY input with empty value (not search) - ANY TYPE
     if (!jobNameInput) {
-      jobNameInput = textInputs.find(i => 
+      jobNameInput = allInputs.find(i => 
         !i.value &&
         !i.placeholder?.toLowerCase().includes('search') &&
         !i.name?.toLowerCase().includes('search') &&
-        !i.className.includes('search')
+        !i.className.includes('search') &&
+        i.type !== 'hidden' &&
+        i.type !== 'checkbox' &&
+        i.type !== 'radio'
       );
     }
     

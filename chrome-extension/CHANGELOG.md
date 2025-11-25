@@ -2,9 +2,23 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.5.6] - 2024-11-24
+
+### 🎯 FIX: Search ALL Input Types (Not Just type="text")
+- **Problem**: v1.5.5 only found `<input type="text">`, but job title field has different type
+- **Discovery**: User's screenshot proves cursor IS in job title field after clicking "Job"
+- **Evidence**: v1.5.5 logs show "Found 1 text inputs" (global search only), "0 textareas", "0 contenteditable"
+- **Root cause**: Job title field is probably `<input>` with no type attribute, or `<input type="">`
+- **Solution**: Search for ALL `<input>` elements (any type), ALL contenteditable (any value)
+- Enhanced logging shows type, value, placeholder for EVERY input found
+- Excludes only hidden, checkbox, and radio inputs
+
+### Impact
+v1.5.5 missed the job title field because it only searched `input[type="text"]`. This version searches ALL inputs.
+
 ## [1.5.5] - 2024-11-24
 
-### 🔍 FIX: Search All Field Types
+### 🔍 ATTEMPTED: Search All Field Types (INCOMPLETE)
 - **Problem**: v1.5.4's `document.activeElement` returned a BUTTON, not the job title field
 - **Discovery**: Job title field is NOT auto-focused after clicking Job button
 - **Root cause**: Field might be textarea, contenteditable div, or late-rendering input
