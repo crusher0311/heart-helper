@@ -55,23 +55,9 @@ export default function Home() {
   const error = searchMutation.error;
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
     if (isLoading) {
       setMatchesFound(0);
-      interval = setInterval(() => {
-        setMatchesFound(prev => {
-          // Cap at 20 to avoid overshooting (most searches return 10-20 results)
-          if (prev >= 20) return prev;
-          
-          // Slower increments as count gets higher to create anticipation
-          const increment = prev < 10 ? Math.floor(Math.random() * 3) + 1 : 1;
-          return prev + increment;
-        });
-      }, 150);
     }
-    return () => {
-      if (interval) clearInterval(interval);
-    };
   }, [isLoading]);
 
   const selectedResult = Array.isArray(results) 
@@ -142,10 +128,10 @@ export default function Home() {
                     </div>
                     <div className="text-right">
                       <div className="text-3xl font-bold text-primary tabular-nums" data-testid="text-matches-counter">
-                        {matchesFound}
+                        {isLoading ? "—" : matchesFound}
                       </div>
                       <div className="text-xs text-muted-foreground uppercase tracking-wide">
-                        Matches Found
+                        {isLoading ? "Searching..." : "Matches Found"}
                       </div>
                     </div>
                   </div>
