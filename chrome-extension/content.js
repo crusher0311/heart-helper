@@ -608,17 +608,43 @@ async function fillTekmetricEstimate(jobData) {
 
     await new Promise(resolve => setTimeout(resolve, 800));
     
-    const finalSaveButton = Array.from(document.querySelectorAll('button')).find(btn => 
-      btn.textContent.trim() === 'SAVE'
-    );
+    // Find and click the final SAVE button (multiple attempts with better detection)
+    console.log('\n💾 Looking for final SAVE button...');
+    let finalSaveButton = null;
+    let saveAttempts = 0;
+    const maxSaveAttempts = 5;
+    
+    while (!finalSaveButton && saveAttempts < maxSaveAttempts) {
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      // Look for SAVE button with various criteria
+      const buttons = Array.from(document.querySelectorAll('button'));
+      finalSaveButton = buttons.find(btn => {
+        const text = btn.textContent?.trim().toUpperCase() || '';
+        const isVisible = btn.offsetParent !== null; // Check if visible
+        return isVisible && (
+          text === 'SAVE' || 
+          text === 'BUILD' ||
+          text.includes('SAVE') ||
+          (btn.getAttribute('type') === 'submit' && text.length < 15)
+        );
+      });
+      
+      saveAttempts++;
+      if (!finalSaveButton && saveAttempts % 2 === 0) {
+        console.log(`⏳ Still looking for SAVE button... (attempt ${saveAttempts})`);
+      }
+    }
     
     if (finalSaveButton) {
-      console.log('Clicking final SAVE button...');
-      finalSaveButton.click();
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('✓ Found SAVE button, clicking now...');
+      clickElement(finalSaveButton, 'final SAVE button');
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      console.log("✅ Successfully filled and saved Tekmetric job!");
+    } else {
+      console.log('⚠️ Could not find SAVE button - user may need to click it manually');
+      console.log("✅ Successfully filled Tekmetric job (manual save required)!");
     }
-
-    console.log("✅ Successfully filled and saved Tekmetric job!");
     
     chrome.runtime.sendMessage({ action: "CLEAR_PENDING_JOB" }, (response) => {
       console.log("📦 Cleared pending job after success:", response);
