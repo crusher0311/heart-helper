@@ -125,11 +125,16 @@ export function registerRoutes(app: Express) {
           candidatesForAI
         );
 
+        console.log(`AI returned ${matches.length} scored matches`);
+
         // Combine AI scores with job data
         results = matches
           .map((match) => {
             const job = candidatesForScoring.find((c) => c.id === match.jobId);
-            if (!job) return null;
+            if (!job) {
+              console.warn(`AI returned jobId ${match.jobId} but not found in candidates`);
+              return null;
+            }
 
             return {
               job,
@@ -138,6 +143,8 @@ export function registerRoutes(app: Express) {
             };
           })
           .filter((r): r is SearchResult => r !== null);
+        
+        console.log(`Returning ${results.length} results to frontend`);
       } catch (aiError) {
         // Return results without AI scoring
         results = candidatesForScoring.slice(0, 20).map((job) => ({
