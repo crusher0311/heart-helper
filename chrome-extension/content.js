@@ -380,10 +380,6 @@ async function fillTekmetricEstimate(jobData) {
         throw new Error('Could not find "Add Parts" button');
       }
       
-      // Snapshot ALL form elements BEFORE clicking "Add Parts"
-      const elementsBefore = new Set(document.querySelectorAll('input, textarea, [contenteditable="true"]'));
-      console.log(`📊 Snapshot before Add Parts: ${elementsBefore.size} total form elements`);
-      
       console.log('✓ Clicking "Add Parts" button');
       addPartsButton.click();
       
@@ -405,42 +401,49 @@ async function fillTekmetricEstimate(jobData) {
         }
       }
       
-      if (addManuallyOption) {
-        console.log('✓ Found "Add part manually" option, clicking now...');
-        addManuallyOption.click();
-        await new Promise(resolve => setTimeout(resolve, 2000)); // 2 second wait for form to render
-      } else {
-        console.log('⚠️ "Add part manually" not found after 5 seconds - trying to fill anyway');
-        await new Promise(resolve => setTimeout(resolve, 2000));
+      if (!addManuallyOption) {
+        console.log('⚠️ "Add part manually" not found after 5 seconds');
+        isFillingJob = false;
+        throw new Error('Could not find "Add part manually" option in dropdown');
       }
-
-      // Find NEW elements that appeared after the clicks
-      const elementsAfter = Array.from(document.querySelectorAll('input, textarea, [contenteditable="true"]'));
-      console.log(`📊 Snapshot after Add part manually: ${elementsAfter.length} total form elements`);
       
-      const newElements = elementsAfter.filter(el => !elementsBefore.has(el));
-      console.log(`✓ Detected ${newElements.length} new form elements after clicking Add part manually`);
+      // Snapshot BEFORE clicking "Add part manually"
+      const elementsBefore = new Set(document.querySelectorAll('input, textarea, [contenteditable="true"]'));
+      console.log(`📊 Snapshot before Add part manually: ${elementsBefore.size} total form elements`);
       
-      // Filter to only visible, non-hidden inputs
-      const newInputs = newElements.filter(el => {
-        if (el.type === 'hidden') return false;
-        const style = window.getComputedStyle(el);
-        return style.display !== 'none' && style.visibility !== 'hidden';
-      });
+      console.log('✓ Found "Add part manually" option, clicking now...');
+      addManuallyOption.click();
       
-      console.log(`✓ ${newInputs.length} of those are visible inputs`);
+      // Wait progressively longer and check for new inputs
+      console.log('⏳ Waiting for part form to render...');
+      let newInputs = [];
+      let waitAttempts = 0;
+      const maxWaitAttempts = 15; // 15 attempts x 400ms = 6 seconds max
+      
+      while (newInputs.length === 0 && waitAttempts < maxWaitAttempts) {
+        await new Promise(resolve => setTimeout(resolve, 400));
+        const elementsAfter = Array.from(document.querySelectorAll('input, textarea, [contenteditable="true"]'));
+        const newElements = elementsAfter.filter(el => !elementsBefore.has(el));
+        
+        // Filter to only visible, non-hidden inputs
+        newInputs = newElements.filter(el => {
+          if (el.type === 'hidden') return false;
+          const style = window.getComputedStyle(el);
+          return style.display !== 'none' && style.visibility !== 'hidden';
+        });
+        
+        waitAttempts++;
+        if (waitAttempts % 3 === 0) {
+          console.log(`⏳ Still waiting for part inputs... (${waitAttempts * 400}ms elapsed, ${newInputs.length} visible inputs so far)`);
+        }
+      }
+      
+      console.log(`✓ Detected ${newInputs.length} new visible input fields after ${waitAttempts * 400}ms`);
       
       if (newInputs.length === 0) {
         console.error('❌ No new visible inputs detected after Add part manually click');
-        console.log('📋 All new elements:', newElements.map(el => ({
-          tag: el.tagName,
-          type: el.type,
-          id: el.id,
-          name: el.name,
-          placeholder: el.placeholder
-        })));
         isFillingJob = false;
-        throw new Error('Add part manually did not create new input fields - UI may have changed');
+        throw new Error('Add part manually did not create new input fields after 6 seconds - UI may have changed');
       }
 
       const inputs = newInputs;
