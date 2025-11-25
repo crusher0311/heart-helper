@@ -2,6 +2,34 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.7.0] - 2024-11-24
+
+### 🎯 MAJOR FIX: Find "click here" Links Instead of ADD LABOR/PART Buttons
+- **THE PROBLEM**: After creating job, automation failed with "Could not find ADD LABOR button"
+  - Screenshot showed job created successfully with name "REAR STRUT ASSEMBLIES" ✅
+  - But labor/parts not added - "No labor added, click here to add labor" ❌
+  - Script searched for `<button>` elements with "ADD LABOR" text
+  - Tekmetric actually uses clickable links: "No labor added, **click here** to add labor"
+- **THE FIX**: Search for ANY clickable element (button, link, span) with "click" + "labor/part"
+  - Now finds: `<a>`, `<span>`, `<div>`, `[role="button"]`, not just `<button>`
+  - Matches text patterns: "click here to add labor", "add labor", etc.
+  - Successfully clicks the red "click here" links shown in screenshot
+- **Result**: Complete automation from job name → labor items → parts ✅
+
+### Implementation
+```javascript
+// OLD: Only searched <button> elements
+const allButtons = document.querySelectorAll('button');
+const btn = allButtons.find(b => b.textContent.includes('ADD LABOR'));
+
+// NEW: Search ALL clickable elements for "click here" pattern
+const allClickables = document.querySelectorAll('button, a, span[class*="link"], [role="button"]');
+const btn = allClickables.find(e => {
+  const text = e.textContent.toLowerCase();
+  return (text.includes('click') && text.includes('labor')) || text.includes('add labor');
+});
+```
+
 ## [1.6.9] - 2024-11-24
 
 ### ⚡ FASTER MODAL DETECTION: Look for Input Fields Instead of ADD LABOR Button

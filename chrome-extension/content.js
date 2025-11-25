@@ -258,26 +258,29 @@ async function fillTekmetricEstimate(jobData) {
     for (const laborItem of jobData.laborItems) {
       console.log(`Adding labor item: ${laborItem.name}`);
       
-      // Look for ADD LABOR button with flexible matching
-      const allButtons = Array.from(document.querySelectorAll('button'));
-      console.log(`Searching through ${allButtons.length} buttons for ADD LABOR...`);
+      // Look for labor add link/button - can be button, link, or clickable text
+      // Screenshot shows: "No labor added, click here to add labor"
+      const allClickables = Array.from(document.querySelectorAll('button, a, span[class*="link"], div[class*="link"], [role="button"]'));
+      console.log(`Searching through ${allClickables.length} clickable elements for labor add button...`);
       
-      const addLaborButton = allButtons.find(btn => {
-        const text = btn.textContent.trim().toUpperCase();
-        return text.includes('ADD LABOR') || text.includes('ADD_LABOR') || text === 'LABOR';
+      const addLaborButton = allClickables.find(elem => {
+        const text = elem.textContent.trim().toLowerCase();
+        // Match "click here" + "labor", "add labor", or just "labor" button
+        return (text.includes('click') && text.includes('labor')) || 
+               text.includes('add labor') || 
+               (text === 'labor' && elem.tagName === 'BUTTON');
       });
       
       if (!addLaborButton) {
-        console.error('❌ ADD LABOR button not found - stopping automation');
-        const buttonTexts = allButtons.map(b => b.textContent.trim()).filter(t => t && t.length < 50);
-        console.log('Buttons containing "LABOR":', buttonTexts.filter(t => t.toUpperCase().includes('LABOR')));
-        console.log('Buttons containing "ADD":', buttonTexts.filter(t => t.toUpperCase().includes('ADD')));
-        console.log('First 50 button texts:', buttonTexts.slice(0, 50));
+        console.error('❌ Labor add button not found - stopping automation');
+        const clickableTexts = allClickables.map(e => e.textContent.trim()).filter(t => t && t.length < 100);
+        console.log('Clickables containing "labor":', clickableTexts.filter(t => t.toLowerCase().includes('labor')));
+        console.log('Clickables containing "click":', clickableTexts.filter(t => t.toLowerCase().includes('click')).slice(0, 10));
         isFillingJob = false;
-        throw new Error('Could not find ADD LABOR button');
+        throw new Error('Could not find labor add button');
       }
       
-      console.log('Clicking ADD LABOR button...');
+      console.log('Clicking labor add button:', addLaborButton.textContent.trim());
       addLaborButton.click();
       await new Promise(resolve => setTimeout(resolve, 800));
 
@@ -346,25 +349,29 @@ async function fillTekmetricEstimate(jobData) {
     for (const part of jobData.parts) {
       console.log(`Adding part: ${part.name}`);
       
-      // Look for ADD PART button with flexible matching
-      const allButtons = Array.from(document.querySelectorAll('button'));
-      console.log(`Searching through ${allButtons.length} buttons for ADD PART...`);
+      // Look for parts add link/button - can be button, link, or clickable text
+      // Screenshot shows: "No parts added, click here to add parts"
+      const allClickables = Array.from(document.querySelectorAll('button, a, span[class*="link"], div[class*="link"], [role="button"]'));
+      console.log(`Searching through ${allClickables.length} clickable elements for parts add button...`);
       
-      const addPartButton = allButtons.find(btn => {
-        const text = btn.textContent.trim().toUpperCase();
-        return text.includes('ADD PART') || text.includes('ADD_PART') || text === 'PART';
+      const addPartButton = allClickables.find(elem => {
+        const text = elem.textContent.trim().toLowerCase();
+        // Match "click here" + "part", "add part", or just "part" button
+        return (text.includes('click') && text.includes('part')) || 
+               text.includes('add part') || 
+               (text === 'part' && elem.tagName === 'BUTTON');
       });
       
       if (!addPartButton) {
-        console.error('❌ ADD PART button not found - stopping automation');
-        const buttonTexts = allButtons.map(b => b.textContent.trim()).filter(t => t && t.length < 50);
-        console.log('Buttons containing "PART":', buttonTexts.filter(t => t.toUpperCase().includes('PART')));
-        console.log('Buttons containing "ADD":', buttonTexts.filter(t => t.toUpperCase().includes('ADD')));
+        console.error('❌ Parts add button not found - stopping automation');
+        const clickableTexts = allClickables.map(e => e.textContent.trim()).filter(t => t && t.length < 100);
+        console.log('Clickables containing "part":', clickableTexts.filter(t => t.toLowerCase().includes('part')));
+        console.log('Clickables containing "click":', clickableTexts.filter(t => t.toLowerCase().includes('click')).slice(0, 10));
         isFillingJob = false;
-        throw new Error('Could not find ADD PART button');
+        throw new Error('Could not find parts add button');
       }
       
-      console.log('Clicking ADD PART button...');
+      console.log('Clicking parts add button:', addPartButton.textContent.trim());
       addPartButton.click();
       await new Promise(resolve => setTimeout(resolve, 800));
 
