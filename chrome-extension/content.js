@@ -250,53 +250,51 @@ async function fillTekmetricEstimate(jobData) {
       console.log('✓ Clicking save button:', jobSaveButton.textContent.trim());
       jobSaveButton.click();
       
-      // Wait for modal to close and job card to appear on estimate with "click here" links
-      console.log('⏳ Waiting for job card to appear with "click here" links...');
-      const waitForJobCard = async () => {
-        const startTime = Date.now();
-        const timeout = 10000; // 10 seconds max
-        
-        while (Date.now() - startTime < timeout) {
-          // Look for the "click here" text that appears in the job card
-          const clickHereLinks = Array.from(document.querySelectorAll('*')).filter(el => {
-            const text = el.textContent?.toLowerCase() || '';
-            return (text.includes('click') && text.includes('labor')) || 
-                   (text.includes('click') && text.includes('part'));
-          });
-          
-          if (clickHereLinks.length > 0) {
-            console.log('✓ Job card appeared with click here links!');
-            return true;
-          }
-          
-          // Log progress every 2 seconds
-          const elapsed = Date.now() - startTime;
-          if (elapsed % 2000 < 100) {
-            console.log(`⏳ Still waiting for job card... (${Math.floor(elapsed / 1000)}s elapsed)`);
-          }
-          
-          await new Promise(resolve => setTimeout(resolve, 200));
-        }
-        
-        console.log('⚠️ Timeout waiting for job card, proceeding anyway...');
-        return false;
-      };
+      // Wait for modal to close and NEW job card to appear with our job name
+      console.log('⏳ Waiting 7 seconds for modal to close and job card to fully render...');
+      await new Promise(resolve => setTimeout(resolve, 7000)); // Wait 7 seconds
       
-      await waitForJobCard();
+      // Find the job card containing our job name
+      console.log(`🔍 Looking for job card containing: "${jobData.jobName}"`);
+      const allElements = Array.from(document.querySelectorAll('*'));
+      const jobCard = allElements.find(el => {
+        const text = el.textContent || '';
+        // Must contain our job name AND "click here" text
+        return text.includes(jobData.jobName) && 
+               text.toLowerCase().includes('click here') &&
+               (text.toLowerCase().includes('labor') || text.toLowerCase().includes('part'));
+      });
+      
+      if (!jobCard) {
+        console.error('❌ Could not find job card with name:', jobData.jobName);
+        console.log('Available job names on page:', 
+          Array.from(document.querySelectorAll('*'))
+            .map(el => el.textContent)
+            .filter(t => t && t.includes('STRUT') || t && t.includes('ALIGN'))
+            .slice(0, 5)
+        );
+        isFillingJob = false;
+        throw new Error(`Could not find job card for: ${jobData.jobName}`);
+      }
+      
+      console.log('✓ Found job card for:', jobData.jobName);
+      console.log('Job card element:', {tag: jobCard.tagName, class: jobCard.className});
     } else {
       console.log('⚠️ No save button found, trying to proceed anyway...');
       console.log('Available buttons:', Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim()).filter(t => t));
     }
 
+    // Store reference to job card for scoped searching
+    let scopedJobCard = jobCard || document.body;
+    
     for (const laborItem of jobData.laborItems) {
       console.log(`Adding labor item: ${laborItem.name}`);
       
-      // Look for labor add link/button - can be button, link, or clickable text
-      // Screenshot shows: "No labor added, click here to add labor"
-      const allClickables = Array.from(document.querySelectorAll('button, a, span[class*="link"], div[class*="link"], [role="button"]'));
-      console.log(`Searching through ${allClickables.length} clickable elements for labor add button...`);
+      // Look for labor add link ONLY within our job card
+      const cardClickables = Array.from(scopedJobCard.querySelectorAll('button, a, span, div, [role="button"]'));
+      console.log(`Searching through ${cardClickables.length} clickable elements WITHIN job card...`);
       
-      const addLaborButton = allClickables.find(elem => {
+      const addLaborButton = cardClickables.find(elem => {
         const text = elem.textContent.trim().toLowerCase();
         // Match "click here" + "labor", "add labor", or just "labor" button
         return (text.includes('click') && text.includes('labor')) || 
@@ -305,15 +303,15 @@ async function fillTekmetricEstimate(jobData) {
       });
       
       if (!addLaborButton) {
-        console.error('❌ Labor add button not found - stopping automation');
-        const clickableTexts = allClickables.map(e => e.textContent.trim()).filter(t => t && t.length < 100);
+        console.error('❌ Labor add button not found in job card - stopping automation');
+        const clickableTexts = cardClickables.map(e => e.textContent.trim()).filter(t => t && t.length < 100);
         console.log('Clickables containing "labor":', clickableTexts.filter(t => t.toLowerCase().includes('labor')));
         console.log('Clickables containing "click":', clickableTexts.filter(t => t.toLowerCase().includes('click')).slice(0, 10));
         isFillingJob = false;
-        throw new Error('Could not find labor add button');
+        throw new Error('Could not find labor add button in job card');
       }
       
-      console.log('Clicking labor add button:', addLaborButton.textContent.trim());
+      console.log('✓ Clicking labor add button:', addLaborButton.textContent.trim().substring(0, 50));
       addLaborButton.click();
       await new Promise(resolve => setTimeout(resolve, 800));
 
@@ -382,12 +380,11 @@ async function fillTekmetricEstimate(jobData) {
     for (const part of jobData.parts) {
       console.log(`Adding part: ${part.name}`);
       
-      // Look for parts add link/button - can be button, link, or clickable text
-      // Screenshot shows: "No parts added, click here to add parts"
-      const allClickables = Array.from(document.querySelectorAll('button, a, span[class*="link"], div[class*="link"], [role="button"]'));
-      console.log(`Searching through ${allClickables.length} clickable elements for parts add button...`);
+      // Look for parts add link ONLY within our job card
+      const cardClickables = Array.from(scopedJobCard.querySelectorAll('button, a, span, div, [role="button"]'));
+      console.log(`Searching through ${cardClickables.length} clickable elements WITHIN job card...`);
       
-      const addPartButton = allClickables.find(elem => {
+      const addPartButton = cardClickables.find(elem => {
         const text = elem.textContent.trim().toLowerCase();
         // Match "click here" + "part", "add part", or just "part" button
         return (text.includes('click') && text.includes('part')) || 
@@ -396,15 +393,15 @@ async function fillTekmetricEstimate(jobData) {
       });
       
       if (!addPartButton) {
-        console.error('❌ Parts add button not found - stopping automation');
-        const clickableTexts = allClickables.map(e => e.textContent.trim()).filter(t => t && t.length < 100);
+        console.error('❌ Parts add button not found in job card - stopping automation');
+        const clickableTexts = cardClickables.map(e => e.textContent.trim()).filter(t => t && t.length < 100);
         console.log('Clickables containing "part":', clickableTexts.filter(t => t.toLowerCase().includes('part')));
         console.log('Clickables containing "click":', clickableTexts.filter(t => t.toLowerCase().includes('click')).slice(0, 10));
         isFillingJob = false;
-        throw new Error('Could not find parts add button');
+        throw new Error('Could not find parts add button in job card');
       }
       
-      console.log('Clicking parts add button:', addPartButton.textContent.trim());
+      console.log('✓ Clicking parts add button:', addPartButton.textContent.trim().substring(0, 50));
       addPartButton.click();
       await new Promise(resolve => setTimeout(resolve, 800));
 
