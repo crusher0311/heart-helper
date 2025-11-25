@@ -364,8 +364,8 @@ async function fillTekmetricEstimate(jobData) {
     }
 
     // Now add parts - each part needs "Add Parts" → "Add part manually" flow
-    for (const part of jobData.parts) {
-      console.log(`\n🔧 Adding part: ${part.name}`);
+    for (const [partIndex, part] of jobData.parts.entries()) {
+      console.log(`\n🔧 Adding part ${partIndex + 1}/${jobData.parts.length}: ${part.name}`);
       
       // Find "Add Parts" button in modal
       const addPartsButton = Array.from(document.querySelectorAll('button')).find(btn => {
