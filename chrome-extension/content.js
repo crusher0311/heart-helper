@@ -251,8 +251,8 @@ async function fillTekmetricEstimate(jobData) {
       jobSaveButton.click();
       
       // Wait for modal to close and NEW job card to appear with our job name
-      console.log('⏳ Waiting 7 seconds for modal to close and job card to fully render...');
-      await new Promise(resolve => setTimeout(resolve, 7000)); // Wait 7 seconds
+      console.log('⏳ Waiting 15 seconds for modal to close and job card to fully render...');
+      await new Promise(resolve => setTimeout(resolve, 15000)); // Wait 15 seconds (user reports 12-15s delay)
       
       // Find the job card containing our job name
       console.log(`🔍 Looking for job card containing: "${jobData.jobName}"`);
