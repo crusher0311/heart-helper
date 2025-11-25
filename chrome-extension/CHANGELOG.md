@@ -2,9 +2,30 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [1.6.1] - 2024-11-24
+
+### ✅ THE REAL FIX: Wait for Modal to Actually Render
+- **Root Cause (identified by architect)**: Fixed 3-second timeout doesn't guarantee modal is rendered
+  - Evidence: "Found 1 inputs" logs show we query DOM before modal appears
+  - Result: We find pre-existing sticky toolbar (z-900) instead of actual modal
+  - Impact: Job title goes into search bar, parts go into labor section
+- **Solution**: Created `waitForModal()` function using MutationObserver pattern
+  - Polls DOM every 100ms until canned jobs input appears
+  - Walks up from input to find container with z-index > 1000 OR 5+ input fields
+  - Only proceeds after modal is CONFIRMED rendered
+  - 10-second timeout prevents infinite waiting
+- **Benefits**:
+  - No more race conditions between click and DOM query
+  - Guaranteed to find correct modal, not sticky toolbars
+  - Works regardless of page load speed
+  - Reuses proven `waitForElement` pattern from codebase
+
+### Architecture
+Replaced `await sleep(3000)` with explicit DOM observation. This is best practice for Chrome extensions automating dynamic pages.
+
 ## [1.6.0] - 2024-11-24
 
-### 🎯 FINAL FIX: Walk Higher Up the DOM Tree
+### 🔧 ATTEMPTED: Walk Higher Up the DOM Tree (TIMING BUG REMAINED)
 - **Problem**: v1.5.9 stopped at sticky toolbar (z-index 900) containing ONLY the search bar
 - **Evidence**: `Found 1 inputs` - only the canned jobs search field, not the job title field
 - **Root cause**: Walked up DOM until z-index > 100, but stopped at FIRST match (toolbar, not modal)

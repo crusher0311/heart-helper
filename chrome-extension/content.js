@@ -27,6 +27,47 @@ function waitForElement(selector, timeout = 10000) {
   });
 }
 
+// Wait for Job modal to appear after clicking Job button
+function waitForModal(timeout = 10000) {
+  console.log('⏳ Waiting for Job modal to appear...');
+  return new Promise((resolve, reject) => {
+    const startTime = Date.now();
+    
+    // Look for the canned jobs search input as signal that modal is ready
+    const checkForModal = () => {
+      const cannedJobsInput = document.querySelector('input[placeholder*="canned"]');
+      
+      if (cannedJobsInput) {
+        console.log('✓ Found canned jobs search input - modal is ready!');
+        // Walk up to find the container with many inputs
+        let element = cannedJobsInput;
+        while (element && element !== document.body) {
+          const inputs = element.querySelectorAll('input, textarea, [contenteditable="true"]');
+          const zIndex = window.getComputedStyle(element).zIndex;
+          
+          // Modal will have z-index > 1000 OR contain 5+ input fields
+          if ((zIndex && parseInt(zIndex) > 1000) || inputs.length > 5) {
+            console.log(`✓ Found modal container with z-index ${zIndex} and ${inputs.length} input fields`);
+            return resolve(element);
+          }
+          element = element.parentElement;
+        }
+      }
+      
+      // Check if timeout exceeded
+      if (Date.now() - startTime > timeout) {
+        return reject(new Error('Timeout waiting for Job modal to appear'));
+      }
+      
+      // Keep polling every 100ms
+      setTimeout(checkForModal, 100);
+    };
+    
+    // Start checking immediately
+    checkForModal();
+  });
+}
+
 function fillInput(selector, value) {
   const element = document.querySelector(selector);
   if (!element) return false;
@@ -96,74 +137,10 @@ async function fillTekmetricEstimate(jobData) {
     
     console.log('✓ Clicking Job button...');
     jobButton.click();
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
-    console.log('3️⃣ Finding the Job dialog/modal that just opened...');
     
-    // Strategy: Find the modal that contains the canned jobs search input
-    // This is unique to the Job modal and won't match other overlays
-    const cannedJobsSearch = document.querySelector('input[placeholder*="canned"]');
-    console.log('Looking for canned jobs search input...');
-    
-    let modal = null;
-    if (cannedJobsSearch) {
-      console.log('✓ Found canned jobs search input');
-      // Walk up the DOM to find the modal container
-      // The REAL modal will have z-index > 1000, not just a sticky toolbar at 900
-      let element = cannedJobsSearch;
-      while (element && element !== document.body) {
-        const zIndex = window.getComputedStyle(element).zIndex;
-        // The modal dialog will have a very high z-index (1000+), not just a toolbar (900)
-        if (zIndex && parseInt(zIndex) > 1000) {
-          modal = element;
-          console.log('Found modal container by walking up from canned jobs input');
-          console.log('Modal z-index:', zIndex, 'Modal tag:', element.tagName, 'Modal class:', element.className.substring(0, 50));
-          break;
-        }
-        element = element.parentElement;
-      }
-      
-      // If we didn't find z-index > 1000, look for the largest container we can find
-      if (!modal) {
-        console.log('No z-index > 1000 found, looking for largest container...');
-        element = cannedJobsSearch;
-        while (element && element !== document.body) {
-          const zIndex = window.getComputedStyle(element).zIndex;
-          if (zIndex && parseInt(zIndex) >= 100) {
-            // Count inputs inside this potential modal
-            const inputs = element.querySelectorAll('input, textarea, [contenteditable="true"]');
-            console.log(`Checking element with z-index ${zIndex}: ${inputs.length} input fields`);
-            // The real modal will have multiple inputs (job title, labor fields, etc.)
-            if (inputs.length > 5) {
-              modal = element;
-              console.log('Found modal with multiple input fields');
-              console.log('Modal z-index:', zIndex, 'Modal tag:', element.tagName, 'Modal class:', element.className.substring(0, 50));
-              break;
-            }
-          }
-          element = element.parentElement;
-        }
-      }
-    }
-    
-    // Fallback: If we can't find it via canned jobs search, try standard modal selectors
-    if (!modal) {
-      console.log('Trying standard modal selectors...');
-      modal = document.querySelector('[role="dialog"]');
-      if (!modal) modal = document.querySelector('[role="alertdialog"]');
-      if (!modal) modal = document.querySelector('.modal');
-      if (!modal) modal = document.querySelector('[class*="Modal"]');
-      if (!modal) modal = document.querySelector('[class*="modal"]');
-      if (!modal) modal = document.querySelector('[class*="dialog"]');
-      if (!modal) modal = document.querySelector('[class*="Dialog"]');
-    }
-    
-    if (!modal) {
-      console.error('❌ Could not find Job dialog/modal');
-      console.log('Tried: canned jobs search, [role="dialog"], [role="alertdialog"], .modal, *Modal*, *dialog*');
-      isFillingJob = false;
-      throw new Error('Could not find Job dialog after clicking Job button');
-    }
+    console.log('3️⃣ Waiting for Job modal to appear...');
+    // Use waitForModal to explicitly wait for the dialog to render
+    const modal = await waitForModal(10000); // Wait up to 10 seconds
     
     console.log('✓ Found modal:', {tag: modal.tagName, role: modal.getAttribute('role'), className: modal.className});
     console.log('4️⃣ Searching for inputs INSIDE the modal only...');
