@@ -135,10 +135,10 @@ export const insertSettingsSchema = createInsertSchema(settings).omit({ id: true
 
 // Search request schema
 export const searchJobSchema = z.object({
-  vehicleMake: z.string().optional(),
-  vehicleModel: z.string().optional(),
-  vehicleYear: z.number().optional(),
-  vehicleEngine: z.string().optional(),
+  vehicleMake: z.string().nullish(),
+  vehicleModel: z.string().nullish(),
+  vehicleYear: z.number().nullish(),
+  vehicleEngine: z.string().nullish(),
   repairType: z.string().min(1, "Repair type is required"),
   limit: z.number().default(20),
   broadenStrategy: z.enum(['years', 'models', 'all']).optional(),
