@@ -542,18 +542,21 @@ async function fillTekmetricEstimate(jobData) {
         console.log('✓ Filled part number:', part.partNumber);
       }
       
-      // Look for description/brand field - try multiple strategies
+      // Look for description/brand/name field - try multiple strategies
       const descriptionField = inputs.find(inp => {
         const placeholder = inp.placeholder?.toLowerCase() || '';
         const name = inp.name?.toLowerCase() || '';
         const id = inp.id?.toLowerCase() || '';
         
-        return placeholder.includes('description') ||
+        return placeholder.includes('part name') ||
+               placeholder.includes('description') ||
                placeholder.includes('brand') ||
-               placeholder.includes('name') ||
+               (placeholder.includes('name') && !placeholder.includes('customer')) ||
                name.includes('description') ||
                name.includes('brand') ||
-               id.includes('description');
+               name.includes('partname') ||
+               id.includes('description') ||
+               id.includes('partname');
       });
       
       if (descriptionField) {
