@@ -1085,8 +1085,11 @@ function injectHeartIconForConcern(concernElement) {
 // Find and inject icons for all concern textareas
 function injectHeartIcons() {
   if (!window.location.href.includes('/repair-orders/')) {
+    console.log("❌ Not on repair orders page, skipping HEART icons");
     return;
   }
+  
+  console.log("🔍 Searching for concern fields on repair order page...");
   
   // Find all concern/complaint/customer textareas and inputs
   const selectors = [
@@ -1101,10 +1104,26 @@ function injectHeartIcons() {
   ];
   
   const concernElements = document.querySelectorAll(selectors.join(', '));
+  console.log(`📊 Found ${concernElements.length} concern fields using selectors`);
   
   if (concernElements.length === 0) {
+    console.log("⚠️ No concern fields found with selectors, trying fallback methods...");
+    
+    // Debug: Show ALL textareas on page
+    const allTextareas = document.querySelectorAll('textarea');
+    console.log(`📝 Total textareas on page: ${allTextareas.length}`);
+    if (allTextareas.length > 0) {
+      console.log("First 5 textareas:", Array.from(allTextareas).slice(0, 5).map(ta => ({
+        placeholder: ta.placeholder,
+        className: ta.className,
+        name: ta.name,
+        id: ta.id
+      })));
+    }
+    
     // Fallback: Look for labels that say concern/complaint, then find nearby textareas
     const labels = Array.from(document.querySelectorAll('label, div'));
+    let foundViaLabels = 0;
     for (const label of labels) {
       const labelText = label.textContent.toLowerCase();
       if (labelText.includes('concern') || labelText.includes('complaint') || 
@@ -1112,17 +1131,23 @@ function injectHeartIcons() {
         const textarea = label.querySelector('textarea') || 
                         label.nextElementSibling?.tagName === 'TEXTAREA' ? label.nextElementSibling : null;
         if (textarea && !injectedIcons.has(textarea)) {
+          console.log(`✓ Found concern field via label: "${labelText.substring(0, 50)}"`);
           injectHeartIconForConcern(textarea);
+          foundViaLabels++;
         }
       }
     }
+    console.log(`📊 Injected ${foundViaLabels} icons via label search`);
   } else {
+    console.log(`✓ Injecting icons for ${concernElements.length} concern fields...`);
     concernElements.forEach(element => {
       if (!injectedIcons.has(element)) {
         injectHeartIconForConcern(element);
       }
     });
   }
+  
+  console.log(`✅ Total HEART icons injected: ${injectedIcons.size}`);
 }
 
 function observePageChanges() {
