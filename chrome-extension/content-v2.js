@@ -120,8 +120,9 @@ async function fillTekmetricEstimate(jobData) {
     });
 
     if (!jobButton) {
-      debug('Available buttons:', Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim()).slice(0, 20));
-      throw new Error('Job button not found');
+      const availableButtons = Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim()).slice(0, 30);
+      console.error('[HEART Helper] Available buttons on page:', availableButtons);
+      throw new Error(`Job button not found. Available buttons: ${availableButtons.slice(0, 10).join(', ')}`);
     }
 
     debug('Found Job button:', jobButton.textContent.trim());

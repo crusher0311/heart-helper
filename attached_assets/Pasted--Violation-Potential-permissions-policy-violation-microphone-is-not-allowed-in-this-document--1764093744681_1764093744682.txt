@@ -1,0 +1,719 @@
+
+[Violation] Potential permissions policy violation: microphone is not allowed in this document.
+ [TekmetricStorageModule] Initializing...
+ 
+a7 @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught 
+ [Settings] No generalSettings settings found, using defaults
+ns @ content.js:9
+ 
+a7 @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught 
+ [OutboundCall] Menu state changed: false
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ Creating handle element
+ [Handle] Updating badge: Object
+ [Handle] Badge hidden (count is 0)
+ [Handle] Updating unread data: Object
+ [Handle] Updating badge: Object
+ [Handle] Badge hidden (count is 0)
+/admin/org/124/shops:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+ [HEART Helper ERROR] Auto-fill failed: 
+debugError @ content-v2.js:11
+ [HEART Helper ERROR] Job data will remain pending for retry
+debugError @ content-v2.js:11
+ [HEART Helper ERROR] Auto-fill failed: 
+debugError @ content-v2.js:11
+ [HEART Helper ERROR] Job data will remain pending for retry
+debugError @ content-v2.js:11
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: null,
+        previousCustomerId: null, previousShopId: null
+ [HEART Helper ERROR] Auto-fill failed: 
+debugError @ content-v2.js:11
+ [HEART Helper ERROR] Job data will remain pending for retry
+debugError @ content-v2.js:11
+ [HEART Helper ERROR] Auto-fill failed: 
+debugError @ content-v2.js:11
+ [HEART Helper ERROR] Job data will remain pending for retry
+debugError @ content-v2.js:11
+ [HEART Helper ERROR] Auto-fill failed: 
+debugError @ content-v2.js:11
+ [HEART Helper ERROR] Job data will remain pending for retry
+debugError @ content-v2.js:11
+ Event "payments_service_status" doesn't have any listeners. Putting it in the stack.
+ Deprecation warning: use moment.updateLocale(localeName, config) to change an existing locale. moment.defineLocale(localeName, config) should only be used for creating a new locale See http://momentjs.com/guides/#/warnings/define-locale/ for more info.
+jB @ main-DK7zafr-.js:188
+ MUI: The SpeedDial component was moved from the lab to the core.
+
+You should use `import { SpeedDial } from '@mui/material'`
+or `import SpeedDial from '@mui/material/SpeedDial'`
+eo @ index-C68Mr6Yj.js:1
+ MUI: The SpeedDialIcon component was moved from the lab to the core.
+
+You should use `import { SpeedDialIcon } from '@mui/material'`
+or `import SpeedDialIcon from '@mui/material/SpeedDialIcon'`
+ho @ index-C68Mr6Yj.js:3
+ MUI: The SpeedDialAction component was moved from the lab to the core.
+
+You should use `import { SpeedDialAction } from '@mui/material'`
+or `import SpeedDialAction from '@mui/material/SpeedDialAction'`
+co @ index-C68Mr6Yj.js:2
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: null
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+ [HEART Helper ERROR] Auto-fill failed: 
+debugError @ content-v2.js:11
+ [HEART Helper ERROR] Job data will remain pending for retry
+debugError @ content-v2.js:11
+ [Handle] Repair order ID found, fetching customer data from background: 274639316
+ [Handle] Customer ID retrieved from background: 11145565
+ customerId:", 11145565,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+handle.2fe6b368.js:23 Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 11145565
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content.js:36 [MaintenanceModule] Initializing...
+content.js:9 [Settings] No profitabilitySettings settings found, using defaults
+ns @ content.js:9
+content.js:9 [Settings] No customerMaintenanceSettings settings found, using defaults
+ns @ content.js:9
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:24 [Handle] Phone link updated event received customerId: 11145565, shopId: 469
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+content-v2.js:11 [HEART Helper ERROR] Auto-fill failed: Error: Job button not found
+    at fillTekmetricEstimate (content-v2.js:124:13)
+    at content-v2.js:523:5
+debugError @ content-v2.js:11
+content-v2.js:11 [HEART Helper ERROR] Job data will remain pending for retry
+debugError @ content-v2.js:11
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content-v2.js:779 Check History button injected
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:24 [Handle] Sending CUSTOMER_PHONE_LIST_REQUEST for phone link updated: 11145565 shopId: 469
+handle.2fe6b368.js:23 Received customer phone list response:, [object Object], payload_customer_id: undefined, customer_id: 11145565
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content-v2.js:592 Extracted RO ID from URL: 274639316
+content-v2.js:668 Extracted vehicle data: Object
+content-v2.js:772 Opening search with URL: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev//?make=Toyota&model=Corolla+L&year=2017&engine=1.8L&roId=274639316
+content-v2.js:773 Vehicle data: Object
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+estimate:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+main-DK7zafr-.js:257 Event "calendar_update" doesn't have any listeners. Putting it in the stack.
+main-DK7zafr-.js:263 Skipping tracking for Repair Order page
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+main-DK7zafr-.js:257 Event "calendar_update" doesn't have any listeners. Putting it in the stack.
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+content-v2.js:11 [HEART Helper ERROR] Auto-fill failed: Error: Modal failed to appear within timeout
+    at checkForModal (content-v2.js:58:23)
+debugError @ content-v2.js:11
+fillTekmetricEstimate @ content-v2.js:167
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+content-v2.js:11 [HEART Helper ERROR] Job data will remain pending for retry
+debugError @ content-v2.js:11
+fillTekmetricEstimate @ content-v2.js:168
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+requestAnimationFrame
+checkForModal @ content-v2.js:61
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+estimate:1 Blocked aria-hidden on an element because its descendant retained focus. The focus must not be hidden from assistive technology users. Avoid using aria-hidden on a focused element or its ancestor. Consider using the inert attribute instead, which will also prevent focus. For more details, see the aria-hidden section of the WAI-ARIA specification at https://w3c.github.io/aria/#aria-hidden.
+Element with focus: <button.MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1lbuq4j>
+Ancestor with aria-hidden: <div#root> <div id=​"root">​…​</div>​<div class=​"flex h-screen flex-col" style=​"padding-top:​ 56px;​">​…​</div>​flex<header class=​"fixed mui-fixed left-auto right-0 top-0 z-[1100]​ box-border flex min-h-14 w-full flex-shrink-0 flex-col text-v2-shade-0 bg-v2-blue-grey-900" style>​…​</header>​flex<main class=​"relative flex flex-auto">​…​</main>​flex<div class=​"flex flex-1">​…​</div>​flex<nav>​…​</nav>​<div class=​"flex-1">​…​</div>​<div class=​"w-full transition-all duration-300 pr-max-sidebar">​…​</div>​<div id=​"ro-header-top-nav-id" class=​"border-b border-b-v2-shade-100 bg-v2-shade-0 font-light [&_h2]​:​m-0 [&_h2]​:​text-v2-shade-900 [&_h2]​:​text-heading-normal [&_svg.small]​:​h-[18px]​ [&_svg.small]​:​w-[18px]​ [&_svg.back]​:​-mb-1.5 [&_svg.back]​:​mr-1.5 sticky z-900 [&_h2]​:​p-0" style=​"top:​ 56px;​">​…​</div>​<div>​…​</div>​<div class=​"sticky z-900 flex justify-center space-x-2 bg-v2-shade-0 py-2 shadow-sm" style=​"top:​ 157px;​">​…​</div>​flex<div class=​"flex w-full flex-col items-center space-y-5 px-6 pb-28 pt-8">​…​</div>​flex<div class=​"w-full max-w-6xl xl:​max-w-7xl w-full">​…​</div>​<div class=​"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root relative overflow-visible rounded-sm w-full max-w-6xl xl:​max-w-7xl css-1kxnsga" style=​"--Paper-shadow:​ 0px 2px 1px -1px rgba(0,0,0,0.2)​,0px 1px 1px 0px rgba(0,0,0,0.14)​,0px 1px 3px 0px rgba(0,0,0,0.12)​;​">​…​</div>​<div class=​"w-full max-w-6xl xl:​max-w-7xl">​…​</div>​<div>​…​</div>​<div class=​"flex items-center">​…​</div>​flex<div class=​"space-y-10">​…​</div>​<div role=​"button" tabindex=​"0" aria-disabled=​"false" aria-roledescription=​"sortable" aria-describedby=​"DndDescribedBy-1" style>​…​</div>​<div class=​"w-full overflow-hidden bg-blue-100 transition-all h-0 bg-opacity-0">​</div>​<div class>​…​</div>​<div class=​"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root relative overflow-visible rounded-sm css-1kxnsga" data-cy=​"job-table-936827532" id=​"job-936827532" style=​"--Paper-shadow:​ 0px 2px 1px -1px rgba(0,0,0,0.2)​,0px 1px 1px 0px rgba(0,0,0,0.14)​,0px 1px 3px 0px rgba(0,0,0,0.12)​;​">​…​</div>​<div class=​"styled-div  ">​…​</div>​<div class=​"flex items-center justify-between bg-shade-10 py-0.5 pl-2.5 pr-2">​…​</div>​flex<div class=​"text-shade-600">​…​</div>​<div class=​"table-scroll-container relative overflow-auto verticalScrollGradient mt-0">​…​</div>​<div data-rbd-droppable-id=​"936827532" data-rbd-droppable-context-id=​"1">​…​</div>​<div class=​"table-scroll-container relative overflow-auto verticalScrollGradient mt-0">​…​</div>​<table class=​"MuiTable-root styled-table css-1xhtq58">​…​</table>​<tbody class=​"MuiTableBody-root css-y6j1my">​…​</tbody>​<tr class=​"MuiTableRow-root css-16pe4ub">​…​</tr>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-left min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w">​…​</td>​<div class=​"flex items-center space-x-6">​…​</div>​flex<div>​…​</div>​<label>​GP%​</label>​<label>​…​</label>​</div>​<div>​…​</div>​<label>​GP$​</label>​<label>​$945.04​</label>​</div>​<div>​…​</div>​<label>​GP/Hr​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 122px;​">​…​</td>​<div class=​"w-full cursor-pointer">​…​</div>​<div class=​"flex items-center justify-between">​…​</div>​flex<div class=​"inline-flex items-center" aria-label>​…​</div>​flex<div>​…​</div>​<label>​Subtotal​</label>​<label>​$1,369.43​</label>​</div>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-30 [&_label:​last-of-type]​:​opacity-30 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" disabled style=​"width:​ 122px;​">​…​</td>​<div class=​"flex items-center justify-between">​…​</div>​flex<div>​…​</div>​<div>​…​</div>​<label>​Labor Tax​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 122px;​">​…​</td>​<div class=​"flex items-center justify-between">​…​</div>​flex<div>​…​</div>​<div>​…​</div>​<label>​Parts Tax​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 122px;​">​…​</td>​<label>​JOB TOTAL​</label>​<label>​$1,441.17​</label>​</td>​</tr>​</tbody>​</table>​</div>​</div>​</div>​</div>​</div>​</div>​<div role=​"button" tabindex=​"0" aria-disabled=​"false" aria-roledescription=​"sortable" aria-describedby=​"DndDescribedBy-1" style>​…​</div>​<div class=​"w-full overflow-hidden bg-blue-100 transition-all h-0 bg-opacity-0">​</div>​<div class>​…​</div>​<div class=​"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root relative overflow-visible rounded-sm css-1kxnsga" data-cy=​"job-table-936827519" id=​"job-936827519" style=​"--Paper-shadow:​ 0px 2px 1px -1px rgba(0,0,0,0.2)​,0px 1px 1px 0px rgba(0,0,0,0.14)​,0px 1px 3px 0px rgba(0,0,0,0.12)​;​">​…​</div>​<div class=​"styled-div  ">​…​</div>​<div class=​"flex items-center justify-between bg-shade-10 py-0.5 pl-2.5 pr-2">​…​</div>​flex<div class=​"text-shade-600">​…​</div>​<div class=​"table-scroll-container relative overflow-auto verticalScrollGradient mt-0">​…​</div>​<div data-rbd-droppable-id=​"936827519" data-rbd-droppable-context-id=​"3">​…​</div>​<div class=​"table-scroll-container relative overflow-auto verticalScrollGradient mt-0">​…​</div>​<table class=​"MuiTable-root styled-table css-1xhtq58">​…​</table>​<tbody class=​"MuiTableBody-root css-y6j1my">​…​</tbody>​<tr class=​"MuiTableRow-root css-16pe4ub">​…​</tr>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-left min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w">​…​</td>​<div class=​"flex items-center space-x-6">​…​</div>​flex<div>​…​</div>​<label>​GP%​</label>​<label>​…​</label>​</div>​<div>​…​</div>​<label>​GP$​</label>​<label>​$75.97​</label>​</div>​<div>​…​</div>​<label>​GP/Hr​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 122px;​">​…​</td>​<div class=​"w-full cursor-pointer">​…​</div>​<div class=​"flex items-center justify-between">​…​</div>​flex<div class=​"inline-flex items-center" aria-label>​…​</div>​flex<div>​…​</div>​<label>​Subtotal​</label>​<label>​$139.00​</label>​</div>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-30 [&_label:​last-of-type]​:​opacity-30 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" disabled style=​"width:​ 122px;​">​…​</td>​<div class=​"flex items-center justify-between">​…​</div>​flex<div>​…​</div>​<div>​…​</div>​<label>​Labor Tax​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-30 [&_label:​last-of-type]​:​opacity-30 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" disabled style=​"width:​ 122px;​">​…​</td>​<div class=​"flex items-center justify-between">​…​</div>​flex<div>​…​</div>​<div>​…​</div>​<label>​Parts Tax​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 122px;​">​…​</td>​<label>​JOB TOTAL​</label>​<label>​$139.00​</label>​</td>​</tr>​</tbody>​</table>​</div>​<div class=​"flex bg-shade-10 px-6 py-3">​…​</div>​flex</div>​</div>​</div>​</div>​</div>​<div role=​"button" tabindex=​"0" aria-disabled=​"false" aria-roledescription=​"sortable" aria-describedby=​"DndDescribedBy-1" style>​…​</div>​<div class=​"w-full overflow-hidden bg-blue-100 transition-all h-0 bg-opacity-0">​</div>​<div class>​…​</div>​<div class=​"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root relative overflow-visible rounded-sm css-1kxnsga" data-cy=​"job-table-936827544" id=​"job-936827544" style=​"--Paper-shadow:​ 0px 2px 1px -1px rgba(0,0,0,0.2)​,0px 1px 1px 0px rgba(0,0,0,0.14)​,0px 1px 3px 0px rgba(0,0,0,0.12)​;​">​…​</div>​<div class=​"styled-div  ">​…​</div>​<div class=​"flex items-center justify-between bg-shade-10 py-0.5 pl-2.5 pr-2">​…​</div>​flex<div class=​"text-shade-600">​…​</div>​<div class=​"table-scroll-container relative overflow-auto verticalScrollGradient mt-0">​…​</div>​<div data-rbd-droppable-id=​"936827544" data-rbd-droppable-context-id=​"5">​…​</div>​<div class=​"table-scroll-container relative overflow-auto verticalScrollGradient mt-0">​…​</div>​<table class=​"MuiTable-root styled-table css-1xhtq58">​…​</table>​<tbody class=​"MuiTableBody-root css-y6j1my">​…​</tbody>​<tr class=​"MuiTableRow-root css-16pe4ub">​…​</tr>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-left min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w">​…​</td>​<div class=​"flex items-center space-x-6">​…​</div>​flex<div>​…​</div>​<label>​GP%​</label>​<label>​…​</label>​</div>​<div>​…​</div>​<label>​GP$​</label>​<label>​$128.13​</label>​</div>​<div>​…​</div>​<label>​GP/Hr​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 122px;​">​…​</td>​<div class=​"w-full cursor-pointer">​…​</div>​<div class=​"flex items-center justify-between">​…​</div>​flex<div class=​"inline-flex items-center" aria-label>​…​</div>​flex<div>​…​</div>​<label>​Subtotal​</label>​<label>​$178.55​</label>​</div>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-30 [&_label:​last-of-type]​:​opacity-30 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" disabled style=​"width:​ 122px;​">​…​</td>​<div class=​"flex items-center justify-between">​…​</div>​flex<div>​…​</div>​<div>​…​</div>​<label>​Labor Tax​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 122px;​">​…​</td>​<div class=​"flex items-center justify-between">​…​</div>​flex<div>​…​</div>​<div>​…​</div>​<label>​Parts Tax​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 122px;​">​…​</td>​<label>​JOB TOTAL​</label>​<label>​$178.55​</label>​</td>​</tr>​</tbody>​</table>​</div>​</div>​</div>​</div>​</div>​</div>​<div role=​"button" tabindex=​"0" aria-disabled=​"false" aria-roledescription=​"sortable" aria-describedby=​"DndDescribedBy-1" style>​…​</div>​<div class=​"w-full overflow-hidden bg-blue-100 transition-all h-0 bg-opacity-0">​</div>​<div class>​…​</div>​<div class=​"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root relative overflow-visible rounded-sm css-1kxnsga" data-cy=​"job-table-936827504" id=​"job-936827504" style=​"--Paper-shadow:​ 0px 2px 1px -1px rgba(0,0,0,0.2)​,0px 1px 1px 0px rgba(0,0,0,0.14)​,0px 1px 3px 0px rgba(0,0,0,0.12)​;​">​…​</div>​<div class=​"styled-div  ">​…​</div>​<div class=​"flex items-center justify-between bg-shade-10 py-0.5 pl-2.5 pr-2">​…​</div>​flex<div class=​"text-shade-600">​…​</div>​<div class=​"table-scroll-container relative overflow-auto verticalScrollGradient mt-0">​…​</div>​<div data-rbd-droppable-id=​"936827504" data-rbd-droppable-context-id=​"7">​…​</div>​<div class=​"table-scroll-container relative overflow-auto verticalScrollGradient mt-0">​…​</div>​<table class=​"MuiTable-root styled-table css-1xhtq58">​…​</table>​<tbody class=​"MuiTableBody-root css-y6j1my">​…​</tbody>​<tr class=​"MuiTableRow-root css-16pe4ub">​…​</tr>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-left min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w">​…​</td>​<div class=​"flex items-center space-x-6">​…​</div>​flex<div>​…​</div>​<label>​GP%​</label>​<label>​…​</label>​</div>​<div>​…​</div>​<label>​GP$​</label>​<label>​$7.39​</label>​</div>​<div>​…​</div>​<label>​GP/Hr​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 122px;​">​…​</td>​<div class=​"w-full cursor-pointer">​…​</div>​<div class=​"flex items-center justify-between">​…​</div>​flex<div class=​"inline-flex items-center" aria-label>​…​</div>​flex<div>​…​</div>​<label>​Subtotal​</label>​<label>​$20.00​</label>​</div>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-30 [&_label:​last-of-type]​:​opacity-30 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" disabled style=​"width:​ 122px;​">​…​</td>​<div class=​"flex items-center justify-between">​…​</div>​flex<div>​…​</div>​<div>​…​</div>​<label>​Labor Tax​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 122px;​">​…​</td>​<div class=​"flex items-center justify-between">​…​</div>​flex<div>​…​</div>​<div>​…​</div>​<label>​Parts Tax​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 122px;​">​…​</td>​<label>​JOB TOTAL​</label>​<label>​$20.00​</label>​</td>​</tr>​</tbody>​</table>​</div>​</div>​</div>​</div>​</div>​</div>​<div role=​"button" tabindex=​"0" aria-disabled=​"false" aria-roledescription=​"sortable" aria-describedby=​"DndDescribedBy-1" style>​…​</div>​<div class=​"w-full overflow-hidden bg-blue-100 transition-all h-0 bg-opacity-0">​</div>​<div class>​…​</div>​<div class=​"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root relative overflow-visible rounded-sm css-1kxnsga" data-cy=​"job-table-936827553" id=​"job-936827553" style=​"--Paper-shadow:​ 0px 2px 1px -1px rgba(0,0,0,0.2)​,0px 1px 1px 0px rgba(0,0,0,0.14)​,0px 1px 3px 0px rgba(0,0,0,0.12)​;​">​…​</div>​<div class=​"styled-div  ">​…​</div>​<div class=​"flex items-center justify-between bg-shade-10 py-0.5 pl-2.5 pr-2">​…​</div>​flex<div class=​"text-shade-600">​…​</div>​<div class=​"table-scroll-container relative overflow-auto verticalScrollGradient mt-0">​…​</div>​<div data-rbd-droppable-id=​"936827553" data-rbd-droppable-context-id=​"9">​…​</div>​<div class=​"table-scroll-container relative overflow-auto verticalScrollGradient mt-0">​…​</div>​<table class=​"MuiTable-root styled-table css-1xhtq58">​…​</table>​<tbody class=​"MuiTableBody-root css-y6j1my">​…​</tbody>​<tr class=​"MuiTableRow-root css-16pe4ub">​…​</tr>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-left min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w">​…​</td>​<div class=​"flex items-center space-x-6">​…​</div>​flex<div>​…​</div>​<label>​GP%​</label>​<label>​…​</label>​</div>​<div>​…​</div>​<label>​GP$​</label>​<label>​$187.02​</label>​</div>​<div>​…​</div>​<label>​GP/Hr​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 122px;​">​…​</td>​<div class=​"w-full cursor-pointer">​…​</div>​<div class=​"flex items-center justify-between">​…​</div>​flex<div class=​"inline-flex items-center" aria-label>​…​</div>​flex<div>​…​</div>​<label>​Subtotal​</label>​<label>​$347.86​</label>​</div>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-30 [&_label:​last-of-type]​:​opacity-30 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" disabled style=​"width:​ 122px;​">​…​</td>​<div class=​"flex items-center justify-between">​…​</div>​flex<div>​…​</div>​<div>​…​</div>​<label>​Labor Tax​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 122px;​">​…​</td>​<div class=​"flex items-center justify-between">​…​</div>​flex<div>​…​</div>​<div>​…​</div>​<label>​Parts Tax​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 122px;​">​…​</td>​<label>​JOB TOTAL​</label>​<label>​$361.28​</label>​</td>​</tr>​</tbody>​</table>​</div>​</div>​</div>​</div>​</div>​</div>​<div role=​"button" tabindex=​"0" aria-disabled=​"false" aria-roledescription=​"sortable" aria-describedby=​"DndDescribedBy-1">​…​</div>​<div class=​"w-full overflow-hidden bg-blue-100 transition-all h-0 bg-opacity-0">​</div>​<div class>​…​</div>​<div class=​"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root relative overflow-visible rounded-sm css-1kxnsga" data-cy=​"job-table-943207508" id=​"job-943207508" style=​"--Paper-shadow:​ 0px 2px 1px -1px rgba(0,0,0,0.2)​,0px 1px 1px 0px rgba(0,0,0,0.14)​,0px 1px 3px 0px rgba(0,0,0,0.12)​;​">​…​</div>​<form class=​"styled-form  " data-cy=​"form" autocomplete=​"off">​…​</form>​<div class=​"table-header border-b border-b-shade-600/​10 px-6 py-2.5">​…​</div>​flex<div class=​"flex flex-auto items-center" aria-label>​…​</div>​flex<div class=​"fieldGroup pr-2.5 flex-grow field-group" classes=​"[object Object]​" name=​"name" placeholder=​"Enter job title" maxlength=​"255" minrows=​"1" value autocomplete=​"name" style=​"padding-bottom:​ 0px;​">​…​</div>​<div class=​"input-wrapper undefined">​…​</div>​<textarea class=​"input-base   resize-y max-h-64 " data-cy=​"textarea-name" id=​"name" placeholder=​"Enter job title" maxlength=​"255" style=​"height:​ 34.2222px !important;​">​</textarea>​scroll</div>​</div>​</div>​<div class=​"flex space-x-4">​…​</div>​flex</div>​<div class=​"[&_table]​:​w-full [&_table]​:​min-w-[950px]​ [&_thead]​:​border-t-0 [&_th]​:​first-of-type:​pr-2 [&_th_+_th]​:​px-2 [&_td]​:​first-of-type:​pr-2 [&_td_+_td]​:​px-2">​…​</div>​<div class=​"[&_table]​:​w-full [&_table]​:​min-w-[950px]​ [&_thead]​:​border-t-0 [&_th]​:​first-of-type:​pr-2 [&_th_+_th]​:​px-2 [&_td]​:​first-of-type:​pr-2 [&_td_+_td]​:​px-2">​…​</div>​<div class=​"[&_table]​:​w-full [&_table]​:​min-w-[950px]​ [&_thead]​:​border-t-0 [&_th]​:​first-of-type:​pr-2 [&_th_+_th]​:​px-2 [&_td]​:​first-of-type:​pr-2 [&_td_+_td]​:​px-2">​…​</div>​<div class=​"[&_table]​:​w-full [&_table]​:​min-w-[950px]​ [&_thead]​:​border-t-0 [&_th]​:​first-of-type:​pr-2 [&_th_+_th]​:​px-2 [&_td]​:​first-of-type:​pr-2 [&_td_+_td]​:​px-2">​…​</div>​<div class=​"border-b border-b-v2-shade-75 px-6 py-2">​…​</div>​<div class=​"relative" style=​"padding:​ 10px 24px;​ margin:​ 0px;​ background:​ rgb(245, 245, 245)​;​ max-width:​ 100%;​">​…​</div>​</form>​</div>​</div>​</div>​<div id=​"DndDescribedBy-1" style=​"display:​ none;​">​…​</div>​<div id=​"DndLiveRegion-1" role=​"status" aria-live=​"assertive" aria-atomic=​"true" style=​"position:​ fixed;​ top:​ 0px;​ left:​ 0px;​ width:​ 1px;​ height:​ 1px;​ margin:​ -1px;​ border:​ 0px;​ padding:​ 0px;​ overflow:​ hidden;​ clip:​ rect(0px, 0px, 0px, 0px)​;​ clip-path:​ inset(100%)​;​ white-space:​ nowrap;​">​</div>​</div>​</div>​</div>​<div class=​"w-full max-w-6xl xl:​max-w-7xl">​…​</div>​<h4 class=​" block text-lg text-shade-200 mb-3.5 mt-7">​RO Fees​</h4>​<div class=​"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root relative overflow-visible rounded-sm css-1kxnsga" data-cy=​"ro-fees-table" style=​"--Paper-shadow:​ 0px 2px 1px -1px rgba(0,0,0,0.2)​,0px 1px 1px 0px rgba(0,0,0,0.14)​,0px 1px 3px 0px rgba(0,0,0,0.12)​;​">​…​</div>​<div class=​"table-header py-0 pl-3 pr-2">​…​</div>​flex<div class=​"table-scroll-container relative overflow-auto verticalScrollGradient mt-0">​…​</div>​<div class=​"table-scroll-container relative overflow-auto verticalScrollGradient mt-0">​…​</div>​<table class=​"MuiTable-root styled-table css-1xhtq58">​…​</table>​<tbody class=​"MuiTableBody-root css-y6j1my">​…​</tbody>​<tr class=​"MuiTableRow-root css-16pe4ub">​…​</tr>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w">​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 150px;​">​…​</td>​<label>​Subtotal​</label>​<label>​$94.78​</label>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-30 [&_label:​last-of-type]​:​opacity-30 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" disabled style=​"width:​ 150px;​">​…​</td>​<div class=​"flex items-center justify-between">​…​</div>​flex<button class=​"MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1lbuq4j" tabindex=​"0" type=​"button">​…​</button>​flex<div>​…​</div>​<label>​Fees Tax​</label>​<label>​…​</label>​</div>​</div>​</td>​<td class=​"MuiTableCell-root table-header-cell h-8 whitespace-pre-wrap align-middle text-right min-w-[120px]​ [&_label]​:​min-h-0 [&_label:​first-of-type]​:​mb-1 [&_label:​first-of-type]​:​block [&_label:​first-of-type]​:​text-base [&_label:​first-of-type]​:​font-medium [&_label:​first-of-type]​:​text-shade-600 [&_label:​last-of-type]​:​block [&_label:​last-of-type]​:​text-lg [&_label:​last-of-type]​:​font-medium [&_label:​last-of-type]​:​text-shade-600 [&_label:​first-of-type]​:​opacity-50 [&_label:​last-of-type]​:​opacity-90 [&_+_td]​:​border-l [&_+_td]​:​border-l-v2-shade-75 [&_.tk-checkbox]​:​p-0 MuiTableCell-body MuiTableCell-sizeMedium css-3otn4w" style=​"width:​ 150px;​">​…​</td>​<label>​RO FEES TOTAL​</label>​<label>​$94.78​</label>​</td>​</tr>​</tbody>​</table>​</div>​</div>​</div>​<div class=​"mb-12 flex flex-col items-center">​…​</div>​flex<button class=​"MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-75dwcb" tabindex=​"0" type=​"button" data-cy=​"button">​…​</button>​flex<label>​RO #141236: MEGAN WOOD's 2017 Toyota Corolla L​</label>​</div>​<div class=​"fixed bottom-0 left-0 z-[999]​ flex w-full flex-col transition-all duration-300 lg:​pr-64 lg:​pl-min-sidebar">​…​</div>​flex<div class=​"w-full bg-v2-shade-100">​</div>​<div class=​"flex bg-v2-blue-grey-900">​…​</div>​flex<div class=​"relative flex flex-grow items-stretch">​…​</div>​flex<div class=​"hidden items-center border-r border-r-shade-800 px-[18px]​ py-0 md:​inline-flex">​…​</div>​flex<div class=​"relative flex flex-grow flex-col items-end justify-center border-r border-r-shade-800 px-2 py-3 text-end text-[13px]​ text-shade-0 [&_.value]​:​block [&_.value]​:​px-0 [&_.value]​:​py-1 [&_.value]​:​font-bold [&_.value]​:​text-shade-0 hover:​cursor-pointer hover:​bg-shade-600/​40">​…​</div>​flex<div class=​"relative flex flex-grow flex-col items-end justify-center border-r border-r-shade-800 px-2 py-3 text-end text-[13px]​ text-shade-0 [&_.value]​:​block [&_.value]​:​px-0 [&_.value]​:​py-1 [&_.value]​:​font-bold [&_.value]​:​text-shade-0">​…​</div>​flex<div aria-label=​"Save all jobs first before opening parts hub" class=​"relative flex flex-grow flex-col items-end justify-center border-r border-r-shade-800 px-2 py-3 text-end text-[13px]​ text-shade-0 [&_.value]​:​block [&_.value]​:​px-0 [&_.value]​:​py-1 [&_.value]​:​font-bold [&_.value]​:​text-shade-0 hover:​cursor-pointer hover:​bg-shade-600/​40">​…​</div>​flex<div class=​"relative flex flex-grow flex-col items-end justify-center border-r border-r-shade-800 px-2 py-3 text-end text-[13px]​ text-shade-0 [&_.value]​:​block [&_.value]​:​px-0 [&_.value]​:​py-1 [&_.value]​:​font-bold [&_.value]​:​text-shade-0">​…​</div>​flex<div class=​"relative flex flex-grow flex-col items-end justify-center border-r border-r-shade-800 px-2 py-3 text-end text-[13px]​ text-shade-0 [&_.value]​:​block [&_.value]​:​px-0 [&_.value]​:​py-1 [&_.value]​:​font-bold [&_.value]​:​text-shade-0">​…​</div>​flex<div class=​"relative flex flex-grow flex-col items-end justify-center border-r border-r-shade-800 px-2 py-3 text-end text-[13px]​ text-shade-0 [&_.value]​:​block [&_.value]​:​px-0 [&_.value]​:​py-1 [&_.value]​:​font-bold [&_.value]​:​text-shade-0">​…​</div>​flex<div class=​"relative flex flex-grow flex-col items-end justify-center border-r border-r-shade-800 px-2 py-3 text-end text-[13px]​ text-shade-0 [&_.value]​:​block [&_.value]​:​px-0 [&_.value]​:​py-1 [&_.value]​:​font-bold [&_.value]​:​text-shade-0">​…​</div>​flex<div class=​"relative flex flex-grow flex-col items-end justify-center border-r border-r-shade-800 px-2 py-3 text-end text-[13px]​ text-shade-0 [&_.value]​:​block [&_.value]​:​px-0 [&_.value]​:​py-1 [&_.value]​:​font-bold [&_.value]​:​text-shade-0 hover:​cursor-pointer hover:​bg-shade-600/​40">​…​</div>​flex<div class=​"flex items-center">​…​</div>​flex<svg class=​"MuiSvgIcon-root MuiSvgIcon-fontSizeMedium mr-1 css-lnffrt" focusable=​"false" aria-hidden=​"true" viewBox=​"0 0 24 24" data-testid=​"EditIcon">​…​</svg>​<div>​…​</div>​<div class=​"flex items-center">​…​</div>​flex<label>​Taxes​</label>​</div>​<span class=​"value">​$85.16​</span>​</div>​</div>​</div>​<div class=​"relative flex flex-grow flex-col items-end justify-center border-r border-r-shade-800 px-2 py-3 text-end text-[13px]​ text-shade-0 [&_.value]​:​block [&_.value]​:​px-0 [&_.value]​:​py-1 [&_.value]​:​font-bold [&_.value]​:​text-shade-0">​…​</div>​flex</div>​<div class=​"inline-flex items-center border-r border-r-shade-800 px-[18px]​ py-0">​…​</div>​flex</div>​</div>​</div>​</div>​<div class=​"MuiDrawer-root MuiDrawer-docked css-1wt4220">​…​</div>​</div>​</div>​<div>​…​</div>​<div class=​"MuiDrawer-root MuiDrawer-docked css-1k5bhpf">​…​</div>​</div>​</main>​</div>​<div>​</div>​<audio id=​"tekmessage-notification-sound" src=​"/​assets/​notification-8apPF64Q.mp3">​</audio>​media<div>​</div>​</div>​
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+main-DK7zafr-.js:263 Skipping tracking for Repair Order page
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+VM507:3 [HEART Helper ERROR] Auto-fill failed: Error: Modal failed to appear within timeout
+    at checkForModal (content-v2.js:58:23)
+debugError @ content-v2.js:11
+fillTekmetricEstimate @ content-v2.js:167
+await in fillTekmetricEstimate
+(anonymous) @ content-v2.js:556
+postMessage
+(anonymous) @ VM507:3
+(anonymous) @ VM507:7
+VM507:3 [HEART Helper ERROR] Job data will remain pending for retry
+debugError @ content-v2.js:11
+fillTekmetricEstimate @ content-v2.js:168
+await in fillTekmetricEstimate
+(anonymous) @ content-v2.js:556
+postMessage
+(anonymous) @ VM507:3
+(anonymous) @ VM507:7
+main-DK7zafr-.js:263 Skipping tracking for Repair Order page
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 274639316
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 11145565
+handle.2fe6b368.js:23 customerId:", 11145565,shopId: 469,
+        previousCustomerId: 11145565, previousShopId: 469
