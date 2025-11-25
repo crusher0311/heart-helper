@@ -109,13 +109,23 @@ async function fillTekmetricEstimate(jobData) {
     debug('Starting instant auto-fill for:', jobData.jobName);
 
     // Step 1: Find and verify Job button exists
-    const jobButton = Array.from(document.querySelectorAll('button')).find(btn =>
-      btn.textContent.trim() === 'Job' || btn.getAttribute('aria-label')?.includes('Job')
-    );
+    // Look for various button texts: "Job", "+ ADD CANNED JOB", "Add Canned Job", etc.
+    const jobButton = Array.from(document.querySelectorAll('button')).find(btn => {
+      const text = btn.textContent.trim().toLowerCase();
+      const ariaLabel = btn.getAttribute('aria-label')?.toLowerCase() || '';
+      return text === 'job' || 
+             text.includes('add canned job') || 
+             text.includes('canned job') ||
+             ariaLabel.includes('job') ||
+             ariaLabel.includes('canned job');
+    });
 
     if (!jobButton) {
+      debug('Available buttons:', Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim()).slice(0, 20));
       throw new Error('Job button not found - may already be in modal or page structure changed');
     }
+
+    debug('Found Job button:', jobButton.textContent.trim());
 
     jobButton.click();
     const modal = await waitForModal();
