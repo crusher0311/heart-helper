@@ -1,0 +1,28 @@
+// DEBUG: Let's see what we're working with
+console.log('🔍 Debugging - Finding New Job elements...');
+
+// Check all text nodes
+const allText = Array.from(document.querySelectorAll('*'))
+  .map(el => ({ tag: el.tagName, text: el.textContent?.trim().substring(0, 50) }))
+  .filter(el => el.text && el.text.toLowerCase().includes('new job'));
+
+console.log('Elements containing "new job":', allText.slice(0, 10));
+
+// Check specifically for the checkbox structure
+const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+console.log('Total checkboxes:', checkboxes.length);
+
+// Check for the exact visible "New Job" text
+const spans = Array.from(document.querySelectorAll('span, div, label, p')).filter(el => {
+  return el.textContent?.trim() === 'New Job' && el.offsetParent !== null; // visible elements only
+});
+console.log('Visible "New Job" elements:', spans.length, spans.slice(0, 3));
+VM946:2 🔍 Debugging - Finding New Job elements...
+VM946:9 Elements containing "new job": (10) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]0: {tag: 'DIV', text: 'New Job     Add Category  Assign LaborTechnicianHo'}1: {tag: 'DIV', text: 'New Job     Add Category  Assign LaborTechnicianHo'}2: {tag: 'DIV', text: 'New Job     Add Category  Assign LaborTechnicianHo'}3: {tag: 'DIV', text: 'New Job     Add Category  Assign LaborTechnicianHo'}4: {tag: 'DIV', text: 'New Job     Add Category  Assign'}5: {tag: 'DIV', text: 'New Job'}6: {tag: 'DIV', text: 'New Job'}7: {tag: 'DIV', text: 'New Job'}8: {tag: 'DIV', text: 'New Job'}9: {tag: 'DIV', text: 'New Job'}length: 10[[Prototype]]: Array(0)
+VM946:13 Total checkboxes: 951
+VM946:19 Visible "New Job" elements: 1848 (3) [div.flex.items-center, div.flex.items-center, div]0: div.flex.items-center1: div.flex.items-center2: divlength: 3[[Prototype]]: Array(0)
+undefined
+content.js:596 📬 Received window message: {action: 'dismissFrame'}
+content.js:600 ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
+content.js:596 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController0851","controllerAppFrameId":"__privateStripeController0851","message":{"action":"stripe-controller-action-response","payload":{"nonce":"57f3a917-90d2-4239-97f4-69ef47c4ba59"}},"__stripeJsV3":true}
+content.js:600 ⚠️ Ignoring message from different origin: https://js.stripe.com
