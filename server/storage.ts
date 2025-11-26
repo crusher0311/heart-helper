@@ -70,6 +70,11 @@ export interface IStorage {
   createScriptFeedback(feedback: InsertScriptFeedback): Promise<ScriptFeedback>;
   getUserFeedback(userId: string, limit?: number): Promise<ScriptFeedback[]>;
   getPositiveFeedbackForUser(userId: string, scriptType?: string): Promise<ScriptFeedback[]>;
+  
+  // Admin operations
+  isUserAdmin(userId: string): Promise<boolean>;
+  getAllUsersWithPreferences(): Promise<UserWithPreferences[]>;
+  updateUserTrainingAsAdmin(targetUserId: string, training: string): Promise<UserPreferences>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -549,6 +554,30 @@ export class DatabaseStorage implements IStorage {
       .where(and(...conditions))
       .orderBy(desc(scriptFeedback.createdAt))
       .limit(20);
+  }
+
+  // Admin operations
+  async isUserAdmin(userId: string): Promise<boolean> {
+    const prefs = await this.getUserPreferences(userId);
+    return prefs?.isAdmin === true;
+  }
+
+  async getAllUsersWithPreferences(): Promise<UserWithPreferences[]> {
+    const allUsers = await db
+      .select()
+      .from(users)
+      .orderBy(users.firstName, users.lastName);
+    
+    const result: UserWithPreferences[] = [];
+    for (const user of allUsers) {
+      const prefs = await this.getUserPreferences(user.id);
+      result.push({ ...user, preferences: prefs });
+    }
+    return result;
+  }
+
+  async updateUserTrainingAsAdmin(targetUserId: string, training: string): Promise<UserPreferences> {
+    return await this.upsertUserPreferences(targetUserId, { personalTraining: training });
   }
 }
 

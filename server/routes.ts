@@ -114,6 +114,64 @@ export async function registerRoutes(app: Express) {
       res.status(500).json({ message: "Failed to fetch feedback" });
     }
   });
+
+  // Admin middleware to check if user is admin
+  const isAdmin = async (req: any, res: any, next: any) => {
+    try {
+      if (!req.user?.claims?.sub) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+      const isAdminUser = await storage.isUserAdmin(req.user.claims.sub);
+      if (!isAdminUser) {
+        return res.status(403).json({ message: "Admin access required" });
+      }
+      next();
+    } catch (error) {
+      console.error("Admin check error:", error);
+      res.status(500).json({ message: "Failed to verify admin status" });
+    }
+  };
+
+  // Check if current user is admin
+  app.get('/api/admin/check', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const isAdminUser = await storage.isUserAdmin(userId);
+      res.json({ isAdmin: isAdminUser });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+      res.status(500).json({ message: "Failed to check admin status" });
+    }
+  });
+
+  // Get all users (admin only)
+  app.get('/api/admin/users', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const users = await storage.getAllUsersWithPreferences();
+      res.json(users);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      res.status(500).json({ message: "Failed to fetch users" });
+    }
+  });
+
+  // Update a user's training data (admin only)
+  app.put('/api/admin/users/:userId/training', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { userId } = req.params;
+      const { personalTraining } = req.body;
+      
+      if (typeof personalTraining !== 'string') {
+        return res.status(400).json({ error: "personalTraining must be a string" });
+      }
+      
+      const prefs = await storage.updateUserTrainingAsAdmin(userId, personalTraining);
+      res.json(prefs);
+    } catch (error) {
+      console.error("Error updating user training:", error);
+      res.status(500).json({ message: "Failed to update user training" });
+    }
+  });
   // Search endpoint
   app.post("/api/search", async (req, res) => {
     try {
