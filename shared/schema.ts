@@ -1,8 +1,81 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, integer, real, timestamp, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, integer, real, timestamp, jsonb, boolean, index } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+
+// ==========================================
+// Authentication Tables (Replit Auth)
+// ==========================================
+
+// Session storage table for Replit Auth
+export const sessions = pgTable(
+  "sessions",
+  {
+    sid: varchar("sid").primaryKey(),
+    sess: jsonb("sess").notNull(),
+    expire: timestamp("expire").notNull(),
+  },
+  (table) => [index("IDX_session_expire").on(table.expire)],
+);
+
+// User accounts table
+export const users = pgTable("users", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  email: varchar("email").unique(),
+  firstName: varchar("first_name"),
+  lastName: varchar("last_name"),
+  profileImageUrl: varchar("profile_image_url"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// User preferences table for per-user settings
+export const userPreferences = pgTable("user_preferences", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id).unique(),
+  displayName: varchar("display_name"), // Name to use in scripts
+  defaultShopId: text("default_shop_id"), // "NB", "WM", or "EV"
+  defaultTool: text("default_tool").default("concern_intake"), // "concern_intake" or "sales_script"
+  personalTraining: text("personal_training"), // Personal script examples/guidelines
+  isManager: boolean("is_manager").default(false), // Can view team analytics
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Script feedback tracking for learning
+export const scriptFeedback = pgTable("script_feedback", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  scriptType: text("script_type").notNull(), // "sales", "concern_intake", etc.
+  repairOrderId: integer("repair_order_id"), // Optional link to Tekmetric RO
+  sentiment: text("sentiment"), // "positive", "negative", "neutral"
+  outcome: text("outcome"), // "approved", "declined", "pending", "no_answer"
+  rating: integer("rating"), // 1-5 star rating
+  scriptBody: text("script_body"), // The actual script that was generated
+  notes: text("notes"), // User's notes about what worked/didn't
+  vehicleInfo: jsonb("vehicle_info"), // Vehicle context
+  jobInfo: jsonb("job_info"), // Job/repair context
+  totalAmount: real("total_amount"), // Dollar amount involved
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Types for auth
+export type UpsertUser = typeof users.$inferInsert;
+export type User = typeof users.$inferSelect;
+export type UserPreferences = typeof userPreferences.$inferSelect;
+export type InsertUserPreferences = typeof userPreferences.$inferInsert;
+export type ScriptFeedback = typeof scriptFeedback.$inferSelect;
+export type InsertScriptFeedback = typeof scriptFeedback.$inferInsert;
+
+// Insert schemas for auth
+export const insertUserPreferencesSchema = createInsertSchema(userPreferences).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertScriptFeedbackSchema = createInsertSchema(scriptFeedback).omit({ id: true, createdAt: true });
+
+// User preferences with user info combined
+export type UserWithPreferences = User & {
+  preferences?: UserPreferences;
+};
 
 // Using existing repair_orders table from Tekmetric integration
 export const repairOrders = pgTable("repair_orders", {
