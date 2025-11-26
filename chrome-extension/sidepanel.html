@@ -145,37 +145,48 @@
 
     <!-- ==================== SALES SCRIPT TAB ==================== -->
     <div id="salesTab" class="tab-content" style="display: none;">
-      <div class="sales-intro">
-        <p>Generate a customized sales script based on the current repair order.</p>
-      </div>
-
-      <div id="roInfoSection" class="ro-info-section">
-        <div class="section-header">
-          <span class="section-icon">&#128663;</span>
-          <span>Current Repair Order</span>
-        </div>
+      <div id="roInfoSection" class="ro-info-compact">
         <div class="ro-details" id="roDetails">
           <div class="ro-placeholder">Navigate to a Tekmetric repair order to load details</div>
         </div>
       </div>
 
-      <button id="generateSalesScriptBtn" class="btn btn-primary" disabled>
+      <div id="salesScriptSection" class="sales-script-section" style="display: none;">
+        <div class="script-header">
+          <span>Sales Script</span>
+          <button class="refresh-script-btn" id="regenerateBtn" title="Regenerate">&#8635;</button>
+        </div>
+        <div class="sales-script-content" id="salesScriptContent"></div>
+        <div class="script-actions">
+          <button class="copy-btn-full" id="copySalesScriptBtn">
+            <span>&#128203;</span> Copy
+          </button>
+        </div>
+        <div class="feedback-section">
+          <div class="feedback-label">How did this go?</div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn success" id="feedbackSuccess">
+              <span>&#128077;</span> Success
+            </button>
+            <button class="feedback-btn fail" id="feedbackFail">
+              <span>&#128078;</span> Didn't Work
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="noRoMessage" class="no-ro-message">
+        <p>Open a Tekmetric repair order to generate a sales script</p>
+      </div>
+
+      <button id="generateSalesScriptBtn" class="btn btn-primary" style="display: none;" disabled>
         <span class="btn-icon">&#10024;</span>
         Generate Sales Script
       </button>
 
-      <div id="salesScriptSection" class="sales-script-section" style="display: none;">
-        <div class="section-header">
-          <span class="section-icon">&#128172;</span>
-          <span>Sales Talking Points</span>
-          <button class="copy-small-btn" id="copySalesScriptBtn" title="Copy">&#128203;</button>
-        </div>
-        <div class="sales-script-content" id="salesScriptContent"></div>
-      </div>
-
       <div id="salesLoadingOverlay" class="loading-overlay" style="display: none;">
         <div class="loading-spinner"></div>
-        <div class="loading-text">Generating sales script...</div>
+        <div class="loading-text">Generating script...</div>
       </div>
     </div>
 

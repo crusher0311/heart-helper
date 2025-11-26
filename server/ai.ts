@@ -720,34 +720,57 @@ export async function generateSalesScript(
     ? `${vehicle.year || ''} ${vehicle.make || ''} ${vehicle.model || ''}`.trim() || 'their vehicle'
     : 'their vehicle';
 
-  const jobsList = jobs.map((job, i) => {
-    let desc = job.name || job.description || 'Service';
-    if (job.laborTotal || job.partsTotal) {
-      desc += ` (~$${((job.laborTotal || 0) + (job.partsTotal || 0)).toFixed(0)})`;
+  // Clean up job names - remove duplicates and noise
+  const cleanedJobs = jobs
+    .map(job => {
+      let name = job.name || job.description || '';
+      // Remove technician names and embedded prices
+      name = name.replace(/\s+[A-Z]+\s+M\.\d+\.\d+\$[\d.]+\$[\d.]+/g, '');
+      name = name.replace(/\$[\d,.]+/g, '');
+      name = name.replace(/\s{2,}/g, ' ').trim();
+      return { ...job, name };
+    })
+    .filter(job => job.name && job.name.length > 3);
+
+  // Get unique job names (deduplicate)
+  const seenNames: string[] = [];
+  const uniqueJobs = cleanedJobs.filter(job => {
+    const normalized = job.name.toLowerCase();
+    if (seenNames.includes(normalized)) return false;
+    // Also skip if one job name contains another
+    for (const seen of seenNames) {
+      if (normalized.includes(seen) || seen.includes(normalized)) return false;
     }
-    return `${i + 1}. ${desc}`;
-  }).join('\n');
+    seenNames.push(normalized);
+    return true;
+  });
 
-  const prompt = `You are an experienced automotive service advisor at HEART Certified Auto Care. Generate a customer-friendly sales script to help explain the recommended services and build trust.
+  const jobsList = uniqueJobs.map(job => job.name).join(', ');
+  const totalAmount = jobs.reduce((sum, job) => sum + (job.laborTotal || 0) + (job.partsTotal || 0), 0);
 
+  const customerName = customer?.name?.split(' ')[0] || ''; // First name only
+
+  const prompt = `You are a friendly service advisor at HEART Certified Auto Care. Write a SHORT, conversational sales script to call the customer about their repair order.
+
+Customer: ${customerName || 'the customer'}
 Vehicle: ${vehicleDesc}
-${customer?.name ? `Customer: ${customer.name}` : ''}
+Services: ${jobsList}
+${totalAmount > 0 ? `Total: $${totalAmount.toFixed(2)}` : ''}
 
-Recommended Services:
-${jobsList}
+Write a SINGLE PARAGRAPH (3-5 sentences max) that:
+1. Greets the customer by first name if available
+2. References the digital inspection they received
+3. Briefly mentions what service is recommended and why it matters for the season/safety
+4. States the total investment and mentions HEART's 3-year/36,000 mile nationwide warranty
+5. Asks if they're ready to schedule
 
-Create a sales script with:
-1. **Opening** - Warm, professional greeting referencing their specific vehicle
-2. **Service Explanation** - For each service:
-   - Explain what it is in simple terms
-   - Why it's important for their vehicle/safety
-   - What happens if they delay/decline
-3. **Value Points** - Emphasize HEART's quality, warranty, and customer-first approach
-4. **Handling Objections** - Brief tips for common concerns (price, timing, necessity)
-5. **Close** - How to confidently ask for the sale
+IMPORTANT: 
+- Write as a natural phone conversation, not bullet points
+- Keep it SHORT and friendly - like you're actually talking
+- Don't list every service separately, summarize the main work
+- End with a simple question to get their response
 
-Format the response as HTML with headers (h4), bullet points (ul/li), and emphasis (strong).
-Keep it conversational but professional. Focus on safety and value, not pressure.`;
+Return ONLY the script paragraph, no headers or formatting.`;
 
   try {
     const response = await openai.chat.completions.create({
@@ -755,14 +778,14 @@ Keep it conversational but professional. Focus on safety and value, not pressure
       messages: [
         {
           role: "system",
-          content: "You are an automotive service advisor helping colleagues communicate effectively with customers. Create helpful, honest sales scripts that focus on education and trust-building. Return formatted HTML."
+          content: "You are a friendly automotive service advisor at HEART Certified Auto Care. Write natural, conversational sales scripts as if you're speaking on the phone. Keep responses short and focused - no bullet points or headers, just a friendly paragraph."
         },
         {
           role: "user",
           content: prompt
         }
       ],
-      max_completion_tokens: 1500,
+      max_completion_tokens: 300,
     });
 
     const content = response.choices[0]?.message?.content;
@@ -770,30 +793,21 @@ Keep it conversational but professional. Focus on safety and value, not pressure
       throw new Error("No response from AI");
     }
 
-    return { script: content };
+    // Clean up any markdown or HTML that slipped through
+    const cleanScript = content
+      .replace(/```[\s\S]*?```/g, '')
+      .replace(/<[^>]*>/g, '')
+      .replace(/\*\*/g, '')
+      .replace(/#{1,4}\s*/g, '')
+      .trim();
+
+    return { script: cleanScript };
   } catch (error) {
     console.error("AI sales script generation error:", error);
     
-    // Fallback: basic template
-    const fallbackScript = `
-      <h4>Opening</h4>
-      <p>Thank you for bringing in your ${vehicleDesc} today. Let me walk you through what we found and our recommendations.</p>
-      
-      <h4>Recommended Services</h4>
-      <ul>
-        ${jobs.map(job => `<li><strong>${job.name || job.description || 'Service'}</strong> - Important for your vehicle's reliability and safety.</li>`).join('')}
-      </ul>
-      
-      <h4>Value Points</h4>
-      <ul>
-        <li>All work backed by HEART's warranty</li>
-        <li>Factory-trained technicians</li>
-        <li>Quality parts that meet or exceed OEM specifications</li>
-      </ul>
-      
-      <h4>Next Steps</h4>
-      <p>Do you have any questions about these services? I'm happy to explain anything in more detail.</p>
-    `;
+    // Fallback: simple conversational script
+    const greeting = customerName ? `Hi ${customerName}!` : 'Hi there!';
+    const fallbackScript = `${greeting} Thanks for bringing in your ${vehicleDesc}. I sent over a copy of your digital inspection, did you get it? Great! Would you mind opening it up and we can go over it together? We're recommending ${jobsList || 'some maintenance services'} to keep you safe and prepared.${totalAmount > 0 ? ` Your total investment is $${totalAmount.toFixed(2)}, and that's backed by our 3-year, 36,000 mile nationwide warranty.` : ''} Once you're ready, we can get you all set up. How does that sound?`;
     
     return { script: fallbackScript };
   }

@@ -164,6 +164,13 @@ function setupEventListeners() {
   // Sales script
   document.getElementById('generateSalesScriptBtn').addEventListener('click', generateSalesScript);
   document.getElementById('copySalesScriptBtn').addEventListener('click', copySalesScript);
+  document.getElementById('regenerateBtn').addEventListener('click', generateSalesScript);
+  document.getElementById('feedbackSuccess').addEventListener('click', () => {
+    showToast('Great! Feedback recorded.');
+  });
+  document.getElementById('feedbackFail').addEventListener('click', () => {
+    showToast('Thanks for the feedback!');
+  });
   
   // Settings
   document.getElementById('settingsBtn').addEventListener('click', openSettings);
@@ -185,6 +192,15 @@ function switchTab(tab) {
   
   document.getElementById('incomingTab').style.display = tab === 'incoming' ? 'flex' : 'none';
   document.getElementById('salesTab').style.display = tab === 'sales' ? 'flex' : 'none';
+  
+  // Auto-generate sales script when switching to sales tab
+  if (tab === 'sales' && currentRO && currentRO.jobs && currentRO.jobs.length > 0 && appUrl) {
+    // Only auto-generate if we haven't already generated
+    const scriptSection = document.getElementById('salesScriptSection');
+    if (scriptSection.style.display === 'none') {
+      generateSalesScript();
+    }
+  }
 }
 
 // ==================== INCOMING CALLER FLOW ====================
@@ -458,27 +474,32 @@ function restart() {
 
 function updateRODisplay() {
   const details = document.getElementById('roDetails');
-  const btn = document.getElementById('generateSalesScriptBtn');
+  const noRoMessage = document.getElementById('noRoMessage');
+  const scriptSection = document.getElementById('salesScriptSection');
   
   if (!currentRO || !currentRO.jobs || currentRO.jobs.length === 0) {
-    details.innerHTML = '<div class="ro-placeholder">Navigate to a Tekmetric repair order to load details</div>';
-    btn.disabled = true;
+    details.innerHTML = '';
+    noRoMessage.style.display = 'block';
+    scriptSection.style.display = 'none';
     return;
   }
   
+  noRoMessage.style.display = 'none';
+  
   let html = '';
   if (currentRO.vehicle) {
-    html += `<div class="ro-vehicle">${currentRO.vehicle.year || ''} ${currentRO.vehicle.make || ''} ${currentRO.vehicle.model || ''}</div>`;
+    const vehicleStr = `${currentRO.vehicle.year || ''} ${currentRO.vehicle.make || ''} ${currentRO.vehicle.model || ''}`.trim();
+    if (vehicleStr) {
+      html += `<div class="ro-vehicle">${vehicleStr}</div>`;
+    }
   }
   
-  html += '<div class="ro-jobs">';
-  currentRO.jobs.forEach(job => {
-    html += `<div class="ro-job-item">• ${job.name || job.description || 'Unknown job'}</div>`;
-  });
-  html += '</div>';
-  
   details.innerHTML = html;
-  btn.disabled = false;
+  
+  // Auto-generate sales script when RO is loaded and we're on the sales tab
+  if (currentTab === 'sales' && appUrl) {
+    generateSalesScript();
+  }
 }
 
 async function generateSalesScript() {
@@ -522,9 +543,12 @@ async function generateSalesScript() {
 function displaySalesScript(script) {
   const section = document.getElementById('salesScriptSection');
   const content = document.getElementById('salesScriptContent');
+  const noRoMessage = document.getElementById('noRoMessage');
   
-  content.innerHTML = script;
+  // Display as plain text (no HTML)
+  content.textContent = script;
   section.style.display = 'block';
+  noRoMessage.style.display = 'none';
 }
 
 function copySalesScript() {
