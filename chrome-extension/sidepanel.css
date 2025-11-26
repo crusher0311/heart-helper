@@ -21,14 +21,15 @@ body {
 .panel-header {
   background: linear-gradient(135deg, #ED1C24 0%, #c91920 100%);
   color: white;
-  padding: 16px;
-  text-align: center;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
   font-size: 18px;
   font-weight: 700;
@@ -39,93 +40,120 @@ body {
   font-size: 20px;
 }
 
-.header-subtitle {
-  font-size: 12px;
-  opacity: 0.9;
-  margin-top: 4px;
+.refresh-btn {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
-.phone-script-section {
-  background: #fff8e1;
-  border-bottom: 1px solid #ffe082;
-  padding: 12px 16px;
+.refresh-btn:hover {
+  background: rgba(255,255,255,0.3);
 }
 
-.phone-script {
-  font-style: italic;
-  color: #5d4037;
-  font-size: 13px;
-  margin-top: 6px;
-}
-
-.vehicle-info-section {
-  background: #e3f2fd;
-  border-bottom: 1px solid #90caf9;
-  padding: 12px 16px;
-}
-
-.vehicle-info {
-  color: #1565c0;
-  font-weight: 500;
-  font-size: 13px;
-  margin-top: 4px;
-}
-
-.section-label {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #666;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.label-icon {
-  font-size: 14px;
-}
-
-.step-indicator {
+/* Tab Navigation */
+.tab-nav {
   display: flex;
   background: white;
   border-bottom: 1px solid #e0e0e0;
 }
 
-.step {
+.tab-btn {
   flex: 1;
-  padding: 10px 8px;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 500;
-  color: #999;
+  padding: 12px;
+  background: none;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   border-bottom: 2px solid transparent;
   transition: all 0.2s;
 }
 
-.step.active {
+.tab-btn:hover {
+  color: #333;
+  background: #f9f9f9;
+}
+
+.tab-btn.active {
   color: #ED1C24;
   border-bottom-color: #ED1C24;
 }
 
-.step.completed {
-  color: #4caf50;
+.tab-icon {
+  font-size: 14px;
 }
 
-.panel-content {
+.tab-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Phone Script Section */
+.phone-script-section {
+  background: #e3f2fd;
+  border-bottom: 1px solid #90caf9;
+  padding: 12px 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1565c0;
+  margin-bottom: 8px;
+}
+
+.section-icon {
+  font-size: 14px;
+}
+
+.copy-small-btn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.copy-small-btn:hover {
+  opacity: 1;
+}
+
+.phone-script {
+  font-style: italic;
+  color: #1565c0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Incoming Steps */
+.incoming-step {
   padding: 16px;
   background: white;
-  position: relative;
 }
 
-.step-content {
+.incoming-step:not(.active) {
   display: none;
 }
 
-.step-content.active {
-  display: block;
-}
-
+/* Form Groups */
 .form-group {
   margin-bottom: 16px;
 }
@@ -138,23 +166,128 @@ body {
   margin-bottom: 6px;
 }
 
-textarea {
+input[type="text"], textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 14px;
   font-family: inherit;
-  resize: vertical;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-textarea:focus {
+input[type="text"]:focus, textarea:focus {
   outline: none;
   border-color: #ED1C24;
   box-shadow: 0 0 0 3px rgba(237, 28, 36, 0.1);
 }
 
+textarea {
+  resize: vertical;
+}
+
+/* Symptoms List */
+.symptoms-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.symptom-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.symptom-input {
+  flex: 1;
+}
+
+.add-symptom-btn {
+  width: 40px;
+  height: 40px;
+  background: #ED1C24;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-symptom-btn:hover {
+  background: #c91920;
+}
+
+.remove-symptom-btn {
+  width: 40px;
+  height: 40px;
+  background: #f5f5f5;
+  color: #666;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.remove-symptom-btn:hover {
+  background: #eee;
+}
+
+/* Vehicle Row */
+.vehicle-row {
+  display: flex;
+  gap: 8px;
+}
+
+.vehicle-field {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Customer Summary */
+.customer-summary {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.customer-summary strong {
+  color: #ED1C24;
+}
+
+/* Step Indicator */
+.step-indicator {
+  display: flex;
+  background: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.step {
+  flex: 1;
+  padding: 8px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 500;
+  color: #999;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.step.active {
+  color: #ED1C24;
+  border-bottom-color: #ED1C24;
+  background: white;
+}
+
+.step.completed {
+  color: #4caf50;
+}
+
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -175,7 +308,7 @@ textarea:focus {
   color: white;
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   background: #c91920;
 }
 
@@ -223,6 +356,7 @@ textarea:focus {
   flex: 1;
 }
 
+/* Question Section */
 .question-section {
   background: #f8f8f8;
   border-radius: 8px;
@@ -242,6 +376,7 @@ textarea:focus {
   color: #1a1a1a;
 }
 
+/* Answered Questions */
 .answered-questions {
   margin-top: 16px;
   padding-top: 16px;
@@ -272,20 +407,113 @@ textarea:focus {
   color: #666;
 }
 
+/* Summary Section */
 .summary-section {
   margin-bottom: 16px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 8px;
 }
 
 .summary-text {
   background: #f8f8f8;
   border-radius: 8px;
   padding: 16px;
-  margin-top: 8px;
   white-space: pre-wrap;
   font-size: 14px;
   line-height: 1.6;
 }
 
+/* Sales Tab */
+.sales-intro {
+  padding: 16px;
+  background: white;
+  border-bottom: 1px solid #eee;
+  color: #666;
+  font-size: 13px;
+}
+
+.ro-info-section {
+  background: white;
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.ro-details {
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.ro-placeholder {
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}
+
+.ro-vehicle {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.ro-jobs {
+  color: #666;
+}
+
+.ro-job-item {
+  padding: 4px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.ro-job-item:last-child {
+  border-bottom: none;
+}
+
+#generateSalesScriptBtn {
+  margin: 16px;
+  width: calc(100% - 32px);
+}
+
+.sales-script-section {
+  padding: 16px;
+  background: white;
+}
+
+.sales-script-content {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.sales-script-content h4 {
+  color: #f57c00;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.sales-script-content ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.sales-script-content li {
+  margin-bottom: 6px;
+}
+
+/* Loading Overlay */
 .loading-overlay {
   position: absolute;
   top: 0;
@@ -298,6 +526,7 @@ textarea:focus {
   align-items: center;
   justify-content: center;
   gap: 12px;
+  z-index: 100;
 }
 
 .loading-spinner {
@@ -318,6 +547,7 @@ textarea:focus {
   font-size: 13px;
 }
 
+/* Footer */
 .panel-footer {
   background: white;
   border-top: 1px solid #e0e0e0;
@@ -346,27 +576,7 @@ textarea:focus {
   background: #f44336;
 }
 
-.copied-toast {
-  position: fixed;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #333;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-size: 13px;
-  animation: fadeInOut 2s forwards;
-}
-
-@keyframes fadeInOut {
-  0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
-  15% { opacity: 1; transform: translateX(-50%) translateY(0); }
-  85% { opacity: 1; transform: translateX(-50%) translateY(0); }
-  100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-}
-
-/* Settings button */
+/* Settings */
 .settings-btn {
   margin-left: auto;
   background: none;
@@ -382,7 +592,6 @@ textarea:focus {
   color: #ED1C24;
 }
 
-/* Settings modal */
 .settings-modal {
   position: fixed;
   top: 0;
@@ -428,23 +637,30 @@ textarea:focus {
   color: #333;
 }
 
-.settings-content input[type="text"] {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.settings-content input[type="text"]:focus {
-  outline: none;
-  border-color: #ED1C24;
-  box-shadow: 0 0 0 3px rgba(237, 28, 36, 0.1);
-}
-
 .help-text {
   font-size: 11px;
   color: #888;
   margin-top: 6px;
+}
+
+/* Toast */
+.copied-toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  animation: fadeInOut 2s forwards;
+  z-index: 1000;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
 }

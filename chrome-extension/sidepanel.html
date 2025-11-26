@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>HEART Helper - Concern Intake</title>
+  <title>HEART Helper</title>
   <link rel="stylesheet" href="sidepanel.css">
 </head>
 <body>
@@ -12,113 +12,172 @@
         <span class="heart-icon">&#10084;</span>
         <span class="logo-text">HEART Helper</span>
       </div>
-      <div class="header-subtitle">Concern Intake</div>
+      <button id="refreshBtn" class="refresh-btn" title="Refresh">&#8635;</button>
     </header>
 
-    <div class="phone-script-section" id="phoneScriptSection" style="display: none;">
-      <div class="section-label">
-        <span class="label-icon">&#128222;</span>
-        Phone Greeting
-      </div>
-      <div class="phone-script" id="phoneScript"></div>
+    <!-- Tab Navigation -->
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="incoming">
+        <span class="tab-icon">&#128222;</span>
+        Incoming Caller
+      </button>
+      <button class="tab-btn" data-tab="sales">
+        <span class="tab-icon">&#128176;</span>
+        Sales Script
+      </button>
     </div>
 
-    <div class="vehicle-info-section" id="vehicleInfoSection" style="display: none;">
-      <div class="section-label">Vehicle Info</div>
-      <div class="vehicle-info" id="vehicleInfo"></div>
-    </div>
-
-    <div class="step-indicator" id="stepIndicator">
-      <div class="step active" data-step="1">1. Concern</div>
-      <div class="step" data-step="2">2. Questions</div>
-      <div class="step" data-step="3">3. Summary</div>
-    </div>
-
-    <main class="panel-content">
-      <div id="step1" class="step-content active">
-        <div class="form-group">
-          <label for="customerConcern">What is the customer's concern?</label>
-          <textarea 
-            id="customerConcern" 
-            placeholder="e.g., Car makes a squeaking noise when braking..."
-            rows="4"
-          ></textarea>
+    <!-- ==================== INCOMING CALLER TAB ==================== -->
+    <div id="incomingTab" class="tab-content active">
+      <!-- Phone Answer Script -->
+      <div class="phone-script-section" id="phoneScriptSection">
+        <div class="section-header">
+          <span class="section-icon">&#128222;</span>
+          <span>Phone Answer Script</span>
+          <button class="copy-small-btn" id="copyScriptBtn" title="Copy">&#128203;</button>
         </div>
-        <button id="generateQuestionsBtn" class="btn btn-primary">
-          <span class="btn-icon">&#10024;</span>
-          Generate Follow-up Questions
-        </button>
+        <div class="phone-script" id="phoneScript">Loading...</div>
       </div>
 
-      <div id="step2" class="step-content" style="display: none;">
-        <div class="question-section">
-          <div class="question-header">
-            <span>Question <span id="questionNum">1</span> of <span id="totalQuestions">5</span></span>
+      <!-- Customer Info Collection -->
+      <div id="customerInfoStep" class="incoming-step active">
+        <div class="form-group">
+          <label for="customerName">Customer Name</label>
+          <input type="text" id="customerName" placeholder="Ask for their name..." />
+        </div>
+
+        <div class="form-group">
+          <label for="referralSource">How did they hear about us?</label>
+          <input type="text" id="referralSource" placeholder="Google, friend, etc..." />
+        </div>
+
+        <div class="form-group">
+          <label>Symptoms / Issues</label>
+          <div class="symptoms-list" id="symptomsList">
+            <div class="symptom-input-row">
+              <input type="text" class="symptom-input" placeholder="Describe the issue..." />
+              <button class="add-symptom-btn" id="addSymptomBtn">+</button>
+            </div>
           </div>
-          <div class="current-question" id="currentQuestion"></div>
         </div>
 
         <div class="form-group">
-          <label for="customerAnswer">Customer's Answer</label>
-          <textarea 
-            id="customerAnswer" 
-            placeholder="Record what the customer says..."
-            rows="3"
-          ></textarea>
+          <label>Vehicle Info</label>
+          <div class="vehicle-row">
+            <input type="text" id="vehicleYear" placeholder="Year" class="vehicle-field" />
+            <input type="text" id="vehicleMake" placeholder="Make" class="vehicle-field" />
+            <input type="text" id="vehicleModel" placeholder="Model" class="vehicle-field" />
+          </div>
         </div>
 
-        <div class="button-row">
-          <button id="nextQuestionBtn" class="btn btn-primary flex-1">
-            Next <span class="btn-arrow">&#8594;</span>
-          </button>
-          <button id="skipQuestionBtn" class="btn btn-secondary">Skip</button>
-        </div>
-
-        <div class="answered-questions" id="answeredQuestions" style="display: none;">
-          <div class="section-label">Recorded Answers</div>
-          <div id="answeredList"></div>
-        </div>
-
-        <div class="form-group" style="margin-top: 12px;">
-          <label for="additionalNotes">Additional Notes (optional)</label>
-          <textarea 
-            id="additionalNotes" 
-            placeholder="Any other observations..."
-            rows="2"
-          ></textarea>
-        </div>
-
-        <button id="finalizeEarlyBtn" class="btn btn-outline">Finalize Now</button>
+        <button id="startConversationBtn" class="btn btn-primary">
+          <span class="btn-icon">&#128222;</span>
+          Start Conversation
+        </button>
       </div>
 
-      <div id="step3" class="step-content" style="display: none;">
-        <div class="summary-section">
-          <div class="section-label">Formatted Concern</div>
-          <div class="summary-text" id="summaryText"></div>
+      <!-- AI Questions Step -->
+      <div id="questionsStep" class="incoming-step" style="display: none;">
+        <div class="customer-summary" id="customerSummary"></div>
+        
+        <div class="step-indicator">
+          <div class="step active" data-step="1">1. Questions</div>
+          <div class="step" data-step="2">2. Summary</div>
         </div>
 
-        <div class="button-row">
-          <button id="copyBtn" class="btn btn-secondary flex-1">
-            <span class="btn-icon">&#128203;</span>
-            Copy
-          </button>
-          <button id="sendToTekmetricBtn" class="btn btn-primary flex-1">
-            <span class="btn-icon">&#128196;</span>
-            Add to RO
-          </button>
+        <div id="questionSection">
+          <div class="question-section">
+            <div class="question-header">
+              <span>Question <span id="questionNum">1</span> of <span id="totalQuestions">5</span></span>
+            </div>
+            <div class="current-question" id="currentQuestion"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="customerAnswer">Customer's Answer</label>
+            <textarea id="customerAnswer" placeholder="Record what the customer says..." rows="3"></textarea>
+          </div>
+
+          <div class="button-row">
+            <button id="nextQuestionBtn" class="btn btn-primary flex-1">
+              Next <span class="btn-arrow">&#8594;</span>
+            </button>
+            <button id="skipQuestionBtn" class="btn btn-secondary">Skip</button>
+          </div>
+
+          <div class="answered-questions" id="answeredQuestions" style="display: none;">
+            <div class="section-label">Recorded Answers</div>
+            <div id="answeredList"></div>
+          </div>
+
+          <button id="finalizeEarlyBtn" class="btn btn-outline">Finalize Now</button>
         </div>
 
-        <button id="restartBtn" class="btn btn-outline">
-          <span class="btn-icon">&#8635;</span>
-          Start New Concern
-        </button>
+        <div id="summarySection" style="display: none;">
+          <div class="summary-section">
+            <div class="section-label">Formatted Concern for RO</div>
+            <div class="summary-text" id="summaryText"></div>
+          </div>
+
+          <div class="button-row">
+            <button id="copyBtn" class="btn btn-secondary flex-1">
+              <span class="btn-icon">&#128203;</span>
+              Copy
+            </button>
+            <button id="sendToTekmetricBtn" class="btn btn-primary flex-1">
+              <span class="btn-icon">&#128196;</span>
+              Add to RO
+            </button>
+          </div>
+
+          <button id="restartBtn" class="btn btn-outline">
+            <span class="btn-icon">&#8635;</span>
+            Start New Call
+          </button>
+        </div>
       </div>
 
       <div id="loadingOverlay" class="loading-overlay" style="display: none;">
         <div class="loading-spinner"></div>
         <div class="loading-text">Generating...</div>
       </div>
-    </main>
+    </div>
+
+    <!-- ==================== SALES SCRIPT TAB ==================== -->
+    <div id="salesTab" class="tab-content" style="display: none;">
+      <div class="sales-intro">
+        <p>Generate a customized sales script based on the current repair order.</p>
+      </div>
+
+      <div id="roInfoSection" class="ro-info-section">
+        <div class="section-header">
+          <span class="section-icon">&#128663;</span>
+          <span>Current Repair Order</span>
+        </div>
+        <div class="ro-details" id="roDetails">
+          <div class="ro-placeholder">Navigate to a Tekmetric repair order to load details</div>
+        </div>
+      </div>
+
+      <button id="generateSalesScriptBtn" class="btn btn-primary" disabled>
+        <span class="btn-icon">&#10024;</span>
+        Generate Sales Script
+      </button>
+
+      <div id="salesScriptSection" class="sales-script-section" style="display: none;">
+        <div class="section-header">
+          <span class="section-icon">&#128172;</span>
+          <span>Sales Talking Points</span>
+          <button class="copy-small-btn" id="copySalesScriptBtn" title="Copy">&#128203;</button>
+        </div>
+        <div class="sales-script-content" id="salesScriptContent"></div>
+      </div>
+
+      <div id="salesLoadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Generating sales script...</div>
+      </div>
+    </div>
 
     <footer class="panel-footer">
       <div class="connection-status" id="connectionStatus">
@@ -128,6 +187,7 @@
       </div>
     </footer>
 
+    <!-- Settings Modal -->
     <div id="settingsModal" class="settings-modal" style="display: none;">
       <div class="settings-content">
         <div class="settings-header">

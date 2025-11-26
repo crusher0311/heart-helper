@@ -17,6 +17,7 @@ import {
   generateConcernFollowUpQuestions,
   reviewConcernConversation,
   cleanConcernConversation,
+  generateSalesScript,
 } from "./ai";
 import archiver from "archiver";
 import { join } from "path";
@@ -541,6 +542,23 @@ export function registerRoutes(app: Express) {
       res.json(result);
     } catch (error: any) {
       console.error("Clean conversation error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Generate AI sales script based on repair order
+  app.post("/api/sales/generate-script", async (req, res) => {
+    try {
+      const { vehicle, jobs, customer } = req.body;
+      
+      if (!jobs || !Array.isArray(jobs) || jobs.length === 0) {
+        return res.status(400).json({ error: "At least one job is required" });
+      }
+      
+      const result = await generateSalesScript({ vehicle, jobs, customer });
+      res.json(result);
+    } catch (error: any) {
+      console.error("Sales script generation error:", error);
       res.status(500).json({ error: error.message });
     }
   });

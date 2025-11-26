@@ -1,50 +1,31 @@
-// HEART Helper Side Panel - Concern Intake
-// Provides AI-powered diagnostic question generation during customer calls
+// HEART Helper Side Panel
+// Provides Incoming Caller flow and AI Sales Script generation
 
 let appUrl = '';
-let currentStep = 1;
-let customerConcern = '';
+let phoneScript = 'Thank you for calling HEART Certified Auto Care, this is [Name], how may I help you?';
+let currentTab = 'incoming';
+
+// Incoming Caller State
+let customerName = '';
+let referralSource = '';
+let symptoms = [];
+let vehicleInfo = { year: '', make: '', model: '' };
 let followUpQuestions = [];
 let answeredQuestions = [];
 let currentQuestionIndex = 0;
 let cleanedConversation = '';
-let vehicleInfo = null;
-let phoneScript = '';
 
-// DOM Elements
-const step1 = document.getElementById('step1');
-const step2 = document.getElementById('step2');
-const step3 = document.getElementById('step3');
-const loadingOverlay = document.getElementById('loadingOverlay');
-const phoneScriptSection = document.getElementById('phoneScriptSection');
-const phoneScriptEl = document.getElementById('phoneScript');
-const vehicleInfoSection = document.getElementById('vehicleInfoSection');
-const vehicleInfoEl = document.getElementById('vehicleInfo');
-const connectionStatus = document.getElementById('connectionStatus');
+// Sales Script State
+let currentRO = null;
 
-// Initialize
+// ==================== INITIALIZATION ====================
+
 document.addEventListener('DOMContentLoaded', async () => {
   await loadSettings();
   setupEventListeners();
   await syncSettingsFromApp();
-  
-  // Listen for messages from content script (vehicle info)
-  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.type === 'VEHICLE_INFO') {
-      vehicleInfo = message.vehicleInfo;
-      updateVehicleInfoDisplay();
-    }
-    if (message.type === 'INITIAL_CONCERN') {
-      document.getElementById('customerConcern').value = message.concern || '';
-    }
-  });
-  
-  // Request current vehicle info from content script
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    if (tabs[0] && tabs[0].url.includes('tekmetric.com')) {
-      chrome.tabs.sendMessage(tabs[0].id, { type: 'GET_VEHICLE_INFO' });
-    }
-  });
+  setupMessageListeners();
+  requestCurrentROInfo();
 });
 
 async function loadSettings() {
@@ -59,17 +40,14 @@ async function loadSettings() {
 
 async function syncSettingsFromApp() {
   if (!appUrl) {
-    console.log('No app URL configured - cannot sync settings');
-    showConnectionWarning('Configure app URL in extension popup');
+    document.getElementById('phoneScript').textContent = phoneScript;
     return;
   }
   
-  // Validate URL format
   try {
     new URL(appUrl);
   } catch {
-    console.log('Invalid app URL format:', appUrl);
-    showConnectionWarning('Invalid app URL - check extension settings');
+    document.getElementById('phoneScript').textContent = phoneScript;
     return;
   }
   
@@ -79,203 +57,184 @@ async function syncSettingsFromApp() {
       headers: { 'Accept': 'application/json' }
     });
     
-    if (!response.ok) {
-      console.log('Settings API returned error:', response.status);
-      loadCachedScript(true);
-      return;
+    if (response.ok) {
+      const settings = await response.json();
+      if (settings.phoneAnswerScript) {
+        phoneScript = settings.phoneAnswerScript;
+        chrome.storage.local.set({ cachedPhoneScript: phoneScript });
+      }
+    } else {
+      // Try cached
+      const cached = await new Promise(r => chrome.storage.local.get(['cachedPhoneScript'], r));
+      if (cached.cachedPhoneScript) phoneScript = cached.cachedPhoneScript;
     }
-    
-    const settings = await response.json();
-    if (settings.phoneAnswerScript) {
-      phoneScript = settings.phoneAnswerScript;
-      phoneScriptSection.style.display = 'block';
-      phoneScriptEl.textContent = phoneScript;
-      
-      // Cache script for offline fallback
-      chrome.storage.local.set({ cachedPhoneScript: phoneScript });
-      console.log('Phone script synced from app');
-    }
-    
-    // Clear any connection warning
-    hideConnectionWarning();
   } catch (error) {
-    console.log('Could not sync settings from app:', error);
-    loadCachedScript(true);
+    console.log('Could not sync settings:', error);
+    const cached = await new Promise(r => chrome.storage.local.get(['cachedPhoneScript'], r));
+    if (cached.cachedPhoneScript) phoneScript = cached.cachedPhoneScript;
   }
+  
+  document.getElementById('phoneScript').textContent = phoneScript;
 }
 
-function loadCachedScript(showWarning = false) {
-  chrome.storage.local.get(['cachedPhoneScript'], (data) => {
-    if (data.cachedPhoneScript) {
-      phoneScript = data.cachedPhoneScript;
-      phoneScriptSection.style.display = 'block';
-      phoneScriptEl.textContent = phoneScript;
-      console.log('Using cached phone script');
-      if (showWarning) {
-        showConnectionWarning('Offline - using cached settings');
-      }
-    } else if (showWarning) {
-      showConnectionWarning('Cannot connect to app - check your connection');
+function setupMessageListeners() {
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.type === 'VEHICLE_INFO') {
+      document.getElementById('vehicleYear').value = message.vehicleInfo.year || '';
+      document.getElementById('vehicleMake').value = message.vehicleInfo.make || '';
+      document.getElementById('vehicleModel').value = message.vehicleInfo.model || '';
+    }
+    if (message.type === 'RO_INFO') {
+      currentRO = message.roInfo;
+      updateRODisplay();
     }
   });
 }
 
-function showConnectionWarning(message) {
-  let warning = document.getElementById('connectionWarning');
-  if (!warning) {
-    warning = document.createElement('div');
-    warning.id = 'connectionWarning';
-    warning.style.cssText = 'background:#fff3cd;border-bottom:1px solid #ffc107;padding:8px 16px;font-size:12px;color:#856404;display:flex;align-items:center;gap:6px;';
-    warning.innerHTML = '<span style="font-size:14px;">&#9888;</span><span id="warningText"></span>';
-    const container = document.querySelector('.panel-container');
-    if (container) {
-      container.insertBefore(warning, container.querySelector('.panel-header').nextSibling);
+function requestCurrentROInfo() {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    if (tabs[0] && tabs[0].url.includes('tekmetric.com')) {
+      chrome.tabs.sendMessage(tabs[0].id, { type: 'GET_VEHICLE_INFO' });
+      chrome.tabs.sendMessage(tabs[0].id, { type: 'GET_RO_INFO' });
     }
-  }
-  document.getElementById('warningText').textContent = message;
-  warning.style.display = 'flex';
+  });
 }
 
-function hideConnectionWarning() {
-  const warning = document.getElementById('connectionWarning');
-  if (warning) {
-    warning.style.display = 'none';
-  }
-}
+// ==================== EVENT LISTENERS ====================
 
 function setupEventListeners() {
-  // Step 1: Generate questions
-  document.getElementById('generateQuestionsBtn').addEventListener('click', generateQuestions);
+  // Tab switching
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
   
-  // Step 2: Answer questions
+  // Refresh button
+  document.getElementById('refreshBtn').addEventListener('click', () => {
+    syncSettingsFromApp();
+    requestCurrentROInfo();
+    showToast('Refreshed!');
+  });
+  
+  // Copy phone script
+  document.getElementById('copyScriptBtn').addEventListener('click', () => {
+    navigator.clipboard.writeText(phoneScript);
+    showToast('Phone script copied!');
+  });
+  
+  // Add symptom
+  document.getElementById('addSymptomBtn').addEventListener('click', addSymptomField);
+  
+  // Start conversation
+  document.getElementById('startConversationBtn').addEventListener('click', startConversation);
+  
+  // Question navigation
   document.getElementById('nextQuestionBtn').addEventListener('click', nextQuestion);
   document.getElementById('skipQuestionBtn').addEventListener('click', skipQuestion);
   document.getElementById('finalizeEarlyBtn').addEventListener('click', finalizeConversation);
   
-  // Step 3: Actions
-  document.getElementById('copyBtn').addEventListener('click', copyToClipboard);
+  // Summary actions
+  document.getElementById('copyBtn').addEventListener('click', copySummary);
   document.getElementById('sendToTekmetricBtn').addEventListener('click', sendToTekmetric);
   document.getElementById('restartBtn').addEventListener('click', restart);
+  
+  // Sales script
+  document.getElementById('generateSalesScriptBtn').addEventListener('click', generateSalesScript);
+  document.getElementById('copySalesScriptBtn').addEventListener('click', copySalesScript);
   
   // Settings
   document.getElementById('settingsBtn').addEventListener('click', openSettings);
   document.getElementById('closeSettingsBtn').addEventListener('click', closeSettings);
   document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
-  
-  // Close modal when clicking outside
   document.getElementById('settingsModal').addEventListener('click', (e) => {
     if (e.target.id === 'settingsModal') closeSettings();
   });
 }
 
-function openSettings() {
-  document.getElementById('appUrlInput').value = appUrl || '';
-  document.getElementById('settingsModal').style.display = 'flex';
-}
+// ==================== TAB SWITCHING ====================
 
-function closeSettings() {
-  document.getElementById('settingsModal').style.display = 'none';
-}
-
-async function saveSettings() {
-  const newUrl = document.getElementById('appUrlInput').value.trim();
+function switchTab(tab) {
+  currentTab = tab;
   
-  // Validate URL if provided
-  if (newUrl) {
-    try {
-      new URL(newUrl);
-    } catch {
-      showToast('Please enter a valid URL');
-      return;
-    }
-  }
-  
-  appUrl = newUrl;
-  
-  // Save to both sync and local storage for compatibility
-  chrome.storage.sync.set({ heartHelperUrl: newUrl });
-  chrome.storage.local.set({ appUrl: newUrl });
-  
-  updateConnectionStatus();
-  closeSettings();
-  showToast('Settings saved!');
-  
-  // Try to sync settings from app
-  if (newUrl) {
-    await syncSettingsFromApp();
-  }
-}
-
-function updateVehicleInfoDisplay() {
-  if (vehicleInfo && (vehicleInfo.year || vehicleInfo.make || vehicleInfo.model)) {
-    vehicleInfoSection.style.display = 'block';
-    vehicleInfoEl.textContent = `${vehicleInfo.year || ''} ${vehicleInfo.make || ''} ${vehicleInfo.model || ''}`.trim();
-  } else {
-    vehicleInfoSection.style.display = 'none';
-  }
-}
-
-function updateConnectionStatus() {
-  const dot = connectionStatus.querySelector('.status-dot');
-  const text = document.getElementById('connectionText');
-  
-  if (appUrl) {
-    dot.className = 'status-dot connected';
-    text.textContent = 'Connected';
-    text.style.cursor = 'default';
-    text.onclick = null;
-  } else {
-    dot.className = 'status-dot disconnected';
-    text.innerHTML = 'Not connected - <u style="cursor:pointer">click to configure</u>';
-    text.style.cursor = 'pointer';
-    text.onclick = openSettings;
-  }
-}
-
-
-function setStep(step) {
-  currentStep = step;
-  
-  // Update step indicators
-  document.querySelectorAll('.step').forEach((el, i) => {
-    el.classList.remove('active', 'completed');
-    if (i + 1 < step) el.classList.add('completed');
-    if (i + 1 === step) el.classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tab);
   });
   
-  // Show/hide step content
-  step1.style.display = step === 1 ? 'block' : 'none';
-  step2.style.display = step === 2 ? 'block' : 'none';
-  step3.style.display = step === 3 ? 'block' : 'none';
+  document.getElementById('incomingTab').style.display = tab === 'incoming' ? 'flex' : 'none';
+  document.getElementById('salesTab').style.display = tab === 'sales' ? 'flex' : 'none';
 }
 
-function showLoading(show, text = 'Generating...') {
-  loadingOverlay.style.display = show ? 'flex' : 'none';
-  loadingOverlay.querySelector('.loading-text').textContent = text;
+// ==================== INCOMING CALLER FLOW ====================
+
+function addSymptomField() {
+  const list = document.getElementById('symptomsList');
+  const row = document.createElement('div');
+  row.className = 'symptom-input-row';
+  row.innerHTML = `
+    <input type="text" class="symptom-input" placeholder="Describe another issue..." />
+    <button class="remove-symptom-btn" onclick="this.parentElement.remove()">×</button>
+  `;
+  list.appendChild(row);
+  row.querySelector('input').focus();
 }
 
-async function generateQuestions() {
-  customerConcern = document.getElementById('customerConcern').value.trim();
+function collectSymptoms() {
+  symptoms = [];
+  document.querySelectorAll('.symptom-input').forEach(input => {
+    const val = input.value.trim();
+    if (val) symptoms.push(val);
+  });
+  return symptoms;
+}
+
+async function startConversation() {
+  customerName = document.getElementById('customerName').value.trim();
+  referralSource = document.getElementById('referralSource').value.trim();
+  collectSymptoms();
+  vehicleInfo = {
+    year: document.getElementById('vehicleYear').value.trim(),
+    make: document.getElementById('vehicleMake').value.trim(),
+    model: document.getElementById('vehicleModel').value.trim()
+  };
   
-  if (!customerConcern) {
-    showToast('Please enter the customer\'s concern first');
+  if (symptoms.length === 0) {
+    showToast('Please enter at least one symptom/issue');
     return;
   }
   
   if (!appUrl) {
-    showToast('Please configure app URL in extension popup');
+    showToast('Please configure app URL in settings');
     return;
   }
   
-  showLoading(true, 'Generating questions...');
+  // Show questions step
+  document.getElementById('customerInfoStep').style.display = 'none';
+  document.getElementById('questionsStep').style.display = 'block';
+  
+  // Show customer summary
+  let summaryHtml = '';
+  if (customerName) summaryHtml += `<strong>${customerName}</strong>`;
+  if (vehicleInfo.year || vehicleInfo.make || vehicleInfo.model) {
+    summaryHtml += ` - ${vehicleInfo.year} ${vehicleInfo.make} ${vehicleInfo.model}`.trim();
+  }
+  summaryHtml += `<br>Issues: ${symptoms.join(', ')}`;
+  document.getElementById('customerSummary').innerHTML = summaryHtml;
+  
+  // Generate questions
+  await generateQuestions();
+}
+
+async function generateQuestions() {
+  const loadingOverlay = document.getElementById('loadingOverlay');
+  loadingOverlay.style.display = 'flex';
   
   try {
+    const concernText = symptoms.join('. ');
     const response = await fetch(`${appUrl}/api/concerns/generate-questions`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        customerConcern,
-        vehicleInfo
+        customerConcern: concernText,
+        vehicleInfo: vehicleInfo
       })
     });
     
@@ -283,30 +242,23 @@ async function generateQuestions() {
     
     const data = await response.json();
     followUpQuestions = data.questions || [];
+    
+    if (followUpQuestions.length === 0) {
+      // No questions, go straight to summary
+      finalizeConversation();
+      return;
+    }
+    
     currentQuestionIndex = 0;
     answeredQuestions = [];
-    
-    showLoading(false);
-    setStep(2);
     displayCurrentQuestion();
+    
   } catch (error) {
     console.error('Error generating questions:', error);
-    showLoading(false);
-    
-    // Fallback questions
-    followUpQuestions = [
-      "When did you first notice this issue?",
-      "Does it happen all the time or only sometimes?",
-      "Have you noticed any other changes with your vehicle?",
-      "Is this affecting your ability to drive safely?",
-      "Have you had any recent work done on the vehicle?"
-    ];
-    currentQuestionIndex = 0;
-    answeredQuestions = [];
-    
-    setStep(2);
-    displayCurrentQuestion();
-    showToast('Using default questions (offline mode)');
+    showToast('Could not generate questions. Finalizing...');
+    finalizeConversation();
+  } finally {
+    loadingOverlay.style.display = 'none';
   }
 }
 
@@ -315,48 +267,28 @@ function displayCurrentQuestion() {
   document.getElementById('totalQuestions').textContent = followUpQuestions.length;
   document.getElementById('currentQuestion').textContent = followUpQuestions[currentQuestionIndex];
   document.getElementById('customerAnswer').value = '';
+  document.getElementById('customerAnswer').focus();
   
-  // Update button text
-  const nextBtn = document.getElementById('nextQuestionBtn');
-  if (currentQuestionIndex >= followUpQuestions.length - 1) {
-    nextBtn.innerHTML = '<span class="btn-icon">&#128196;</span> Finalize';
-  } else {
-    nextBtn.innerHTML = 'Next <span class="btn-arrow">&#8594;</span>';
-  }
-  
-  // Update answered questions display
-  updateAnsweredDisplay();
-}
-
-function updateAnsweredDisplay() {
-  const container = document.getElementById('answeredQuestions');
-  const list = document.getElementById('answeredList');
-  
-  if (answeredQuestions.length > 0) {
-    container.style.display = 'block';
-    list.innerHTML = answeredQuestions.map(qa => `
-      <div class="answered-item">
-        <div class="question">${qa.question}</div>
-        <div class="answer">${qa.answer}</div>
-      </div>
-    `).join('');
-  } else {
-    container.style.display = 'none';
-  }
+  // Update step indicators
+  document.querySelectorAll('.step-indicator .step').forEach((el, i) => {
+    el.classList.toggle('active', i === 0);
+    el.classList.remove('completed');
+  });
 }
 
 function nextQuestion() {
   const answer = document.getElementById('customerAnswer').value.trim();
-  
   if (!answer) {
-    showToast('Please record the customer\'s answer');
+    showToast('Please enter the customer\'s answer');
     return;
   }
   
   answeredQuestions.push({
     question: followUpQuestions[currentQuestionIndex],
-    answer
+    answer: answer
   });
+  
+  updateAnsweredList();
   
   if (currentQuestionIndex < followUpQuestions.length - 1) {
     currentQuestionIndex++;
@@ -375,93 +307,262 @@ function skipQuestion() {
   }
 }
 
-async function finalizeConversation() {
-  const notes = document.getElementById('additionalNotes')?.value.trim() || '';
+function updateAnsweredList() {
+  const container = document.getElementById('answeredQuestions');
+  const list = document.getElementById('answeredList');
   
-  showLoading(true, 'Formatting summary...');
+  if (answeredQuestions.length > 0) {
+    container.style.display = 'block';
+    list.innerHTML = answeredQuestions.map(qa => `
+      <div class="answered-item">
+        <div class="question">${qa.question}</div>
+        <div class="answer">${qa.answer}</div>
+      </div>
+    `).join('');
+  }
+}
+
+async function finalizeConversation() {
+  const loadingOverlay = document.getElementById('loadingOverlay');
+  loadingOverlay.style.display = 'flex';
+  loadingOverlay.querySelector('.loading-text').textContent = 'Finalizing...';
   
   try {
+    const concernText = symptoms.join('. ');
     const response = await fetch(`${appUrl}/api/concerns/clean-conversation`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        customerConcern,
-        answeredQuestions,
-        conversationNotes: notes
+        customerConcern: concernText,
+        answeredQuestions: answeredQuestions,
+        conversationNotes: `Customer: ${customerName || 'Unknown'}. Referral: ${referralSource || 'Not specified'}. Vehicle: ${vehicleInfo.year} ${vehicleInfo.make} ${vehicleInfo.model}`.trim()
       })
     });
     
-    if (!response.ok) throw new Error('Failed to clean conversation');
+    if (!response.ok) throw new Error('Failed to finalize');
     
     const data = await response.json();
-    cleanedConversation = data.cleanedText || '';
+    cleanedConversation = data.cleanedText || symptoms.join('. ');
     
-    showLoading(false);
-    setStep(3);
-    document.getElementById('summaryText').textContent = cleanedConversation;
   } catch (error) {
-    console.error('Error cleaning conversation:', error);
-    showLoading(false);
-    
-    // Fallback: simple concatenation
-    cleanedConversation = `Customer reports: ${customerConcern}. ` +
-      answeredQuestions.map(qa => qa.answer).join('. ');
-    
-    setStep(3);
-    document.getElementById('summaryText').textContent = cleanedConversation;
-    showToast('Using simple format (offline mode)');
+    console.error('Error finalizing:', error);
+    // Fallback to basic format
+    cleanedConversation = `Customer reports: ${symptoms.join('. ')}`;
+    if (answeredQuestions.length > 0) {
+      cleanedConversation += '\n\n' + answeredQuestions.map(qa => `${qa.question}: ${qa.answer}`).join('\n');
+    }
+  } finally {
+    loadingOverlay.style.display = 'none';
   }
+  
+  // Show summary section
+  document.getElementById('questionSection').style.display = 'none';
+  document.getElementById('summarySection').style.display = 'block';
+  document.getElementById('summaryText').textContent = cleanedConversation;
+  
+  // Update step indicators
+  document.querySelectorAll('.step-indicator .step').forEach((el, i) => {
+    if (i === 0) el.classList.add('completed');
+    el.classList.toggle('active', i === 1);
+  });
 }
 
-async function copyToClipboard() {
-  try {
-    await navigator.clipboard.writeText(cleanedConversation);
-    showToast('Copied to clipboard!');
-  } catch (error) {
-    console.error('Copy failed:', error);
-    showToast('Copy failed - please select and copy manually');
-  }
+function copySummary() {
+  navigator.clipboard.writeText(cleanedConversation);
+  showToast('Copied to clipboard!');
 }
 
 function sendToTekmetric() {
-  // Send message to content script to add concern to RO
+  // Send cleaned conversation to content script to paste into Tekmetric
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs[0] && tabs[0].url.includes('tekmetric.com')) {
-      chrome.tabs.sendMessage(tabs[0].id, {
-        type: 'ADD_CONCERN_TO_RO',
-        concernText: cleanedConversation
-      }, (response) => {
-        if (chrome.runtime.lastError) {
-          showToast('Could not communicate with Tekmetric page');
-          return;
-        }
-        if (response && response.success) {
-          showToast('Added to repair order!');
-        } else {
-          showToast('Could not find concern field on page');
-        }
+      chrome.tabs.sendMessage(tabs[0].id, { 
+        type: 'PASTE_CONCERN', 
+        text: cleanedConversation 
       });
+      showToast('Sent to Tekmetric!');
     } else {
-      showToast('Please open a Tekmetric repair order first');
+      navigator.clipboard.writeText(cleanedConversation);
+      showToast('Copied! Switch to Tekmetric to paste.');
     }
   });
 }
 
 function restart() {
-  customerConcern = '';
+  // Reset state
+  customerName = '';
+  referralSource = '';
+  symptoms = [];
+  vehicleInfo = { year: '', make: '', model: '' };
   followUpQuestions = [];
   answeredQuestions = [];
   currentQuestionIndex = 0;
   cleanedConversation = '';
   
-  document.getElementById('customerConcern').value = '';
-  document.getElementById('customerAnswer').value = '';
-  document.getElementById('additionalNotes').value = '';
-  document.getElementById('answeredList').innerHTML = '';
-  document.getElementById('answeredQuestions').style.display = 'none';
+  // Reset UI
+  document.getElementById('customerName').value = '';
+  document.getElementById('referralSource').value = '';
+  document.getElementById('vehicleYear').value = '';
+  document.getElementById('vehicleMake').value = '';
+  document.getElementById('vehicleModel').value = '';
   
-  setStep(1);
+  // Reset symptoms list to single input
+  const symptomsList = document.getElementById('symptomsList');
+  symptomsList.innerHTML = `
+    <div class="symptom-input-row">
+      <input type="text" class="symptom-input" placeholder="Describe the issue..." />
+      <button class="add-symptom-btn" id="addSymptomBtn">+</button>
+    </div>
+  `;
+  document.getElementById('addSymptomBtn').addEventListener('click', addSymptomField);
+  
+  // Reset sections
+  document.getElementById('questionSection').style.display = 'block';
+  document.getElementById('summarySection').style.display = 'none';
+  document.getElementById('answeredQuestions').style.display = 'none';
+  document.getElementById('answeredList').innerHTML = '';
+  
+  // Show customer info step
+  document.getElementById('questionsStep').style.display = 'none';
+  document.getElementById('customerInfoStep').style.display = 'block';
+  
+  // Refresh vehicle info from current page
+  requestCurrentROInfo();
 }
+
+// ==================== SALES SCRIPT ====================
+
+function updateRODisplay() {
+  const details = document.getElementById('roDetails');
+  const btn = document.getElementById('generateSalesScriptBtn');
+  
+  if (!currentRO || !currentRO.jobs || currentRO.jobs.length === 0) {
+    details.innerHTML = '<div class="ro-placeholder">Navigate to a Tekmetric repair order to load details</div>';
+    btn.disabled = true;
+    return;
+  }
+  
+  let html = '';
+  if (currentRO.vehicle) {
+    html += `<div class="ro-vehicle">${currentRO.vehicle.year || ''} ${currentRO.vehicle.make || ''} ${currentRO.vehicle.model || ''}</div>`;
+  }
+  
+  html += '<div class="ro-jobs">';
+  currentRO.jobs.forEach(job => {
+    html += `<div class="ro-job-item">• ${job.name || job.description || 'Unknown job'}</div>`;
+  });
+  html += '</div>';
+  
+  details.innerHTML = html;
+  btn.disabled = false;
+}
+
+async function generateSalesScript() {
+  if (!currentRO || !currentRO.jobs) {
+    showToast('No repair order data available');
+    return;
+  }
+  
+  if (!appUrl) {
+    showToast('Please configure app URL in settings');
+    return;
+  }
+  
+  const loadingOverlay = document.getElementById('salesLoadingOverlay');
+  loadingOverlay.style.display = 'flex';
+  
+  try {
+    const response = await fetch(`${appUrl}/api/sales/generate-script`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        vehicle: currentRO.vehicle,
+        jobs: currentRO.jobs,
+        customer: currentRO.customer
+      })
+    });
+    
+    if (!response.ok) throw new Error('Failed to generate sales script');
+    
+    const data = await response.json();
+    displaySalesScript(data.script);
+    
+  } catch (error) {
+    console.error('Error generating sales script:', error);
+    showToast('Could not generate sales script');
+  } finally {
+    loadingOverlay.style.display = 'none';
+  }
+}
+
+function displaySalesScript(script) {
+  const section = document.getElementById('salesScriptSection');
+  const content = document.getElementById('salesScriptContent');
+  
+  content.innerHTML = script;
+  section.style.display = 'block';
+}
+
+function copySalesScript() {
+  const content = document.getElementById('salesScriptContent').innerText;
+  navigator.clipboard.writeText(content);
+  showToast('Sales script copied!');
+}
+
+// ==================== SETTINGS ====================
+
+function updateConnectionStatus() {
+  const dot = document.querySelector('.status-dot');
+  const text = document.getElementById('connectionText');
+  
+  if (appUrl) {
+    dot.className = 'status-dot connected';
+    text.textContent = 'Connected';
+    text.style.cursor = 'default';
+    text.onclick = null;
+  } else {
+    dot.className = 'status-dot disconnected';
+    text.innerHTML = 'Not connected - <u style="cursor:pointer">click to configure</u>';
+    text.style.cursor = 'pointer';
+    text.onclick = openSettings;
+  }
+}
+
+function openSettings() {
+  document.getElementById('appUrlInput').value = appUrl || '';
+  document.getElementById('settingsModal').style.display = 'flex';
+}
+
+function closeSettings() {
+  document.getElementById('settingsModal').style.display = 'none';
+}
+
+async function saveSettings() {
+  const newUrl = document.getElementById('appUrlInput').value.trim();
+  
+  if (newUrl) {
+    try {
+      new URL(newUrl);
+    } catch {
+      showToast('Please enter a valid URL');
+      return;
+    }
+  }
+  
+  appUrl = newUrl;
+  chrome.storage.sync.set({ heartHelperUrl: newUrl });
+  chrome.storage.local.set({ appUrl: newUrl });
+  
+  updateConnectionStatus();
+  closeSettings();
+  showToast('Settings saved!');
+  
+  if (newUrl) {
+    await syncSettingsFromApp();
+  }
+}
+
+// ==================== UTILITIES ====================
 
 function showToast(message) {
   const existing = document.querySelector('.copied-toast');

@@ -681,3 +681,120 @@ Return ONLY valid JSON:
     return { cleanedText: parts.join('. ') };
   }
 }
+
+// ==========================================
+// Sales Script Generation
+// ==========================================
+
+export interface SalesScriptRequest {
+  vehicle?: {
+    year?: string;
+    make?: string;
+    model?: string;
+  };
+  jobs: Array<{
+    name?: string;
+    description?: string;
+    laborTotal?: number;
+    partsTotal?: number;
+  }>;
+  customer?: {
+    name?: string;
+  };
+}
+
+export interface SalesScriptResponse {
+  script: string;
+}
+
+/**
+ * Generates a customized sales script based on the repair order
+ * Helps service advisors communicate value and build trust with customers
+ */
+export async function generateSalesScript(
+  request: SalesScriptRequest
+): Promise<SalesScriptResponse> {
+  const { vehicle, jobs, customer } = request;
+
+  const vehicleDesc = vehicle 
+    ? `${vehicle.year || ''} ${vehicle.make || ''} ${vehicle.model || ''}`.trim() || 'their vehicle'
+    : 'their vehicle';
+
+  const jobsList = jobs.map((job, i) => {
+    let desc = job.name || job.description || 'Service';
+    if (job.laborTotal || job.partsTotal) {
+      desc += ` (~$${((job.laborTotal || 0) + (job.partsTotal || 0)).toFixed(0)})`;
+    }
+    return `${i + 1}. ${desc}`;
+  }).join('\n');
+
+  const prompt = `You are an experienced automotive service advisor at HEART Certified Auto Care. Generate a customer-friendly sales script to help explain the recommended services and build trust.
+
+Vehicle: ${vehicleDesc}
+${customer?.name ? `Customer: ${customer.name}` : ''}
+
+Recommended Services:
+${jobsList}
+
+Create a sales script with:
+1. **Opening** - Warm, professional greeting referencing their specific vehicle
+2. **Service Explanation** - For each service:
+   - Explain what it is in simple terms
+   - Why it's important for their vehicle/safety
+   - What happens if they delay/decline
+3. **Value Points** - Emphasize HEART's quality, warranty, and customer-first approach
+4. **Handling Objections** - Brief tips for common concerns (price, timing, necessity)
+5. **Close** - How to confidently ask for the sale
+
+Format the response as HTML with headers (h4), bullet points (ul/li), and emphasis (strong).
+Keep it conversational but professional. Focus on safety and value, not pressure.`;
+
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: "You are an automotive service advisor helping colleagues communicate effectively with customers. Create helpful, honest sales scripts that focus on education and trust-building. Return formatted HTML."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      max_completion_tokens: 1500,
+    });
+
+    const content = response.choices[0]?.message?.content;
+    if (!content) {
+      throw new Error("No response from AI");
+    }
+
+    return { script: content };
+  } catch (error) {
+    console.error("AI sales script generation error:", error);
+    
+    // Fallback: basic template
+    const fallbackScript = `
+      <h4>Opening</h4>
+      <p>Thank you for bringing in your ${vehicleDesc} today. Let me walk you through what we found and our recommendations.</p>
+      
+      <h4>Recommended Services</h4>
+      <ul>
+        ${jobs.map(job => `<li><strong>${job.name || job.description || 'Service'}</strong> - Important for your vehicle's reliability and safety.</li>`).join('')}
+      </ul>
+      
+      <h4>Value Points</h4>
+      <ul>
+        <li>All work backed by HEART's warranty</li>
+        <li>Factory-trained technicians</li>
+        <li>Quality parts that meet or exceed OEM specifications</li>
+      </ul>
+      
+      <h4>Next Steps</h4>
+      <p>Do you have any questions about these services? I'm happy to explain anything in more detail.</p>
+    `;
+    
+    return { script: fallbackScript };
+  }
+}

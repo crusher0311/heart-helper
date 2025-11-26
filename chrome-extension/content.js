@@ -1327,6 +1327,32 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   }
   
+  // Get full RO info for sales script generation
+  if (message.type === 'GET_RO_INFO') {
+    const roInfo = extractROInfo();
+    sendResponse({ roInfo });
+    return true;
+  }
+  
+  // Paste cleaned concern text into Tekmetric
+  if (message.type === 'PASTE_CONCERN') {
+    const concernField = findConcernField();
+    if (concernField) {
+      if (concernField.tagName === 'TEXTAREA' || concernField.tagName === 'INPUT') {
+        concernField.value = message.text;
+        concernField.dispatchEvent(new Event('input', { bubbles: true }));
+        concernField.dispatchEvent(new Event('change', { bubbles: true }));
+      } else {
+        concernField.textContent = message.text;
+        concernField.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      sendResponse({ success: true });
+    } else {
+      sendResponse({ success: false, error: 'Concern field not found' });
+    }
+    return true;
+  }
+  
   // Add cleaned concern text to the repair order
   if (message.type === 'ADD_CONCERN_TO_RO') {
     const concernText = message.concernText;
@@ -1456,4 +1482,105 @@ function findConcernField() {
   }
   
   return null;
+}
+
+// Extract full repair order info for sales script generation
+function extractROInfo() {
+  const roInfo = {
+    vehicle: null,
+    jobs: [],
+    customer: null
+  };
+  
+  try {
+    // Get vehicle info
+    roInfo.vehicle = extractVehicleInfo();
+    
+    // Extract customer name if available
+    const customerElements = document.querySelectorAll('[class*="customer"], [class*="Customer"], [data-customer-name]');
+    for (const el of customerElements) {
+      const text = el.textContent?.trim();
+      if (text && text.length > 2 && text.length < 100) {
+        // Avoid grabbing labels
+        if (!text.toLowerCase().includes('customer info') && !text.toLowerCase().includes('customer:')) {
+          roInfo.customer = { name: text };
+          break;
+        }
+      }
+    }
+    
+    // Extract jobs/services from the RO
+    // Look for job cards, rows, or sections
+    const jobSelectors = [
+      '[class*="job-card"]', 
+      '[class*="JobCard"]',
+      '[class*="service-item"]',
+      '[class*="ServiceItem"]',
+      'tr[class*="job"]',
+      'div[class*="labor"]',
+      '[data-job-name]',
+      '[data-service-name]'
+    ];
+    
+    const seenJobs = new Set();
+    
+    for (const selector of jobSelectors) {
+      const elements = document.querySelectorAll(selector);
+      for (const el of elements) {
+        // Try to find job name
+        const nameEl = el.querySelector('[class*="name"], [class*="description"], h3, h4, strong, .title');
+        const name = nameEl?.textContent?.trim() || el.getAttribute('data-job-name') || el.getAttribute('data-service-name');
+        
+        if (name && !seenJobs.has(name) && name.length > 2 && name.length < 200) {
+          seenJobs.add(name);
+          
+          // Try to get cost info
+          let laborTotal = 0;
+          let partsTotal = 0;
+          
+          const priceMatch = el.textContent?.match(/\$[\d,]+\.?\d*/g);
+          if (priceMatch && priceMatch.length > 0) {
+            // Get the total (usually the last or largest number)
+            const prices = priceMatch.map(p => parseFloat(p.replace(/[$,]/g, '')));
+            laborTotal = Math.max(...prices);
+          }
+          
+          roInfo.jobs.push({
+            name,
+            description: name,
+            laborTotal,
+            partsTotal
+          });
+        }
+      }
+    }
+    
+    // Fallback: Look for any section that lists services
+    if (roInfo.jobs.length === 0) {
+      // Look for list items or rows that might contain job names
+      const listItems = document.querySelectorAll('li, tr, [role="listitem"]');
+      for (const item of listItems) {
+        const text = item.textContent?.trim();
+        // Look for automotive service-like patterns
+        if (text && text.length > 5 && text.length < 150) {
+          const servicePatterns = /oil change|brake|tire|alignment|filter|fluid|tune|inspection|battery|belt|hose|cooling|engine|transmission|steering|suspension|exhaust|electrical|diagnostic/i;
+          if (servicePatterns.test(text)) {
+            if (!seenJobs.has(text)) {
+              seenJobs.add(text);
+              roInfo.jobs.push({
+                name: text.substring(0, 100),
+                description: text.substring(0, 100)
+              });
+            }
+          }
+        }
+      }
+    }
+    
+    console.log('Extracted RO info:', roInfo);
+  } catch (error) {
+    console.error('Error extracting RO info:', error);
+  }
+  
+  return roInfo;
 }
