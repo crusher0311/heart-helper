@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Heart, Sparkles, Phone, FileText, TrendingUp, Users } from "lucide-react";
@@ -7,11 +8,25 @@ export default function Landing() {
     window.location.href = "/api/login";
   };
 
+  useEffect(() => {
+    document.title = "HEART Helper - AI-Powered Service Advisor Assistant";
+    
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "HEART Helper finds similar repair jobs, generates personalized sales scripts, and helps service advisors deliver exceptional customer service with AI-powered assistance.");
+    } else {
+      const meta = document.createElement("meta");
+      meta.name = "description";
+      meta.content = "HEART Helper finds similar repair jobs, generates personalized sales scripts, and helps service advisors deliver exceptional customer service with AI-powered assistance.";
+      document.head.appendChild(meta);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto px-4 py-8">
-        <header className="flex items-center justify-between mb-16">
-          <div className="flex items-center gap-3">
+        <header className="flex items-center justify-between mb-16" data-testid="landing-header">
+          <div className="flex items-center gap-3" data-testid="landing-brand">
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
               <Heart className="w-6 h-6 text-primary-foreground" />
             </div>
@@ -37,8 +52,8 @@ export default function Landing() {
             </Button>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
-            <Card className="text-left">
+          <div className="grid md:grid-cols-3 gap-6 mb-16" data-testid="features-grid">
+            <Card className="text-left" data-testid="feature-card-search">
               <CardHeader>
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-2">
                   <FileText className="w-6 h-6 text-primary" />
@@ -55,7 +70,7 @@ export default function Landing() {
               </CardContent>
             </Card>
 
-            <Card className="text-left">
+            <Card className="text-left" data-testid="feature-card-intake">
               <CardHeader>
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-2">
                   <Phone className="w-6 h-6 text-primary" />
@@ -72,7 +87,7 @@ export default function Landing() {
               </CardContent>
             </Card>
 
-            <Card className="text-left">
+            <Card className="text-left" data-testid="feature-card-scripts">
               <CardHeader>
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-2">
                   <TrendingUp className="w-6 h-6 text-primary" />
