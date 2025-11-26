@@ -1171,18 +1171,31 @@ function injectFloatingHeartButton() {
     e.preventDefault();
     e.stopPropagation();
     
-    // Open side panel for concern intake and phone script
-    console.log("Opening HEART Helper side panel...");
-    chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" }, (response) => {
-      if (chrome.runtime.lastError) {
-        console.error("Failed to open side panel:", chrome.runtime.lastError);
-        showErrorNotification('Could not open side panel. Try clicking the extension icon.');
-      } else if (response?.success) {
-        console.log("Side panel opened successfully");
-      } else {
-        console.error("Side panel failed to open:", response?.error);
-        showErrorNotification('Side panel failed to open. Try reloading the page.');
+    // Get vehicle info and open HEART Helper app for searching
+    const vehicleInfo = extractVehicleInfo();
+    
+    chrome.storage.local.get(['appUrl', 'heartHelperUrl'], (result) => {
+      const appUrl = result.appUrl || result.heartHelperUrl;
+      
+      if (!appUrl) {
+        // Try to open side panel to configure settings
+        chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" }, (response) => {
+          if (chrome.runtime.lastError || !response?.success) {
+            showErrorNotification('Please click the extension icon to configure HEART Helper URL');
+          }
+        });
+        return;
       }
+      
+      // Build search URL with vehicle info
+      const params = new URLSearchParams();
+      if (vehicleInfo.year) params.set('year', vehicleInfo.year);
+      if (vehicleInfo.make) params.set('make', vehicleInfo.make);
+      if (vehicleInfo.model) params.set('model', vehicleInfo.model);
+      
+      const searchUrl = params.toString() ? `${appUrl}/?${params.toString()}` : appUrl;
+      console.log("Opening HEART Helper app:", searchUrl);
+      window.open(searchUrl, '_blank');
     });
   });
   
@@ -1496,82 +1509,99 @@ function extractROInfo() {
     // Get vehicle info
     roInfo.vehicle = extractVehicleInfo();
     
-    // Extract customer name if available
-    const customerElements = document.querySelectorAll('[class*="customer"], [class*="Customer"], [data-customer-name]');
-    for (const el of customerElements) {
-      const text = el.textContent?.trim();
-      if (text && text.length > 2 && text.length < 100) {
-        // Avoid grabbing labels
-        if (!text.toLowerCase().includes('customer info') && !text.toLowerCase().includes('customer:')) {
-          roInfo.customer = { name: text };
-          break;
-        }
+    // Extract customer name from RO header (e.g., "CAREY LEWIS's 2015 Subaru...")
+    const roHeader = document.querySelector('h1, h2, [class*="ro-header"], [class*="RoHeader"]');
+    if (roHeader) {
+      const headerText = roHeader.textContent || '';
+      // Match pattern like "CAREY LEWIS's" at the start
+      const customerMatch = headerText.match(/^[A-Z\s]+(?='s\s)/);
+      if (customerMatch) {
+        roInfo.customer = { name: customerMatch[0].trim() };
       }
     }
-    
-    // Extract jobs/services from the RO
-    // Look for job cards, rows, or sections
-    const jobSelectors = [
-      '[class*="job-card"]', 
-      '[class*="JobCard"]',
-      '[class*="service-item"]',
-      '[class*="ServiceItem"]',
-      'tr[class*="job"]',
-      'div[class*="labor"]',
-      '[data-job-name]',
-      '[data-service-name]'
-    ];
     
     const seenJobs = new Set();
     
-    for (const selector of jobSelectors) {
-      const elements = document.querySelectorAll(selector);
-      for (const el of elements) {
-        // Try to find job name
-        const nameEl = el.querySelector('[class*="name"], [class*="description"], h3, h4, strong, .title');
-        const name = nameEl?.textContent?.trim() || el.getAttribute('data-job-name') || el.getAttribute('data-service-name');
+    // Strategy 1: Find the "Jobs" section and extract job names
+    // Look for section headers containing "Jobs" or job accordions
+    const allText = document.body.innerText;
+    
+    // Find all elements that could be job headers/titles
+    // Tekmetric shows jobs like "TIRE SWAP WITH WHEELS - WINTER" with status/date below
+    const allElements = document.querySelectorAll('*');
+    
+    for (const el of allElements) {
+      // Skip if too many children (not a leaf/title element)
+      if (el.children.length > 5) continue;
+      
+      const text = el.textContent?.trim() || '';
+      
+      // Skip too short or too long texts
+      if (text.length < 5 || text.length > 100) continue;
+      
+      // Skip if it's mostly numbers/dates
+      if (/^\d+[\/\-\.\d\s:]+$/.test(text)) continue;
+      if (/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/i.test(text)) continue;
+      
+      // Look for job-like patterns (all caps or title case with automotive keywords)
+      const isAllCaps = text === text.toUpperCase() && /[A-Z]{3,}/.test(text);
+      const hasJobKeywords = /tire|wheel|brake|oil|engine|transmission|alignment|service|repair|replace|install|inspect|filter|fluid|swap|change|mount|balance|rotate/i.test(text);
+      
+      // Check if parent/context suggests this is a job title
+      const parentClasses = (el.parentElement?.className || '') + (el.className || '');
+      const isInJobContext = /job|service|labor|work/i.test(parentClasses);
+      
+      if ((isAllCaps && hasJobKeywords) || (hasJobKeywords && isInJobContext)) {
+        // Clean up the text (remove dates, statuses, etc.)
+        let jobName = text.replace(/Approved.*$/i, '').replace(/Pending.*$/i, '').replace(/\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}/g, '').trim();
         
-        if (name && !seenJobs.has(name) && name.length > 2 && name.length < 200) {
-          seenJobs.add(name);
-          
-          // Try to get cost info
-          let laborTotal = 0;
-          let partsTotal = 0;
-          
-          const priceMatch = el.textContent?.match(/\$[\d,]+\.?\d*/g);
-          if (priceMatch && priceMatch.length > 0) {
-            // Get the total (usually the last or largest number)
-            const prices = priceMatch.map(p => parseFloat(p.replace(/[$,]/g, '')));
-            laborTotal = Math.max(...prices);
+        // Skip if it looks like a labor description (usually longer and in sentence form)
+        if (jobName.split(' ').length > 8) continue;
+        
+        // Skip if already seen or too generic
+        if (seenJobs.has(jobName) || jobName.length < 5) continue;
+        
+        seenJobs.add(jobName);
+        roInfo.jobs.push({
+          name: jobName,
+          description: jobName
+        });
+      }
+    }
+    
+    // Strategy 2: Look for labor line items
+    if (roInfo.jobs.length === 0) {
+      const laborRows = document.querySelectorAll('tr, [class*="labor-row"], [class*="LaborRow"]');
+      for (const row of laborRows) {
+        const cells = row.querySelectorAll('td, [class*="cell"]');
+        for (const cell of cells) {
+          const text = cell.textContent?.trim() || '';
+          if (text.length > 10 && text.length < 100 && /install|replace|repair|service|inspect/i.test(text)) {
+            if (!seenJobs.has(text)) {
+              seenJobs.add(text);
+              roInfo.jobs.push({
+                name: text,
+                description: text
+              });
+            }
           }
-          
-          roInfo.jobs.push({
-            name,
-            description: name,
-            laborTotal,
-            partsTotal
-          });
         }
       }
     }
     
-    // Fallback: Look for any section that lists services
+    // Strategy 3: Fallback - look for any automotive service terms
     if (roInfo.jobs.length === 0) {
-      // Look for list items or rows that might contain job names
-      const listItems = document.querySelectorAll('li, tr, [role="listitem"]');
-      for (const item of listItems) {
-        const text = item.textContent?.trim();
-        // Look for automotive service-like patterns
-        if (text && text.length > 5 && text.length < 150) {
-          const servicePatterns = /oil change|brake|tire|alignment|filter|fluid|tune|inspection|battery|belt|hose|cooling|engine|transmission|steering|suspension|exhaust|electrical|diagnostic/i;
-          if (servicePatterns.test(text)) {
-            if (!seenJobs.has(text)) {
-              seenJobs.add(text);
-              roInfo.jobs.push({
-                name: text.substring(0, 100),
-                description: text.substring(0, 100)
-              });
-            }
+      const allDivs = document.querySelectorAll('div, span, td');
+      for (const el of allDivs) {
+        const text = el.textContent?.trim() || '';
+        if (text.length > 5 && text.length < 80) {
+          const servicePatterns = /tire swap|oil change|brake (pad|rotor|service)|wheel alignment|transmission|filter|coolant flush|tune.?up|inspection|battery|belt|timing/i;
+          if (servicePatterns.test(text) && !seenJobs.has(text)) {
+            seenJobs.add(text);
+            roInfo.jobs.push({
+              name: text.substring(0, 80),
+              description: text.substring(0, 80)
+            });
           }
         }
       }

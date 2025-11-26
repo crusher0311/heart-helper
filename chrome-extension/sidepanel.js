@@ -93,9 +93,33 @@ function setupMessageListeners() {
 
 function requestCurrentROInfo() {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    if (tabs[0] && tabs[0].url.includes('tekmetric.com')) {
-      chrome.tabs.sendMessage(tabs[0].id, { type: 'GET_VEHICLE_INFO' });
-      chrome.tabs.sendMessage(tabs[0].id, { type: 'GET_RO_INFO' });
+    if (tabs[0] && tabs[0].url && tabs[0].url.includes('tekmetric.com')) {
+      // Get vehicle info
+      chrome.tabs.sendMessage(tabs[0].id, { type: 'GET_VEHICLE_INFO' }, (response) => {
+        if (chrome.runtime.lastError) {
+          console.log('Could not get vehicle info:', chrome.runtime.lastError.message);
+          return;
+        }
+        if (response && response.vehicleInfo) {
+          document.getElementById('vehicleYear').value = response.vehicleInfo.year || '';
+          document.getElementById('vehicleMake').value = response.vehicleInfo.make || '';
+          document.getElementById('vehicleModel').value = response.vehicleInfo.model || '';
+        }
+      });
+      
+      // Get RO info for sales script
+      chrome.tabs.sendMessage(tabs[0].id, { type: 'GET_RO_INFO' }, (response) => {
+        if (chrome.runtime.lastError) {
+          console.log('Could not get RO info:', chrome.runtime.lastError.message);
+          return;
+        }
+        if (response && response.roInfo) {
+          currentRO = response.roInfo;
+          updateRODisplay();
+        }
+      });
+    } else {
+      console.log('Not on a Tekmetric page');
     }
   });
 }
