@@ -9,13 +9,17 @@ import { JobCardSkeleton, JobDetailSkeleton } from "@/components/loading-skeleto
 import { RecentSearches } from "@/components/recent-searches";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Settings, RefreshCw, Clock } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Sparkles, Settings, RefreshCw, Clock, LogOut, User } from "lucide-react";
 import { Link } from "wouter";
+import { useAuth } from "@/hooks/useAuth";
 import type { SearchJobRequest, SearchResult } from "@shared/schema";
 import { formatDistanceToNow } from "date-fns";
 import heartLogo from "@assets/HCAC_1764080802250.png";
 
 export default function Home() {
+  const { user } = useAuth();
   const [searchParams, setSearchParams] = useState<SearchJobRequest | null>(null);
   const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
   const [results, setResults] = useState<SearchResult[] | null>(null);
@@ -188,6 +192,42 @@ export default function Home() {
                 <Settings className="w-4 h-4" />
               </Button>
             </Link>
+            {user && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-8 w-8 rounded-full" data-testid="button-user-menu">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src={user.profileImageUrl || undefined} alt={user.firstName || "User"} />
+                      <AvatarFallback>
+                        {user.firstName?.[0] || user.email?.[0]?.toUpperCase() || "U"}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <div className="px-2 py-1.5">
+                    <p className="text-sm font-medium">{user.firstName} {user.lastName}</p>
+                    <p className="text-xs text-muted-foreground">{user.email}</p>
+                  </div>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href="/settings" className="cursor-pointer">
+                      <User className="mr-2 h-4 w-4" />
+                      <span>Preferences</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem 
+                    className="cursor-pointer text-destructive focus:text-destructive"
+                    onClick={() => window.location.href = "/api/logout"}
+                    data-testid="button-logout"
+                  >
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Log out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </div>
         </div>
       </header>

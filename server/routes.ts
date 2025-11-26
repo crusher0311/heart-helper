@@ -8,6 +8,7 @@ import {
   generateConcernQuestionsRequestSchema,
   reviewConcernConversationRequestSchema,
   cleanConversationRequestSchema,
+  insertScriptFeedbackSchema,
 } from "@shared/schema";
 import { 
   scoreJobMatches, 
@@ -31,8 +32,88 @@ import {
   type ShopLocation
 } from "./tekmetric";
 import { z } from "zod";
+import { setupAuth, isAuthenticated } from "./replitAuth";
 
-export function registerRoutes(app: Express) {
+export async function registerRoutes(app: Express) {
+  // Set up Replit Auth
+  await setupAuth(app);
+
+  // Get current authenticated user
+  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const user = await storage.getUserWithPreferences(userId);
+      res.json(user);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      res.status(500).json({ message: "Failed to fetch user" });
+    }
+  });
+
+  // Get user preferences
+  app.get('/api/user/preferences', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const prefs = await storage.getUserPreferences(userId);
+      res.json(prefs || {});
+    } catch (error) {
+      console.error("Error fetching preferences:", error);
+      res.status(500).json({ message: "Failed to fetch preferences" });
+    }
+  });
+
+  // Update user preferences
+  app.put('/api/user/preferences', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const { displayName, defaultShopId, defaultTool, personalTraining } = req.body;
+      
+      const prefs = await storage.upsertUserPreferences(userId, {
+        displayName,
+        defaultShopId,
+        defaultTool,
+        personalTraining,
+      });
+      res.json(prefs);
+    } catch (error) {
+      console.error("Error updating preferences:", error);
+      res.status(500).json({ message: "Failed to update preferences" });
+    }
+  });
+
+  // Submit script feedback
+  app.post('/api/scripts/feedback', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const parseResult = insertScriptFeedbackSchema.safeParse({ ...req.body, userId });
+      
+      if (!parseResult.success) {
+        return res.status(400).json({ 
+          error: "Invalid feedback data", 
+          details: parseResult.error.issues 
+        });
+      }
+      
+      const feedback = await storage.createScriptFeedback(parseResult.data);
+      res.json(feedback);
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+      res.status(500).json({ message: "Failed to submit feedback" });
+    }
+  });
+
+  // Get user's feedback history
+  app.get('/api/scripts/feedback', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const limit = parseInt(req.query.limit as string) || 50;
+      const feedback = await storage.getUserFeedback(userId, limit);
+      res.json(feedback);
+    } catch (error) {
+      console.error("Error fetching feedback:", error);
+      res.status(500).json({ message: "Failed to fetch feedback" });
+    }
+  });
   // Search endpoint
   app.post("/api/search", async (req, res) => {
     try {

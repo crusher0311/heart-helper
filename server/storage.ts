@@ -12,9 +12,16 @@ import type {
   InsertSettings,
   SearchCache,
   SearchResult,
+  User,
+  UpsertUser,
+  UserPreferences,
+  InsertUserPreferences,
+  ScriptFeedback,
+  InsertScriptFeedback,
+  UserWithPreferences,
 } from "@shared/schema";
 import { db } from "./db";
-import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache } from "@shared/schema";
+import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache, users, userPreferences, scriptFeedback } from "@shared/schema";
 import { eq, and, or, like, ilike, sql, desc, gte, lte } from "drizzle-orm";
 import crypto from "crypto";
 
@@ -49,6 +56,20 @@ export interface IStorage {
   setCachedSearch(params: SearchJobRequest, results: SearchResult[]): Promise<void>;
   getRecentSearches(limit?: number): Promise<SearchCache[]>;
   cleanExpiredCache(): Promise<void>;
+  
+  // User operations (required for Replit Auth)
+  getUser(id: string): Promise<User | undefined>;
+  upsertUser(user: UpsertUser): Promise<User>;
+  
+  // User preferences
+  getUserPreferences(userId: string): Promise<UserPreferences | undefined>;
+  upsertUserPreferences(userId: string, prefs: Partial<InsertUserPreferences>): Promise<UserPreferences>;
+  getUserWithPreferences(userId: string): Promise<UserWithPreferences | undefined>;
+  
+  // Script feedback
+  createScriptFeedback(feedback: InsertScriptFeedback): Promise<ScriptFeedback>;
+  getUserFeedback(userId: string, limit?: number): Promise<ScriptFeedback[]>;
+  getPositiveFeedbackForUser(userId: string, scriptType?: string): Promise<ScriptFeedback[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -432,6 +453,102 @@ export class DatabaseStorage implements IStorage {
     await db
       .delete(searchCache)
       .where(lte(searchCache.expiresAt, new Date()));
+  }
+
+  // User operations (required for Replit Auth)
+  async getUser(id: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
+  }
+
+  async upsertUser(userData: UpsertUser): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values(userData)
+      .onConflictDoUpdate({
+        target: users.id,
+        set: {
+          ...userData,
+          updatedAt: new Date(),
+        },
+      })
+      .returning();
+    return user;
+  }
+
+  // User preferences
+  async getUserPreferences(userId: string): Promise<UserPreferences | undefined> {
+    const [prefs] = await db
+      .select()
+      .from(userPreferences)
+      .where(eq(userPreferences.userId, userId));
+    return prefs;
+  }
+
+  async upsertUserPreferences(userId: string, prefs: Partial<InsertUserPreferences>): Promise<UserPreferences> {
+    const existing = await this.getUserPreferences(userId);
+    
+    if (existing) {
+      const [result] = await db
+        .update(userPreferences)
+        .set({ ...prefs, updatedAt: new Date() })
+        .where(eq(userPreferences.userId, userId))
+        .returning();
+      return result;
+    } else {
+      const [result] = await db
+        .insert(userPreferences)
+        .values({ userId, ...prefs })
+        .returning();
+      return result;
+    }
+  }
+
+  async getUserWithPreferences(userId: string): Promise<UserWithPreferences | undefined> {
+    const user = await this.getUser(userId);
+    if (!user) return undefined;
+    
+    const prefs = await this.getUserPreferences(userId);
+    return { ...user, preferences: prefs };
+  }
+
+  // Script feedback
+  async createScriptFeedback(feedback: InsertScriptFeedback): Promise<ScriptFeedback> {
+    const [result] = await db
+      .insert(scriptFeedback)
+      .values(feedback)
+      .returning();
+    return result;
+  }
+
+  async getUserFeedback(userId: string, limit: number = 50): Promise<ScriptFeedback[]> {
+    return await db
+      .select()
+      .from(scriptFeedback)
+      .where(eq(scriptFeedback.userId, userId))
+      .orderBy(desc(scriptFeedback.createdAt))
+      .limit(limit);
+  }
+
+  async getPositiveFeedbackForUser(userId: string, scriptType?: string): Promise<ScriptFeedback[]> {
+    const conditions = [
+      eq(scriptFeedback.userId, userId),
+      or(
+        eq(scriptFeedback.sentiment, 'positive'),
+        eq(scriptFeedback.outcome, 'approved')
+      )
+    ];
+    
+    if (scriptType) {
+      conditions.push(eq(scriptFeedback.scriptType, scriptType));
+    }
+    
+    return await db
+      .select()
+      .from(scriptFeedback)
+      .where(and(...conditions))
+      .orderBy(desc(scriptFeedback.createdAt))
+      .limit(20);
   }
 }
 
