@@ -39,6 +39,7 @@ export const userPreferences = pgTable("user_preferences", {
   defaultTool: text("default_tool").default("concern_intake"), // "concern_intake" or "sales_script"
   personalTraining: text("personal_training"), // Personal script examples/guidelines
   isManager: boolean("is_manager").default(false), // Can view team analytics
+  isAdmin: boolean("is_admin").default(false), // Can manage other users' training
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
