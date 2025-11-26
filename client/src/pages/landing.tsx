@@ -9,15 +9,15 @@ export default function Landing() {
   };
 
   useEffect(() => {
-    document.title = "HEART Helper - AI-Powered Service Advisor Assistant";
+    document.title = "HEART Helper";
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute("content", "HEART Helper finds similar repair jobs, generates personalized sales scripts, and helps service advisors deliver exceptional customer service with AI-powered assistance.");
+      metaDescription.setAttribute("content", "HEART Helper finds similar repair jobs, generates personalized sales scripts, and helps service advisors deliver exceptional customer service.");
     } else {
       const meta = document.createElement("meta");
       meta.name = "description";
-      meta.content = "HEART Helper finds similar repair jobs, generates personalized sales scripts, and helps service advisors deliver exceptional customer service with AI-powered assistance.";
+      meta.content = "HEART Helper finds similar repair jobs, generates personalized sales scripts, and helps service advisors deliver exceptional customer service.";
       document.head.appendChild(meta);
     }
   }, []);
@@ -38,17 +38,16 @@ export default function Landing() {
         </header>
 
         <main className="max-w-4xl mx-auto text-center">
-          <div className="mb-12">
+          <div className="mb-12" data-testid="hero-section">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Your AI-Powered <span className="text-primary">Service Advisor</span> Assistant
+              Welcome to <span className="text-primary">HEART Helper</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              HEART Helper finds similar repair jobs, generates personalized sales scripts, 
-              and helps you deliver exceptional customer service.
+              Find similar repair jobs, generate personalized sales scripts, 
+              and deliver exceptional customer service.
             </p>
-            <Button size="lg" onClick={handleLogin} className="gap-2" data-testid="button-get-started">
-              <Sparkles className="w-5 h-5" />
-              Get Started
+            <Button size="lg" onClick={handleLogin} className="gap-2" data-testid="button-login">
+              Sign In to Get Started
             </Button>
           </div>
 
