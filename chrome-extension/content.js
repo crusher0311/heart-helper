@@ -1522,15 +1522,35 @@ function extractROInfo() {
       }
     }
     
-    // Detect if vehicle is currently in shop (look for status indicators)
-    const pageText = document.body.innerText || '';
-    const statusIndicators = ['In Shop', 'Waiting', 'In Progress', 'Work In Progress', 'In Service'];
-    roInfo.isInShop = statusIndicators.some(status => pageText.includes(status));
+    // Detect if vehicle is currently in shop based on RO column status
+    // "Work in Progress" column = vehicle IS on premises (in-shop)
+    // "Estimate" column = vehicle is NOT on premises (follow-up call)
+    roInfo.isInShop = false;
     
-    // If no obvious in-shop indicator, check for "waiting" or dropped-off type status
-    if (!roInfo.isInShop) {
-      const hasWaiting = /waiting|drop.?off|checked.?in/i.test(pageText);
-      roInfo.isInShop = hasWaiting;
+    // Strategy 1: Look for status element with data-testid
+    const statusElement = document.querySelector('[data-testid="repair-order-status"]');
+    if (statusElement) {
+      const statusText = (statusElement.textContent || '').toLowerCase().trim();
+      console.log('Found RO status element:', statusText);
+      // Work in Progress means vehicle is in-shop
+      roInfo.isInShop = statusText.includes('work in progress') || 
+                        statusText.includes('in progress') ||
+                        statusText.includes('wip');
+    }
+    
+    // Strategy 2: Look for column header or breadcrumb showing current workflow stage
+    if (!statusElement) {
+      const pageText = document.body.innerText || '';
+      // Check for Work in Progress indicators (vehicle on premises)
+      const wipIndicators = ['Work in Progress', 'In Progress', 'WIP'];
+      const hasWIP = wipIndicators.some(indicator => pageText.includes(indicator));
+      
+      // Check for Estimate indicator (vehicle NOT on premises = follow-up call)
+      const isEstimate = /\bEstimate\b/i.test(pageText) && !hasWIP;
+      
+      // If we find Work in Progress anywhere on the page, vehicle is likely in-shop
+      roInfo.isInShop = hasWIP && !isEstimate;
+      console.log('RO status detection - hasWIP:', hasWIP, 'isEstimate:', isEstimate, 'isInShop:', roInfo.isInShop);
     }
     
     // Extract total amount from the page
