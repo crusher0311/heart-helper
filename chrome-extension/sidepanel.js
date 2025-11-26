@@ -156,6 +156,54 @@ function setupEventListeners() {
   document.getElementById('copyBtn').addEventListener('click', copyToClipboard);
   document.getElementById('sendToTekmetricBtn').addEventListener('click', sendToTekmetric);
   document.getElementById('restartBtn').addEventListener('click', restart);
+  
+  // Settings
+  document.getElementById('settingsBtn').addEventListener('click', openSettings);
+  document.getElementById('closeSettingsBtn').addEventListener('click', closeSettings);
+  document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
+  
+  // Close modal when clicking outside
+  document.getElementById('settingsModal').addEventListener('click', (e) => {
+    if (e.target.id === 'settingsModal') closeSettings();
+  });
+}
+
+function openSettings() {
+  document.getElementById('appUrlInput').value = appUrl || '';
+  document.getElementById('settingsModal').style.display = 'flex';
+}
+
+function closeSettings() {
+  document.getElementById('settingsModal').style.display = 'none';
+}
+
+async function saveSettings() {
+  const newUrl = document.getElementById('appUrlInput').value.trim();
+  
+  // Validate URL if provided
+  if (newUrl) {
+    try {
+      new URL(newUrl);
+    } catch {
+      showToast('Please enter a valid URL');
+      return;
+    }
+  }
+  
+  appUrl = newUrl;
+  
+  // Save to both sync and local storage for compatibility
+  chrome.storage.sync.set({ heartHelperUrl: newUrl });
+  chrome.storage.local.set({ appUrl: newUrl });
+  
+  updateConnectionStatus();
+  closeSettings();
+  showToast('Settings saved!');
+  
+  // Try to sync settings from app
+  if (newUrl) {
+    await syncSettingsFromApp();
+  }
 }
 
 function updateVehicleInfoDisplay() {
@@ -169,14 +217,18 @@ function updateVehicleInfoDisplay() {
 
 function updateConnectionStatus() {
   const dot = connectionStatus.querySelector('.status-dot');
-  const text = connectionStatus.querySelector('span:last-child');
+  const text = document.getElementById('connectionText');
   
   if (appUrl) {
     dot.className = 'status-dot connected';
     text.textContent = 'Connected';
+    text.style.cursor = 'default';
+    text.onclick = null;
   } else {
     dot.className = 'status-dot disconnected';
-    text.textContent = 'Not connected - Set app URL in popup';
+    text.innerHTML = 'Not connected - <u style="cursor:pointer">click to configure</u>';
+    text.style.cursor = 'pointer';
+    text.onclick = openSettings;
   }
 }
 
