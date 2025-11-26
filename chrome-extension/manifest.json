@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "HEART Helper - Tekmetric Integration",
-  "version": "3.2.0",
-  "description": "HEART Certified Auto Care repair history search, concern intake, and Tekmetric auto-fill tool",
+  "version": "3.3.0",
+  "description": "HEART Certified Auto Care repair history search, concern intake, sales scripts with feedback, and Tekmetric auto-fill tool",
   "permissions": [
     "storage",
     "activeTab",
@@ -12,7 +12,8 @@
   "host_permissions": [
     "https://shop.tekmetric.com/*",
     "http://localhost:5000/*",
-    "*://*.replit.dev/*"
+    "*://*.replit.dev/*",
+    "*://*.replit.app/*"
   ],
   "background": {
     "service_worker": "background.js"

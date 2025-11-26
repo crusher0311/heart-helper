@@ -5,6 +5,10 @@ let appUrl = '';
 let phoneScript = 'Thank you for calling HEART Certified Auto Care, this is [Name], how may I help you?';
 let currentTab = 'incoming';
 
+// User Authentication State
+let currentUser = null;
+let isAuthenticated = false;
+
 // Incoming Caller State
 let customerName = '';
 let referralSource = '';
@@ -17,16 +21,77 @@ let cleanedConversation = '';
 
 // Sales Script State
 let currentRO = null;
+let lastGeneratedScript = null;
 
 // ==================== INITIALIZATION ====================
 
 document.addEventListener('DOMContentLoaded', async () => {
   await loadSettings();
   setupEventListeners();
+  await checkAuthStatus();
   await syncSettingsFromApp();
   setupMessageListeners();
   requestCurrentROInfo();
 });
+
+// ==================== AUTHENTICATION ====================
+
+async function checkAuthStatus() {
+  if (!appUrl) {
+    updateUserDisplay(null);
+    return;
+  }
+  
+  try {
+    const response = await fetch(`${appUrl}/api/auth/user`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: { 'Accept': 'application/json' }
+    });
+    
+    if (response.ok) {
+      currentUser = await response.json();
+      isAuthenticated = true;
+      updateUserDisplay(currentUser);
+    } else {
+      currentUser = null;
+      isAuthenticated = false;
+      updateUserDisplay(null);
+    }
+  } catch (error) {
+    console.log('Could not check auth status:', error);
+    currentUser = null;
+    isAuthenticated = false;
+    updateUserDisplay(null);
+  }
+}
+
+function updateUserDisplay(user) {
+  const userSection = document.getElementById('userSection');
+  if (!userSection) return;
+  
+  if (user) {
+    const initials = (user.firstName?.[0] || '') + (user.lastName?.[0] || '');
+    const displayName = user.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : user.email;
+    userSection.innerHTML = `
+      <div class="user-info">
+        <div class="user-avatar">${initials || '?'}</div>
+        <div class="user-details">
+          <div class="user-name">${displayName}</div>
+          <div class="user-email">${user.email || ''}</div>
+        </div>
+      </div>
+    `;
+    userSection.style.display = 'flex';
+  } else {
+    userSection.innerHTML = `
+      <div class="user-info login-prompt">
+        <a href="${appUrl || '#'}" target="_blank" class="login-link">Sign in to save preferences</a>
+      </div>
+    `;
+    userSection.style.display = 'flex';
+  }
+}
 
 async function loadSettings() {
   return new Promise((resolve) => {
@@ -165,12 +230,8 @@ function setupEventListeners() {
   document.getElementById('generateSalesScriptBtn').addEventListener('click', generateSalesScript);
   document.getElementById('copySalesScriptBtn').addEventListener('click', copySalesScript);
   document.getElementById('regenerateBtn').addEventListener('click', generateSalesScript);
-  document.getElementById('feedbackSuccess').addEventListener('click', () => {
-    showToast('Great! Feedback recorded.');
-  });
-  document.getElementById('feedbackFail').addEventListener('click', () => {
-    showToast('Thanks for the feedback!');
-  });
+  document.getElementById('feedbackSuccess').addEventListener('click', () => submitFeedback('positive'));
+  document.getElementById('feedbackFail').addEventListener('click', () => submitFeedback('negative'));
   
   // Settings
   document.getElementById('settingsBtn').addEventListener('click', openSettings);
@@ -557,6 +618,73 @@ function copySalesScript() {
   const content = document.getElementById('salesScriptContent').innerText;
   navigator.clipboard.writeText(content);
   showToast('Sales script copied!');
+}
+
+async function submitFeedback(sentiment) {
+  const scriptContent = document.getElementById('salesScriptContent').innerText;
+  
+  if (!appUrl) {
+    showToast(sentiment === 'positive' ? 'Great! Thanks for the feedback.' : 'Thanks for the feedback!');
+    return;
+  }
+  
+  // Visual feedback immediately
+  const successBtn = document.getElementById('feedbackSuccess');
+  const failBtn = document.getElementById('feedbackFail');
+  
+  if (sentiment === 'positive') {
+    successBtn.classList.add('selected');
+    failBtn.classList.remove('selected');
+  } else {
+    failBtn.classList.add('selected');
+    successBtn.classList.remove('selected');
+  }
+  
+  if (!isAuthenticated) {
+    showToast(sentiment === 'positive' ? 'Great! Sign in to save feedback.' : 'Thanks! Sign in to save feedback.');
+    return;
+  }
+  
+  try {
+    // Build vehicle info string if available
+    const vehicleStr = currentRO?.vehicle ? 
+      `${currentRO.vehicle.year || ''} ${currentRO.vehicle.make || ''} ${currentRO.vehicle.model || ''}`.trim() : null;
+    
+    // Build repair type string from jobs
+    const repairStr = currentRO?.jobs?.length > 0 ? 
+      currentRO.jobs.map(j => j.name || j.jobName).filter(Boolean).join(', ') : null;
+    
+    const response = await fetch(`${appUrl}/api/scripts/feedback`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        scriptType: 'sales',
+        repairOrderId: currentRO?.repairOrderId || null,
+        sentiment: sentiment,
+        outcome: sentiment === 'positive' ? 'approved' : 'declined',
+        scriptContent: scriptContent || null,
+        vehicleInfo: vehicleStr,
+        repairType: repairStr
+      })
+    });
+    
+    if (response.ok) {
+      showToast(sentiment === 'positive' ? 'Great! Feedback saved.' : 'Thanks! Feedback saved.');
+    } else if (response.status === 401) {
+      isAuthenticated = false;
+      currentUser = null;
+      updateUserDisplay(null);
+      showToast('Session expired. Please sign in again.');
+    } else {
+      const errorData = await response.json().catch(() => ({}));
+      console.error('Feedback error:', errorData);
+      throw new Error('Failed to save feedback');
+    }
+  } catch (error) {
+    console.error('Error submitting feedback:', error);
+    showToast(sentiment === 'positive' ? 'Great! Thanks for the feedback.' : 'Thanks for the feedback!');
+  }
 }
 
 // ==================== SETTINGS ====================

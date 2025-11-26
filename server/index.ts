@@ -9,6 +9,42 @@ declare module 'http' {
     rawBody: unknown
   }
 }
+
+// CORS configuration for Chrome extension and cross-origin requests
+const allowedOrigins = [
+  'http://localhost:5000',
+  /https:\/\/[^.]+\.replit\.dev$/,
+  /https:\/\/[^.]+\.replit\.app$/,
+  /^chrome-extension:\/\//
+];
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  
+  if (origin) {
+    const isAllowed = allowedOrigins.some(allowed => {
+      if (allowed instanceof RegExp) {
+        return allowed.test(origin);
+      }
+      return allowed === origin;
+    });
+    
+    if (isAllowed) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader('Access-Control-Allow-Credentials', 'true');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept');
+      res.setHeader('Vary', 'Origin');
+    }
+  }
+  
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+  
+  next();
+});
+
 app.use(express.json({
   verify: (req, _res, buf) => {
     req.rawBody = buf;
