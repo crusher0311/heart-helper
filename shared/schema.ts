@@ -103,6 +103,7 @@ export const settings = pgTable("settings", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   defaultShopId: text("default_shop_id"), // "NB", "WM", or "EV"
   phoneAnswerScript: text("phone_answer_script"), // Custom phone greeting script
+  salesScriptTraining: text("sales_script_training"), // Example scripts and guidelines for AI
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 

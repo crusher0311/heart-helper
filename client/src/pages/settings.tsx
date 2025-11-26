@@ -1,4 +1,4 @@
-import { Download, Chrome, CheckCircle2, Circle, ArrowLeft, Sparkles, Search, Send, Zap, Settings as SettingsIcon, XCircle, Loader2, Phone, MessageSquare } from "lucide-react";
+import { Download, Chrome, CheckCircle2, Circle, ArrowLeft, Sparkles, Search, Send, Zap, Settings as SettingsIcon, XCircle, Loader2, Phone, MessageSquare, FileText } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -28,6 +28,7 @@ type Settings = {
   id: string;
   defaultShopId: ShopLocation | null;
   phoneAnswerScript: string | null;
+  salesScriptTraining: string | null;
   updatedAt: string;
 };
 
@@ -35,6 +36,7 @@ export default function Settings() {
   const { toast } = useToast();
   const [selectedShop, setSelectedShop] = useState<ShopLocation | null>(null);
   const [phoneScript, setPhoneScript] = useState("");
+  const [salesScriptTraining, setSalesScriptTraining] = useState("");
   const [showConcernIntake, setShowConcernIntake] = useState(false);
 
   const { data: status, isLoading: statusLoading } = useQuery<TekmetricStatus>({
@@ -49,10 +51,13 @@ export default function Settings() {
     if (settings?.phoneAnswerScript) {
       setPhoneScript(settings.phoneAnswerScript);
     }
+    if (settings?.salesScriptTraining) {
+      setSalesScriptTraining(settings.salesScriptTraining);
+    }
   }, [settings]);
 
   const updateSettingsMutation = useMutation({
-    mutationFn: async (data: { defaultShopId?: ShopLocation; phoneAnswerScript?: string }) => {
+    mutationFn: async (data: { defaultShopId?: ShopLocation; phoneAnswerScript?: string; salesScriptTraining?: string }) => {
       const response = await apiRequest("POST", "/api/settings", data);
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -66,6 +71,11 @@ export default function Settings() {
         toast({
           title: "Phone script saved",
           description: "Your phone greeting script has been updated.",
+        });
+      } else if (variables.salesScriptTraining !== undefined) {
+        toast({
+          title: "Sales script training saved",
+          description: "Your example scripts will be used to generate future sales scripts.",
         });
       } else if (variables.defaultShopId !== undefined) {
         toast({
@@ -119,6 +129,10 @@ export default function Settings() {
 
   const handleSavePhoneScript = () => {
     updateSettingsMutation.mutate({ phoneAnswerScript: phoneScript });
+  };
+
+  const handleSaveSalesScriptTraining = () => {
+    updateSettingsMutation.mutate({ salesScriptTraining: salesScriptTraining });
   };
 
   const handleTestConnection = () => {
@@ -301,6 +315,65 @@ export default function Settings() {
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
               )}
               Save Script
+            </Button>
+          </CardContent>
+        </Card>
+
+        {/* Sales Script Training Section */}
+        <Card className="mb-6">
+          <CardHeader>
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                <FileText className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <CardTitle>Sales Script Training</CardTitle>
+                <CardDescription>
+                  Provide example scripts to train the AI how to generate your sales scripts
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <Alert>
+              <AlertDescription>
+                Add example scripts showing your preferred style. The AI will learn from these examples to generate more relevant and context-aware sales scripts. Include examples for both in-shop conversations and follow-up calls.
+              </AlertDescription>
+            </Alert>
+
+            <div className="space-y-2">
+              <Label htmlFor="sales-script-training">Example Scripts & Guidelines</Label>
+              <Textarea
+                id="sales-script-training"
+                placeholder={`Example in-shop script:
+"Hi [Customer]! Thanks for bringing in your [Year Make Model]. I just sent over your digital inspection, did you get it? Great! We're recommending [service] to keep you safe. Your total is $XX.XX. Would you like us to go ahead with that?"
+
+Example follow-up call:
+"Hi [Customer], this is [Name] from HEART Certified Auto Care. I'm calling to follow up on the digital inspection we sent for your [Year Make Model]. Did you get a chance to look it over? We recommend [service] for safety. The total would be $XX.XX. When would be a good time to schedule?"
+
+Guidelines:
+- Only mention the 3-year warranty for major repairs (brakes, engine, transmission)
+- Don't mention warranty for tires, oil changes, or seasonal maintenance
+- Keep it conversational and friendly`}
+                value={salesScriptTraining}
+                onChange={(e) => setSalesScriptTraining(e.target.value)}
+                className="min-h-[200px]"
+                data-testid="input-sales-script-training"
+              />
+              <p className="text-sm text-muted-foreground">
+                These examples help the AI understand your preferred tone, what to include, and when to mention warranties
+              </p>
+            </div>
+
+            <Button
+              onClick={handleSaveSalesScriptTraining}
+              disabled={updateSettingsMutation.isPending}
+              data-testid="button-save-sales-script-training"
+            >
+              {updateSettingsMutation.isPending && (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              )}
+              Save Training
             </Button>
           </CardContent>
         </Card>

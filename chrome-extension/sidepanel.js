@@ -523,7 +523,9 @@ async function generateSalesScript() {
       body: JSON.stringify({
         vehicle: currentRO.vehicle,
         jobs: currentRO.jobs,
-        customer: currentRO.customer
+        customer: currentRO.customer,
+        totalAmount: currentRO.totalAmount,
+        isInShop: currentRO.isInShop
       })
     });
     

@@ -549,13 +549,24 @@ export function registerRoutes(app: Express) {
   // Generate AI sales script based on repair order
   app.post("/api/sales/generate-script", async (req, res) => {
     try {
-      const { vehicle, jobs, customer } = req.body;
+      const { vehicle, jobs, customer, totalAmount, isInShop } = req.body;
       
       if (!jobs || !Array.isArray(jobs) || jobs.length === 0) {
         return res.status(400).json({ error: "At least one job is required" });
       }
       
-      const result = await generateSalesScript({ vehicle, jobs, customer });
+      // Fetch training guidelines from settings
+      const settings = await storage.getSettings();
+      const trainingGuidelines = settings?.salesScriptTraining || undefined;
+      
+      const result = await generateSalesScript({ 
+        vehicle, 
+        jobs, 
+        customer, 
+        totalAmount: totalAmount ? parseFloat(totalAmount) : undefined,
+        isInShop: Boolean(isInShop),
+        trainingGuidelines
+      });
       res.json(result);
     } catch (error: any) {
       console.error("Sales script generation error:", error);

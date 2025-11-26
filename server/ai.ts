@@ -701,6 +701,9 @@ export interface SalesScriptRequest {
   customer?: {
     name?: string;
   };
+  totalAmount?: number; // Extracted from Tekmetric page
+  isInShop?: boolean;   // Whether vehicle is currently in shop vs follow-up call
+  trainingGuidelines?: string; // User-provided example scripts and guidelines
 }
 
 export interface SalesScriptResponse {
@@ -714,7 +717,7 @@ export interface SalesScriptResponse {
 export async function generateSalesScript(
   request: SalesScriptRequest
 ): Promise<SalesScriptResponse> {
-  const { vehicle, jobs, customer } = request;
+  const { vehicle, jobs, customer, totalAmount: providedTotal, isInShop, trainingGuidelines } = request;
 
   const vehicleDesc = vehicle 
     ? `${vehicle.year || ''} ${vehicle.make || ''} ${vehicle.model || ''}`.trim() || 'their vehicle'
@@ -746,28 +749,54 @@ export async function generateSalesScript(
   });
 
   const jobsList = uniqueJobs.map(job => job.name).join(', ');
-  const totalAmount = jobs.reduce((sum, job) => sum + (job.laborTotal || 0) + (job.partsTotal || 0), 0);
+  
+  // Use provided total from page, or calculate from jobs if not available
+  const calculatedTotal = jobs.reduce((sum, job) => sum + (job.laborTotal || 0) + (job.partsTotal || 0), 0);
+  const totalAmount = providedTotal || calculatedTotal;
 
   const customerName = customer?.name?.split(' ')[0] || ''; // First name only
 
-  const prompt = `You are a friendly service advisor at HEART Certified Auto Care. Write a SHORT, conversational sales script to call the customer about their repair order.
+  // Determine context and adjust script accordingly
+  const context = isInShop 
+    ? 'The customer is currently AT THE SHOP with their vehicle. This is an in-person conversation, not a phone call.'
+    : 'This is a PHONE CALL to follow up with the customer about the digital inspection.';
+
+  // Determine which services might have warranty (brake work, engine, transmission, etc. - but NOT tires, basic maintenance)
+  const hasWarrantyServices = /brake|engine|transmission|suspension|steering|cooling|electrical|fuel|exhaust|timing/i.test(jobsList);
+  const warrantyNote = hasWarrantyServices 
+    ? "Mention HEART's 3-year/36,000 mile nationwide warranty if applicable to the recommended services."
+    : "Do NOT mention warranty for basic services like tire swaps, oil changes, or seasonal maintenance - they typically don't have the 3-year warranty.";
+
+  // Build training context if provided
+  const trainingContext = trainingGuidelines 
+    ? `\n\nIMPORTANT - Follow these example scripts and guidelines from the shop:\n${trainingGuidelines}\n\nUse the style and tone from these examples while adapting to the current situation.`
+    : '';
+
+  const prompt = `You are a friendly service advisor at HEART Certified Auto Care. Write a SHORT, conversational script.
+
+CONTEXT: ${context}
 
 Customer: ${customerName || 'the customer'}
 Vehicle: ${vehicleDesc}
 Services: ${jobsList}
-${totalAmount > 0 ? `Total: $${totalAmount.toFixed(2)}` : ''}
+${totalAmount > 0 ? `Total: $${totalAmount.toFixed(2)}` : 'Total: Check the repair order for final amount'}
+${trainingContext}
 
 Write a SINGLE PARAGRAPH (3-5 sentences max) that:
 1. Greets the customer by first name if available
-2. References the digital inspection they received
-3. Briefly mentions what service is recommended and why it matters for the season/safety
-4. States the total investment and mentions HEART's 3-year/36,000 mile nationwide warranty
-5. Asks if they're ready to schedule
+${isInShop 
+  ? '2. Thanks them for bringing in their vehicle and mentions the inspection'
+  : '2. References the digital inspection you sent over'}
+3. Briefly mentions what service is recommended and why it matters
+4. ${totalAmount > 0 ? `States the total investment of $${totalAmount.toFixed(2)}` : 'Asks if they have any questions about pricing'}
+5. ${warrantyNote}
+6. ${isInShop ? 'Asks if they want to proceed' : 'Asks if they are ready to schedule'}
 
-IMPORTANT: 
-- Write as a natural phone conversation, not bullet points
+CRITICAL RULES:
+- Write as a natural ${isInShop ? 'in-person conversation' : 'phone conversation'}, not bullet points
 - Keep it SHORT and friendly - like you're actually talking
 - Don't list every service separately, summarize the main work
+- ${totalAmount > 0 ? `Use the EXACT total of $${totalAmount.toFixed(2)} - do not say "$XX" or make up a number` : 'Do not make up pricing - ask them to check the estimate'}
 - End with a simple question to get their response
 
 Return ONLY the script paragraph, no headers or formatting.`;
@@ -778,7 +807,7 @@ Return ONLY the script paragraph, no headers or formatting.`;
       messages: [
         {
           role: "system",
-          content: "You are a friendly automotive service advisor at HEART Certified Auto Care. Write natural, conversational sales scripts as if you're speaking on the phone. Keep responses short and focused - no bullet points or headers, just a friendly paragraph."
+          content: "You are a friendly automotive service advisor at HEART Certified Auto Care. Write natural, conversational sales scripts. Keep responses short and focused - no bullet points or headers, just a friendly paragraph. Always use the EXACT pricing provided - never placeholder amounts."
         },
         {
           role: "user",
@@ -807,7 +836,9 @@ Return ONLY the script paragraph, no headers or formatting.`;
     
     // Fallback: simple conversational script
     const greeting = customerName ? `Hi ${customerName}!` : 'Hi there!';
-    const fallbackScript = `${greeting} Thanks for bringing in your ${vehicleDesc}. I sent over a copy of your digital inspection, did you get it? Great! Would you mind opening it up and we can go over it together? We're recommending ${jobsList || 'some maintenance services'} to keep you safe and prepared.${totalAmount > 0 ? ` Your total investment is $${totalAmount.toFixed(2)}, and that's backed by our 3-year, 36,000 mile nationwide warranty.` : ''} Once you're ready, we can get you all set up. How does that sound?`;
+    const action = isInShop ? 'for bringing in' : 'for choosing';
+    const priceStr = totalAmount > 0 ? `$${totalAmount.toFixed(2)}` : 'the amount on your estimate';
+    const fallbackScript = `${greeting} Thanks ${action} your ${vehicleDesc}. I sent over a copy of your digital inspection, did you get it? Great! Would you mind opening it up and we can go over it together? We're recommending ${jobsList || 'some maintenance services'} to keep you safe and prepared. Your total investment is ${priceStr}. Once you're ready, we can get you all set up. How does that sound?`;
     
     return { script: fallbackScript };
   }

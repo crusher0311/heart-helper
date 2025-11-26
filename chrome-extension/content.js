@@ -1502,7 +1502,9 @@ function extractROInfo() {
   const roInfo = {
     vehicle: null,
     jobs: [],
-    customer: null
+    customer: null,
+    totalAmount: null,
+    isInShop: false // Determine context: in-shop vs follow-up call
   };
   
   try {
@@ -1520,6 +1522,58 @@ function extractROInfo() {
       }
     }
     
+    // Detect if vehicle is currently in shop (look for status indicators)
+    const pageText = document.body.innerText || '';
+    const statusIndicators = ['In Shop', 'Waiting', 'In Progress', 'Work In Progress', 'In Service'];
+    roInfo.isInShop = statusIndicators.some(status => pageText.includes(status));
+    
+    // If no obvious in-shop indicator, check for "waiting" or dropped-off type status
+    if (!roInfo.isInShop) {
+      const hasWaiting = /waiting|drop.?off|checked.?in/i.test(pageText);
+      roInfo.isInShop = hasWaiting;
+    }
+    
+    // Extract total amount from the page
+    // Look for common patterns: "Total: $XX.XX", "Grand Total $XX.XX", etc.
+    const allElements = document.querySelectorAll('*');
+    
+    // Strategy 1: Look for labeled totals
+    for (const el of allElements) {
+      const text = el.textContent?.trim() || '';
+      // Match patterns like "Total $64.80", "Grand Total: $1,234.56", "Total Amount $99.00"
+      const totalMatch = text.match(/(?:grand\s+)?total(?:\s+amount)?[:\s]*\$?([\d,]+\.?\d*)/i);
+      if (totalMatch) {
+        const amount = parseFloat(totalMatch[1].replace(/,/g, ''));
+        if (amount > 0 && amount < 100000) {
+          // Prefer larger amounts (grand total vs subtotal)
+          if (!roInfo.totalAmount || amount > roInfo.totalAmount) {
+            roInfo.totalAmount = amount;
+          }
+        }
+      }
+    }
+    
+    // Strategy 2: Look for prominent price displays (often the largest visible dollar amount)
+    if (!roInfo.totalAmount) {
+      const priceElements = [];
+      for (const el of allElements) {
+        if (el.children.length > 3) continue; // Skip container elements
+        const text = el.textContent?.trim() || '';
+        const priceMatch = text.match(/^\$?([\d,]+\.\d{2})$/);
+        if (priceMatch) {
+          const amount = parseFloat(priceMatch[1].replace(/,/g, ''));
+          if (amount > 10 && amount < 100000) {
+            priceElements.push({ el, amount });
+          }
+        }
+      }
+      // Take the largest price as likely total
+      if (priceElements.length > 0) {
+        priceElements.sort((a, b) => b.amount - a.amount);
+        roInfo.totalAmount = priceElements[0].amount;
+      }
+    }
+    
     const seenJobs = new Set();
     
     // Strategy 1: Find the "Jobs" section and extract job names
@@ -1528,7 +1582,6 @@ function extractROInfo() {
     
     // Find all elements that could be job headers/titles
     // Tekmetric shows jobs like "TIRE SWAP WITH WHEELS - WINTER" with status/date below
-    const allElements = document.querySelectorAll('*');
     
     for (const el of allElements) {
       // Skip if too many children (not a leaf/title element)
