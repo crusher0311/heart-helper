@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "HEART Helper - Tekmetric Integration",
-  "version": "2.7.0",
+  "version": "2.8.0",
   "description": "HEART Certified Auto Care repair history search, concern intake, and Tekmetric auto-fill tool",
   "permissions": [
     "storage",
@@ -35,7 +35,7 @@
     }
   ],
   "action": {
-    "default_popup": "popup.html",
+    "default_title": "Open HEART Helper",
     "default_icon": {
       "16": "icon16.png",
       "48": "icon48.png",

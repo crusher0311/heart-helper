@@ -1,7 +1,7 @@
 let pendingJobData = null;
 
-// Enable side panel for Tekmetric pages
-chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: false })
+// Open side panel when extension icon is clicked
+chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true })
   .catch((error) => console.log('Side panel behavior not set:', error));
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {

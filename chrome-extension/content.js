@@ -1171,22 +1171,18 @@ function injectFloatingHeartButton() {
     e.preventDefault();
     e.stopPropagation();
     
-    const vehicleData = extractVehicleData();
-    const params = new URLSearchParams();
-    if (vehicleData.make) params.set('make', vehicleData.make);
-    if (vehicleData.model) params.set('model', vehicleData.model);
-    if (vehicleData.year) params.set('year', vehicleData.year);
-    if (vehicleData.engine) params.set('engine', vehicleData.engine);
-    if (vehicleData.repairOrderId) params.set('roId', vehicleData.repairOrderId);
-    
-    chrome.storage.local.get(['appUrl'], (result) => {
-      if (!result.appUrl) {
-        showErrorNotification('Extension not configured. Click the extension icon and set your app URL in Settings.');
-        return;
+    // Open side panel for concern intake and phone script
+    console.log("Opening HEART Helper side panel...");
+    chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" }, (response) => {
+      if (chrome.runtime.lastError) {
+        console.error("Failed to open side panel:", chrome.runtime.lastError);
+        showErrorNotification('Could not open side panel. Try clicking the extension icon.');
+      } else if (response?.success) {
+        console.log("Side panel opened successfully");
+      } else {
+        console.error("Side panel failed to open:", response?.error);
+        showErrorNotification('Side panel failed to open. Try reloading the page.');
       }
-      const searchUrl = `${result.appUrl}/?${params.toString()}`;
-      console.log("Opening HEART Helper (general search):", searchUrl);
-      window.open(searchUrl, '_blank');
     });
   });
   
