@@ -1,5 +1,5 @@
 import { useState, useEffect, startTransition } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { SearchInterface } from "@/components/search-interface";
 import { JobCard } from "@/components/job-card";
@@ -11,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Sparkles, Settings, RefreshCw, Clock, LogOut, User } from "lucide-react";
+import { Sparkles, Settings, RefreshCw, Clock, LogOut, User, ShieldCheck } from "lucide-react";
 import { Link } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
 import type { SearchJobRequest, SearchResult } from "@shared/schema";
@@ -27,6 +27,10 @@ export default function Home() {
   const [matchesFound, setMatchesFound] = useState<number>(0);
   const [isCached, setIsCached] = useState(false);
   const [cachedAt, setCachedAt] = useState<string | null>(null);
+
+  const { data: adminCheck } = useQuery<{ isAdmin: boolean }>({
+    queryKey: ["/api/admin/check"],
+  });
   
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -216,6 +220,14 @@ export default function Home() {
                       <span>Preferences</span>
                     </Link>
                   </DropdownMenuItem>
+                  {adminCheck?.isAdmin && (
+                    <DropdownMenuItem asChild>
+                      <Link href="/admin" className="cursor-pointer" data-testid="link-admin">
+                        <ShieldCheck className="mr-2 h-4 w-4" />
+                        <span>Team Training</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem 
                     className="cursor-pointer text-destructive focus:text-destructive"
