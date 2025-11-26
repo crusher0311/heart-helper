@@ -628,7 +628,8 @@ export async function registerRoutes(app: Express) {
   });
 
   // Generate AI sales script based on repair order
-  app.post("/api/sales/generate-script", async (req, res) => {
+  // Supports both authenticated (with per-user training) and unauthenticated requests
+  app.post("/api/sales/generate-script", async (req: any, res) => {
     try {
       const { vehicle, jobs, customer, totalAmount, isInShop } = req.body;
       
@@ -636,9 +637,25 @@ export async function registerRoutes(app: Express) {
         return res.status(400).json({ error: "At least one job is required" });
       }
       
-      // Fetch training guidelines from settings
-      const settings = await storage.getSettings();
-      const trainingGuidelines = settings?.salesScriptTraining || undefined;
+      // Try to get per-user training data if authenticated
+      let trainingGuidelines: string | undefined;
+      let usedPersonalTraining = false;
+      
+      if (req.user?.claims?.sub) {
+        const userId = req.user.claims.sub;
+        const userPrefs = await storage.getUserPreferences(userId);
+        if (userPrefs?.personalTraining) {
+          trainingGuidelines = userPrefs.personalTraining;
+          usedPersonalTraining = true;
+          console.log(`Using personal training data for user ${userId}`);
+        }
+      }
+      
+      // Fall back to global settings if no user training
+      if (!trainingGuidelines) {
+        const settings = await storage.getSettings();
+        trainingGuidelines = settings?.salesScriptTraining || undefined;
+      }
       
       const result = await generateSalesScript({ 
         vehicle, 
@@ -648,7 +665,7 @@ export async function registerRoutes(app: Express) {
         isInShop: Boolean(isInShop),
         trainingGuidelines
       });
-      res.json(result);
+      res.json({ ...result, usedPersonalTraining });
     } catch (error: any) {
       console.error("Sales script generation error:", error);
       res.status(500).json({ error: error.message });

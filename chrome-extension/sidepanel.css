@@ -478,6 +478,17 @@ textarea {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 12px;
+  gap: 8px;
+}
+
+.personalized-badge {
+  font-size: 10px;
+  font-weight: 500;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: auto;
 }
 
 .refresh-script-btn {

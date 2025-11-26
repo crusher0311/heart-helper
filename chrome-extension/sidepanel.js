@@ -578,8 +578,10 @@ async function generateSalesScript() {
   loadingOverlay.style.display = 'flex';
   
   try {
+    // Include credentials to send session cookie for personalized training data
     const response = await fetch(`${appUrl}/api/sales/generate-script`, {
       method: 'POST',
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         vehicle: currentRO.vehicle,
@@ -594,6 +596,32 @@ async function generateSalesScript() {
     
     const data = await response.json();
     displaySalesScript(data.script);
+    
+    // Show personalization indicator only when personal training was actually used
+    const section = document.getElementById('salesScriptSection');
+    const existingBadge = section.querySelector('.personalized-badge');
+    
+    if (data.usedPersonalTraining) {
+      if (!existingBadge) {
+        const badge = document.createElement('span');
+        badge.className = 'personalized-badge';
+        badge.title = 'Script personalized using your training data';
+        badge.textContent = 'Personalized';
+        const header = section.querySelector('.script-header');
+        if (header) {
+          // Insert before the refresh button
+          const refreshBtn = header.querySelector('.refresh-script-btn');
+          if (refreshBtn) {
+            header.insertBefore(badge, refreshBtn);
+          } else {
+            header.appendChild(badge);
+          }
+        }
+      }
+    } else if (existingBadge) {
+      // Remove badge if not using personal training
+      existingBadge.remove();
+    }
     
   } catch (error) {
     console.error('Error generating sales script:', error);
