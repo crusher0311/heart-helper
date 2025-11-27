@@ -215,8 +215,11 @@ export async function registerRoutes(app: Express) {
       
       await storage.deleteUserAsAdmin(userId);
       res.json({ success: true });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error deleting user:", error);
+      if (error.message === "User not found") {
+        return res.status(404).json({ error: "User not found" });
+      }
       res.status(500).json({ message: "Failed to delete user" });
     }
   });
@@ -239,8 +242,11 @@ export async function registerRoutes(app: Express) {
       
       const prefs = await storage.updateUserAdminStatus(userId, makeAdmin);
       res.json(prefs);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error updating user admin status:", error);
+      if (error.message === "User not found") {
+        return res.status(404).json({ error: "User not found" });
+      }
       res.status(500).json({ message: "Failed to update user admin status" });
     }
   });

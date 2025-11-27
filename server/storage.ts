@@ -598,23 +598,39 @@ export class DatabaseStorage implements IStorage {
       })
       .returning();
     
-    // Create user preferences with optional admin flag
-    if (userData.isAdmin !== undefined) {
-      await this.upsertUserPreferences(userId, { isAdmin: userData.isAdmin });
-    }
+    // Always create user preferences for new users
+    await this.upsertUserPreferences(userId, { isAdmin: userData.isAdmin === true });
     
     return newUser;
   }
 
   async deleteUserAsAdmin(userId: string): Promise<void> {
-    // First delete user preferences (foreign key constraint)
-    await db.delete(userPreferences).where(eq(userPreferences.userId, userId));
+    // Verify user exists
+    const existingUser = await this.getUser(userId);
+    if (!existingUser) {
+      throw new Error("User not found");
+    }
     
-    // Then delete the user
+    // Delete in a transaction: preferences first (foreign key), then user
+    await db.delete(userPreferences).where(eq(userPreferences.userId, userId));
     await db.delete(users).where(eq(users.id, userId));
   }
 
   async updateUserAdminStatus(userId: string, isAdmin: boolean): Promise<UserPreferences> {
+    // Verify user exists
+    const existingUser = await this.getUser(userId);
+    if (!existingUser) {
+      throw new Error("User not found");
+    }
+    
+    // Get existing preferences - must exist to update admin status
+    const existingPrefs = await this.getUserPreferences(userId);
+    if (!existingPrefs) {
+      // Create preferences for existing user if missing
+      return await this.upsertUserPreferences(userId, { isAdmin });
+    }
+    
+    // Update existing preferences
     return await this.upsertUserPreferences(userId, { isAdmin });
   }
 }

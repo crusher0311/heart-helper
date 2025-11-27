@@ -1,9 +1,32 @@
-import { ArrowLeft, Users, Save, Loader2, User, Shield, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Users, Save, Loader2, User, Shield, ShieldCheck, Plus, Trash2 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -33,6 +56,8 @@ export default function Admin() {
   const [selectedUser, setSelectedUser] = useState<UserWithPreferences | null>(null);
   const [trainingText, setTrainingText] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [newUserData, setNewUserData] = useState({ email: '', firstName: '', lastName: '', isAdmin: false });
 
   const { data: adminCheck } = useQuery<{ isAdmin: boolean }>({
     queryKey: ["/api/admin/check"],
@@ -67,6 +92,86 @@ export default function Admin() {
         variant: "destructive",
       });
       setIsSaving(false);
+    },
+  });
+
+  const createUserMutation = useMutation({
+    mutationFn: async (userData: { email: string; firstName: string; lastName: string; isAdmin: boolean }) => {
+      const response = await apiRequest("POST", "/api/admin/users", userData);
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "Failed to create user");
+      }
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/users"] });
+      toast({
+        title: "User created",
+        description: `${newUserData.firstName} ${newUserData.lastName} has been added.`,
+      });
+      setIsAddDialogOpen(false);
+      setNewUserData({ email: '', firstName: '', lastName: '', isAdmin: false });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const deleteUserMutation = useMutation({
+    mutationFn: async (userId: string) => {
+      const response = await apiRequest("DELETE", `/api/admin/users/${userId}`);
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "Failed to delete user");
+      }
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/users"] });
+      if (selectedUser) {
+        setSelectedUser(null);
+        setTrainingText("");
+      }
+      toast({
+        title: "User deleted",
+        description: "The user has been removed.",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const toggleAdminMutation = useMutation({
+    mutationFn: async ({ userId, isAdmin }: { userId: string; isAdmin: boolean }) => {
+      const response = await apiRequest("PUT", `/api/admin/users/${userId}/admin`, { isAdmin });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "Failed to update admin status");
+      }
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/users"] });
+      toast({
+        title: "Admin status updated",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
 
@@ -138,10 +243,89 @@ export default function Admin() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <Card className="lg:col-span-1">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Users className="h-5 w-5" />
-                Team Members
-              </CardTitle>
+              <div className="flex items-center justify-between gap-2">
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="h-5 w-5" />
+                  Team Members
+                </CardTitle>
+                <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button size="sm" data-testid="button-add-user">
+                      <Plus className="h-4 w-4 mr-1" />
+                      Add
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Add Team Member</DialogTitle>
+                      <DialogDescription>
+                        Add a new user to the team. They'll be able to sign in with Replit.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4 py-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="firstName">First Name</Label>
+                        <Input
+                          id="firstName"
+                          value={newUserData.firstName}
+                          onChange={(e) => setNewUserData({ ...newUserData, firstName: e.target.value })}
+                          placeholder="John"
+                          data-testid="input-first-name"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="lastName">Last Name</Label>
+                        <Input
+                          id="lastName"
+                          value={newUserData.lastName}
+                          onChange={(e) => setNewUserData({ ...newUserData, lastName: e.target.value })}
+                          placeholder="Doe"
+                          data-testid="input-last-name"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={newUserData.email}
+                          onChange={(e) => setNewUserData({ ...newUserData, email: e.target.value })}
+                          placeholder="john@heartautocare.com"
+                          data-testid="input-email"
+                        />
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Switch
+                          id="isAdmin"
+                          checked={newUserData.isAdmin}
+                          onCheckedChange={(checked) => setNewUserData({ ...newUserData, isAdmin: checked })}
+                          data-testid="switch-admin"
+                        />
+                        <Label htmlFor="isAdmin">Admin privileges</Label>
+                      </div>
+                    </div>
+                    <DialogFooter>
+                      <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
+                        Cancel
+                      </Button>
+                      <Button
+                        onClick={() => createUserMutation.mutate(newUserData)}
+                        disabled={createUserMutation.isPending || !newUserData.email || !newUserData.firstName || !newUserData.lastName}
+                        data-testid="button-create-user"
+                      >
+                        {createUserMutation.isPending ? (
+                          <>
+                            <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                            Creating...
+                          </>
+                        ) : (
+                          'Add User'
+                        )}
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </div>
               <CardDescription>
                 Select a user to manage their training
               </CardDescription>
@@ -154,30 +338,67 @@ export default function Admin() {
               ) : (
                 <div className="space-y-2">
                   {users?.map((user) => (
-                    <button
+                    <div
                       key={user.id}
-                      onClick={() => handleSelectUser(user)}
-                      className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-colors hover-elevate ${
+                      className={`flex items-center gap-2 p-2 rounded-lg transition-colors ${
                         selectedUser?.id === user.id
                           ? 'bg-accent'
                           : 'hover:bg-muted'
                       }`}
-                      data-testid={`button-user-${user.id}`}
                     >
-                      <Avatar className="h-10 w-10">
-                        {user.profileImageUrl && <AvatarImage src={user.profileImageUrl} alt={getUserDisplayName(user)} />}
-                        <AvatarFallback>{getInitials(user)}</AvatarFallback>
-                      </Avatar>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-medium truncate">{getUserDisplayName(user)}</div>
-                        <div className="text-xs text-muted-foreground truncate">{user.email}</div>
-                      </div>
-                      {user.preferences?.personalTraining && (
-                        <Badge variant="secondary" className="shrink-0">
-                          Trained
-                        </Badge>
-                      )}
-                    </button>
+                      <button
+                        onClick={() => handleSelectUser(user)}
+                        className="flex-1 flex items-center gap-3 p-1 text-left hover-elevate rounded"
+                        data-testid={`button-user-${user.id}`}
+                      >
+                        <Avatar className="h-10 w-10">
+                          {user.profileImageUrl && <AvatarImage src={user.profileImageUrl} alt={getUserDisplayName(user)} />}
+                          <AvatarFallback>{getInitials(user)}</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium truncate">{getUserDisplayName(user)}</div>
+                          <div className="text-xs text-muted-foreground truncate">{user.email}</div>
+                        </div>
+                        <div className="flex gap-1 shrink-0">
+                          {user.preferences?.isAdmin && (
+                            <Badge>Admin</Badge>
+                          )}
+                          {user.preferences?.personalTraining && (
+                            <Badge variant="secondary">Trained</Badge>
+                          )}
+                        </div>
+                      </button>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="shrink-0 text-muted-foreground hover:text-destructive"
+                            data-testid={`button-delete-user-${user.id}`}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Delete User</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Are you sure you want to delete {getUserDisplayName(user)}? This action cannot be undone.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => deleteUserMutation.mutate(user.id)}
+                              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                              data-testid="button-confirm-delete"
+                            >
+                              Delete
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </div>
                   ))}
                   {users?.length === 0 && (
                     <p className="text-center text-muted-foreground py-8">
