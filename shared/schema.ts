@@ -265,6 +265,7 @@ export type LaborItem = {
   hours: number;
   rate: number;
   technicianId?: number;
+  laborTotal?: number; // Computed: hours * rate
 };
 
 // Combined types for API responses
@@ -284,6 +285,7 @@ export type JobWithDetails = {
   subtotal: number;
   laborTotal: number;  // Computed: sum of labor hours * rates
   partsTotal: number;  // Computed: sum of parts cost * quantity
+  totalPrice?: number; // Same as subtotal, for frontend compatibility
   feeTotal?: number;   // For future use
   jobCategoryName?: string;  // For future use
   note?: string;  // For future use

@@ -234,23 +234,39 @@ export class DatabaseStorage implements IStorage {
 
       // Extract labor items from job raw_data
       const jobRawData = job.rawData as any;
-      const laborItems: LaborItem[] = jobRawData?.labor?.map((labor: any) => ({
-        id: labor.id,
-        name: labor.name,
-        hours: parseFloat(labor.hours) || 0,
-        rate: labor.rate || 0,
-        technicianId: labor.technicianId,
-      })) || [];
+      const laborItems: LaborItem[] = jobRawData?.labor?.map((labor: any) => {
+        const hours = parseFloat(labor.hours) || 0;
+        const rate = labor.rate || 0;
+        return {
+          id: labor.id,
+          name: labor.name,
+          hours,
+          rate,
+          technicianId: labor.technicianId,
+          laborTotal: hours * rate, // Computed per-item total
+        };
+      }) || [];
 
       // Calculate labor total from labor items (hours * rate)
       const laborTotal = laborItems.reduce((sum, item) => {
-        return sum + (item.hours * item.rate);
+        return sum + (item.laborTotal || 0);
       }, 0);
+
+      // Calculate parts with computed fields for frontend
+      const partsWithTotals = parts.map(part => {
+        const unitPrice = part.retail || part.cost || 0;
+        const quantity = part.quantity || 0;
+        return {
+          ...part,
+          unitPrice, // Add unitPrice for frontend display
+          total: unitPrice * quantity, // Computed per-item total
+        };
+      });
 
       // Calculate parts total from parts (retail * quantity)
       // Use retail price for customer-facing totals, not wholesale cost
-      const partsTotal = parts.reduce((sum, part) => {
-        return sum + ((part.retail || part.cost || 0) * (part.quantity || 0));
+      const partsTotal = partsWithTotals.reduce((sum, part) => {
+        return sum + (part.total || 0);
       }, 0);
 
       jobsWithDetails.push({
@@ -264,11 +280,12 @@ export class DatabaseStorage implements IStorage {
         authorized: job.authorized === 1,
         vehicle,
         laborItems,
-        parts,
+        parts: partsWithTotals, // Use parts with computed totals
         repairOrder,
         laborTotal,
         partsTotal,
         subtotal: laborTotal + partsTotal,
+        totalPrice: laborTotal + partsTotal, // Add for sidepanel display
         feeTotal: 0,
       });
     }
@@ -328,22 +345,38 @@ export class DatabaseStorage implements IStorage {
     } : undefined;
 
     const jobRawData = job.rawData as any;
-    const laborItems: LaborItem[] = jobRawData?.labor?.map((labor: any) => ({
-      id: labor.id,
-      name: labor.name,
-      hours: parseFloat(labor.hours) || 0,
-      rate: labor.rate || 0,
-      technicianId: labor.technicianId,
-    })) || [];
+    const laborItems: LaborItem[] = jobRawData?.labor?.map((labor: any) => {
+      const hours = parseFloat(labor.hours) || 0;
+      const rate = labor.rate || 0;
+      return {
+        id: labor.id,
+        name: labor.name,
+        hours,
+        rate,
+        technicianId: labor.technicianId,
+        laborTotal: hours * rate, // Computed per-item total
+      };
+    }) || [];
 
     const laborTotal = laborItems.reduce((sum, item) => {
-      return sum + (item.hours * item.rate);
+      return sum + (item.laborTotal || 0);
     }, 0);
+
+    // Calculate parts with computed fields for frontend
+    const partsWithTotals = parts.map(part => {
+      const unitPrice = part.retail || part.cost || 0;
+      const quantity = part.quantity || 0;
+      return {
+        ...part,
+        unitPrice, // Add unitPrice for frontend display
+        total: unitPrice * quantity, // Computed per-item total
+      };
+    });
 
     // Calculate parts total from parts (retail * quantity)
     // Use retail price for customer-facing totals, not wholesale cost
-    const partsTotal = parts.reduce((sum, part) => {
-      return sum + ((part.retail || part.cost || 0) * (part.quantity || 0));
+    const partsTotal = partsWithTotals.reduce((sum, part) => {
+      return sum + (part.total || 0);
     }, 0);
 
     return {
@@ -357,11 +390,12 @@ export class DatabaseStorage implements IStorage {
       authorized: job.authorized === 1,
       vehicle,
       laborItems,
-      parts,
+      parts: partsWithTotals, // Use parts with computed totals
       repairOrder,
       laborTotal,
       partsTotal,
       subtotal: laborTotal + partsTotal,
+      totalPrice: laborTotal + partsTotal, // Add for sidepanel display
       feeTotal: 0,
     };
   }
