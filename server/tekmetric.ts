@@ -178,3 +178,65 @@ export async function fetchCurrentPricing(
   
   return results;
 }
+
+// Fetch repair order details from Tekmetric API
+export async function fetchRepairOrder(
+  roId: string,
+  shopId: string
+): Promise<{
+  id: string;
+  roNumber: string;
+  customer: { id: number; firstName: string; lastName: string } | null;
+  vehicle: { id: number; year: number; make: string; model: string; engine?: string; vin?: string } | null;
+  jobs: Array<{ id: number; name: string; authorized: boolean }>;
+} | null> {
+  try {
+    // Determine shop location from shop ID
+    const shopLocation = getShopLocationFromId(shopId);
+    if (!shopLocation) {
+      console.error(`Unknown shop ID: ${shopId}`);
+      return null;
+    }
+    
+    const response = await tekmetricRequest(`/repair-orders/${roId}`, "GET", undefined, shopLocation);
+    
+    return {
+      id: response.id?.toString() || roId,
+      roNumber: response.repairOrderNumber || response.roNumber || `RO-${roId}`,
+      customer: response.customer ? {
+        id: response.customer.id,
+        firstName: response.customer.firstName || '',
+        lastName: response.customer.lastName || '',
+      } : null,
+      vehicle: response.vehicle ? {
+        id: response.vehicle.id,
+        year: response.vehicle.year,
+        make: response.vehicle.make,
+        model: response.vehicle.model,
+        engine: response.vehicle.engineSize || response.vehicle.engine,
+        vin: response.vehicle.vin,
+      } : null,
+      jobs: (response.jobs || []).map((job: any) => ({
+        id: job.id,
+        name: job.name,
+        authorized: job.authorized || false,
+      })),
+    };
+  } catch (error) {
+    console.error(`Failed to fetch RO ${roId}:`, error);
+    return null;
+  }
+}
+
+// Helper to get shop location from numeric shop ID
+function getShopLocationFromId(shopId: string): ShopLocation | null {
+  const nbId = process.env.TM_SHOP_ID_NB;
+  const wmId = process.env.TM_SHOP_ID_WM;
+  const evId = process.env.TM_SHOP_ID_EV;
+  
+  if (shopId === nbId) return "NB";
+  if (shopId === wmId) return "WM";
+  if (shopId === evId) return "EV";
+  
+  return null;
+}

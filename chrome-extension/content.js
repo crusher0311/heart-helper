@@ -1335,16 +1335,61 @@ if (document.readyState === 'loading') {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Get current vehicle info for side panel
   if (message.type === 'GET_VEHICLE_INFO') {
-    const vehicleInfo = extractVehicleInfo();
-    sendResponse({ vehicleInfo });
-    return true;
+    // First try to fetch from API for accurate data
+    fetchVehicleInfoFromAPI().then(apiData => {
+      if (apiData && apiData.vehicle) {
+        console.log('Sending API vehicle data:', apiData.vehicle);
+        sendResponse({ 
+          vehicleInfo: {
+            year: apiData.vehicle.year,
+            make: apiData.vehicle.make,
+            model: apiData.vehicle.model,
+            engine: apiData.vehicle.engine || null
+          }
+        });
+      } else {
+        // Fallback to DOM scraping
+        console.log('API failed, using DOM scraping');
+        const vehicleInfo = extractVehicleInfo();
+        sendResponse({ vehicleInfo });
+      }
+    }).catch(error => {
+      console.error('API fetch error:', error);
+      const vehicleInfo = extractVehicleInfo();
+      sendResponse({ vehicleInfo });
+    });
+    return true; // Keep channel open for async response
   }
   
   // Get full RO info for sales script generation
   if (message.type === 'GET_RO_INFO') {
-    const roInfo = extractROInfo();
-    sendResponse({ roInfo });
-    return true;
+    // First try to fetch from API for accurate data
+    fetchVehicleInfoFromAPI().then(apiData => {
+      if (apiData) {
+        console.log('Sending API RO data:', apiData);
+        sendResponse({ 
+          roInfo: {
+            roId: apiData.id,
+            roNumber: apiData.roNumber,
+            customer: apiData.customer ? {
+              name: `${apiData.customer.firstName} ${apiData.customer.lastName}`.trim()
+            } : null,
+            vehicle: apiData.vehicle,
+            jobs: apiData.jobs || []
+          }
+        });
+      } else {
+        // Fallback to DOM scraping
+        console.log('API failed, using DOM scraping for RO info');
+        const roInfo = extractROInfo();
+        sendResponse({ roInfo });
+      }
+    }).catch(error => {
+      console.error('API fetch error:', error);
+      const roInfo = extractROInfo();
+      sendResponse({ roInfo });
+    });
+    return true; // Keep channel open for async response
   }
   
   // Paste cleaned concern text into Tekmetric
@@ -1400,11 +1445,92 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 // Extract vehicle info from Tekmetric page
+// Extract shop ID and RO ID from Tekmetric URL
+function extractIdsFromUrl() {
+  // URL pattern: https://shop.tekmetric.com/shop/{shopId}/repair-orders/{roId}
+  const url = window.location.href;
+  const match = url.match(/\/shop\/(\d+)\/repair-orders\/(\d+)/);
+  if (match) {
+    return { shopId: match[1], roId: match[2] };
+  }
+  return null;
+}
+
+// Cache for API-fetched RO data to avoid repeated calls
+let cachedROData = null;
+let cachedROUrl = null;
+
+// Fetch vehicle info from our API (uses Tekmetric API for accurate data)
+async function fetchVehicleInfoFromAPI() {
+  const ids = extractIdsFromUrl();
+  if (!ids) {
+    console.log('Not on a Tekmetric RO page, cannot fetch from API');
+    return null;
+  }
+  
+  // Check cache first
+  if (cachedROData && cachedROUrl === window.location.href) {
+    console.log('Using cached RO data');
+    return cachedROData;
+  }
+  
+  try {
+    // Get app URL from storage
+    const result = await new Promise(resolve => {
+      chrome.storage.local.get(['appUrl'], resolve);
+    });
+    const syncResult = await new Promise(resolve => {
+      chrome.storage.sync.get(['heartHelperUrl'], resolve);
+    });
+    
+    const appUrl = syncResult.heartHelperUrl || result.appUrl;
+    if (!appUrl) {
+      console.log('App URL not configured, cannot fetch from API');
+      return null;
+    }
+    
+    console.log(`Fetching RO data from API: ${appUrl}/api/tekmetric/ro/${ids.shopId}/${ids.roId}`);
+    
+    const response = await fetch(`${appUrl}/api/tekmetric/ro/${ids.shopId}/${ids.roId}`, {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' }
+    });
+    
+    if (!response.ok) {
+      console.log(`API returned ${response.status}, falling back to DOM scraping`);
+      return null;
+    }
+    
+    const data = await response.json();
+    console.log('Got RO data from API:', data);
+    
+    // Cache the result
+    cachedROData = data;
+    cachedROUrl = window.location.href;
+    
+    return data;
+  } catch (error) {
+    console.error('Error fetching from API:', error);
+    return null;
+  }
+}
+
 function extractVehicleInfo() {
   let vehicleInfo = { year: null, make: null, model: null, engine: null };
   
+  // Check if we have cached API data
+  if (cachedROData && cachedROData.vehicle && cachedROUrl === window.location.href) {
+    console.log('Using cached API vehicle data');
+    return {
+      year: cachedROData.vehicle.year,
+      make: cachedROData.vehicle.make,
+      model: cachedROData.vehicle.model,
+      engine: cachedROData.vehicle.engine || null
+    };
+  }
+  
   try {
-    // Look for vehicle info in various common locations
+    // Fallback to DOM scraping if API data not available
     // Strategy 1: Look for vehicle header text
     const headerElements = document.querySelectorAll('h1, h2, h3, h4, .vehicle-info, [class*="vehicle"], [class*="Vehicle"]');
     for (const el of headerElements) {

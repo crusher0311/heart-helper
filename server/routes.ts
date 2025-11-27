@@ -654,6 +654,29 @@ export async function registerRoutes(app: Express) {
     });
   });
 
+  // Fetch RO data directly from Tekmetric API (for Chrome extension)
+  app.get("/api/tekmetric/ro/:shopId/:roId", async (req, res) => {
+    try {
+      const { shopId, roId } = req.params;
+      
+      if (!shopId || !roId) {
+        return res.status(400).json({ error: "Shop ID and RO ID are required" });
+      }
+      
+      const { fetchRepairOrder } = await import("./tekmetric");
+      const roData = await fetchRepairOrder(roId, shopId);
+      
+      if (!roData) {
+        return res.status(404).json({ error: "Repair order not found or shop not configured" });
+      }
+      
+      res.json(roData);
+    } catch (error: any) {
+      console.error("Fetch RO error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
   // Test Tekmetric connection for a specific shop
   app.post("/api/tekmetric/test", async (req, res) => {
     try {
