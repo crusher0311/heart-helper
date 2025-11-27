@@ -46,11 +46,14 @@ All protected routes require both authentication and approval status check.
 
 CORS is configured to allow Chrome extension origins (chrome-extension://), *.replit.dev, *.replit.app, and localhost with credentials support for cross-origin authentication.
 
-### Chrome Extension (v3.4.0)
+### Chrome Extension (v3.5.0)
 
 Located in `/chrome-extension/`, provides:
-- Side panel UI for live call assistance
-- Tekmetric page integration for repair order data
+- Side panel UI for live call assistance with 3 main tabs:
+  - **Incoming Caller**: Phone scripts and AI-powered concern intake Q&A
+  - **Search**: Native repair order search with job details and pricing
+  - **Sales Script**: AI-generated sales scripts with feedback tracking
+- Tekmetric page integration for repair order and vehicle data
 - User authentication status display
 - AI sales script generation with personalization indicator
 - Feedback submission (thumbs up/down) synced to server

@@ -149,13 +149,24 @@ async function syncSettingsFromApp() {
 function setupMessageListeners() {
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === 'VEHICLE_INFO') {
+      // Update Incoming Caller tab vehicle fields
       document.getElementById('vehicleYear').value = message.vehicleInfo.year || '';
       document.getElementById('vehicleMake').value = message.vehicleInfo.make || '';
       document.getElementById('vehicleModel').value = message.vehicleInfo.model || '';
+      // Also update Search tab vehicle fields
+      document.getElementById('searchYear').value = message.vehicleInfo.year || '';
+      document.getElementById('searchMake').value = message.vehicleInfo.make || '';
+      document.getElementById('searchModel').value = message.vehicleInfo.model || '';
     }
     if (message.type === 'RO_INFO') {
       currentRO = message.roInfo;
       updateRODisplay();
+      // Also update Search tab vehicle fields from RO
+      if (currentRO && currentRO.vehicle) {
+        document.getElementById('searchYear').value = currentRO.vehicle.year || '';
+        document.getElementById('searchMake').value = currentRO.vehicle.make || '';
+        document.getElementById('searchModel').value = currentRO.vehicle.model || '';
+      }
     }
   });
 }
@@ -170,9 +181,14 @@ function requestCurrentROInfo() {
           return;
         }
         if (response && response.vehicleInfo) {
+          // Update Incoming Caller tab vehicle fields
           document.getElementById('vehicleYear').value = response.vehicleInfo.year || '';
           document.getElementById('vehicleMake').value = response.vehicleInfo.make || '';
           document.getElementById('vehicleModel').value = response.vehicleInfo.model || '';
+          // Also update Search tab vehicle fields
+          document.getElementById('searchYear').value = response.vehicleInfo.year || '';
+          document.getElementById('searchMake').value = response.vehicleInfo.make || '';
+          document.getElementById('searchModel').value = response.vehicleInfo.model || '';
         }
       });
       
@@ -185,6 +201,12 @@ function requestCurrentROInfo() {
         if (response && response.roInfo) {
           currentRO = response.roInfo;
           updateRODisplay();
+          // Also update Search tab vehicle fields from RO
+          if (currentRO && currentRO.vehicle) {
+            document.getElementById('searchYear').value = currentRO.vehicle.year || '';
+            document.getElementById('searchMake').value = currentRO.vehicle.make || '';
+            document.getElementById('searchModel').value = currentRO.vehicle.model || '';
+          }
         }
       });
     } else {
@@ -742,12 +764,12 @@ const SHOP_NAMES = {
 };
 
 function autoFillSearchVehicle() {
-  // Auto-fill from current RO vehicle info if available
+  const searchYear = document.getElementById('searchYear');
+  const searchMake = document.getElementById('searchMake');
+  const searchModel = document.getElementById('searchModel');
+  
+  // First try to fill from current RO vehicle info
   if (currentRO && currentRO.vehicle) {
-    const searchYear = document.getElementById('searchYear');
-    const searchMake = document.getElementById('searchMake');
-    const searchModel = document.getElementById('searchModel');
-    
     if (!searchYear.value && currentRO.vehicle.year) {
       searchYear.value = currentRO.vehicle.year;
     }
@@ -757,6 +779,21 @@ function autoFillSearchVehicle() {
     if (!searchModel.value && currentRO.vehicle.model) {
       searchModel.value = currentRO.vehicle.model;
     }
+  }
+  
+  // Fallback: try to fill from Incoming Caller tab vehicle fields
+  const incomingYear = document.getElementById('vehicleYear').value;
+  const incomingMake = document.getElementById('vehicleMake').value;
+  const incomingModel = document.getElementById('vehicleModel').value;
+  
+  if (!searchYear.value && incomingYear) {
+    searchYear.value = incomingYear;
+  }
+  if (!searchMake.value && incomingMake) {
+    searchMake.value = incomingMake;
+  }
+  if (!searchModel.value && incomingModel) {
+    searchModel.value = incomingModel;
   }
 }
 
