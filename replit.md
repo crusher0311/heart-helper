@@ -10,9 +10,11 @@ HEART Helper is an AI-powered repair order search tool for HEART Certified Auto 
 - **Phone Answer Scripts**: Professional scripts for incoming calls
 - **Intelligent Repair Term Extraction**: Semantic parsing of customer descriptions
 - **Smart Year Matching**: Broader searches across compatible model years
-- **User Authentication**: Replit Auth with personalized settings
+- **User Authentication**: Replit Auth with personalized settings and approval workflow
+- **User Approval Workflow**: Auto-approves @heartautocare.com emails; other domains require admin approval
 - **Per-User AI Training**: Personal training data for customized script generation
 - **Script Feedback Tracking**: Thumbs up/down feedback to improve AI recommendations
+- **Admin User Management**: Add/delete users, manage admin status, approve/reject pending users
 
 ## User Preferences
 
@@ -38,6 +40,9 @@ Key API endpoints:
 - `/api/scripts/feedback` - Script feedback submission
 - `/api/sales/generate-script` - AI script generation with per-user training
 - `/api/search` - AI-powered repair order search
+- `/api/admin/*` - Admin user management, approvals, training data
+
+All protected routes require both authentication and approval status check.
 
 CORS is configured to allow Chrome extension origins (chrome-extension://), *.replit.dev, *.replit.app, and localhost with credentials support for cross-origin authentication.
 
