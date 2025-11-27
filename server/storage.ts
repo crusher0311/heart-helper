@@ -648,8 +648,9 @@ export class DatabaseStorage implements IStorage {
       return existing;
     }
     
-    // Auto-approve @heartautocare.com emails
-    const isHeartEmail = email?.toLowerCase().endsWith('@heartautocare.com') ?? false;
+    // Auto-approve @heartautocare.com emails (case-insensitive)
+    const normalizedEmail = email?.toLowerCase().trim() ?? '';
+    const isHeartEmail = normalizedEmail.endsWith('@heartautocare.com');
     const approvalStatus = isHeartEmail ? 'approved' : 'pending';
     
     // Create new preferences with appropriate approval status

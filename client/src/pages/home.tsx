@@ -11,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Sparkles, Settings, RefreshCw, Clock, LogOut, User, ShieldCheck } from "lucide-react";
+import { Sparkles, Settings, RefreshCw, Clock, LogOut, User, ShieldCheck, AlertCircle } from "lucide-react";
 import { Link } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
 import type { SearchJobRequest, SearchResult } from "@shared/schema";
@@ -148,6 +148,46 @@ export default function Home() {
     searchParams.vehicleModel !== undefined ||
     searchParams.vehicleEngine !== undefined
   );
+
+  // Check if user is pending approval
+  const isPendingApproval = user?.preferences?.approvalStatus === 'pending';
+  const isRejected = user?.preferences?.approvalStatus === 'rejected';
+
+  // Show pending approval page if not approved
+  if (isPendingApproval || isRejected) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <Card className="max-w-md w-full">
+          <CardContent className="pt-8 pb-6 text-center">
+            <div className={`mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-4 ${
+              isRejected ? 'bg-destructive/10' : 'bg-amber-500/10'
+            }`}>
+              <AlertCircle className={`w-8 h-8 ${isRejected ? 'text-destructive' : 'text-amber-500'}`} />
+            </div>
+            <h2 className="text-xl font-semibold mb-2" data-testid="text-approval-title">
+              {isRejected ? 'Access Denied' : 'Approval Pending'}
+            </h2>
+            <p className="text-muted-foreground mb-6" data-testid="text-approval-message">
+              {isRejected 
+                ? 'Your access to HEART Helper has been denied. Please contact an administrator if you believe this is an error.'
+                : 'Your account is awaiting approval from an administrator. Please check back later.'}
+            </p>
+            <div className="flex flex-col gap-2">
+              <p className="text-sm text-muted-foreground">
+                Signed in as: <span className="font-medium">{user?.email}</span>
+              </p>
+              <a href="/api/logout">
+                <Button variant="outline" className="w-full" data-testid="button-logout">
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out
+                </Button>
+              </a>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">

@@ -32,7 +32,7 @@ import {
   type ShopLocation
 } from "./tekmetric";
 import { z } from "zod";
-import { setupAuth, isAuthenticated } from "./replitAuth";
+import { setupAuth, isAuthenticated, isApproved } from "./replitAuth";
 
 export async function registerRoutes(app: Express) {
   // Set up Replit Auth
@@ -50,8 +50,8 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Get user preferences
-  app.get('/api/user/preferences', isAuthenticated, async (req: any, res) => {
+  // Get user preferences (requires approval)
+  app.get('/api/user/preferences', isAuthenticated, isApproved, async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const prefs = await storage.getUserPreferences(userId);
@@ -62,8 +62,8 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Update user preferences
-  app.put('/api/user/preferences', isAuthenticated, async (req: any, res) => {
+  // Update user preferences (requires approval)
+  app.put('/api/user/preferences', isAuthenticated, isApproved, async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const { displayName, defaultShopId, defaultTool, personalTraining } = req.body;
@@ -81,8 +81,8 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Submit script feedback
-  app.post('/api/scripts/feedback', isAuthenticated, async (req: any, res) => {
+  // Submit script feedback (requires approval)
+  app.post('/api/scripts/feedback', isAuthenticated, isApproved, async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const parseResult = insertScriptFeedbackSchema.safeParse({ ...req.body, userId });
@@ -102,8 +102,8 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Get user's feedback history
-  app.get('/api/scripts/feedback', isAuthenticated, async (req: any, res) => {
+  // Get user's feedback history (requires approval)
+  app.get('/api/scripts/feedback', isAuthenticated, isApproved, async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const limit = parseInt(req.query.limit as string) || 50;
@@ -283,8 +283,8 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Search endpoint
-  app.post("/api/search", async (req, res) => {
+  // Search endpoint (requires authentication and approval)
+  app.post("/api/search", isAuthenticated, isApproved, async (req: any, res) => {
     try {
       const params = searchJobSchema.parse(req.body);
       const bypassCache = req.body.bypassCache === true;
@@ -556,8 +556,8 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Get recent searches endpoint
-  app.get("/api/search/recent", async (req, res) => {
+  // Get recent searches endpoint (requires authentication and approval)
+  app.get("/api/search/recent", isAuthenticated, isApproved, async (req: any, res) => {
     try {
       const limit = parseInt(req.query.limit as string) || 10;
       const recentSearches = await storage.getRecentSearches(limit);
@@ -742,8 +742,8 @@ export async function registerRoutes(app: Express) {
   // Concern Intake API Routes
   // ==========================================
 
-  // Generate follow-up questions from initial customer concern
-  app.post("/api/concerns/generate-questions", async (req, res) => {
+  // Generate follow-up questions from initial customer concern (requires authentication and approval)
+  app.post("/api/concerns/generate-questions", isAuthenticated, isApproved, async (req: any, res) => {
     try {
       const parseResult = generateConcernQuestionsRequestSchema.safeParse(req.body);
       if (!parseResult.success) {
@@ -760,8 +760,8 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Review conversation and suggest additional questions
-  app.post("/api/concerns/review", async (req, res) => {
+  // Review conversation and suggest additional questions (requires authentication and approval)
+  app.post("/api/concerns/review", isAuthenticated, isApproved, async (req: any, res) => {
     try {
       const parseResult = reviewConcernConversationRequestSchema.safeParse(req.body);
       if (!parseResult.success) {
@@ -778,8 +778,8 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Clean and format conversation into paragraph
-  app.post("/api/concerns/clean-conversation", async (req, res) => {
+  // Clean and format conversation into paragraph (requires authentication and approval)
+  app.post("/api/concerns/clean-conversation", isAuthenticated, isApproved, async (req: any, res) => {
     try {
       const parseResult = cleanConversationRequestSchema.safeParse(req.body);
       if (!parseResult.success) {
@@ -796,9 +796,8 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Generate AI sales script based on repair order
-  // Supports both authenticated (with per-user training) and unauthenticated requests
-  app.post("/api/sales/generate-script", async (req: any, res) => {
+  // Generate AI sales script based on repair order (requires authentication and approval)
+  app.post("/api/sales/generate-script", isAuthenticated, isApproved, async (req: any, res) => {
     try {
       const { vehicle, jobs, customer, totalAmount, isInShop } = req.body;
       
