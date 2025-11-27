@@ -172,6 +172,79 @@ export async function registerRoutes(app: Express) {
       res.status(500).json({ message: "Failed to update user training" });
     }
   });
+
+  // Create a new user (admin only)
+  app.post('/api/admin/users', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { email, firstName, lastName, isAdmin: makeAdmin } = req.body;
+      
+      if (!email || !firstName || !lastName) {
+        return res.status(400).json({ error: "email, firstName, and lastName are required" });
+      }
+      
+      // Check if email already exists
+      const existingUsers = await storage.getAllUsersWithPreferences();
+      if (existingUsers.some(u => u.email?.toLowerCase() === email.toLowerCase())) {
+        return res.status(400).json({ error: "A user with this email already exists" });
+      }
+      
+      const newUser = await storage.createUserAsAdmin({
+        email,
+        firstName,
+        lastName,
+        isAdmin: makeAdmin === true,
+      });
+      
+      res.status(201).json(newUser);
+    } catch (error) {
+      console.error("Error creating user:", error);
+      res.status(500).json({ message: "Failed to create user" });
+    }
+  });
+
+  // Delete a user (admin only)
+  app.delete('/api/admin/users/:userId', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { userId } = req.params;
+      const currentUserId = req.user.claims.sub;
+      
+      // Prevent admin from deleting themselves
+      if (userId === currentUserId) {
+        return res.status(400).json({ error: "You cannot delete your own account" });
+      }
+      
+      await storage.deleteUserAsAdmin(userId);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      res.status(500).json({ message: "Failed to delete user" });
+    }
+  });
+
+  // Update user's admin status (admin only)
+  app.put('/api/admin/users/:userId/admin', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { userId } = req.params;
+      const { isAdmin: makeAdmin } = req.body;
+      const currentUserId = req.user.claims.sub;
+      
+      // Prevent admin from changing their own admin status
+      if (userId === currentUserId) {
+        return res.status(400).json({ error: "You cannot change your own admin status" });
+      }
+      
+      if (typeof makeAdmin !== 'boolean') {
+        return res.status(400).json({ error: "isAdmin must be a boolean" });
+      }
+      
+      const prefs = await storage.updateUserAdminStatus(userId, makeAdmin);
+      res.json(prefs);
+    } catch (error) {
+      console.error("Error updating user admin status:", error);
+      res.status(500).json({ message: "Failed to update user admin status" });
+    }
+  });
+
   // Search endpoint
   app.post("/api/search", async (req, res) => {
     try {
