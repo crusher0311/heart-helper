@@ -23,6 +23,10 @@ let cleanedConversation = '';
 let currentRO = null;
 let lastGeneratedScript = null;
 
+// Search State
+let searchResults = [];
+let selectedJobResult = null;
+
 // ==================== INITIALIZATION ====================
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -233,6 +237,14 @@ function setupEventListeners() {
   document.getElementById('feedbackSuccess').addEventListener('click', () => submitFeedback('positive'));
   document.getElementById('feedbackFail').addEventListener('click', () => submitFeedback('negative'));
   
+  // Search
+  document.getElementById('searchBtn').addEventListener('click', performSearch);
+  document.getElementById('clearSearchBtn').addEventListener('click', clearSearch);
+  document.getElementById('backToResultsBtn').addEventListener('click', backToResults);
+  document.getElementById('searchRepairType').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') performSearch();
+  });
+  
   // Settings
   document.getElementById('settingsBtn').addEventListener('click', openSettings);
   document.getElementById('closeSettingsBtn').addEventListener('click', closeSettings);
@@ -252,7 +264,13 @@ function switchTab(tab) {
   });
   
   document.getElementById('incomingTab').style.display = tab === 'incoming' ? 'flex' : 'none';
+  document.getElementById('searchTab').style.display = tab === 'search' ? 'flex' : 'none';
   document.getElementById('salesTab').style.display = tab === 'sales' ? 'flex' : 'none';
+  
+  // Auto-fill vehicle info when switching to search tab
+  if (tab === 'search') {
+    autoFillSearchVehicle();
+  }
   
   // Auto-generate sales script when switching to sales tab
   if (tab === 'sales' && currentRO && currentRO.jobs && currentRO.jobs.length > 0 && appUrl) {
@@ -713,6 +731,293 @@ async function submitFeedback(sentiment) {
     console.error('Error submitting feedback:', error);
     showToast(sentiment === 'positive' ? 'Great! Thanks for the feedback.' : 'Thanks for the feedback!');
   }
+}
+
+// ==================== SEARCH ====================
+
+const SHOP_NAMES = {
+  NB: 'Northbrook',
+  WM: 'Wilmette',
+  EV: 'Evanston'
+};
+
+function autoFillSearchVehicle() {
+  // Auto-fill from current RO vehicle info if available
+  if (currentRO && currentRO.vehicle) {
+    const searchYear = document.getElementById('searchYear');
+    const searchMake = document.getElementById('searchMake');
+    const searchModel = document.getElementById('searchModel');
+    
+    if (!searchYear.value && currentRO.vehicle.year) {
+      searchYear.value = currentRO.vehicle.year;
+    }
+    if (!searchMake.value && currentRO.vehicle.make) {
+      searchMake.value = currentRO.vehicle.make;
+    }
+    if (!searchModel.value && currentRO.vehicle.model) {
+      searchModel.value = currentRO.vehicle.model;
+    }
+  }
+}
+
+async function performSearch() {
+  const repairType = document.getElementById('searchRepairType').value.trim();
+  
+  if (!repairType) {
+    showToast('Please enter a repair type');
+    return;
+  }
+  
+  if (!appUrl) {
+    showToast('Please configure app URL in settings');
+    return;
+  }
+  
+  const loadingOverlay = document.getElementById('searchLoadingOverlay');
+  loadingOverlay.style.display = 'flex';
+  
+  try {
+    const params = {
+      repairType: repairType,
+      vehicleYear: document.getElementById('searchYear').value.trim() || undefined,
+      vehicleMake: document.getElementById('searchMake').value.trim() || undefined,
+      vehicleModel: document.getElementById('searchModel').value.trim() || undefined,
+      vehicleEngine: document.getElementById('searchEngine').value.trim() || undefined,
+      limit: 20
+    };
+    
+    // Remove undefined values
+    Object.keys(params).forEach(key => params[key] === undefined && delete params[key]);
+    
+    const response = await fetch(`${appUrl}/api/search`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params)
+    });
+    
+    if (!response.ok) {
+      if (response.status === 401) {
+        showToast('Please sign in to search');
+        return;
+      }
+      if (response.status === 403) {
+        showToast('Account pending approval');
+        return;
+      }
+      throw new Error('Search failed');
+    }
+    
+    const data = await response.json();
+    searchResults = data.results || [];
+    displaySearchResults();
+    
+  } catch (error) {
+    console.error('Search error:', error);
+    showToast('Search failed. Please try again.');
+  } finally {
+    loadingOverlay.style.display = 'none';
+  }
+}
+
+function displaySearchResults() {
+  const emptyState = document.getElementById('searchEmptyState');
+  const resultsSection = document.getElementById('searchResultsSection');
+  const resultsList = document.getElementById('searchResultsList');
+  const resultsCount = document.getElementById('resultsCount');
+  const jobDetailSection = document.getElementById('jobDetailSection');
+  const formSection = document.querySelector('.search-form-section');
+  
+  // Hide job detail, show form
+  jobDetailSection.style.display = 'none';
+  formSection.style.display = 'block';
+  
+  if (searchResults.length === 0) {
+    emptyState.style.display = 'none';
+    resultsSection.style.display = 'flex';
+    resultsList.innerHTML = `
+      <div class="no-results-state">
+        <div class="no-results-icon">&#128269;</div>
+        <div class="no-results-title">No Matching Jobs Found</div>
+        <div class="no-results-desc">Try adjusting your search criteria or broadening your vehicle details.</div>
+      </div>
+    `;
+    resultsCount.textContent = '0 results';
+    return;
+  }
+  
+  emptyState.style.display = 'none';
+  resultsSection.style.display = 'flex';
+  resultsCount.textContent = `${searchResults.length} result${searchResults.length !== 1 ? 's' : ''}`;
+  
+  resultsList.innerHTML = searchResults.map((result, index) => {
+    const { job, matchScore, matchReason } = result;
+    const vehicle = job.vehicle;
+    const laborHours = job.laborItems.reduce((sum, item) => sum + Number(item.hours || 0), 0);
+    const partsCount = job.parts.length;
+    const shopId = job.repairOrder?.shopId;
+    const shopName = shopId && SHOP_NAMES[shopId] ? SHOP_NAMES[shopId] : null;
+    
+    const matchClass = matchScore >= 80 ? 'high' : matchScore >= 60 ? 'medium' : 'low';
+    const vehicleStr = vehicle ? `${vehicle.year || ''} ${vehicle.make || ''} ${vehicle.model || ''}`.trim() : '';
+    
+    return `
+      <div class="job-result-card" data-index="${index}">
+        <div class="job-card-header">
+          <div>
+            ${vehicleStr ? `<div class="job-card-vehicle">${vehicleStr}</div>` : ''}
+            <div class="job-card-name">${job.name}</div>
+          </div>
+          <span class="match-badge ${matchClass}">${matchScore}%</span>
+        </div>
+        ${matchReason ? `<div class="job-card-reason">${matchReason}</div>` : ''}
+        <div class="job-card-meta">
+          <div class="job-card-meta-item">
+            <span class="job-card-meta-icon">&#128176;</span>
+            ${formatCurrency(job.totalPrice)}
+          </div>
+          <div class="job-card-meta-item">
+            <span class="job-card-meta-icon">&#128338;</span>
+            ${laborHours.toFixed(1)} hrs
+          </div>
+          <div class="job-card-meta-item">
+            <span class="job-card-meta-icon">&#128295;</span>
+            ${partsCount} parts
+          </div>
+          ${shopName ? `<div class="job-card-meta-item"><span class="job-card-meta-icon">&#127970;</span>${shopName}</div>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  // Add click listeners to cards
+  resultsList.querySelectorAll('.job-result-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const index = parseInt(card.dataset.index);
+      showJobDetail(searchResults[index]);
+    });
+  });
+}
+
+function showJobDetail(result) {
+  selectedJobResult = result;
+  const { job, matchScore, matchReason } = result;
+  const vehicle = job.vehicle;
+  const formSection = document.querySelector('.search-form-section');
+  const resultsSection = document.getElementById('searchResultsSection');
+  const jobDetailSection = document.getElementById('jobDetailSection');
+  const detailContent = document.getElementById('jobDetailContent');
+  
+  formSection.style.display = 'none';
+  resultsSection.style.display = 'none';
+  jobDetailSection.style.display = 'flex';
+  
+  const vehicleStr = vehicle ? `${vehicle.year || ''} ${vehicle.make || ''} ${vehicle.model || ''}`.trim() : '';
+  const shopId = job.repairOrder?.shopId;
+  const shopName = shopId && SHOP_NAMES[shopId] ? SHOP_NAMES[shopId] : null;
+  
+  // Calculate totals
+  const laborTotal = job.laborItems.reduce((sum, item) => sum + Number(item.laborTotal || 0), 0);
+  const partsTotal = job.parts.reduce((sum, part) => sum + Number(part.total || 0), 0);
+  const totalHours = job.laborItems.reduce((sum, item) => sum + Number(item.hours || 0), 0);
+  
+  let html = `
+    <div class="job-detail-header">
+      ${vehicleStr ? `<div class="job-detail-vehicle">${vehicleStr}${vehicle?.engine ? ` - ${vehicle.engine}` : ''}</div>` : ''}
+      <div class="job-detail-name">${job.name}</div>
+      <div class="job-detail-match">&#127942; ${matchScore}% Match</div>
+      ${matchReason ? `<div class="job-detail-reason">${matchReason}</div>` : ''}
+    </div>
+  `;
+  
+  // Labor items
+  if (job.laborItems.length > 0) {
+    html += `<div class="job-detail-section-title">Labor (${totalHours.toFixed(1)} hrs)</div>`;
+    job.laborItems.forEach(item => {
+      html += `
+        <div class="job-detail-item">
+          <div class="job-detail-item-name">${item.name}</div>
+          <div class="job-detail-item-meta">${item.hours} hrs @ ${formatCurrency(item.rate)}/hr = ${formatCurrency(item.laborTotal)}</div>
+        </div>
+      `;
+    });
+  }
+  
+  // Parts
+  if (job.parts.length > 0) {
+    html += `<div class="job-detail-section-title">Parts (${job.parts.length})</div>`;
+    job.parts.forEach(part => {
+      html += `
+        <div class="job-detail-item">
+          <div class="job-detail-item-name">${part.name || 'Part'}</div>
+          <div class="job-detail-item-meta">
+            ${part.partNumber ? `#${part.partNumber} - ` : ''}
+            Qty ${part.quantity} @ ${formatCurrency(part.unitPrice)} = ${formatCurrency(part.total)}
+          </div>
+        </div>
+      `;
+    });
+  }
+  
+  // Totals
+  html += `
+    <div class="job-detail-totals">
+      <div class="job-detail-total-row">
+        <span>Labor</span>
+        <span>${formatCurrency(laborTotal)}</span>
+      </div>
+      <div class="job-detail-total-row">
+        <span>Parts</span>
+        <span>${formatCurrency(partsTotal)}</span>
+      </div>
+      <div class="job-detail-total-row grand">
+        <span>Total</span>
+        <span>${formatCurrency(job.totalPrice)}</span>
+      </div>
+    </div>
+  `;
+  
+  // RO info
+  html += `
+    <div class="job-detail-ro">
+      RO #${job.repairOrderId}
+      ${shopName ? `<span class="job-detail-shop">${shopName}</span>` : ''}
+    </div>
+  `;
+  
+  detailContent.innerHTML = html;
+}
+
+function backToResults() {
+  const formSection = document.querySelector('.search-form-section');
+  const resultsSection = document.getElementById('searchResultsSection');
+  const jobDetailSection = document.getElementById('jobDetailSection');
+  
+  formSection.style.display = 'block';
+  resultsSection.style.display = 'flex';
+  jobDetailSection.style.display = 'none';
+  selectedJobResult = null;
+}
+
+function clearSearch() {
+  searchResults = [];
+  selectedJobResult = null;
+  
+  document.getElementById('searchYear').value = '';
+  document.getElementById('searchMake').value = '';
+  document.getElementById('searchModel').value = '';
+  document.getElementById('searchEngine').value = '';
+  document.getElementById('searchRepairType').value = '';
+  
+  document.getElementById('searchResultsSection').style.display = 'none';
+  document.getElementById('jobDetailSection').style.display = 'none';
+  document.getElementById('searchEmptyState').style.display = 'flex';
+  document.querySelector('.search-form-section').style.display = 'block';
+}
+
+function formatCurrency(cents) {
+  if (cents === null || cents === undefined) return '$0.00';
+  return `$${(Number(cents) / 100).toFixed(2)}`;
 }
 
 // ==================== SETTINGS ====================

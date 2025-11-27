@@ -22,11 +22,15 @@
     <div class="tab-nav">
       <button class="tab-btn active" data-tab="incoming">
         <span class="tab-icon">&#128222;</span>
-        Incoming Caller
+        Incoming
+      </button>
+      <button class="tab-btn" data-tab="search">
+        <span class="tab-icon">&#128269;</span>
+        Search
       </button>
       <button class="tab-btn" data-tab="sales">
         <span class="tab-icon">&#128176;</span>
-        Sales Script
+        Sales
       </button>
     </div>
 
@@ -143,6 +147,65 @@
       <div id="loadingOverlay" class="loading-overlay" style="display: none;">
         <div class="loading-spinner"></div>
         <div class="loading-text">Generating...</div>
+      </div>
+    </div>
+
+    <!-- ==================== SEARCH TAB ==================== -->
+    <div id="searchTab" class="tab-content" style="display: none;">
+      <!-- Search Form -->
+      <div class="search-form-section">
+        <div class="form-group">
+          <label>Vehicle Info</label>
+          <div class="vehicle-row">
+            <input type="text" id="searchYear" placeholder="Year" class="vehicle-field" />
+            <input type="text" id="searchMake" placeholder="Make" class="vehicle-field" />
+            <input type="text" id="searchModel" placeholder="Model" class="vehicle-field" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="searchEngine">Engine (optional)</label>
+          <input type="text" id="searchEngine" placeholder="e.g., 3.5L V6, 2.0T..." />
+        </div>
+
+        <div class="form-group">
+          <label for="searchRepairType">Repair Type *</label>
+          <input type="text" id="searchRepairType" placeholder="e.g., brake pads, timing belt, alternator..." />
+        </div>
+
+        <button id="searchBtn" class="btn btn-primary">
+          <span class="btn-icon">&#128269;</span>
+          Search Jobs
+        </button>
+      </div>
+
+      <!-- Search Results -->
+      <div id="searchResultsSection" class="search-results-section" style="display: none;">
+        <div class="results-header">
+          <span id="resultsCount">0 results</span>
+          <button id="clearSearchBtn" class="clear-search-btn">Clear</button>
+        </div>
+        <div id="searchResultsList" class="search-results-list"></div>
+      </div>
+
+      <!-- Job Detail View -->
+      <div id="jobDetailSection" class="job-detail-section" style="display: none;">
+        <button id="backToResultsBtn" class="back-btn">
+          <span>&#8592;</span> Back to Results
+        </button>
+        <div id="jobDetailContent"></div>
+      </div>
+
+      <!-- Empty State -->
+      <div id="searchEmptyState" class="search-empty-state">
+        <div class="empty-icon">&#128269;</div>
+        <div class="empty-title">Search Historical Jobs</div>
+        <div class="empty-desc">Enter a repair type to find similar jobs from your shop's history. Add vehicle details for better AI matching.</div>
+      </div>
+
+      <div id="searchLoadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Searching...</div>
       </div>
     </div>
 
