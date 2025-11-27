@@ -47,6 +47,7 @@ body {
 }
 
 .open-app-btn,
+.settings-btn,
 .refresh-btn {
   background: rgba(255,255,255,0.2);
   border: none;
@@ -63,11 +64,13 @@ body {
 }
 
 .open-app-btn:hover,
+.settings-btn:hover,
 .refresh-btn:hover {
   background: rgba(255,255,255,0.3);
 }
 
-.open-icon {
+.open-icon,
+.settings-icon {
   font-size: 14px;
   font-weight: bold;
 }

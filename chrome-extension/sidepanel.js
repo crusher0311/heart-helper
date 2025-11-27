@@ -99,10 +99,20 @@ function updateUserDisplay(user) {
 
 async function loadSettings() {
   return new Promise((resolve) => {
-    chrome.storage.sync.get(['heartHelperUrl'], (data) => {
-      appUrl = data.heartHelperUrl || '';
-      updateConnectionStatus();
-      resolve();
+    // Check sync storage first (user-configured), then local storage (auto-detected from app visit)
+    chrome.storage.sync.get(['heartHelperUrl'], (syncData) => {
+      if (syncData.heartHelperUrl) {
+        appUrl = syncData.heartHelperUrl;
+        updateConnectionStatus();
+        resolve();
+      } else {
+        // Fallback to local storage (set by inject.js when visiting the app)
+        chrome.storage.local.get(['appUrl'], (localData) => {
+          appUrl = localData.appUrl || '';
+          updateConnectionStatus();
+          resolve();
+        });
+      }
     });
   });
 }
@@ -225,11 +235,26 @@ function setupEventListeners() {
   
   // Open full app button
   document.getElementById('openAppBtn').addEventListener('click', () => {
-    chrome.storage.local.get(['appUrl'], (result) => {
-      const appUrl = result.appUrl || 'https://heart-helper.replit.app';
+    // Use the global appUrl that was loaded from settings, or fallback
+    if (appUrl) {
       chrome.tabs.create({ url: appUrl });
-    });
+    } else {
+      // Try to get from storage as fallback
+      chrome.storage.sync.get(['heartHelperUrl'], (syncData) => {
+        if (syncData.heartHelperUrl) {
+          chrome.tabs.create({ url: syncData.heartHelperUrl });
+        } else {
+          chrome.storage.local.get(['appUrl'], (localData) => {
+            const url = localData.appUrl || 'https://heart-helper.replit.app';
+            chrome.tabs.create({ url: url });
+          });
+        }
+      });
+    }
   });
+  
+  // Settings button
+  document.getElementById('settingsBtn').addEventListener('click', openSettings);
   
   // Refresh button
   document.getElementById('refreshBtn').addEventListener('click', () => {
@@ -814,7 +839,9 @@ async function performSearch() {
   }
   
   if (!appUrl) {
-    showToast('Please configure app URL in settings');
+    console.error('Search error: appUrl not configured');
+    showToast('Please configure app URL in settings (gear icon)');
+    openSettings();
     return;
   }
   
@@ -822,9 +849,10 @@ async function performSearch() {
   loadingOverlay.style.display = 'flex';
   
   try {
+    const yearValue = document.getElementById('searchYear').value.trim();
     const params = {
       repairType: repairType,
-      vehicleYear: document.getElementById('searchYear').value.trim() || undefined,
+      vehicleYear: yearValue ? parseInt(yearValue, 10) : undefined,
       vehicleMake: document.getElementById('searchMake').value.trim() || undefined,
       vehicleModel: document.getElementById('searchModel').value.trim() || undefined,
       vehicleEngine: document.getElementById('searchEngine').value.trim() || undefined,
@@ -834,12 +862,17 @@ async function performSearch() {
     // Remove undefined values
     Object.keys(params).forEach(key => params[key] === undefined && delete params[key]);
     
+    console.log('Search params:', params);
+    console.log('Fetching from:', `${appUrl}/api/search`);
+    
     const response = await fetch(`${appUrl}/api/search`, {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(params)
     });
+    
+    console.log('Search response status:', response.status);
     
     if (!response.ok) {
       if (response.status === 401) {
@@ -850,16 +883,23 @@ async function performSearch() {
         showToast('Account pending approval');
         return;
       }
-      throw new Error('Search failed');
+      const errorText = await response.text();
+      console.error('Search error response:', errorText);
+      throw new Error(`Search failed: ${response.status}`);
     }
     
     const data = await response.json();
+    console.log('Search results:', data);
     searchResults = data.results || [];
     displaySearchResults();
     
+    if (searchResults.length === 0) {
+      showToast('No matching jobs found');
+    }
+    
   } catch (error) {
     console.error('Search error:', error);
-    showToast('Search failed. Please try again.');
+    showToast('Search failed. Check connection.');
   } finally {
     loadingOverlay.style.display = 'none';
   }
