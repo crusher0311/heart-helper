@@ -223,6 +223,14 @@ function setupEventListeners() {
     btn.addEventListener('click', () => switchTab(btn.dataset.tab));
   });
   
+  // Open full app button
+  document.getElementById('openAppBtn').addEventListener('click', () => {
+    chrome.storage.local.get(['appUrl'], (result) => {
+      const appUrl = result.appUrl || 'https://heart-helper.replit.app';
+      chrome.tabs.create({ url: appUrl });
+    });
+  });
+  
   // Refresh button
   document.getElementById('refreshBtn').addEventListener('click', () => {
     syncSettingsFromApp();
