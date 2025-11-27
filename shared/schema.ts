@@ -40,6 +40,7 @@ export const userPreferences = pgTable("user_preferences", {
   personalTraining: text("personal_training"), // Personal script examples/guidelines
   isManager: boolean("is_manager").default(false), // Can view team analytics
   isAdmin: boolean("is_admin").default(false), // Can manage other users' training
+  approvalStatus: text("approval_status").default("pending"), // "approved", "pending", "rejected" - @heartautocare.com auto-approved
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
