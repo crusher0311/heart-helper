@@ -1,4 +1,4 @@
-import { ArrowLeft, Users, Save, Loader2, User, Shield, ShieldCheck, Plus, Trash2 } from "lucide-react";
+import { ArrowLeft, Users, Save, Loader2, User, Shield, ShieldCheck, Plus, Trash2, Clock, Check, X } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -40,6 +40,7 @@ type UserPreferences = {
   personalTraining: string | null;
   isAdmin: boolean;
   isManager: boolean;
+  approvalStatus: 'approved' | 'pending' | 'rejected' | null;
 };
 
 type UserWithPreferences = {
@@ -65,6 +66,11 @@ export default function Admin() {
 
   const { data: users, isLoading: usersLoading } = useQuery<UserWithPreferences[]>({
     queryKey: ["/api/admin/users"],
+    enabled: adminCheck?.isAdmin === true,
+  });
+
+  const { data: pendingUsers } = useQuery<UserWithPreferences[]>({
+    queryKey: ["/api/admin/users/pending"],
     enabled: adminCheck?.isAdmin === true,
   });
 
@@ -175,6 +181,34 @@ export default function Admin() {
     },
   });
 
+  const approvalMutation = useMutation({
+    mutationFn: async ({ userId, status }: { userId: string; status: 'approved' | 'rejected' }) => {
+      const response = await apiRequest("PUT", `/api/admin/users/${userId}/approval`, { status });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "Failed to update approval status");
+      }
+      return response.json();
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/users"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/users/pending"] });
+      toast({
+        title: variables.status === 'approved' ? "User approved" : "User rejected",
+        description: variables.status === 'approved' 
+          ? "User can now access the application." 
+          : "User access has been revoked.",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
   const handleSelectUser = (user: UserWithPreferences) => {
     setSelectedUser(user);
     setTrainingText(user.preferences?.personalTraining || "");
@@ -239,6 +273,63 @@ export default function Admin() {
             <p className="text-muted-foreground">Upload scripts and training data for team members</p>
           </div>
         </div>
+
+        {/* Pending Approvals Section */}
+        {pendingUsers && pendingUsers.length > 0 && (
+          <Card className="mb-6 border-amber-500/50">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Clock className="h-5 w-5 text-amber-500" />
+                Pending Approvals
+                <Badge variant="secondary" className="ml-2">{pendingUsers.length}</Badge>
+              </CardTitle>
+              <CardDescription>
+                These users are waiting for approval to access the application
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {pendingUsers.map((user) => (
+                  <div
+                    key={user.id}
+                    className="flex items-center gap-3 p-3 rounded-lg bg-muted"
+                    data-testid={`pending-user-${user.id}`}
+                  >
+                    <Avatar className="h-10 w-10">
+                      {user.profileImageUrl && <AvatarImage src={user.profileImageUrl} alt={getUserDisplayName(user)} />}
+                      <AvatarFallback>{getInitials(user)}</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-medium truncate">{getUserDisplayName(user)}</div>
+                      <div className="text-sm text-muted-foreground truncate">{user.email}</div>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button
+                        size="sm"
+                        onClick={() => approvalMutation.mutate({ userId: user.id, status: 'approved' })}
+                        disabled={approvalMutation.isPending}
+                        data-testid={`button-approve-${user.id}`}
+                      >
+                        <Check className="h-4 w-4 mr-1" />
+                        Approve
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => approvalMutation.mutate({ userId: user.id, status: 'rejected' })}
+                        disabled={approvalMutation.isPending}
+                        data-testid={`button-reject-${user.id}`}
+                      >
+                        <X className="h-4 w-4 mr-1" />
+                        Reject
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <Card className="lg:col-span-1">

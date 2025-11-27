@@ -251,6 +251,38 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Get pending approval users (admin only)
+  app.get('/api/admin/users/pending', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const pendingUsers = await storage.getPendingApprovalUsers();
+      res.json(pendingUsers);
+    } catch (error) {
+      console.error("Error fetching pending users:", error);
+      res.status(500).json({ message: "Failed to fetch pending users" });
+    }
+  });
+
+  // Update user's approval status (admin only)
+  app.put('/api/admin/users/:userId/approval', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { userId } = req.params;
+      const { status } = req.body;
+      
+      if (status !== 'approved' && status !== 'rejected') {
+        return res.status(400).json({ error: "Status must be 'approved' or 'rejected'" });
+      }
+      
+      const prefs = await storage.updateUserApprovalStatus(userId, status);
+      res.json(prefs);
+    } catch (error: any) {
+      console.error("Error updating user approval status:", error);
+      if (error.message === "User not found") {
+        return res.status(404).json({ error: "User not found" });
+      }
+      res.status(500).json({ message: "Failed to update user approval status" });
+    }
+  });
+
   // Search endpoint
   app.post("/api/search", async (req, res) => {
     try {
