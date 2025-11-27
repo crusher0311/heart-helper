@@ -75,6 +75,9 @@ export interface IStorage {
   isUserAdmin(userId: string): Promise<boolean>;
   getAllUsersWithPreferences(): Promise<UserWithPreferences[]>;
   updateUserTrainingAsAdmin(targetUserId: string, training: string): Promise<UserPreferences>;
+  createUserAsAdmin(userData: { email: string; firstName: string; lastName: string; isAdmin?: boolean }): Promise<User>;
+  deleteUserAsAdmin(userId: string): Promise<void>;
+  updateUserAdminStatus(userId: string, isAdmin: boolean): Promise<UserPreferences>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -578,6 +581,41 @@ export class DatabaseStorage implements IStorage {
 
   async updateUserTrainingAsAdmin(targetUserId: string, training: string): Promise<UserPreferences> {
     return await this.upsertUserPreferences(targetUserId, { personalTraining: training });
+  }
+
+  async createUserAsAdmin(userData: { email: string; firstName: string; lastName: string; isAdmin?: boolean }): Promise<User> {
+    // Generate a unique ID for the user
+    const userId = crypto.randomUUID();
+    
+    // Create the user
+    const [newUser] = await db
+      .insert(users)
+      .values({
+        id: userId,
+        email: userData.email,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+      })
+      .returning();
+    
+    // Create user preferences with optional admin flag
+    if (userData.isAdmin !== undefined) {
+      await this.upsertUserPreferences(userId, { isAdmin: userData.isAdmin });
+    }
+    
+    return newUser;
+  }
+
+  async deleteUserAsAdmin(userId: string): Promise<void> {
+    // First delete user preferences (foreign key constraint)
+    await db.delete(userPreferences).where(eq(userPreferences.userId, userId));
+    
+    // Then delete the user
+    await db.delete(users).where(eq(users.id, userId));
+  }
+
+  async updateUserAdminStatus(userId: string, isAdmin: boolean): Promise<UserPreferences> {
+    return await this.upsertUserPreferences(userId, { isAdmin });
   }
 }
 
