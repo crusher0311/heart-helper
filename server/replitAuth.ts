@@ -60,6 +60,10 @@ async function upsertUser(claims: any) {
     lastName: claims["last_name"],
     profileImageUrl: claims["profile_image_url"],
   });
+  
+  // Ensure user preferences exist with appropriate approval status
+  // @heartautocare.com emails are auto-approved, others require admin approval
+  await storage.ensureUserPreferencesOnLogin(claims["sub"], claims["email"]);
 }
 
 export async function setupAuth(app: Express) {
@@ -157,4 +161,19 @@ export const isAuthenticated: RequestHandler = async (req, res, next) => {
     res.status(401).json({ message: "Unauthorized" });
     return;
   }
+};
+
+// Middleware to check if user is approved (for protected routes)
+export const isApproved: RequestHandler = async (req, res, next) => {
+  const user = req.user as any;
+  if (!user?.claims?.sub) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  
+  const approved = await storage.isUserApproved(user.claims.sub);
+  if (!approved) {
+    return res.status(403).json({ message: "Account pending approval", code: "PENDING_APPROVAL" });
+  }
+  
+  return next();
 };

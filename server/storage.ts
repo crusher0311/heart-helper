@@ -78,6 +78,12 @@ export interface IStorage {
   createUserAsAdmin(userData: { email: string; firstName: string; lastName: string; isAdmin?: boolean }): Promise<User>;
   deleteUserAsAdmin(userId: string): Promise<void>;
   updateUserAdminStatus(userId: string, isAdmin: boolean): Promise<UserPreferences>;
+  
+  // Approval workflow
+  ensureUserPreferencesOnLogin(userId: string, email: string | null): Promise<UserPreferences>;
+  isUserApproved(userId: string): Promise<boolean>;
+  getPendingApprovalUsers(): Promise<UserWithPreferences[]>;
+  updateUserApprovalStatus(userId: string, status: 'approved' | 'rejected'): Promise<UserPreferences>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -632,6 +638,51 @@ export class DatabaseStorage implements IStorage {
     
     // Update existing preferences
     return await this.upsertUserPreferences(userId, { isAdmin });
+  }
+
+  // Approval workflow methods
+  async ensureUserPreferencesOnLogin(userId: string, email: string | null): Promise<UserPreferences> {
+    // Check if preferences already exist
+    const existing = await this.getUserPreferences(userId);
+    if (existing) {
+      return existing;
+    }
+    
+    // Auto-approve @heartautocare.com emails
+    const isHeartEmail = email?.toLowerCase().endsWith('@heartautocare.com') ?? false;
+    const approvalStatus = isHeartEmail ? 'approved' : 'pending';
+    
+    // Create new preferences with appropriate approval status
+    return await this.upsertUserPreferences(userId, { approvalStatus });
+  }
+
+  async isUserApproved(userId: string): Promise<boolean> {
+    const prefs = await this.getUserPreferences(userId);
+    return prefs?.approvalStatus === 'approved';
+  }
+
+  async getPendingApprovalUsers(): Promise<UserWithPreferences[]> {
+    const allUsers = await db
+      .select()
+      .from(users)
+      .innerJoin(userPreferences, eq(users.id, userPreferences.userId))
+      .where(eq(userPreferences.approvalStatus, 'pending'))
+      .orderBy(users.firstName, users.lastName);
+    
+    return allUsers.map(row => ({
+      ...row.users,
+      preferences: row.user_preferences,
+    }));
+  }
+
+  async updateUserApprovalStatus(userId: string, status: 'approved' | 'rejected'): Promise<UserPreferences> {
+    // Verify user exists
+    const existingUser = await this.getUser(userId);
+    if (!existingUser) {
+      throw new Error("User not found");
+    }
+    
+    return await this.upsertUserPreferences(userId, { approvalStatus: status });
   }
 }
 
