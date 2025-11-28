@@ -750,6 +750,77 @@ function showSuccessNotification(jobData) {
   }, 5000);
 }
 
+// Show a friendly hint to click the extension icon for side panel
+function showSidePanelHint() {
+  // Remove existing hint if any
+  const existing = document.getElementById('heart-side-panel-hint');
+  if (existing) existing.remove();
+  
+  const hint = document.createElement('div');
+  hint.id = 'heart-side-panel-hint';
+  hint.innerHTML = `
+    <style>
+      #heart-side-panel-hint {
+        position: fixed;
+        top: 60px;
+        right: 20px;
+        background: linear-gradient(135deg, #c41230 0%, #a30f28 100%);
+        color: white;
+        padding: 16px 20px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(196, 18, 48, 0.3);
+        z-index: 999999;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 14px;
+        max-width: 280px;
+        animation: slideIn 0.3s ease-out;
+      }
+      #heart-side-panel-hint .hint-title {
+        font-weight: 600;
+        font-size: 15px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      #heart-side-panel-hint .hint-text {
+        opacity: 0.95;
+        line-height: 1.4;
+      }
+      #heart-side-panel-hint .hint-arrow {
+        position: absolute;
+        top: -8px;
+        right: 30px;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #c41230;
+      }
+      @keyframes slideIn {
+        from { transform: translateY(-10px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+    </style>
+    <div class="hint-arrow"></div>
+    <div class="hint-title">♥ Open HEART Helper</div>
+    <div class="hint-text">Click the <strong>HEART Helper icon</strong> in your browser toolbar (top-right) to open the side panel.</div>
+  `;
+  document.body.appendChild(hint);
+  
+  // Auto-dismiss after 5 seconds
+  setTimeout(() => {
+    hint.style.animation = 'slideIn 0.3s ease-out reverse';
+    setTimeout(() => hint.remove(), 300);
+  }, 5000);
+  
+  // Click to dismiss
+  hint.addEventListener('click', () => {
+    hint.style.animation = 'slideIn 0.3s ease-out reverse';
+    setTimeout(() => hint.remove(), 300);
+  });
+}
+
 function showErrorNotification(message) {
   const notification = document.createElement('div');
   notification.style.cssText = `
@@ -1171,17 +1242,15 @@ function injectFloatingHeartButton() {
     e.preventDefault();
     e.stopPropagation();
     
-    // Open the side panel instead of the app
+    // Try to open the side panel
     console.log("Opening HEART Helper side panel...");
     chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" }, (response) => {
-      if (chrome.runtime.lastError) {
-        console.error("Failed to open side panel:", chrome.runtime.lastError);
-        showErrorNotification('Please click the extension icon in the toolbar to open HEART Helper');
-      } else if (response?.success) {
-        console.log("Side panel opened successfully");
+      if (chrome.runtime.lastError || !response?.success) {
+        // Side panel can't be opened programmatically without user gesture on extension icon
+        // Show a helpful tooltip instead
+        showSidePanelHint();
       } else {
-        console.error("Side panel failed to open:", response);
-        showErrorNotification('Please click the extension icon in the toolbar to open HEART Helper');
+        console.log("Side panel opened successfully");
       }
     });
   });
