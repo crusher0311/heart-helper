@@ -1171,31 +1171,18 @@ function injectFloatingHeartButton() {
     e.preventDefault();
     e.stopPropagation();
     
-    // Get vehicle info and open HEART Helper app for searching
-    const vehicleInfo = extractVehicleInfo();
-    
-    chrome.storage.local.get(['appUrl', 'heartHelperUrl'], (result) => {
-      const appUrl = result.appUrl || result.heartHelperUrl;
-      
-      if (!appUrl) {
-        // Try to open side panel to configure settings
-        chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" }, (response) => {
-          if (chrome.runtime.lastError || !response?.success) {
-            showErrorNotification('Please click the extension icon to configure HEART Helper URL');
-          }
-        });
-        return;
+    // Open the side panel instead of the app
+    console.log("Opening HEART Helper side panel...");
+    chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" }, (response) => {
+      if (chrome.runtime.lastError) {
+        console.error("Failed to open side panel:", chrome.runtime.lastError);
+        showErrorNotification('Please click the extension icon in the toolbar to open HEART Helper');
+      } else if (response?.success) {
+        console.log("Side panel opened successfully");
+      } else {
+        console.error("Side panel failed to open:", response);
+        showErrorNotification('Please click the extension icon in the toolbar to open HEART Helper');
       }
-      
-      // Build search URL with vehicle info
-      const params = new URLSearchParams();
-      if (vehicleInfo.year) params.set('year', vehicleInfo.year);
-      if (vehicleInfo.make) params.set('make', vehicleInfo.make);
-      if (vehicleInfo.model) params.set('model', vehicleInfo.model);
-      
-      const searchUrl = params.toString() ? `${appUrl}/?${params.toString()}` : appUrl;
-      console.log("Opening HEART Helper app:", searchUrl);
-      window.open(searchUrl, '_blank');
     });
   });
   
