@@ -14,18 +14,12 @@ chrome.sidePanel.setOptions({
   .catch((error) => console.error('Failed to enable side panel:', error));
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Open side panel for concern intake
+  // Open side panel - MUST be synchronous to preserve user gesture context
   if (message.action === "OPEN_SIDE_PANEL") {
-    chrome.sidePanel.open({ tabId: sender.tab.id })
-      .then(() => {
-        console.log("Side panel opened");
-        sendResponse({ success: true });
-      })
-      .catch((error) => {
-        console.error("Failed to open side panel:", error);
-        sendResponse({ success: false, error: error.message });
-      });
-    return true; // Async response
+    // Use windowId for more reliable opening (tabId can fail)
+    chrome.sidePanel.open({ windowId: sender.tab.windowId });
+    sendResponse({ success: true });
+    return false; // Synchronous - critical for user gesture
   }
   
   if (message.action === "SEND_TO_TEKMETRIC") {
