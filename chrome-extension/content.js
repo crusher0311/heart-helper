@@ -1172,11 +1172,11 @@ function injectFloatingHeartButton() {
   // Dragging functionality
   let isDragging = false;
   let dragStartX, dragStartY, btnStartX, btnStartY;
-  let hasMoved = false;
+  let totalDragDistance = 0;
   
   floatingBtn.addEventListener('mousedown', (e) => {
     isDragging = true;
-    hasMoved = false;
+    totalDragDistance = 0;
     dragStartX = e.clientX;
     dragStartY = e.clientY;
     btnStartX = floatingBtn.offsetLeft;
@@ -1191,10 +1191,7 @@ function injectFloatingHeartButton() {
     
     const deltaX = e.clientX - dragStartX;
     const deltaY = e.clientY - dragStartY;
-    
-    if (Math.abs(deltaX) > 3 || Math.abs(deltaY) > 3) {
-      hasMoved = true;
-    }
+    totalDragDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     
     let newX = btnStartX + deltaX;
     let newY = btnStartY + deltaY;
@@ -1207,8 +1204,9 @@ function injectFloatingHeartButton() {
     floatingBtn.style.top = newY + 'px';
   });
   
-  document.addEventListener('mouseup', () => {
+  document.addEventListener('mouseup', (e) => {
     if (isDragging) {
+      const wasDragged = totalDragDistance > 5;
       isDragging = false;
       floatingBtn.style.cursor = 'grab';
       floatingBtn.style.transition = 'box-shadow 0.2s ease';
@@ -1218,6 +1216,22 @@ function injectFloatingHeartButton() {
         x: floatingBtn.offsetLeft,
         y: floatingBtn.offsetTop
       }));
+      
+      // If this was a click (not a drag), open the side panel
+      if (!wasDragged && e.target === floatingBtn) {
+        console.log("Opening HEART Helper side panel...");
+        chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" }, (response) => {
+          if (chrome.runtime.lastError) {
+            console.error("Failed to open HEART Helper:", chrome.runtime.lastError);
+            showSidePanelHint();
+          } else if (response?.success) {
+            console.log("HEART Helper opened successfully");
+          } else {
+            console.error("Failed to open HEART Helper:", response?.error);
+            showSidePanelHint();
+          }
+        });
+      }
     }
   });
   
@@ -1229,32 +1243,6 @@ function injectFloatingHeartButton() {
   
   floatingBtn.addEventListener('mouseleave', () => {
     floatingBtn.style.boxShadow = '0 4px 12px rgba(237, 28, 36, 0.4)';
-  });
-  
-  floatingBtn.addEventListener('click', (e) => {
-    // Only trigger click if we didn't drag
-    if (hasMoved) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
-    
-    e.preventDefault();
-    e.stopPropagation();
-    
-    // Open HEART Helper popup window
-    console.log("Opening HEART Helper...");
-    chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" }, (response) => {
-      if (chrome.runtime.lastError) {
-        console.error("Failed to open HEART Helper:", chrome.runtime.lastError);
-        showSidePanelHint();
-      } else if (response?.success) {
-        console.log("HEART Helper opened successfully");
-      } else {
-        console.error("Failed to open HEART Helper:", response?.error);
-        showSidePanelHint();
-      }
-    });
   });
   
   document.body.appendChild(floatingBtn);
