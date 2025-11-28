@@ -1,0 +1,66 @@
+background.js:106 Tekmetric Job Importer: Background service worker loaded
+background.js:7 Side panel behavior set: opens on action click
+background.js:13 Side panel enabled for all tabs
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:76 Background: Content script requesting pending job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:79 Background: Retrieved from storage: No job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:19 OPEN_SIDE_PANEL received from tab: 1498357517 window: 1498349839
+background.js:35 Side panel open failed: `sidePanel.open()` may only be called in response to a user gesture.
+(anonymous) @ background.js:35
+Promise.catch
+(anonymous) @ background.js:34
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job
+background.js:76 Background: Content script requesting pending job
+background.js:79 Background: Retrieved from storage: No job

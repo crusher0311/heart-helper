@@ -14,27 +14,47 @@ chrome.sidePanel.setOptions({
   .catch((error) => console.error('Failed to enable side panel:', error));
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Open side panel - call synchronously but handle the promise rejection
+  // Open HEART Helper - try side panel first, fall back to popup window
   if (message.action === "OPEN_SIDE_PANEL") {
     console.log("OPEN_SIDE_PANEL received from tab:", sender.tab?.id, "window:", sender.tab?.windowId);
     
-    // sidePanel.open() returns a Promise - we need to handle it properly
-    // but still call it synchronously in response to the user gesture
-    const openPromise = chrome.sidePanel.open({ 
+    // Try to open side panel first
+    chrome.sidePanel.open({ 
       tabId: sender.tab.id,
       windowId: sender.tab.windowId 
-    });
-    
-    // Handle the promise result
-    openPromise
-      .then(() => {
-        console.log("Side panel opened successfully!");
-        sendResponse({ success: true });
+    })
+    .then(() => {
+      console.log("Side panel opened successfully!");
+      sendResponse({ success: true, method: 'sidePanel' });
+    })
+    .catch((error) => {
+      console.log("Side panel failed, opening popup window instead:", error.message);
+      
+      // Fall back to popup window - this always works
+      chrome.windows.getCurrent().then((currentWindow) => {
+        const popupWidth = 420;
+        const popupHeight = 700;
+        const left = (currentWindow.left || 0) + (currentWindow.width || 1200) - popupWidth - 30;
+        const top = (currentWindow.top || 0) + 80;
+        
+        return chrome.windows.create({
+          url: chrome.runtime.getURL('sidepanel.html'),
+          type: 'popup',
+          width: popupWidth,
+          height: popupHeight,
+          top: top,
+          left: left
+        });
       })
-      .catch((error) => {
-        console.error("Side panel open failed:", error.message);
-        sendResponse({ success: false, error: error.message });
+      .then((newWindow) => {
+        console.log("Popup window opened:", newWindow.id);
+        sendResponse({ success: true, method: 'popup', windowId: newWindow.id });
+      })
+      .catch((windowError) => {
+        console.error("Popup window also failed:", windowError);
+        sendResponse({ success: false, error: windowError.message });
       });
+    });
     
     return true; // Will respond asynchronously
   }
