@@ -1070,7 +1070,82 @@ function showJobDetail(result) {
     </div>
   `;
   
+  // Create Job in Tekmetric button
+  html += `
+    <div class="job-detail-actions">
+      <button class="create-job-btn" onclick="createJobInTekmetric()" data-testid="button-create-job">
+        <span class="btn-icon">&#128203;</span>
+        Create Job in Tekmetric
+      </button>
+    </div>
+  `;
+  
   detailContent.innerHTML = html;
+}
+
+// Create job in Tekmetric from selected job result
+async function createJobInTekmetric() {
+  if (!selectedJobResult) {
+    showToast('No job selected', 'error');
+    return;
+  }
+  
+  const job = selectedJobResult.job;
+  
+  // Store job data in background for content script to pick up
+  const jobData = {
+    name: job.name,
+    laborItems: job.laborItems.map(item => ({
+      name: item.name,
+      hours: item.hours,
+      rate: item.rate,
+    })),
+    parts: job.parts.map(part => ({
+      name: part.name,
+      partNumber: part.partNumber,
+      quantity: part.quantity,
+      cost: part.cost,
+      retail: part.retail || part.unitPrice,
+    })),
+  };
+  
+  try {
+    // Store in background script
+    await new Promise((resolve, reject) => {
+      chrome.runtime.sendMessage({ 
+        action: 'STORE_PENDING_JOB', 
+        jobData 
+      }, (response) => {
+        if (response?.success) {
+          resolve(response);
+        } else {
+          reject(new Error('Failed to store job data'));
+        }
+      });
+    });
+    
+    // Send message to content script to create job
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    
+    if (!tab?.url?.includes('shop.tekmetric.com')) {
+      showToast('Please navigate to a Tekmetric repair order first', 'error');
+      return;
+    }
+    
+    chrome.tabs.sendMessage(tab.id, { 
+      type: 'CREATE_JOB_FROM_SEARCH',
+      jobData 
+    }, (response) => {
+      if (response?.success) {
+        showToast('Job data ready - click "Add Service" in Tekmetric', 'success');
+      } else {
+        showToast('Could not connect to Tekmetric page', 'error');
+      }
+    });
+  } catch (error) {
+    console.error('Error creating job:', error);
+    showToast('Failed to prepare job data', 'error');
+  }
 }
 
 function backToResults() {

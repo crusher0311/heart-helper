@@ -1442,7 +1442,74 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
     return true;
   }
+  
+  // Handle job creation from search results
+  if (message.type === 'CREATE_JOB_FROM_SEARCH') {
+    console.log('Received job data from search:', message.jobData);
+    
+    // Store the pending job data for when user clicks "Add Service"
+    pendingJobDataFromSearch = message.jobData;
+    
+    // Show visual indicator that job is ready
+    showJobReadyIndicator();
+    
+    sendResponse({ success: true });
+    return true;
+  }
 });
+
+// Store pending job data from search
+let pendingJobDataFromSearch = null;
+
+// Show indicator that job data is ready
+function showJobReadyIndicator() {
+  // Remove any existing indicator
+  const existing = document.getElementById('heart-job-ready-indicator');
+  if (existing) existing.remove();
+  
+  const indicator = document.createElement('div');
+  indicator.id = 'heart-job-ready-indicator';
+  indicator.innerHTML = `
+    <style>
+      #heart-job-ready-indicator {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: #c41230;
+        color: white;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        z-index: 999999;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        animation: slideIn 0.3s ease-out;
+      }
+      #heart-job-ready-indicator .title {
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      #heart-job-ready-indicator .subtitle {
+        opacity: 0.9;
+        font-size: 12px;
+      }
+      @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+    </style>
+    <div class="title">Job Ready to Import</div>
+    <div class="subtitle">${pendingJobDataFromSearch?.name || 'Job data loaded'}</div>
+  `;
+  document.body.appendChild(indicator);
+  
+  // Auto-remove after 5 seconds
+  setTimeout(() => {
+    indicator.style.animation = 'slideIn 0.3s ease-out reverse';
+    setTimeout(() => indicator.remove(), 300);
+  }, 5000);
+}
 
 // Extract vehicle info from Tekmetric page
 // Extract shop ID and RO ID from Tekmetric URL

@@ -1077,6 +1077,38 @@ textarea {
   margin-left: 8px;
 }
 
+.job-detail-actions {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.create-job-btn {
+  width: 100%;
+  padding: 12px 16px;
+  background: #c41230;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.create-job-btn:hover {
+  background: #a30f28;
+}
+
+.create-job-btn .btn-icon {
+  font-size: 16px;
+}
+
 /* Search Empty State */
 .search-empty-state {
   flex: 1;

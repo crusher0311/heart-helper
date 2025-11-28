@@ -4,6 +4,14 @@ let pendingJobData = null;
 chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true })
   .catch((error) => console.log('Side panel behavior not set:', error));
 
+// Explicit action click handler as fallback for opening side panel
+chrome.action.onClicked.addListener((tab) => {
+  console.log("Extension icon clicked, opening side panel for tab:", tab.id);
+  chrome.sidePanel.open({ tabId: tab.id })
+    .then(() => console.log("Side panel opened via action click"))
+    .catch((error) => console.error("Failed to open side panel:", error));
+});
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Open side panel for concern intake
   if (message.action === "OPEN_SIDE_PANEL") {
