@@ -16,21 +16,42 @@ chrome.sidePanel.setOptions({
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Open HEART Helper as a popup window (side panel can't be opened from content script)
   if (message.action === "OPEN_SIDE_PANEL") {
-    // Create a popup window that mimics the side panel
-    // This is how other extensions achieve "floating button opens panel" UX
-    chrome.windows.create({
-      url: chrome.runtime.getURL('sidepanel.html'),
-      type: 'popup',
-      width: 420,
-      height: 700,
-      top: 100,
-      left: screen.width - 450  // Position on right side like a side panel
-    }).then((window) => {
-      console.log("HEART Helper popup window opened:", window.id);
-      sendResponse({ success: true, windowId: window.id });
+    // Get the current window to position the popup on the right side
+    chrome.windows.getCurrent().then((currentWindow) => {
+      // Calculate position on right side of current window
+      const windowWidth = currentWindow.width || 1920;
+      const windowLeft = currentWindow.left || 0;
+      const popupWidth = 420;
+      const popupHeight = 700;
+      
+      chrome.windows.create({
+        url: chrome.runtime.getURL('sidepanel.html'),
+        type: 'popup',
+        width: popupWidth,
+        height: popupHeight,
+        top: (currentWindow.top || 0) + 50,
+        left: windowLeft + windowWidth - popupWidth - 20
+      }).then((newWindow) => {
+        console.log("HEART Helper popup window opened:", newWindow.id);
+        sendResponse({ success: true, windowId: newWindow.id });
+      }).catch((error) => {
+        console.error("Failed to open popup window:", error);
+        sendResponse({ success: false, error: error.message });
+      });
     }).catch((error) => {
-      console.error("Failed to open popup window:", error);
-      sendResponse({ success: false, error: error.message });
+      // Fallback without positioning
+      chrome.windows.create({
+        url: chrome.runtime.getURL('sidepanel.html'),
+        type: 'popup',
+        width: 420,
+        height: 700
+      }).then((newWindow) => {
+        console.log("HEART Helper popup window opened (fallback):", newWindow.id);
+        sendResponse({ success: true, windowId: newWindow.id });
+      }).catch((err) => {
+        console.error("Failed to open popup window:", err);
+        sendResponse({ success: false, error: err.message });
+      });
     });
     return true; // Async response
   }
