@@ -1,0 +1,121 @@
+ Tekmetric Job Importer: Background service worker loaded
+ Side panel behavior set: opens on action click
+ Side panel enabled for all tabs
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:1 Uncaught (in promise) Error: `sidePanel.open()` may only be called in response to a user gesture.
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:59 Background: Content script requesting pending job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:62 Background: Retrieved from storage: No job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:59 Background: Content script requesting pending job
+background.js:62 Background: Retrieved from storage: No job
+background.js:1 Uncaught (in promise) Error: `sidePanel.open()` may only be called in response to a user gesture.
+background.js:1 Uncaught (in promise) Error: `sidePanel.open()` may only be called in response to a user gesture.
+background.js:1 Uncaught (in promise) Error: `sidePanel.open()` may only be called in response to a user gesture.
+background.js:1 Uncaught (in promise) Error: `sidePanel.open()` may only be called in response to a user gesture.
+background.js:1 Uncaught (in promise) Error: `sidePanel.open()` may only be called in response to a user gesture.
+background.js:1 Uncaught (in promise) Error: `sidePanel.open()` may only be called in response to a user gesture.
+background.js:1 Uncaught (in promise) Error: `sidePanel.open()` may only be called in response to a user gesture.
+background.js:1 Uncaught (in promise) Error: `sidePanel.open()` may only be called in response to a user gesture.
+background.js:1 Uncaught (in promise) Error: `sidePanel.open()` may only be called in response to a user gesture.

@@ -14,35 +14,24 @@ chrome.sidePanel.setOptions({
   .catch((error) => console.error('Failed to enable side panel:', error));
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Open side panel via popup relay - content script clicks trigger this
+  // Open HEART Helper as a popup window (side panel can't be opened from content script)
   if (message.action === "OPEN_SIDE_PANEL") {
-    // Try direct open first (works in some Chrome versions)
-    chrome.sidePanel.open({ windowId: sender.tab.windowId })
-      .then(() => {
-        console.log("Side panel opened directly");
-        sendResponse({ success: true });
-      })
-      .catch((error) => {
-        console.log("Direct open failed, trying popup relay:", error.message);
-        // Fallback: Open a popup that will open the side panel
-        // This works because the popup runs in extension context
-        chrome.action.setPopup({ popup: 'popup-relay.html' });
-        chrome.action.openPopup()
-          .then(() => {
-            console.log("Popup relay triggered");
-            // Reset popup after a delay
-            setTimeout(() => {
-              chrome.action.setPopup({ popup: '' });
-            }, 1000);
-            sendResponse({ success: true });
-          })
-          .catch((popupError) => {
-            console.error("Popup relay also failed:", popupError);
-            // Reset popup setting
-            chrome.action.setPopup({ popup: '' });
-            sendResponse({ success: false, error: popupError.message });
-          });
-      });
+    // Create a popup window that mimics the side panel
+    // This is how other extensions achieve "floating button opens panel" UX
+    chrome.windows.create({
+      url: chrome.runtime.getURL('sidepanel.html'),
+      type: 'popup',
+      width: 420,
+      height: 700,
+      top: 100,
+      left: screen.width - 450  // Position on right side like a side panel
+    }).then((window) => {
+      console.log("HEART Helper popup window opened:", window.id);
+      sendResponse({ success: true, windowId: window.id });
+    }).catch((error) => {
+      console.error("Failed to open popup window:", error);
+      sendResponse({ success: false, error: error.message });
+    });
     return true; // Async response
   }
   

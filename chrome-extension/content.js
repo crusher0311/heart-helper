@@ -1242,15 +1242,17 @@ function injectFloatingHeartButton() {
     e.preventDefault();
     e.stopPropagation();
     
-    // Try to open the side panel
-    console.log("Opening HEART Helper side panel...");
+    // Open HEART Helper popup window
+    console.log("Opening HEART Helper...");
     chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" }, (response) => {
-      if (chrome.runtime.lastError || !response?.success) {
-        // Side panel can't be opened programmatically without user gesture on extension icon
-        // Show a helpful tooltip instead
+      if (chrome.runtime.lastError) {
+        console.error("Failed to open HEART Helper:", chrome.runtime.lastError);
         showSidePanelHint();
+      } else if (response?.success) {
+        console.log("HEART Helper opened successfully");
       } else {
-        console.log("Side panel opened successfully");
+        console.error("Failed to open HEART Helper:", response?.error);
+        showSidePanelHint();
       }
     });
   });
