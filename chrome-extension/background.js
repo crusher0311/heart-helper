@@ -14,24 +14,29 @@ chrome.sidePanel.setOptions({
   .catch((error) => console.error('Failed to enable side panel:', error));
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Open side panel - MUST be completely synchronous, no promises at all
+  // Open side panel - call synchronously but handle the promise rejection
   if (message.action === "OPEN_SIDE_PANEL") {
     console.log("OPEN_SIDE_PANEL received from tab:", sender.tab?.id, "window:", sender.tab?.windowId);
     
-    // Try the synchronous approach that other extensions use
-    // The key is: NO promises, NO async, call sidePanel.open immediately
-    try {
-      chrome.sidePanel.open({ 
-        tabId: sender.tab.id,
-        windowId: sender.tab.windowId 
+    // sidePanel.open() returns a Promise - we need to handle it properly
+    // but still call it synchronously in response to the user gesture
+    const openPromise = chrome.sidePanel.open({ 
+      tabId: sender.tab.id,
+      windowId: sender.tab.windowId 
+    });
+    
+    // Handle the promise result
+    openPromise
+      .then(() => {
+        console.log("Side panel opened successfully!");
+        sendResponse({ success: true });
+      })
+      .catch((error) => {
+        console.error("Side panel open failed:", error.message);
+        sendResponse({ success: false, error: error.message });
       });
-      console.log("sidePanel.open() called synchronously");
-      sendResponse({ success: true });
-    } catch (error) {
-      console.error("sidePanel.open sync error:", error);
-      sendResponse({ success: false, error: error.message });
-    }
-    return false; // Synchronous response
+    
+    return true; // Will respond asynchronously
   }
   
   if (message.action === "SEND_TO_TEKMETRIC") {
