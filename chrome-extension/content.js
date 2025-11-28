@@ -1163,10 +1163,11 @@ function injectFloatingHeartButton() {
     font-weight: bold;
     cursor: grab;
     box-shadow: 0 4px 12px rgba(237, 28, 36, 0.4);
-    z-index: 999999;
+    z-index: 2147483647;
     transition: box-shadow 0.2s ease;
     font-family: Arial, sans-serif;
     user-select: none;
+    pointer-events: auto !important;
   `;
   
   // Dragging functionality
@@ -1174,8 +1175,9 @@ function injectFloatingHeartButton() {
   let wasDragged = false;
   let dragStartX, dragStartY, btnStartX, btnStartY;
   
-  floatingBtn.addEventListener('mousedown', (e) => {
-    console.log("🔵 HEART Helper mousedown event fired");
+  // Use pointer events for better reliability
+  floatingBtn.addEventListener('pointerdown', (e) => {
+    console.log("🔵 HEART Helper pointerdown event fired");
     isDragging = true;
     wasDragged = false;
     dragStartX = e.clientX;
@@ -1184,12 +1186,12 @@ function injectFloatingHeartButton() {
     btnStartY = floatingBtn.offsetTop;
     floatingBtn.style.cursor = 'grabbing';
     floatingBtn.style.transition = 'none';
-    // Don't prevent default - we need the click event to fire
-    e.stopPropagation();
+    floatingBtn.setPointerCapture(e.pointerId);
   });
   
-  floatingBtn.addEventListener('mouseup', (e) => {
-    console.log("🟢 HEART Helper mouseup event fired on button");
+  floatingBtn.addEventListener('pointerup', (e) => {
+    console.log("🟢 HEART Helper pointerup event fired");
+    floatingBtn.releasePointerCapture(e.pointerId);
   });
   
   document.addEventListener('mousemove', (e) => {
