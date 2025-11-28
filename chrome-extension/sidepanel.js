@@ -97,18 +97,29 @@ function updateUserDisplay(user) {
   }
 }
 
+// Normalize URL to just origin (strips any path like /settings)
+function normalizeUrl(url) {
+  if (!url) return '';
+  try {
+    const parsed = new URL(url);
+    return parsed.origin;
+  } catch {
+    return url;
+  }
+}
+
 async function loadSettings() {
   return new Promise((resolve) => {
     // Check sync storage first (user-configured), then local storage (auto-detected from app visit)
     chrome.storage.sync.get(['heartHelperUrl'], (syncData) => {
       if (syncData.heartHelperUrl) {
-        appUrl = syncData.heartHelperUrl;
+        appUrl = normalizeUrl(syncData.heartHelperUrl);
         updateConnectionStatus();
         resolve();
       } else {
         // Fallback to local storage (set by inject.js when visiting the app)
         chrome.storage.local.get(['appUrl'], (localData) => {
-          appUrl = localData.appUrl || '';
+          appUrl = normalizeUrl(localData.appUrl || '');
           updateConnectionStatus();
           resolve();
         });
@@ -1204,11 +1215,13 @@ function closeSettings() {
 }
 
 async function saveSettings() {
-  const newUrl = document.getElementById('appUrlInput').value.trim();
+  let newUrl = document.getElementById('appUrlInput').value.trim();
   
   if (newUrl) {
     try {
-      new URL(newUrl);
+      // Normalize URL: extract just the origin (protocol + host)
+      const parsed = new URL(newUrl);
+      newUrl = parsed.origin; // This strips any path like /settings
     } catch {
       showToast('Please enter a valid URL');
       return;

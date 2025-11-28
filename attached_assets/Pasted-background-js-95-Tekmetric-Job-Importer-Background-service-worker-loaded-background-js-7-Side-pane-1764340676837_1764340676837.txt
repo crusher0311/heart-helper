@@ -1,0 +1,72 @@
+background.js:95 Tekmetric Job Importer: Background service worker loaded
+background.js:7 Side panel behavior set: opens on action click
+background.js:13 Side panel enabled for all tabs
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+background.js:68 Background: Retrieved from storage: No job
+background.js:65 Background: Content script requesting pending job
+background.js:68 Background: Retrieved from storage: No job
+sidepanel.js:66 Could not check auth status: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+sidepanel.js:151 Could not sync settings: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+sidepanel.js:865 Search params: Object
+sidepanel.js:866 Fetching from: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/settings/api/search
+sidepanel.js:875 Search response status: 200
+sidepanel.js:901 Search error: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+performSearch @ sidepanel.js:901
