@@ -1175,7 +1175,7 @@ function injectFloatingHeartButton() {
   let wasDragged = false;
   let dragStartX, dragStartY, btnStartX, btnStartY;
   
-  // Use pointer events for better reliability
+  // Use capture phase to catch events before anything can block them
   floatingBtn.addEventListener('pointerdown', (e) => {
     console.log("🔵 HEART Helper pointerdown event fired");
     isDragging = true;
@@ -1187,12 +1187,17 @@ function injectFloatingHeartButton() {
     floatingBtn.style.cursor = 'grabbing';
     floatingBtn.style.transition = 'none';
     floatingBtn.setPointerCapture(e.pointerId);
-  });
+  }, true); // capture phase
   
   floatingBtn.addEventListener('pointerup', (e) => {
     console.log("🟢 HEART Helper pointerup event fired");
     floatingBtn.releasePointerCapture(e.pointerId);
-  });
+  }, true); // capture phase
+  
+  // Also add a direct onclick as backup
+  floatingBtn.onclick = function(e) {
+    console.log("🚀 HEART Helper onclick fired!");
+  };
   
   document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
