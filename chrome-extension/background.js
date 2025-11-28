@@ -23,30 +23,45 @@ chrome.runtime.onInstalled.addListener(() => {
   console.log('Context menu created: Open HEART Helper');
 });
 
-// Handle context menu clicks - this preserves user gesture!
+// Handle context menu clicks - use tabId for proper side panel opening
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  if (info.menuItemId === 'openHeartHelper') {
-    console.log('Context menu clicked - opening side panel');
-    chrome.sidePanel.open({ windowId: tab.windowId });
+  if (info.menuItemId === 'openHeartHelper' && tab?.id) {
+    console.log('Context menu clicked - opening side panel for tab:', tab.id);
+    chrome.sidePanel.open({ tabId: tab.id })
+      .then(() => console.log('Context menu: Side panel opened'))
+      .catch((err) => console.error('Context menu: Failed to open side panel:', err));
   }
 });
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Open side panel - use Chrome's official pattern (async IIFE, return falsy)
+  // Open side panel using popup relay (preserves user gesture in extension context)
   if (message.action === "OPEN_SIDE_PANEL") {
-    console.log("OPEN_SIDE_PANEL received from tab:", sender.tab?.id, "window:", sender.tab?.windowId);
+    const tabId = sender.tab?.id;
+    console.log("OPEN_SIDE_PANEL received from tab:", tabId);
     
-    // Chrome's official pattern: async IIFE, call sidePanel.open() FIRST, return nothing
-    (async () => {
-      try {
-        // CRITICAL: sidePanel.open() must be the FIRST await - this preserves user gesture
-        await chrome.sidePanel.open({ tabId: sender.tab.id });
-        console.log("Side panel opened successfully!");
-      } catch (error) {
-        console.error("Side panel open failed:", error.message);
-      }
-    })();
-    // Return nothing (falsy) - this is Chrome's official pattern
+    if (!tabId) {
+      console.error("No tab ID available");
+      return;
+    }
+    
+    // Open a tiny popup window that will open the side panel and close itself
+    // This works because popup-relay.html is an extension page, so sidePanel.open() works
+    chrome.windows.create({
+      url: chrome.runtime.getURL(`popup-relay.html?tabId=${tabId}`),
+      type: 'popup',
+      width: 1,
+      height: 1,
+      focused: false,
+      top: 0,
+      left: 0
+    }).then((win) => {
+      console.log('Popup relay window created:', win.id);
+      // The popup will close itself after opening the side panel
+    }).catch((err) => {
+      console.error('Failed to create popup relay:', err);
+    });
+    
+    // Don't return true - we're not sending async response
   }
   
   if (message.action === "SEND_TO_TEKMETRIC") {
