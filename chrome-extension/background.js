@@ -13,50 +13,22 @@ chrome.sidePanel.setOptions({
 }).then(() => console.log('Side panel enabled for all tabs'))
   .catch((error) => console.error('Failed to enable side panel:', error));
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Open HEART Helper - try side panel first, fall back to popup window
+chrome.runtime.onMessage.addListener((message, sender) => {
+  // Open side panel - use Chrome's official pattern (async IIFE, return falsy)
   if (message.action === "OPEN_SIDE_PANEL") {
     console.log("OPEN_SIDE_PANEL received from tab:", sender.tab?.id, "window:", sender.tab?.windowId);
     
-    // Try to open side panel first
-    chrome.sidePanel.open({ 
-      tabId: sender.tab.id,
-      windowId: sender.tab.windowId 
-    })
-    .then(() => {
-      console.log("Side panel opened successfully!");
-      sendResponse({ success: true, method: 'sidePanel' });
-    })
-    .catch((error) => {
-      console.log("Side panel failed, opening popup window instead:", error.message);
-      
-      // Fall back to popup window - this always works
-      chrome.windows.getCurrent().then((currentWindow) => {
-        const popupWidth = 420;
-        const popupHeight = 700;
-        const left = (currentWindow.left || 0) + (currentWindow.width || 1200) - popupWidth - 30;
-        const top = (currentWindow.top || 0) + 80;
-        
-        return chrome.windows.create({
-          url: chrome.runtime.getURL('sidepanel.html'),
-          type: 'popup',
-          width: popupWidth,
-          height: popupHeight,
-          top: top,
-          left: left
-        });
-      })
-      .then((newWindow) => {
-        console.log("Popup window opened:", newWindow.id);
-        sendResponse({ success: true, method: 'popup', windowId: newWindow.id });
-      })
-      .catch((windowError) => {
-        console.error("Popup window also failed:", windowError);
-        sendResponse({ success: false, error: windowError.message });
-      });
-    });
-    
-    return true; // Will respond asynchronously
+    // Chrome's official pattern: async IIFE, call sidePanel.open() FIRST, return nothing
+    (async () => {
+      try {
+        // CRITICAL: sidePanel.open() must be the FIRST await - this preserves user gesture
+        await chrome.sidePanel.open({ tabId: sender.tab.id });
+        console.log("Side panel opened successfully!");
+      } catch (error) {
+        console.error("Side panel open failed:", error.message);
+      }
+    })();
+    // Return nothing (falsy) - this is Chrome's official pattern
   }
   
   if (message.action === "SEND_TO_TEKMETRIC") {

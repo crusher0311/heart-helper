@@ -1220,17 +1220,8 @@ function injectFloatingHeartButton() {
       // If this was a click (not a drag), open the side panel
       if (!wasDragged && e.target === floatingBtn) {
         console.log("Opening HEART Helper side panel...");
-        chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" }, (response) => {
-          if (chrome.runtime.lastError) {
-            console.error("Failed to open HEART Helper:", chrome.runtime.lastError);
-            showSidePanelHint();
-          } else if (response?.success) {
-            console.log("HEART Helper opened successfully");
-          } else {
-            console.error("Failed to open HEART Helper:", response?.error);
-            showSidePanelHint();
-          }
-        });
+        // Chrome's official pattern: no callback, just send the message
+        chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" });
       }
     }
   });
