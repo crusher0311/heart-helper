@@ -1,0 +1,141 @@
+ Tekmetric Job Importer: Background service worker loaded
+ Side panel behavior set: opens on action click
+ Side panel enabled for all tabs
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+Error handling response: ReferenceError: sendResponse is not defined
+    at <URL>
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job
+background.js:19 OPEN_SIDE_PANEL received from tab: 1498357517 window: 1498349839
+background.js:28 Side panel open failed: `sidePanel.open()` may only be called in response to a user gesture.
+(anonymous) @ background.js:28
+await in (anonymous)
+(anonymous) @ background.js:30
+background.js:19 OPEN_SIDE_PANEL received from tab: 1498357517 window: 1498349839
+background.js:28 Side panel open failed: `sidePanel.open()` may only be called in response to a user gesture.
+(anonymous) @ background.js:28
+await in (anonymous)
+(anonymous) @ background.js:30
+background.js:68 Background: Content script requesting pending job
+background.js:71 Background: Retrieved from storage: No job

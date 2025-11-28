@@ -1,0 +1,277 @@
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ ChatThreadService: Port disconnected: port_1764343436095_nluduwc
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ Token is outdated: false
+ ChatThreadService: New port connected: sidePanel
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ message & sender Object Object
+ ChatThreadService: New port connected: port_1764343462704_r6soi7i
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ ChatThreadService: Port disconnected: port_1764343462704_r6soi7i
+ [InspectionMaintenanceAbility] Page check: Object
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+ [DEBUG] Automatic cache refresh triggered
+ [InspectionMaintenanceAbility] Page check: Object
+ Window focus changed to: 1498349839
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ Token is outdated: false
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ [Zulip] Received GET_CHAT_UNREAD_DATA request
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:78 [MAIN] Preloading recommendations for shop: 469 repair order: 276058512
+background.js:174 AxiosError$1
+(anonymous) @ background.js:174
+background.js:174 message & sender Object Object
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:174 message & sender Object Object
+background.js:168 [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+background.js:168 [Debug] Processing Tekmetric URL
+background.js:168 Error sending message to browser extension UI: Error: Could not establish connection. Receiving end does not exist.
+background.js:168 [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:174 message & sender Object Object
+background.js:168 [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+background.js:168 [Debug] Processing Tekmetric URL
+background.js:168 Error sending message to browser extension UI: Error: Could not establish connection. Receiving end does not exist.
+background.js:168 [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:174 Window focus changed to: 1498349839
+background.js:152 [InspectionMaintenanceAbility] Page check: Object
+background.js:152 [InspectionMaintenanceAbility] Page check: Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:1 Uncaught (in promise) Error: Could not establish connection. Receiving end does not exist.
+background.js:174 message & sender Object Object
+background.js:174 Token is outdated: false
+background.js:168 ChatThreadService: New port connected: sidePanel
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:168 ChatThreadService: New port connected: port_1764343927193_n4t9pd3
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] Page check: Object

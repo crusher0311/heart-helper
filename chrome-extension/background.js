@@ -13,7 +13,25 @@ chrome.sidePanel.setOptions({
 }).then(() => console.log('Side panel enabled for all tabs'))
   .catch((error) => console.error('Failed to enable side panel:', error));
 
-chrome.runtime.onMessage.addListener((message, sender) => {
+// Create context menu on install - context menus preserve user gesture properly
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.contextMenus.create({
+    id: 'openHeartHelper',
+    title: 'Open HEART Helper',
+    contexts: ['all']
+  });
+  console.log('Context menu created: Open HEART Helper');
+});
+
+// Handle context menu clicks - this preserves user gesture!
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  if (info.menuItemId === 'openHeartHelper') {
+    console.log('Context menu clicked - opening side panel');
+    chrome.sidePanel.open({ windowId: tab.windowId });
+  }
+});
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Open side panel - use Chrome's official pattern (async IIFE, return falsy)
   if (message.action === "OPEN_SIDE_PANEL") {
     console.log("OPEN_SIDE_PANEL received from tab:", sender.tab?.id, "window:", sender.tab?.windowId);
