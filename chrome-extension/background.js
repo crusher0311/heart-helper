@@ -41,7 +41,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     
     if (!tabId) {
       console.error("No tab ID available");
-      return;
+      sendResponse({ success: false, error: "No tab ID available" });
+      return true;
     }
     
     // Open a tiny popup window that will open the side panel and close itself
@@ -56,12 +57,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       left: 0
     }).then((win) => {
       console.log('Popup relay window created:', win.id);
-      // The popup will close itself after opening the side panel
+      sendResponse({ success: true, windowId: win.id });
     }).catch((err) => {
       console.error('Failed to create popup relay:', err);
+      sendResponse({ success: false, error: err.message });
     });
     
-    // Don't return true - we're not sending async response
+    return true; // Keep message port open for async response
   }
   
   if (message.action === "SEND_TO_TEKMETRIC") {
