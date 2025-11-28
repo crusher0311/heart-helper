@@ -1183,7 +1183,8 @@ function injectFloatingHeartButton() {
     btnStartY = floatingBtn.offsetTop;
     floatingBtn.style.cursor = 'grabbing';
     floatingBtn.style.transition = 'none';
-    e.preventDefault();
+    // Don't prevent default - we need the click event to fire
+    e.stopPropagation();
   });
   
   document.addEventListener('mousemove', (e) => {
