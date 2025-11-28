@@ -1175,6 +1175,7 @@ function injectFloatingHeartButton() {
   let dragStartX, dragStartY, btnStartX, btnStartY;
   
   floatingBtn.addEventListener('mousedown', (e) => {
+    console.log("🔵 HEART Helper mousedown event fired");
     isDragging = true;
     wasDragged = false;
     dragStartX = e.clientX;
@@ -1185,6 +1186,10 @@ function injectFloatingHeartButton() {
     floatingBtn.style.transition = 'none';
     // Don't prevent default - we need the click event to fire
     e.stopPropagation();
+  });
+  
+  floatingBtn.addEventListener('mouseup', (e) => {
+    console.log("🟢 HEART Helper mouseup event fired on button");
   });
   
   document.addEventListener('mousemove', (e) => {
