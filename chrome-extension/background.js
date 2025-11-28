@@ -14,12 +14,36 @@ chrome.sidePanel.setOptions({
   .catch((error) => console.error('Failed to enable side panel:', error));
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Open side panel - MUST be synchronous to preserve user gesture context
+  // Open side panel via popup relay - content script clicks trigger this
   if (message.action === "OPEN_SIDE_PANEL") {
-    // Use windowId for more reliable opening (tabId can fail)
-    chrome.sidePanel.open({ windowId: sender.tab.windowId });
-    sendResponse({ success: true });
-    return false; // Synchronous - critical for user gesture
+    // Try direct open first (works in some Chrome versions)
+    chrome.sidePanel.open({ windowId: sender.tab.windowId })
+      .then(() => {
+        console.log("Side panel opened directly");
+        sendResponse({ success: true });
+      })
+      .catch((error) => {
+        console.log("Direct open failed, trying popup relay:", error.message);
+        // Fallback: Open a popup that will open the side panel
+        // This works because the popup runs in extension context
+        chrome.action.setPopup({ popup: 'popup-relay.html' });
+        chrome.action.openPopup()
+          .then(() => {
+            console.log("Popup relay triggered");
+            // Reset popup after a delay
+            setTimeout(() => {
+              chrome.action.setPopup({ popup: '' });
+            }, 1000);
+            sendResponse({ success: true });
+          })
+          .catch((popupError) => {
+            console.error("Popup relay also failed:", popupError);
+            // Reset popup setting
+            chrome.action.setPopup({ popup: '' });
+            sendResponse({ success: false, error: popupError.message });
+          });
+      });
+    return true; // Async response
   }
   
   if (message.action === "SEND_TO_TEKMETRIC") {
