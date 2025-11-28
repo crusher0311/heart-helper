@@ -1,0 +1,1024 @@
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ Token is outdated: false
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ [Zulip] Received GET_CHAT_UNREAD_DATA request
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+ [MAIN] Preloading recommendations for shop: 469 repair order: 276058512
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ Window focus changed to: 1498349839
+ message & sender Object Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ Window focus changed to: 1498349839
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+ Window focus changed to: 1498349839
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ Window focus changed to: 1498349839
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ Token is outdated: false
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ [Zulip] Received GET_CHAT_UNREAD_DATA request
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+ [MAIN] Preloading recommendations for shop: 469 repair order: 276058512
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ Window focus changed to: 1498349839
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ Token is outdated: false
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ [Zulip] Received GET_CHAT_UNREAD_DATA request
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+ AxiosError$1
+(anonymous) @ background.js:174
+ [MAIN] Preloading recommendations for shop: 469 repair order: 276058512
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ Window focus changed to: 1498357503
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ Window focus changed to: 1498349839
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ Token is outdated: false
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ [Zulip] Received GET_CHAT_UNREAD_DATA request
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+ [MAIN] Preloading recommendations for shop: 469 repair order: 276058512
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ [DEBUG] Automatic cache refresh triggered
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ Token is outdated: false
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ [Zulip] Received GET_CHAT_UNREAD_DATA request
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+ [MAIN] Preloading recommendations for shop: 469 repair order: 276058512
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ Token is outdated: false
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ [Zulip] Received GET_CHAT_UNREAD_DATA request
+ [InspectionMaintenanceAbility] Page check: Object
+background.js:1 Uncaught (in promise) 
+ [MAIN] Preloading recommendations for shop: 469 repair order: 276058512
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ [Debug] getDetectAutoVehicleId for URL: https://shop.tekmetric.com/admin/shop/469/repair-orders/276058512/estimate, RO: 276058512
+ [Debug] Processing Tekmetric URL
+ Error sending message to browser extension UI: 
+ [MaintenanceBackground] Emitting DA_VEHICLE_ID event via EventEmitter: Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+background.js:1 Uncaught (in promise) 
+ message & sender Object Object
+ Token is outdated: false
+ [DEBUG-SETTINGS] Loading module from path: ../components/CustomSettings/InspectionsSync.tsx
+ ChatThreadService: New port connected: sidePanel
+ [useZulipClient] Client blocked: disabled or loading
+ [useZulipClient] Client blocked: disabled or loading
+ [useZulipClient] Client blocked: disabled or loading
+ [useZulipClient] Client blocked: disabled or loading
+ [useZulipClient] Client blocked: disabled or loading
+ [useZulipClient] Client blocked: disabled or loading
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [PORT] Attempting to connect port with name 'port_1764342668661_hmggrs0' (attempt 1/5)
+ [PORT] Port successfully connected with ID: port_1764342668661_hmggrs0
+ [PORT] No thread ID available at port setup
+ message & sender Object Object
+ ChatThreadService: New port connected: port_1764342668661_hmggrs0
+ 🔧 useZulipState initialized: Object
+ 📊 Updating notifications with unread count: 0 Object
+ message & sender Object Object
+ [useZulipClient] Client blocked: disabled or loading
+ [useZulipClient] Client blocked: disabled or loading
+ [useZulipClient] Client blocked: disabled or loading
+ [useZulipClient] Client blocked: disabled or loading
+ [useZulipClient] Client blocked: disabled or loading
+ [useZulipClient] Client blocked: disabled or loading
+ 🔧 useZulipState initialized: Object
+ [DEBUG-SETTINGS] Loading module from path: ../components/CustomSettings/JobCategoriesSync.tsx
+ 🔧 useZulipState initialized: Object
+ [DEBUG-SETTINGS] Loading module from path: ../components/CustomSettings/MaintenanceIntervalMapping.tsx
+ 📊 Updating notifications with unread count: 0 Object
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] Page check: Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ [InspectionMaintenanceAbility] isReady check: Object
+ message & sender Object Object
+ Window focus changed to: 1498349839
+ [InspectionMaintenanceAbility] Page check: Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+ message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] Page check: Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object
+background.js:152 [InspectionMaintenanceAbility] isReady check: Object
+background.js:174 message & sender Object Object

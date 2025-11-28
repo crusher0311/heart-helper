@@ -14,46 +14,24 @@ chrome.sidePanel.setOptions({
   .catch((error) => console.error('Failed to enable side panel:', error));
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Open HEART Helper as a popup window (side panel can't be opened from content script)
+  // Open side panel - MUST be completely synchronous, no promises at all
   if (message.action === "OPEN_SIDE_PANEL") {
-    // Get the current window to position the popup on the right side
-    chrome.windows.getCurrent().then((currentWindow) => {
-      // Calculate position on right side of current window
-      const windowWidth = currentWindow.width || 1920;
-      const windowLeft = currentWindow.left || 0;
-      const popupWidth = 420;
-      const popupHeight = 700;
-      
-      chrome.windows.create({
-        url: chrome.runtime.getURL('sidepanel.html'),
-        type: 'popup',
-        width: popupWidth,
-        height: popupHeight,
-        top: (currentWindow.top || 0) + 50,
-        left: windowLeft + windowWidth - popupWidth - 20
-      }).then((newWindow) => {
-        console.log("HEART Helper popup window opened:", newWindow.id);
-        sendResponse({ success: true, windowId: newWindow.id });
-      }).catch((error) => {
-        console.error("Failed to open popup window:", error);
-        sendResponse({ success: false, error: error.message });
+    console.log("OPEN_SIDE_PANEL received from tab:", sender.tab?.id, "window:", sender.tab?.windowId);
+    
+    // Try the synchronous approach that other extensions use
+    // The key is: NO promises, NO async, call sidePanel.open immediately
+    try {
+      chrome.sidePanel.open({ 
+        tabId: sender.tab.id,
+        windowId: sender.tab.windowId 
       });
-    }).catch((error) => {
-      // Fallback without positioning
-      chrome.windows.create({
-        url: chrome.runtime.getURL('sidepanel.html'),
-        type: 'popup',
-        width: 420,
-        height: 700
-      }).then((newWindow) => {
-        console.log("HEART Helper popup window opened (fallback):", newWindow.id);
-        sendResponse({ success: true, windowId: newWindow.id });
-      }).catch((err) => {
-        console.error("Failed to open popup window:", err);
-        sendResponse({ success: false, error: err.message });
-      });
-    });
-    return true; // Async response
+      console.log("sidePanel.open() called synchronously");
+      sendResponse({ success: true });
+    } catch (error) {
+      console.error("sidePanel.open sync error:", error);
+      sendResponse({ success: false, error: error.message });
+    }
+    return false; // Synchronous response
   }
   
   if (message.action === "SEND_TO_TEKMETRIC") {
