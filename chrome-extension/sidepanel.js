@@ -1085,12 +1085,15 @@ function showJobDetail(result) {
 
 // Create job in Tekmetric from selected job result
 async function createJobInTekmetric() {
+  console.log('createJobInTekmetric called, selectedJobResult:', selectedJobResult);
+  
   if (!selectedJobResult) {
     showToast('No job selected', 'error');
     return;
   }
   
   const job = selectedJobResult.job;
+  console.log('Creating job data for:', job.name);
   
   // Store job data in background for content script to pick up
   const jobData = {
@@ -1109,37 +1112,29 @@ async function createJobInTekmetric() {
     })),
   };
   
+  console.log('Job data prepared:', jobData);
+  
   try {
-    // Store in background script
-    await new Promise((resolve, reject) => {
-      chrome.runtime.sendMessage({ 
-        action: 'STORE_PENDING_JOB', 
-        jobData 
-      }, (response) => {
-        if (response?.success) {
-          resolve(response);
-        } else {
-          reject(new Error('Failed to store job data'));
-        }
-      });
-    });
-    
-    // Send message to content script to create job
+    // Check if we're on a Tekmetric page first
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    console.log('Current tab:', tab?.url);
     
     if (!tab?.url?.includes('shop.tekmetric.com')) {
-      showToast('Please navigate to a Tekmetric repair order first', 'error');
+      showToast('Navigate to a Tekmetric RO and click "Add Service" first', 'error');
       return;
     }
     
-    chrome.tabs.sendMessage(tab.id, { 
-      type: 'CREATE_JOB_FROM_SEARCH',
+    // Store in background script - this will trigger the content script's storage listener
+    console.log('Sending STORE_PENDING_JOB to background...');
+    chrome.runtime.sendMessage({ 
+      action: 'STORE_PENDING_JOB', 
       jobData 
     }, (response) => {
+      console.log('STORE_PENDING_JOB response:', response);
       if (response?.success) {
-        showToast('Job data ready - click "Add Service" in Tekmetric', 'success');
+        showToast('Job ready! Click "Add Service" in Tekmetric to auto-fill', 'success');
       } else {
-        showToast('Could not connect to Tekmetric page', 'error');
+        showToast('Failed to store job data', 'error');
       }
     });
   } catch (error) {

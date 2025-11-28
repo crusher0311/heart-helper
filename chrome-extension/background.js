@@ -1,16 +1,17 @@
 let pendingJobData = null;
 
 // Open side panel when extension icon is clicked
+// This is the ONLY way to handle icon clicks - do NOT add chrome.action.onClicked
+// as they are mutually exclusive
 chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true })
-  .catch((error) => console.log('Side panel behavior not set:', error));
+  .then(() => console.log('Side panel behavior set: opens on action click'))
+  .catch((error) => console.error('Failed to set side panel behavior:', error));
 
-// Explicit action click handler as fallback for opening side panel
-chrome.action.onClicked.addListener((tab) => {
-  console.log("Extension icon clicked, opening side panel for tab:", tab.id);
-  chrome.sidePanel.open({ tabId: tab.id })
-    .then(() => console.log("Side panel opened via action click"))
-    .catch((error) => console.error("Failed to open side panel:", error));
-});
+// Also set the side panel to be enabled for all tabs
+chrome.sidePanel.setOptions({
+  enabled: true
+}).then(() => console.log('Side panel enabled for all tabs'))
+  .catch((error) => console.error('Failed to enable side panel:', error));
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Open side panel for concern intake
