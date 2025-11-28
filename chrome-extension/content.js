@@ -1218,10 +1218,16 @@ function injectFloatingHeartButton() {
       }));
       
       // If this was a click (not a drag), open the side panel
-      if (!wasDragged && e.target === floatingBtn) {
-        console.log("Opening HEART Helper side panel...");
-        // Chrome's official pattern: no callback, just send the message
-        chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" });
+      // Use contains() to handle clicks on child elements
+      if (!wasDragged && (e.target === floatingBtn || floatingBtn.contains(e.target))) {
+        console.log("🚀 HEART Helper button clicked - sending OPEN_SIDE_PANEL message");
+        chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" }, (response) => {
+          if (chrome.runtime.lastError) {
+            console.error("❌ Failed to send message:", chrome.runtime.lastError.message);
+          } else {
+            console.log("✅ Message sent successfully");
+          }
+        });
       }
     }
   });

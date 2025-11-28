@@ -1,0 +1,468 @@
+
+ [MaintenanceModule] Initializing...
+ [TekmetricStorageModule] Initializing...
+ Tekmetric Job Importer: Content script loaded
+ 📋 Tekmetric Job Importer initialized, document ready state: interactive
+ 📄 Document already loaded - checking for pending jobs in 2s...
+ ✅ Floating HEART Helper button injected (draggable)
+ ✅ HEART Helper floating button ready
+ 🔍 Checking for pending job data...
+ 📬 Received window message: Object
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 
+a7 @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught 
+ 📬 Received window message: 
+ [Settings] No profitabilitySettings settings found, using defaults
+ns @ content.js:9
+ [Settings] No customerMaintenanceSettings settings found, using defaults
+ns @ content.js:9
+ [Settings] No generalSettings settings found, using defaults
+ns @ content.js:9
+ 
+a7 @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught 
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ [OutboundCall] Menu state changed: false
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ Creating handle element
+ [Handle] Updating badge: Object
+ [Handle] Badge hidden (count is 0)
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: null, previousShopId: null
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+[Violation] Potential permissions policy violation: microphone is not allowed in this document.
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ [Handle] Updating unread data: Object
+ [Handle] Updating badge: Object
+ [Handle] Badge hidden (count is 0)
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 Received window message: Object
+ ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
+ Received customer phone list response:, [object Object], payload_customer_id: 89489894, customer_id: 89489894
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+estimate:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+ 📬 Received window message: Object
+ 📬 Received window message: Object
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 Received window message: Object
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ Event "payments_service_status" doesn't have any listeners. Putting it in the stack.
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ ✅ HEART Helper floating button ready
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-load","payload":{"controllerMetrics":{"resource_timings":{"shared.js":{"raw_size":813930,"transfer_size":0,"duration":0},"controller-with-preconnect.js":{"raw_size":1091382,"transfer_size":0,"duration":0}}}}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ [Handle] Customer ID retrieved from background: 89489894
+ [Handle] Phone link updated event received customerId: 89489894, shopId: 469
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"1d12d6df-64db-4cef-ae4f-1b3c6fce4ef4"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+ ✅ HEART Helper floating button ready
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"d82ef30b-3ed8-49c0-93de-c6a2336d2d7c"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"1258568f-6ae5-4d61-bb26-69fc0c9b4b2f"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"5f676a82-dc71-4d94-9721-a0626310c2f4"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ 🔍 Checking for pending job data...
+ ✅ HEART Helper floating button ready
+ ✅ HEART Helper floating button ready
+ [Handle] Repair order ID found, fetching customer data from background: 276058512
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ [Handle] Customer ID retrieved from background: 89489894
+ customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+content.js:861 🔍 Checking for pending job data...
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+content.js:863 📬 GET_PENDING_JOB response: Object
+content.js:869 ⚠️ No pending job data found
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"11044ee1-3d01-4479-9399-659163be3ea4"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:887 📬 Received window message: {"originatingScript":"m2","payload":{"guid":"cb64f5f7-386b-46b0-948b-ec66ed5d6999ea1d00","muid":"34668a3d-e2c7-40c0-9117-16e3a2f648ab1c6239","sid":"d3eadc4e-44f0-4a2d-93cb-ed78125e5ab4f0fde1"}}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"ca6c63fc-f763-4bf9-9f05-ca0ca6726a9f"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"29ce87f9-6d1b-4eb7-a39f-f49e89038ff7"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:24 [Handle] Sending CUSTOMER_PHONE_LIST_REQUEST for phone link updated: 89489894 shopId: 469
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 Received customer phone list response:, [object Object], payload_customer_id: 89489894, customer_id: 89489894
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1222 Opening HEART Helper side panel...
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"728bc607-59f2-4848-9576-bc2e3a02d2da"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"fcff9786-0fe4-4ad0-9969-6a3b9b1bb762"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:861 🔍 Checking for pending job data...
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:863 📬 GET_PENDING_JOB response: Object
+content.js:869 ⚠️ No pending job data found
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"697544d1-e6f7-40be-b225-8be32ee1eaa9"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"31dcb67f-8322-42de-854f-20138168aaca"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"8af6a115-235e-46e0-8392-5fd47f4dc8bc"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:861 🔍 Checking for pending job data...
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:861 🔍 Checking for pending job data...
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:863 📬 GET_PENDING_JOB response: Object
+content.js:869 ⚠️ No pending job data found
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"b65f7db4-40d7-4717-b29f-cb17cc351dc2"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:863 📬 GET_PENDING_JOB response: Object
+content.js:869 ⚠️ No pending job data found
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"fdaa1699-f52d-4576-9b89-156ee28cbcc0"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+content.js:1311 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController6651","controllerAppFrameId":"__privateStripeController6651","message":{"action":"stripe-controller-action-response","payload":{"nonce":"b20ef215-701e-4258-ad64-002affaa2c46"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
+content.js:1311 ✅ HEART Helper floating button ready
