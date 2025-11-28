@@ -1171,12 +1171,12 @@ function injectFloatingHeartButton() {
   
   // Dragging functionality
   let isDragging = false;
+  let wasDragged = false;
   let dragStartX, dragStartY, btnStartX, btnStartY;
-  let totalDragDistance = 0;
   
   floatingBtn.addEventListener('mousedown', (e) => {
     isDragging = true;
-    totalDragDistance = 0;
+    wasDragged = false;
     dragStartX = e.clientX;
     dragStartY = e.clientY;
     btnStartX = floatingBtn.offsetLeft;
@@ -1191,7 +1191,11 @@ function injectFloatingHeartButton() {
     
     const deltaX = e.clientX - dragStartX;
     const deltaY = e.clientY - dragStartY;
-    totalDragDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    
+    if (distance > 5) {
+      wasDragged = true;
+    }
     
     let newX = btnStartX + deltaX;
     let newY = btnStartY + deltaY;
@@ -1204,9 +1208,8 @@ function injectFloatingHeartButton() {
     floatingBtn.style.top = newY + 'px';
   });
   
-  document.addEventListener('mouseup', (e) => {
+  document.addEventListener('mouseup', () => {
     if (isDragging) {
-      const wasDragged = totalDragDistance > 5;
       isDragging = false;
       floatingBtn.style.cursor = 'grab';
       floatingBtn.style.transition = 'box-shadow 0.2s ease';
@@ -1216,20 +1219,24 @@ function injectFloatingHeartButton() {
         x: floatingBtn.offsetLeft,
         y: floatingBtn.offsetTop
       }));
-      
-      // If this was a click (not a drag), open the side panel
-      // Use contains() to handle clicks on child elements
-      if (!wasDragged && (e.target === floatingBtn || floatingBtn.contains(e.target))) {
-        console.log("🚀 HEART Helper button clicked - sending OPEN_SIDE_PANEL message");
-        chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" }, (response) => {
-          if (chrome.runtime.lastError) {
-            console.error("❌ Failed to send message:", chrome.runtime.lastError.message);
-          } else {
-            console.log("✅ Message sent successfully");
-          }
-        });
-      }
     }
+  });
+  
+  // Direct click handler - opens side panel if not a drag
+  floatingBtn.addEventListener('click', (e) => {
+    console.log("🚀 HEART Helper button click event, wasDragged:", wasDragged);
+    if (!wasDragged) {
+      console.log("📤 Sending OPEN_SIDE_PANEL message to background...");
+      chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" }, (response) => {
+        if (chrome.runtime.lastError) {
+          console.error("❌ Failed to send message:", chrome.runtime.lastError.message);
+        } else {
+          console.log("✅ Message sent to background");
+        }
+      });
+    }
+    // Reset for next interaction
+    wasDragged = false;
   });
   
   floatingBtn.addEventListener('mouseenter', () => {
