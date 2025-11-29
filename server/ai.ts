@@ -436,9 +436,12 @@ import type {
   CleanConversationResponse,
 } from "@shared/schema";
 
+import { getSymptomQuestionsContext, matchSymptomCategory } from "./symptom-questions";
+
 /**
  * Generates diagnostic follow-up questions based on customer's initial concern
  * Helps service advisors gather complete information during the call
+ * Uses symptom-based questions reference for expert-level diagnostics
  */
 export async function generateConcernFollowUpQuestions(
   request: GenerateConcernQuestionsRequest
@@ -449,10 +452,19 @@ export async function generateConcernFollowUpQuestions(
     ? `Vehicle: ${vehicleInfo.year || ''} ${vehicleInfo.make || ''} ${vehicleInfo.model || ''}`.trim()
     : '';
 
+  // Get symptom-specific question guidance
+  const symptomContext = getSymptomQuestionsContext(customerConcern);
+  const matchedCategory = matchSymptomCategory(customerConcern);
+  const categoryInfo = matchedCategory 
+    ? `\nDetected Issue Category: ${matchedCategory.category}` 
+    : '';
+
   const prompt = `You are an experienced automotive service advisor at HEART Certified Auto Care. A customer has called with a concern and you need to ask follow-up questions to gather complete diagnostic information.
 
 Customer's Initial Concern: "${customerConcern}"
-${vehicleContext ? `\n${vehicleContext}` : ''}
+${vehicleContext ? `\n${vehicleContext}` : ''}${categoryInfo}
+
+${symptomContext}
 
 Generate 5 diagnostic follow-up questions that will help:
 1. Pinpoint the exact symptom (when, where, how often)
@@ -461,7 +473,10 @@ Generate 5 diagnostic follow-up questions that will help:
 4. Gather safety-relevant information
 5. Determine urgency/severity
 
-GUIDELINES:
+IMPORTANT PHRASING GUIDELINES:
+- Instead of "What makes you think you need a...?" say "Tell me about the issue. What symptoms are you experiencing?"
+- Instead of "Have you had it inspected?" say "Have you had a trusted shop perform the necessary testing?"
+- Start questions with "Tell me the story about..." to encourage detailed responses
 - Keep questions conversational and friendly
 - Ask one thing at a time (not compound questions)
 - Start with the most important diagnostic info
@@ -471,10 +486,10 @@ GUIDELINES:
 Return ONLY valid JSON:
 {
   "questions": [
+    "Tell me the story about your issue. What happened?",
     "When did you first notice this?",
     "Does it happen all the time or only in certain conditions?",
     "Have you noticed any other changes with the vehicle?",
-    "Does the problem get worse when the engine is cold or hot?",
     "Is it affecting your ability to drive safely?"
   ]
 }`;
@@ -528,6 +543,7 @@ Return ONLY valid JSON:
 /**
  * Reviews the conversation so far and suggests additional questions if needed
  * Helps ensure complete information is gathered
+ * Uses symptom-based questions reference for expert-level follow-up
  */
 export async function reviewConcernConversation(
   request: ReviewConcernConversationRequest
@@ -538,6 +554,10 @@ export async function reviewConcernConversation(
     ? `Vehicle: ${vehicleInfo.year || ''} ${vehicleInfo.make || ''} ${vehicleInfo.model || ''}`.trim()
     : '';
 
+  // Get symptom-specific question guidance for review
+  const symptomContext = getSymptomQuestionsContext(customerConcern);
+  const matchedCategory = matchSymptomCategory(customerConcern);
+
   const qaHistory = answeredQuestions
     .map((qa, i) => `Q${i + 1}: ${qa.question}\nA${i + 1}: ${qa.answer}`)
     .join('\n\n');
@@ -546,15 +566,24 @@ export async function reviewConcernConversation(
 
 Customer's Initial Concern: "${customerConcern}"
 ${vehicleContext ? `\n${vehicleContext}` : ''}
+${matchedCategory ? `Detected Issue Category: ${matchedCategory.category}` : ''}
 
 Conversation So Far:
 ${qaHistory}
 
-EVALUATE:
+${symptomContext}
+
+EVALUATE based on the expert diagnostic questions above:
 1. Do we have enough information to diagnose the problem?
 2. Are there any important gaps in the diagnostic information?
 3. Did any answers raise new questions that should be explored?
 4. Is there safety information we should confirm?
+5. Have we asked the key questions for this type of issue?
+
+PHRASING GUIDELINES for additional questions:
+- Instead of "What makes you think you need a...?" say "Tell me about the issue. What symptoms are you experiencing?"
+- Instead of "Have you had it inspected?" say "Have you had a trusted shop perform the necessary testing?"
+- Start questions with "Tell me the story about..." to encourage detailed responses
 
 IF more questions are needed (max 3), ask ONLY for missing critical information.
 IF we have enough info, return empty array.

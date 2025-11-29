@@ -226,11 +226,47 @@ export const SYMPTOM_CATEGORIES: SymptomCategory[] = [
 ];
 
 /**
+ * Checks if a keyword matches in the concern using word boundaries
+ * Prevents "AC" from matching within "replace" or "vacuum"
+ */
+function keywordMatches(concern: string, keyword: string): boolean {
+  const lowerKeyword = keyword.toLowerCase();
+  const lowerConcern = concern.toLowerCase();
+  
+  // For very short keywords (2-3 chars like "AC"), require exact word boundary
+  if (lowerKeyword.length <= 3) {
+    // Use word boundary regex for short keywords
+    const wordBoundaryRegex = new RegExp(`\\b${escapeRegex(lowerKeyword)}\\b`, 'i');
+    return wordBoundaryRegex.test(lowerConcern);
+  }
+  
+  // For longer keywords, use word boundary matching as well
+  const wordBoundaryRegex = new RegExp(`\\b${escapeRegex(lowerKeyword)}\\b`, 'i');
+  if (wordBoundaryRegex.test(lowerConcern)) {
+    return true;
+  }
+  
+  // Also allow partial matches for multi-word phrases like "check engine light"
+  // if the keyword is longer than 5 characters
+  if (lowerKeyword.length > 5 && lowerConcern.includes(lowerKeyword)) {
+    return true;
+  }
+  
+  return false;
+}
+
+/**
+ * Escapes special regex characters in a string
+ */
+function escapeRegex(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
  * Finds the most relevant symptom category based on customer concern keywords
+ * Uses word boundary matching to prevent false positives
  */
 export function matchSymptomCategory(customerConcern: string): SymptomCategory | null {
-  const lowerConcern = customerConcern.toLowerCase();
-  
   // Score each category by keyword matches
   let bestMatch: SymptomCategory | null = null;
   let bestScore = 0;
@@ -238,14 +274,22 @@ export function matchSymptomCategory(customerConcern: string): SymptomCategory |
   for (const category of SYMPTOM_CATEGORIES) {
     let score = 0;
     for (const keyword of category.keywords) {
-      if (lowerConcern.includes(keyword.toLowerCase())) {
-        score += keyword.length; // Longer matches score higher
+      if (keywordMatches(customerConcern, keyword)) {
+        // Score based on keyword length - longer/more specific matches score higher
+        score += keyword.length;
       }
     }
     if (score > bestScore) {
       bestScore = score;
       bestMatch = category;
     }
+  }
+  
+  // Require a minimum score to return a match
+  // Score of 4 allows single keywords like "heat", "odor", "leak", "tire" to match
+  // while still filtering out 2-3 character noise
+  if (bestScore < 4) {
+    return null;
   }
   
   return bestMatch;

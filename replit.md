@@ -6,7 +6,7 @@ HEART Helper is an AI-powered repair order search tool for HEART Certified Auto 
 
 ### Key Capabilities
 
-- **AI-Powered Concern Intake**: Interactive diagnostic Q&A workflow for customer calls
+- **AI-Powered Concern Intake**: Interactive diagnostic Q&A workflow for customer calls with symptom-based expert questions (16 categories: brakes, engine, transmission, cooling, steering, A/C, etc.)
 - **Phone Answer Scripts**: Professional scripts for incoming calls
 - **Intelligent Repair Term Extraction**: Semantic parsing of customer descriptions
 - **Smart Year Matching**: Broader searches across compatible model years
