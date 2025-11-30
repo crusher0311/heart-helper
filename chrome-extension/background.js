@@ -33,23 +33,21 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
   }
 });
 
-chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Open side panel directly from service worker
   if (message.action === "OPEN_SIDE_PANEL") {
     console.log("OPEN_SIDE_PANEL received from tab:", sender.tab?.id);
     
     if (sender.tab && sender.tab.id) {
-      try {
-        await chrome.sidePanel.open({ tabId: sender.tab.id });
-        console.log("Side panel opened successfully for tab:", sender.tab.id);
-      } catch (error) {
-        console.error("Failed to open side panel:", error);
-      }
+      // Use promise chain, not await (can't use async on message listener)
+      chrome.sidePanel.open({ tabId: sender.tab.id })
+        .then(() => console.log("Side panel opened successfully for tab:", sender.tab.id))
+        .catch((error) => console.error("Failed to open side panel:", error));
     } else {
       console.error("No tab ID available from sender");
     }
-    // No response needed - fire and forget
-    return;
+    // No response needed, don't return true
+    return false;
   }
   
   if (message.action === "SEND_TO_TEKMETRIC") {
