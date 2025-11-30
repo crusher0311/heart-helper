@@ -1,0 +1,100 @@
+ Tekmetric Job Importer: Background service worker loaded (v3.9.7)
+ Side panel behavior set: opens on action click
+ Side panel enabled for all tabs
+ Context menu created: Open HEART Helper
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:93 Background: Retrieved from storage: No job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: OPEN_SIDE_PANEL from tab: 959692998
+background.js:42 🚀 OPEN_SIDE_PANEL handler triggered for tab: 959692998
+background.js:48 Failed to open side panel: Error: `sidePanel.open()` may only be called in response to a user gesture.
+(anonymous) @ background.js:48
+Promise.catch
+(anonymous) @ background.js:48
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job
+background.js:38 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:90 Background: Content script requesting pending job
+background.js:93 Background: Retrieved from storage: No job

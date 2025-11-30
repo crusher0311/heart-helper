@@ -37,17 +37,27 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Log ALL messages for debugging
   console.log("📨 Message received:", message.action, "from tab:", sender.tab?.id);
   
-  // Open side panel directly from service worker
+  // Open side panel via extension page (workaround for user gesture requirement)
   if (message.action === "OPEN_SIDE_PANEL") {
     console.log("🚀 OPEN_SIDE_PANEL handler triggered for tab:", sender.tab?.id);
     
-    if (sender.tab && sender.tab.id) {
-      // Use promise chain, not await (can't use async on message listener)
-      chrome.sidePanel.open({ tabId: sender.tab.id })
-        .then(() => console.log("Side panel opened successfully for tab:", sender.tab.id))
-        .catch((error) => console.error("Failed to open side panel:", error));
+    if (sender.tab && sender.tab.id && sender.tab.windowId) {
+      // Create a new tab with our extension page that will open the side panel
+      // This is a workaround for the user gesture requirement
+      const relayUrl = chrome.runtime.getURL(`sidepanel-opener.html?tabId=${sender.tab.id}&windowId=${sender.tab.windowId}`);
+      console.log("Creating relay tab:", relayUrl);
+      
+      chrome.tabs.create({ 
+        url: relayUrl, 
+        active: false,
+        index: 0 // Put at beginning so it's less intrusive
+      }).then((tab) => {
+        console.log("Relay tab created:", tab.id);
+      }).catch((error) => {
+        console.error("Failed to create relay tab:", error);
+      });
     } else {
-      console.error("No tab ID available from sender");
+      console.error("No tab ID or window ID available from sender");
     }
     // No response needed, don't return true
     return false;
@@ -117,4 +127,4 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-console.log("Tekmetric Job Importer: Background service worker loaded (v3.9.7)");
+console.log("Tekmetric Job Importer: Background service worker loaded (v3.9.8)");

@@ -1,0 +1,49 @@
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8351","controllerAppFrameId":"__privateStripeController8351","message":{"action":"stripe-controller-action-response","payload":{"nonce":"91c3702d-109c-42a8-82ce-7922aa563e40"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:861 🔍 Checking for pending job data...
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:863 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:869 ⚠️ No pending job data found
+content.js:861 🔍 Checking for pending job data...
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:863 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:869 ⚠️ No pending job data found
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8351","controllerAppFrameId":"__privateStripeController8351","message":{"action":"stripe-controller-action-response","payload":{"nonce":"aca40aa6-3887-4ca4-b1f4-5543651e6a5e"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1180 🔵 HEART Helper pointerdown event fired
+content.js:1333 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:1333 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8351","controllerAppFrameId":"__privateStripeController8351","message":{"action":"stripe-controller-action-response","payload":{"nonce":"e8fc9ee5-3f5a-43bc-a491-d289deca94a8"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1193 🟢 HEART Helper pointerup event fired
+content.js:1199 🚀 HEART Helper onclick fired!
+content.js:1240 🚀 HEART Helper button click event, wasDragged: false
+content.js:1242 📤 Sending OPEN_SIDE_PANEL message to background...
+content.js:1245 ✅ Message sent to background
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8351","controllerAppFrameId":"__privateStripeController8351","message":{"action":"stripe-controller-action-response","payload":{"nonce":"3c02a3e5-b398-4cab-9630-1133ad1a9389"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8351","controllerAppFrameId":"__privateStripeController8351","message":{"action":"stripe-controller-action-response","payload":{"nonce":"70d66b6f-4e76-4a58-9848-f8834ceb1044"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8351","controllerAppFrameId":"__privateStripeController8351","message":{"action":"stripe-controller-action-response","payload":{"nonce":"78cee4bb-af2c-42a7-9c96-dee383158e93"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
