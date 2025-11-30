@@ -1129,7 +1129,7 @@ async function createJobInTekmetric() {
   
   // Store job data in background for content script to pick up
   const jobData = {
-    name: job.name,
+    jobName: job.name,  // Content script expects 'jobName' not 'name'
     laborItems: job.laborItems.map(item => ({
       name: item.name,
       hours: item.hours,

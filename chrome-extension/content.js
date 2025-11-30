@@ -84,14 +84,33 @@ function waitForModal(timeout = 15000) {
   });
 }
 
+// Set value on React-controlled input elements
+// This technique works with React apps by using the native value setter
+function setNativeInputValue(element, value) {
+  const valueSetter = Object.getOwnPropertyDescriptor(element, 'value')?.set;
+  const prototype = Object.getPrototypeOf(element);
+  const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value')?.set;
+
+  if (prototypeValueSetter && valueSetter !== prototypeValueSetter) {
+    prototypeValueSetter.call(element, value);
+  } else if (valueSetter) {
+    valueSetter.call(element, value);
+  } else {
+    element.value = value;
+  }
+
+  // Dispatch events to ensure React sees the change
+  element.dispatchEvent(new Event('input', { bubbles: true }));
+  element.dispatchEvent(new Event('change', { bubbles: true }));
+  element.dispatchEvent(new FocusEvent('blur', { bubbles: true }));
+}
+
 function fillInput(selector, value) {
   const element = document.querySelector(selector);
   if (!element) return false;
   
-  element.value = value;
-  element.dispatchEvent(new Event('input', { bubbles: true }));
-  element.dispatchEvent(new Event('change', { bubbles: true }));
-  element.dispatchEvent(new Event('blur', { bubbles: true }));
+  element.focus();
+  setNativeInputValue(element, value);
   
   return true;
 }
@@ -220,17 +239,17 @@ async function fillTekmetricEstimate(jobData) {
       // Check if it's a contenteditable element or an input
       if (jobNameInput.contentEditable === 'true') {
         console.log('Using contenteditable approach...');
+        jobNameInput.focus();
         jobNameInput.textContent = jobData.jobName;
         jobNameInput.dispatchEvent(new Event('input', { bubbles: true }));
-      } else if (jobNameInput.tagName === 'INPUT' || jobNameInput.tagName === 'TEXTAREA') {
-        console.log('Using input/textarea approach...');
-        jobNameInput.value = '';
-        jobNameInput.value = jobData.jobName;
-        jobNameInput.dispatchEvent(new Event('input', { bubbles: true }));
         jobNameInput.dispatchEvent(new Event('change', { bubbles: true }));
+      } else if (jobNameInput.tagName === 'INPUT' || jobNameInput.tagName === 'TEXTAREA') {
+        console.log('Using setNativeInputValue for React compatibility...');
+        jobNameInput.focus();
+        setNativeInputValue(jobNameInput, jobData.jobName);
       } else {
         console.log('Using simple typing simulation...');
-        // Just type the text character by character
+        jobNameInput.focus();
         document.execCommand('selectAll', false, null);
         document.execCommand('delete', false, null);
         document.execCommand('insertText', false, jobData.jobName);
@@ -324,16 +343,11 @@ async function fillTekmetricEstimate(jobData) {
         throw new Error('Could not find labor description field');
       }
       
-      // Clear and fill the field, then blur to prevent autocomplete interference
+      // Use setNativeInputValue for React compatibility
       descriptionField.focus();
-      descriptionField.value = '';
       await new Promise(resolve => setTimeout(resolve, 200));
-      descriptionField.value = laborItem.name;
-      descriptionField.dispatchEvent(new Event('input', { bubbles: true }));
-      descriptionField.dispatchEvent(new Event('change', { bubbles: true }));
-      await new Promise(resolve => setTimeout(resolve, 300)); // Wait before blur
-      descriptionField.blur(); // Blur to commit the value and avoid autocomplete
-      await new Promise(resolve => setTimeout(resolve, 500)); // Wait after blur to ensure commit
+      setNativeInputValue(descriptionField, laborItem.name);
+      await new Promise(resolve => setTimeout(resolve, 500)); // Wait to ensure React processes
       console.log('✓ Filled labor description:', laborItem.name);
       
       const hoursField = inputs.find(inp => 
@@ -344,9 +358,7 @@ async function fillTekmetricEstimate(jobData) {
       );
       if (hoursField) {
         hoursField.focus();
-        hoursField.value = laborItem.hours.toString();
-        hoursField.dispatchEvent(new Event('input', { bubbles: true }));
-        hoursField.dispatchEvent(new Event('change', { bubbles: true }));
+        setNativeInputValue(hoursField, laborItem.hours.toString());
         console.log('✓ Filled hours:', laborItem.hours);
       }
       
@@ -358,9 +370,7 @@ async function fillTekmetricEstimate(jobData) {
       );
       if (rateField) {
         rateField.focus();
-        rateField.value = laborItem.rate.toString();
-        rateField.dispatchEvent(new Event('input', { bubbles: true }));
-        rateField.dispatchEvent(new Event('change', { bubbles: true }));
+        setNativeInputValue(rateField, laborItem.rate.toString());
         console.log('✓ Filled rate:', laborItem.rate);
       }
       
@@ -547,35 +557,22 @@ async function fillTekmetricEstimate(jobData) {
       console.log('Text input details:', textInputs.map(inp => ({placeholder: inp.placeholder, type: inp.type})));
       console.log('Number input details:', numberInputs.map(inp => ({placeholder: inp.placeholder, type: inp.type})));
       
-      // Helper to fill text field character-by-character
+      // Helper to fill text field using React-compatible setNativeInputValue
       async function fillTextField(element, text, label) {
         element.focus();
         await new Promise(resolve => setTimeout(resolve, 50));
-        element.value = '';
-        for (let i = 0; i < text.length; i++) {
-          element.value = text.substring(0, i + 1);
-          element.dispatchEvent(new InputEvent('input', { 
-            bubbles: true,
-            data: text[i]
-          }));
-          if (i % 10 === 0) await new Promise(resolve => setTimeout(resolve, 5));
-        }
-        element.dispatchEvent(new Event('change', { bubbles: true }));
-        element.dispatchEvent(new Event('blur', { bubbles: true }));
+        setNativeInputValue(element, text);
         console.log(`✓ Filled ${label}:`, text);
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise(resolve => setTimeout(resolve, 150));
       }
       
-      // Helper to fill number field
+      // Helper to fill number field using React-compatible setNativeInputValue
       async function fillNumberField(element, value, label) {
         element.focus();
         await new Promise(resolve => setTimeout(resolve, 50));
-        element.value = value.toString();
-        element.dispatchEvent(new Event('input', { bubbles: true }));
-        element.dispatchEvent(new Event('change', { bubbles: true }));
-        element.dispatchEvent(new Event('blur', { bubbles: true }));
+        setNativeInputValue(element, value.toString());
         console.log(`✓ Filled ${label}:`, value);
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise(resolve => setTimeout(resolve, 150));
       }
       
       // Fill text fields in order: Brand (0), Part Name (1), Part Number (2), Details (3)
@@ -638,9 +635,7 @@ async function fillTekmetricEstimate(jobData) {
       );
       if (retailField && part.retail) {
         retailField.focus();
-        retailField.value = part.retail.toString();
-        retailField.dispatchEvent(new Event('input', { bubbles: true }));
-        retailField.dispatchEvent(new Event('change', { bubbles: true }));
+        setNativeInputValue(retailField, part.retail.toString());
         console.log('✓ Filled sale price:', part.retail);
       }
       
@@ -1461,10 +1456,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       // Focus the field first
       concernField.focus();
       
-      // Use setNativeValue for React compatibility
+      // Use setNativeInputValue for React compatibility
       if (concernField.tagName === 'TEXTAREA' || concernField.tagName === 'INPUT') {
-        setNativeValue(concernField, message.text);
-        console.log('✅ Text inserted via setNativeValue');
+        setNativeInputValue(concernField, message.text);
+        console.log('✅ Text inserted via setNativeInputValue');
       } else {
         concernField.textContent = message.text;
         concernField.dispatchEvent(new Event('input', { bubbles: true }));
@@ -1498,7 +1493,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       concernField.focus();
       
       if (concernField.tagName === 'TEXTAREA' || concernField.tagName === 'INPUT') {
-        setNativeValue(concernField, newValue);
+        setNativeInputValue(concernField, newValue);
       } else {
         concernField.textContent = newValue;
         concernField.dispatchEvent(new Event('input', { bubbles: true }));
@@ -1724,30 +1719,6 @@ function extractVehicleInfo() {
   }
   
   return vehicleInfo;
-}
-
-// Set value on React-controlled input elements
-// This technique works with React apps by using the native value setter
-function setNativeValue(element, value) {
-  const valueSetter = Object.getOwnPropertyDescriptor(element, 'value')?.set;
-  const prototype = Object.getPrototypeOf(element);
-  const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value')?.set;
-
-  if (prototypeValueSetter && valueSetter !== prototypeValueSetter) {
-    prototypeValueSetter.call(element, value);
-  } else if (valueSetter) {
-    valueSetter.call(element, value);
-  } else {
-    element.value = value;
-  }
-
-  // Dispatch events to ensure React sees the change
-  element.dispatchEvent(new Event('input', { bubbles: true }));
-  element.dispatchEvent(new Event('change', { bubbles: true }));
-  // Also try blur to trigger form validation
-  element.dispatchEvent(new FocusEvent('blur', { bubbles: true }));
-
-  console.log('Content Script: Set native value and dispatched events');
 }
 
 // Find concern/complaint text field on the page
