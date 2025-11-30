@@ -34,9 +34,12 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // Log ALL messages for debugging
+  console.log("📨 Message received:", message.action, "from tab:", sender.tab?.id);
+  
   // Open side panel directly from service worker
   if (message.action === "OPEN_SIDE_PANEL") {
-    console.log("OPEN_SIDE_PANEL received from tab:", sender.tab?.id);
+    console.log("🚀 OPEN_SIDE_PANEL handler triggered for tab:", sender.tab?.id);
     
     if (sender.tab && sender.tab.id) {
       // Use promise chain, not await (can't use async on message listener)
@@ -114,4 +117,4 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-console.log("Tekmetric Job Importer: Background service worker loaded");
+console.log("Tekmetric Job Importer: Background service worker loaded (v3.9.7)");
