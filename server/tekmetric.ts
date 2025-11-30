@@ -253,8 +253,15 @@ export interface TekmetricEmployee {
 
 export async function fetchEmployees(shopLocation: ShopLocation): Promise<TekmetricEmployee[]> {
   try {
-    const response = await tekmetricRequest("/employees", "GET", undefined, shopLocation);
+    const shopId = getShopId(shopLocation);
+    if (!shopId) {
+      console.error(`No shop ID configured for ${shopLocation}`);
+      return [];
+    }
     
+    // Use shop query parameter like other Tekmetric endpoints (Customers, etc.)
+    // Don't pass shopLocation to avoid adding X-Shop-Id header - just use query param
+    const response = await tekmetricRequest(`/employees?shop=${shopId}`, "GET");
     const employees = response.content || response.items || response || [];
     
     return employees.map((emp: any) => ({
@@ -273,6 +280,30 @@ export async function fetchEmployees(shopLocation: ShopLocation): Promise<Tekmet
 
 // Get employee name by ID (uses cache if available)
 const employeeCache = new Map<number, TekmetricEmployee>();
+let employeeCacheInitialized = false;
+let employeeCachePromise: Promise<void> | null = null;
+
+async function initializeEmployeeCache(): Promise<void> {
+  if (employeeCacheInitialized) return;
+  if (employeeCachePromise) return employeeCachePromise;
+  
+  employeeCachePromise = (async () => {
+    console.log('Initializing employee cache from all shops...');
+    const shops = getAvailableShops();
+    
+    for (const shop of shops) {
+      const employees = await fetchEmployees(shop);
+      for (const emp of employees) {
+        employeeCache.set(emp.id, emp);
+      }
+    }
+    
+    console.log(`Employee cache initialized with ${employeeCache.size} employees`);
+    employeeCacheInitialized = true;
+  })();
+  
+  return employeeCachePromise;
+}
 
 export async function getEmployeeName(employeeId: number, shopLocation?: ShopLocation): Promise<string | null> {
   // Check cache first
@@ -281,23 +312,15 @@ export async function getEmployeeName(employeeId: number, shopLocation?: ShopLoc
     return `${emp.firstName} ${emp.lastName}`.trim() || null;
   }
   
-  // Try to fetch from each shop if not specified
-  const shops = shopLocation ? [shopLocation] : getAvailableShops();
+  // Initialize cache if not done yet (batches all shop fetches)
+  await initializeEmployeeCache();
   
-  for (const shop of shops) {
-    const employees = await fetchEmployees(shop);
-    
-    // Cache all fetched employees
-    for (const emp of employees) {
-      employeeCache.set(emp.id, emp);
-    }
-    
-    // Check if we found the employee we're looking for
-    if (employeeCache.has(employeeId)) {
-      const emp = employeeCache.get(employeeId)!;
-      return `${emp.firstName} ${emp.lastName}`.trim() || null;
-    }
+  // Check cache again after initialization
+  if (employeeCache.has(employeeId)) {
+    const emp = employeeCache.get(employeeId)!;
+    return `${emp.firstName} ${emp.lastName}`.trim() || null;
   }
   
+  // Employee not found in any shop
   return null;
 }
