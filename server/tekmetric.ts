@@ -240,3 +240,64 @@ function getShopLocationFromId(shopId: string): ShopLocation | null {
   
   return null;
 }
+
+// Fetch all employees from Tekmetric for a shop
+export interface TekmetricEmployee {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email?: string;
+  role?: string;
+  isActive?: boolean;
+}
+
+export async function fetchEmployees(shopLocation: ShopLocation): Promise<TekmetricEmployee[]> {
+  try {
+    const response = await tekmetricRequest("/employees", "GET", undefined, shopLocation);
+    
+    const employees = response.content || response.items || response || [];
+    
+    return employees.map((emp: any) => ({
+      id: emp.id,
+      firstName: emp.firstName || emp.first_name || '',
+      lastName: emp.lastName || emp.last_name || '',
+      email: emp.email,
+      role: emp.role?.name || emp.roleName || emp.role,
+      isActive: emp.active !== false && emp.isActive !== false,
+    }));
+  } catch (error) {
+    console.error(`Failed to fetch employees for ${shopLocation}:`, error);
+    return [];
+  }
+}
+
+// Get employee name by ID (uses cache if available)
+const employeeCache = new Map<number, TekmetricEmployee>();
+
+export async function getEmployeeName(employeeId: number, shopLocation?: ShopLocation): Promise<string | null> {
+  // Check cache first
+  if (employeeCache.has(employeeId)) {
+    const emp = employeeCache.get(employeeId)!;
+    return `${emp.firstName} ${emp.lastName}`.trim() || null;
+  }
+  
+  // Try to fetch from each shop if not specified
+  const shops = shopLocation ? [shopLocation] : getAvailableShops();
+  
+  for (const shop of shops) {
+    const employees = await fetchEmployees(shop);
+    
+    // Cache all fetched employees
+    for (const emp of employees) {
+      employeeCache.set(emp.id, emp);
+    }
+    
+    // Check if we found the employee we're looking for
+    if (employeeCache.has(employeeId)) {
+      const emp = employeeCache.get(employeeId)!;
+      return `${emp.firstName} ${emp.lastName}`.trim() || null;
+    }
+  }
+  
+  return null;
+}

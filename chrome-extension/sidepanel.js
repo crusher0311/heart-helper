@@ -1008,6 +1008,7 @@ function displaySearchResults() {
             ${partsCount} parts
           </div>
           ${shopName ? `<div class="job-card-meta-item"><span class="job-card-meta-icon">&#127970;</span>${shopName}</div>` : ''}
+          ${job.serviceWriterName ? `<div class="job-card-meta-item"><span class="job-card-meta-icon">&#128100;</span>${job.serviceWriterName}</div>` : ''}
         </div>
       </div>
     `;
@@ -1100,11 +1101,12 @@ function showJobDetail(result) {
     </div>
   `;
   
-  // RO info
+  // RO info with service advisor
   html += `
     <div class="job-detail-ro">
       RO #${job.repairOrderId}
       ${shopName ? `<span class="job-detail-shop">${shopName}</span>` : ''}
+      ${job.serviceWriterName ? `<span class="job-detail-advisor">&#128100; ${job.serviceWriterName}</span>` : ''}
     </div>
   `;
   

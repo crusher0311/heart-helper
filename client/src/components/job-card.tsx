@@ -1,4 +1,4 @@
-import { Calendar, Gauge, Wrench, DollarSign, TrendingUp, MapPin, FileText } from "lucide-react";
+import { Calendar, Gauge, Wrench, DollarSign, TrendingUp, MapPin, FileText, User } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { SearchResult, ShopLocation } from "@shared/schema";
@@ -101,11 +101,17 @@ export function JobCard({ result, isSelected, onClick }: JobCardProps) {
               </div>
             )}
           </div>
-          <div className="flex items-center justify-between text-xs gap-2">
+          <div className="flex items-center justify-between text-xs gap-2 flex-wrap">
             {shopName && (
               <div className="flex items-center gap-1.5 text-muted-foreground">
                 <MapPin className="w-3 h-3 shrink-0" />
                 <span className="font-medium">{shopName}</span>
+              </div>
+            )}
+            {job.serviceWriterName && (
+              <div className="flex items-center gap-1.5 text-muted-foreground" data-testid={`text-advisor-${job.id}`}>
+                <User className="w-3 h-3 shrink-0" />
+                <span className="font-medium">{job.serviceWriterName}</span>
               </div>
             )}
             <div className="flex items-center gap-1.5 text-muted-foreground ml-auto">

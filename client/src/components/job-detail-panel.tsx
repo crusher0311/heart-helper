@@ -321,6 +321,12 @@ TOTAL: ${formatCurrency(job.subtotal)}
               <Badge variant="secondary">{job.jobCategoryName}</Badge>
             </div>
           )}
+          {job.serviceWriterName && (
+            <div>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Service Advisor</p>
+              <p className="text-sm font-medium" data-testid="text-service-writer">{job.serviceWriterName}</p>
+            </div>
+          )}
           {job.note && (
             <div>
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1 flex items-center gap-1">

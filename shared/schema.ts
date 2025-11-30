@@ -79,12 +79,30 @@ export type UserWithPreferences = User & {
   preferences?: UserPreferences;
 };
 
+// Tekmetric employees (service writers, technicians, etc.)
+export const employees = pgTable("employees", {
+  id: integer("id").primaryKey(),
+  shopId: varchar("shop_id"),
+  firstName: text("first_name"),
+  lastName: text("last_name"),
+  email: text("email"),
+  role: text("role"), // "Service Writer", "Technician", etc.
+  isActive: boolean("is_active").default(true),
+  rawData: jsonb("raw_data"),
+  syncedAt: timestamp("synced_at"),
+});
+
+export type Employee = typeof employees.$inferSelect;
+export type InsertEmployee = typeof employees.$inferInsert;
+
 // Using existing repair_orders table from Tekmetric integration
 export const repairOrders = pgTable("repair_orders", {
   id: integer("id").primaryKey(),
   tekmetricId: integer("tekmetric_id"),
   shopId: varchar("shop_id"),
   customerId: integer("customer_id"),
+  serviceWriterId: integer("service_writer_id"),
+  serviceWriterName: text("service_writer_name"), // Denormalized for quick access
   totalSales: integer("total_sales"),
   laborSales: integer("labor_sales"),
   partsSales: integer("parts_sales"),
@@ -289,6 +307,7 @@ export type JobWithDetails = {
   feeTotal?: number;   // For future use
   jobCategoryName?: string;  // For future use
   note?: string;  // For future use
+  serviceWriterName?: string;  // Name of the advisor who wrote the estimate
 };
 
 export type SearchResult = {

@@ -269,6 +269,19 @@ export class DatabaseStorage implements IStorage {
         return sum + (part.total || 0);
       }, 0);
 
+      // Get service writer name from repair order (denormalized or from raw_data)
+      const roRawData = repairOrder?.rawData as any;
+      let serviceWriterName: string | undefined = 
+        (repairOrder as any)?.serviceWriterName || 
+        roRawData?.serviceWriterName;
+      
+      // If no stored name, try to extract from raw_data serviceWriterId
+      if (!serviceWriterName && roRawData?.serviceWriterId) {
+        // We'll look this up after fetching all results
+        const writerId = roRawData.serviceWriterId;
+        serviceWriterName = undefined; // Will be populated in batch
+      }
+
       jobsWithDetails.push({
         id: job.id,
         repairOrderId: job.repairOrderId || 0,
@@ -287,6 +300,7 @@ export class DatabaseStorage implements IStorage {
         subtotal: laborTotal + partsTotal,
         totalPrice: laborTotal + partsTotal, // Add for sidepanel display
         feeTotal: 0,
+        serviceWriterName,
       });
     }
 

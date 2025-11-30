@@ -29,6 +29,8 @@ import {
   isTekmetricConfigured,
   getAvailableShops,
   SHOP_NAMES,
+  fetchEmployees,
+  getEmployeeName,
   type ShopLocation
 } from "./tekmetric";
 import { z } from "zod";
@@ -529,6 +531,25 @@ export async function registerRoutes(app: Express) {
           matchScore: 85,
           matchReason: "Match based on repair type (AI scoring unavailable)",
         }));
+      }
+
+      // Populate service writer names for results that don't have them
+      // This fetches from Tekmetric API if needed
+      for (const result of results) {
+        if (!result.job.serviceWriterName) {
+          const roRawData = result.job.repairOrder?.rawData as any;
+          const writerId = roRawData?.serviceWriterId;
+          if (writerId) {
+            try {
+              const writerName = await getEmployeeName(writerId);
+              if (writerName) {
+                result.job.serviceWriterName = writerName;
+              }
+            } catch (err) {
+              // Silently continue if we can't get the name
+            }
+          }
+        }
       }
 
       // Cache results for future use (1 hour TTL)
