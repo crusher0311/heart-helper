@@ -1,0 +1,52 @@
+div id="options-content">
+    <h1>Customer Concern Assistant - Options</h1>
+    
+    <!-- Section to View Saved Conversations -->
+    <div id="saved-conversations">
+        <h2>Saved Conversations</h2>
+        <div id="conversation-list"></div>
+        <button id="deleteAllBtn" class="delete-all-button">Delete All Conversations</button>
+    </div>
+
+    <!-- Section to Export Data -->
+    <div id="export-options">
+        <h2>Export Conversations</h2>
+        <button id="exportBtn">Export All Conversations</button>
+    </div>
+
+    <!-- Section for Layout Options -->
+    <div id="layout-options">
+        <h2>Conversation Layout</h2>
+        <label>
+            <input type="radio" name="layout" value="paragraph" checked>
+            Paragraph Style
+        </label>
+        <label>
+            <input type="radio" name="layout" value="qa">
+            Q&A Style
+        </label>
+        <label>
+            <input type="radio" name="layout" value="sentence">
+            Sentence Style
+        </label>
+        <button id="saveLayout">Save Layout</button>
+    </div>
+
+    <!-- Section to View and Edit API Logic -->
+    <div id="api-logic-section">
+        <h2>API Logic Configuration</h2>
+        <textarea id="openaiPrompt" placeholder="Enter the default prompt for OpenAI..."></textarea>
+        <button id="savePromptButton">Save Prompt</button>
+    </div>
+
+    <!-- Section for Readme -->
+    <div id="readme-section">
+        <h2>Instructions</h2>
+        <p>
+            1. Enter the customer's concern in the input box and click "Submit Concern".<br>
+            2. Follow-up questions will be listed in the Follow-Up List section. Click on a question to move it to the active area.<br>
+            3. Enter the customer's response to each follow-up question and click "Submit".<br>
+            4. Use the "Save" button to save the conversation when complete.
+        </p>
+    </div>
+</div>

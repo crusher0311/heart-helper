@@ -1,0 +1,185 @@
+/* General Styling for the entire extension */
+body {
+  font-family: Arial, sans-serif; /* You can change this to any other font, like 'Verdana' */
+  padding: 20px; /* Adjust the spacing around the main content */
+  background-color: #f4f4f4; /* Background color of the entire page */
+  font-size: 16px; /* Default font size for the body text */
+}
+
+/* Controls the font size and color of headings (h1 and h2) */
+h1 {
+  color: #333;
+  font-size: 24px; /* Adjust this for main headings */
+}
+
+h2 {
+  color: #333;
+  font-size: 20px; /* Adjust this for sub-headings */
+}
+
+/* Main container for the extension content */
+#extension-content {
+  max-width: 800px; /* Controls the maximum width of the content */
+  margin: 0 auto; /* Centers the content horizontally */
+  background: white; /* Background color of the content section */
+  padding: 20px; /* Space inside the content area */
+  border-radius: 8px; /* Rounds the corners of the container */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Adds shadow effect */
+}
+
+/* Controls the input field for customer concern */
+#concernInput {
+  width: 100%; /* Input field stretches across the full width */
+  height: 100px; /* Default height of the input field */
+  padding: 10px; /* Space inside the input */
+  margin-bottom: 10px; /* Space below the input */
+  box-sizing: border-box; /* Ensures padding is included in total width/height */
+  border-radius: 4px; /* Rounded corners for the input field */
+  border: 1px solid #ccc; /* Border color and thickness */
+  font-size: 14px; /* Adjust the text size inside the input */
+}
+
+/* General button styling */
+button {
+  padding: 10px 15px; /* Adjust button padding */
+  margin-right: 10px; /* Space between buttons */
+  margin-bottom: 10px; /* Adds space below buttons */
+  background-color: var(--primary-color, #007BFF); /* Default button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove button borders */
+  border-radius: 4px; /* Rounded corners for buttons */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Button hover state */
+button:hover {
+  background-color: var(--primary-hover, #0056b3); /* Button hover color */
+}
+
+/* Specific container for controlling the spacing between buttons and other sections */
+.button-container {
+  margin-top: 15px; /* Space between buttons and sections like Additional Notes */
+}
+
+/* Controls the Follow-Up List section styling */
+#followUpListSection {
+  border: 1px solid var(--border-color, #ccc); /* Border around the follow-up section */
+  padding: 10px; /* Space inside the container */
+  border-radius: 4px; /* Rounded corners for the section */
+  background-color: var(--background-light, #f9f9f9); /* Background color of the section */
+  margin-top: 10px; /* Space above the section */
+}
+
+/* Controls individual follow-up question items */
+.follow-up-item {
+  padding: 8px; /* Space inside each follow-up item */
+  border-bottom: 1px solid var(--border-color, #ddd); /* Bottom border to separate items */
+  background-color: #f0f0f0; /* Background color for each follow-up item */
+  font-size: 14px; /* Text size for follow-up questions */
+}
+
+/* Styling for textarea fields inside follow-up items */
+textarea, input {
+  font-size: 14px; /* Adjust this to increase/decrease input text size */
+  width: 100%; /* Ensures the input box takes the full width */
+  padding: 8px; /* Padding inside the input box */
+  border-radius: 4px; /* Rounded corners for inputs */
+  border: 1px solid #ccc; /* Border around the inputs */
+  box-sizing: border-box;
+  resize: vertical; /* Allows users to resize the input vertically */
+}
+
+/* Active question container styling */
+.active-question {
+  margin-bottom: 10px; /* Space between active questions */
+  padding: 8px; /* Space inside each active question */
+  border: 1px solid var(--border-color, #ddd); /* Border around each active question */
+  border-radius: 4px; /* Rounded corners for each active question */
+  background-color: #ffffff; /* Background color for active questions */
+}
+
+/* Controls the entire Active Conversation section */
+#activeConversationSection {
+  margin-top: 20px; /* Space above the Active Conversation section */
+}
+
+/* Styling for paragraphs inside the Active Conversation section */
+#activeConversationSection p {
+  font-size: 16px; /* Adjust the font size for the conversation area */
+}
+
+/* Controls the copy conversation button */
+#copyConversationButton {
+  margin-top: 10px; /* Space above the button */
+  background-color: green; /* Background color for the Copy button */
+  color: white; /* Text color for the button */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 15px; /* Padding for the button */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Copy conversation button hover state */
+#copyConversationButton:hover {
+  background-color: darkgreen; /* Change background color on hover */
+}
+
+/* Font size for labels (Follow-Up Questions, etc.) */
+label {
+  font-size: 16px; /* Adjust to control the size of the labels for questions */
+}
+
+/* Font size for Additional Customer Notes section */
+.additional-notes textarea {
+  font-size: 14px;
+  padding: 10px; /* Padding inside the additional notes area */
+}
+
+/* Set global color scheme using CSS variables */
+:root {
+  --primary-color: #007BFF; /* Default primary color for buttons */
+  --primary-hover: #0056b3; /* Hover state for buttons */
+  --border-color: #ccc; /* Default border color */
+  --background-light: #f9f9f9; /* Light background color for sections */
+}
+
+/* Styling for the new "Send to Tekmetric" button */
+#sendToTekmetricButton {
+  background-color: #007BFF; /* Primary blue */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 250ms ease;
+  margin-top: 10px;
+}
+
+#sendToTekmetricButton:hover {
+  background-color: #0056b3; /* Darker blue for hover */
+}
+
+#logo-container {
+  text-align: center;  /* Centers the logo */
+  margin-top: 10px;    /* Adjusts space above the logo */
+  margin-bottom: 10px; /* Adjusts space below the logo */
+  background: none;    /* Ensures no background is applied */
+  padding: 0;          /* Ensures no extra padding */
+  border: none;        /* Remove any border if present */
+}
+
+#logo {
+  max-width: 100%;   /* Ensures the logo scales responsively */
+  height: auto;      /* Maintains the aspect ratio */
+  margin: 0 auto;    /* Centers the logo */
+  padding: 0;        /* Removes any padding */
+  background: none;  /* Ensures the image itself has no background */
+  display: inline;   /* Ensures the image takes only necessary space */
+}
+
+#extension-content {
+  background: none;  /* Remove any background color */
+  padding: 0;        /* Remove any padding */
+  margin: 0;         /* Remove any margin */
+}

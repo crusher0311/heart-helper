@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "Customer Concern Assistant",
+  "version": "4.0",
+  "description": "Side Panel Production",
+  "permissions": [
+    "sidePanel",
+    "storage",
+    "clipboardWrite",
+    "activeTab",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Open Side Panel"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["styles.css", "images/*", "addAIconcern.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "host_permissions": [
+    "*://api.openai.com/*",
+    "*://firebase.googleapis.com/*",
+    "*://firestore.googleapis.com/*"
+  ],
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://shop.tekmetric.com/*"],
+      "js": ["addAIconcern.js", "addAInewAppointment.js", "content.js"]
+    }
+  ]
+}
+
+
+
