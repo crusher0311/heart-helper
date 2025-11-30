@@ -1,0 +1,31 @@
+content.js:1337 ✅ HEART Helper floating button ready
+content.js:1337 ✅ HEART Helper floating button ready
+content.js:1337 ✅ HEART Helper floating button ready
+content.js:1337 ✅ HEART Helper floating button ready
+content.js:1337 ✅ HEART Helper floating button ready
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4131","controllerAppFrameId":"__privateStripeController4131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"b39b91f6-439e-4238-b08f-2d5b53e285c0"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4131","controllerAppFrameId":"__privateStripeController4131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"359bfd9d-b73b-4a2b-902b-9a0245670333"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4131","controllerAppFrameId":"__privateStripeController4131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"e489c99d-25fa-4aff-a061-b2d710c34545"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4131","controllerAppFrameId":"__privateStripeController4131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"f7aaaac3-2ca2-4c13-8cdc-1f4ae4aabddf"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1337 ✅ HEART Helper floating button ready
+content.js:1337 ✅ HEART Helper floating button ready
+content.js:1337 ✅ HEART Helper floating button ready
+content.js:1337 ✅ HEART Helper floating button ready
+content.js:1180 🔵 HEART Helper pointerdown event fired
+content.js:1193 🟢 HEART Helper pointerup event fired
+content.js:1199 🚀 HEART Helper onclick fired!
+content.js:1240 🚀 HEART Helper button click event, wasDragged: false
+content.js:1242 📤 Sending OPEN_SIDE_PANEL message to background...
+content.js:1245 ❌ Failed to send message: The message port closed before a response was received.
+(anonymous) @ content.js:1245
+content.js:1337 ✅ HEART Helper floating button ready
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4131","controllerAppFrameId":"__privateStripeController4131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"7847ee1a-8e78-4f61-abec-5e0c33fabe11"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController4131","controllerAppFrameId":"__privateStripeController4131","message":{"action":"stripe-controller-action-response","payload":{"nonce":"020691e3-d6a1-4043-bcc5-b87b1462ad6c"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1337 ✅ HEART Helper floating button ready
+content.js:1337 ✅ HEART Helper floating button ready

@@ -1240,13 +1240,9 @@ function injectFloatingHeartButton() {
     console.log("🚀 HEART Helper button click event, wasDragged:", wasDragged);
     if (!wasDragged) {
       console.log("📤 Sending OPEN_SIDE_PANEL message to background...");
-      chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" }, (response) => {
-        if (chrome.runtime.lastError) {
-          console.error("❌ Failed to send message:", chrome.runtime.lastError.message);
-        } else {
-          console.log("✅ Message sent to background");
-        }
-      });
+      // Fire and forget - no response expected
+      chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" });
+      console.log("✅ Message sent to background");
     }
     // Reset for next interaction
     wasDragged = false;
