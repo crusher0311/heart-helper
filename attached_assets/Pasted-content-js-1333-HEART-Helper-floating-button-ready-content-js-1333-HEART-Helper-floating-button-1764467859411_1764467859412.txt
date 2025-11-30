@@ -1,0 +1,90 @@
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:861 🔍 Checking for pending job data...
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:863 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:869 ⚠️ No pending job data found
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9501","controllerAppFrameId":"__privateStripeController9501","message":{"action":"stripe-controller-action-response","payload":{"nonce":"83f50ca0-b351-4280-9775-0a3d9b149e4f"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9501","controllerAppFrameId":"__privateStripeController9501","message":{"action":"stripe-controller-action-response","payload":{"nonce":"92354822-6d76-4b7c-880b-e5fda420b8fd"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:861 🔍 Checking for pending job data...
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:863 📬 GET_PENDING_JOB response: {jobData: null}
+content.js:869 ⚠️ No pending job data found
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9501","controllerAppFrameId":"__privateStripeController9501","message":{"action":"stripe-controller-action-response","payload":{"nonce":"32a08396-b54c-457c-b987-94ca0b06a5f0"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1333 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:1333 ✅ HEART Helper floating button ready
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 276058512
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 89489894
+handle.2fe6b368.js:23 customerId:", 89489894,shopId: 469,
+        previousCustomerId: 89489894, previousShopId: 469
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1180 🔵 HEART Helper pointerdown event fired
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9501","controllerAppFrameId":"__privateStripeController9501","message":{"action":"stripe-controller-action-response","payload":{"nonce":"2f1446b2-cdbd-4f3f-9954-3ce63f3ea9dc"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1193 🟢 HEART Helper pointerup event fired
+content.js:1199 🚀 HEART Helper onclick fired!
+content.js:1240 🚀 HEART Helper button click event, wasDragged: false
+content.js:1242 📤 Sending OPEN_SIDE_PANEL message to background...
+content.js:1245 ✅ Message sent to background
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9501","controllerAppFrameId":"__privateStripeController9501","message":{"action":"stripe-controller-action-response","payload":{"nonce":"12e52b7d-2df5-4760-8bc1-3bdaaace795d"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9501","controllerAppFrameId":"__privateStripeController9501","message":{"action":"stripe-controller-action-response","payload":{"nonce":"39969312-3cff-44cf-9f6f-126cf4d0be4e"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9501","controllerAppFrameId":"__privateStripeController9501","message":{"action":"stripe-controller-action-response","payload":{"nonce":"dd96ecc3-18c6-49cf-bd2f-0a286af5d628"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:887 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController9501","controllerAppFrameId":"__privateStripeController9501","message":{"action":"stripe-controller-action-response","payload":{"nonce":"2fcf8353-37d3-4c1d-af82-ffd22e4a9099"}},"__stripeJsV3":true}
+content.js:891 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1333 ✅ HEART Helper floating button ready
+content.js:1618 Fetching RO data from API: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/api/tekmetric/ro/469/276058512
+content.js:1618 Fetching RO data from API: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/api/tekmetric/ro/469/276058512
+estimate:1 Access to fetch at 'https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/api/tekmetric/ro/469/276058512' from origin 'https://shop.tekmetric.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+content.js:1620  GET https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/api/tekmetric/ro/469/276058512 net::ERR_FAILED 200 (OK)
+fetchVehicleInfoFromAPI @ content.js:1620
+await in fetchVehicleInfoFromAPI
+(anonymous) @ content.js:1398
+content.js:1639 Error fetching from API: TypeError: Failed to fetch
+    at fetchVehicleInfoFromAPI (content.js:1620:28)
+fetchVehicleInfoFromAPI @ content.js:1639
+await in fetchVehicleInfoFromAPI
+(anonymous) @ content.js:1398
+content.js:1411 API failed, using DOM scraping
+estimate:1 Access to fetch at 'https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/api/tekmetric/ro/469/276058512' from origin 'https://shop.tekmetric.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+content.js:1620  GET https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/api/tekmetric/ro/469/276058512 net::ERR_FAILED 200 (OK)
+fetchVehicleInfoFromAPI @ content.js:1620
+await in fetchVehicleInfoFromAPI
+(anonymous) @ content.js:1426
+content.js:1639 Error fetching from API: TypeError: Failed to fetch
+    at fetchVehicleInfoFromAPI (content.js:1620:28)
+fetchVehicleInfoFromAPI @ content.js:1639
+await in fetchVehicleInfoFromAPI
+(anonymous) @ content.js:1426
+content.js:1442 API failed, using DOM scraping for RO info
+content.js:1805 RO status detection - hasWIP: false isEstimate: true isInShop: false
+content.js:1935 Extracted RO info: {vehicle: {…}, jobs: Array(3), customer: null, totalAmount: 1815.49, isInShop: false}
