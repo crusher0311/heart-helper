@@ -1,4 +1,6 @@
-import { JobWithDetails } from "@shared/schema";
+import { JobWithDetails, employees } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 const TEKMETRIC_BASE_URL = "https://shop.tekmetric.com/api/v1";
 
@@ -278,10 +280,126 @@ export async function fetchEmployees(shopLocation: ShopLocation): Promise<Tekmet
   }
 }
 
-// Get employee name by ID (uses cache if available)
+// Employee cache - uses both in-memory cache and database
 const employeeCache = new Map<number, TekmetricEmployee>();
 let employeeCacheInitialized = false;
 let employeeCachePromise: Promise<void> | null = null;
+
+
+// Sync all current employees from Tekmetric to database
+export async function syncEmployeesToDatabase(): Promise<number> {
+  console.log('Syncing employees from Tekmetric to database...');
+  const shops = getAvailableShops();
+  let syncedCount = 0;
+  
+  for (const shop of shops) {
+    const shopId = getShopId(shop);
+    const emps = await fetchEmployees(shop);
+    
+    for (const emp of emps) {
+      try {
+        // Upsert employee record
+        await db.insert(employees)
+          .values({
+            id: emp.id,
+            shopId: shopId,
+            firstName: emp.firstName,
+            lastName: emp.lastName,
+            email: emp.email || null,
+            role: emp.role || null,
+            isActive: emp.isActive !== false,
+            syncedAt: new Date(),
+          })
+          .onConflictDoUpdate({
+            target: employees.id,
+            set: {
+              firstName: emp.firstName,
+              lastName: emp.lastName,
+              email: emp.email || null,
+              role: emp.role || null,
+              isActive: emp.isActive !== false,
+              syncedAt: new Date(),
+            }
+          });
+        syncedCount++;
+      } catch (err) {
+        console.error(`Failed to sync employee ${emp.id}:`, err);
+      }
+    }
+  }
+  
+  console.log(`Synced ${syncedCount} employees to database`);
+  return syncedCount;
+}
+
+// Try to fetch a single employee by ID from Tekmetric
+async function fetchEmployeeById(employeeId: number): Promise<TekmetricEmployee | null> {
+  try {
+    // Try each shop's endpoint with the employee ID
+    const shops = getAvailableShops();
+    for (const shop of shops) {
+      const shopId = getShopId(shop);
+      try {
+        console.log(`Trying to fetch employee ${employeeId} from shop ${shop} (${shopId})...`);
+        const response = await tekmetricRequest(`/employees/${employeeId}?shop=${shopId}`, "GET");
+        if (response && response.id) {
+          console.log(`Found employee ${employeeId}: ${response.firstName} ${response.lastName}`);
+          return {
+            id: response.id,
+            firstName: response.firstName || '',
+            lastName: response.lastName || '',
+            email: response.email,
+            role: response.role?.name || response.roleName,
+            isActive: response.active !== false,
+          };
+        }
+      } catch (err: any) {
+        console.log(`Employee ${employeeId} not found in shop ${shop}: ${err.message || 'unknown error'}`);
+        // Try next shop
+      }
+    }
+    console.log(`Employee ${employeeId} not found in any shop`);
+    return null;
+  } catch (error) {
+    return null;
+  }
+}
+
+// Get employee from database
+async function getEmployeeFromDb(employeeId: number): Promise<{ firstName: string | null; lastName: string | null } | null> {
+  try {
+    const result = await db.select({
+      firstName: employees.firstName,
+      lastName: employees.lastName,
+    })
+    .from(employees)
+    .where(eq(employees.id, employeeId))
+    .limit(1);
+    
+    return result[0] || null;
+  } catch (err) {
+    return null;
+  }
+}
+
+// Save employee to database
+async function saveEmployeeToDb(emp: TekmetricEmployee): Promise<void> {
+  try {
+    await db.insert(employees)
+      .values({
+        id: emp.id,
+        firstName: emp.firstName,
+        lastName: emp.lastName,
+        email: emp.email || null,
+        role: emp.role || null,
+        isActive: emp.isActive !== false,
+        syncedAt: new Date(),
+      })
+      .onConflictDoNothing();
+  } catch (err) {
+    // Ignore errors
+  }
+}
 
 async function initializeEmployeeCache(): Promise<void> {
   if (employeeCacheInitialized) return;
@@ -292,9 +410,11 @@ async function initializeEmployeeCache(): Promise<void> {
     const shops = getAvailableShops();
     
     for (const shop of shops) {
-      const employees = await fetchEmployees(shop);
-      for (const emp of employees) {
+      const emps = await fetchEmployees(shop);
+      for (const emp of emps) {
         employeeCache.set(emp.id, emp);
+        // Also save to database for persistence
+        await saveEmployeeToDb(emp);
       }
     }
     
@@ -306,13 +426,20 @@ async function initializeEmployeeCache(): Promise<void> {
 }
 
 export async function getEmployeeName(employeeId: number, shopLocation?: ShopLocation): Promise<string | null> {
-  // Check cache first
+  // Check in-memory cache first
   if (employeeCache.has(employeeId)) {
     const emp = employeeCache.get(employeeId)!;
     return `${emp.firstName} ${emp.lastName}`.trim() || null;
   }
   
-  // Initialize cache if not done yet (batches all shop fetches)
+  // Check database for persisted employee
+  const dbEmployee = await getEmployeeFromDb(employeeId);
+  if (dbEmployee && (dbEmployee.firstName || dbEmployee.lastName)) {
+    const name = `${dbEmployee.firstName || ''} ${dbEmployee.lastName || ''}`.trim();
+    if (name) return name;
+  }
+  
+  // Initialize cache from Tekmetric if not done yet
   await initializeEmployeeCache();
   
   // Check cache again after initialization
@@ -321,6 +448,14 @@ export async function getEmployeeName(employeeId: number, shopLocation?: ShopLoc
     return `${emp.firstName} ${emp.lastName}`.trim() || null;
   }
   
-  // Employee not found in any shop
+  // Try to fetch individual employee by ID (might work for inactive employees)
+  const fetchedEmp = await fetchEmployeeById(employeeId);
+  if (fetchedEmp) {
+    employeeCache.set(employeeId, fetchedEmp);
+    await saveEmployeeToDb(fetchedEmp);
+    return `${fetchedEmp.firstName} ${fetchedEmp.lastName}`.trim() || null;
+  }
+  
+  // Employee not found
   return null;
 }
