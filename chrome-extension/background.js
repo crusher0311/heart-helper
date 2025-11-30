@@ -33,6 +33,16 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
   }
 });
 
+// Handle keyboard shortcut - this preserves user gesture!
+chrome.commands.onCommand.addListener((command, tab) => {
+  if (command === 'open-side-panel' && tab?.id) {
+    console.log('Keyboard shortcut pressed - opening side panel for tab:', tab.id);
+    chrome.sidePanel.open({ tabId: tab.id })
+      .then(() => console.log('Keyboard shortcut: Side panel opened'))
+      .catch((err) => console.error('Keyboard shortcut: Failed to open side panel:', err));
+  }
+});
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Log ALL messages for debugging
   console.log("📨 Message received:", message.action, "from tab:", sender.tab?.id);
@@ -127,4 +137,4 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-console.log("Tekmetric Job Importer: Background service worker loaded (v3.9.8)");
+console.log("Tekmetric Job Importer: Background service worker loaded (v3.9.9)");
