@@ -33,37 +33,23 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
   }
 });
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Open side panel using popup relay (preserves user gesture in extension context)
+chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  // Open side panel directly from service worker
   if (message.action === "OPEN_SIDE_PANEL") {
-    const tabId = sender.tab?.id;
-    console.log("OPEN_SIDE_PANEL received from tab:", tabId);
+    console.log("OPEN_SIDE_PANEL received from tab:", sender.tab?.id);
     
-    if (!tabId) {
-      console.error("No tab ID available");
-      sendResponse({ success: false, error: "No tab ID available" });
-      return true;
+    if (sender.tab && sender.tab.id) {
+      try {
+        await chrome.sidePanel.open({ tabId: sender.tab.id });
+        console.log("Side panel opened successfully for tab:", sender.tab.id);
+      } catch (error) {
+        console.error("Failed to open side panel:", error);
+      }
+    } else {
+      console.error("No tab ID available from sender");
     }
-    
-    // Open a tiny popup window that will open the side panel and close itself
-    // This works because popup-relay.html is an extension page, so sidePanel.open() works
-    chrome.windows.create({
-      url: chrome.runtime.getURL(`popup-relay.html?tabId=${tabId}`),
-      type: 'popup',
-      width: 1,
-      height: 1,
-      focused: false,
-      top: 0,
-      left: 0
-    }).then((win) => {
-      console.log('Popup relay window created:', win.id);
-      sendResponse({ success: true, windowId: win.id });
-    }).catch((err) => {
-      console.error('Failed to create popup relay:', err);
-      sendResponse({ success: false, error: err.message });
-    });
-    
-    return true; // Keep message port open for async response
+    // No response needed - fire and forget
+    return;
   }
   
   if (message.action === "SEND_TO_TEKMETRIC") {
