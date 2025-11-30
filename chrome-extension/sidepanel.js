@@ -356,9 +356,15 @@ function addSymptomField() {
   row.className = 'symptom-input-row';
   row.innerHTML = `
     <input type="text" class="symptom-input" placeholder="Describe another issue..." />
-    <button class="remove-symptom-btn" onclick="this.parentElement.remove()">×</button>
+    <button class="remove-symptom-btn">×</button>
   `;
   list.appendChild(row);
+  
+  // Add event listener (CSP doesn't allow inline onclick)
+  row.querySelector('.remove-symptom-btn').addEventListener('click', function() {
+    this.parentElement.remove();
+  });
+  
   row.querySelector('input').focus();
 }
 
@@ -1105,7 +1111,7 @@ function showJobDetail(result) {
   // Create Job in Tekmetric button
   html += `
     <div class="job-detail-actions">
-      <button class="create-job-btn" onclick="createJobInTekmetric()" data-testid="button-create-job">
+      <button class="create-job-btn" id="createJobBtn" data-testid="button-create-job">
         <span class="btn-icon">&#128203;</span>
         Create Job in Tekmetric
       </button>
@@ -1113,6 +1119,9 @@ function showJobDetail(result) {
   `;
   
   detailContent.innerHTML = html;
+  
+  // Add event listener (CSP doesn't allow inline onclick)
+  document.getElementById('createJobBtn').addEventListener('click', createJobInTekmetric);
 }
 
 // Create job in Tekmetric from selected job result
