@@ -378,7 +378,7 @@ async function getEmployeeFromDb(employeeId: number): Promise<{ firstName: strin
   }
 }
 
-// Save employee to database
+// Save employee to database (upsert - update if exists)
 async function saveEmployeeToDb(emp: TekmetricEmployee): Promise<void> {
   try {
     await db.insert(employees)
@@ -391,9 +391,19 @@ async function saveEmployeeToDb(emp: TekmetricEmployee): Promise<void> {
         isActive: emp.isActive !== false,
         syncedAt: new Date(),
       })
-      .onConflictDoNothing();
+      .onConflictDoUpdate({
+        target: employees.id,
+        set: {
+          firstName: emp.firstName,
+          lastName: emp.lastName,
+          email: emp.email || null,
+          role: emp.role || null,
+          isActive: emp.isActive !== false,
+          syncedAt: new Date(),
+        },
+      });
   } catch (err) {
-    // Ignore errors
+    // Ignore errors silently
   }
 }
 
@@ -422,29 +432,29 @@ async function initializeEmployeeCache(): Promise<void> {
 }
 
 export async function getEmployeeName(employeeId: number, shopLocation?: ShopLocation): Promise<string | null> {
-  // Check in-memory cache first
+  // Check in-memory cache first (fastest)
   if (employeeCache.has(employeeId)) {
     const emp = employeeCache.get(employeeId)!;
     return `${emp.firstName} ${emp.lastName}`.trim() || null;
   }
   
-  // Check database for persisted employee
+  // Check database for persisted employee (fast, avoids API call)
   const dbEmployee = await getEmployeeFromDb(employeeId);
   if (dbEmployee && (dbEmployee.firstName || dbEmployee.lastName)) {
     const name = `${dbEmployee.firstName || ''} ${dbEmployee.lastName || ''}`.trim();
-    if (name) return name;
+    if (name) {
+      // Populate in-memory cache from DB hit for subsequent lookups
+      employeeCache.set(employeeId, {
+        id: employeeId,
+        firstName: dbEmployee.firstName || '',
+        lastName: dbEmployee.lastName || '',
+        isActive: true,
+      });
+      return name;
+    }
   }
   
-  // Initialize cache from Tekmetric if not done yet
-  await initializeEmployeeCache();
-  
-  // Check cache again after initialization
-  if (employeeCache.has(employeeId)) {
-    const emp = employeeCache.get(employeeId)!;
-    return `${emp.firstName} ${emp.lastName}`.trim() || null;
-  }
-  
-  // Try to fetch individual employee by ID (might work for inactive employees)
+  // Not in DB - try to fetch from Tekmetric API (slower, but persists for future)
   const fetchedEmp = await fetchEmployeeById(employeeId);
   if (fetchedEmp) {
     employeeCache.set(employeeId, fetchedEmp);
@@ -452,6 +462,6 @@ export async function getEmployeeName(employeeId: number, shopLocation?: ShopLoc
     return `${fetchedEmp.firstName} ${fetchedEmp.lastName}`.trim() || null;
   }
   
-  // Employee not found
+  // Employee not found anywhere
   return null;
 }
