@@ -534,7 +534,7 @@ export async function registerRoutes(app: Express) {
       }
 
       // Populate service writer names for results that don't have them
-      // This fetches from Tekmetric API if needed
+      // This fetches from Tekmetric API if needed (including former employees)
       for (const result of results) {
         if (!result.job.serviceWriterName) {
           const roRawData = result.job.repairOrder?.rawData as any;

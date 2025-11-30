@@ -340,10 +340,8 @@ async function fetchEmployeeById(employeeId: number): Promise<TekmetricEmployee 
     for (const shop of shops) {
       const shopId = getShopId(shop);
       try {
-        console.log(`Trying to fetch employee ${employeeId} from shop ${shop} (${shopId})...`);
         const response = await tekmetricRequest(`/employees/${employeeId}?shop=${shopId}`, "GET");
         if (response && response.id) {
-          console.log(`Found employee ${employeeId}: ${response.firstName} ${response.lastName}`);
           return {
             id: response.id,
             firstName: response.firstName || '',
@@ -353,12 +351,10 @@ async function fetchEmployeeById(employeeId: number): Promise<TekmetricEmployee 
             isActive: response.active !== false,
           };
         }
-      } catch (err: any) {
-        console.log(`Employee ${employeeId} not found in shop ${shop}: ${err.message || 'unknown error'}`);
+      } catch (err) {
         // Try next shop
       }
     }
-    console.log(`Employee ${employeeId} not found in any shop`);
     return null;
   } catch (error) {
     return null;

@@ -10,6 +10,7 @@ HEART Helper is an AI-powered repair order search tool for HEART Certified Auto 
 - **Phone Answer Scripts**: Professional scripts for incoming calls
 - **Intelligent Repair Term Extraction**: Semantic parsing of customer descriptions
 - **Smart Year Matching**: Broader searches across compatible model years
+- **Service Writer Attribution**: Displays the service advisor who wrote each repair order, helping technicians identify jobs from experienced colleagues
 - **User Authentication**: Replit Auth with personalized settings and approval workflow
 - **User Approval Workflow**: Auto-approves @heartautocare.com emails; other domains require admin approval
 - **Per-User AI Training**: Personal training data for customized script generation
@@ -70,6 +71,7 @@ Extension auth requires HTTPS (production deployment) - local dev cannot support
 
 The PostgreSQL database (Neon serverless) stores:
 - `vehicles`, `repair_orders`, `jobs`, `labor_items`, `parts` - Tekmetric data
+- `employees` - Service advisor names cached from Tekmetric (supports per-ID lookup for current & former employees)
 - `search_requests`, `search_cache` (1-hour TTL) - Search optimization
 - `settings` - Global application settings
 - `users`, `sessions` - User authentication
@@ -77,6 +79,8 @@ The PostgreSQL database (Neon serverless) stores:
 - `script_feedback` - User feedback on generated scripts
 
 Tekmetric's external IDs are used as primary keys for vehicle/RO data.
+
+**Service Writer Lookup**: The Tekmetric `/employees` list only returns current employees (~30), but `/employees/{id}` returns any employee by ID including former staff. Employee names are cached in-memory and persisted to the `employees` table for fast lookups.
 
 ## External Dependencies
 
