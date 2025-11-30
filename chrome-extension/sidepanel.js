@@ -558,17 +558,38 @@ function copySummary() {
 }
 
 function sendToTekmetric() {
+  if (!cleanedConversation) {
+    showToast('No conversation to send');
+    return;
+  }
+  
   // Send cleaned conversation to content script to paste into Tekmetric
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    if (tabs[0] && tabs[0].url.includes('tekmetric.com')) {
+    if (tabs[0] && tabs[0].url && tabs[0].url.includes('tekmetric.com')) {
+      console.log('Sending to Tekmetric tab:', tabs[0].id);
       chrome.tabs.sendMessage(tabs[0].id, { 
         type: 'PASTE_CONCERN', 
         text: cleanedConversation 
+      }, (response) => {
+        if (chrome.runtime.lastError) {
+          console.log('Error sending to Tekmetric:', chrome.runtime.lastError);
+          navigator.clipboard.writeText(cleanedConversation);
+          showToast('Could not insert - copied to clipboard instead');
+          return;
+        }
+        
+        if (response && response.success) {
+          showToast('Added to Tekmetric!');
+        } else {
+          // Field not found - copy to clipboard as fallback
+          navigator.clipboard.writeText(cleanedConversation);
+          showToast(response?.error || 'Open concern dialog in Tekmetric first. Copied to clipboard.');
+        }
       });
-      showToast('Sent to Tekmetric!');
     } else {
+      // Not on Tekmetric - copy to clipboard
       navigator.clipboard.writeText(cleanedConversation);
-      showToast('Copied! Switch to Tekmetric to paste.');
+      showToast('Copied! Open Tekmetric to paste.');
     }
   });
 }

@@ -1453,25 +1453,35 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   
   // Paste cleaned concern text into Tekmetric
   if (message.type === 'PASTE_CONCERN') {
+    console.log('📝 PASTE_CONCERN received, text length:', message.text?.length);
     const concernField = findConcernField();
     if (concernField) {
+      console.log('✅ Found concern field:', concernField.id || concernField.name || 'unnamed');
+      
+      // Focus the field first
+      concernField.focus();
+      
+      // Use setNativeValue for React compatibility
       if (concernField.tagName === 'TEXTAREA' || concernField.tagName === 'INPUT') {
-        concernField.value = message.text;
-        concernField.dispatchEvent(new Event('input', { bubbles: true }));
-        concernField.dispatchEvent(new Event('change', { bubbles: true }));
+        setNativeValue(concernField, message.text);
+        console.log('✅ Text inserted via setNativeValue');
       } else {
         concernField.textContent = message.text;
         concernField.dispatchEvent(new Event('input', { bubbles: true }));
+        console.log('✅ Text set via textContent');
       }
+      
       sendResponse({ success: true });
     } else {
-      sendResponse({ success: false, error: 'Concern field not found' });
+      console.log('❌ Could not find concern field on this page');
+      sendResponse({ success: false, error: 'Concern field not found. Make sure you have a customer concern dialog open.' });
     }
     return true;
   }
   
   // Add cleaned concern text to the repair order
   if (message.type === 'ADD_CONCERN_TO_RO') {
+    console.log('📝 ADD_CONCERN_TO_RO received');
     const concernText = message.concernText;
     
     // Find concern/complaint textarea on the page
@@ -1484,20 +1494,21 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         ? `${existingValue}\n\n${concernText}` 
         : concernText;
       
+      // Focus the field first
+      concernField.focus();
+      
       if (concernField.tagName === 'TEXTAREA' || concernField.tagName === 'INPUT') {
-        concernField.value = newValue;
-        concernField.dispatchEvent(new Event('input', { bubbles: true }));
-        concernField.dispatchEvent(new Event('change', { bubbles: true }));
+        setNativeValue(concernField, newValue);
       } else {
         concernField.textContent = newValue;
         concernField.dispatchEvent(new Event('input', { bubbles: true }));
       }
       
-      console.log("✓ Added concern text to RO:", concernText.substring(0, 50) + '...');
+      console.log("✅ Added concern text to RO:", concernText.substring(0, 50) + '...');
       sendResponse({ success: true });
     } else {
       console.log("❌ Could not find concern field on page");
-      sendResponse({ success: false, error: 'Concern field not found' });
+      sendResponse({ success: false, error: 'Concern field not found. Make sure you have a customer concern dialog open.' });
     }
     return true;
   }
@@ -1715,9 +1726,64 @@ function extractVehicleInfo() {
   return vehicleInfo;
 }
 
+// Set value on React-controlled input elements
+// This technique works with React apps by using the native value setter
+function setNativeValue(element, value) {
+  const valueSetter = Object.getOwnPropertyDescriptor(element, 'value')?.set;
+  const prototype = Object.getPrototypeOf(element);
+  const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value')?.set;
+
+  if (prototypeValueSetter && valueSetter !== prototypeValueSetter) {
+    prototypeValueSetter.call(element, value);
+  } else if (valueSetter) {
+    valueSetter.call(element, value);
+  } else {
+    element.value = value;
+  }
+
+  // Dispatch events to ensure React sees the change
+  element.dispatchEvent(new Event('input', { bubbles: true }));
+  element.dispatchEvent(new Event('change', { bubbles: true }));
+  // Also try blur to trigger form validation
+  element.dispatchEvent(new FocusEvent('blur', { bubbles: true }));
+
+  console.log('Content Script: Set native value and dispatched events');
+}
+
 // Find concern/complaint text field on the page
 function findConcernField() {
-  // Look for textareas with concern-related placeholders or labels
+  // Determine which page we're on by URL
+  const url = window.location.href;
+  const isRepairOrderPage = /\/repair-orders\//.test(url);
+  const isAppointmentPage = /\/appointments\/create/.test(url);
+  
+  // Strategy 1: Look for specific Tekmetric IDs first
+  let targetField = document.querySelector('textarea#concern');
+  if (targetField) {
+    console.log('Found concern field by #concern ID');
+    return targetField;
+  }
+  
+  targetField = document.querySelector('textarea#description');
+  if (targetField) {
+    console.log('Found concern field by #description ID');
+    return targetField;
+  }
+  
+  // Strategy 2: Look for data-cy attribute (Tekmetric's test selectors)
+  targetField = document.querySelector('[data-cy="customer-concern"] textarea');
+  if (targetField) {
+    console.log('Found concern field by data-cy selector');
+    return targetField;
+  }
+  
+  targetField = document.querySelector('[data-cy="concern-textarea"]');
+  if (targetField) {
+    console.log('Found concern field by data-cy concern-textarea');
+    return targetField;
+  }
+  
+  // Strategy 3: Look for textareas with concern-related placeholders or labels
   const textareas = document.querySelectorAll('textarea');
   for (const textarea of textareas) {
     const placeholder = textarea.placeholder?.toLowerCase() || '';
@@ -1730,22 +1796,51 @@ function findConcernField() {
         label.includes('concern') || label.includes('complaint') ||
         id.includes('concern') || id.includes('complaint') ||
         name.includes('concern') || name.includes('complaint')) {
+      console.log('Found concern field by attribute matching:', id || name || placeholder);
       return textarea;
     }
   }
   
-  // Fallback: look for any visible textarea that might be a notes field
+  // Strategy 4: Look for form labels containing "concern" and get associated textarea
+  const labels = document.querySelectorAll('label');
+  for (const label of labels) {
+    const labelText = label.textContent?.toLowerCase() || '';
+    if (labelText.includes('concern') || labelText.includes('complaint') || labelText.includes('customer issue')) {
+      // Look for textarea in the same container
+      const container = label.closest('div, section, form');
+      if (container) {
+        const textarea = container.querySelector('textarea');
+        if (textarea) {
+          console.log('Found concern field by label association');
+          return textarea;
+        }
+      }
+      // Check for "for" attribute
+      const forId = label.getAttribute('for');
+      if (forId) {
+        const textarea = document.getElementById(forId);
+        if (textarea && textarea.tagName === 'TEXTAREA') {
+          console.log('Found concern field by label for attribute');
+          return textarea;
+        }
+      }
+    }
+  }
+  
+  // Strategy 5: Fallback - look for any visible textarea that might be a notes field
   for (const textarea of textareas) {
     const style = window.getComputedStyle(textarea);
     if (style.display !== 'none' && style.visibility !== 'hidden') {
       // Check parent for concern-related classes
       const parent = textarea.closest('[class*="concern"], [class*="complaint"], [class*="note"]');
       if (parent) {
+        console.log('Found concern field by parent class');
         return textarea;
       }
     }
   }
   
+  console.log('Could not find concern field on this page');
   return null;
 }
 
