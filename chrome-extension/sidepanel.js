@@ -1125,6 +1125,7 @@ function showJobDetail(result) {
 }
 
 // Create job in Tekmetric from selected job result
+// MUST match the exact format used by web app's "Send to Extension" button
 async function createJobInTekmetric() {
   console.log('createJobInTekmetric called, selectedJobResult:', selectedJobResult);
   
@@ -1134,26 +1135,41 @@ async function createJobInTekmetric() {
   }
   
   const job = selectedJobResult.job;
+  const vehicle = selectedJobResult.vehicle;
   console.log('Creating job data for:', job.name);
   
-  // Store job data in background for content script to pick up
+  // Build job data in EXACT same format as web app's handleSendToTekmetric()
+  // Note: API returns values in cents, we convert to dollars for Tekmetric
   const jobData = {
-    jobName: job.name,  // Content script expects 'jobName' not 'name'
+    jobName: job.name,
+    vehicle: vehicle ? {
+      year: vehicle.year,
+      make: vehicle.make,
+      model: vehicle.model,
+      engine: vehicle.engine,
+      vin: vehicle.vin,
+    } : null,
     laborItems: job.laborItems.map(item => ({
       name: item.name,
-      hours: item.hours,
-      rate: item.rate,
+      hours: Number(item.hours),
+      rate: (item.rate || 0) / 100,  // Convert cents to dollars
     })),
     parts: job.parts.map(part => ({
       name: part.name,
+      brand: part.brand,
       partNumber: part.partNumber,
       quantity: part.quantity,
-      cost: part.cost,
-      retail: part.retail || part.unitPrice,
+      cost: (part.cost || 0) / 100,  // Convert cents to dollars
+      retail: (part.retail || part.unitPrice || 0) / 100,  // Convert cents to dollars
     })),
+    totals: {
+      labor: (job.laborTotal || 0) / 100,
+      parts: (job.partsTotal || 0) / 100,
+      total: (job.subtotal || job.totalPrice || 0) / 100,
+    },
   };
   
-  console.log('Job data prepared:', jobData);
+  console.log('Job data prepared (matches web app format):', jobData);
   
   try {
     // Check if we're on a Tekmetric page first
