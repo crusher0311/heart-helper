@@ -57,9 +57,13 @@ export interface IStorage {
   getRecentSearches(limit?: number): Promise<SearchCache[]>;
   cleanExpiredCache(): Promise<void>;
   
-  // User operations (required for Replit Auth)
+  // User operations (username/password auth)
   getUser(id: string): Promise<User | undefined>;
+  getUserByEmail(email: string): Promise<(User & { passwordHash: string | null }) | undefined>;
   upsertUser(user: UpsertUser): Promise<User>;
+  createUserWithPassword(data: { email: string; passwordHash: string; firstName?: string | null; lastName?: string | null }): Promise<User>;
+  updateUserLastLogin(userId: string): Promise<void>;
+  updateUserPassword(userId: string, passwordHash: string): Promise<void>;
   
   // User preferences
   getUserPreferences(userId: string): Promise<UserPreferences | undefined>;
@@ -523,6 +527,14 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
+  async getUserByEmail(email: string): Promise<(User & { passwordHash: string | null }) | undefined> {
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, email.toLowerCase()));
+    return user as (User & { passwordHash: string | null }) | undefined;
+  }
+
   async upsertUser(userData: UpsertUser): Promise<User> {
     const [user] = await db
       .insert(users)
@@ -536,6 +548,41 @@ export class DatabaseStorage implements IStorage {
       })
       .returning();
     return user;
+  }
+
+  async createUserWithPassword(data: { 
+    email: string; 
+    passwordHash: string; 
+    firstName?: string | null; 
+    lastName?: string | null;
+  }): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values({
+        email: data.email.toLowerCase(),
+        passwordHash: data.passwordHash,
+        firstName: data.firstName || null,
+        lastName: data.lastName || null,
+      })
+      .returning();
+    return user;
+  }
+
+  async updateUserLastLogin(userId: string): Promise<void> {
+    await db
+      .update(users)
+      .set({ updatedAt: new Date() })
+      .where(eq(users.id, userId));
+  }
+
+  async updateUserPassword(userId: string, passwordHash: string): Promise<void> {
+    await db
+      .update(users)
+      .set({ 
+        passwordHash,
+        updatedAt: new Date(),
+      })
+      .where(eq(users.id, userId));
   }
 
   // User preferences

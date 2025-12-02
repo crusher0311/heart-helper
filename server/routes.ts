@@ -34,28 +34,16 @@ import {
   type ShopLocation
 } from "./tekmetric";
 import { z } from "zod";
-import { setupAuth, isAuthenticated, isApproved } from "./replitAuth";
+import { setupAuth, isAuthenticated, isApproved } from "./auth";
 
 export async function registerRoutes(app: Express) {
-  // Set up Replit Auth
+  // Set up username/password authentication
   await setupAuth(app);
-
-  // Get current authenticated user
-  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
-    try {
-      const userId = req.user.claims.sub;
-      const user = await storage.getUserWithPreferences(userId);
-      res.json(user);
-    } catch (error) {
-      console.error("Error fetching user:", error);
-      res.status(500).json({ message: "Failed to fetch user" });
-    }
-  });
 
   // Get user preferences (requires approval)
   app.get('/api/user/preferences', isAuthenticated, isApproved, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const prefs = await storage.getUserPreferences(userId);
       res.json(prefs || {});
     } catch (error) {
@@ -67,7 +55,7 @@ export async function registerRoutes(app: Express) {
   // Update user preferences (requires approval)
   app.put('/api/user/preferences', isAuthenticated, isApproved, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const { displayName, defaultShopId, defaultTool, personalTraining } = req.body;
       
       const prefs = await storage.upsertUserPreferences(userId, {
@@ -86,7 +74,7 @@ export async function registerRoutes(app: Express) {
   // Submit script feedback (requires approval)
   app.post('/api/scripts/feedback', isAuthenticated, isApproved, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const parseResult = insertScriptFeedbackSchema.safeParse({ ...req.body, userId });
       
       if (!parseResult.success) {
@@ -107,7 +95,7 @@ export async function registerRoutes(app: Express) {
   // Get user's feedback history (requires approval)
   app.get('/api/scripts/feedback', isAuthenticated, isApproved, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const limit = parseInt(req.query.limit as string) || 50;
       const feedback = await storage.getUserFeedback(userId, limit);
       res.json(feedback);
@@ -120,10 +108,10 @@ export async function registerRoutes(app: Express) {
   // Admin middleware to check if user is admin
   const isAdmin = async (req: any, res: any, next: any) => {
     try {
-      if (!req.user?.claims?.sub) {
+      if (!req.user?.id) {
         return res.status(401).json({ message: "Unauthorized" });
       }
-      const isAdminUser = await storage.isUserAdmin(req.user.claims.sub);
+      const isAdminUser = await storage.isUserAdmin(req.user.id);
       if (!isAdminUser) {
         return res.status(403).json({ message: "Admin access required" });
       }
@@ -137,7 +125,7 @@ export async function registerRoutes(app: Express) {
   // Check if current user is admin
   app.get('/api/admin/check', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const isAdminUser = await storage.isUserAdmin(userId);
       res.json({ isAdmin: isAdminUser });
     } catch (error) {
@@ -208,7 +196,7 @@ export async function registerRoutes(app: Express) {
   app.delete('/api/admin/users/:userId', isAuthenticated, isAdmin, async (req: any, res) => {
     try {
       const { userId } = req.params;
-      const currentUserId = req.user.claims.sub;
+      const currentUserId = req.user.id;
       
       // Prevent admin from deleting themselves
       if (userId === currentUserId) {
@@ -231,7 +219,7 @@ export async function registerRoutes(app: Express) {
     try {
       const { userId } = req.params;
       const { isAdmin: makeAdmin } = req.body;
-      const currentUserId = req.user.claims.sub;
+      const currentUserId = req.user.id;
       
       // Prevent admin from changing their own admin status
       if (userId === currentUserId) {
@@ -853,8 +841,8 @@ export async function registerRoutes(app: Express) {
       let trainingGuidelines: string | undefined;
       let usedPersonalTraining = false;
       
-      if (req.user?.claims?.sub) {
-        const userId = req.user.claims.sub;
+      if (req.user?.id) {
+        const userId = req.user.id;
         const userPrefs = await storage.getUserPreferences(userId);
         if (userPrefs?.personalTraining) {
           trainingGuidelines = userPrefs.personalTraining;
