@@ -3,11 +3,21 @@ let pendingJobData = null;
 // ==================== LABOR RATE AUTO-UPDATE SECTION ====================
 let tekmetricAuthToken = null;
 let currentTekmetricShopId = null;
+let currentTekmetricBaseUrl = null;
 let lastProcessedRoId = null;
 
-// Capture Tekmetric auth token and shop ID from network requests
+// Capture Tekmetric auth token, shop ID, and base URL from network requests
 chrome.webRequest.onBeforeSendHeaders.addListener(
   (details) => {
+    // Capture the base URL from the request (shop, sandbox, or cba)
+    try {
+      const url = new URL(details.url);
+      currentTekmetricBaseUrl = url.origin;
+      console.log("[Labor Rate] Base URL captured:", currentTekmetricBaseUrl);
+    } catch (e) {
+      // Ignore URL parsing errors
+    }
+    
     // Match shop ID from URL patterns like /api/token/shop/123 or /api/shop/123
     const shopMatch = details.url.match(/\/(?:token\/)?shop\/(\d+)/);
     if (shopMatch) {
@@ -94,8 +104,9 @@ chrome.webRequest.onCompleted.addListener(
 
 async function processLaborRateUpdate(shopId, roId) {
   try {
-    // Determine base URL from the current tab or use shop.tekmetric.com as default
-    const baseUrl = "https://shop.tekmetric.com";
+    // Use the captured base URL (shop, sandbox, or cba) or fallback to shop.tekmetric.com
+    const baseUrl = currentTekmetricBaseUrl || "https://shop.tekmetric.com";
+    console.log("[Labor Rate] Using base URL:", baseUrl);
     
     // Fetch the repair order details
     const getRes = await fetch(`${baseUrl}/api/shop/${shopId}/repair-order/${roId}`, {
