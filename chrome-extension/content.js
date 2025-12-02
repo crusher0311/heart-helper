@@ -1206,148 +1206,6 @@ function injectHeartIconForConcern(concernRow, concernText) {
   injectedIcons.add(concernRow);
 }
 
-// Create floating HEART Helper button for general searches (always visible on RO pages)
-let floatingButtonInjected = false;
-
-function injectFloatingHeartButton() {
-  if (floatingButtonInjected) return;
-  if (!window.location.href.includes('/repair-orders/')) return;
-  
-  // Check if already exists
-  if (document.getElementById('heart-helper-floating-btn')) {
-    floatingButtonInjected = true;
-    return;
-  }
-  
-  const floatingBtn = document.createElement('button');
-  floatingBtn.id = 'heart-helper-floating-btn';
-  floatingBtn.innerHTML = '♥ HEART Helper';
-  
-  // Get saved position or use defaults
-  const savedPos = localStorage.getItem('heartHelperBtnPos');
-  let startX = window.innerWidth - 160;
-  let startY = window.innerHeight - 60;
-  
-  if (savedPos) {
-    try {
-      const pos = JSON.parse(savedPos);
-      startX = Math.min(pos.x, window.innerWidth - 140);
-      startY = Math.min(pos.y, window.innerHeight - 50);
-    } catch (e) {}
-  }
-  
-  floatingBtn.style.cssText = `
-    position: fixed;
-    left: ${startX}px;
-    top: ${startY}px;
-    background: #ED1C24;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    padding: 12px 20px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: grab;
-    box-shadow: 0 4px 12px rgba(237, 28, 36, 0.4);
-    z-index: 2147483647;
-    transition: box-shadow 0.2s ease;
-    font-family: Arial, sans-serif;
-    user-select: none;
-    pointer-events: auto !important;
-  `;
-  
-  // Dragging functionality
-  let isDragging = false;
-  let wasDragged = false;
-  let dragStartX, dragStartY, btnStartX, btnStartY;
-  
-  // Use capture phase to catch events before anything can block them
-  floatingBtn.addEventListener('pointerdown', (e) => {
-    console.log("🔵 HEART Helper pointerdown event fired");
-    isDragging = true;
-    wasDragged = false;
-    dragStartX = e.clientX;
-    dragStartY = e.clientY;
-    btnStartX = floatingBtn.offsetLeft;
-    btnStartY = floatingBtn.offsetTop;
-    floatingBtn.style.cursor = 'grabbing';
-    floatingBtn.style.transition = 'none';
-    floatingBtn.setPointerCapture(e.pointerId);
-  }, true); // capture phase
-  
-  floatingBtn.addEventListener('pointerup', (e) => {
-    console.log("🟢 HEART Helper pointerup event fired");
-    floatingBtn.releasePointerCapture(e.pointerId);
-  }, true); // capture phase
-  
-  // Also add a direct onclick as backup
-  floatingBtn.onclick = function(e) {
-    console.log("🚀 HEART Helper onclick fired!");
-  };
-  
-  document.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    
-    const deltaX = e.clientX - dragStartX;
-    const deltaY = e.clientY - dragStartY;
-    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-    
-    if (distance > 5) {
-      wasDragged = true;
-    }
-    
-    let newX = btnStartX + deltaX;
-    let newY = btnStartY + deltaY;
-    
-    // Keep within viewport
-    newX = Math.max(0, Math.min(newX, window.innerWidth - floatingBtn.offsetWidth));
-    newY = Math.max(0, Math.min(newY, window.innerHeight - floatingBtn.offsetHeight));
-    
-    floatingBtn.style.left = newX + 'px';
-    floatingBtn.style.top = newY + 'px';
-  });
-  
-  document.addEventListener('mouseup', () => {
-    if (isDragging) {
-      isDragging = false;
-      floatingBtn.style.cursor = 'grab';
-      floatingBtn.style.transition = 'box-shadow 0.2s ease';
-      
-      // Save position
-      localStorage.setItem('heartHelperBtnPos', JSON.stringify({
-        x: floatingBtn.offsetLeft,
-        y: floatingBtn.offsetTop
-      }));
-    }
-  });
-  
-  // Direct click handler - opens side panel if not a drag
-  floatingBtn.addEventListener('click', (e) => {
-    console.log("🚀 HEART Helper button click event, wasDragged:", wasDragged);
-    if (!wasDragged) {
-      console.log("📤 Sending OPEN_SIDE_PANEL message to background...");
-      // Fire and forget - no response expected
-      chrome.runtime.sendMessage({ action: "OPEN_SIDE_PANEL" });
-      console.log("✅ Message sent to background");
-    }
-    // Reset for next interaction
-    wasDragged = false;
-  });
-  
-  floatingBtn.addEventListener('mouseenter', () => {
-    if (!isDragging) {
-      floatingBtn.style.boxShadow = '0 6px 16px rgba(237, 28, 36, 0.5)';
-    }
-  });
-  
-  floatingBtn.addEventListener('mouseleave', () => {
-    floatingBtn.style.boxShadow = '0 4px 12px rgba(237, 28, 36, 0.4)';
-  });
-  
-  document.body.appendChild(floatingBtn);
-  floatingButtonInjected = true;
-  console.log("✅ Floating HEART Helper button injected (draggable)");
-}
 
 // Create a heart button with click handler
 function createHeartButton(searchText) {
@@ -1408,15 +1266,9 @@ function createHeartButton(searchText) {
 // Just find 3-dot menu buttons and put hearts to their left
 function injectHeartIcons() {
   if (!window.location.href.includes('/repair-orders/')) {
-    console.log("❌ Not on repair orders page, skipping HEART icons");
     return;
   }
-  
-  // Always inject floating button - this is the primary way to search
-  injectFloatingHeartButton();
-  
-  // Floating button is the primary interface - no inline hearts needed
-  console.log("✅ HEART Helper floating button ready");
+  // Side panel is the primary interface - use extension icon or keyboard shortcut to open
 }
 
 function observePageChanges() {
@@ -1447,23 +1299,12 @@ function observePageChanges() {
   setInterval(() => {
     if (lastUrl !== window.location.href) {
       console.log(`🔄 URL changed: ${lastUrl} → ${window.location.href}`);
-      // IMPORTANT: Clear tracked icons when navigating between ANY pages (including different ROs)
+      // Clear tracked icons when navigating between pages
       injectedIcons.clear();
-      floatingButtonInjected = false; // Reset floating button flag for new page
-      // Remove old floating button if exists
-      const oldBtn = document.getElementById('heart-helper-floating-btn');
-      if (oldBtn) oldBtn.remove();
       lastUrl = window.location.href;
       checkAndInject();
     }
-  }, 500); // Check more frequently for faster detection
-  
-  // Also observe for dynamically added textareas - check every 3 seconds
-  setInterval(() => {
-    if (window.location.href.includes('/repair-orders/')) {
-      injectHeartIcons();
-    }
-  }, 3000);
+  }, 500);
 }
 
 if (document.readyState === 'loading') {
