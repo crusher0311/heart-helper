@@ -201,6 +201,19 @@ export const settings = pgTable("settings", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+// Labor rate groups - admin-managed, per-shop configuration
+// These automatically apply labor rates when opening ROs based on vehicle make
+export const laborRateGroups = pgTable("labor_rate_groups", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  shopId: text("shop_id").notNull(), // "NB", "WM", or "EV" (or "ALL" for all shops)
+  name: text("name").notNull(), // e.g., "Euro", "Domestic", "Asian"
+  makes: text("makes").array().notNull(), // Vehicle makes that belong to this group
+  laborRate: integer("labor_rate").notNull(), // Rate in cents (e.g., 27322 = $273.22/hr)
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: varchar("created_by").references(() => users.id), // Admin who created this
+});
+
 // Relations
 export const repairOrdersRelations = relations(repairOrders, ({ many }) => ({
   jobs: many(repairOrderJobs),
@@ -228,6 +241,7 @@ export const insertRepairOrderJobPartSchema = createInsertSchema(repairOrderJobP
 export const insertSearchRequestSchema = createInsertSchema(searchRequests).omit({ id: true, createdDate: true });
 export const insertSearchCacheSchema = createInsertSchema(searchCache).omit({ id: true, createdAt: true });
 export const insertSettingsSchema = createInsertSchema(settings).omit({ id: true, updatedAt: true });
+export const insertLaborRateGroupSchema = createInsertSchema(laborRateGroups).omit({ id: true, createdAt: true, updatedAt: true });
 
 // Search request schema
 export const searchJobSchema = z.object({
@@ -266,6 +280,9 @@ export type Vehicle = typeof vehicles.$inferSelect;
 
 export type Settings = typeof settings.$inferSelect;
 export type InsertSettings = z.infer<typeof insertSettingsSchema>;
+
+export type LaborRateGroup = typeof laborRateGroups.$inferSelect;
+export type InsertLaborRateGroup = z.infer<typeof insertLaborRateGroupSchema>;
 
 // Vehicle info extracted from raw_data
 export type VehicleInfo = {
