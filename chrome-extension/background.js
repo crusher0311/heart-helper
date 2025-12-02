@@ -562,4 +562,4 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-console.log("Tekmetric Job Importer: Background service worker loaded (v3.14.5 - URL Regex Fix)");
+console.log("Tekmetric Job Importer: Background service worker loaded (v3.14.6 - Debug Logging)");

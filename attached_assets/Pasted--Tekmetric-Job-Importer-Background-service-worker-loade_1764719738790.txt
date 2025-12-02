@@ -1,0 +1,176 @@
+ Tekmetric Job Importer: Background service worker loaded (v3.14.5 - URL Regex Fix)
+ Side panel behavior set: opens on action click
+ Side panel enabled for all tabs
+ Context menu created: Open HEART Helper
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Auth token captured
+ 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+ Background: Content script requesting pending job
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Auth token captured
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Auth token captured
+ Background: Retrieved from storage: No job
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+ Background: Content script requesting pending job
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+ Background: Content script requesting pending job
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+ Background: Content script requesting pending job
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ Background: Retrieved from storage: No job
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ [Labor Rate] Repair order detected: 277379616 Shop: 469
+ [Labor Rate] Using base URL: https://shop.tekmetric.com
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+ Background: Content script requesting pending job
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Auth token captured
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Auth token captured
+ Background: Retrieved from storage: No job
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+ Background: Content script requesting pending job
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Auth token captured
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Auth token captured
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Auth token captured
+ Background: Retrieved from storage: No job
+ [Labor Rate] Skipping duplicate RO: 277379616
+ [Labor Rate] Current rate: 27322, Vehicle make: mercedes-benz
+ [Labor Rate] Matched group 'Euro' with rate: 27322
+ [Labor Rate] No change needed - rate already correct
+ 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ [Labor Rate] Skipping duplicate RO: 277379616
+ 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+ Background: Content script requesting pending job
+ [Labor Rate] Base URL captured: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+ Background: Content script requesting pending job
+background.js:480 Background: Retrieved from storage: No job
+background.js:16 [Labor Rate] Base URL captured: https://shop.tekmetric.com
+background.js:25 [Labor Rate] Shop ID captured: 469
+background.js:36 [Labor Rate] Auth token captured
+background.js:16 [Labor Rate] Base URL captured: https://shop.tekmetric.com
+background.js:25 [Labor Rate] Shop ID captured: 469
+background.js:36 [Labor Rate] Auth token captured
+background.js:16 [Labor Rate] Base URL captured: https://shop.tekmetric.com
+background.js:25 [Labor Rate] Shop ID captured: 469
+background.js:36 [Labor Rate] Auth token captured
+background.js:16 [Labor Rate] Base URL captured: https://shop.tekmetric.com
+background.js:36 [Labor Rate] Auth token captured
+background.js:415 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+background.js:477 Background: Content script requesting pending job
+background.js:16 [Labor Rate] Base URL captured: https://shop.tekmetric.com
+background.js:25 [Labor Rate] Shop ID captured: 469
+background.js:36 [Labor Rate] Auth token captured
+background.js:480 Background: Retrieved from storage: No job
+background.js:415 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+background.js:477 Background: Content script requesting pending job
+background.js:480 Background: Retrieved from storage: No job
+background.js:415 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+background.js:477 Background: Content script requesting pending job
+background.js:480 Background: Retrieved from storage: No job
+background.js:16 [Labor Rate] Base URL captured: https://shop.tekmetric.com
+background.js:36 [Labor Rate] Auth token captured
+background.js:16 [Labor Rate] Base URL captured: https://shop.tekmetric.com
+background.js:25 [Labor Rate] Shop ID captured: 469
+background.js:36 [Labor Rate] Auth token captured
+background.js:16 [Labor Rate] Base URL captured: https://shop.tekmetric.com
+background.js:36 [Labor Rate] Auth token captured
+background.js:415 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+background.js:477 Background: Content script requesting pending job
+background.js:480 Background: Retrieved from storage: No job
+sidepanel.js:19 All cookies for https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev : Array(1)
+sidepanel.js:26 Session cookie found: connect.sid value length: 80
+sidepanel.js:19 All cookies for https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev : Array(1)
+sidepanel.js:26 Session cookie found: connect.sid value length: 80
+background.js:415 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+background.js:477 Background: Content script requesting pending job
+background.js:415 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+background.js:477 Background: Content script requesting pending job
+background.js:480 Background: Retrieved from storage: No job
+background.js:480 Background: Retrieved from storage: No job
+background.js:415 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+background.js:477 Background: Content script requesting pending job
+background.js:480 Background: Retrieved from storage: No job
+background.js:415 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+background.js:477 Background: Content script requesting pending job
+background.js:480 Background: Retrieved from storage: No job
+background.js:415 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+background.js:477 Background: Content script requesting pending job
+background.js:480 Background: Retrieved from storage: No job
+sidepanel.js:115 Auth check successful: brandoncrusha@gmail.com
+sidepanel.js:356 Labor rate groups synced: 1 groups
+sidepanel.js:502 [SidePanel] requestCurrentROInfo called
+sidepanel.js:504 [SidePanel] Active tab: https://shop.tekmetric.com/admin/shop/469/repair-orders/277379616/estimate
+sidepanel.js:506 [SidePanel] Sending GET_VEHICLE_INFO to tab: 1498358225
+sidepanel.js:509 [SidePanel] GET_VEHICLE_INFO response: {"vehicleInfo":{"year":null,"make":null,"model":null,"engine":null}}
+sidepanel.js:515 [SidePanel] Updating fields with: {"year":null,"make":null,"model":null,"engine":null}
+background.js:415 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+background.js:477 Background: Content script requesting pending job
+background.js:480 Background: Retrieved from storage: No job
+background.js:415 📨 Message received: GET_PENDING_JOB from tab: 1498358225
+background.js:477 Background: Content script requesting pending job
+background.js:480 Background: Retrieved from storage: No job

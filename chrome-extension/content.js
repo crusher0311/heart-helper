@@ -1,4 +1,4 @@
-console.log("Tekmetric Job Importer: Content script loaded (v3.14.5)");
+console.log("Tekmetric Job Importer: Content script loaded (v3.14.6)");
 
 let checkHistoryButton = null;
 let injectedIcons = new Set(); // Track which textareas already have icons
@@ -1321,33 +1321,38 @@ if (document.readyState === 'loading') {
 
 // Listen for messages from side panel
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  console.log('[Content] Received message:', message.type);
+  // Use alert-style logging that can't be filtered
+  console.warn('[Content v3.14.6] MESSAGE RECEIVED:', message.type);
   
   // Get current vehicle info for side panel
   if (message.type === 'GET_VEHICLE_INFO') {
-    console.log('[Content] Processing GET_VEHICLE_INFO');
+    console.warn('[Content] GET_VEHICLE_INFO handler started');
+    
+    // Test URL extraction immediately
+    const testIds = extractIdsFromUrl();
+    console.warn('[Content] URL extraction result:', JSON.stringify(testIds));
+    
     // First try to fetch from API for accurate data
     fetchVehicleInfoFromAPI().then(apiData => {
-      console.log('[Content] API data received:', apiData);
+      console.warn('[Content] API response:', JSON.stringify(apiData ? { hasVehicle: !!apiData.vehicle } : null));
       if (apiData && apiData.vehicle) {
-        console.log('[Content] Sending API vehicle data:', apiData.vehicle);
-        sendResponse({ 
-          vehicleInfo: {
-            year: apiData.vehicle.year,
-            make: apiData.vehicle.make,
-            model: apiData.vehicle.model,
-            engine: apiData.vehicle.engine || null
-          }
-        });
+        const vehicleData = {
+          year: apiData.vehicle.year,
+          make: apiData.vehicle.make,
+          model: apiData.vehicle.model,
+          engine: apiData.vehicle.engine || null
+        };
+        console.warn('[Content] Sending API vehicle:', JSON.stringify(vehicleData));
+        sendResponse({ vehicleInfo: vehicleData });
       } else {
         // Fallback to DOM scraping
-        console.log('[Content] API failed, using DOM scraping');
+        console.warn('[Content] API failed/empty, using DOM scraping');
         const vehicleInfo = extractVehicleInfo();
-        console.log('[Content] DOM scraped vehicle:', vehicleInfo);
+        console.warn('[Content] DOM scraped:', JSON.stringify(vehicleInfo));
         sendResponse({ vehicleInfo });
       }
     }).catch(error => {
-      console.error('[Content] API fetch error:', error);
+      console.error('[Content] API error:', error.message);
       const vehicleInfo = extractVehicleInfo();
       sendResponse({ vehicleInfo });
     });
