@@ -30,6 +30,8 @@ export default function Landing() {
         title: "Welcome back!",
         description: "You have been signed in successfully.",
       });
+      // Redirect to home page after successful login
+      window.location.href = "/";
     },
     onError: (error: Error) => {
       toast({
@@ -52,6 +54,8 @@ export default function Landing() {
           title: "Welcome!",
           description: "Your account has been created and you're ready to go.",
         });
+        // Redirect approved users to home page
+        window.location.href = "/";
       } else {
         toast({
           title: "Account created!",
