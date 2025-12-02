@@ -1,5 +1,208 @@
 let pendingJobData = null;
 
+// ==================== LABOR RATE AUTO-UPDATE SECTION ====================
+let tekmetricAuthToken = null;
+let currentTekmetricShopId = null;
+let lastProcessedRoId = null;
+
+// Capture Tekmetric auth token and shop ID from network requests
+chrome.webRequest.onBeforeSendHeaders.addListener(
+  (details) => {
+    // Match shop ID from URL patterns like /api/token/shop/123 or /api/shop/123
+    const shopMatch = details.url.match(/\/(?:token\/)?shop\/(\d+)/);
+    if (shopMatch) {
+      currentTekmetricShopId = shopMatch[1];
+      console.log("[Labor Rate] Shop ID captured:", currentTekmetricShopId);
+    }
+
+    // Capture auth token from header
+    const tokenHeader = details.requestHeaders.find(
+      (h) => h.name.toLowerCase() === "x-auth-token"
+    );
+    if (tokenHeader && tokenHeader.value) {
+      tekmetricAuthToken = tokenHeader.value;
+      console.log("[Labor Rate] Auth token captured");
+    }
+  },
+  {
+    urls: [
+      "https://shop.tekmetric.com/api/*",
+      "https://sandbox.tekmetric.com/api/*",
+      "https://cba.tekmetric.com/api/*"
+    ],
+    types: ["xmlhttprequest"]
+  },
+  ["requestHeaders"]
+);
+
+// Listen for repair order navigation/creation
+chrome.webRequest.onCompleted.addListener(
+  async (details) => {
+    if (!tekmetricAuthToken || !currentTekmetricShopId) {
+      console.log("[Labor Rate] Skipping - no auth token or shop ID");
+      return;
+    }
+
+    let roId = null;
+    let shopId = currentTekmetricShopId;
+
+    // Match patterns for repair order URLs
+    // Pattern 1: /shop/123/repair-order/456
+    const shopRoMatch = details.url.match(/\/(?:sandbox|shop)\/(\d+)\/repair-order\/(\d+)/);
+    if (shopRoMatch) {
+      shopId = shopRoMatch[1];
+      roId = shopRoMatch[2];
+    }
+
+    // Pattern 2: /repair-order/456/estimate (new RO created)
+    const newRoMatch = details.url.match(/\/repair-order\/(\d+)\/estimate/);
+    if (newRoMatch) {
+      roId = newRoMatch[1];
+    }
+
+    // Pattern 3: /api/shop/123/repair-order/456
+    const apiRoMatch = details.url.match(/\/api\/shop\/(\d+)\/repair-order\/(\d+)/);
+    if (apiRoMatch) {
+      shopId = apiRoMatch[1];
+      roId = apiRoMatch[2];
+    }
+
+    if (!roId) return;
+
+    // Prevent duplicate processing
+    if (lastProcessedRoId === roId) {
+      console.log(`[Labor Rate] Skipping duplicate RO: ${roId}`);
+      return;
+    }
+    lastProcessedRoId = roId;
+
+    console.log("[Labor Rate] Repair order detected:", roId, "Shop:", shopId);
+    await processLaborRateUpdate(shopId, roId);
+  },
+  {
+    urls: [
+      "https://shop.tekmetric.com/api/shop/*/repair-order/*",
+      "https://sandbox.tekmetric.com/api/shop/*/repair-order/*",
+      "https://cba.tekmetric.com/api/shop/*/repair-order/*",
+      "https://shop.tekmetric.com/api/repair-order/*/estimate",
+      "https://sandbox.tekmetric.com/api/repair-order/*/estimate",
+      "https://cba.tekmetric.com/api/repair-order/*/estimate"
+    ],
+    types: ["xmlhttprequest"]
+  }
+);
+
+async function processLaborRateUpdate(shopId, roId) {
+  try {
+    // Determine base URL from the current tab or use shop.tekmetric.com as default
+    const baseUrl = "https://shop.tekmetric.com";
+    
+    // Fetch the repair order details
+    const getRes = await fetch(`${baseUrl}/api/shop/${shopId}/repair-order/${roId}`, {
+      headers: {
+        "x-auth-token": tekmetricAuthToken,
+        "content-type": "application/json"
+      }
+    });
+
+    if (!getRes.ok) {
+      console.error(`[Labor Rate] Failed to fetch RO: ${getRes.status}`);
+      return;
+    }
+
+    const roData = await getRes.json();
+    const currentRate = roData.laborRate;
+    const make = roData.vehicle?.make?.toLowerCase();
+    
+    console.log(`[Labor Rate] Current rate: ${currentRate}, Vehicle make: ${make}`);
+
+    if (!make) {
+      console.log("[Labor Rate] No vehicle make found, skipping");
+      return;
+    }
+
+    // Load saved labor rate groups from storage
+    const data = await chrome.storage.local.get("laborRateGroups");
+    const groups = data.laborRateGroups || [];
+
+    if (groups.length === 0) {
+      console.log("[Labor Rate] No labor rate groups configured");
+      return;
+    }
+
+    // Find matching rate group
+    let matchedRate = null;
+    let matchedGroupName = null;
+
+    for (const group of groups) {
+      if (group.makes.some(m => m.toLowerCase() === make)) {
+        matchedRate = group.laborRate;
+        matchedGroupName = group.name;
+        console.log(`[Labor Rate] Matched group '${group.name}' with rate: ${matchedRate}`);
+        break;
+      }
+    }
+
+    if (matchedRate === null) {
+      console.log(`[Labor Rate] No matching group found for make: ${make}`);
+      return;
+    }
+
+    // Apply labor rate if different
+    if (currentRate !== matchedRate) {
+      const payload = {
+        laborRate: matchedRate,
+        appointmentOption: roData.appointmentOption,
+        customerTimeIn: roData.customerTimeIn,
+        customerTimeOut: roData.customerTimeOut,
+        defaultTechnicianId: roData.defaultTechnicianId,
+        keytag: roData.keytag,
+        leadSource: roData.leadSource,
+        notes: roData.notes,
+        poNumber: roData.poNumber,
+        referrerId: roData.referrerId,
+        referrerName: roData.referrerName,
+        saveCustomerParts: roData.saveCustomerParts,
+        serviceWriterId: roData.serviceWriterId
+      };
+
+      const putRes = await fetch(`${baseUrl}/api/repair-order/${roId}/summary`, {
+        method: "PUT",
+        headers: {
+          "x-auth-token": tekmetricAuthToken,
+          "content-type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (putRes.ok) {
+        console.log(`[Labor Rate] Updated to $${(matchedRate / 100).toFixed(2)} (${matchedGroupName}) for RO: ${roId}`);
+
+        // Notify content scripts to refresh UI
+        chrome.tabs.query({ url: "*://*.tekmetric.com/*" }, (tabs) => {
+          for (const tab of tabs) {
+            chrome.tabs.sendMessage(tab.id, { 
+              type: "REFRESH_LABOR_RATE_UI",
+              rate: matchedRate,
+              groupName: matchedGroupName
+            }).catch(() => {
+              // Content script may not be ready
+            });
+          }
+        });
+      } else {
+        console.error(`[Labor Rate] Failed to update: ${putRes.status}`);
+      }
+    } else {
+      console.log(`[Labor Rate] No change needed - rate already correct`);
+    }
+  } catch (err) {
+    console.error("[Labor Rate] Error processing RO:", err);
+  }
+}
+
+// ==================== END LABOR RATE SECTION ====================
+
 // Open side panel when extension icon is clicked
 // This is the ONLY way to handle icon clicks - do NOT add chrome.action.onClicked
 // as they are mutually exclusive
