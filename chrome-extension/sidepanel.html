@@ -23,8 +23,70 @@
       </div>
     </header>
 
-    <!-- User Section -->
+    <!-- User Section (shown when logged in) -->
     <div id="userSection" class="user-section" style="display: none;"></div>
+
+    <!-- Login Section (shown when not logged in) -->
+    <div id="loginSection" class="login-section" style="display: none;">
+      <div class="login-card">
+        <div class="login-header">
+          <span class="heart-icon">&#10084;</span>
+          <h3>Sign In</h3>
+        </div>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" placeholder="your.email@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="Password" required />
+          </div>
+          <div id="loginError" class="login-error" style="display: none;"></div>
+          <button type="submit" id="loginBtn" class="btn btn-primary login-submit">
+            Sign In
+          </button>
+        </form>
+        <div class="login-footer">
+          <span>Need an account?</span>
+          <button id="showRegisterBtn" class="link-btn">Register</button>
+        </div>
+      </div>
+      
+      <!-- Registration Form (initially hidden) -->
+      <div id="registerCard" class="login-card" style="display: none;">
+        <div class="login-header">
+          <span class="heart-icon">&#10084;</span>
+          <h3>Create Account</h3>
+        </div>
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="registerEmail">Email</label>
+            <input type="email" id="registerEmail" placeholder="your.email@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="registerFirstName">First Name</label>
+            <input type="text" id="registerFirstName" placeholder="First name" />
+          </div>
+          <div class="form-group">
+            <label for="registerLastName">Last Name</label>
+            <input type="text" id="registerLastName" placeholder="Last name" />
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <input type="password" id="registerPassword" placeholder="At least 8 characters" required minlength="8" />
+          </div>
+          <div id="registerError" class="login-error" style="display: none;"></div>
+          <button type="submit" id="registerBtn" class="btn btn-primary login-submit">
+            Create Account
+          </button>
+        </form>
+        <div class="login-footer">
+          <span>Already have an account?</span>
+          <button id="showLoginBtn" class="link-btn">Sign In</button>
+        </div>
+      </div>
+    </div>
 
     <!-- Tab Navigation -->
     <div class="tab-nav">
