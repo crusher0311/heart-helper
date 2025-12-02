@@ -1,4 +1,4 @@
-console.log("Tekmetric Job Importer: Content script loaded (v3.14.4)");
+console.log("Tekmetric Job Importer: Content script loaded (v3.14.5)");
 
 let checkHistoryButton = null;
 let injectedIcons = new Set(); // Track which textareas already have icons
@@ -1518,12 +1518,17 @@ function showJobReadyIndicator() {
 // Extract vehicle info from Tekmetric page
 // Extract shop ID and RO ID from Tekmetric URL
 function extractIdsFromUrl() {
-  // URL pattern: https://shop.tekmetric.com/shop/{shopId}/repair-orders/{roId}
+  // URL patterns:
+  // https://shop.tekmetric.com/admin/shop/{shopId}/repair-orders/{roId}/estimate
+  // https://shop.tekmetric.com/shop/{shopId}/repair-orders/{roId}
   const url = window.location.href;
-  const match = url.match(/\/shop\/(\d+)\/repair-orders\/(\d+)/);
+  // Match both /admin/shop/ and /shop/ patterns
+  const match = url.match(/\/(?:admin\/)?shop\/(\d+)\/repair-orders\/(\d+)/);
   if (match) {
+    console.log('[Content] Extracted IDs from URL:', { shopId: match[1], roId: match[2] });
     return { shopId: match[1], roId: match[2] };
   }
+  console.log('[Content] Could not extract IDs from URL:', url);
   return null;
 }
 
