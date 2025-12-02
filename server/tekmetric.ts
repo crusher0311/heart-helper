@@ -203,6 +203,23 @@ export async function fetchRepairOrder(
     
     const response = await tekmetricRequest(`/repair-orders/${roId}`, "GET", undefined, shopLocation);
     
+    console.log('Tekmetric RO response keys:', Object.keys(response));
+    console.log('Tekmetric RO vehicle field:', response.vehicle);
+    console.log('Tekmetric RO vehicleId field:', response.vehicleId);
+    
+    // If vehicle is not embedded, try to fetch it separately
+    let vehicleData = response.vehicle;
+    if (!vehicleData && response.vehicleId) {
+      console.log(`Vehicle not embedded, fetching vehicle ${response.vehicleId} separately`);
+      try {
+        const vehicleResponse = await tekmetricRequest(`/vehicles/${response.vehicleId}`, "GET", undefined, shopLocation);
+        vehicleData = vehicleResponse;
+        console.log('Fetched vehicle data:', vehicleData);
+      } catch (vehicleError) {
+        console.error('Failed to fetch vehicle:', vehicleError);
+      }
+    }
+    
     return {
       id: response.id?.toString() || roId,
       roNumber: response.repairOrderNumber || response.roNumber || `RO-${roId}`,
@@ -211,13 +228,16 @@ export async function fetchRepairOrder(
         firstName: response.customer.firstName || '',
         lastName: response.customer.lastName || '',
       } : null,
-      vehicle: response.vehicle ? {
-        id: response.vehicle.id,
-        year: response.vehicle.year,
-        make: response.vehicle.make,
-        model: cleanVehicleModel(response.vehicle.model || ''),
-        engine: response.vehicle.engineSize || response.vehicle.engine,
-        vin: response.vehicle.vin,
+      vehicle: vehicleData ? {
+        id: vehicleData.id,
+        year: vehicleData.year,
+        make: vehicleData.make,
+        // Combine model and subModel (e.g., "GLC300" + "4Matic" -> "GLC300 4Matic")
+        model: cleanVehicleModel(
+          [vehicleData.model, vehicleData.subModel].filter(Boolean).join(' ')
+        ),
+        engine: vehicleData.engineSize || vehicleData.engine,
+        vin: vehicleData.vin,
       } : null,
       jobs: (response.jobs || []).map((job: any) => ({
         id: job.id,
