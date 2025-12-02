@@ -11,7 +11,7 @@ HEART Helper is an AI-powered repair order search tool for HEART Certified Auto 
 - **Intelligent Repair Term Extraction**: Semantic parsing of customer descriptions
 - **Smart Year Matching**: Broader searches across compatible model years
 - **Service Writer Attribution**: Displays the service advisor who wrote each repair order, helping technicians identify jobs from experienced colleagues
-- **User Authentication**: Replit Auth with personalized settings and approval workflow
+- **User Authentication**: Custom username/password authentication (bcrypt hashing, session-based) with personalized settings and approval workflow
 - **User Approval Workflow**: Auto-approves @heartautocare.com emails; other domains require admin approval
 - **Per-User AI Training**: Personal training data for customized script generation
 - **Script Feedback Tracking**: Thumbs up/down feedback to improve AI recommendations
@@ -36,7 +36,7 @@ Key pages:
 The backend uses Node.js with Express.js, providing REST endpoints for AI-powered job search, Tekmetric integration (read-only), AI-driven concern intake, and user authentication. It employs Drizzle ORM with PostgreSQL (Neon serverless) for data storage, utilizing Tekmetric's external IDs for referential integrity. 
 
 Key API endpoints:
-- `/api/auth/*` - Replit Auth login/logout/user
+- `/api/auth/*` - Username/password auth (register, login, logout, user)
 - `/api/user/preferences` - User preferences CRUD
 - `/api/scripts/feedback` - Script feedback submission
 - `/api/sales/generate-script` - AI script generation with per-user training
@@ -86,7 +86,6 @@ Tekmetric's external IDs are used as primary keys for vehicle/RO data.
 
 - **Tekmetric API**: Shop management system for repair order, vehicle, and customer data.
 - **OpenAI API**: Large Language Model for semantic job matching and scoring.
-- **Replit Auth**: User authentication via OIDC.
 - **Neon Database**: Serverless PostgreSQL hosting.
 - **Google Fonts**: Inter and JetBrains Mono typefaces.
-- **Key npm Packages**: `@neondatabase/serverless`, `drizzle-orm`, `openai`, `@tanstack/react-query`, `@radix-ui/*`, `tailwindcss`, `zod`, `wouter`, `passport`, `openid-client`.
+- **Key npm Packages**: `@neondatabase/serverless`, `drizzle-orm`, `openai`, `@tanstack/react-query`, `@radix-ui/*`, `tailwindcss`, `zod`, `wouter`, `bcryptjs`, `express-session`.
