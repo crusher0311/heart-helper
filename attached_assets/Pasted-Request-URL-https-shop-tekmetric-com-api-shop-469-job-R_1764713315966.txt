@@ -1,0 +1,62 @@
+Request URL
+https://shop.tekmetric.com/api/shop/469/job
+Request Method
+POST
+Status Code
+200 OK
+Remote Address
+52.84.217.56:443
+Referrer Policy
+strict-origin-when-cross-origin
+alt-svc
+h3=":443"; ma=86400
+cache-control
+no-cache, no-store, max-age=0, must-revalidate
+content-type
+application/json; charset=UTF-8
+date
+Tue, 02 Dec 2025 22:07:01 GMT
+expires
+0
+permissions-policy
+accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+pragma
+no-cache
+referrer-policy
+strict-origin-when-cross-origin
+server
+envoy
+strict-transport-security
+max-age=63072000; includeSubDomains
+via
+1.1 fcd09f2c31a065e7aa6144a2edfbc126.cloudfront.net (CloudFront)
+x-amz-cf-id
+HcCt9ZOhsBpEczkHkIUEW_hQe4ksQuaO1uNmpXk9PUP2U91MBt28Qg==
+x-amz-cf-pop
+DFW59-P5
+x-cache
+Miss from cloudfront
+x-content-type-options
+nosniff
+x-envoy-upstream-service-time
+217
+x-frame-options
+SAMEORIGIN
+x-xss-protection
+0
+accept
+application/json
+content-type
+application/json
+referer
+https://shop.tekmetric.com/admin/shop/469/repair-orders/277382151/estimate
+sec-ch-ua
+"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"
+sec-ch-ua-mobile
+?1
+sec-ch-ua-platform
+"Android"
+user-agent
+Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36
+x-auth-token
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJicmFuZG9uQG15b2lsc3RpY2tlci5jb20iLCJ1c2VySWQiOiIxNDE1MzIiLCJzaG9wSWQiOiI0NjkiLCJzaG9wVGltZVpvbmVJZCI6IkFtZXJpY2EvQ2hpY2FnbyIsInBlcm1pc3Npb25zIjpbIjEwMDAiLCIxMDAiLCIxNTAyIiwiMTAxIiwiMjAwIiwiMTUwMSIsIjMwMCIsIjIwMSIsIjE1MDAiLCI0MDAiLCIzMDEiLCIyMDIiLCIxMDMiLCIxNDAwIiwiNDAxIiwiMzAyIiwiMjAzIiwiNTAwIiwiMTIwMSIsIjEzMDAiLCIyMDQiLCI2MDAiLCIxMTAxIiwiNDAyIiwiNTAxIiwiMTIwMCIsIjYwMSIsIjExMDAiLCI3MDAiLCI0MDMiLCIyMDUiLCI1MDIiLCI4MDAiLCI1MDMiLCI5MDAiLCI2MDMiLCI1MDQiXSwiZW1wbG95ZWVJZCI6IjE4MTAyMyIsImVtcGxveWVlUm9sZSI6eyJpZCI6MiwiY29kZSI6IjIiLCJuYW1lIjoiU2VydmljZSBBZHZpc29yIn0sImFjY291bnRUeXBlIjoiVVNFUiIsInNlcnZlclRpbWUiOiIyMDI1LTEyLTAyVDIyOjAzOjE5LjU1MzQ1NTIwOFoiLCJvcmdJZCI6IjEyNCIsImV4cCI6MTc2NDc3MDU5OX0.9j82u4dV5-kQAhPyg07OXPkVS5s8_Gzra1wk94ni3Ik
