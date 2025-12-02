@@ -23,6 +23,8 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
     if (shopMatch) {
       currentTekmetricShopId = shopMatch[1];
       console.log("[Labor Rate] Shop ID captured:", currentTekmetricShopId);
+      // Store for sidepanel to use
+      chrome.storage.local.set({ currentTekmetricShopId: currentTekmetricShopId });
     }
 
     // Capture auth token from header

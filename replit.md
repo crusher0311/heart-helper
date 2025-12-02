@@ -16,6 +16,7 @@ HEART Helper is an AI-powered repair order search tool for HEART Certified Auto 
 - **Per-User AI Training**: Personal training data for customized script generation
 - **Script Feedback Tracking**: Thumbs up/down feedback to improve AI recommendations
 - **Admin User Management**: Add/delete users, manage admin status, approve/reject pending users
+- **Centralized Labor Rate Groups**: Organization-wide labor rate configuration by vehicle make and location, synced to Chrome extension
 
 ## User Preferences
 
@@ -30,6 +31,8 @@ The frontend is built with React and TypeScript using Vite, styled with shadcn/u
 Key pages:
 - `/` - Landing page (unauthenticated) or Home page (authenticated)
 - `/settings` - User preferences with personal AI training data
+- `/admin` - Team training management (admin only)
+- `/admin/labor-rates` - Centralized labor rate group management (admin only)
 
 ### Backend Architecture
 
@@ -47,7 +50,7 @@ All protected routes require both authentication and approval status check.
 
 CORS is configured to allow Chrome extension origins (chrome-extension://), *.replit.dev, *.replit.app, and localhost with credentials support for cross-origin authentication.
 
-### Chrome Extension (v3.7.0)
+### Chrome Extension (v3.12.0)
 
 Located in `/chrome-extension/`, provides:
 - Side panel UI for live call assistance with 3 main tabs:
@@ -77,6 +80,7 @@ The PostgreSQL database (Neon serverless) stores:
 - `users`, `sessions` - User authentication
 - `user_preferences` - Per-user settings and AI training data
 - `script_feedback` - User feedback on generated scripts
+- `labor_rate_groups` - Centralized labor rate configuration by vehicle make and shop location
 
 Tekmetric's external IDs are used as primary keys for vehicle/RO data.
 

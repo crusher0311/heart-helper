@@ -1342,3 +1342,60 @@ textarea {
   border-radius: 8px;
   border: 1px dashed #ddd;
 }
+
+.no-groups-message.error {
+  background: #fff3f3;
+  border-color: #ffcccc;
+  color: #c62828;
+}
+
+/* Shop info badge */
+.rates-shop-info {
+  background: #e3f2fd;
+  color: #1565c0;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Shop group sections */
+.shop-group-section {
+  margin-bottom: 16px;
+}
+
+.shop-group-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #999;
+  font-weight: 600;
+  margin-bottom: 8px;
+  padding-left: 4px;
+}
+
+/* Admin link section */
+.admin-link-section {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.admin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #1565c0;
+  font-size: 13px;
+  text-decoration: none;
+  padding: 8px 16px;
+  background: #e3f2fd;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.admin-link:hover {
+  background: #bbdefb;
+}

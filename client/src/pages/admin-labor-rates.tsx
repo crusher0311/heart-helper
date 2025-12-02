@@ -155,12 +155,13 @@ export default function AdminLaborRates() {
       toast({ title: "Error", description: "At least one vehicle make is required", variant: "destructive" });
       return;
     }
-    if (!formData.laborRate || isNaN(parseFloat(formData.laborRate))) {
-      toast({ title: "Error", description: "Valid labor rate is required", variant: "destructive" });
+    const parsedRate = parseFloat(formData.laborRate);
+    if (!formData.laborRate || isNaN(parsedRate) || parsedRate <= 0) {
+      toast({ title: "Error", description: "Valid labor rate is required (must be greater than 0)", variant: "destructive" });
       return;
     }
 
-    const laborRateCents = Math.round(parseFloat(formData.laborRate) * 100);
+    const laborRateCents = Math.round(parsedRate * 100);
 
     if (editingGroup) {
       updateMutation.mutate({

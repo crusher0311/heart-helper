@@ -890,6 +890,7 @@ async function submitFeedback(sentiment) {
 // ==================== SEARCH ====================
 
 const SHOP_NAMES = {
+  ALL: 'All Locations',
   NB: 'Northbrook',
   WM: 'Wilmette',
   EV: 'Evanston'
@@ -1406,26 +1407,135 @@ function showToast(message) {
 
 // ==================== LABOR RATE GROUPS ====================
 
-let laborRateEditingIndex = null;
+// Get current Tekmetric shop ID from background or storage
+async function getCurrentTekmetricShopId() {
+  // Try to get from storage (set by background.js)
+  const data = await chrome.storage.local.get(['currentTekmetricShopId']);
+  return data.currentTekmetricShopId || null;
+}
 
 async function loadLaborRateGroups() {
-  const data = await chrome.storage.local.get("laborRateGroups");
-  const groups = data.laborRateGroups || [];
   const container = document.getElementById("laborRateGroupsList");
+  const shopLabel = document.getElementById("ratesShopLabel");
+  const adminLink = document.getElementById("ratesAdminLink");
+  const openAdminLink = document.getElementById("openLaborRatesAdmin");
   
   if (!container) return;
   
-  if (groups.length === 0) {
+  // Show loading state
+  container.innerHTML = '<div class="no-groups-message">Loading labor rate groups...</div>';
+  
+  if (!appUrl) {
+    shopLabel.textContent = 'App not connected';
     container.innerHTML = `
       <div class="no-groups-message">
-        No labor rate groups configured yet. Add your first group below.
+        Connect to the HEART Helper app to view labor rate groups.
+        Click the gear icon below to configure.
       </div>
     `;
     return;
   }
   
-  container.innerHTML = groups.map((group, index) => `
-    <div class="labor-rate-group-card" data-index="${index}">
+  // Get current shop ID
+  const shopId = await getCurrentTekmetricShopId();
+  
+  try {
+    // Fetch groups from server (includes both shop-specific and ALL location groups)
+    const response = await authenticatedFetch(`${appUrl}/api/labor-rate-groups${shopId ? `?shopId=${shopId}` : ''}`);
+    
+    if (!response.ok) {
+      if (response.status === 401) {
+        shopLabel.textContent = 'Not signed in';
+        container.innerHTML = `
+          <div class="no-groups-message">
+            Sign in to the HEART Helper app to view labor rate groups.
+          </div>
+        `;
+        return;
+      }
+      throw new Error(`Server error: ${response.status}`);
+    }
+    
+    const groups = await response.json();
+    
+    // Update shop label
+    if (shopId && SHOP_NAMES[shopId]) {
+      shopLabel.textContent = `Showing rates for: ${SHOP_NAMES[shopId]}`;
+    } else if (shopId) {
+      shopLabel.textContent = `Shop: ${shopId}`;
+    } else {
+      shopLabel.textContent = 'All configured rates';
+    }
+    
+    // Show admin link for admin users
+    if (currentUser?.isAdmin) {
+      adminLink.style.display = 'block';
+      openAdminLink.onclick = (e) => {
+        e.preventDefault();
+        window.open(`${appUrl}/admin/labor-rates`, '_blank');
+      };
+    } else {
+      adminLink.style.display = 'none';
+    }
+    
+    // Store groups locally for background.js to use
+    await chrome.storage.local.set({ laborRateGroups: groups });
+    
+    if (groups.length === 0) {
+      container.innerHTML = `
+        <div class="no-groups-message">
+          No labor rate groups configured for this location.
+          ${currentUser?.isAdmin ? '<br><br>Click "Manage Labor Rates" below to add groups.' : '<br><br>Ask your admin to configure labor rate groups.'}
+        </div>
+      `;
+      return;
+    }
+    
+    // Group by shop for display
+    const groupsByShop = {};
+    groups.forEach(group => {
+      const key = group.shopId || 'ALL';
+      if (!groupsByShop[key]) groupsByShop[key] = [];
+      groupsByShop[key].push(group);
+    });
+    
+    // Render groups
+    let html = '';
+    
+    // Show ALL location groups first if any
+    if (groupsByShop['ALL']) {
+      html += `<div class="shop-group-section">
+        <div class="shop-group-label">All Locations</div>
+        ${renderGroups(groupsByShop['ALL'])}
+      </div>`;
+    }
+    
+    // Show shop-specific groups
+    Object.entries(groupsByShop)
+      .filter(([key]) => key !== 'ALL')
+      .forEach(([shopKey, shopGroups]) => {
+        html += `<div class="shop-group-section">
+          <div class="shop-group-label">${SHOP_NAMES[shopKey] || shopKey}</div>
+          ${renderGroups(shopGroups)}
+        </div>`;
+      });
+    
+    container.innerHTML = html;
+    
+  } catch (error) {
+    console.error('Error loading labor rate groups:', error);
+    shopLabel.textContent = 'Error loading groups';
+    container.innerHTML = `
+      <div class="no-groups-message error">
+        Failed to load labor rate groups. Check your connection and try again.
+      </div>
+    `;
+  }
+}
+
+function renderGroups(groups) {
+  return groups.map(group => `
+    <div class="labor-rate-group-card">
       <div class="labor-rate-group-header">
         <span class="labor-rate-group-name">${escapeHtml(group.name)}</span>
         <span class="labor-rate-group-rate">$${(group.laborRate / 100).toFixed(2)}/hr</span>
@@ -1433,21 +1543,8 @@ async function loadLaborRateGroups() {
       <div class="labor-rate-group-makes">
         <strong>Makes:</strong> ${group.makes.map(m => escapeHtml(m)).join(", ")}
       </div>
-      <div class="labor-rate-group-actions">
-        <button class="rate-edit-btn" data-index="${index}">Edit</button>
-        <button class="rate-delete-btn" data-index="${index}">Delete</button>
-      </div>
     </div>
   `).join("");
-  
-  // Add event listeners
-  container.querySelectorAll(".rate-edit-btn").forEach(btn => {
-    btn.addEventListener("click", () => editLaborRateGroup(parseInt(btn.dataset.index)));
-  });
-  
-  container.querySelectorAll(".rate-delete-btn").forEach(btn => {
-    btn.addEventListener("click", () => deleteLaborRateGroup(parseInt(btn.dataset.index)));
-  });
 }
 
 function escapeHtml(text) {
@@ -1455,99 +1552,3 @@ function escapeHtml(text) {
   div.textContent = text;
   return div.innerHTML;
 }
-
-async function saveLaborRateGroup() {
-  const nameInput = document.getElementById("groupNameInput");
-  const makesInput = document.getElementById("groupMakesInput");
-  const rateInput = document.getElementById("groupLaborRateInput");
-  
-  const name = nameInput.value.trim();
-  const makes = makesInput.value.trim().split(",").map(m => m.trim()).filter(m => m);
-  const laborRate = Math.round(parseFloat(rateInput.value) * 100); // Convert to cents
-  
-  if (!name) {
-    showToast("Please enter a group name");
-    return;
-  }
-  
-  if (makes.length === 0) {
-    showToast("Please enter at least one vehicle make");
-    return;
-  }
-  
-  if (isNaN(laborRate) || laborRate <= 0) {
-    showToast("Please enter a valid labor rate");
-    return;
-  }
-  
-  const data = await chrome.storage.local.get("laborRateGroups");
-  const groups = data.laborRateGroups || [];
-  
-  if (laborRateEditingIndex !== null) {
-    groups[laborRateEditingIndex] = { name, makes, laborRate };
-    showToast("Group updated!");
-  } else {
-    groups.push({ name, makes, laborRate });
-    showToast("Group added!");
-  }
-  
-  await chrome.storage.local.set({ laborRateGroups: groups });
-  resetLaborRateForm();
-  await loadLaborRateGroups();
-}
-
-async function editLaborRateGroup(index) {
-  const data = await chrome.storage.local.get("laborRateGroups");
-  const group = data.laborRateGroups?.[index];
-  
-  if (!group) return;
-  
-  document.getElementById("groupNameInput").value = group.name;
-  document.getElementById("groupMakesInput").value = group.makes.join(", ");
-  document.getElementById("groupLaborRateInput").value = (group.laborRate / 100).toFixed(2);
-  
-  laborRateEditingIndex = index;
-  document.getElementById("rateFormTitle").textContent = "Edit Group";
-  document.getElementById("saveRateGroupBtn").textContent = "Save Changes";
-  document.getElementById("cancelRateEditBtn").style.display = "inline-block";
-}
-
-async function deleteLaborRateGroup(index) {
-  if (!confirm("Are you sure you want to delete this group?")) return;
-  
-  const data = await chrome.storage.local.get("laborRateGroups");
-  const groups = data.laborRateGroups || [];
-  groups.splice(index, 1);
-  
-  await chrome.storage.local.set({ laborRateGroups: groups });
-  showToast("Group deleted");
-  await loadLaborRateGroups();
-}
-
-function resetLaborRateForm() {
-  laborRateEditingIndex = null;
-  document.getElementById("groupNameInput").value = "";
-  document.getElementById("groupMakesInput").value = "";
-  document.getElementById("groupLaborRateInput").value = "";
-  document.getElementById("rateFormTitle").textContent = "Add New Group";
-  document.getElementById("saveRateGroupBtn").textContent = "Add Group";
-  document.getElementById("cancelRateEditBtn").style.display = "none";
-}
-
-function setupLaborRateListeners() {
-  const saveBtn = document.getElementById("saveRateGroupBtn");
-  const cancelBtn = document.getElementById("cancelRateEditBtn");
-  
-  if (saveBtn) {
-    saveBtn.addEventListener("click", saveLaborRateGroup);
-  }
-  
-  if (cancelBtn) {
-    cancelBtn.addEventListener("click", resetLaborRateForm);
-  }
-}
-
-// Initialize labor rate listeners when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  setupLaborRateListeners();
-});
