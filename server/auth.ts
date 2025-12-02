@@ -74,7 +74,11 @@ export async function setupAuth(app: Express) {
       // Update last login
       await storage.updateUserLastLogin(user.id);
       
-      // Get user with preferences
+      // Check and upgrade bootstrap admins on login
+      const normalizedEmail = email.toLowerCase().trim();
+      await storage.ensureUserPreferencesOnLogin(user.id, normalizedEmail);
+      
+      // Get user with preferences (after potential upgrade)
       const userWithPrefs = await storage.getUserWithPreferences(user.id);
       
       // Regenerate session to prevent session fixation attacks, then set userId
