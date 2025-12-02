@@ -499,15 +499,20 @@ function setupMessageListeners() {
 }
 
 function requestCurrentROInfo() {
+  console.log('[SidePanel] requestCurrentROInfo called');
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    console.log('[SidePanel] Active tab:', tabs[0]?.url);
     if (tabs[0] && tabs[0].url && tabs[0].url.includes('tekmetric.com')) {
+      console.log('[SidePanel] Sending GET_VEHICLE_INFO to tab:', tabs[0].id);
       // Get vehicle info
       chrome.tabs.sendMessage(tabs[0].id, { type: 'GET_VEHICLE_INFO' }, (response) => {
+        console.log('[SidePanel] GET_VEHICLE_INFO response:', response);
         if (chrome.runtime.lastError) {
-          console.log('Could not get vehicle info:', chrome.runtime.lastError.message);
+          console.log('[SidePanel] Could not get vehicle info:', chrome.runtime.lastError.message);
           return;
         }
         if (response && response.vehicleInfo) {
+          console.log('[SidePanel] Updating fields with:', response.vehicleInfo);
           // Update Incoming Caller tab vehicle fields
           document.getElementById('vehicleYear').value = response.vehicleInfo.year || '';
           document.getElementById('vehicleMake').value = response.vehicleInfo.make || '';
@@ -516,6 +521,8 @@ function requestCurrentROInfo() {
           document.getElementById('searchYear').value = response.vehicleInfo.year || '';
           document.getElementById('searchMake').value = response.vehicleInfo.make || '';
           document.getElementById('searchModel').value = response.vehicleInfo.model || '';
+        } else {
+          console.log('[SidePanel] No vehicleInfo in response');
         }
       });
       

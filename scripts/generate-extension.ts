@@ -2,7 +2,7 @@ import archiver from 'archiver';
 import { createWriteStream, readdirSync, statSync } from 'fs';
 import { join } from 'path';
 
-const version = '3.14.2';
+const version = '3.14.3';
 const outputPath = `heart-helper-extension-v${version}.zip`;
 const sourceDir = 'chrome-extension';
 

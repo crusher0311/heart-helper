@@ -1321,12 +1321,16 @@ if (document.readyState === 'loading') {
 
 // Listen for messages from side panel
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  console.log('[Content] Received message:', message.type);
+  
   // Get current vehicle info for side panel
   if (message.type === 'GET_VEHICLE_INFO') {
+    console.log('[Content] Processing GET_VEHICLE_INFO');
     // First try to fetch from API for accurate data
     fetchVehicleInfoFromAPI().then(apiData => {
+      console.log('[Content] API data received:', apiData);
       if (apiData && apiData.vehicle) {
-        console.log('Sending API vehicle data:', apiData.vehicle);
+        console.log('[Content] Sending API vehicle data:', apiData.vehicle);
         sendResponse({ 
           vehicleInfo: {
             year: apiData.vehicle.year,
@@ -1337,12 +1341,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
       } else {
         // Fallback to DOM scraping
-        console.log('API failed, using DOM scraping');
+        console.log('[Content] API failed, using DOM scraping');
         const vehicleInfo = extractVehicleInfo();
+        console.log('[Content] DOM scraped vehicle:', vehicleInfo);
         sendResponse({ vehicleInfo });
       }
     }).catch(error => {
-      console.error('API fetch error:', error);
+      console.error('[Content] API fetch error:', error);
       const vehicleInfo = extractVehicleInfo();
       sendResponse({ vehicleInfo });
     });
