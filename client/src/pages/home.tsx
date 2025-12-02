@@ -18,6 +18,16 @@ import type { SearchJobRequest, SearchResult } from "@shared/schema";
 import { formatDistanceToNow } from "date-fns";
 import heartLogo from "@assets/HCAC_1764080802250.png";
 
+// Logout handler
+async function handleLogout() {
+  try {
+    await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
+  } catch (error) {
+    console.error("Logout error:", error);
+  }
+  window.location.href = "/";
+}
+
 export default function Home() {
   const { user } = useAuth();
   const [searchParams, setSearchParams] = useState<SearchJobRequest | null>(null);
@@ -176,12 +186,10 @@ export default function Home() {
               <p className="text-sm text-muted-foreground">
                 Signed in as: <span className="font-medium">{user?.email}</span>
               </p>
-              <a href="/api/logout">
-                <Button variant="outline" className="w-full" data-testid="button-logout">
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Sign Out
-                </Button>
-              </a>
+              <Button variant="outline" className="w-full" onClick={handleLogout} data-testid="button-logout">
+                <LogOut className="w-4 h-4 mr-2" />
+                Sign Out
+              </Button>
             </div>
           </CardContent>
         </Card>
@@ -271,7 +279,7 @@ export default function Home() {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem 
                     className="cursor-pointer text-destructive focus:text-destructive"
-                    onClick={() => window.location.href = "/api/logout"}
+                    onClick={handleLogout}
                     data-testid="button-logout"
                   >
                     <LogOut className="mr-2 h-4 w-4" />
