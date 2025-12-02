@@ -39,8 +39,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }, 1000);
     
     sendResponse({ success: true });
+    return false; // Only return false when we handled it
   }
-  return false; // Don't keep channel open
+  // Don't return anything if we didn't handle it - let other listeners process
 });
 
 // Remove overlay after reload (if it exists from previous page)
@@ -89,8 +90,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }, 1500);
     
     sendResponse({ success: true });
+    return false; // Only return false when we handled it
   }
-  return false;
+  // Don't return anything if we didn't handle it - let other listeners process
 });
 // ==================== END JOB CREATED HANDLER ====================
 
