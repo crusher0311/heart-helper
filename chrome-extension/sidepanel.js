@@ -506,13 +506,13 @@ function requestCurrentROInfo() {
       console.log('[SidePanel] Sending GET_VEHICLE_INFO to tab:', tabs[0].id);
       // Get vehicle info
       chrome.tabs.sendMessage(tabs[0].id, { type: 'GET_VEHICLE_INFO' }, (response) => {
-        console.log('[SidePanel] GET_VEHICLE_INFO response:', response);
+        console.log('[SidePanel] GET_VEHICLE_INFO response:', JSON.stringify(response));
         if (chrome.runtime.lastError) {
           console.log('[SidePanel] Could not get vehicle info:', chrome.runtime.lastError.message);
           return;
         }
         if (response && response.vehicleInfo) {
-          console.log('[SidePanel] Updating fields with:', response.vehicleInfo);
+          console.log('[SidePanel] Updating fields with:', JSON.stringify(response.vehicleInfo));
           // Update Incoming Caller tab vehicle fields
           document.getElementById('vehicleYear').value = response.vehicleInfo.year || '';
           document.getElementById('vehicleMake').value = response.vehicleInfo.make || '';
