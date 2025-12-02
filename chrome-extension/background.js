@@ -224,6 +224,147 @@ async function processLaborRateUpdate(shopId, roId) {
 
 // ==================== END LABOR RATE SECTION ====================
 
+// ==================== API-BASED JOB CREATION SECTION ====================
+
+/**
+ * Create a job in Tekmetric via direct API call
+ * This is MUCH faster than UI automation (1-2 seconds vs 20-30 seconds)
+ * 
+ * @param {Object} params - Job creation parameters
+ * @param {string} params.shopId - Tekmetric shop ID
+ * @param {string} params.roId - Repair order ID
+ * @param {Object} params.jobData - Job data from HEART Helper search
+ * @returns {Promise<{success: boolean, error?: string, jobId?: number}>}
+ */
+async function createJobViaAPI({ shopId, roId, jobData }) {
+  try {
+    if (!tekmetricAuthToken) {
+      return { success: false, error: "No Tekmetric auth token available. Please navigate to a repair order first." };
+    }
+
+    const baseUrl = currentTekmetricBaseUrl || "https://shop.tekmetric.com";
+    console.log("[Job API] Creating job via API:", { shopId, roId, baseUrl });
+    console.log("[Job API] Job data received:", jobData);
+
+    // First, fetch the current RO to get vehicle info and other details
+    const roRes = await fetch(`${baseUrl}/api/shop/${shopId}/repair-order/${roId}`, {
+      headers: {
+        "x-auth-token": tekmetricAuthToken,
+        "content-type": "application/json"
+      }
+    });
+
+    if (!roRes.ok) {
+      console.error("[Job API] Failed to fetch RO:", roRes.status);
+      return { success: false, error: `Failed to fetch repair order: ${roRes.status}` };
+    }
+
+    const roData = await roRes.json();
+    console.log("[Job API] RO data fetched:", { 
+      roNumber: roData.repairOrderNumber,
+      vehicle: roData.vehicle?.year + " " + roData.vehicle?.make + " " + roData.vehicle?.model,
+      laborRate: roData.laborRate
+    });
+
+    // Get the current labor rate from the RO (in cents)
+    const laborRate = roData.laborRate || 15000; // Default to $150/hr if not set
+
+    // Build the labor items array
+    const laborItems = (jobData.laborItems || []).map(item => ({
+      tempId: Math.random(),
+      jobId: null,
+      name: item.name || item.description || "Labor",
+      hours: parseFloat(item.hours) || 1,
+      rate: laborRate, // Use RO's labor rate
+      technician: roData.defaultTechnician || null
+    }));
+
+    // Build the parts array
+    const partsItems = (jobData.parts || []).map(part => ({
+      tempId: Math.random(),
+      jobId: null,
+      name: part.name || part.description || "Part",
+      partNumber: part.partNumber || "",
+      oemPartNumber: "",
+      brand: part.brand || "",
+      cost: Math.round((parseFloat(part.cost) || 0) * 100), // Convert to cents
+      quantity: parseInt(part.quantity) || 1,
+      retail: Math.round((parseFloat(part.retail) || parseFloat(part.price) || 0) * 100), // Convert to cents
+      position: "",
+      partType: { id: 1, code: "PART" }
+    }));
+
+    // Build the vehicle description
+    const vehicleDesc = roData.vehicle 
+      ? `${roData.vehicle.year} ${roData.vehicle.make} ${roData.vehicle.model}`.trim()
+      : "";
+
+    // Build the job payload matching Tekmetric's expected structure
+    // Use nullish coalescing (??) to respect RO values even when they're false
+    const jobPayload = {
+      repairOrderId: parseInt(roId),
+      repairOrderNumber: roData.repairOrderNumber,
+      repairOrderVehicleDescription: vehicleDesc,
+      name: jobData.jobName || jobData.name || "New Job",
+      status: "Pending",
+      selected: true,
+      archived: false,
+      authorized: null,
+      authorizedDate: null,
+      milesOut: roData.milesOut ?? roData.vehicle?.mileageOut ?? null,
+      technician: roData.defaultTechnician ?? null,
+      labor: laborItems,
+      parts: partsItems,
+      discounts: [],
+      fees: [],
+      feeable: true,
+      taxLabor: roData.taxLabor ?? false,
+      taxParts: roData.taxParts ?? true,
+      taxFees: roData.taxFees ?? true,
+      taxTires: roData.taxTires ?? false,
+      taxTiresFet: roData.taxTiresFet ?? true,
+      note: jobData.note ?? null,
+      notDeclined: true
+    };
+
+    console.log("[Job API] Sending job payload:", JSON.stringify(jobPayload, null, 2));
+
+    // Create the job via POST
+    const createRes = await fetch(`${baseUrl}/api/shop/${shopId}/job`, {
+      method: "POST",
+      headers: {
+        "x-auth-token": tekmetricAuthToken,
+        "content-type": "application/json",
+        "accept": "application/json"
+      },
+      body: JSON.stringify(jobPayload)
+    });
+
+    if (!createRes.ok) {
+      const errorText = await createRes.text();
+      console.error("[Job API] Failed to create job:", createRes.status, errorText);
+      return { success: false, error: `Failed to create job: ${createRes.status} - ${errorText}` };
+    }
+
+    const createdJob = await createRes.json();
+    console.log("[Job API] Job created successfully:", createdJob.id, createdJob.name);
+
+    return { 
+      success: true, 
+      jobId: createdJob.id,
+      jobName: createdJob.name,
+      laborCount: laborItems.length,
+      partsCount: partsItems.length
+    };
+
+  } catch (err) {
+    console.error("[Job API] Error creating job:", err);
+    return { success: false, error: err.message };
+  }
+}
+
+// ==================== END API JOB CREATION SECTION ====================
+
 // Open side panel when extension icon is clicked
 // This is the ONLY way to handle icon clicks - do NOT add chrome.action.onClicked
 // as they are mutually exclusive
@@ -359,6 +500,64 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
     return true; // Keep this because storage.get is async
   }
+
+  // API-based job creation - much faster than UI automation!
+  if (message.action === "CREATE_JOB_VIA_API") {
+    console.log("[Job API] Received CREATE_JOB_VIA_API message:", message);
+    
+    const { shopId, roId, jobData } = message;
+    
+    if (!shopId || !roId || !jobData) {
+      sendResponse({ success: false, error: "Missing required parameters (shopId, roId, or jobData)" });
+      return true;
+    }
+
+    // Use the captured shopId if not provided, or the one from the message
+    const effectiveShopId = shopId || currentTekmetricShopId;
+    
+    if (!effectiveShopId) {
+      sendResponse({ success: false, error: "No shop ID available. Please navigate to a repair order first." });
+      return true;
+    }
+
+    createJobViaAPI({ shopId: effectiveShopId, roId, jobData })
+      .then(result => {
+        console.log("[Job API] Create job result:", result);
+        
+        // If successful, notify Tekmetric tabs to refresh
+        if (result.success) {
+          chrome.tabs.query({ url: "*://*.tekmetric.com/*" }, (tabs) => {
+            for (const tab of tabs) {
+              chrome.tabs.sendMessage(tab.id, { 
+                type: "JOB_CREATED_VIA_API",
+                jobId: result.jobId,
+                jobName: result.jobName
+              }).catch(() => {
+                // Content script may not be ready
+              });
+            }
+          });
+        }
+        
+        sendResponse(result);
+      })
+      .catch(err => {
+        console.error("[Job API] Error:", err);
+        sendResponse({ success: false, error: err.message });
+      });
+    
+    return true; // Async response
+  }
+
+  // Get current Tekmetric context (auth token status, shop ID, etc.)
+  if (message.action === "GET_TEKMETRIC_CONTEXT") {
+    sendResponse({
+      hasAuthToken: !!tekmetricAuthToken,
+      shopId: currentTekmetricShopId,
+      baseUrl: currentTekmetricBaseUrl
+    });
+    return false;
+  }
 });
 
-console.log("Tekmetric Job Importer: Background service worker loaded (v3.10.3)");
+console.log("Tekmetric Job Importer: Background service worker loaded (v3.11.0 - API Job Creation)");

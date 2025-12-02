@@ -52,6 +52,48 @@ window.addEventListener("load", () => {
 });
 // ==================== END LABOR RATE HANDLER ====================
 
+// ==================== JOB CREATED VIA API HANDLER ====================
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (msg.type === "JOB_CREATED_VIA_API") {
+    console.log("[Job API] Job created notification:", msg.jobId, msg.jobName);
+    
+    // Show success overlay briefly
+    const overlay = document.createElement("div");
+    overlay.id = "job-created-overlay";
+    overlay.innerHTML = `
+      <div style="text-align: center;">
+        <div style="font-size: 2em; margin-bottom: 10px;">&#10004;</div>
+        <div style="font-size: 1.5em; margin-bottom: 10px;">Job Created!</div>
+        <div style="font-size: 1em; opacity: 0.8;">${msg.jobName || 'New Job'}</div>
+      </div>
+    `;
+    Object.assign(overlay.style, {
+      position: "fixed",
+      top: "0",
+      left: "0",
+      width: "100vw",
+      height: "100vh",
+      background: "rgba(0, 100, 0, 0.85)",
+      color: "white",
+      fontSize: "1.5em",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: "99999"
+    });
+    document.body.appendChild(overlay);
+
+    // Remove overlay after brief display (page will reload from sidepanel)
+    setTimeout(() => {
+      overlay.remove();
+    }, 1500);
+    
+    sendResponse({ success: true });
+  }
+  return false;
+});
+// ==================== END JOB CREATED HANDLER ====================
+
 function waitForElement(selector, timeout = 10000) {
   return new Promise((resolve, reject) => {
     if (document.querySelector(selector)) {

@@ -1190,7 +1190,7 @@ function showJobDetail(result) {
 }
 
 // Create job in Tekmetric from selected job result
-// MUST match the exact format used by web app's "Send to Extension" button
+// Uses direct API call for speed (1-2 seconds vs 20-30 seconds with UI automation)
 async function createJobInTekmetric() {
   console.log('createJobInTekmetric called, selectedJobResult:', selectedJobResult);
   
@@ -1203,10 +1203,11 @@ async function createJobInTekmetric() {
   const vehicle = selectedJobResult.vehicle;
   console.log('Creating job data for:', job.name);
   
-  // Build job data in EXACT same format as web app's handleSendToTekmetric()
-  // Note: API returns values in cents, we convert to dollars for Tekmetric
+  // Build job data for API
+  // Note: API returns values in cents, we convert to dollars for the API payload
   const jobData = {
     jobName: job.name,
+    name: job.name,
     vehicle: vehicle ? {
       year: vehicle.year,
       make: vehicle.make,
@@ -1216,16 +1217,19 @@ async function createJobInTekmetric() {
     } : null,
     laborItems: job.laborItems.map(item => ({
       name: item.name,
+      description: item.name,
       hours: Number(item.hours),
       rate: (item.rate || 0) / 100,  // Convert cents to dollars
     })),
     parts: job.parts.map(part => ({
       name: part.name,
+      description: part.name,
       brand: part.brand,
       partNumber: part.partNumber,
       quantity: part.quantity,
       cost: (part.cost || 0) / 100,  // Convert cents to dollars
       retail: (part.retail || part.unitPrice || 0) / 100,  // Convert cents to dollars
+      price: (part.retail || part.unitPrice || 0) / 100,
     })),
     totals: {
       labor: (job.laborTotal || 0) / 100,
@@ -1234,34 +1238,68 @@ async function createJobInTekmetric() {
     },
   };
   
-  console.log('Job data prepared (matches web app format):', jobData);
+  console.log('Job data prepared for API:', jobData);
   
   try {
     // Check if we're on a Tekmetric page first
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     console.log('Current tab:', tab?.url);
     
-    if (!tab?.url?.includes('shop.tekmetric.com')) {
-      showToast('Navigate to a Tekmetric RO and click "Add Service" first', 'error');
+    if (!tab?.url?.includes('tekmetric.com')) {
+      showToast('Navigate to a Tekmetric repair order first', 'error');
       return;
     }
     
-    // Store in background script - this will trigger the content script's storage listener
-    console.log('Sending STORE_PENDING_JOB to background...');
+    // Extract shop ID and RO ID from the URL
+    // Patterns: /shop/469/repair-orders/277382151 or /sandbox/469/repair-orders/277382151
+    const urlMatch = tab.url.match(/\/(?:shop|sandbox|cba)\/(\d+)\/repair-orders\/(\d+)/);
+    
+    if (!urlMatch) {
+      showToast('Please open a repair order in Tekmetric first', 'error');
+      return;
+    }
+    
+    const shopId = urlMatch[1];
+    const roId = urlMatch[2];
+    
+    console.log('Extracted from URL - Shop ID:', shopId, 'RO ID:', roId);
+    
+    // Show loading state
+    const createBtn = document.getElementById('createJobBtn');
+    const originalText = createBtn.innerHTML;
+    createBtn.innerHTML = '<span class="btn-icon">&#9203;</span> Creating...';
+    createBtn.disabled = true;
+    
+    // Call the API-based job creation
+    console.log('Sending CREATE_JOB_VIA_API to background...');
     chrome.runtime.sendMessage({ 
-      action: 'STORE_PENDING_JOB', 
+      action: 'CREATE_JOB_VIA_API',
+      shopId,
+      roId,
       jobData 
     }, (response) => {
-      console.log('STORE_PENDING_JOB response:', response);
+      console.log('CREATE_JOB_VIA_API response:', response);
+      
+      // Restore button state
+      createBtn.innerHTML = originalText;
+      createBtn.disabled = false;
+      
       if (response?.success) {
-        showToast('Job ready! Click "Add Service" in Tekmetric to auto-fill', 'success');
+        const laborCount = response.laborCount || 0;
+        const partsCount = response.partsCount || 0;
+        showToast(`Job created! (${laborCount} labor, ${partsCount} parts)`, 'success');
+        
+        // Refresh the Tekmetric tab to show the new job
+        chrome.tabs.reload(tab.id);
       } else {
-        showToast('Failed to store job data', 'error');
+        const errorMsg = response?.error || 'Unknown error';
+        console.error('Job creation failed:', errorMsg);
+        showToast(`Failed: ${errorMsg}`, 'error');
       }
     });
   } catch (error) {
     console.error('Error creating job:', error);
-    showToast('Failed to prepare job data', 'error');
+    showToast('Failed to create job', 'error');
   }
 }
 
