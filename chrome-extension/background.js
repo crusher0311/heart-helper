@@ -57,8 +57,8 @@ chrome.webRequest.onCompleted.addListener(
     let shopId = currentTekmetricShopId;
 
     // Match patterns for repair order URLs
-    // Pattern 1: /shop/123/repair-order/456
-    const shopRoMatch = details.url.match(/\/(?:sandbox|shop)\/(\d+)\/repair-order\/(\d+)/);
+    // Pattern 1: /shop/123/repair-order/456 or /sandbox/123/repair-order/456 or /cba/123/repair-order/456
+    const shopRoMatch = details.url.match(/\/(?:sandbox|shop|cba)\/(\d+)\/repair-order\/(\d+)/);
     if (shopRoMatch) {
       shopId = shopRoMatch[1];
       roId = shopRoMatch[2];
@@ -70,11 +70,21 @@ chrome.webRequest.onCompleted.addListener(
       roId = newRoMatch[1];
     }
 
-    // Pattern 3: /api/shop/123/repair-order/456
-    const apiRoMatch = details.url.match(/\/api\/shop\/(\d+)\/repair-order\/(\d+)/);
+    // Pattern 3: /api/shop/123/repair-order/456 (API calls for all environments)
+    const apiRoMatch = details.url.match(/\/api\/(?:shop|sandbox|cba)\/(\d+)\/repair-order\/(\d+)/);
     if (apiRoMatch) {
       shopId = apiRoMatch[1];
       roId = apiRoMatch[2];
+    }
+    
+    // Pattern 4: Generic repair-order API pattern (fallback with shopId from captured data)
+    if (!roId) {
+      const genericRoMatch = details.url.match(/\/repair-order\/(\d+)(?:\/|$)/);
+      if (genericRoMatch && currentTekmetricShopId) {
+        roId = genericRoMatch[1];
+        shopId = currentTekmetricShopId;
+        console.log(`[Labor Rate] Using fallback pattern with captured shopId: ${shopId}`);
+      }
     }
 
     if (!roId) return;
