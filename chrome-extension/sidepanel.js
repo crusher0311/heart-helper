@@ -14,17 +14,21 @@ let sessionCookie = null;
 async function getSessionCookie() {
   if (!appUrl) return null;
   try {
-    const url = new URL(appUrl);
+    // Debug: List all cookies for the domain
+    const allCookies = await chrome.cookies.getAll({ url: appUrl });
+    console.log('All cookies for', appUrl, ':', allCookies.map(c => c.name));
+    
     const cookie = await chrome.cookies.get({
       url: appUrl,
       name: 'connect.sid'
     });
     if (cookie) {
-      console.log('Session cookie found:', cookie.name);
+      console.log('Session cookie found:', cookie.name, 'value length:', cookie.value.length);
       sessionCookie = cookie.value;
       return cookie.value;
     } else {
-      console.log('No session cookie found for', appUrl);
+      console.log('No connect.sid cookie found for', appUrl);
+      console.log('Make sure you are logged in at:', appUrl);
       return null;
     }
   } catch (error) {

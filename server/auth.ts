@@ -30,9 +30,7 @@ export function getSession() {
       secure: isProduction,
       sameSite: isProduction ? 'none' : 'lax',
       maxAge: sessionTtl,
-      // Chrome requires partitioned cookies for cross-site access (Privacy Sandbox)
-      partitioned: isProduction,
-    } as any,
+    },
   });
 }
 

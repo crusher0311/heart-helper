@@ -1,0 +1,78 @@
+background.js:140 Tekmetric Job Importer: Background service worker loaded (v3.10.3)
+background.js:7 Side panel behavior set: opens on action click
+background.js:13 Side panel enabled for all tabs
+background.js:23 Context menu created: Open HEART Helper
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:113 Background: Retrieved from storage: No job
+background.js:113 Background: Retrieved from storage: No job
+background.js:113 Background: Retrieved from storage: No job
+sidepanel.js:27 No session cookie found for https://heart-helper.replit.app
+sidepanel.js:27 No session cookie found for https://heart-helper.replit.app
+sidepanel.js:27 No session cookie found for https://heart-helper.replit.app
+heart-helper.replit.app/api/auth/user:1  Failed to load resource: the server responded with a status of 401 ()
+sidepanel.js:113 Auth check failed: 401
+sidepanel.js:954 Search params: Object
+sidepanel.js:955 Fetching from: https://heart-helper.replit.app/api/search
+sidepanel.js:27 No session cookie found for https://heart-helper.replit.app
+sidepanel.js:27 No session cookie found for https://heart-helper.replit.app
+heart-helper.replit.app/api/search:1  Failed to load resource: the server responded with a status of 401 ()
+sidepanel.js:966 Search response status: 401
