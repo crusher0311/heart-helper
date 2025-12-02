@@ -10,6 +10,7 @@ HEART Helper is an AI-powered repair order search tool for HEART Certified Auto 
 - **Phone Answer Scripts**: Professional scripts for incoming calls
 - **Intelligent Repair Term Extraction**: Semantic parsing of customer descriptions
 - **Smart Year Matching**: Broader searches across compatible model years
+- **Fuzzy Model Matching**: Automatically matches model variations (F150 = F-150 = F 150) for better search results
 - **Service Writer Attribution**: Displays the service advisor who wrote each repair order, helping technicians identify jobs from experienced colleagues
 - **User Authentication**: Custom username/password authentication (bcrypt hashing, session-based) with personalized settings and approval workflow
 - **User Approval Workflow**: Auto-approves @heartautocare.com emails; other domains require admin approval
@@ -50,7 +51,7 @@ All protected routes require both authentication and approval status check.
 
 CORS is configured to allow Chrome extension origins (chrome-extension://), *.replit.dev, *.replit.app, and localhost with credentials support for cross-origin authentication.
 
-### Chrome Extension (v3.14.0)
+### Chrome Extension (v3.14.1)
 
 Located in `/chrome-extension/`, provides:
 - **Built-in Login/Registration**: Users can sign in or create accounts directly in the extension side panel - no need to visit the web app

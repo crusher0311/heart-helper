@@ -1,6 +1,7 @@
 import { JobWithDetails, employees } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
+import { cleanVehicleModel } from "./vehicle-utils";
 
 const TEKMETRIC_BASE_URL = "https://shop.tekmetric.com/api/v1";
 
@@ -214,7 +215,7 @@ export async function fetchRepairOrder(
         id: response.vehicle.id,
         year: response.vehicle.year,
         make: response.vehicle.make,
-        model: response.vehicle.model,
+        model: cleanVehicleModel(response.vehicle.model || ''),
         engine: response.vehicle.engineSize || response.vehicle.engine,
         vin: response.vehicle.vin,
       } : null,
