@@ -113,6 +113,9 @@ async function checkAuthStatus() {
       isAuthenticated = true;
       updateUserDisplay(currentUser);
       console.log('Auth check successful:', currentUser.email);
+      
+      // Sync labor rate groups on successful auth check
+      await syncLaborRateGroups();
     } else {
       console.log('Auth check failed:', response.status);
       currentUser = null;
@@ -129,9 +132,14 @@ async function checkAuthStatus() {
 
 function updateUserDisplay(user) {
   const userSection = document.getElementById('userSection');
-  if (!userSection) return;
+  const loginSection = document.getElementById('loginSection');
+  const tabNav = document.querySelector('.tab-nav');
+  const tabContents = document.querySelectorAll('.tab-content');
+  
+  if (!userSection || !loginSection) return;
   
   if (user) {
+    // Show user section, hide login
     const initials = (user.firstName?.[0] || '') + (user.lastName?.[0] || '');
     const displayName = user.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : user.email;
     userSection.innerHTML = `
@@ -141,16 +149,250 @@ function updateUserDisplay(user) {
           <div class="user-name">${displayName}</div>
           <div class="user-email">${user.email || ''}</div>
         </div>
+        <button class="logout-btn" id="logoutBtn">Sign out</button>
       </div>
     `;
     userSection.style.display = 'flex';
+    loginSection.style.display = 'none';
+    
+    // Show tabs
+    if (tabNav) tabNav.style.display = 'flex';
+    
+    // Add logout handler
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', handleLogout);
+    }
   } else {
-    userSection.innerHTML = `
-      <div class="user-info login-prompt">
-        <a href="${appUrl || '#'}" target="_blank" class="login-link">Sign in to save preferences</a>
-      </div>
-    `;
-    userSection.style.display = 'flex';
+    // Show login section, hide user section and tabs
+    userSection.style.display = 'none';
+    loginSection.style.display = 'flex';
+    
+    // Hide tabs when not logged in
+    if (tabNav) tabNav.style.display = 'none';
+    tabContents.forEach(content => content.style.display = 'none');
+  }
+}
+
+// Handle login form submission
+async function handleLogin(e) {
+  e.preventDefault();
+  
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const errorDiv = document.getElementById('loginError');
+  const submitBtn = document.getElementById('loginBtn');
+  
+  if (!email || !password) {
+    showLoginError('Please enter email and password');
+    return;
+  }
+  
+  if (!appUrl) {
+    showLoginError('App not configured. Click the gear icon to set up.');
+    return;
+  }
+  
+  // Disable button during login
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Signing in...';
+  
+  try {
+    const response = await fetch(`${appUrl}/api/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({ email, password }),
+    });
+    
+    const data = await response.json();
+    
+    if (response.ok) {
+      // Login successful
+      hideLoginError();
+      currentUser = data.user;
+      isAuthenticated = true;
+      
+      // Refresh session cookie
+      await getSessionCookie();
+      
+      // Update display
+      updateUserDisplay(currentUser);
+      
+      // Sync labor rate groups after login
+      await syncLaborRateGroups();
+      
+      // Show default tab
+      switchTab('incoming');
+      
+      console.log('Login successful:', currentUser.email);
+    } else {
+      showLoginError(data.message || 'Login failed');
+    }
+  } catch (error) {
+    console.error('Login error:', error);
+    showLoginError('Could not connect to server');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Sign In';
+  }
+}
+
+// Handle registration form submission
+async function handleRegister(e) {
+  e.preventDefault();
+  
+  const email = document.getElementById('registerEmail').value.trim();
+  const firstName = document.getElementById('registerFirstName').value.trim();
+  const lastName = document.getElementById('registerLastName').value.trim();
+  const password = document.getElementById('registerPassword').value;
+  const errorDiv = document.getElementById('registerError');
+  const submitBtn = document.getElementById('registerBtn');
+  
+  if (!email || !password) {
+    showRegisterError('Please enter email and password');
+    return;
+  }
+  
+  if (password.length < 8) {
+    showRegisterError('Password must be at least 8 characters');
+    return;
+  }
+  
+  if (!appUrl) {
+    showRegisterError('App not configured. Click the gear icon to set up.');
+    return;
+  }
+  
+  // Disable button during registration
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Creating account...';
+  
+  try {
+    const response = await fetch(`${appUrl}/api/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({ email, password, firstName, lastName }),
+    });
+    
+    const data = await response.json();
+    
+    if (response.ok) {
+      // Registration successful
+      hideRegisterError();
+      currentUser = data.user;
+      isAuthenticated = true;
+      
+      // Refresh session cookie
+      await getSessionCookie();
+      
+      // Update display
+      updateUserDisplay(currentUser);
+      
+      // Sync labor rate groups after login
+      await syncLaborRateGroups();
+      
+      // Show default tab
+      switchTab('incoming');
+      
+      console.log('Registration successful:', currentUser.email);
+    } else {
+      showRegisterError(data.message || 'Registration failed');
+    }
+  } catch (error) {
+    console.error('Registration error:', error);
+    showRegisterError('Could not connect to server');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Create Account';
+  }
+}
+
+// Handle logout
+async function handleLogout() {
+  try {
+    await authenticatedFetch(`${appUrl}/api/auth/logout`, {
+      method: 'POST',
+    });
+  } catch (error) {
+    console.error('Logout error:', error);
+  }
+  
+  // Clear state regardless of server response
+  currentUser = null;
+  isAuthenticated = false;
+  sessionCookie = null;
+  
+  // Update display
+  updateUserDisplay(null);
+  
+  console.log('Logged out');
+}
+
+// Sync labor rate groups from server to local storage
+async function syncLaborRateGroups() {
+  if (!appUrl || !isAuthenticated) return;
+  
+  try {
+    const response = await authenticatedFetch(`${appUrl}/api/labor-rate-groups`);
+    if (response.ok) {
+      const groups = await response.json();
+      // Store in chrome.storage.local for background.js to use
+      chrome.storage.local.set({ laborRateGroups: groups });
+      console.log('Labor rate groups synced:', groups.length, 'groups');
+    }
+  } catch (error) {
+    console.error('Failed to sync labor rate groups:', error);
+  }
+}
+
+function showLoginError(message) {
+  const errorDiv = document.getElementById('loginError');
+  if (errorDiv) {
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+  }
+}
+
+function hideLoginError() {
+  const errorDiv = document.getElementById('loginError');
+  if (errorDiv) {
+    errorDiv.style.display = 'none';
+  }
+}
+
+function showRegisterError(message) {
+  const errorDiv = document.getElementById('registerError');
+  if (errorDiv) {
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+  }
+}
+
+function hideRegisterError() {
+  const errorDiv = document.getElementById('registerError');
+  if (errorDiv) {
+    errorDiv.style.display = 'none';
+  }
+}
+
+function toggleLoginRegister(showRegister) {
+  const loginCard = document.querySelector('#loginSection .login-card:not(#registerCard)');
+  const registerCard = document.getElementById('registerCard');
+  
+  if (showRegister) {
+    if (loginCard) loginCard.style.display = 'none';
+    if (registerCard) registerCard.style.display = 'block';
+  } else {
+    if (loginCard) loginCard.style.display = 'block';
+    if (registerCard) registerCard.style.display = 'none';
   }
 }
 
@@ -296,6 +538,27 @@ function requestCurrentROInfo() {
 // ==================== EVENT LISTENERS ====================
 
 function setupEventListeners() {
+  // Login/Register forms
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', handleLogin);
+  }
+  
+  const registerForm = document.getElementById('registerForm');
+  if (registerForm) {
+    registerForm.addEventListener('submit', handleRegister);
+  }
+  
+  const showRegisterBtn = document.getElementById('showRegisterBtn');
+  if (showRegisterBtn) {
+    showRegisterBtn.addEventListener('click', () => toggleLoginRegister(true));
+  }
+  
+  const showLoginBtn = document.getElementById('showLoginBtn');
+  if (showLoginBtn) {
+    showLoginBtn.addEventListener('click', () => toggleLoginRegister(false));
+  }
+  
   // Tab switching
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => switchTab(btn.dataset.tab));
