@@ -1,4 +1,4 @@
-import { ArrowLeft, Users, Save, Loader2, User, Shield, ShieldCheck, Plus, Trash2, Clock, Check, X } from "lucide-react";
+import { ArrowLeft, Users, Save, Loader2, User, Shield, ShieldCheck, Plus, Trash2, Clock, Check, X, DollarSign } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -266,12 +266,20 @@ export default function Admin() {
           Back to Home
         </Link>
 
-        <div className="flex items-center gap-3 mb-6">
-          <ShieldCheck className="h-8 w-8 text-primary" />
-          <div>
-            <h1 className="text-2xl font-bold" data-testid="text-admin-title">Team Training Management</h1>
-            <p className="text-muted-foreground">Upload scripts and training data for team members</p>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <ShieldCheck className="h-8 w-8 text-primary" />
+            <div>
+              <h1 className="text-2xl font-bold" data-testid="text-admin-title">Team Training Management</h1>
+              <p className="text-muted-foreground">Upload scripts and training data for team members</p>
+            </div>
           </div>
+          <Link href="/admin/labor-rates">
+            <Button variant="outline" data-testid="link-labor-rates">
+              <DollarSign className="h-4 w-4 mr-2" />
+              Labor Rates
+            </Button>
+          </Link>
         </div>
 
         {/* Pending Approvals Section */}
