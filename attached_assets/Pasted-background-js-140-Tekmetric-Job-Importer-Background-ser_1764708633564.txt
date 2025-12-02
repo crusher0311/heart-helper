@@ -1,0 +1,62 @@
+background.js:140 Tekmetric Job Importer: Background service worker loaded (v3.10.3)
+background.js:7 Side panel behavior set: opens on action click
+background.js:13 Side panel enabled for all tabs
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+background.js:113 Background: Retrieved from storage: No job
+background.js:48 📨 Message received: GET_PENDING_JOB from tab: 1498358166
+background.js:110 Background: Content script requesting pending job
+background.js:113 Background: Retrieved from storage: No job
+heart-helper.replit.app/api/auth/user:1  Failed to load resource: the server responded with a status of 401 ()
+sidepanel.js:903 Search params: Object
+sidepanel.js:904 Fetching from: https://heart-helper.replit.app/api/search
+heart-helper.replit.app/api/search:1  Failed to load resource: the server responded with a status of 401 ()
+sidepanel.js:913 Search response status: 401

@@ -8,6 +8,54 @@ let currentTab = 'incoming';
 // User Authentication State
 let currentUser = null;
 let isAuthenticated = false;
+let sessionCookie = null;
+
+// Helper to get session cookie using Chrome cookies API
+async function getSessionCookie() {
+  if (!appUrl) return null;
+  try {
+    const url = new URL(appUrl);
+    const cookie = await chrome.cookies.get({
+      url: appUrl,
+      name: 'connect.sid'
+    });
+    if (cookie) {
+      console.log('Session cookie found:', cookie.name);
+      sessionCookie = cookie.value;
+      return cookie.value;
+    } else {
+      console.log('No session cookie found for', appUrl);
+      return null;
+    }
+  } catch (error) {
+    console.error('Error getting session cookie:', error);
+    return null;
+  }
+}
+
+// Wrapper for fetch that includes session cookie in header
+async function authenticatedFetch(url, options = {}) {
+  // Try to get cookie if we don't have it
+  if (!sessionCookie) {
+    await getSessionCookie();
+  }
+  
+  const headers = {
+    ...options.headers,
+    'Accept': 'application/json',
+  };
+  
+  // Add cookie header if we have a session
+  if (sessionCookie) {
+    headers['Cookie'] = `connect.sid=${sessionCookie}`;
+  }
+  
+  return fetch(url, {
+    ...options,
+    credentials: 'include',
+    headers,
+  });
+}
 
 // Incoming Caller State
 let customerName = '';
@@ -32,6 +80,8 @@ let selectedJobResult = null;
 document.addEventListener('DOMContentLoaded', async () => {
   await loadSettings();
   setupEventListeners();
+  // Get session cookie first before checking auth
+  await getSessionCookie();
   await checkAuthStatus();
   await syncSettingsFromApp();
   setupMessageListeners();
@@ -46,18 +96,21 @@ async function checkAuthStatus() {
     return;
   }
   
+  // Refresh cookie before checking
+  await getSessionCookie();
+  
   try {
-    const response = await fetch(`${appUrl}/api/auth/user`, {
+    const response = await authenticatedFetch(`${appUrl}/api/auth/user`, {
       method: 'GET',
-      credentials: 'include',
-      headers: { 'Accept': 'application/json' }
     });
     
     if (response.ok) {
       currentUser = await response.json();
       isAuthenticated = true;
       updateUserDisplay(currentUser);
+      console.log('Auth check successful:', currentUser.email);
     } else {
+      console.log('Auth check failed:', response.status);
       currentUser = null;
       isAuthenticated = false;
       updateUserDisplay(null);
@@ -420,7 +473,7 @@ async function generateQuestions() {
   
   try {
     const concernText = symptoms.join('. ');
-    const response = await fetch(`${appUrl}/api/concerns/generate-questions`, {
+    const response = await authenticatedFetch(`${appUrl}/api/concerns/generate-questions`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -520,7 +573,7 @@ async function finalizeConversation() {
   
   try {
     const concernText = symptoms.join('. ');
-    const response = await fetch(`${appUrl}/api/concerns/clean-conversation`, {
+    const response = await authenticatedFetch(`${appUrl}/api/concerns/clean-conversation`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -690,9 +743,8 @@ async function generateSalesScript() {
   
   try {
     // Include credentials to send session cookie for personalized training data
-    const response = await fetch(`${appUrl}/api/sales/generate-script`, {
+    const response = await authenticatedFetch(`${appUrl}/api/sales/generate-script`, {
       method: 'POST',
-      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         vehicle: currentRO.vehicle,
@@ -793,9 +845,8 @@ async function submitFeedback(sentiment) {
     const repairStr = currentRO?.jobs?.length > 0 ? 
       currentRO.jobs.map(j => j.name || j.jobName).filter(Boolean).join(', ') : null;
     
-    const response = await fetch(`${appUrl}/api/scripts/feedback`, {
+    const response = await authenticatedFetch(`${appUrl}/api/scripts/feedback`, {
       method: 'POST',
-      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         scriptType: 'sales',
@@ -903,9 +954,11 @@ async function performSearch() {
     console.log('Search params:', params);
     console.log('Fetching from:', `${appUrl}/api/search`);
     
-    const response = await fetch(`${appUrl}/api/search`, {
+    // Refresh cookie before searching
+    await getSessionCookie();
+    
+    const response = await authenticatedFetch(`${appUrl}/api/search`, {
       method: 'POST',
-      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(params)
     });
