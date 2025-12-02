@@ -741,19 +741,31 @@ export class DatabaseStorage implements IStorage {
 
   // Approval workflow methods
   async ensureUserPreferencesOnLogin(userId: string, email: string | null): Promise<UserPreferences> {
-    // Check if preferences already exist
-    const existing = await this.getUserPreferences(userId);
-    if (existing) {
-      return existing;
-    }
-    
     // Auto-approve @heartautocare.com emails (case-insensitive)
     const normalizedEmail = email?.toLowerCase().trim() ?? '';
     const isHeartEmail = normalizedEmail.endsWith('@heartautocare.com');
-    const approvalStatus = isHeartEmail ? 'approved' : 'pending';
     
-    // Create new preferences with appropriate approval status
-    return await this.upsertUserPreferences(userId, { approvalStatus });
+    // Bootstrap admin emails - these get auto-approved AND admin access
+    const bootstrapAdminEmails = [
+      'brandoncrusha@gmail.com',
+    ];
+    const isBootstrapAdmin = bootstrapAdminEmails.includes(normalizedEmail);
+    
+    // Check if preferences already exist
+    const existing = await this.getUserPreferences(userId);
+    if (existing) {
+      // If user is a bootstrap admin but not yet approved/admin, upgrade them
+      if (isBootstrapAdmin && (!existing.isAdmin || existing.approvalStatus !== 'approved')) {
+        return await this.upsertUserPreferences(userId, { approvalStatus: 'approved', isAdmin: true });
+      }
+      return existing;
+    }
+    
+    const approvalStatus = (isHeartEmail || isBootstrapAdmin) ? 'approved' : 'pending';
+    const isAdmin = isBootstrapAdmin;
+    
+    // Create new preferences with appropriate approval status and admin flag
+    return await this.upsertUserPreferences(userId, { approvalStatus, isAdmin });
   }
 
   async isUserApproved(userId: string): Promise<boolean> {
