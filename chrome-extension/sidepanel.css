@@ -1194,3 +1194,151 @@ textarea {
   85% { opacity: 1; transform: translateX(-50%) translateY(0); }
   100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
 }
+
+/* ==================== LABOR RATES TAB ==================== */
+.rates-section {
+  padding: 16px;
+}
+
+.rates-description {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.labor-rate-groups-list {
+  margin-bottom: 20px;
+}
+
+.labor-rate-group-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.labor-rate-group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.labor-rate-group-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+
+.labor-rate-group-rate {
+  background: #e8f5e9;
+  color: #2e7d32;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.labor-rate-group-makes {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.labor-rate-group-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.rate-edit-btn,
+.rate-delete-btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s;
+}
+
+.rate-edit-btn {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.rate-edit-btn:hover {
+  background: #bbdefb;
+}
+
+.rate-delete-btn {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.rate-delete-btn:hover {
+  background: #ffcdd2;
+}
+
+.rate-form-section {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.rate-form-section h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.rate-form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.rates-info-section {
+  margin-top: 16px;
+}
+
+.info-box {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 12px;
+  color: #5d4037;
+}
+
+.info-box strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #4e342e;
+}
+
+.info-box ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.info-box li {
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.no-groups-message {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+  font-size: 13px;
+  background: #fafafa;
+  border-radius: 8px;
+  border: 1px dashed #ddd;
+}

@@ -389,10 +389,16 @@ function switchTab(tab) {
   document.getElementById('incomingTab').style.display = tab === 'incoming' ? 'flex' : 'none';
   document.getElementById('searchTab').style.display = tab === 'search' ? 'flex' : 'none';
   document.getElementById('salesTab').style.display = tab === 'sales' ? 'flex' : 'none';
+  document.getElementById('ratesTab').style.display = tab === 'rates' ? 'flex' : 'none';
   
   // Auto-fill vehicle info when switching to search tab
   if (tab === 'search') {
     autoFillSearchVehicle();
+  }
+  
+  // Load labor rate groups when switching to rates tab
+  if (tab === 'rates') {
+    loadLaborRateGroups();
   }
   
   // Auto-generate sales script when switching to sales tab
@@ -1359,3 +1365,151 @@ function showToast(message) {
   
   setTimeout(() => toast.remove(), 2000);
 }
+
+// ==================== LABOR RATE GROUPS ====================
+
+let laborRateEditingIndex = null;
+
+async function loadLaborRateGroups() {
+  const data = await chrome.storage.local.get("laborRateGroups");
+  const groups = data.laborRateGroups || [];
+  const container = document.getElementById("laborRateGroupsList");
+  
+  if (!container) return;
+  
+  if (groups.length === 0) {
+    container.innerHTML = `
+      <div class="no-groups-message">
+        No labor rate groups configured yet. Add your first group below.
+      </div>
+    `;
+    return;
+  }
+  
+  container.innerHTML = groups.map((group, index) => `
+    <div class="labor-rate-group-card" data-index="${index}">
+      <div class="labor-rate-group-header">
+        <span class="labor-rate-group-name">${escapeHtml(group.name)}</span>
+        <span class="labor-rate-group-rate">$${(group.laborRate / 100).toFixed(2)}/hr</span>
+      </div>
+      <div class="labor-rate-group-makes">
+        <strong>Makes:</strong> ${group.makes.map(m => escapeHtml(m)).join(", ")}
+      </div>
+      <div class="labor-rate-group-actions">
+        <button class="rate-edit-btn" data-index="${index}">Edit</button>
+        <button class="rate-delete-btn" data-index="${index}">Delete</button>
+      </div>
+    </div>
+  `).join("");
+  
+  // Add event listeners
+  container.querySelectorAll(".rate-edit-btn").forEach(btn => {
+    btn.addEventListener("click", () => editLaborRateGroup(parseInt(btn.dataset.index)));
+  });
+  
+  container.querySelectorAll(".rate-delete-btn").forEach(btn => {
+    btn.addEventListener("click", () => deleteLaborRateGroup(parseInt(btn.dataset.index)));
+  });
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+async function saveLaborRateGroup() {
+  const nameInput = document.getElementById("groupNameInput");
+  const makesInput = document.getElementById("groupMakesInput");
+  const rateInput = document.getElementById("groupLaborRateInput");
+  
+  const name = nameInput.value.trim();
+  const makes = makesInput.value.trim().split(",").map(m => m.trim()).filter(m => m);
+  const laborRate = Math.round(parseFloat(rateInput.value) * 100); // Convert to cents
+  
+  if (!name) {
+    showToast("Please enter a group name");
+    return;
+  }
+  
+  if (makes.length === 0) {
+    showToast("Please enter at least one vehicle make");
+    return;
+  }
+  
+  if (isNaN(laborRate) || laborRate <= 0) {
+    showToast("Please enter a valid labor rate");
+    return;
+  }
+  
+  const data = await chrome.storage.local.get("laborRateGroups");
+  const groups = data.laborRateGroups || [];
+  
+  if (laborRateEditingIndex !== null) {
+    groups[laborRateEditingIndex] = { name, makes, laborRate };
+    showToast("Group updated!");
+  } else {
+    groups.push({ name, makes, laborRate });
+    showToast("Group added!");
+  }
+  
+  await chrome.storage.local.set({ laborRateGroups: groups });
+  resetLaborRateForm();
+  await loadLaborRateGroups();
+}
+
+async function editLaborRateGroup(index) {
+  const data = await chrome.storage.local.get("laborRateGroups");
+  const group = data.laborRateGroups?.[index];
+  
+  if (!group) return;
+  
+  document.getElementById("groupNameInput").value = group.name;
+  document.getElementById("groupMakesInput").value = group.makes.join(", ");
+  document.getElementById("groupLaborRateInput").value = (group.laborRate / 100).toFixed(2);
+  
+  laborRateEditingIndex = index;
+  document.getElementById("rateFormTitle").textContent = "Edit Group";
+  document.getElementById("saveRateGroupBtn").textContent = "Save Changes";
+  document.getElementById("cancelRateEditBtn").style.display = "inline-block";
+}
+
+async function deleteLaborRateGroup(index) {
+  if (!confirm("Are you sure you want to delete this group?")) return;
+  
+  const data = await chrome.storage.local.get("laborRateGroups");
+  const groups = data.laborRateGroups || [];
+  groups.splice(index, 1);
+  
+  await chrome.storage.local.set({ laborRateGroups: groups });
+  showToast("Group deleted");
+  await loadLaborRateGroups();
+}
+
+function resetLaborRateForm() {
+  laborRateEditingIndex = null;
+  document.getElementById("groupNameInput").value = "";
+  document.getElementById("groupMakesInput").value = "";
+  document.getElementById("groupLaborRateInput").value = "";
+  document.getElementById("rateFormTitle").textContent = "Add New Group";
+  document.getElementById("saveRateGroupBtn").textContent = "Add Group";
+  document.getElementById("cancelRateEditBtn").style.display = "none";
+}
+
+function setupLaborRateListeners() {
+  const saveBtn = document.getElementById("saveRateGroupBtn");
+  const cancelBtn = document.getElementById("cancelRateEditBtn");
+  
+  if (saveBtn) {
+    saveBtn.addEventListener("click", saveLaborRateGroup);
+  }
+  
+  if (cancelBtn) {
+    cancelBtn.addEventListener("click", resetLaborRateForm);
+  }
+}
+
+// Initialize labor rate listeners when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  setupLaborRateListeners();
+});
