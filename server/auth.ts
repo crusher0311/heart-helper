@@ -71,25 +71,44 @@ export async function setupAuth(app: Express) {
         return res.status(401).json({ message: "Invalid email or password" });
       }
 
-      // Set session
-      req.session.userId = user.id;
-      
       // Update last login
       await storage.updateUserLastLogin(user.id);
       
       // Get user with preferences
       const userWithPrefs = await storage.getUserWithPreferences(user.id);
       
-      return res.json({ 
-        message: "Login successful",
-        user: {
-          id: user.id,
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          profileImageUrl: user.profileImageUrl,
-        },
-        preferences: userWithPrefs?.preferences,
+      // Regenerate session to prevent session fixation attacks, then set userId
+      return new Promise<void>((resolve, reject) => {
+        req.session.regenerate((err) => {
+          if (err) {
+            console.error("Session regeneration error:", err);
+            return res.status(500).json({ message: "Login failed" });
+          }
+          
+          // Set session after regeneration
+          req.session.userId = user.id;
+          
+          // Save the session before responding
+          req.session.save((saveErr) => {
+            if (saveErr) {
+              console.error("Session save error:", saveErr);
+              return res.status(500).json({ message: "Login failed" });
+            }
+            
+            res.json({ 
+              message: "Login successful",
+              user: {
+                id: user.id,
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                profileImageUrl: user.profileImageUrl,
+              },
+              preferences: userWithPrefs?.preferences,
+            });
+            resolve();
+          });
+        });
       });
     } catch (error) {
       console.error("Login error:", error);
@@ -106,8 +125,8 @@ export async function setupAuth(app: Express) {
         return res.status(400).json({ message: "Email and password are required" });
       }
 
-      if (password.length < 6) {
-        return res.status(400).json({ message: "Password must be at least 6 characters" });
+      if (password.length < 8) {
+        return res.status(400).json({ message: "Password must be at least 8 characters" });
       }
 
       const normalizedEmail = email.toLowerCase().trim();
@@ -132,21 +151,40 @@ export async function setupAuth(app: Express) {
       // Ensure user preferences exist with appropriate approval status
       await storage.ensureUserPreferencesOnLogin(user.id, normalizedEmail);
 
-      // Set session
-      req.session.userId = user.id;
-      
       // Get user with preferences
       const userWithPrefs = await storage.getUserWithPreferences(user.id);
-      
-      return res.status(201).json({ 
-        message: "Registration successful",
-        user: {
-          id: user.id,
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        },
-        preferences: userWithPrefs?.preferences,
+
+      // Regenerate session to prevent session fixation attacks, then set userId
+      return new Promise<void>((resolve, reject) => {
+        req.session.regenerate((err) => {
+          if (err) {
+            console.error("Session regeneration error:", err);
+            return res.status(500).json({ message: "Registration failed" });
+          }
+          
+          // Set session after regeneration
+          req.session.userId = user.id;
+          
+          // Save the session before responding
+          req.session.save((saveErr) => {
+            if (saveErr) {
+              console.error("Session save error:", saveErr);
+              return res.status(500).json({ message: "Registration failed" });
+            }
+            
+            res.status(201).json({ 
+              message: "Registration successful",
+              user: {
+                id: user.id,
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+              },
+              preferences: userWithPrefs?.preferences,
+            });
+            resolve();
+          });
+        });
       });
     } catch (error) {
       console.error("Registration error:", error);

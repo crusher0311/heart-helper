@@ -79,7 +79,7 @@ export interface IStorage {
   isUserAdmin(userId: string): Promise<boolean>;
   getAllUsersWithPreferences(): Promise<UserWithPreferences[]>;
   updateUserTrainingAsAdmin(targetUserId: string, training: string): Promise<UserPreferences>;
-  createUserAsAdmin(userData: { email: string; firstName: string; lastName: string; isAdmin?: boolean }): Promise<User>;
+  createUserAsAdmin(userData: { email: string; firstName: string; lastName: string; isAdmin?: boolean; passwordHash?: string }): Promise<User>;
   deleteUserAsAdmin(userId: string): Promise<void>;
   updateUserAdminStatus(userId: string, isAdmin: boolean): Promise<UserPreferences>;
   
@@ -684,11 +684,11 @@ export class DatabaseStorage implements IStorage {
     return await this.upsertUserPreferences(targetUserId, { personalTraining: training });
   }
 
-  async createUserAsAdmin(userData: { email: string; firstName: string; lastName: string; isAdmin?: boolean }): Promise<User> {
+  async createUserAsAdmin(userData: { email: string; firstName: string; lastName: string; isAdmin?: boolean; passwordHash?: string }): Promise<User> {
     // Generate a unique ID for the user
     const userId = crypto.randomUUID();
     
-    // Create the user
+    // Create the user with optional password
     const [newUser] = await db
       .insert(users)
       .values({
@@ -696,11 +696,15 @@ export class DatabaseStorage implements IStorage {
         email: userData.email,
         firstName: userData.firstName,
         lastName: userData.lastName,
+        passwordHash: userData.passwordHash || null,
       })
       .returning();
     
-    // Always create user preferences for new users
-    await this.upsertUserPreferences(userId, { isAdmin: userData.isAdmin === true });
+    // Always create user preferences for new users (auto-approve admin-created users)
+    await this.upsertUserPreferences(userId, { 
+      isAdmin: userData.isAdmin === true,
+      approvalStatus: 'approved',
+    });
     
     return newUser;
   }

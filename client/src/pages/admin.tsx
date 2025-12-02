@@ -58,7 +58,7 @@ export default function Admin() {
   const [trainingText, setTrainingText] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
-  const [newUserData, setNewUserData] = useState({ email: '', firstName: '', lastName: '', isAdmin: false });
+  const [newUserData, setNewUserData] = useState({ email: '', firstName: '', lastName: '', password: '', isAdmin: false });
 
   const { data: adminCheck } = useQuery<{ isAdmin: boolean }>({
     queryKey: ["/api/admin/check"],
@@ -117,7 +117,7 @@ export default function Admin() {
         description: `${newUserData.firstName} ${newUserData.lastName} has been added.`,
       });
       setIsAddDialogOpen(false);
-      setNewUserData({ email: '', firstName: '', lastName: '', isAdmin: false });
+      setNewUserData({ email: '', firstName: '', lastName: '', password: '', isAdmin: false });
     },
     onError: (error: Error) => {
       toast({
@@ -350,29 +350,31 @@ export default function Admin() {
                     <DialogHeader>
                       <DialogTitle>Add Team Member</DialogTitle>
                       <DialogDescription>
-                        Add a new user to the team. They'll be able to sign in with Replit.
+                        Add a new user to the team. They'll sign in with email and password.
                       </DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 py-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="firstName">First Name</Label>
-                        <Input
-                          id="firstName"
-                          value={newUserData.firstName}
-                          onChange={(e) => setNewUserData({ ...newUserData, firstName: e.target.value })}
-                          placeholder="John"
-                          data-testid="input-first-name"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="lastName">Last Name</Label>
-                        <Input
-                          id="lastName"
-                          value={newUserData.lastName}
-                          onChange={(e) => setNewUserData({ ...newUserData, lastName: e.target.value })}
-                          placeholder="Doe"
-                          data-testid="input-last-name"
-                        />
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="firstName">First Name</Label>
+                          <Input
+                            id="firstName"
+                            value={newUserData.firstName}
+                            onChange={(e) => setNewUserData({ ...newUserData, firstName: e.target.value })}
+                            placeholder="John"
+                            data-testid="input-first-name"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="lastName">Last Name</Label>
+                          <Input
+                            id="lastName"
+                            value={newUserData.lastName}
+                            onChange={(e) => setNewUserData({ ...newUserData, lastName: e.target.value })}
+                            placeholder="Doe"
+                            data-testid="input-last-name"
+                          />
+                        </div>
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="email">Email</Label>
@@ -384,6 +386,18 @@ export default function Admin() {
                           placeholder="john@heartautocare.com"
                           data-testid="input-email"
                         />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="password">Password</Label>
+                        <Input
+                          id="password"
+                          type="password"
+                          value={newUserData.password}
+                          onChange={(e) => setNewUserData({ ...newUserData, password: e.target.value })}
+                          placeholder="At least 8 characters"
+                          data-testid="input-password"
+                        />
+                        <p className="text-xs text-muted-foreground">Password for the new user to sign in</p>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Switch
@@ -401,7 +415,7 @@ export default function Admin() {
                       </Button>
                       <Button
                         onClick={() => createUserMutation.mutate(newUserData)}
-                        disabled={createUserMutation.isPending || !newUserData.email || !newUserData.firstName || !newUserData.lastName}
+                        disabled={createUserMutation.isPending || !newUserData.email || !newUserData.firstName || !newUserData.lastName || newUserData.password.length < 8}
                         data-testid="button-create-user"
                       >
                         {createUserMutation.isPending ? (

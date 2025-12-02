@@ -166,10 +166,15 @@ export async function registerRoutes(app: Express) {
   // Create a new user (admin only)
   app.post('/api/admin/users', isAuthenticated, isAdmin, async (req: any, res) => {
     try {
-      const { email, firstName, lastName, isAdmin: makeAdmin } = req.body;
+      const { email, firstName, lastName, isAdmin: makeAdmin, password } = req.body;
       
       if (!email || !firstName || !lastName) {
         return res.status(400).json({ error: "email, firstName, and lastName are required" });
+      }
+      
+      // Validate password - must be at least 8 characters
+      if (!password || typeof password !== 'string' || password.length < 8) {
+        return res.status(400).json({ error: "Password must be at least 8 characters" });
       }
       
       // Check if email already exists
@@ -178,11 +183,16 @@ export async function registerRoutes(app: Express) {
         return res.status(400).json({ error: "A user with this email already exists" });
       }
       
+      // Hash password
+      const bcrypt = await import('bcryptjs');
+      const passwordHash = await bcrypt.hash(password, 12);
+      
       const newUser = await storage.createUserAsAdmin({
         email,
         firstName,
         lastName,
         isAdmin: makeAdmin === true,
+        passwordHash,
       });
       
       res.status(201).json(newUser);
