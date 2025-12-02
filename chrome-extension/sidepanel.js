@@ -155,8 +155,15 @@ function updateUserDisplay(user) {
     userSection.style.display = 'flex';
     loginSection.style.display = 'none';
     
-    // Show tabs
+    // Show tabs and restore active tab content
     if (tabNav) tabNav.style.display = 'flex';
+    
+    // Show the current tab content (or default to incoming)
+    const activeTab = currentTab || 'incoming';
+    document.getElementById('incomingTab').style.display = activeTab === 'incoming' ? 'flex' : 'none';
+    document.getElementById('searchTab').style.display = activeTab === 'search' ? 'flex' : 'none';
+    document.getElementById('salesTab').style.display = activeTab === 'sales' ? 'flex' : 'none';
+    document.getElementById('ratesTab').style.display = activeTab === 'rates' ? 'flex' : 'none';
     
     // Add logout handler
     const logoutBtn = document.getElementById('logoutBtn');
