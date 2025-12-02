@@ -19,9 +19,11 @@ import type {
   ScriptFeedback,
   InsertScriptFeedback,
   UserWithPreferences,
+  LaborRateGroup,
+  InsertLaborRateGroup,
 } from "@shared/schema";
 import { db } from "./db";
-import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache, users, userPreferences, scriptFeedback } from "@shared/schema";
+import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache, users, userPreferences, scriptFeedback, laborRateGroups } from "@shared/schema";
 import { eq, and, or, like, ilike, sql, desc, gte, lte } from "drizzle-orm";
 import crypto from "crypto";
 
@@ -88,6 +90,12 @@ export interface IStorage {
   isUserApproved(userId: string): Promise<boolean>;
   getPendingApprovalUsers(): Promise<UserWithPreferences[]>;
   updateUserApprovalStatus(userId: string, status: 'approved' | 'rejected'): Promise<UserPreferences>;
+  
+  // Labor rate groups (admin-managed, per-shop configuration)
+  getLaborRateGroups(shopId?: string): Promise<LaborRateGroup[]>;
+  createLaborRateGroup(data: InsertLaborRateGroup): Promise<LaborRateGroup>;
+  updateLaborRateGroup(id: string, data: Partial<InsertLaborRateGroup>): Promise<LaborRateGroup>;
+  deleteLaborRateGroup(id: string): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -795,6 +803,54 @@ export class DatabaseStorage implements IStorage {
     }
     
     return await this.upsertUserPreferences(userId, { approvalStatus: status });
+  }
+
+  // Labor rate groups (admin-managed, per-shop configuration)
+  async getLaborRateGroups(shopId?: string): Promise<LaborRateGroup[]> {
+    if (shopId) {
+      // Get groups for specific shop OR groups that apply to all shops
+      return await db
+        .select()
+        .from(laborRateGroups)
+        .where(or(
+          eq(laborRateGroups.shopId, shopId),
+          eq(laborRateGroups.shopId, 'ALL')
+        ))
+        .orderBy(laborRateGroups.name);
+    }
+    
+    // Get all groups (admin view)
+    return await db
+      .select()
+      .from(laborRateGroups)
+      .orderBy(laborRateGroups.shopId, laborRateGroups.name);
+  }
+
+  async createLaborRateGroup(data: InsertLaborRateGroup): Promise<LaborRateGroup> {
+    const [group] = await db
+      .insert(laborRateGroups)
+      .values(data)
+      .returning();
+    return group;
+  }
+
+  async updateLaborRateGroup(id: string, data: Partial<InsertLaborRateGroup>): Promise<LaborRateGroup> {
+    const [group] = await db
+      .update(laborRateGroups)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(laborRateGroups.id, id))
+      .returning();
+    
+    if (!group) {
+      throw new Error("Labor rate group not found");
+    }
+    return group;
+  }
+
+  async deleteLaborRateGroup(id: string): Promise<void> {
+    await db
+      .delete(laborRateGroups)
+      .where(eq(laborRateGroups.id, id));
   }
 }
 

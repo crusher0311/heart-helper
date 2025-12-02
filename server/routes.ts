@@ -283,6 +283,110 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // ==================== LABOR RATE GROUPS (ADMIN) ====================
+  
+  // Get all labor rate groups (admin only - sees all shops)
+  app.get('/api/admin/labor-rate-groups', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const groups = await storage.getLaborRateGroups();
+      res.json(groups);
+    } catch (error) {
+      console.error("Error fetching labor rate groups:", error);
+      res.status(500).json({ message: "Failed to fetch labor rate groups" });
+    }
+  });
+  
+  // Create labor rate group (admin only)
+  app.post('/api/admin/labor-rate-groups', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { shopId, name, makes, laborRate } = req.body;
+      
+      if (!shopId || !name || !makes || !laborRate) {
+        return res.status(400).json({ error: "shopId, name, makes, and laborRate are required" });
+      }
+      
+      if (!Array.isArray(makes) || makes.length === 0) {
+        return res.status(400).json({ error: "makes must be a non-empty array" });
+      }
+      
+      const group = await storage.createLaborRateGroup({
+        shopId,
+        name,
+        makes,
+        laborRate: Math.round(laborRate), // Ensure it's an integer (cents)
+        createdBy: req.user.id,
+      });
+      
+      res.status(201).json(group);
+    } catch (error) {
+      console.error("Error creating labor rate group:", error);
+      res.status(500).json({ message: "Failed to create labor rate group" });
+    }
+  });
+  
+  // Update labor rate group (admin only)
+  app.put('/api/admin/labor-rate-groups/:id', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { id } = req.params;
+      const { shopId, name, makes, laborRate } = req.body;
+      
+      const updateData: any = {};
+      if (shopId !== undefined) updateData.shopId = shopId;
+      if (name !== undefined) updateData.name = name;
+      if (makes !== undefined) {
+        if (!Array.isArray(makes) || makes.length === 0) {
+          return res.status(400).json({ error: "makes must be a non-empty array" });
+        }
+        updateData.makes = makes;
+      }
+      if (laborRate !== undefined) updateData.laborRate = Math.round(laborRate);
+      
+      const group = await storage.updateLaborRateGroup(id, updateData);
+      res.json(group);
+    } catch (error: any) {
+      console.error("Error updating labor rate group:", error);
+      if (error.message === "Labor rate group not found") {
+        return res.status(404).json({ error: "Labor rate group not found" });
+      }
+      res.status(500).json({ message: "Failed to update labor rate group" });
+    }
+  });
+  
+  // Delete labor rate group (admin only)
+  app.delete('/api/admin/labor-rate-groups/:id', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { id } = req.params;
+      await storage.deleteLaborRateGroup(id);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error deleting labor rate group:", error);
+      res.status(500).json({ message: "Failed to delete labor rate group" });
+    }
+  });
+  
+  // ==================== LABOR RATE GROUPS (USER) ====================
+  
+  // Get labor rate groups for a specific shop (authenticated users)
+  // The extension uses this to fetch groups based on the current Tekmetric shop
+  app.get('/api/labor-rate-groups', isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const shopId = req.query.shopId as string | undefined;
+      
+      // If no shopId provided, use user's default shop
+      let targetShopId = shopId;
+      if (!targetShopId) {
+        const prefs = await storage.getUserPreferences(req.user.id);
+        targetShopId = prefs?.defaultShopId || undefined;
+      }
+      
+      const groups = await storage.getLaborRateGroups(targetShopId);
+      res.json(groups);
+    } catch (error) {
+      console.error("Error fetching labor rate groups:", error);
+      res.status(500).json({ message: "Failed to fetch labor rate groups" });
+    }
+  });
+
   // Search endpoint (requires authentication and approval)
   app.post("/api/search", isAuthenticated, isApproved, async (req: any, res) => {
     try {
