@@ -3,6 +3,55 @@ console.log("Tekmetric Job Importer: Content script loaded");
 let checkHistoryButton = null;
 let injectedIcons = new Set(); // Track which textareas already have icons
 
+// ==================== LABOR RATE UI REFRESH HANDLER ====================
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (msg.type === "REFRESH_LABOR_RATE_UI") {
+    console.log("[Labor Rate] Refreshing UI after rate update to:", msg.rate, msg.groupName);
+    
+    // Create overlay with update message
+    const overlay = document.createElement("div");
+    overlay.id = "labor-rate-overlay";
+    overlay.innerHTML = `
+      <div style="text-align: center;">
+        <div style="font-size: 1.5em; margin-bottom: 10px;">Updating labor rate...</div>
+        <div style="font-size: 1em; opacity: 0.8;">${msg.groupName || 'Matched Group'}: $${((msg.rate || 0) / 100).toFixed(2)}/hr</div>
+      </div>
+    `;
+    Object.assign(overlay.style, {
+      position: "fixed",
+      top: "0",
+      left: "0",
+      width: "100vw",
+      height: "100vh",
+      background: "rgba(0,0,0,0.7)",
+      color: "white",
+      fontSize: "1.5em",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: "99999"
+    });
+    document.body.appendChild(overlay);
+
+    // Reload page after brief delay
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+    
+    sendResponse({ success: true });
+  }
+  return false; // Don't keep channel open
+});
+
+// Remove overlay after reload (if it exists from previous page)
+window.addEventListener("load", () => {
+  const overlay = document.getElementById("labor-rate-overlay");
+  if (overlay) {
+    overlay.remove();
+  }
+});
+// ==================== END LABOR RATE HANDLER ====================
+
 function waitForElement(selector, timeout = 10000) {
   return new Promise((resolve, reject) => {
     if (document.querySelector(selector)) {
