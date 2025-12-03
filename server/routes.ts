@@ -19,6 +19,7 @@ import {
   reviewConcernConversation,
   cleanConcernConversation,
   generateSalesScript,
+  scoreCallTranscript,
 } from "./ai";
 import archiver from "archiver";
 import { join } from "path";
@@ -1031,6 +1032,79 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Get all extension-to-user mappings (admin only)
+  app.get("/api/ringcentral/mappings", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const mappings = await storage.getAllRingcentralUsers();
+      res.json(mappings);
+    } catch (error: any) {
+      console.error("Get mappings error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Save extension-to-user mappings (admin only)
+  // Only upserts provided mappings; does NOT delete existing mappings not in the request
+  app.post("/api/ringcentral/mappings", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { mappings } = req.body;
+      
+      if (!Array.isArray(mappings)) {
+        return res.status(400).json({ message: "Invalid mappings format - expected array" });
+      }
+
+      // Validate each mapping has required fields
+      for (const mapping of mappings) {
+        if (!mapping.extensionId || typeof mapping.extensionId !== 'string') {
+          return res.status(400).json({ message: "Each mapping must have a valid extensionId" });
+        }
+        // userId can be "none" or "" for unmapping, otherwise must be a valid string
+        if (typeof mapping.userId !== 'string') {
+          return res.status(400).json({ message: "Each mapping must have a userId (use 'none' or empty string to unmap)" });
+        }
+      }
+
+      // Get existing mappings to handle unmapping
+      const existingMappings = await storage.getAllRingcentralUsers();
+      const existingByExtId = new Map(
+        existingMappings.map(m => [m.ringcentralExtensionId, m])
+      );
+
+      // Process each mapping in the request
+      const results = [];
+      const processedExtIds = new Set<string>();
+      
+      for (const mapping of mappings) {
+        // Only require extensionId to be truthy - userId can be empty for unmapping
+        if (mapping.extensionId) {
+          processedExtIds.add(mapping.extensionId);
+          
+          if (mapping.userId === "none" || mapping.userId === "") {
+            // Unmapping request - delete if exists
+            const existing = existingByExtId.get(mapping.extensionId);
+            if (existing) {
+              await storage.deleteRingcentralUser(existing.id);
+            }
+          } else if (mapping.userId) {
+            // Map or update mapping (only if userId is a non-empty string)
+            const result = await storage.upsertRingcentralUserMapping(
+              mapping.extensionId,
+              mapping.userId,
+              mapping.extensionNumber || "",
+              mapping.extensionName || ""
+            );
+            results.push(result);
+          }
+        }
+      }
+
+      res.json({ success: true, count: results.length });
+    } catch (error: any) {
+      console.error("Save mappings error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
   // Get call recordings for current user (requires approval)
   app.get("/api/calls", isAuthenticated, isApproved, async (req: any, res) => {
     try {
@@ -1038,6 +1112,11 @@ export async function registerRoutes(app: Express) {
       const limit = parseInt(req.query.limit as string) || 50;
       const dateFrom = req.query.dateFrom ? new Date(req.query.dateFrom as string) : undefined;
       const dateTo = req.query.dateTo ? new Date(req.query.dateTo as string) : undefined;
+      const direction = req.query.direction as string | undefined;
+      
+      // Validate direction if provided
+      const validDirections = ['Inbound', 'Outbound'];
+      const normalizedDirection = direction && validDirections.includes(direction) ? direction : undefined;
       
       // Check if user is admin or manager
       const isAdminUser = await storage.isUserAdmin(userId);
@@ -1047,13 +1126,13 @@ export async function registerRoutes(app: Express) {
       let calls;
       if (isAdminUser) {
         // Admins see all calls
-        calls = await storage.getAllCallRecordings(dateFrom, dateTo, limit);
+        calls = await storage.getAllCallRecordings(dateFrom, dateTo, limit, normalizedDirection);
       } else if (managedShopId) {
         // Managers see calls for their shop
-        calls = await storage.getCallRecordingsForShop(managedShopId, dateFrom, dateTo, limit);
+        calls = await storage.getCallRecordingsForShop(managedShopId, dateFrom, dateTo, limit, normalizedDirection);
       } else {
         // Regular users see only their calls
-        calls = await storage.getCallRecordingsForUser(userId, dateFrom, dateTo, limit);
+        calls = await storage.getCallRecordingsForUser(userId, dateFrom, dateTo, limit, normalizedDirection);
       }
       
       res.json(calls);
@@ -1074,11 +1153,127 @@ export async function registerRoutes(app: Express) {
       }
       
       // Get call score if exists
-      const score = await storage.getCallScore(callId);
+      const rawScore = await storage.getCallScore(callId);
+      
+      // Transform score to frontend format
+      let score = null;
+      if (rawScore) {
+        // Get all coaching criteria to provide names and max scores
+        const allCriteria = await storage.getAllCoachingCriteria();
+        const criteriaMap = new Map(allCriteria.map(c => [c.id, c]));
+        
+        // Parse criteriaScores from jsonb
+        const criteriaScoresJson = rawScore.criteriaScores as Record<string, { score: number; found: boolean; excerpts: string[] }> || {};
+        
+        // Calculate max possible score (each criterion is worth 5 points)
+        const maxPossibleScore = allCriteria.filter(c => c.isActive).length * 5;
+        
+        // Build the criteriaScores array for frontend
+        const criteriaScores = Object.entries(criteriaScoresJson).map(([criterionId, data]) => {
+          const criterion = criteriaMap.get(criterionId);
+          return {
+            criterionId,
+            criterionName: criterion?.name || 'Unknown Criterion',
+            score: data.score || 0,
+            maxScore: 5,
+            found: data.found || false,
+            excerpts: data.excerpts || [],
+          };
+        });
+        
+        score = {
+          id: rawScore.id,
+          overallScore: rawScore.overallScore || 0,
+          maxPossibleScore,
+          criteriaScores,
+          summary: rawScore.aiFeedback || '',
+          scoredAt: rawScore.createdAt?.toISOString() || new Date().toISOString(),
+        };
+      }
       
       res.json({ ...call, score });
     } catch (error: any) {
       console.error("Get call error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Score a call transcript with AI (admin only)
+  app.post("/api/calls/:id/score", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const callId = req.params.id;
+      const call = await storage.getCallRecordingById(callId);
+      
+      if (!call) {
+        return res.status(404).json({ message: "Call not found" });
+      }
+      
+      if (!call.transcript || call.transcript.trim().length < 50) {
+        return res.status(400).json({ message: "Call does not have a transcript to score" });
+      }
+      
+      // Get active coaching criteria
+      const criteria = await storage.getActiveCoachingCriteria();
+      
+      if (criteria.length === 0) {
+        return res.status(400).json({ message: "No active coaching criteria defined" });
+      }
+      
+      // Score the transcript with AI
+      const scoringResult = await scoreCallTranscript(call.transcript, criteria.map(c => ({
+        id: c.id,
+        name: c.name,
+        description: c.description,
+        category: c.category,
+        maxScore: 5, // Each criterion is scored 0-5
+        isActive: c.isActive || true,
+      })));
+      
+      // Check if score already exists
+      const existingScore = await storage.getCallScore(callId);
+      
+      let savedScore;
+      if (existingScore) {
+        // Update existing score
+        savedScore = await storage.updateCallScore(existingScore.id, {
+          overallScore: scoringResult.overallScore,
+          criteriaScores: scoringResult.criteriaScores,
+          aiFeedback: scoringResult.summary,
+          aiHighlights: scoringResult.highlights,
+        });
+      } else {
+        // Create new score
+        savedScore = await storage.createCallScore({
+          callId,
+          overallScore: scoringResult.overallScore,
+          criteriaScores: scoringResult.criteriaScores,
+          aiFeedback: scoringResult.summary,
+          aiHighlights: scoringResult.highlights,
+        });
+      }
+      
+      res.json({
+        success: true,
+        score: {
+          id: savedScore.id,
+          overallScore: scoringResult.overallScore,
+          criteriaScores: Object.entries(scoringResult.criteriaScores).map(([criterionId, data]) => {
+            const criterion = criteria.find(c => c.id === criterionId);
+            return {
+              criterionId,
+              criterionName: criterion?.name || 'Unknown',
+              score: data.score,
+              maxScore: 5,
+              found: data.found,
+              excerpts: data.excerpts,
+            };
+          }),
+          summary: scoringResult.summary,
+          highlights: scoringResult.highlights,
+        },
+      });
+    } catch (error: any) {
+      console.error("Score call error:", error);
       res.status(500).json({ message: error.message });
     }
   });

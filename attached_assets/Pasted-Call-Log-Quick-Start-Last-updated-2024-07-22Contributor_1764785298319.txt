@@ -1,0 +1,68 @@
+Call Log Quick Start
+Last updated: 2024-07-22ContributorsPaco VuByrne Reese
+Edit this page
+Calling the RingCentral API for the first time? We recommend you try out getting started experience.
+
+In this quick start, we are going to help you access your company's call log, or a detailed audit of all the calls that have been routed through your account. Let's get started.
+
+Create an app and obtain credentials
+The first thing we need to do is create an app in the RingCentral Developer Console. This can be done quickly by clicking the "Create Call Log App" button below. Just click the button, enter a name and description if you choose, and click the "Create" button. If you do not yet have a RingCentral account, you will be prompted to create one.
+
+Show detailed instructions
+
+When you are done, you will be taken to the app's dashboard. Make note of the Client ID and Client Secret. We will be using those momentarily.
+
+Download and edit a .env file
+Follow the instructions found in our guide to running Developer Guide code samples. Or:
+
+Download our env-template and save it as a file named .env.
+Edit your newly downloaded .env file, setting its variables with the proper values for the app you created above, paying close attention to the following:
+RC_APP_CLIENT_ID - set to the Client ID of the app you created above
+RC_APP_CLIENT_SECRET - set to the Client Secret of the app you created above
+RC_USER_JWT - set to the JWT credential you created for yourself
+Access your company's call log
+JavaScript
+const RC_SDK = require('@ringcentral/sdk').SDK
+const path = require('path')
+// Remember to modify the path of your .env file location!
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
+// Instantiate the SDK and get the platform instance
+var rcsdk = new RC_SDK({
+    'server':       process.env.RC_SERVER_URL,
+    'clientId':     process.env.RC_APP_CLIENT_ID,
+    'clientSecret': process.env.RC_APP_CLIENT_SECRET
+});
+var platform = rcsdk.platform();
+
+/* Authenticate a user using a personal JWT token */
+platform.login({ 'jwt':  process.env.RC_USER_JWT })
+
+platform.on(platform.events.loginSuccess, function(e){
+    read_user_calllog()
+});
+
+platform.on(platform.events.loginError, function(e){
+    console.log("Unable to authenticate to platform. Check credentials.", e.message)
+    process.exit(1)
+});
+
+/*
+* Read user call log between a period of time
+*/
+async function read_user_calllog() {
+  try {
+    var queryParams = {
+        'dateFrom': "2024-01-01T00:00:00.000Z",
+        'dateTo': "2024-01-31T23:59:59.009Z",
+        'view': "Detailed"
+    }
+    var endpoint = "/restapi/v1.0/account/~/extension/~/call-log"
+    var resp = await platform.get(endpoint, queryParams)
+    var jsonObj = await resp.json()
+    for (var record of jsonObj.records)
+      console.log(record)
+  } catch (e) {
+    console.log("Unable to read user call log.", e.message)
+  }
+}

@@ -11,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Sparkles, Settings, RefreshCw, Clock, LogOut, User, ShieldCheck, AlertCircle } from "lucide-react";
+import { Sparkles, Settings, RefreshCw, Clock, LogOut, User, ShieldCheck, AlertCircle, Phone } from "lucide-react";
 import { Link } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
 import type { SearchJobRequest, SearchResult } from "@shared/schema";
@@ -266,6 +266,12 @@ export default function Home() {
                     <Link href="/settings" className="cursor-pointer">
                       <User className="mr-2 h-4 w-4" />
                       <span>Preferences</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/calls" className="cursor-pointer" data-testid="link-calls">
+                      <Phone className="mr-2 h-4 w-4" />
+                      <span>Call History</span>
                     </Link>
                   </DropdownMenuItem>
                   {adminCheck?.isAdmin && (

@@ -107,19 +107,22 @@ export interface IStorage {
   deleteLaborRateGroup(id: string): Promise<void>;
   
   // RingCentral user mappings
+  getAllRingcentralUsers(): Promise<RingcentralUser[]>;
   getRingcentralUserByExtensionId(extensionId: string): Promise<RingcentralUser | undefined>;
   getRingcentralUserByUserId(userId: string): Promise<RingcentralUser | undefined>;
   createRingcentralUser(data: InsertRingcentralUser): Promise<RingcentralUser>;
   updateRingcentralUser(id: string, data: Partial<InsertRingcentralUser>): Promise<RingcentralUser>;
+  deleteRingcentralUser(id: string): Promise<void>;
+  upsertRingcentralUserMapping(extensionId: string, userId: string, extensionNumber: string, extensionName: string): Promise<RingcentralUser>;
   
   // Call recordings
   getCallRecordingByRingcentralId(callId: string): Promise<CallRecording | undefined>;
   getCallRecordingById(id: string): Promise<CallRecording | undefined>;
   createCallRecording(data: InsertCallRecording): Promise<CallRecording>;
   updateCallRecording(id: string, data: Partial<InsertCallRecording>): Promise<CallRecording>;
-  getCallRecordingsForUser(userId: string, dateFrom?: Date, dateTo?: Date, limit?: number): Promise<CallRecording[]>;
-  getCallRecordingsForShop(shopId: string, dateFrom?: Date, dateTo?: Date, limit?: number): Promise<CallRecording[]>;
-  getAllCallRecordings(dateFrom?: Date, dateTo?: Date, limit?: number): Promise<CallRecording[]>;
+  getCallRecordingsForUser(userId: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string): Promise<CallRecording[]>;
+  getCallRecordingsForShop(shopId: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string): Promise<CallRecording[]>;
+  getAllCallRecordings(dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string): Promise<CallRecording[]>;
   
   // Coaching criteria
   getActiveCoachingCriteria(shopId?: string): Promise<CoachingCriteria[]>;
@@ -893,6 +896,13 @@ export class DatabaseStorage implements IStorage {
   }
   
   // RingCentral user mappings
+  async getAllRingcentralUsers(): Promise<RingcentralUser[]> {
+    return await db
+      .select()
+      .from(ringcentralUsers)
+      .orderBy(ringcentralUsers.displayName);
+  }
+
   async getRingcentralUserByExtensionId(extensionId: string): Promise<RingcentralUser | undefined> {
     const [user] = await db
       .select()
@@ -925,6 +935,34 @@ export class DatabaseStorage implements IStorage {
       .returning();
     if (!user) throw new Error("RingCentral user not found");
     return user;
+  }
+
+  async deleteRingcentralUser(id: string): Promise<void> {
+    await db
+      .delete(ringcentralUsers)
+      .where(eq(ringcentralUsers.id, id));
+  }
+
+  async upsertRingcentralUserMapping(
+    extensionId: string, 
+    userId: string, 
+    extensionNumber: string, 
+    extensionName: string
+  ): Promise<RingcentralUser> {
+    const existing = await this.getRingcentralUserByExtensionId(extensionId);
+    
+    if (existing) {
+      return await this.updateRingcentralUser(existing.id.toString(), {
+        userId,
+        displayName: `${extensionName} (Ext ${extensionNumber})`,
+      });
+    } else {
+      return await this.createRingcentralUser({
+        ringcentralExtensionId: extensionId,
+        userId,
+        displayName: `${extensionName} (Ext ${extensionNumber})`,
+      });
+    }
   }
 
   // Call recordings
@@ -966,7 +1004,8 @@ export class DatabaseStorage implements IStorage {
     userId: string, 
     dateFrom?: Date, 
     dateTo?: Date, 
-    limit: number = 100
+    limit: number = 100,
+    direction?: string
   ): Promise<CallRecording[]> {
     const conditions = [eq(callRecordings.userId, userId)];
     
@@ -975,6 +1014,9 @@ export class DatabaseStorage implements IStorage {
     }
     if (dateTo) {
       conditions.push(lte(callRecordings.callStartTime, dateTo));
+    }
+    if (direction) {
+      conditions.push(eq(callRecordings.direction, direction));
     }
     
     return await db
@@ -989,7 +1031,8 @@ export class DatabaseStorage implements IStorage {
     shopId: string, 
     dateFrom?: Date, 
     dateTo?: Date, 
-    limit: number = 100
+    limit: number = 100,
+    direction?: string
   ): Promise<CallRecording[]> {
     const conditions = [eq(callRecordings.shopId, shopId)];
     
@@ -998,6 +1041,9 @@ export class DatabaseStorage implements IStorage {
     }
     if (dateTo) {
       conditions.push(lte(callRecordings.callStartTime, dateTo));
+    }
+    if (direction) {
+      conditions.push(eq(callRecordings.direction, direction));
     }
     
     return await db
@@ -1011,7 +1057,8 @@ export class DatabaseStorage implements IStorage {
   async getAllCallRecordings(
     dateFrom?: Date, 
     dateTo?: Date, 
-    limit: number = 100
+    limit: number = 100,
+    direction?: string
   ): Promise<CallRecording[]> {
     const conditions = [];
     
@@ -1020,6 +1067,9 @@ export class DatabaseStorage implements IStorage {
     }
     if (dateTo) {
       conditions.push(lte(callRecordings.callStartTime, dateTo));
+    }
+    if (direction) {
+      conditions.push(eq(callRecordings.direction, direction));
     }
     
     const query = conditions.length > 0 

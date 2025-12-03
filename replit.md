@@ -32,10 +32,13 @@ The frontend is built with React and TypeScript using Vite, styled with shadcn/u
 
 Key pages:
 - `/` - Landing page (unauthenticated) or Home page (authenticated)
-- `/settings` - User preferences with personal AI training data, plus admin-only sections for Labor Rates and Coaching Criteria
+- `/settings` - User preferences with personal AI training data, plus admin-only sections for Labor Rates, RingCentral Sync, and Coaching Criteria
 - `/admin` - Team training management (admin only)
 - `/admin/labor-rates` - Centralized labor rate group management (admin only)
+- `/admin/extension-mapping` - RingCentral extension to user mapping (admin only)
 - `/admin/coaching-criteria` - Call coaching 10-point grading system configuration (admin only)
+- `/calls` - Call history with date/direction filters and recording status (role-based access)
+- `/calls/:id` - Individual call detail with AI scoring, transcript, and coaching feedback
 
 ### Backend Architecture
 
@@ -48,9 +51,11 @@ Key API endpoints:
 - `/api/sales/generate-script` - AI script generation with per-user training
 - `/api/search` - AI-powered repair order search
 - `/api/admin/*` - Admin user management, approvals, training data
-- `/api/ringcentral/*` - RingCentral integration (test, sync, extensions)
+- `/api/ringcentral/*` - RingCentral integration (test, sync, extensions, mappings)
 - `/api/coaching/criteria` - Coaching criteria CRUD and seed-defaults
-- `/api/calls` - Call recordings with role-based access (admin/manager/user)
+- `/api/calls` - Call recordings with role-based access and direction filtering (admin/manager/user)
+- `/api/calls/:id` - Single call with AI score, criteria breakdown, and transcript
+- `/api/calls/:id/score` - Trigger AI scoring of call transcript (admin only)
 
 All protected routes require both authentication and approval status check.
 

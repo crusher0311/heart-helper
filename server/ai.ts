@@ -872,3 +872,160 @@ Return ONLY the script paragraph, no headers or formatting.`;
     return { script: fallbackScript };
   }
 }
+
+// ==========================================
+// AI Call Scoring for RingCentral Coaching
+// ==========================================
+
+interface CoachingCriterion {
+  id: string;
+  name: string;
+  description: string | null;
+  category: string | null;
+  maxScore: number;
+  isActive: boolean;
+}
+
+interface CriterionScore {
+  criterionId: string;
+  score: number; // 0-5
+  found: boolean;
+  excerpts: string[];
+}
+
+interface CallScoringResult {
+  overallScore: number;
+  criteriaScores: Record<string, CriterionScore>;
+  summary: string;
+  highlights: Array<{ text: string; type: 'positive' | 'improvement' }>;
+}
+
+/**
+ * Uses AI to score a call transcript against coaching criteria
+ * Returns detailed scores for each criterion with evidence excerpts
+ */
+export async function scoreCallTranscript(
+  transcript: string,
+  criteria: CoachingCriterion[]
+): Promise<CallScoringResult> {
+  // Filter to only active criteria
+  const activeCriteria = criteria.filter(c => c.isActive);
+  
+  if (activeCriteria.length === 0) {
+    return {
+      overallScore: 0,
+      criteriaScores: {},
+      summary: "No active coaching criteria defined.",
+      highlights: [],
+    };
+  }
+  
+  if (!transcript || transcript.trim().length < 50) {
+    return {
+      overallScore: 0,
+      criteriaScores: {},
+      summary: "Transcript too short or not available for scoring.",
+      highlights: [],
+    };
+  }
+
+  const criteriaList = activeCriteria.map((c, i) => 
+    `${i + 1}. "${c.name}" (ID: ${c.id}): ${c.description || 'No description'}`
+  ).join('\n');
+
+  const prompt = `You are an expert call coach for automotive service advisors. Analyze this phone call transcript and score the service advisor's performance.
+
+COACHING CRITERIA (score each 0-5):
+${criteriaList}
+
+SCORING GUIDE:
+- 0: Not present at all
+- 1: Barely attempted, needs significant improvement
+- 2: Attempted but poorly executed
+- 3: Adequately performed
+- 4: Well executed with minor improvements possible
+- 5: Excellent, exemplary performance
+
+CALL TRANSCRIPT:
+${transcript.slice(0, 8000)}
+
+Analyze the call and provide:
+1. A score (0-5) for each criterion
+2. Whether evidence was found for each criterion
+3. Brief excerpts (quotes) showing evidence for each criterion
+4. Overall feedback summary
+5. Key positive moments and areas for improvement
+
+Return ONLY valid JSON:
+{
+  "criteriaScores": {
+    "criterion_id": {
+      "score": 4,
+      "found": true,
+      "excerpts": ["Relevant quote from transcript", "Another quote"]
+    }
+  },
+  "summary": "Overall feedback paragraph about the call performance",
+  "highlights": [
+    { "text": "Good job greeting customer by name", "type": "positive" },
+    { "text": "Could improve by mentioning warranty benefits", "type": "improvement" }
+  ]
+}`;
+
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o", // Use full model for detailed analysis
+      messages: [
+        {
+          role: "system",
+          content: "You are an expert automotive service advisor call coach. Analyze calls objectively, provide specific examples from the transcript, and give actionable feedback. Score fairly - not every call will be perfect. Always respond with valid JSON only."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      response_format: { type: "json_object" },
+      max_completion_tokens: 2000,
+    });
+
+    const content = response.choices[0]?.message?.content;
+    if (!content) {
+      throw new Error("No response from AI");
+    }
+
+    const parsed = JSON.parse(content);
+    
+    // Calculate overall score as average of all criteria scores
+    const criteriaScores = parsed.criteriaScores || {};
+    let totalScore = 0;
+    let scoredCount = 0;
+    
+    for (const criterionId of Object.keys(criteriaScores)) {
+      const scoreData = criteriaScores[criterionId];
+      if (typeof scoreData.score === 'number') {
+        totalScore += scoreData.score;
+        scoredCount++;
+      }
+    }
+    
+    const overallScore = scoredCount > 0 
+      ? Math.round(totalScore / scoredCount * 20) // Convert 0-5 to 0-100
+      : 0;
+
+    return {
+      overallScore,
+      criteriaScores,
+      summary: parsed.summary || '',
+      highlights: parsed.highlights || [],
+    };
+  } catch (error) {
+    console.error("AI call scoring error:", error);
+    return {
+      overallScore: 0,
+      criteriaScores: {},
+      summary: "Unable to score call due to an error.",
+      highlights: [],
+    };
+  }
+}
