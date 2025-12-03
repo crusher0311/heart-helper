@@ -653,6 +653,12 @@ function setupEventListeners() {
   document.getElementById('feedbackSuccess').addEventListener('click', () => submitFeedback('positive'));
   document.getElementById('feedbackFail').addEventListener('click', () => submitFeedback('negative'));
   
+  // Objection handling buttons
+  document.querySelectorAll('.objection-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => handleObjectionClick(e.target.dataset.objection));
+  });
+  document.getElementById('copyObjectionBtn').addEventListener('click', copyObjectionResponse);
+  
   // Search
   document.getElementById('searchBtn').addEventListener('click', performSearch);
   document.getElementById('clearSearchBtn').addEventListener('click', clearSearch);
@@ -1191,6 +1197,183 @@ async function submitFeedback(sentiment) {
     console.error('Error submitting feedback:', error);
     showToast(sentiment === 'positive' ? 'Great! Thanks for the feedback.' : 'Thanks for the feedback!');
   }
+}
+
+// ==================== OBJECTION HANDLING ====================
+
+// Objection response templates with placeholders for work order context
+const objectionTemplates = {
+  price_high: {
+    label: "Price Too High",
+    template: (ctx) => `I totally get it—car repairs never seem to come at the right time. Just to understand—is there a price you had in mind, or is it just more than you were expecting?
+
+I'll be honest with you—we're not the cheapest facility in town, and we don't hide from that. We've built this business by providing a premium service, and it just costs more to do things the right way.
+
+You're paying for:
+• ASE Master Certified techs who are paid like professionals
+• A 3-year/36,000-mile nationwide warranty
+• A team that's here 7 days a week if something goes wrong
+
+${ctx.totalAmount ? `Your investment of $${ctx.totalAmount.toFixed(2)} for the ${ctx.jobsList || 'recommended services'}` : 'This investment'} isn't just for parts—it's for peace of mind and a repair done right the first time.
+
+Have you ever paid less for something because it felt like a good deal, and then regretted it later?`
+  },
+  
+  no_money: {
+    label: "No Money Right Now",
+    template: (ctx) => `I totally get it. Car repair never seems to come at a good time—it always finds us on the wrong week, right before payday, or right after something else goes sideways.
+
+Something a ton of our customers love using is our payment options. You can take care of what ${ctx.vehicleDesc || 'your vehicle'} needs today, but spread the cost out over time—without paying for it all up front.
+
+We have programs that can break the cost into smaller payments—some even with 0% for six months.
+
+${ctx.totalAmount ? `So instead of $${ctx.totalAmount.toFixed(2)} all at once, you could handle it in manageable monthly payments.` : ''}
+
+It's the same quality repair, same team, same warranty—you're just not taking the hit all at once. Would that be something you're interested in?`
+  },
+  
+  spouse: {
+    label: "Talk to Spouse",
+    template: (ctx) => `Hey, I totally understand—I've got to run everything by my wife too before I go spending all of our money!
+
+Let me make this easier for you: What I can do is take this off your plate and offer to make that call for you. Sometimes there are technical questions about ${ctx.jobsList || 'the repairs'} that are easier for me to answer—stuff that gets lost in translation.
+
+We can also hop on a quick 3-way call together if that's easier. That way nobody's guessing or relaying information. I'm here to help however you need.
+
+Would you feel more comfortable if I spoke with them directly? Or would you prefer to tag them in on a quick call?`
+  },
+  
+  waiting: {
+    label: "I'll Wait",
+    template: (ctx) => {
+      const isSafety = ctx.hasSafetyItems;
+      if (isSafety) {
+        return `I understand completely. Just so I'm being totally upfront with you—this one falls into a true safety category.
+
+${ctx.jobsList ? `With the ${ctx.jobsList}` : 'With these repairs'}, we're beyond the point of normal wear and into items that directly affect your safety on the road. At this stage, it's not just going to cost more later—it's putting you and your passengers at risk if you're driving ${ctx.vehicleDesc || 'the vehicle'} regularly.
+
+I'm not saying that to scare you—I just don't want to see you stuck on the side of the road or unable to stop when it counts.
+
+If it helps, we've got some flexible payment options we can look at, so you don't have to absorb the full cost today. Want me to walk you through those real quick?`;
+      } else {
+        return `Totally understand—${ctx.jobsList || 'these services'} aren't safety-critical, but they're definitely longevity-critical.
+
+The reason we recommend doing them now is because you're already here, we already have ${ctx.vehicleDesc || 'the vehicle'} in the air, and doing it now actually saves you money and time long-term.
+
+A lot of what we're seeing in these systems is buildup that doesn't show symptoms until it causes real damage. If you're planning to hang on to ${ctx.vehicleDesc || 'the vehicle'}, it's a great time to knock these out now while we've got access and can protect those systems under our warranty.
+
+And again—we can space out the cost if that helps. I'm here to make it work for you either way.`;
+      }
+    }
+  },
+  
+  selling_car: {
+    label: "Selling the Car",
+    template: (ctx) => `I totally get where you're coming from. Unexpected repairs can be frustrating.
+
+But here's what I tell all my customers—selling the car rarely saves money, it just moves the cost somewhere else. Let's do the math for a second:
+
+The average new car is $48,000 right now. Put 10% down, and that's nearly $5,000 out of pocket. Drive it off the lot—you immediately lose another 10% in depreciation. Now you're paying $800 a month, plus taxes, plus maintenance, and a year later you're down $15,000 plus.
+
+Even used cars today average $28,000—and you're inheriting someone else's wear and tear. You don't know how they maintained it. You don't really know what's coming next.
+
+We only recommend services on vehicles that are truly good investments. And based on our inspection, ${ctx.vehicleDesc || 'this vehicle'} is in excellent condition overall. The overwhelming majority of the systems we checked are in great shape.
+
+Let me ask you this—if you could walk onto a car lot today and buy ${ctx.vehicleDesc || 'this exact car'} for ${ctx.totalAmount ? `$${ctx.totalAmount.toFixed(2)}` : 'this repair cost'}, knowing that so many of the key components have already been inspected and are in good shape—would you buy it?
+
+Because that's exactly what you're doing. You're not just throwing money at an old car—you're making a smart, measured investment in a vehicle that still has a lot of life left.`
+  },
+  
+  need_car: {
+    label: "Need Car Today",
+    template: (ctx) => `Totally understand—and let me start by saying: we've got options.
+
+We have loaner vehicles available, and we offer shuttle rides and pickup/drop-off services too—whatever makes your day easier. Let me take that stress off your plate.
+
+Would a loaner or shuttle ride help take care of that for you today?
+
+Once we get ${ctx.vehicleDesc || 'your vehicle'} in and get started on ${ctx.jobsList || 'the repairs'}, I'll keep you posted on progress. ${ctx.totalAmount ? `Your total investment is $${ctx.totalAmount.toFixed(2)}, and` : ''} I'll have an update for you by end of day, around 4:30 or 5.
+
+Is this still the best number for updates later today?`
+  },
+  
+  always_selling: {
+    label: "Always Selling Me",
+    template: (ctx) => `I totally understand, ${ctx.customerName || 'and I appreciate you being honest with me'}. And I want to start by saying this: That is never my intention—to make you feel sold. If that's how it came across, then I must've dropped the ball.
+
+You are never obligated to do any of the work we recommend—but it is my professional obligation to look over ${ctx.vehicleDesc || 'your vehicle'} and tell you what I see.
+
+Let me ask you something: What's worse—a quick phone call about a maintenance item today… or a phone call two weeks from now when there's oil leaking all over your driveway and no one warned you? Or worse yet—you and your family are broken down on the side of the road, 5 hours outside of town, calling AAA for something that could have been prevented.
+
+That's the call I never want to get.
+
+Every time your vehicle comes in, we're going to do a complimentary, bumper-to-bumper inspection. We check underhood, mid-rise, and full-rise—front to back, top to bottom.
+
+Again—you're not obligated to fix any of it with us, but as your service advisor, it's my professional obligation to help you make smart decisions about ${ctx.vehicleDesc || 'your vehicle'}.
+
+Would you like me to walk you through the results of the inspection today?`
+  }
+};
+
+// Generate context object from current RO data
+function getObjectionContext() {
+  if (!currentRO) return {};
+  
+  const vehicle = currentRO.vehicle || {};
+  const vehicleDesc = `${vehicle.year || ''} ${vehicle.make || ''} ${vehicle.model || ''}`.trim() || 'your vehicle';
+  
+  const jobs = currentRO.jobs || [];
+  const jobNames = jobs.map(j => j.name || j.jobName).filter(Boolean);
+  const jobsList = jobNames.slice(0, 3).join(', ') || null;
+  
+  // Detect safety items (brakes, steering, suspension, etc.)
+  const safetyKeywords = /brake|steering|suspension|tire|axle|ball joint|tie rod|wheel bearing|control arm|strut|shock|rotor|caliper|hub/i;
+  const hasSafetyItems = jobNames.some(name => safetyKeywords.test(name));
+  
+  // Get total from currentRO
+  const totalAmount = currentRO.totalAmount || currentRO.total || null;
+  
+  // Customer name
+  const customerName = currentRO.customer?.name?.split(' ')[0] || null;
+  
+  return {
+    vehicleDesc,
+    jobsList,
+    hasSafetyItems,
+    totalAmount: totalAmount ? parseFloat(totalAmount) : null,
+    customerName
+  };
+}
+
+// Handle objection button click
+function handleObjectionClick(objectionKey) {
+  const template = objectionTemplates[objectionKey];
+  if (!template) return;
+  
+  // Update active button state
+  document.querySelectorAll('.objection-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.objection === objectionKey);
+  });
+  
+  // Generate response using context
+  const context = getObjectionContext();
+  const response = template.template(context);
+  
+  // Display response
+  const responseSection = document.getElementById('objectionResponse');
+  const responseLabel = document.getElementById('objectionResponseLabel');
+  const responseContent = document.getElementById('objectionResponseContent');
+  
+  responseLabel.textContent = template.label;
+  responseContent.textContent = response;
+  responseSection.style.display = 'block';
+}
+
+// Copy objection response
+function copyObjectionResponse() {
+  const content = document.getElementById('objectionResponseContent').innerText;
+  navigator.clipboard.writeText(content);
+  showToast('Response copied!');
 }
 
 // ==================== SEARCH ====================

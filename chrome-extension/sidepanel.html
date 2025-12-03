@@ -313,6 +313,41 @@
             </button>
           </div>
         </div>
+
+        <!-- Objection Handling Section -->
+        <div class="objection-section">
+          <div class="objection-header">Handle Objections</div>
+          <div class="objection-buttons" id="objectionButtons">
+            <button class="objection-btn" data-objection="price_high" data-testid="btn-objection-price">
+              Price Too High
+            </button>
+            <button class="objection-btn" data-objection="no_money" data-testid="btn-objection-money">
+              No Money
+            </button>
+            <button class="objection-btn" data-objection="spouse" data-testid="btn-objection-spouse">
+              Talk to Spouse
+            </button>
+            <button class="objection-btn" data-objection="waiting" data-testid="btn-objection-wait">
+              I'll Wait
+            </button>
+            <button class="objection-btn" data-objection="selling_car" data-testid="btn-objection-selling">
+              Selling Car
+            </button>
+            <button class="objection-btn" data-objection="need_car" data-testid="btn-objection-needcar">
+              Need Car Today
+            </button>
+            <button class="objection-btn" data-objection="always_selling" data-testid="btn-objection-selling-me">
+              Always Selling Me
+            </button>
+          </div>
+          <div id="objectionResponse" class="objection-response" style="display: none;">
+            <div class="objection-response-header">
+              <span id="objectionResponseLabel"></span>
+              <button class="objection-copy-btn" id="copyObjectionBtn" title="Copy response">Copy</button>
+            </div>
+            <div class="objection-response-content" id="objectionResponseContent"></div>
+          </div>
+        </div>
       </div>
 
       <div id="noRoMessage" class="no-ro-message">

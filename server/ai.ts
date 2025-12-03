@@ -843,45 +843,9 @@ ${hasWarrantyServices
 **9. FOLLOW-UP COMMITMENT**
 - Tell them when they'll hear from us next with status/updates
 - ${isInShop ? 'Let them know we\'ll have updates by end of day (around 4:30-5pm) depending on the work involved' : 'Commit to a specific follow-up time (typically end of day 4:30-5pm)'}
-- This builds trust by setting clear expectations for communication
+- This builds trust by setting clear expectations for communication`;
 
----
-
-**OBJECTION HANDLING GUIDE**
-After the main script, provide brief responses for these common objections. Use empathy first, then redirect:
-
-**If "The price is too high":**
-- Empathize: "I totally get it—car repairs never seem to come at the right time."
-- Reframe value: "We're not the cheapest, but you're paying for ASE Master Certified techs, a 3-year/36,000-mile nationwide warranty, and a team here 7 days a week."
-- Ask: "Have you ever paid less for something and regretted it later?"
-
-**If "I don't have the money right now":**
-- Empathize: "Car repair always finds us on the wrong week, right?"
-- Offer solution: "We have payment options—you can take care of what the car needs today and spread the cost over time, some even with 0% for 6 months."
-
-**If "I need to talk to my spouse":**
-- Relate: "I get it—I run everything by my wife too!"
-- Offer help: "Would it help if I called them directly? Sometimes there are technical questions that are easier for me to answer. Or we can do a quick 3-way call."
-
-**If "I'm going to wait":**
-${hasWarrantyServices 
-  ? '- For safety items: "I understand. Just to be upfront—this falls into a true safety category. It\'s not just going to cost more later, it\'s putting you at risk if you\'re driving regularly."'
-  : '- For maintenance: "Totally understand. These aren\'t emergencies, but doing them now while we have the car saves you time and money long-term."'}
-- Offer: "If it helps, we have flexible payment options."
-
-**If "I'm selling the car":**
-- Challenge gently: "I get it. But selling rarely saves money—it just moves the cost somewhere else."
-- Math: "A used car today averages $28,000, and you're inheriting someone else's problems. This repair is like buying a car you already know for a fraction of the price."
-
-**If "I need my car today" or "I'm in a hurry":**
-- Solve it: "We've got options—loaner vehicles, shuttle rides, or pickup/drop-off. Whatever makes your day easier."
-- Remove barrier: "Let me take that stress off your plate so we can handle the repair the right way."
-
-**If "You're always trying to sell me":**
-- Acknowledge: "I never want you to feel sold. You're never obligated to do any work we recommend."
-- Reframe: "But it's my professional obligation to tell you what I see. What's worse—a call about maintenance today, or a call when you're broken down on the side of the road?"`;
-
-  const prompt = `You are a friendly service advisor at HEART Certified Auto Care. Write a structured sales script following our proven 9-point format, followed by objection handling responses.
+  const prompt = `You are a friendly service advisor at HEART Certified Auto Care. Write a structured sales script following our proven 9-point format.
 
 CONTEXT: ${context}
 
@@ -892,23 +856,19 @@ ${totalAmount > 0 ? `Total: $${totalAmount.toFixed(2)}` : 'Total: Check the repa
 ${salesKeyPoints}
 ${trainingContext}
 
-FORMAT YOUR RESPONSE in two parts:
+FORMAT YOUR RESPONSE with clear section labels for each point. Each section should be 1-2 sentences. Write naturally as if speaking to the customer.
 
-PART 1 - MAIN SCRIPT (with section labels):
+Example format:
 **RAPPORT:** "Hi [Name]! Thanks for bringing in your [Vehicle] today..."
 **INSPECTION CREDENTIALS:** "Our ASE-certified technicians completed a thorough inspection..."
 ...and so on for each applicable section.
-
-PART 2 - OBJECTION HANDLING:
-After the main script, add a section titled "---" followed by "**COMMON OBJECTION RESPONSES:**"
-Provide 2-3 sentence responses for the most relevant objections based on the repair type and price.
 
 CRITICAL RULES:
 - Include the main script sections with headers in bold
 - Write conversationally - like you're actually talking to them
 - ${totalAmount > 0 ? `Use the EXACT total of $${totalAmount.toFixed(2)} - never use placeholders` : 'Do not make up pricing'}
 - Each section should flow naturally into the next
-- Include the objection handling section at the end with practical responses`;
+- End with the follow-up commitment`;
 
   try {
     const response = await openai.chat.completions.create({
@@ -923,7 +883,7 @@ CRITICAL RULES:
           content: prompt
         }
       ],
-      max_completion_tokens: 1500,
+      max_completion_tokens: 800,
     });
 
     const content = response.choices[0]?.message?.content;

@@ -9,7 +9,7 @@ HEART Helper is an AI-powered repair order search tool for HEART Certified Auto 
 - **AI-Powered Concern Intake**: Interactive diagnostic Q&A workflow for customer calls with symptom-based expert questions (16 categories: brakes, engine, transmission, cooling, steering, A/C, etc.)
 - **Phone Answer Scripts**: Professional scripts for incoming calls
 - **9-Point Sales Script Format**: Structured AI-generated scripts with required sections (Rapport, Inspection Credentials, Digital Resources, Good-Good-Bad Presentation, Safety Urgency, Warranty, Price as Investment, Permission to Inspect, Follow-up Commitment)
-- **Objection Handling Guide**: Built-in responses for common customer objections (price too high, no money, need spouse approval, waiting, selling car, need car today, always selling me)
+- **Interactive Objection Handling**: Clickable buttons in Chrome extension for instant context-aware objection responses (price too high, no money, need spouse approval, waiting, selling car, need car today, always selling me) - uses templates with vehicle/pricing context substitution for instant responses with no AI delay
 - **Intelligent Repair Term Extraction**: Semantic parsing of customer descriptions
 - **Smart Year Matching**: Broader searches across compatible model years
 - **Fuzzy Model Matching**: Automatically matches model variations (F150 = F-150 = F 150) for better search results
@@ -63,7 +63,7 @@ All protected routes require both authentication and approval status check.
 
 CORS is configured to allow Chrome extension origins (chrome-extension://), *.replit.dev, *.replit.app, and localhost with credentials support for cross-origin authentication.
 
-### Chrome Extension (v3.14.1)
+### Chrome Extension (v3.18.0)
 
 Located in `/chrome-extension/`, provides:
 - **Built-in Login/Registration**: Users can sign in or create accounts directly in the extension side panel - no need to visit the web app
