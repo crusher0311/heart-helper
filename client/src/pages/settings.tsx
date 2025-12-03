@@ -1,4 +1,4 @@
-import { Download, Chrome, CheckCircle2, Circle, ArrowLeft, Sparkles, Search, Send, Zap, Settings as SettingsIcon, XCircle, Loader2, Phone, MessageSquare, FileText, DollarSign, ExternalLink, Headphones } from "lucide-react";
+import { Download, Chrome, CheckCircle2, Circle, ArrowLeft, Sparkles, Search, Send, Zap, Settings as SettingsIcon, XCircle, Loader2, Phone, MessageSquare, FileText, DollarSign, ExternalLink, Headphones, PhoneCall, RefreshCw, Users } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -49,6 +49,63 @@ export default function Settings() {
 
   const { data: adminCheck } = useQuery<{ isAdmin: boolean }>({
     queryKey: ["/api/admin/check"],
+  });
+
+  // RingCentral state and queries (admin only)
+  const [syncDateFrom, setSyncDateFrom] = useState<string>(() => {
+    const date = new Date();
+    date.setDate(date.getDate() - 7);
+    return date.toISOString().split('T')[0];
+  });
+  const [syncDateTo, setSyncDateTo] = useState<string>(() => {
+    return new Date().toISOString().split('T')[0];
+  });
+
+  const { data: ringcentralTest, isLoading: rcTestLoading, refetch: refetchRcTest } = useQuery<{
+    success: boolean;
+    message: string;
+    accountInfo?: { id: string; mainNumber: string };
+  }>({
+    queryKey: ["/api/ringcentral/test"],
+    enabled: adminCheck?.isAdmin === true,
+  });
+
+  const { data: rcExtensions, isLoading: rcExtensionsLoading } = useQuery<Array<{
+    id: number;
+    extensionNumber: string;
+    name: string;
+    contact?: { email?: string };
+  }>>({
+    queryKey: ["/api/ringcentral/extensions"],
+    enabled: adminCheck?.isAdmin === true && ringcentralTest?.success === true,
+  });
+
+  const syncCallsMutation = useMutation({
+    mutationFn: async (params: { dateFrom: string; dateTo: string }) => {
+      const response = await apiRequest("POST", "/api/ringcentral/sync", {
+        dateFrom: new Date(params.dateFrom).toISOString(),
+        dateTo: new Date(params.dateTo + "T23:59:59").toISOString(),
+      });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Failed to sync calls");
+      }
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Call sync complete",
+        description: `Synced ${data.stats.synced} calls, skipped ${data.stats.skipped} existing, ${data.stats.errors} errors.`,
+      });
+      queryClient.invalidateQueries({ queryKey: ["/api/calls"] });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Sync failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
   });
 
   useEffect(() => {
@@ -651,6 +708,120 @@ Guidelines:
                   <ExternalLink className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* RingCentral Call Sync Section - Admin Only */}
+        {adminCheck?.isAdmin && (
+          <Card className="mb-6">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <PhoneCall className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <CardTitle>RingCentral Call Sync</CardTitle>
+                  <CardDescription>
+                    Sync call recordings from RingCentral for AI-powered coaching
+                  </CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Connection Status */}
+              {rcTestLoading ? (
+                <div className="flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  <span className="text-sm text-muted-foreground">Testing RingCentral connection...</span>
+                </div>
+              ) : ringcentralTest?.success ? (
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-green-600" />
+                  <span className="text-sm text-muted-foreground">
+                    Connected to RingCentral • Account: {ringcentralTest.accountInfo?.mainNumber}
+                  </span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <XCircle className="h-5 w-5 text-destructive" />
+                  <span className="text-sm text-muted-foreground">
+                    {ringcentralTest?.message || "RingCentral not configured. Add RINGCENTRAL_CLIENT_ID, RINGCENTRAL_CLIENT_SECRET, and RINGCENTRAL_JWT_TOKEN secrets."}
+                  </span>
+                </div>
+              )}
+
+              {ringcentralTest?.success && (
+                <>
+                  {/* Extensions Summary */}
+                  {rcExtensionsLoading ? (
+                    <div className="flex items-center gap-2">
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <span className="text-sm text-muted-foreground">Loading extensions...</span>
+                    </div>
+                  ) : rcExtensions && rcExtensions.length > 0 ? (
+                    <Alert>
+                      <Users className="h-4 w-4" />
+                      <AlertDescription>
+                        Found {rcExtensions.length} user extensions in RingCentral. 
+                        Map extensions to HEART Helper users to enable per-advisor call tracking.
+                      </AlertDescription>
+                    </Alert>
+                  ) : null}
+
+                  {/* Sync Controls */}
+                  <div className="border rounded-lg p-4 space-y-4">
+                    <h4 className="font-medium">Sync Call Recordings</h4>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="sync-date-from">From Date</Label>
+                        <input
+                          type="date"
+                          id="sync-date-from"
+                          value={syncDateFrom}
+                          onChange={(e) => setSyncDateFrom(e.target.value)}
+                          className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                          data-testid="input-sync-date-from"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="sync-date-to">To Date</Label>
+                        <input
+                          type="date"
+                          id="sync-date-to"
+                          value={syncDateTo}
+                          onChange={(e) => setSyncDateTo(e.target.value)}
+                          className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                          data-testid="input-sync-date-to"
+                        />
+                      </div>
+                    </div>
+                    <Button
+                      onClick={() => syncCallsMutation.mutate({ dateFrom: syncDateFrom, dateTo: syncDateTo })}
+                      disabled={syncCallsMutation.isPending}
+                      data-testid="button-sync-calls"
+                    >
+                      {syncCallsMutation.isPending ? (
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      ) : (
+                        <RefreshCw className="h-4 w-4 mr-2" />
+                      )}
+                      Sync Calls from RingCentral
+                    </Button>
+                  </div>
+
+                  {/* Extension Mapping Link */}
+                  <div className="pt-4 border-t">
+                    <Link href="/admin/extension-mapping">
+                      <Button variant="outline" data-testid="button-manage-extension-mapping">
+                        <Users className="w-4 h-4 mr-2" />
+                        Manage Extension Mappings
+                        <ExternalLink className="w-4 h-4 ml-2" />
+                      </Button>
+                    </Link>
+                  </div>
+                </>
+              )}
             </CardContent>
           </Card>
         )}

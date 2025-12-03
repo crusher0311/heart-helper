@@ -9,6 +9,7 @@ import Settings from "@/pages/settings";
 import Admin from "@/pages/admin";
 import AdminLaborRates from "@/pages/admin-labor-rates";
 import AdminCoachingCriteria from "@/pages/admin-coaching-criteria";
+import AdminExtensionMapping from "@/pages/admin-extension-mapping";
 import Landing from "@/pages/landing";
 import NotFound from "@/pages/not-found";
 
