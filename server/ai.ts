@@ -837,12 +837,13 @@ ${hasWarrantyServices
 - Frame it as investing in their vehicle's safety and reliability, not just a cost
 
 **8. PERMISSION TO INSPECT REST OF VEHICLE**
-- Ask if they'd like us to complete a full inspection while it's here
-- Offer to check other systems for peace of mind
+- SKIP THIS SECTION if a full inspection has already been done (which it has if we're presenting digital inspection results)
+- Only use this section when calling about their primary concern BEFORE performing a full inspection
 
 **9. FOLLOW-UP COMMITMENT**
-- ${isInShop ? 'Ask if they\'re ready to proceed today' : 'Ask what day/time works best to get this taken care of'}
-- Confirm next steps and set clear expectations`;
+- Tell them when they'll hear from us next with status/updates
+- ${isInShop ? 'Let them know we\'ll have updates by end of day (around 4:30-5pm) depending on the work involved' : 'Commit to a specific follow-up time (typically end of day 4:30-5pm)'}
+- This builds trust by setting clear expectations for communication`;
 
   const prompt = `You are a friendly service advisor at HEART Certified Auto Care. Write a structured sales script following our proven 9-point format.
 
@@ -922,9 +923,7 @@ CRITICAL RULES:
 
 **PRICE PRESENTATION:** Your total investment to get this taken care of is ${priceStr}. I know it's an investment, but it's really about keeping you safe and avoiding bigger problems down the road.
 
-**PERMISSION TO INSPECT:** While your vehicle is here, would you like us to do a complete inspection of the other systems for peace of mind?
-
-**FOLLOW-UP COMMITMENT:** ${isInShop ? "Are you ready to get started on this today?" : "What day and time works best for you to bring it in?"} We'll take great care of you.`;
+**FOLLOW-UP COMMITMENT:** ${isInShop ? "Once we get started, I'll have an update for you by end of day, around 4:30 or 5. We'll keep you posted every step of the way." : "I'll give you a call back by end of day, around 4:30-5pm, with a full update. Sound good?"}`;
     
     return { script: fallbackScript };
   }
