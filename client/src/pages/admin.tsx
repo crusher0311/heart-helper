@@ -1,4 +1,4 @@
-import { ArrowLeft, Users, Save, Loader2, User, Shield, ShieldCheck, Plus, Trash2, Clock, Check, X } from "lucide-react";
+import { Users, Save, Loader2, User, Shield, ShieldCheck, Plus, Trash2, Clock, Check, X } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -27,6 +27,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Navigation } from "@/components/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -259,13 +260,9 @@ export default function Admin() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-6xl mx-auto">
-        <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6" data-testid="link-back-home">
-          <ArrowLeft className="h-4 w-4" />
-          Back to Home
-        </Link>
-
+    <div className="min-h-screen bg-background">
+      <Navigation />
+      <div className="max-w-6xl mx-auto p-6">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <ShieldCheck className="h-8 w-8 text-primary" />

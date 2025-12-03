@@ -1097,3 +1097,143 @@ Return ONLY valid JSON:
     };
   }
 }
+
+/**
+ * Training recommendation structure
+ */
+interface TrainingRecommendation {
+  criterionId: string;
+  criterionName: string;
+  averageScore: number;
+  priority: 'high' | 'medium' | 'low';
+  recommendation: string;
+  actionItems: string[];
+  examplePhrases: string[];
+}
+
+interface TrainingRecommendationsResponse {
+  recommendations: TrainingRecommendation[];
+  overallAssessment: string;
+  strengths: string[];
+  nextSteps: string;
+}
+
+/**
+ * Generates personalized training recommendations based on a service advisor's 
+ * call scoring history, identifying weak areas and providing specific improvement suggestions.
+ */
+export async function generateTrainingRecommendations(
+  advisorName: string,
+  criteriaPerformance: Array<{
+    id: string;
+    name: string;
+    description: string | null;
+    averageScore: number;
+    callCount: number;
+  }>,
+  recentScores: Array<{
+    callId: string;
+    score: number;
+    callDate: string;
+  }>
+): Promise<TrainingRecommendationsResponse> {
+  try {
+    // Sort criteria by average score (lowest first = most needs improvement)
+    const sortedCriteria = [...criteriaPerformance].sort((a, b) => a.averageScore - b.averageScore);
+    
+    // Identify weak areas (score < 3.5 out of 5)
+    const weakAreas = sortedCriteria.filter(c => c.averageScore < 3.5);
+    const strongAreas = sortedCriteria.filter(c => c.averageScore >= 4.0);
+    
+    // Calculate trend from recent scores
+    const recentAverage = recentScores.length > 0 
+      ? recentScores.reduce((sum, s) => sum + s.score, 0) / recentScores.length 
+      : 0;
+    
+    const criteriaList = sortedCriteria.map(c => 
+      `- ${c.name} (${c.averageScore.toFixed(1)}/5 from ${c.callCount} calls): ${c.description || 'No description'}`
+    ).join('\n');
+
+    const prompt = `You are a professional automotive service advisor coach for HEART Certified Auto Care. 
+Analyze this service advisor's call performance data and generate personalized training recommendations.
+
+SERVICE ADVISOR: ${advisorName}
+
+CRITERIA PERFORMANCE (lowest to highest):
+${criteriaList}
+
+RECENT PERFORMANCE TREND:
+- Average score from recent ${recentScores.length} calls: ${recentAverage.toFixed(0)}%
+${recentScores.length >= 5 ? (recentAverage >= 70 ? '- Trending positively' : '- Needs improvement') : '- Not enough data for trend analysis'}
+
+WEAK AREAS (score < 3.5):
+${weakAreas.length > 0 ? weakAreas.map(c => `- ${c.name}: ${c.averageScore.toFixed(1)}/5`).join('\n') : '- None identified'}
+
+STRONG AREAS (score >= 4.0):
+${strongAreas.length > 0 ? strongAreas.map(c => `- ${c.name}: ${c.averageScore.toFixed(1)}/5`).join('\n') : '- Building foundation in all areas'}
+
+Generate training recommendations in this JSON format:
+{
+  "recommendations": [
+    {
+      "criterionId": "id of the criterion",
+      "criterionName": "Name of the criterion",
+      "averageScore": 2.5,
+      "priority": "high" | "medium" | "low",
+      "recommendation": "Clear explanation of what to improve and why it matters",
+      "actionItems": ["Specific action 1", "Specific action 2", "Specific action 3"],
+      "examplePhrases": ["Example phrase to use in calls", "Another example phrase"]
+    }
+  ],
+  "overallAssessment": "2-3 sentence overview of the advisor's performance and potential",
+  "strengths": ["Specific strength 1", "Specific strength 2"],
+  "nextSteps": "Clear 1-2 sentence recommendation for immediate focus area"
+}
+
+GUIDELINES:
+- Focus on the 3-5 most impactful areas for improvement (priority: high for < 2.5, medium for 2.5-3.5, low for others)
+- For each weak criterion, provide 2-3 specific action items and example phrases
+- Keep recommendations practical and specific to automotive service advisor conversations
+- Reference HEART's 9-point sales method when relevant (Rapport, Inspection Credentials, Digital Resources, Good-Good-Bad, Safety Urgency, Warranty, Price as Investment, Permission to Inspect, Follow-up Commitment)
+- Emphasize building trust and providing value, not high-pressure sales tactics
+- Include positive reinforcement for strong areas in the overall assessment`;
+
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "system",
+          content: "You are an expert automotive service advisor coach. Provide actionable, specific training recommendations based on call performance data. Always return valid JSON."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      response_format: { type: "json_object" },
+      max_completion_tokens: 2000,
+    });
+
+    const content = response.choices[0]?.message?.content;
+    if (!content) {
+      throw new Error("No response from AI");
+    }
+
+    const parsed = JSON.parse(content);
+    
+    return {
+      recommendations: parsed.recommendations || [],
+      overallAssessment: parsed.overallAssessment || "Unable to generate assessment.",
+      strengths: parsed.strengths || [],
+      nextSteps: parsed.nextSteps || "Continue practicing and reviewing calls.",
+    };
+  } catch (error) {
+    console.error("AI training recommendations error:", error);
+    return {
+      recommendations: [],
+      overallAssessment: "Unable to generate recommendations due to an error.",
+      strengths: [],
+      nextSteps: "Please try again later.",
+    };
+  }
+}

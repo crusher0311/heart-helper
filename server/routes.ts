@@ -20,6 +20,7 @@ import {
   cleanConcernConversation,
   generateSalesScript,
   scoreCallTranscript,
+  generateTrainingRecommendations,
 } from "./ai";
 import archiver from "archiver";
 import { join } from "path";
@@ -1682,9 +1683,10 @@ export async function registerRoutes(app: Express) {
     try {
       const user = req.user;
       const prefs = await storage.getUserPreferences(user.id);
+      const isAdminUser = await storage.isUserAdmin(user.id);
       
       // Only admins and managers can view dashboard
-      if (!user.isAdmin && !prefs?.isManager) {
+      if (!isAdminUser && !prefs?.isManager) {
         return res.status(403).json({ message: "Access denied. Admin or manager role required." });
       }
       
@@ -1706,9 +1708,10 @@ export async function registerRoutes(app: Express) {
       const user = req.user;
       const { userId } = req.params;
       const prefs = await storage.getUserPreferences(user.id);
+      const isAdminUser = await storage.isUserAdmin(user.id);
       
       // Users can view their own stats, admins/managers can view anyone's
-      if (userId !== user.id && !user.isAdmin && !prefs?.isManager) {
+      if (userId !== user.id && !isAdminUser && !prefs?.isManager) {
         return res.status(403).json({ message: "Access denied." });
       }
       
@@ -1729,9 +1732,10 @@ export async function registerRoutes(app: Express) {
     try {
       const user = req.user;
       const prefs = await storage.getUserPreferences(user.id);
+      const isAdminUser = await storage.isUserAdmin(user.id);
       
       // Only admins and managers can view criteria breakdown
-      if (!user.isAdmin && !prefs?.isManager) {
+      if (!isAdminUser && !prefs?.isManager) {
         return res.status(403).json({ message: "Access denied. Admin or manager role required." });
       }
       
@@ -1743,6 +1747,94 @@ export async function registerRoutes(app: Express) {
       res.json(stats);
     } catch (error: any) {
       console.error("Criteria dashboard error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Training Recommendations - AI-powered personalized coaching (admin/manager or self)
+  app.get("/api/coaching/recommendations/:userId", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const user = req.user;
+      const { userId } = req.params;
+      const prefs = await storage.getUserPreferences(user.id);
+      const isAdminUser = await storage.isUserAdmin(user.id);
+      
+      // Users can view their own recommendations, admins/managers can view anyone's
+      if (userId !== user.id && !isAdminUser && !prefs?.isManager) {
+        return res.status(403).json({ message: "Access denied." });
+      }
+      
+      // Get user's name for personalized recommendations
+      const targetUser = await storage.getUser(userId);
+      if (!targetUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      const userName = targetUser.firstName && targetUser.lastName 
+        ? `${targetUser.firstName} ${targetUser.lastName}` 
+        : targetUser.email || 'Service Advisor';
+      
+      // Get date range (default to last 90 days for comprehensive analysis)
+      const { dateFrom, dateTo } = req.query;
+      const fromDate = dateFrom 
+        ? new Date(dateFrom as string) 
+        : new Date(Date.now() - 90 * 24 * 60 * 60 * 1000); // 90 days ago
+      const toDate = dateTo ? new Date(dateTo as string) : new Date();
+      
+      // Get user's dashboard stats with criteria averages
+      const userStats = await storage.getUserDashboardStats(userId, fromDate, toDate);
+      
+      // Need at least 3 scored calls for meaningful recommendations
+      if (userStats.scoredCount < 3) {
+        return res.json({
+          recommendations: [],
+          overallAssessment: "Not enough scored calls to generate recommendations. At least 3 scored calls are needed for meaningful analysis.",
+          strengths: [],
+          nextSteps: "Continue making calls and ensure they are being scored by a manager.",
+          minimumCallsRequired: 3,
+          currentScoredCalls: userStats.scoredCount,
+        });
+      }
+      
+      // Get all coaching criteria for descriptions
+      const allCriteria = await storage.getAllCoachingCriteria();
+      const criteriaMap = new Map(allCriteria.map(c => [c.id, c]));
+      
+      // Build criteria performance data
+      const criteriaPerformance = Object.entries(userStats.criteriaAverages).map(([id, data]) => ({
+        id,
+        name: data.name,
+        description: criteriaMap.get(id)?.description || null,
+        averageScore: data.average,
+        callCount: data.count,
+      }));
+      
+      // Prepare recent scores for trend analysis
+      const recentScores = userStats.recentScores.map(s => ({
+        callId: s.callId,
+        score: s.score,
+        callDate: s.callDate.toISOString(),
+      }));
+      
+      // Generate AI-powered recommendations
+      const recommendations = await generateTrainingRecommendations(
+        userName,
+        criteriaPerformance,
+        recentScores
+      );
+      
+      res.json({
+        ...recommendations,
+        stats: {
+          callCount: userStats.callCount,
+          scoredCount: userStats.scoredCount,
+          averageScore: userStats.averageScore,
+          dateFrom: fromDate.toISOString(),
+          dateTo: toDate.toISOString(),
+        }
+      });
+    } catch (error: any) {
+      console.error("Training recommendations error:", error);
       res.status(500).json({ message: error.message });
     }
   });

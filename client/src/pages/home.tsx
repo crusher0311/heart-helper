@@ -1,5 +1,5 @@
 import { useState, useEffect, startTransition } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { SearchInterface } from "@/components/search-interface";
 import { JobCard } from "@/components/job-card";
@@ -7,18 +7,14 @@ import { JobDetailPanel } from "@/components/job-detail-panel";
 import { EmptyState } from "@/components/empty-state";
 import { JobCardSkeleton, JobDetailSkeleton } from "@/components/loading-skeleton";
 import { RecentSearches } from "@/components/recent-searches";
+import { Navigation } from "@/components/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Sparkles, Settings, RefreshCw, Clock, LogOut, User, ShieldCheck, AlertCircle, Phone } from "lucide-react";
-import { Link } from "wouter";
+import { Sparkles, RefreshCw, Clock, AlertCircle, LogOut } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import type { SearchJobRequest, SearchResult } from "@shared/schema";
 import { formatDistanceToNow } from "date-fns";
-import heartLogo from "@assets/HCAC_1764080802250.png";
 
-// Logout handler
 async function handleLogout() {
   try {
     await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
@@ -38,10 +34,6 @@ export default function Home() {
   const [isCached, setIsCached] = useState(false);
   const [cachedAt, setCachedAt] = useState<string | null>(null);
 
-  const { data: adminCheck } = useQuery<{ isAdmin: boolean }>({
-    queryKey: ["/api/admin/check"],
-  });
-  
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const roId = urlParams.get('roId');
@@ -199,104 +191,30 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <img 
-              src={heartLogo} 
-              alt="HEART Certified Auto Care" 
-              className="h-12 w-auto"
-              data-testid="img-heart-logo"
-            />
-            <div>
-              <h1 className="text-lg font-semibold" data-testid="text-app-title">
-                Helper
-              </h1>
-              <p className="text-xs text-muted-foreground">AI-Powered Repair History</p>
+      <Navigation>
+        {Array.isArray(results) && results.length > 0 && (
+          <div className="flex items-center gap-2">
+            <div className="text-sm text-muted-foreground hidden md:block" data-testid="text-results-count">
+              {results.length} {results.length === 1 ? "result" : "results"}
             </div>
-          </div>
-          <div className="flex items-center gap-3">
-            {Array.isArray(results) && results.length > 0 && (
-              <>
-                <div className="text-sm text-muted-foreground" data-testid="text-results-count">
-                  {results.length} {results.length === 1 ? "result" : "results"} found
-                </div>
-                {isCached && cachedAt && (
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground" data-testid="cache-indicator">
-                    <Clock className="w-3 h-3" />
-                    Cached {formatDistanceToNow(new Date(cachedAt), { addSuffix: true })}
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-6 w-6"
-                      onClick={handleRefresh}
-                      data-testid="button-refresh-cache"
-                    >
-                      <RefreshCw className="w-3 h-3" />
-                    </Button>
-                  </div>
-                )}
-              </>
-            )}
-            <Link href="/settings">
-              <Button variant="ghost" size="icon" data-testid="button-settings">
-                <Settings className="w-4 h-4" />
-              </Button>
-            </Link>
-            {user && (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-8 w-8 rounded-full" data-testid="button-user-menu">
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage src={user.profileImageUrl || undefined} alt={user.firstName || "User"} />
-                      <AvatarFallback>
-                        {user.firstName?.[0] || user.email?.[0]?.toUpperCase() || "U"}
-                      </AvatarFallback>
-                    </Avatar>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <div className="px-2 py-1.5">
-                    <p className="text-sm font-medium">{user.firstName} {user.lastName}</p>
-                    <p className="text-xs text-muted-foreground">{user.email}</p>
-                  </div>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link href="/settings" className="cursor-pointer">
-                      <User className="mr-2 h-4 w-4" />
-                      <span>Preferences</span>
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/calls" className="cursor-pointer" data-testid="link-calls">
-                      <Phone className="mr-2 h-4 w-4" />
-                      <span>Call History</span>
-                    </Link>
-                  </DropdownMenuItem>
-                  {adminCheck?.isAdmin && (
-                    <DropdownMenuItem asChild>
-                      <Link href="/admin" className="cursor-pointer" data-testid="link-admin">
-                        <ShieldCheck className="mr-2 h-4 w-4" />
-                        <span>Team Training</span>
-                      </Link>
-                    </DropdownMenuItem>
-                  )}
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem 
-                    className="cursor-pointer text-destructive focus:text-destructive"
-                    onClick={handleLogout}
-                    data-testid="button-logout"
-                  >
-                    <LogOut className="mr-2 h-4 w-4" />
-                    <span>Log out</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+            {isCached && cachedAt && (
+              <div className="flex items-center gap-1 text-xs text-muted-foreground hidden lg:flex" data-testid="cache-indicator">
+                <Clock className="w-3 h-3" />
+                <span className="hidden xl:inline">Cached {formatDistanceToNow(new Date(cachedAt), { addSuffix: true })}</span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6"
+                  onClick={handleRefresh}
+                  data-testid="button-refresh-cache"
+                >
+                  <RefreshCw className="w-3 h-3" />
+                </Button>
+              </div>
             )}
           </div>
-        </div>
-      </header>
+        )}
+      </Navigation>
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8">

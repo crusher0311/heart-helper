@@ -1,10 +1,11 @@
-import { ArrowLeft, Phone, Clock, Calendar, User, ChevronRight, Loader2, PhoneIncoming, PhoneOutgoing, Star, Filter, RefreshCw, Search, X, Sparkles, BarChart3 } from "lucide-react";
+import { Phone, Clock, Calendar, User, ChevronRight, Loader2, PhoneIncoming, PhoneOutgoing, Star, Filter, RefreshCw, Search, X, Sparkles } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Navigation } from "@/components/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -204,61 +205,36 @@ export default function Calls() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b bg-card sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <Link href="/">
-              <Button variant="ghost" size="icon" data-testid="button-back">
-                <ArrowLeft className="w-4 h-4" />
-              </Button>
-            </Link>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <Phone className="w-5 h-5 text-primary-foreground" />
-              </div>
-              <div>
-                <h1 className="text-lg font-semibold">Call History</h1>
-                <p className="text-xs text-muted-foreground">Review synced call recordings</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="flex items-center gap-2">
-            {isAdmin && (
-              <Link href="/coaching">
-                <Button variant="outline" data-testid="button-dashboard">
-                  <BarChart3 className="h-4 w-4 mr-2" />
-                  Dashboard
-                </Button>
-              </Link>
-            )}
-            {isAdmin && unscoredCount && unscoredCount.count > 0 && (
-              <Button
-                variant="default"
-                onClick={() => batchScoreMutation.mutate(10)}
-                disabled={batchScoreMutation.isPending}
-                data-testid="button-score-batch"
-              >
-                {batchScoreMutation.isPending ? (
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                ) : (
-                  <Sparkles className="h-4 w-4 mr-2" />
-                )}
-                Score {Math.min(unscoredCount.count, 10)} Sales Calls
-              </Button>
-            )}
+      <Navigation>
+        <div className="flex items-center gap-2">
+          {isAdmin && unscoredCount && unscoredCount.count > 0 && (
             <Button
-              variant="outline"
-              onClick={() => refetch()}
-              disabled={isFetching}
-              data-testid="button-refresh"
+              variant="default"
+              size="sm"
+              onClick={() => batchScoreMutation.mutate(10)}
+              disabled={batchScoreMutation.isPending}
+              data-testid="button-score-batch"
             >
-              <RefreshCw className={`h-4 w-4 mr-2 ${isFetching ? 'animate-spin' : ''}`} />
-              Refresh
+              {batchScoreMutation.isPending ? (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              ) : (
+                <Sparkles className="h-4 w-4 mr-2" />
+              )}
+              <span className="hidden sm:inline">Score {Math.min(unscoredCount.count, 10)}</span>
+              <span className="sm:hidden">Score</span>
             </Button>
-          </div>
+          )}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => refetch()}
+            disabled={isFetching}
+            data-testid="button-refresh"
+          >
+            <RefreshCw className={`h-4 w-4 ${isFetching ? 'animate-spin' : ''}`} />
+          </Button>
         </div>
-      </header>
+      </Navigation>
 
       <div className="container mx-auto max-w-6xl py-8 px-4">
         {/* Search & Filters */}

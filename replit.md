@@ -41,7 +41,7 @@ Key pages:
 - `/admin/coaching-criteria` - Call coaching 10-point grading system configuration (admin only)
 - `/calls` - Call history with date/direction filters and recording status (role-based access)
 - `/calls/:id` - Individual call detail with AI scoring, transcript, and coaching feedback
-- `/coaching` - Coaching dashboard with team leaderboard, criteria performance charts, and individual drill-down (admin/manager only)
+- `/coaching` - Coaching dashboard with team leaderboard, criteria performance charts, individual drill-down with AI-powered training recommendations (admin/manager only)
 
 ### Backend Architecture
 
@@ -59,6 +59,7 @@ Key API endpoints:
 - `/api/coaching/dashboard` - Team dashboard stats with leaderboard (admin/manager only)
 - `/api/coaching/dashboard/user/:userId` - Individual user performance stats (self or admin/manager)
 - `/api/coaching/dashboard/criteria` - Criteria breakdown across all calls (admin/manager only)
+- `/api/coaching/recommendations/:userId` - AI-powered personalized training recommendations based on call scoring history (self or admin/manager)
 - `/api/calls` - Call recordings with role-based access and direction filtering (admin/manager/user)
 - `/api/calls/:id` - Single call with AI score, criteria breakdown, and transcript
 - `/api/calls/:id/score` - Trigger AI scoring of call transcript (admin only)

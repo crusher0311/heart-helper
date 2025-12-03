@@ -1342,7 +1342,11 @@ export class DatabaseStorage implements IStorage {
 
     const scoreMap = new Map(allScores.map(s => [s.callId, s]));
 
-    // Get user preferences for names
+    // Get users for names
+    const allUsers = await db.select().from(users);
+    const usersMap = new Map(allUsers.map(u => [u.id, u]));
+    
+    // Get user preferences for displayName fallback
     const allPrefs = await db.select().from(userPreferences);
     const prefsMap = new Map(allPrefs.map(p => [p.userId, p]));
 
@@ -1365,10 +1369,11 @@ export class DatabaseStorage implements IStorage {
     }
 
     const teamMembers = Array.from(userStats.entries()).map(([userId, stats]) => {
+      const user = usersMap.get(userId);
       const prefs = prefsMap.get(userId);
-      const userName = prefs?.firstName && prefs?.lastName 
-        ? `${prefs.firstName} ${prefs.lastName}` 
-        : 'Unknown User';
+      const userName = user?.firstName && user?.lastName 
+        ? `${user.firstName} ${user.lastName}` 
+        : prefs?.displayName || user?.email || 'Unknown User';
       return {
         userId,
         userName,
