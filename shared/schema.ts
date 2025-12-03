@@ -37,6 +37,7 @@ export const userPreferences = pgTable("user_preferences", {
   userId: varchar("user_id").notNull().references(() => users.id).unique(),
   displayName: varchar("display_name"), // Name to use in scripts
   defaultShopId: text("default_shop_id"), // "NB", "WM", or "EV"
+  managedShopId: text("managed_shop_id"), // For managers: which shop they manage (can see all calls for this shop)
   defaultTool: text("default_tool").default("concern_intake"), // "concern_intake" or "sales_script"
   personalTraining: text("personal_training"), // Personal script examples/guidelines
   isManager: boolean("is_manager").default(false), // Can view team analytics
@@ -214,6 +215,91 @@ export const laborRateGroups = pgTable("labor_rate_groups", {
   createdBy: varchar("created_by").references(() => users.id), // Admin who created this
 });
 
+// ==========================================
+// Call Coaching Tables (RingCentral Integration)
+// ==========================================
+
+// Map RingCentral extensions/users to HEART Helper users
+export const ringcentralUsers = pgTable("ringcentral_users", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  ringcentralExtensionId: text("ringcentral_extension_id"), // RC extension number
+  ringcentralUserId: text("ringcentral_user_id"), // RC internal user ID
+  phoneNumber: text("phone_number"), // Direct phone number
+  displayName: text("display_name"), // Name as it appears in RingCentral
+  shopId: text("shop_id"), // Which shop location this user is at ("NB", "WM", "EV")
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Call recordings from RingCentral
+export const callRecordings = pgTable("call_recordings", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  ringcentralCallId: text("ringcentral_call_id").unique(), // RC's unique call identifier
+  ringcentralRecordingId: text("ringcentral_recording_id"), // RC's recording ID
+  userId: varchar("user_id").references(() => users.id), // Service advisor who handled the call
+  shopId: text("shop_id"), // Shop location ("NB", "WM", "EV")
+  direction: text("direction"), // "inbound" or "outbound"
+  customerPhone: text("customer_phone"), // Customer's phone number
+  customerName: text("customer_name"), // Customer name if matched from Tekmetric
+  tekmetricCustomerId: integer("tekmetric_customer_id"), // Link to Tekmetric customer
+  durationSeconds: integer("duration_seconds"),
+  recordingUrl: text("recording_url"), // URL to audio file
+  recordingStatus: text("recording_status").default("pending"), // "pending", "downloaded", "transcribed", "scored", "error"
+  transcript: jsonb("transcript"), // Full transcript with speaker labels
+  transcriptText: text("transcript_text"), // Plain text version for search
+  aiSummary: text("ai_summary"), // AI-generated call summary
+  detectedSpeakerName: text("detected_speaker_name"), // Name detected from "Hi, this is [Name]..."
+  callStartTime: timestamp("call_start_time"),
+  callEndTime: timestamp("call_end_time"),
+  processedAt: timestamp("processed_at"), // When transcription/scoring completed
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+}, (table) => [
+  index("idx_call_recordings_user").on(table.userId),
+  index("idx_call_recordings_shop").on(table.shopId),
+  index("idx_call_recordings_date").on(table.callStartTime),
+]);
+
+// Coaching criteria - admin-configurable grading points
+export const coachingCriteria = pgTable("coaching_criteria", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(), // e.g., "Rapport", "Safety Concern Emphasis"
+  description: text("description"), // Detailed description of what to look for
+  keywords: text("keywords").array(), // Keywords/phrases that indicate this criterion was met
+  aiPrompt: text("ai_prompt"), // Custom AI prompt for scoring this criterion
+  weight: integer("weight").default(10), // Weight for overall score calculation
+  category: text("category"), // Optional grouping: "greeting", "sales", "closing"
+  sortOrder: integer("sort_order").default(0), // Display order
+  isActive: boolean("is_active").default(true),
+  shopId: text("shop_id"), // null = applies to all shops, or specific shop
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: varchar("created_by").references(() => users.id),
+});
+
+// Call scores - AI scoring results per call
+export const callScores = pgTable("call_scores", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  callId: varchar("call_id").notNull().references(() => callRecordings.id),
+  overallScore: integer("overall_score"), // 0-100 overall score
+  criteriaScores: jsonb("criteria_scores"), // { criterionId: { score: 0-5, found: boolean, excerpts: string[] } }
+  talkRatio: real("talk_ratio"), // Advisor talk time percentage (0-1)
+  customerTalkRatio: real("customer_talk_ratio"), // Customer talk time percentage
+  avgResponseTime: real("avg_response_time"), // Average seconds before advisor responds
+  aiFeedback: text("ai_feedback"), // AI-generated coaching feedback
+  aiHighlights: jsonb("ai_highlights"), // Key moments: { timestamp, text, type }
+  aiObjections: jsonb("ai_objections"), // Detected objections and how they were handled
+  managerNotes: text("manager_notes"), // Manager's additional coaching notes
+  reviewedBy: varchar("reviewed_by").references(() => users.id), // Manager who reviewed
+  reviewedAt: timestamp("reviewed_at"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+}, (table) => [
+  index("idx_call_scores_call").on(table.callId),
+]);
+
 // Relations
 export const repairOrdersRelations = relations(repairOrders, ({ many }) => ({
   jobs: many(repairOrderJobs),
@@ -242,6 +328,12 @@ export const insertSearchRequestSchema = createInsertSchema(searchRequests).omit
 export const insertSearchCacheSchema = createInsertSchema(searchCache).omit({ id: true, createdAt: true });
 export const insertSettingsSchema = createInsertSchema(settings).omit({ id: true, updatedAt: true });
 export const insertLaborRateGroupSchema = createInsertSchema(laborRateGroups).omit({ id: true, createdAt: true, updatedAt: true });
+
+// Call Coaching insert schemas
+export const insertRingcentralUserSchema = createInsertSchema(ringcentralUsers).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertCallRecordingSchema = createInsertSchema(callRecordings).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertCoachingCriteriaSchema = createInsertSchema(coachingCriteria).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertCallScoreSchema = createInsertSchema(callScores).omit({ id: true, createdAt: true, updatedAt: true });
 
 // Search request schema
 export const searchJobSchema = z.object({
@@ -283,6 +375,33 @@ export type InsertSettings = z.infer<typeof insertSettingsSchema>;
 
 export type LaborRateGroup = typeof laborRateGroups.$inferSelect;
 export type InsertLaborRateGroup = z.infer<typeof insertLaborRateGroupSchema>;
+
+// Call Coaching types
+export type RingcentralUser = typeof ringcentralUsers.$inferSelect;
+export type InsertRingcentralUser = z.infer<typeof insertRingcentralUserSchema>;
+
+export type CallRecording = typeof callRecordings.$inferSelect;
+export type InsertCallRecording = z.infer<typeof insertCallRecordingSchema>;
+
+export type CoachingCriteria = typeof coachingCriteria.$inferSelect;
+export type InsertCoachingCriteria = z.infer<typeof insertCoachingCriteriaSchema>;
+
+export type CallScore = typeof callScores.$inferSelect;
+export type InsertCallScore = z.infer<typeof insertCallScoreSchema>;
+
+// Criteria score detail for a single criterion
+export type CriteriaScoreDetail = {
+  criterionId: string;
+  score: number; // 0-5
+  found: boolean;
+  excerpts: string[]; // Relevant quotes from transcript
+};
+
+// Call with full score details for API responses
+export type CallWithScore = CallRecording & {
+  score?: CallScore;
+  criteriaDetails?: CriteriaScoreDetail[];
+};
 
 // Vehicle info extracted from raw_data
 export type VehicleInfo = {
