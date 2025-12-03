@@ -1,4 +1,4 @@
-import { Download, Chrome, CheckCircle2, Circle, ArrowLeft, Sparkles, Search, Send, Zap, Settings as SettingsIcon, XCircle, Loader2, Phone, MessageSquare, FileText, DollarSign, ExternalLink } from "lucide-react";
+import { Download, Chrome, CheckCircle2, Circle, ArrowLeft, Sparkles, Search, Send, Zap, Settings as SettingsIcon, XCircle, Loader2, Phone, MessageSquare, FileText, DollarSign, ExternalLink, Headphones } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -614,6 +614,40 @@ Guidelines:
                 <Button data-testid="button-manage-labor-rates">
                   <DollarSign className="w-4 h-4 mr-2" />
                   Manage Labor Rates
+                  <ExternalLink className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Call Coaching Criteria Section - Admin Only */}
+        {adminCheck?.isAdmin && (
+          <Card className="mb-6">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Headphones className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <CardTitle>Call Coaching Criteria</CardTitle>
+                  <CardDescription>
+                    Configure the 10-point grading system for call evaluations
+                  </CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Alert>
+                <AlertDescription>
+                  Call coaching criteria define what the AI looks for when scoring recorded calls. Customize criteria names, descriptions, weights, and AI prompts for each scoring category.
+                </AlertDescription>
+              </Alert>
+
+              <Link href="/admin/coaching-criteria">
+                <Button data-testid="button-manage-coaching-criteria">
+                  <Headphones className="w-4 h-4 mr-2" />
+                  Manage Coaching Criteria
                   <ExternalLink className="w-4 h-4 ml-2" />
                 </Button>
               </Link>

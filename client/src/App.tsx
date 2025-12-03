@@ -8,6 +8,7 @@ import Home from "@/pages/home";
 import Settings from "@/pages/settings";
 import Admin from "@/pages/admin";
 import AdminLaborRates from "@/pages/admin-labor-rates";
+import AdminCoachingCriteria from "@/pages/admin-coaching-criteria";
 import Landing from "@/pages/landing";
 import NotFound from "@/pages/not-found";
 
@@ -39,6 +40,7 @@ function Router() {
       <Route path="/settings" component={Settings}/>
       <Route path="/admin" component={Admin}/>
       <Route path="/admin/labor-rates" component={AdminLaborRates}/>
+      <Route path="/admin/coaching-criteria" component={AdminCoachingCriteria}/>
       <Route component={NotFound} />
     </Switch>
   );

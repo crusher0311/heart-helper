@@ -1119,8 +1119,19 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Update coaching criteria (admin only)
+  // Update coaching criteria (admin only) - PUT for full replacement
   app.put("/api/coaching/criteria/:id", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const criteria = await storage.updateCoachingCriteria(req.params.id, req.body);
+      res.json(criteria);
+    } catch (error: any) {
+      console.error("Update coaching criteria error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Update coaching criteria (admin only) - PATCH for partial updates
+  app.patch("/api/coaching/criteria/:id", isAuthenticated, isAdmin, async (req: any, res) => {
     try {
       const criteria = await storage.updateCoachingCriteria(req.params.id, req.body);
       res.json(criteria);
@@ -1142,7 +1153,7 @@ export async function registerRoutes(app: Express) {
   });
 
   // Seed default coaching criteria (admin only)
-  app.post("/api/coaching/criteria/seed", isAuthenticated, isAdmin, async (req: any, res) => {
+  app.post("/api/coaching/criteria/seed-defaults", isAuthenticated, isAdmin, async (req: any, res) => {
     try {
       const userId = req.user.id;
       
