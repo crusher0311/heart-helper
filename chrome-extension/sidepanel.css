@@ -530,6 +530,24 @@ textarea {
   padding: 16px 0;
 }
 
+.sales-script-content p {
+  margin: 0 0 12px 0;
+}
+
+.sales-script-content p:last-child {
+  margin-bottom: 0;
+}
+
+.script-header-label {
+  display: inline-block;
+  color: #ED1C24;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 4px;
+}
+
 .script-actions {
   padding: 12px 0;
   border-top: 1px solid #eee;

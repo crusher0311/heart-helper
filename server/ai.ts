@@ -792,16 +792,59 @@ export async function generateSalesScript(
 
   // Determine which services might have warranty (brake work, engine, transmission, etc. - but NOT tires, basic maintenance)
   const hasWarrantyServices = /brake|engine|transmission|suspension|steering|cooling|electrical|fuel|exhaust|timing/i.test(jobsList);
-  const warrantyNote = hasWarrantyServices 
-    ? "Mention HEART's 3-year/36,000 mile nationwide warranty if applicable to the recommended services."
-    : "Do NOT mention warranty for basic services like tire swaps, oil changes, or seasonal maintenance - they typically don't have the 3-year warranty.";
+  const hasBrakeWork = /brake/i.test(jobsList);
 
   // Build training context if provided
   const trainingContext = trainingGuidelines 
-    ? `\n\nIMPORTANT - Follow these example scripts and guidelines from the shop:\n${trainingGuidelines}\n\nUse the style and tone from these examples while adapting to the current situation.`
+    ? `\n\nADDITIONAL USER GUIDELINES:\n${trainingGuidelines}\n\nIncorporate this user's personal style while following the required structure.`
     : '';
 
-  const prompt = `You are a friendly service advisor at HEART Certified Auto Care. Write a SHORT, conversational script.
+  // HEART's 9 Key Sales Call Elements
+  const salesKeyPoints = `
+REQUIRED SALES CALL STRUCTURE - Follow this format with clear section headers:
+
+**1. RAPPORT**
+- Warm, personal greeting using customer's first name
+- Brief friendly connection (acknowledge their time, situation, etc.)
+
+**2. INSPECTION CREDENTIALS**
+- Mention that our ASE-certified technicians performed a thorough inspection
+- Build confidence in our expertise and professionalism
+
+**3. DIGITAL RESOURCES CONFIRMATION**
+- ${isInShop 
+    ? 'Confirm they received the digital inspection on their phone/email'
+    : 'Reference the digital inspection you sent and confirm they received it'}
+- Ask them to open it so you can review together
+
+**4. GOOD-GOOD-BAD PRESENTATION**
+- Start with positive findings ("The good news is...")
+- Then address the items needing attention
+${hasBrakeWork ? '- For brakes: Use the Good-Good-Bad format (e.g., "Your front brakes look great, rear brakes are good for now, but we did find...")' : '- Highlight what\'s working well before discussing needed repairs'}
+
+**5. SAFETY CONCERN EMPHASIS - URGENCY**
+- Explain WHY the recommended service matters for their safety
+- Create appropriate urgency without being pushy
+- Connect the repair to protecting them and their family
+
+**6. 3-YEAR/36,000-MILE WARRANTY**
+${hasWarrantyServices 
+    ? '- Emphasize HEART\'s nationwide 3-year/36,000-mile warranty on this work\n- This sets us apart and adds value to the investment'
+    : '- Note: Basic maintenance services typically don\'t include the warranty - skip this for oil changes, tire swaps, etc.'}
+
+**7. PRICE PRESENTATION - INVESTMENT**
+- ${totalAmount > 0 ? `Present the total as an "investment" of $${totalAmount.toFixed(2)}` : 'Ask if they have questions about the pricing on the estimate'}
+- Frame it as investing in their vehicle's safety and reliability, not just a cost
+
+**8. PERMISSION TO INSPECT REST OF VEHICLE**
+- Ask if they'd like us to complete a full inspection while it's here
+- Offer to check other systems for peace of mind
+
+**9. FOLLOW-UP COMMITMENT**
+- ${isInShop ? 'Ask if they\'re ready to proceed today' : 'Ask what day/time works best to get this taken care of'}
+- Confirm next steps and set clear expectations`;
+
+  const prompt = `You are a friendly service advisor at HEART Certified Auto Care. Write a structured sales script following our proven 9-point format.
 
 CONTEXT: ${context}
 
@@ -809,26 +852,24 @@ Customer: ${customerName || 'the customer'}
 Vehicle: ${vehicleDesc}
 Services: ${jobsList}
 ${totalAmount > 0 ? `Total: $${totalAmount.toFixed(2)}` : 'Total: Check the repair order for final amount'}
+${salesKeyPoints}
 ${trainingContext}
 
-Write a SINGLE PARAGRAPH (3-5 sentences max) that:
-1. Greets the customer by first name if available
-${isInShop 
-  ? '2. Thanks them for bringing in their vehicle and mentions the inspection'
-  : '2. References the digital inspection you sent over'}
-3. Briefly mentions what service is recommended and why it matters
-4. ${totalAmount > 0 ? `States the total investment of $${totalAmount.toFixed(2)}` : 'Asks if they have any questions about pricing'}
-5. ${warrantyNote}
-6. ${isInShop ? 'Asks if they want to proceed' : 'Asks if they are ready to schedule'}
+FORMAT YOUR RESPONSE with clear section labels for each of the 9 points. Each section should be 1-2 sentences. Write naturally as if speaking to the customer.
+
+Example format:
+**RAPPORT:** "Hi [Name]! Thanks for bringing in your [Vehicle] today..."
+
+**INSPECTION CREDENTIALS:** "Our ASE-certified technicians completed a thorough inspection..."
+
+...and so on for all 9 sections.
 
 CRITICAL RULES:
-- Write as a natural ${isInShop ? 'in-person conversation' : 'phone conversation'}, not bullet points
-- Keep it SHORT and friendly - like you're actually talking
-- Don't list every service separately, summarize the main work
-- ${totalAmount > 0 ? `Use the EXACT total of $${totalAmount.toFixed(2)} - do not say "$XX" or make up a number` : 'Do not make up pricing - ask them to check the estimate'}
-- End with a simple question to get their response
-
-Return ONLY the script paragraph, no headers or formatting.`;
+- Include ALL 9 sections with their headers in bold
+- Write conversationally - like you're actually talking to them
+- ${totalAmount > 0 ? `Use the EXACT total of $${totalAmount.toFixed(2)} - never use placeholders` : 'Do not make up pricing'}
+- Each section should flow naturally into the next
+- End with a clear call to action in the Follow-up Commitment`;
 
   try {
     const response = await openai.chat.completions.create({
@@ -836,14 +877,14 @@ Return ONLY the script paragraph, no headers or formatting.`;
       messages: [
         {
           role: "system",
-          content: "You are a friendly automotive service advisor at HEART Certified Auto Care. Write natural, conversational sales scripts. Keep responses short and focused - no bullet points or headers, just a friendly paragraph. Always use the EXACT pricing provided - never placeholder amounts."
+          content: "You are a friendly automotive service advisor at HEART Certified Auto Care. Write structured sales scripts following HEART's proven 9-point format. Each section should be clearly labeled with bold headers. Write conversationally as if speaking directly to the customer. Always use the EXACT pricing provided - never placeholder amounts."
         },
         {
           role: "user",
           content: prompt
         }
       ],
-      max_completion_tokens: 300,
+      max_completion_tokens: 800,
     });
 
     const content = response.choices[0]?.message?.content;
@@ -851,11 +892,10 @@ Return ONLY the script paragraph, no headers or formatting.`;
       throw new Error("No response from AI");
     }
 
-    // Clean up any markdown or HTML that slipped through
+    // Clean up code blocks and HTML but preserve bold headers for the 9-point format
     const cleanScript = content
       .replace(/```[\s\S]*?```/g, '')
       .replace(/<[^>]*>/g, '')
-      .replace(/\*\*/g, '')
       .replace(/#{1,4}\s*/g, '')
       .trim();
 
@@ -863,11 +903,28 @@ Return ONLY the script paragraph, no headers or formatting.`;
   } catch (error) {
     console.error("AI sales script generation error:", error);
     
-    // Fallback: simple conversational script
+    // Fallback: structured 9-point script
     const greeting = customerName ? `Hi ${customerName}!` : 'Hi there!';
-    const action = isInShop ? 'for bringing in' : 'for choosing';
     const priceStr = totalAmount > 0 ? `$${totalAmount.toFixed(2)}` : 'the amount on your estimate';
-    const fallbackScript = `${greeting} Thanks ${action} your ${vehicleDesc}. I sent over a copy of your digital inspection, did you get it? Great! Would you mind opening it up and we can go over it together? We're recommending ${jobsList || 'some maintenance services'} to keep you safe and prepared. Your total investment is ${priceStr}. Once you're ready, we can get you all set up. How does that sound?`;
+    const warrantyLine = hasWarrantyServices 
+      ? `\n\n**WARRANTY:** And the great news is this work comes with HEART's 3-year/36,000-mile nationwide warranty, so you're covered wherever you go.`
+      : '';
+    
+    const fallbackScript = `**RAPPORT:** ${greeting} Thanks for ${isInShop ? 'bringing in' : 'choosing us for'} your ${vehicleDesc} today. I really appreciate your trust in us.
+
+**INSPECTION CREDENTIALS:** Our ASE-certified technicians just completed a thorough inspection of your vehicle.
+
+**DIGITAL RESOURCES CONFIRMATION:** I sent over a copy of your digital inspection - did you get that on your phone? Perfect! Would you mind opening it up so we can go over it together?
+
+**GOOD-GOOD-BAD PRESENTATION:** The good news is most of your vehicle is in great shape. However, we did find some items that need attention - specifically ${jobsList || 'some maintenance services'}.
+
+**SAFETY CONCERN EMPHASIS:** This is important because it directly affects your safety on the road. Taking care of this now helps protect you and your family.${warrantyLine}
+
+**PRICE PRESENTATION:** Your total investment to get this taken care of is ${priceStr}. I know it's an investment, but it's really about keeping you safe and avoiding bigger problems down the road.
+
+**PERMISSION TO INSPECT:** While your vehicle is here, would you like us to do a complete inspection of the other systems for peace of mind?
+
+**FOLLOW-UP COMMITMENT:** ${isInShop ? "Are you ready to get started on this today?" : "What day and time works best for you to bring it in?"} We'll take great care of you.`;
     
     return { script: fallbackScript };
   }

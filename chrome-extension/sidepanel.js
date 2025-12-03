@@ -1102,8 +1102,21 @@ function displaySalesScript(script) {
   const content = document.getElementById('salesScriptContent');
   const noRoMessage = document.getElementById('noRoMessage');
   
-  // Display as plain text (no HTML)
-  content.textContent = script;
+  // Convert markdown bold headers to HTML for the 9-point format
+  // First escape any HTML, then convert **text** to bold spans
+  const escaped = script
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  
+  // Convert **HEADER:** format to styled spans
+  const formatted = escaped
+    .replace(/\*\*([A-Z][A-Z0-9\s\-\/]+):\*\*/g, '<strong class="script-header-label">$1:</strong>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n/g, '<br>');
+  
+  content.innerHTML = '<p>' + formatted + '</p>';
   section.style.display = 'block';
   noRoMessage.style.display = 'none';
 }

@@ -8,6 +8,7 @@ HEART Helper is an AI-powered repair order search tool for HEART Certified Auto 
 
 - **AI-Powered Concern Intake**: Interactive diagnostic Q&A workflow for customer calls with symptom-based expert questions (16 categories: brakes, engine, transmission, cooling, steering, A/C, etc.)
 - **Phone Answer Scripts**: Professional scripts for incoming calls
+- **9-Point Sales Script Format**: Structured AI-generated scripts with required sections (Rapport, Inspection Credentials, Digital Resources, Good-Good-Bad Presentation, Safety Urgency, Warranty, Price as Investment, Permission to Inspect, Follow-up Commitment)
 - **Intelligent Repair Term Extraction**: Semantic parsing of customer descriptions
 - **Smart Year Matching**: Broader searches across compatible model years
 - **Fuzzy Model Matching**: Automatically matches model variations (F150 = F-150 = F 150) for better search results
