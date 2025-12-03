@@ -1,4 +1,4 @@
-import { Download, Chrome, CheckCircle2, Circle, ArrowLeft, Sparkles, Search, Send, Zap, Settings as SettingsIcon, XCircle, Loader2, Phone, MessageSquare, FileText } from "lucide-react";
+import { Download, Chrome, CheckCircle2, Circle, ArrowLeft, Sparkles, Search, Send, Zap, Settings as SettingsIcon, XCircle, Loader2, Phone, MessageSquare, FileText, DollarSign, ExternalLink } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -45,6 +45,10 @@ export default function Settings() {
 
   const { data: settings, isLoading: settingsLoading } = useQuery<Settings>({
     queryKey: ["/api/settings"],
+  });
+
+  const { data: adminCheck } = useQuery<{ isAdmin: boolean }>({
+    queryKey: ["/api/admin/check"],
   });
 
   useEffect(() => {
@@ -582,6 +586,40 @@ Guidelines:
           </div>
         </CardContent>
         </Card>
+
+        {/* Labor Rates Section - Admin Only */}
+        {adminCheck?.isAdmin && (
+          <Card className="mb-6">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <DollarSign className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <CardTitle>Labor Rate Groups</CardTitle>
+                  <CardDescription>
+                    Configure automatic labor rates by vehicle make and shop location
+                  </CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Alert>
+                <AlertDescription>
+                  Labor rate groups automatically update pricing when technicians open repair orders based on the vehicle make. Configure rates for Euro, Domestic, Asian, and other vehicle categories per shop location.
+                </AlertDescription>
+              </Alert>
+
+              <Link href="/admin/labor-rates">
+                <Button data-testid="button-manage-labor-rates">
+                  <DollarSign className="w-4 h-4 mr-2" />
+                  Manage Labor Rates
+                  <ExternalLink className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   );

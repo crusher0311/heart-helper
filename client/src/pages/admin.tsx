@@ -1,4 +1,4 @@
-import { ArrowLeft, Users, Save, Loader2, User, Shield, ShieldCheck, Plus, Trash2, Clock, Check, X, DollarSign } from "lucide-react";
+import { ArrowLeft, Users, Save, Loader2, User, Shield, ShieldCheck, Plus, Trash2, Clock, Check, X } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -274,12 +274,6 @@ export default function Admin() {
               <p className="text-muted-foreground">Upload scripts and training data for team members</p>
             </div>
           </div>
-          <Link href="/admin/labor-rates">
-            <Button variant="outline" data-testid="link-labor-rates">
-              <DollarSign className="h-4 w-4 mr-2" />
-              Labor Rates
-            </Button>
-          </Link>
         </div>
 
         {/* Pending Approvals Section */}
