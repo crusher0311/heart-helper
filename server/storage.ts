@@ -124,7 +124,8 @@ export interface IStorage {
   getCallRecordingsForShop(shopId: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string): Promise<CallRecording[]>;
   getAllCallRecordings(dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string): Promise<CallRecording[]>;
   searchCallRecordings(query: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string, shopId?: string, userId?: string): Promise<CallRecording[]>;
-  getUnscoredCallRecordings(limit?: number): Promise<CallRecording[]>;
+  getUnscoredCallRecordings(limit?: number, salesOnly?: boolean): Promise<CallRecording[]>;
+  isSalesCall(transcriptText: string | null): boolean;
   
   // Coaching criteria
   getActiveCoachingCriteria(shopId?: string): Promise<CoachingCriteria[]>;
@@ -1125,24 +1126,58 @@ export class DatabaseStorage implements IStorage {
       .limit(limit);
   }
 
-  async getUnscoredCallRecordings(limit: number = 50): Promise<CallRecording[]> {
+  async getUnscoredCallRecordings(limit: number = 50, salesOnly: boolean = true): Promise<CallRecording[]> {
     // Get calls that have transcripts but haven't been scored yet
     const scoredCallIds = db
       .select({ callId: callScores.callId })
       .from(callScores);
     
+    // Sales call keywords - indicates a repair/service sales conversation
+    const salesKeywords = [
+      'inspection', 'repair', 'total', 'investment', 'estimate', 'quote',
+      'recommend', 'service', 'brake', 'engine', 'transmission', 'oil change',
+      'maintenance', 'warranty', 'safety', 'appointment', 'schedule',
+      'price', 'cost', 'parts', 'labor', 'diagnostic', 'alignment',
+      'tire', 'battery', 'fluid', 'filter', 'mileage'
+    ];
+    
+    const conditions = [
+      sql`${callRecordings.transcriptText} IS NOT NULL`,
+      sql`LENGTH(${callRecordings.transcriptText}) > 50`,
+      sql`${callRecordings.id} NOT IN (${scoredCallIds})`
+    ];
+    
+    // Add sales keyword filter if requested
+    if (salesOnly) {
+      // Build OR condition for any keyword match (case-insensitive)
+      const keywordConditions = salesKeywords.map(keyword => 
+        sql`LOWER(${callRecordings.transcriptText}) LIKE ${'%' + keyword.toLowerCase() + '%'}`
+      );
+      conditions.push(sql`(${sql.join(keywordConditions, sql` OR `)})`);
+    }
+    
     return await db
       .select()
       .from(callRecordings)
-      .where(
-        and(
-          sql`${callRecordings.transcriptText} IS NOT NULL`,
-          sql`LENGTH(${callRecordings.transcriptText}) > 50`,
-          sql`${callRecordings.id} NOT IN (${scoredCallIds})`
-        )
-      )
+      .where(and(...conditions))
       .orderBy(desc(callRecordings.callStartTime))
       .limit(limit);
+  }
+  
+  // Helper to check if a single call transcript is a sales call
+  isSalesCall(transcriptText: string | null): boolean {
+    if (!transcriptText) return false;
+    
+    const salesKeywords = [
+      'inspection', 'repair', 'total', 'investment', 'estimate', 'quote',
+      'recommend', 'service', 'brake', 'engine', 'transmission', 'oil change',
+      'maintenance', 'warranty', 'safety', 'appointment', 'schedule',
+      'price', 'cost', 'parts', 'labor', 'diagnostic', 'alignment',
+      'tire', 'battery', 'fluid', 'filter', 'mileage'
+    ];
+    
+    const lowerText = transcriptText.toLowerCase();
+    return salesKeywords.some(keyword => lowerText.includes(keyword.toLowerCase()));
   }
 
   // Coaching criteria

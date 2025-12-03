@@ -1,4 +1,4 @@
-import { ArrowLeft, Phone, Clock, Calendar, User, ChevronRight, Loader2, PhoneIncoming, PhoneOutgoing, Star, Filter, RefreshCw, Search, X } from "lucide-react";
+import { ArrowLeft, Phone, Clock, Calendar, User, ChevronRight, Loader2, PhoneIncoming, PhoneOutgoing, Star, Filter, RefreshCw, Search, X, Sparkles } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { queryClient } from "@/lib/queryClient";
 import { useState, useMemo } from "react";
 import { format, formatDistanceToNow } from "date-fns";
 
@@ -98,6 +99,42 @@ export default function Calls() {
     enabled: isAdmin,
   });
 
+  // Get count of unscored sales calls (admin only)
+  const { data: unscoredCount, refetch: refetchUnscoredCount } = useQuery<{ count: number; message: string }>({
+    queryKey: ["/api/calls/unscored/count"],
+    enabled: isAdmin,
+  });
+
+  // Batch score mutation
+  const batchScoreMutation = useMutation({
+    mutationFn: async (limit: number = 10) => {
+      const response = await fetch(`/api/calls/score-batch?limit=${limit}`, {
+        method: "POST",
+        credentials: "include",
+      });
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Failed to score calls");
+      }
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Scoring Complete",
+        description: data.message,
+      });
+      refetchUnscoredCount();
+      queryClient.invalidateQueries({ queryKey: ["/api/calls"] });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Scoring Failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
   // Regular calls query (when not searching)
   const { data: calls, isLoading, refetch, isFetching } = useQuery<CallRecording[]>({
     queryKey: ["/api/calls", dateFrom, dateTo, directionFilter, userFilter],
@@ -186,15 +223,32 @@ export default function Calls() {
             </div>
           </div>
           
-          <Button
-            variant="outline"
-            onClick={() => refetch()}
-            disabled={isFetching}
-            data-testid="button-refresh"
-          >
-            <RefreshCw className={`h-4 w-4 mr-2 ${isFetching ? 'animate-spin' : ''}`} />
-            Refresh
-          </Button>
+          <div className="flex items-center gap-2">
+            {isAdmin && unscoredCount && unscoredCount.count > 0 && (
+              <Button
+                variant="default"
+                onClick={() => batchScoreMutation.mutate(10)}
+                disabled={batchScoreMutation.isPending}
+                data-testid="button-score-batch"
+              >
+                {batchScoreMutation.isPending ? (
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                ) : (
+                  <Sparkles className="h-4 w-4 mr-2" />
+                )}
+                Score {Math.min(unscoredCount.count, 10)} Sales Calls
+              </Button>
+            )}
+            <Button
+              variant="outline"
+              onClick={() => refetch()}
+              disabled={isFetching}
+              data-testid="button-refresh"
+            >
+              <RefreshCw className={`h-4 w-4 mr-2 ${isFetching ? 'animate-spin' : ''}`} />
+              Refresh
+            </Button>
+          </div>
         </div>
       </header>
 

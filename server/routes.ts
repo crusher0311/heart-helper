@@ -1343,6 +1343,102 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Get count of unscored sales calls (admin only)
+  app.get("/api/calls/unscored/count", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      // Use a smaller limit for counting since we just need to know if there are any
+      const unscoredCalls = await storage.getUnscoredCallRecordings(100, true);
+      res.json({ 
+        count: unscoredCalls.length,
+        message: unscoredCalls.length > 0 
+          ? `${unscoredCalls.length}${unscoredCalls.length === 100 ? '+' : ''} sales calls ready for scoring`
+          : "All sales calls have been scored"
+      });
+    } catch (error: any) {
+      console.error("Get unscored count error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Batch score unscored sales calls (admin only)
+  app.post("/api/calls/score-batch", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const limit = Math.min(parseInt(req.query.limit as string) || 10, 50); // Max 50 per batch
+      
+      // Get unscored sales calls
+      const unscoredCalls = await storage.getUnscoredCallRecordings(limit, true);
+      
+      if (unscoredCalls.length === 0) {
+        return res.json({ 
+          success: true, 
+          scored: 0, 
+          message: "No unscored sales calls found" 
+        });
+      }
+      
+      // Get active coaching criteria
+      const criteria = await storage.getActiveCoachingCriteria();
+      
+      if (criteria.length === 0) {
+        return res.status(400).json({ message: "No active coaching criteria defined" });
+      }
+      
+      const results = {
+        scored: 0,
+        failed: 0,
+        errors: [] as string[],
+      };
+      
+      // Score each call (with rate limiting - 1 second between calls)
+      for (const call of unscoredCalls) {
+        try {
+          const transcriptText = call.transcriptText as string;
+          
+          // Score the transcript with AI
+          const scoringResult = await scoreCallTranscript(transcriptText, criteria.map(c => ({
+            id: c.id,
+            name: c.name,
+            description: c.description,
+            category: c.category,
+            maxScore: 5,
+            isActive: c.isActive || true,
+          })));
+          
+          // Save the score
+          await storage.createCallScore({
+            callId: call.id,
+            overallScore: scoringResult.overallScore,
+            criteriaScores: scoringResult.criteriaScores,
+            aiFeedback: scoringResult.summary,
+            aiHighlights: scoringResult.highlights,
+          });
+          
+          results.scored++;
+          
+          // Rate limit: wait 1 second between API calls to avoid overwhelming OpenAI
+          if (results.scored < unscoredCalls.length) {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+          }
+        } catch (err: any) {
+          results.failed++;
+          results.errors.push(`Call ${call.id}: ${err.message}`);
+          console.error(`Failed to score call ${call.id}:`, err.message);
+        }
+      }
+      
+      res.json({
+        success: true,
+        scored: results.scored,
+        failed: results.failed,
+        errors: results.errors.slice(0, 5), // Only return first 5 errors
+        message: `Scored ${results.scored} of ${unscoredCalls.length} sales calls`,
+      });
+    } catch (error: any) {
+      console.error("Batch score error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
   // Stream call recording audio (requires approval)
   app.get("/api/calls/:id/recording", isAuthenticated, isApproved, async (req: any, res) => {
     try {
