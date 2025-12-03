@@ -1,0 +1,45 @@
+sidepanel.js:19 All cookies for https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev : Array(1)
+sidepanel.js:26 Session cookie found: connect.sid value length: 80
+sidepanel.js:19 All cookies for https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev : Array(1)
+sidepanel.js:26 Session cookie found: connect.sid value length: 80
+sidepanel.js:115 Auth check successful: brandoncrusha@gmail.com
+sidepanel.js:356 Labor rate groups synced: 1 groups
+sidepanel.js:502 [SidePanel] requestCurrentROInfo called
+sidepanel.js:504 [SidePanel] Active tab: https://shop.tekmetric.com/admin/shop/469/repair-orders/277379616/estimate
+sidepanel.js:516 [SidePanel] Extracted from URL: Object
+sidepanel.js:519 [SidePanel] Sending GET_VEHICLE_INFO to background
+sidepanel.js:525 [SidePanel] GET_VEHICLE_INFO response: {"year":2017,"make":"Mercedes-Benz","model":"GLC300","engine":"2.0L 4Cyl GAS 274.920 Turbocharged","shopId":"469","roId":"277379616"}
+sidepanel.js:531 [SidePanel] Updating fields with: {"year":2017,"make":"Mercedes-Benz","model":"GLC300","engine":"2.0L 4Cyl GAS 274.920 Turbocharged","shopId":"469","roId":"277379616"}
+sidepanel.js:1258 Search params: Object
+sidepanel.js:1259 Fetching from: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/api/search
+sidepanel.js:19 All cookies for https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev : Array(1)
+sidepanel.js:26 Session cookie found: connect.sid value length: 80
+sidepanel.js:1270 Search response status: 200
+sidepanel.js:1287 Search results: Object
+sidepanel.js:1489 createJobInTekmetric called, selectedJobResult: Object
+sidepanel.js:1498 Creating job data for: REAR BRAKES -- PADS AND ROTORS WITH SENSORS
+sidepanel.js:1535 Job data prepared for API: Object
+sidepanel.js:1540 Current tab: https://shop.tekmetric.com/admin/shop/469/repair-orders/277379616/estimate
+sidepanel.js:1559 Extracted from URL - Shop ID: 469 RO ID: 277379616
+sidepanel.js:1568 Sending CREATE_JOB_VIA_API to background...
+background.js:627 Tekmetric Job Importer: Background service worker loaded (v3.14.9)
+background.js:374 Side panel behavior set: opens on action click
+background.js:380 Side panel enabled for all tabs
+background.js:415 📨 Message received: CREATE_JOB_VIA_API from tab: undefined
+background.js:508 [Job API] Received CREATE_JOB_VIA_API message: Object
+background.js:527 [Job API] Create job result: Object
+sidepanel.js:1575 CREATE_JOB_VIA_API response: Object
+sidepanel.js:1590 Job creation failed: No Tekmetric auth token available. Please navigate to a repair order first.
+(anonymous) @ sidepanel.js:1590
+sidepanel.js:1489 createJobInTekmetric called, selectedJobResult: {job: {…}, matchScore: 70, matchReason: 'This job involves rear brake replacements on a mor…compatibility with the same general brake system.'}
+sidepanel.js:1498 Creating job data for: REAR BRAKES -- PADS AND ROTORS WITH SENSORS
+sidepanel.js:1535 Job data prepared for API: {jobName: 'REAR BRAKES -- PADS AND ROTORS WITH SENSORS', name: 'REAR BRAKES -- PADS AND ROTORS WITH SENSORS', vehicle: null, laborItems: Array(1), parts: Array(3), …}
+sidepanel.js:1540 Current tab: https://shop.tekmetric.com/admin/shop/469/repair-orders/277379616/estimate
+sidepanel.js:1559 Extracted from URL - Shop ID: 469 RO ID: 277379616
+sidepanel.js:1568 Sending CREATE_JOB_VIA_API to background...
+background.js:415 📨 Message received: CREATE_JOB_VIA_API from tab: undefined
+background.js:508 [Job API] Received CREATE_JOB_VIA_API message: {action: 'CREATE_JOB_VIA_API', shopId: '469', roId: '277379616', jobData: {…}}
+background.js:527 [Job API] Create job result: {success: false, error: 'No Tekmetric auth token available. Please navigate to a repair order first.'}
+sidepanel.js:1575 CREATE_JOB_VIA_API response: {success: false, error: 'No Tekmetric auth token available. Please navigate to a repair order first.'}
+sidepanel.js:1590 Job creation failed: No Tekmetric auth token available. Please navigate to a repair order first.
+(anonymous) @ sidepanel.js:1590

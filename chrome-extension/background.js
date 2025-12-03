@@ -6,6 +6,25 @@ let currentTekmetricShopId = null;
 let currentTekmetricBaseUrl = null;
 let lastProcessedRoId = null;
 
+// Restore persisted Tekmetric context on service worker startup
+chrome.storage.local.get(['tekmetricAuthToken', 'currentTekmetricShopId', 'currentTekmetricBaseUrl', 'lastProcessedRoId'], (result) => {
+  if (result.tekmetricAuthToken) {
+    tekmetricAuthToken = result.tekmetricAuthToken;
+    console.log("[Background] Restored auth token from storage");
+  }
+  if (result.currentTekmetricShopId) {
+    currentTekmetricShopId = result.currentTekmetricShopId;
+    console.log("[Background] Restored shop ID from storage:", currentTekmetricShopId);
+  }
+  if (result.currentTekmetricBaseUrl) {
+    currentTekmetricBaseUrl = result.currentTekmetricBaseUrl;
+    console.log("[Background] Restored base URL from storage:", currentTekmetricBaseUrl);
+  }
+  if (result.lastProcessedRoId) {
+    lastProcessedRoId = result.lastProcessedRoId;
+  }
+});
+
 // Capture Tekmetric auth token, shop ID, and base URL from network requests
 chrome.webRequest.onBeforeSendHeaders.addListener(
   (details) => {
@@ -13,7 +32,8 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
     try {
       const url = new URL(details.url);
       currentTekmetricBaseUrl = url.origin;
-      console.log("[Labor Rate] Base URL captured:", currentTekmetricBaseUrl);
+      // Persist to storage
+      chrome.storage.local.set({ currentTekmetricBaseUrl: currentTekmetricBaseUrl });
     } catch (e) {
       // Ignore URL parsing errors
     }
@@ -23,17 +43,19 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
     if (shopMatch) {
       currentTekmetricShopId = shopMatch[1];
       console.log("[Labor Rate] Shop ID captured:", currentTekmetricShopId);
-      // Store for sidepanel to use
+      // Store for sidepanel to use AND persist for service worker restart
       chrome.storage.local.set({ currentTekmetricShopId: currentTekmetricShopId });
     }
 
-    // Capture auth token from header
+    // Capture auth token from header AND persist it
     const tokenHeader = details.requestHeaders.find(
       (h) => h.name.toLowerCase() === "x-auth-token"
     );
     if (tokenHeader && tokenHeader.value) {
       tekmetricAuthToken = tokenHeader.value;
-      console.log("[Labor Rate] Auth token captured");
+      console.log("[Labor Rate] Auth token captured and persisted");
+      // Persist to storage so it survives service worker restarts
+      chrome.storage.local.set({ tekmetricAuthToken: tokenHeader.value });
     }
   },
   {
@@ -624,4 +646,4 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-console.log("Tekmetric Job Importer: Background service worker loaded (v3.14.9)");
+console.log("Tekmetric Job Importer: Background service worker loaded (v3.15.0)");
