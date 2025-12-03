@@ -986,6 +986,282 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // ==========================================
+  // RingCentral Call Coaching API Routes
+  // ==========================================
+
+  // Test RingCentral connection (admin only)
+  app.get("/api/ringcentral/test", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { testConnection } = await import("./ringcentral");
+      const result = await testConnection();
+      res.json(result);
+    } catch (error: any) {
+      console.error("RingCentral test error:", error);
+      res.status(500).json({ success: false, message: error.message });
+    }
+  });
+
+  // Sync call logs from RingCentral (admin only)
+  app.post("/api/ringcentral/sync", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { syncCallRecords } = await import("./ringcentral");
+      const { dateFrom, dateTo } = req.body;
+      
+      const fromDate = dateFrom ? new Date(dateFrom) : undefined;
+      const toDate = dateTo ? new Date(dateTo) : undefined;
+      
+      const stats = await syncCallRecords(fromDate, toDate);
+      res.json({ success: true, stats });
+    } catch (error: any) {
+      console.error("RingCentral sync error:", error);
+      res.status(500).json({ success: false, message: error.message });
+    }
+  });
+
+  // Fetch RingCentral extensions (admin only)
+  app.get("/api/ringcentral/extensions", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { fetchExtensions } = await import("./ringcentral");
+      const extensions = await fetchExtensions();
+      res.json(extensions);
+    } catch (error: any) {
+      console.error("RingCentral extensions error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Get call recordings for current user (requires approval)
+  app.get("/api/calls", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const userId = req.user.id;
+      const limit = parseInt(req.query.limit as string) || 50;
+      const dateFrom = req.query.dateFrom ? new Date(req.query.dateFrom as string) : undefined;
+      const dateTo = req.query.dateTo ? new Date(req.query.dateTo as string) : undefined;
+      
+      // Check if user is admin or manager
+      const isAdminUser = await storage.isUserAdmin(userId);
+      const userPrefs = await storage.getUserPreferences(userId);
+      const managedShopId = userPrefs?.managedShopId;
+      
+      let calls;
+      if (isAdminUser) {
+        // Admins see all calls
+        calls = await storage.getAllCallRecordings(dateFrom, dateTo, limit);
+      } else if (managedShopId) {
+        // Managers see calls for their shop
+        calls = await storage.getCallRecordingsForShop(managedShopId, dateFrom, dateTo, limit);
+      } else {
+        // Regular users see only their calls
+        calls = await storage.getCallRecordingsForUser(userId, dateFrom, dateTo, limit);
+      }
+      
+      res.json(calls);
+    } catch (error: any) {
+      console.error("Get calls error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Get single call recording with score (requires approval)
+  app.get("/api/calls/:id", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const callId = req.params.id;
+      const call = await storage.getCallRecordingById(callId);
+      
+      if (!call) {
+        return res.status(404).json({ message: "Call not found" });
+      }
+      
+      // Get call score if exists
+      const score = await storage.getCallScore(callId);
+      
+      res.json({ ...call, score });
+    } catch (error: any) {
+      console.error("Get call error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // ==========================================
+  // Coaching Criteria API Routes (Admin only)
+  // ==========================================
+
+  // Get all coaching criteria
+  app.get("/api/coaching/criteria", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const userId = req.user.id;
+      const isAdminUser = await storage.isUserAdmin(userId);
+      
+      // Admins see all, others see only active
+      const criteria = isAdminUser 
+        ? await storage.getAllCoachingCriteria()
+        : await storage.getActiveCoachingCriteria();
+      
+      res.json(criteria);
+    } catch (error: any) {
+      console.error("Get coaching criteria error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Create coaching criteria (admin only)
+  app.post("/api/coaching/criteria", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const userId = req.user.id;
+      const data = { ...req.body, createdBy: userId };
+      
+      const criteria = await storage.createCoachingCriteria(data);
+      res.json(criteria);
+    } catch (error: any) {
+      console.error("Create coaching criteria error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Update coaching criteria (admin only)
+  app.put("/api/coaching/criteria/:id", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const criteria = await storage.updateCoachingCriteria(req.params.id, req.body);
+      res.json(criteria);
+    } catch (error: any) {
+      console.error("Update coaching criteria error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Delete coaching criteria (admin only)
+  app.delete("/api/coaching/criteria/:id", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      await storage.deleteCoachingCriteria(req.params.id);
+      res.json({ success: true });
+    } catch (error: any) {
+      console.error("Delete coaching criteria error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Seed default coaching criteria (admin only)
+  app.post("/api/coaching/criteria/seed", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const userId = req.user.id;
+      
+      const defaultCriteria = [
+        {
+          name: "Rapport Building",
+          description: "Did the advisor establish rapport with the customer? Friendly greeting, use of customer's name, genuine interest.",
+          keywords: ["hello", "thank you", "name", "appreciate", "how are you"],
+          aiPrompt: "Look for friendly greetings, personalized conversation, and genuine interest in the customer's needs.",
+          weight: 10,
+          category: "relationship",
+          sortOrder: 1,
+          createdBy: userId,
+        },
+        {
+          name: "Inspection Credentials",
+          description: "Did the advisor explain the inspection process and technician qualifications?",
+          keywords: ["ASE certified", "master technician", "trained", "experience", "inspection"],
+          aiPrompt: "Check if advisor mentioned technician qualifications, certifications, or expertise.",
+          weight: 10,
+          category: "credibility",
+          sortOrder: 2,
+          createdBy: userId,
+        },
+        {
+          name: "Digital Resources Confirmation",
+          description: "Did the advisor mention or confirm digital inspection resources being sent?",
+          keywords: ["digital inspection", "photos", "video", "text", "email", "link"],
+          aiPrompt: "Look for mentions of sending digital inspection results, photos, or videos to the customer.",
+          weight: 10,
+          category: "communication",
+          sortOrder: 3,
+          createdBy: userId,
+        },
+        {
+          name: "Good-Good-Bad Presentation",
+          description: "Did the advisor present findings in the Good-Good-Bad format? Positive before negative.",
+          keywords: ["good news", "great condition", "needs attention", "recommend"],
+          aiPrompt: "Check if the advisor started with positive findings before presenting needed repairs.",
+          weight: 10,
+          category: "presentation",
+          sortOrder: 4,
+          createdBy: userId,
+        },
+        {
+          name: "Safety Concern Emphasis",
+          description: "Did the advisor emphasize safety concerns when presenting repairs?",
+          keywords: ["safety", "family", "safe", "concern", "important", "risk"],
+          aiPrompt: "Look for emphasis on safety implications of repairs, especially for brakes, tires, and steering.",
+          weight: 10,
+          category: "presentation",
+          sortOrder: 5,
+          createdBy: userId,
+        },
+        {
+          name: "3yr/36k Mile Warranty",
+          description: "Did the advisor mention the HEART warranty on repairs?",
+          keywords: ["warranty", "3 year", "36,000", "36000", "covered", "guarantee"],
+          aiPrompt: "Check if advisor mentioned the 3-year/36,000-mile warranty on repairs.",
+          weight: 10,
+          category: "value",
+          sortOrder: 6,
+          createdBy: userId,
+        },
+        {
+          name: "Price Presentation (Investment)",
+          description: "Did the advisor present prices as an 'investment' rather than a cost?",
+          keywords: ["investment", "value", "save", "protect", "worth"],
+          aiPrompt: "Look for positive framing of repair costs as investments in vehicle longevity and safety.",
+          weight: 10,
+          category: "presentation",
+          sortOrder: 7,
+          createdBy: userId,
+        },
+        {
+          name: "Permission to Inspect Rest",
+          description: "Did the advisor ask for permission to inspect the rest of the vehicle?",
+          keywords: ["inspect", "check", "look at", "while we have it", "courtesy"],
+          aiPrompt: "Check if advisor asked permission to perform a courtesy inspection or check other items.",
+          weight: 10,
+          category: "upsell",
+          sortOrder: 8,
+          createdBy: userId,
+        },
+        {
+          name: "Follow-up Commitment",
+          description: "Did the advisor establish a follow-up plan or next appointment?",
+          keywords: ["next time", "follow up", "schedule", "come back", "appointment", "reminder"],
+          aiPrompt: "Look for discussion of future maintenance needs or scheduling next visit.",
+          weight: 10,
+          category: "retention",
+          sortOrder: 9,
+          createdBy: userId,
+        },
+        {
+          name: "Objection Handling",
+          description: "How well did the advisor handle customer objections or concerns?",
+          keywords: ["understand", "I hear you", "let me explain", "alternative", "option"],
+          aiPrompt: "Evaluate how the advisor responded to price objections, time concerns, or repair necessity questions.",
+          weight: 10,
+          category: "objection",
+          sortOrder: 10,
+          createdBy: userId,
+        },
+      ];
+
+      const created = [];
+      for (const c of defaultCriteria) {
+        const criteria = await storage.createCoachingCriteria(c);
+        created.push(criteria);
+      }
+
+      res.json({ success: true, created: created.length });
+    } catch (error: any) {
+      console.error("Seed coaching criteria error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;

@@ -21,9 +21,17 @@ import type {
   UserWithPreferences,
   LaborRateGroup,
   InsertLaborRateGroup,
+  RingcentralUser,
+  InsertRingcentralUser,
+  CallRecording,
+  InsertCallRecording,
+  CoachingCriteria,
+  InsertCoachingCriteria,
+  CallScore,
+  InsertCallScore,
 } from "@shared/schema";
 import { db } from "./db";
-import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache, users, userPreferences, scriptFeedback, laborRateGroups } from "@shared/schema";
+import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache, users, userPreferences, scriptFeedback, laborRateGroups, ringcentralUsers, callRecordings, coachingCriteria, callScores } from "@shared/schema";
 import { eq, and, or, like, ilike, sql, desc, gte, lte } from "drizzle-orm";
 import crypto from "crypto";
 import { getModelVariations } from "./vehicle-utils";
@@ -97,6 +105,34 @@ export interface IStorage {
   createLaborRateGroup(data: InsertLaborRateGroup): Promise<LaborRateGroup>;
   updateLaborRateGroup(id: string, data: Partial<InsertLaborRateGroup>): Promise<LaborRateGroup>;
   deleteLaborRateGroup(id: string): Promise<void>;
+  
+  // RingCentral user mappings
+  getRingcentralUserByExtensionId(extensionId: string): Promise<RingcentralUser | undefined>;
+  getRingcentralUserByUserId(userId: string): Promise<RingcentralUser | undefined>;
+  createRingcentralUser(data: InsertRingcentralUser): Promise<RingcentralUser>;
+  updateRingcentralUser(id: string, data: Partial<InsertRingcentralUser>): Promise<RingcentralUser>;
+  
+  // Call recordings
+  getCallRecordingByRingcentralId(callId: string): Promise<CallRecording | undefined>;
+  getCallRecordingById(id: string): Promise<CallRecording | undefined>;
+  createCallRecording(data: InsertCallRecording): Promise<CallRecording>;
+  updateCallRecording(id: string, data: Partial<InsertCallRecording>): Promise<CallRecording>;
+  getCallRecordingsForUser(userId: string, dateFrom?: Date, dateTo?: Date, limit?: number): Promise<CallRecording[]>;
+  getCallRecordingsForShop(shopId: string, dateFrom?: Date, dateTo?: Date, limit?: number): Promise<CallRecording[]>;
+  getAllCallRecordings(dateFrom?: Date, dateTo?: Date, limit?: number): Promise<CallRecording[]>;
+  
+  // Coaching criteria
+  getActiveCoachingCriteria(shopId?: string): Promise<CoachingCriteria[]>;
+  getAllCoachingCriteria(): Promise<CoachingCriteria[]>;
+  getCoachingCriteriaById(id: string): Promise<CoachingCriteria | undefined>;
+  createCoachingCriteria(data: InsertCoachingCriteria): Promise<CoachingCriteria>;
+  updateCoachingCriteria(id: string, data: Partial<InsertCoachingCriteria>): Promise<CoachingCriteria>;
+  deleteCoachingCriteria(id: string): Promise<void>;
+  
+  // Call scores
+  getCallScore(callId: string): Promise<CallScore | undefined>;
+  createCallScore(data: InsertCallScore): Promise<CallScore>;
+  updateCallScore(id: string, data: Partial<InsertCallScore>): Promise<CallScore>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -854,6 +890,229 @@ export class DatabaseStorage implements IStorage {
     await db
       .delete(laborRateGroups)
       .where(eq(laborRateGroups.id, id));
+  }
+  
+  // RingCentral user mappings
+  async getRingcentralUserByExtensionId(extensionId: string): Promise<RingcentralUser | undefined> {
+    const [user] = await db
+      .select()
+      .from(ringcentralUsers)
+      .where(eq(ringcentralUsers.ringcentralExtensionId, extensionId));
+    return user;
+  }
+
+  async getRingcentralUserByUserId(userId: string): Promise<RingcentralUser | undefined> {
+    const [user] = await db
+      .select()
+      .from(ringcentralUsers)
+      .where(eq(ringcentralUsers.userId, userId));
+    return user;
+  }
+
+  async createRingcentralUser(data: InsertRingcentralUser): Promise<RingcentralUser> {
+    const [user] = await db
+      .insert(ringcentralUsers)
+      .values(data)
+      .returning();
+    return user;
+  }
+
+  async updateRingcentralUser(id: string, data: Partial<InsertRingcentralUser>): Promise<RingcentralUser> {
+    const [user] = await db
+      .update(ringcentralUsers)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(ringcentralUsers.id, id))
+      .returning();
+    if (!user) throw new Error("RingCentral user not found");
+    return user;
+  }
+
+  // Call recordings
+  async getCallRecordingByRingcentralId(callId: string): Promise<CallRecording | undefined> {
+    const [recording] = await db
+      .select()
+      .from(callRecordings)
+      .where(eq(callRecordings.ringcentralCallId, callId));
+    return recording;
+  }
+
+  async getCallRecordingById(id: string): Promise<CallRecording | undefined> {
+    const [recording] = await db
+      .select()
+      .from(callRecordings)
+      .where(eq(callRecordings.id, id));
+    return recording;
+  }
+
+  async createCallRecording(data: InsertCallRecording): Promise<CallRecording> {
+    const [recording] = await db
+      .insert(callRecordings)
+      .values(data)
+      .returning();
+    return recording;
+  }
+
+  async updateCallRecording(id: string, data: Partial<InsertCallRecording>): Promise<CallRecording> {
+    const [recording] = await db
+      .update(callRecordings)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(callRecordings.id, id))
+      .returning();
+    if (!recording) throw new Error("Call recording not found");
+    return recording;
+  }
+
+  async getCallRecordingsForUser(
+    userId: string, 
+    dateFrom?: Date, 
+    dateTo?: Date, 
+    limit: number = 100
+  ): Promise<CallRecording[]> {
+    const conditions = [eq(callRecordings.userId, userId)];
+    
+    if (dateFrom) {
+      conditions.push(gte(callRecordings.callStartTime, dateFrom));
+    }
+    if (dateTo) {
+      conditions.push(lte(callRecordings.callStartTime, dateTo));
+    }
+    
+    return await db
+      .select()
+      .from(callRecordings)
+      .where(and(...conditions))
+      .orderBy(desc(callRecordings.callStartTime))
+      .limit(limit);
+  }
+
+  async getCallRecordingsForShop(
+    shopId: string, 
+    dateFrom?: Date, 
+    dateTo?: Date, 
+    limit: number = 100
+  ): Promise<CallRecording[]> {
+    const conditions = [eq(callRecordings.shopId, shopId)];
+    
+    if (dateFrom) {
+      conditions.push(gte(callRecordings.callStartTime, dateFrom));
+    }
+    if (dateTo) {
+      conditions.push(lte(callRecordings.callStartTime, dateTo));
+    }
+    
+    return await db
+      .select()
+      .from(callRecordings)
+      .where(and(...conditions))
+      .orderBy(desc(callRecordings.callStartTime))
+      .limit(limit);
+  }
+
+  async getAllCallRecordings(
+    dateFrom?: Date, 
+    dateTo?: Date, 
+    limit: number = 100
+  ): Promise<CallRecording[]> {
+    const conditions = [];
+    
+    if (dateFrom) {
+      conditions.push(gte(callRecordings.callStartTime, dateFrom));
+    }
+    if (dateTo) {
+      conditions.push(lte(callRecordings.callStartTime, dateTo));
+    }
+    
+    const query = conditions.length > 0 
+      ? db.select().from(callRecordings).where(and(...conditions))
+      : db.select().from(callRecordings);
+    
+    return await query
+      .orderBy(desc(callRecordings.callStartTime))
+      .limit(limit);
+  }
+
+  // Coaching criteria
+  async getActiveCoachingCriteria(shopId?: string): Promise<CoachingCriteria[]> {
+    const conditions = [eq(coachingCriteria.isActive, true)];
+    
+    if (shopId) {
+      conditions.push(or(
+        eq(coachingCriteria.shopId, shopId),
+        sql`${coachingCriteria.shopId} IS NULL`
+      )!);
+    }
+    
+    return await db
+      .select()
+      .from(coachingCriteria)
+      .where(and(...conditions))
+      .orderBy(coachingCriteria.sortOrder);
+  }
+
+  async getAllCoachingCriteria(): Promise<CoachingCriteria[]> {
+    return await db
+      .select()
+      .from(coachingCriteria)
+      .orderBy(coachingCriteria.sortOrder);
+  }
+
+  async getCoachingCriteriaById(id: string): Promise<CoachingCriteria | undefined> {
+    const [criteria] = await db
+      .select()
+      .from(coachingCriteria)
+      .where(eq(coachingCriteria.id, id));
+    return criteria;
+  }
+
+  async createCoachingCriteria(data: InsertCoachingCriteria): Promise<CoachingCriteria> {
+    const [criteria] = await db
+      .insert(coachingCriteria)
+      .values(data)
+      .returning();
+    return criteria;
+  }
+
+  async updateCoachingCriteria(id: string, data: Partial<InsertCoachingCriteria>): Promise<CoachingCriteria> {
+    const [criteria] = await db
+      .update(coachingCriteria)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(coachingCriteria.id, id))
+      .returning();
+    if (!criteria) throw new Error("Coaching criteria not found");
+    return criteria;
+  }
+
+  async deleteCoachingCriteria(id: string): Promise<void> {
+    await db
+      .delete(coachingCriteria)
+      .where(eq(coachingCriteria.id, id));
+  }
+
+  // Call scores
+  async getCallScore(callId: string): Promise<CallScore | undefined> {
+    const [score] = await db
+      .select()
+      .from(callScores)
+      .where(eq(callScores.callId, callId));
+    return score;
+  }
+
+  async createCallScore(data: InsertCallScore): Promise<CallScore> {
+    const [score] = await db
+      .insert(callScores)
+      .values(data)
+      .returning();
+    return score;
+  }
+
+  async updateCallScore(id: string, data: Partial<InsertCallScore>): Promise<CallScore> {
+    const [score] = await db
+      .update(callScores)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(callScores.id, id))
+      .returning();
+    if (!score) throw new Error("Call score not found");
+    return score;
   }
 }
 
