@@ -1,4 +1,4 @@
-import SDK from "@ringcentral/sdk";
+import { SDK } from "@ringcentral/sdk";
 import { storage } from "./storage";
 import type { InsertCallRecording, InsertRingcentralUser } from "@shared/schema";
 
