@@ -69,14 +69,15 @@ All protected routes require both authentication and approval status check.
 
 CORS is configured to allow Chrome extension origins (chrome-extension://), *.replit.dev, *.replit.app, and localhost with credentials support for cross-origin authentication.
 
-### Chrome Extension (v3.18.0)
+### Chrome Extension (v3.19.0)
 
 Located in `/chrome-extension/`, provides:
 - **Built-in Login/Registration**: Users can sign in or create accounts directly in the extension side panel - no need to visit the web app
-- Side panel UI for live call assistance with 4 main tabs:
+- Side panel UI for live call assistance with 5 main tabs:
   - **Incoming Caller**: Phone scripts and AI-powered concern intake Q&A
   - **Search**: Native repair order search with job details, pricing, and "Create Job in Tekmetric" button
   - **Sales Script**: AI-generated sales scripts with feedback tracking
+  - **Tips**: Live coaching tips based on configured coaching criteria, with HEART 9-Point Method quick reference
   - **Rates**: View labor rate groups configured by admins
 - **API-based vehicle data extraction**: Uses Tekmetric API via `/api/tekmetric/ro/:shopId/:roId` for accurate vehicle info (year, make, model, engine) instead of DOM scraping. Falls back to DOM parsing if API unavailable.
 - **Create Job functionality**: From search results, users can click "Create Job in Tekmetric" to prepare job data for import

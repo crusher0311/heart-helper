@@ -163,6 +163,7 @@ function updateUserDisplay(user) {
     document.getElementById('incomingTab').style.display = activeTab === 'incoming' ? 'flex' : 'none';
     document.getElementById('searchTab').style.display = activeTab === 'search' ? 'flex' : 'none';
     document.getElementById('salesTab').style.display = activeTab === 'sales' ? 'flex' : 'none';
+    document.getElementById('tipsTab').style.display = activeTab === 'tips' ? 'flex' : 'none';
     document.getElementById('ratesTab').style.display = activeTab === 'rates' ? 'flex' : 'none';
     
     // Add logout handler
