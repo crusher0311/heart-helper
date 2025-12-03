@@ -1,0 +1,248 @@
+
+[Violation] Potential permissions policy violation: microphone is not allowed in this document.
+ Tekmetric Job Importer: Content script loaded (v3.14.8)
+ 📋 Tekmetric Job Importer initialized, document ready state: interactive
+ 📄 Document already loaded - checking for pending jobs in 2s...
+ [Content] Main frame detected - registering side panel message handler...
+(anonymous) @ content.js:1324
+ 🔍 Checking for pending job data...
+ 
+a7 @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught 
+ 📬 Received window message: 
+ 
+a7 @ make-phone-link.abc00f32.js:1
+make-phone-link.abc00f32.js:1 Uncaught 
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ [OutboundCall] Menu state changed: false
+ [Handle] Repair order ID found, fetching customer data from background: 277379616
+ 🔍 Checking for pending job data...
+ [Handle] Customer ID retrieved from background: 2080474
+ customerId:", 2080474,shopId: 469,
+        previousCustomerId: null, previousShopId: null
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 Received window message: Object
+ ⚠️ Ignoring message from different origin: https://q8lnyd9kmdck.statuspage.io
+ 📬 Received window message: Object
+ 📬 Received window message: Object
+estimate:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+ 📬 Received window message: Object
+ Received customer phone list response:, [object Object], payload_customer_id: 2080474, customer_id: 2080474
+ 🔍 Checking for pending job data...
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ Event "payments_service_status" doesn't have any listeners. Putting it in the stack.
+ 🔍 Checking for pending job data...
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Checking for pending job data...
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Checking for pending job data...
+ 🔍 Checking for pending job data...
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController2581","controllerAppFrameId":"__privateStripeController2581","message":{"action":"stripe-controller-load","payload":{"controllerMetrics":{"resource_timings":{"shared.js":{"raw_size":814206,"transfer_size":0,"duration":0},"controller-with-preconnect.js":{"raw_size":1095850,"transfer_size":0,"duration":0}}}}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+ 🔍 Checking for pending job data...
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController2581","controllerAppFrameId":"__privateStripeController2581","message":{"action":"stripe-controller-action-response","payload":{"nonce":"9456a93d-bc1c-4c83-ac39-cf33327f09c0"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ 🔍 Checking for pending job data...
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ 🔍 Checking for pending job data...
+ [Handle] Repair order ID found, fetching customer data from background: 277379616
+ [Handle] Customer ID retrieved from background: 2080474
+ [Handle] Phone link updated event received customerId: 2080474, shopId: 469
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ [Handle] Repair order ID found, fetching customer data from background: 277379616
+ [Handle] Customer ID retrieved from background: 2080474
+ customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+ 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController2581","controllerAppFrameId":"__privateStripeController2581","message":{"action":"stripe-controller-action-response","payload":{"nonce":"45c1d2e4-812c-4795-a004-10ef1aff4a40"}},"__stripeJsV3":true}
+ ⚠️ Ignoring message from different origin: https://js.stripe.com
+ 🔍 Checking for pending job data...
+ 📬 GET_PENDING_JOB response: Object
+ ⚠️ No pending job data found
+ [Handle] Repair order ID found, fetching customer data from background: 277379616
+ [Handle] Customer ID retrieved from background: 2080474
+ customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 277379616
+ [Handle] Customer ID retrieved from background: 2080474
+ customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 277379616
+ [Handle] Customer ID retrieved from background: 2080474
+ customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+ [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+content.js:949 🔍 Checking for pending job data...
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+content.js:951 📬 GET_PENDING_JOB response: Object
+content.js:957 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController2581","controllerAppFrameId":"__privateStripeController2581","message":{"action":"stripe-controller-action-response","payload":{"nonce":"0442ccd3-1a1c-487f-a916-174f86ef47f6"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+[Violation] Potential permissions policy violation: payment is not allowed in this document.
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+content.js:949 🔍 Checking for pending job data...
+content.js:951 📬 GET_PENDING_JOB response: Object
+content.js:957 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+content.js:975 📬 Received window message: {"originatingScript":"m2","payload":{"guid":"cb64f5f7-386b-46b0-948b-ec66ed5d6999ea1d00","muid":"e6189d69-2dd3-464e-ac58-bec4d81089bf27571d","sid":"aeaf2843-5ef1-445e-9426-0612963bb202021f5c"}}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController2581","controllerAppFrameId":"__privateStripeController2581","message":{"action":"stripe-controller-action-response","payload":{"nonce":"15ddf17b-1e36-468f-a215-6986e8f655fb"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController2581","controllerAppFrameId":"__privateStripeController2581","message":{"action":"stripe-controller-action-response","payload":{"nonce":"48aa4b7a-0bc3-44fc-b9cc-255385d6a9b7"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:24 [Handle] Sending CUSTOMER_PHONE_LIST_REQUEST for phone link updated: 2080474 shopId: 469
+handle.2fe6b368.js:23 Received customer phone list response:, [object Object], payload_customer_id: 2080474, customer_id: 2080474
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+content.js:949 🔍 Checking for pending job data...
+content.js:949 🔍 Checking for pending job data...
+content.js:951 📬 GET_PENDING_JOB response: Object
+content.js:957 ⚠️ No pending job data found
+content.js:951 📬 GET_PENDING_JOB response: Object
+content.js:957 ⚠️ No pending job data found
+content.js:949 🔍 Checking for pending job data...
+content.js:951 📬 GET_PENDING_JOB response: Object
+content.js:957 ⚠️ No pending job data found
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+content.js:1329 [Content v3.14.8] MESSAGE RECEIVED: GET_VEHICLE_INFO
+(anonymous) @ content.js:1329
+content.js:1333 [Content] GET_VEHICLE_INFO handler started
+(anonymous) @ content.js:1333
+content.js:1538 [Content] Extracted IDs from URL: Object
+content.js:1337 [Content] URL extraction result: {"shopId":"469","roId":"277379616"}
+(anonymous) @ content.js:1337
+content.js:1538 [Content] Extracted IDs from URL: Object
+content.js:1329 [Content v3.14.8] MESSAGE RECEIVED: GET_RO_INFO
+(anonymous) @ content.js:1329
+content.js:1538 [Content] Extracted IDs from URL: Object
+content.js:1578 Fetching RO data from API: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/api/tekmetric/ro/469/277379616
+content.js:1578 Fetching RO data from API: https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/api/tekmetric/ro/469/277379616
+estimate:1 Access to fetch at 'https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/api/tekmetric/ro/469/277379616' from origin 'https://shop.tekmetric.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/api/tekmetric/ro/469/277379616:1  Failed to load resource: net::ERR_FAILED
+content.js:1599 Error fetching from API: TypeError: Failed to fetch
+    at fetchVehicleInfoFromAPI (content.js:1580:28)
+fetchVehicleInfoFromAPI @ content.js:1599
+content.js:1341 [Content] API response: null
+(anonymous) @ content.js:1341
+content.js:1353 [Content] API failed/empty, using DOM scraping
+(anonymous) @ content.js:1353
+content.js:1355 [Content] DOM scraped: {"year":null,"make":null,"model":null,"engine":null}
+(anonymous) @ content.js:1355
+estimate:1 Access to fetch at 'https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/api/tekmetric/ro/469/277379616' from origin 'https://shop.tekmetric.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev/api/tekmetric/ro/469/277379616:1  Failed to load resource: net::ERR_FAILED
+content.js:1599 Error fetching from API: TypeError: Failed to fetch
+    at fetchVehicleInfoFromAPI (content.js:1580:28)
+fetchVehicleInfoFromAPI @ content.js:1599
+content.js:1385 API failed, using DOM scraping for RO info
+content.js:1825 RO status detection - hasWIP: false isEstimate: true isInShop: false
+content.js:1955 Extracted RO info: Object
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController2581","controllerAppFrameId":"__privateStripeController2581","message":{"action":"stripe-controller-action-response","payload":{"nonce":"ff6412de-5e75-4791-8557-bebb160a6382"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController2581","controllerAppFrameId":"__privateStripeController2581","message":{"action":"stripe-controller-action-response","payload":{"nonce":"8635d6d8-13fa-410b-bb96-2cb8ec148024"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController2581","controllerAppFrameId":"__privateStripeController2581","message":{"action":"stripe-controller-action-response","payload":{"nonce":"c05d0777-c863-4336-b7f4-629584c6ef54"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:949 🔍 Checking for pending job data...
+content.js:949 🔍 Checking for pending job data...
+content.js:949 🔍 Checking for pending job data...
+content.js:951 📬 GET_PENDING_JOB response: Object
+content.js:957 ⚠️ No pending job data found
+content.js:951 📬 GET_PENDING_JOB response: Object
+content.js:957 ⚠️ No pending job data found
+content.js:951 📬 GET_PENDING_JOB response: Object
+content.js:957 ⚠️ No pending job data found
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController2581","controllerAppFrameId":"__privateStripeController2581","message":{"action":"stripe-controller-action-response","payload":{"nonce":"1f7ab924-1f01-4003-8827-1671c5c52e9d"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469
+handle.2fe6b368.js:23 [Handle] Repair order ID found, fetching customer data from background: 277379616
+handle.2fe6b368.js:23 [Handle] Customer ID retrieved from background: 2080474
+handle.2fe6b368.js:23 customerId:", 2080474,shopId: 469,
+        previousCustomerId: 2080474, previousShopId: 469

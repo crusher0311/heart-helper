@@ -560,6 +560,68 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
     return false;
   }
+
+  // GET_VEHICLE_INFO - Fetch vehicle data from Tekmetric API (same pattern as labor rate)
+  if (message.action === "GET_VEHICLE_INFO" || message.type === "GET_VEHICLE_INFO") {
+    console.log("[Background] GET_VEHICLE_INFO received:", { 
+      shopId: message.shopId, 
+      roId: message.roId,
+      hasToken: !!tekmetricAuthToken,
+      storedShopId: currentTekmetricShopId
+    });
+    
+    const shopId = message.shopId || currentTekmetricShopId;
+    const roId = message.roId || lastProcessedRoId;
+    
+    if (!tekmetricAuthToken) {
+      console.warn("[Background] No auth token - cannot fetch vehicle info");
+      sendResponse({ year: null, make: null, model: null, engine: null, error: "No auth token" });
+      return false;
+    }
+    
+    if (!shopId || !roId) {
+      console.warn("[Background] Missing shopId or roId:", { shopId, roId });
+      sendResponse({ year: null, make: null, model: null, engine: null, error: "Missing shopId or roId" });
+      return false;
+    }
+    
+    const baseUrl = currentTekmetricBaseUrl || "https://shop.tekmetric.com";
+    
+    // Fetch RO data from Tekmetric API (same as labor rate tool)
+    fetch(`${baseUrl}/api/shop/${shopId}/repair-order/${roId}`, {
+      headers: {
+        "x-auth-token": tekmetricAuthToken,
+        "content-type": "application/json"
+      }
+    })
+    .then(res => {
+      if (!res.ok) throw new Error(`API returned ${res.status}`);
+      return res.json();
+    })
+    .then(roData => {
+      const vehicle = roData.vehicle || {};
+      console.log("[Background] Vehicle info from API:", {
+        year: vehicle.year,
+        make: vehicle.make,
+        model: vehicle.model,
+        engine: vehicle.engineDescription || vehicle.engine
+      });
+      sendResponse({
+        year: vehicle.year || null,
+        make: vehicle.make || null,
+        model: vehicle.model || null,
+        engine: vehicle.engineDescription || vehicle.engine || null,
+        shopId: shopId,
+        roId: roId
+      });
+    })
+    .catch(err => {
+      console.error("[Background] Failed to fetch vehicle info:", err);
+      sendResponse({ year: null, make: null, model: null, engine: null, error: err.message });
+    });
+    
+    return true; // Async response
+  }
 });
 
-console.log("Tekmetric Job Importer: Background service worker loaded (v3.14.8)");
+console.log("Tekmetric Job Importer: Background service worker loaded (v3.14.9)");

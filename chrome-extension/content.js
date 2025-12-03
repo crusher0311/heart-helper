@@ -1,4 +1,4 @@
-console.log("Tekmetric Job Importer: Content script loaded (v3.14.8)");
+console.log("Tekmetric Job Importer: Content script loaded (v3.14.9)");
 
 let checkHistoryButton = null;
 let injectedIcons = new Set(); // Track which textareas already have icons

@@ -503,30 +503,46 @@ function requestCurrentROInfo() {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     console.log('[SidePanel] Active tab:', tabs[0]?.url);
     if (tabs[0] && tabs[0].url && tabs[0].url.includes('tekmetric.com')) {
-      console.log('[SidePanel] Sending GET_VEHICLE_INFO to tab:', tabs[0].id);
-      // Get vehicle info
-      chrome.tabs.sendMessage(tabs[0].id, { type: 'GET_VEHICLE_INFO' }, (response) => {
+      const url = tabs[0].url;
+      
+      // Extract shopId and roId from URL (same pattern as labor rate tool)
+      // Matches both /shop/123/repair-orders/456 and /admin/shop/123/repair-orders/456
+      const shopMatch = url.match(/\/shop\/(\d+)/);
+      const roMatch = url.match(/repair-orders?\/(\d+)/);
+      
+      const shopId = shopMatch ? shopMatch[1] : null;
+      const roId = roMatch ? roMatch[1] : null;
+      
+      console.log('[SidePanel] Extracted from URL:', { shopId, roId });
+      
+      // Send to BACKGROUND SCRIPT (not content script) - uses proven API fetch like labor rate tool
+      console.log('[SidePanel] Sending GET_VEHICLE_INFO to background');
+      chrome.runtime.sendMessage({ 
+        action: 'GET_VEHICLE_INFO',
+        shopId: shopId,
+        roId: roId
+      }, (response) => {
         console.log('[SidePanel] GET_VEHICLE_INFO response:', JSON.stringify(response));
         if (chrome.runtime.lastError) {
           console.log('[SidePanel] Could not get vehicle info:', chrome.runtime.lastError.message);
           return;
         }
-        if (response && response.vehicleInfo) {
-          console.log('[SidePanel] Updating fields with:', JSON.stringify(response.vehicleInfo));
+        if (response && (response.year || response.make || response.model)) {
+          console.log('[SidePanel] Updating fields with:', JSON.stringify(response));
           // Update Incoming Caller tab vehicle fields
-          document.getElementById('vehicleYear').value = response.vehicleInfo.year || '';
-          document.getElementById('vehicleMake').value = response.vehicleInfo.make || '';
-          document.getElementById('vehicleModel').value = response.vehicleInfo.model || '';
+          document.getElementById('vehicleYear').value = response.year || '';
+          document.getElementById('vehicleMake').value = response.make || '';
+          document.getElementById('vehicleModel').value = response.model || '';
           // Also update Search tab vehicle fields
-          document.getElementById('searchYear').value = response.vehicleInfo.year || '';
-          document.getElementById('searchMake').value = response.vehicleInfo.make || '';
-          document.getElementById('searchModel').value = response.vehicleInfo.model || '';
+          document.getElementById('searchYear').value = response.year || '';
+          document.getElementById('searchMake').value = response.make || '';
+          document.getElementById('searchModel').value = response.model || '';
         } else {
-          console.log('[SidePanel] No vehicleInfo in response');
+          console.log('[SidePanel] No vehicle info in response:', response?.error || 'unknown');
         }
       });
       
-      // Get RO info for sales script
+      // Get RO info for sales script (still from content script for now)
       chrome.tabs.sendMessage(tabs[0].id, { type: 'GET_RO_INFO' }, (response) => {
         if (chrome.runtime.lastError) {
           console.log('Could not get RO info:', chrome.runtime.lastError.message);
