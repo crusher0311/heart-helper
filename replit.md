@@ -18,6 +18,7 @@ HEART Helper is an AI-powered repair order search tool for HEART Certified Auto 
 - **Script Feedback Tracking**: Thumbs up/down feedback to improve AI recommendations
 - **Admin User Management**: Add/delete users, manage admin status, approve/reject pending users
 - **Centralized Labor Rate Groups**: Organization-wide labor rate configuration by vehicle make and location, synced to Chrome extension
+- **RingCentral Call Coaching**: Integration with RingCentral for call recording sync, AI-powered call scoring, and 10-point grading system for service advisor training
 
 ## User Preferences
 
@@ -31,9 +32,10 @@ The frontend is built with React and TypeScript using Vite, styled with shadcn/u
 
 Key pages:
 - `/` - Landing page (unauthenticated) or Home page (authenticated)
-- `/settings` - User preferences with personal AI training data
+- `/settings` - User preferences with personal AI training data, plus admin-only sections for Labor Rates and Coaching Criteria
 - `/admin` - Team training management (admin only)
 - `/admin/labor-rates` - Centralized labor rate group management (admin only)
+- `/admin/coaching-criteria` - Call coaching 10-point grading system configuration (admin only)
 
 ### Backend Architecture
 
@@ -46,6 +48,9 @@ Key API endpoints:
 - `/api/sales/generate-script` - AI script generation with per-user training
 - `/api/search` - AI-powered repair order search
 - `/api/admin/*` - Admin user management, approvals, training data
+- `/api/ringcentral/*` - RingCentral integration (test, sync, extensions)
+- `/api/coaching/criteria` - Coaching criteria CRUD and seed-defaults
+- `/api/calls` - Call recordings with role-based access (admin/manager/user)
 
 All protected routes require both authentication and approval status check.
 
@@ -81,9 +86,13 @@ The PostgreSQL database (Neon serverless) stores:
 - `search_requests`, `search_cache` (1-hour TTL) - Search optimization
 - `settings` - Global application settings
 - `users`, `sessions` - User authentication
-- `user_preferences` - Per-user settings and AI training data
+- `user_preferences` - Per-user settings and AI training data (includes managedShopId for location-based access)
 - `script_feedback` - User feedback on generated scripts
 - `labor_rate_groups` - Centralized labor rate configuration by vehicle make and shop location
+- `ringcentral_users` - RingCentral extension mappings to app users
+- `call_recordings` - Call log data synced from RingCentral with transcripts
+- `coaching_criteria` - Configurable 10-point grading system for call scoring
+- `call_scores` - AI-generated scores per call with criterion-level details
 
 Tekmetric's external IDs are used as primary keys for vehicle/RO data.
 
