@@ -1263,6 +1263,227 @@ export class DatabaseStorage implements IStorage {
     if (!score) throw new Error("Call score not found");
     return score;
   }
+
+  // Dashboard statistics
+  async getTeamDashboardStats(dateFrom?: Date, dateTo?: Date): Promise<{
+    totalCalls: number;
+    scoredCalls: number;
+    averageScore: number;
+    teamMembers: Array<{
+      userId: string;
+      userName: string;
+      callCount: number;
+      scoredCount: number;
+      averageScore: number;
+    }>;
+  }> {
+    // Get all scored calls with user info
+    const conditions = [];
+    if (dateFrom) {
+      conditions.push(gte(callRecordings.callStartTime, dateFrom));
+    }
+    if (dateTo) {
+      conditions.push(lte(callRecordings.callStartTime, dateTo));
+    }
+
+    // Get all calls
+    const allCalls = await db
+      .select({
+        id: callRecordings.id,
+        userId: callRecordings.userId,
+        callStartTime: callRecordings.callStartTime,
+      })
+      .from(callRecordings)
+      .where(conditions.length > 0 ? and(...conditions) : undefined);
+
+    // Get all scores
+    const allScores = await db
+      .select({
+        callId: callScores.callId,
+        overallScore: callScores.overallScore,
+        criteriaScores: callScores.criteriaScores,
+      })
+      .from(callScores);
+
+    const scoreMap = new Map(allScores.map(s => [s.callId, s]));
+
+    // Get user preferences for names
+    const allPrefs = await db.select().from(userPreferences);
+    const prefsMap = new Map(allPrefs.map(p => [p.userId, p]));
+
+    // Aggregate by user
+    const userStats = new Map<string, { callCount: number; scoredCount: number; totalScore: number }>();
+    
+    for (const call of allCalls) {
+      if (!call.userId) continue;
+      
+      const stats = userStats.get(call.userId) || { callCount: 0, scoredCount: 0, totalScore: 0 };
+      stats.callCount++;
+      
+      const score = scoreMap.get(call.id);
+      if (score && score.overallScore !== null) {
+        stats.scoredCount++;
+        stats.totalScore += score.overallScore;
+      }
+      
+      userStats.set(call.userId, stats);
+    }
+
+    const teamMembers = Array.from(userStats.entries()).map(([userId, stats]) => {
+      const prefs = prefsMap.get(userId);
+      const userName = prefs?.firstName && prefs?.lastName 
+        ? `${prefs.firstName} ${prefs.lastName}` 
+        : 'Unknown User';
+      return {
+        userId,
+        userName,
+        callCount: stats.callCount,
+        scoredCount: stats.scoredCount,
+        averageScore: stats.scoredCount > 0 ? Math.round(stats.totalScore / stats.scoredCount) : 0,
+      };
+    }).sort((a, b) => b.averageScore - a.averageScore);
+
+    const totalCalls = allCalls.length;
+    const scoredCalls = allScores.length;
+    const totalScore = allScores.reduce((sum, s) => sum + (s.overallScore || 0), 0);
+    const averageScore = scoredCalls > 0 ? Math.round(totalScore / scoredCalls) : 0;
+
+    return { totalCalls, scoredCalls, averageScore, teamMembers };
+  }
+
+  async getUserDashboardStats(userId: string, dateFrom?: Date, dateTo?: Date): Promise<{
+    callCount: number;
+    scoredCount: number;
+    averageScore: number;
+    recentScores: Array<{
+      callId: string;
+      score: number;
+      callDate: Date;
+      customerName: string | null;
+    }>;
+    criteriaAverages: Record<string, { name: string; average: number; count: number }>;
+  }> {
+    const conditions = [eq(callRecordings.userId, userId)];
+    if (dateFrom) {
+      conditions.push(gte(callRecordings.callStartTime, dateFrom));
+    }
+    if (dateTo) {
+      conditions.push(lte(callRecordings.callStartTime, dateTo));
+    }
+
+    const userCalls = await db
+      .select()
+      .from(callRecordings)
+      .where(and(...conditions))
+      .orderBy(desc(callRecordings.callStartTime));
+
+    const callIds = userCalls.map(c => c.id);
+    
+    // Get scores for these calls
+    const scores = callIds.length > 0 
+      ? await db
+          .select()
+          .from(callScores)
+          .where(sql`${callScores.callId} IN (${sql.join(callIds.map(id => sql`${id}`), sql`, `)})`)
+      : [];
+
+    const scoreMap = new Map(scores.map(s => [s.callId, s]));
+
+    // Get criteria names
+    const criteria = await this.getAllCoachingCriteria();
+    const criteriaMap = new Map(criteria.map(c => [c.id, c.name]));
+
+    // Calculate criteria averages
+    const criteriaStats: Record<string, { total: number; count: number }> = {};
+    
+    for (const score of scores) {
+      const criteriaScores = score.criteriaScores as Record<string, { score: number }> | null;
+      if (criteriaScores) {
+        for (const [criterionId, data] of Object.entries(criteriaScores)) {
+          if (!criteriaStats[criterionId]) {
+            criteriaStats[criterionId] = { total: 0, count: 0 };
+          }
+          criteriaStats[criterionId].total += data.score || 0;
+          criteriaStats[criterionId].count++;
+        }
+      }
+    }
+
+    const criteriaAverages: Record<string, { name: string; average: number; count: number }> = {};
+    for (const [criterionId, stats] of Object.entries(criteriaStats)) {
+      criteriaAverages[criterionId] = {
+        name: criteriaMap.get(criterionId) || 'Unknown',
+        average: stats.count > 0 ? Math.round((stats.total / stats.count) * 10) / 10 : 0,
+        count: stats.count,
+      };
+    }
+
+    // Recent scores
+    const recentScores = userCalls
+      .filter(c => scoreMap.has(c.id))
+      .slice(0, 10)
+      .map(c => ({
+        callId: c.id,
+        score: scoreMap.get(c.id)?.overallScore || 0,
+        callDate: c.callStartTime!,
+        customerName: c.customerName,
+      }));
+
+    const scoredCount = scores.length;
+    const totalScore = scores.reduce((sum, s) => sum + (s.overallScore || 0), 0);
+
+    return {
+      callCount: userCalls.length,
+      scoredCount,
+      averageScore: scoredCount > 0 ? Math.round(totalScore / scoredCount) : 0,
+      recentScores,
+      criteriaAverages,
+    };
+  }
+
+  async getCriteriaDashboardStats(dateFrom?: Date, dateTo?: Date): Promise<{
+    criteria: Array<{
+      id: string;
+      name: string;
+      category: string | null;
+      averageScore: number;
+      totalEvaluations: number;
+    }>;
+  }> {
+    // Get all scores
+    const allScores = await db.select().from(callScores);
+    
+    // Get all criteria
+    const allCriteria = await this.getAllCoachingCriteria();
+    
+    // Aggregate scores by criterion
+    const criteriaStats: Record<string, { total: number; count: number }> = {};
+    
+    for (const score of allScores) {
+      const criteriaScores = score.criteriaScores as Record<string, { score: number }> | null;
+      if (criteriaScores) {
+        for (const [criterionId, data] of Object.entries(criteriaScores)) {
+          if (!criteriaStats[criterionId]) {
+            criteriaStats[criterionId] = { total: 0, count: 0 };
+          }
+          criteriaStats[criterionId].total += data.score || 0;
+          criteriaStats[criterionId].count++;
+        }
+      }
+    }
+
+    const criteria = allCriteria.map(c => ({
+      id: c.id,
+      name: c.name,
+      category: c.category,
+      averageScore: criteriaStats[c.id] 
+        ? Math.round((criteriaStats[c.id].total / criteriaStats[c.id].count) * 10) / 10 
+        : 0,
+      totalEvaluations: criteriaStats[c.id]?.count || 0,
+    })).sort((a, b) => a.averageScore - b.averageScore); // Lowest first (needs improvement)
+
+    return { criteria };
+  }
 }
 
 export const storage: IStorage = new DatabaseStorage();
