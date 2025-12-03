@@ -688,6 +688,7 @@ function switchTab(tab) {
   document.getElementById('incomingTab').style.display = tab === 'incoming' ? 'flex' : 'none';
   document.getElementById('searchTab').style.display = tab === 'search' ? 'flex' : 'none';
   document.getElementById('salesTab').style.display = tab === 'sales' ? 'flex' : 'none';
+  document.getElementById('tipsTab').style.display = tab === 'tips' ? 'flex' : 'none';
   document.getElementById('ratesTab').style.display = tab === 'rates' ? 'flex' : 'none';
   
   // Auto-fill vehicle info when switching to search tab
@@ -698,6 +699,11 @@ function switchTab(tab) {
   // Load labor rate groups when switching to rates tab
   if (tab === 'rates') {
     loadLaborRateGroups();
+  }
+  
+  // Load coaching tips when switching to tips tab
+  if (tab === 'tips') {
+    loadCoachingTips();
   }
   
   // Auto-generate sales script when switching to sales tab
@@ -2040,4 +2046,156 @@ function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
+}
+
+// ==================== LIVE COACHING TIPS ====================
+
+let coachingTips = [];
+let currentTipIndex = 0;
+
+async function loadCoachingTips() {
+  const tipsList = document.getElementById('tipsList');
+  const tipsCount = document.getElementById('tipsCount');
+  const highlightedTip = document.getElementById('highlightedTip');
+  const currentTipHighlight = document.getElementById('currentTipHighlight');
+  const tipsListContainer = document.getElementById('tipsListContainer');
+  const noTipsMessage = document.getElementById('noTipsMessage');
+  const refreshBtn = document.getElementById('refreshTipsBtn');
+  
+  if (!tipsList) return;
+  
+  // Show loading state
+  tipsList.innerHTML = '<div class="loading-tips">Loading coaching tips...</div>';
+  highlightedTip.textContent = 'Loading...';
+  
+  if (!appUrl) {
+    tipsList.innerHTML = '<div class="loading-tips">Connect to the app to load tips.</div>';
+    highlightedTip.textContent = 'Connect to the HEART Helper app to see coaching tips.';
+    return;
+  }
+  
+  try {
+    // Fetch coaching criteria from server
+    const response = await authenticatedFetch(`${appUrl}/api/coaching/criteria`);
+    
+    if (!response.ok) {
+      if (response.status === 401) {
+        tipsList.innerHTML = '<div class="loading-tips">Sign in to view coaching tips.</div>';
+        highlightedTip.textContent = 'Sign in to the app to see coaching tips.';
+        return;
+      }
+      throw new Error(`Server error: ${response.status}`);
+    }
+    
+    const criteria = await response.json();
+    
+    if (!criteria || criteria.length === 0) {
+      currentTipHighlight.style.display = 'none';
+      tipsListContainer.style.display = 'none';
+      noTipsMessage.style.display = 'block';
+      return;
+    }
+    
+    // Show tips UI
+    currentTipHighlight.style.display = 'block';
+    tipsListContainer.style.display = 'block';
+    noTipsMessage.style.display = 'none';
+    
+    // Store and shuffle tips
+    coachingTips = criteria.map(c => ({
+      id: c.id,
+      name: c.name,
+      description: c.description,
+      keywords: c.keywords || [],
+      category: c.category || 'general'
+    }));
+    
+    // Shuffle tips for variety
+    shuffleTips();
+    
+    // Update count
+    tipsCount.textContent = `${coachingTips.length} tips`;
+    
+    // Show first highlighted tip
+    updateHighlightedTip();
+    
+    // Render tips list
+    renderTipsList();
+    
+    // Set up refresh button
+    if (refreshBtn) {
+      refreshBtn.onclick = () => {
+        shuffleTips();
+        updateHighlightedTip();
+        renderTipsList();
+      };
+    }
+    
+  } catch (error) {
+    console.error('Error loading coaching tips:', error);
+    tipsList.innerHTML = '<div class="loading-tips">Failed to load tips. Try again later.</div>';
+    highlightedTip.textContent = 'Unable to load coaching tips.';
+  }
+}
+
+function shuffleTips() {
+  for (let i = coachingTips.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [coachingTips[i], coachingTips[j]] = [coachingTips[j], coachingTips[i]];
+  }
+  currentTipIndex = 0;
+}
+
+function updateHighlightedTip() {
+  const highlightedTip = document.getElementById('highlightedTip');
+  if (coachingTips.length > 0 && highlightedTip) {
+    const tip = coachingTips[currentTipIndex];
+    highlightedTip.textContent = tip.name;
+  }
+}
+
+function renderTipsList() {
+  const tipsList = document.getElementById('tipsList');
+  if (!tipsList || coachingTips.length === 0) return;
+  
+  const html = coachingTips.map((tip, index) => `
+    <div class="tip-item ${index === currentTipIndex ? 'active' : ''}" data-tip-index="${index}">
+      <div class="tip-icon">${getCategoryIcon(tip.category)}</div>
+      <div class="tip-content">
+        <div class="tip-name">${escapeHtml(tip.name)}</div>
+        ${tip.description ? `<div class="tip-description">${escapeHtml(tip.description)}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+  
+  tipsList.innerHTML = html;
+  
+  // Add click handlers for selecting tips
+  tipsList.querySelectorAll('.tip-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const index = parseInt(item.dataset.tipIndex);
+      currentTipIndex = index;
+      updateHighlightedTip();
+      
+      // Update active state
+      tipsList.querySelectorAll('.tip-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+}
+
+function getCategoryIcon(category) {
+  const icons = {
+    greeting: '&#128075;',     // waving hand
+    rapport: '&#129309;',      // handshake
+    presentation: '&#128172;', // speech bubble
+    objection: '&#128170;',    // flexed biceps
+    urgency: '&#9200;',        // alarm clock
+    value: '&#128176;',        // money bag
+    closing: '&#9989;',        // check mark
+    retention: '&#128231;',    // envelope
+    general: '&#128161;',      // lightbulb
+    default: '&#128161;'       // lightbulb
+  };
+  return icons[category] || icons.default;
 }

@@ -1627,3 +1627,224 @@ textarea {
 .admin-link:hover {
   background: #bbdefb;
 }
+
+/* ==================== TIPS TAB STYLES ==================== */
+
+.tips-section {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.tips-description {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Current Tip Highlight */
+.current-tip-highlight {
+  background: linear-gradient(135deg, #ED1C24 0%, #c91920 100%);
+  color: white;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(237, 28, 36, 0.3);
+}
+
+.tip-highlight-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.highlighted-tip {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Tips List Container */
+.tips-list-container {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+}
+
+.tips-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.tips-count {
+  font-weight: 500;
+  color: #666;
+  font-size: 12px;
+}
+
+.tips-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.loading-tips {
+  padding: 20px;
+  text-align: center;
+  color: #888;
+  font-size: 13px;
+}
+
+.tip-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tip-item:last-child {
+  border-bottom: none;
+}
+
+.tip-item:hover {
+  background: #f9f9f9;
+}
+
+.tip-item.active {
+  background: #fff3f3;
+  border-left: 3px solid #ED1C24;
+}
+
+.tip-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+.tip-item.active .tip-icon {
+  background: #ED1C24;
+  color: white;
+}
+
+.tip-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.tip-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.tip-description {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* HEART 9-Point Method Section */
+.heart-method-section {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+}
+
+.method-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.method-icon {
+  color: #ED1C24;
+  font-size: 14px;
+}
+
+.method-steps {
+  padding: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px;
+}
+
+.method-step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  font-size: 11px;
+  color: #555;
+  background: #fafafa;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.method-step:hover {
+  background: #fff3f3;
+  color: #ED1C24;
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: #ED1C24;
+  color: white;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* No Tips Message */
+.no-tips-message {
+  text-align: center;
+  padding: 30px 20px;
+  color: #888;
+}
+
+.no-tips-message p {
+  margin: 0 0 8px 0;
+}
+
+.no-tips-message .help-text {
+  font-size: 12px;
+  color: #aaa;
+}

@@ -102,6 +102,10 @@
         <span class="tab-icon">&#128176;</span>
         Sales
       </button>
+      <button class="tab-btn" data-tab="tips">
+        <span class="tab-icon">&#128161;</span>
+        Tips
+      </button>
       <button class="tab-btn" data-tab="rates">
         <span class="tab-icon">&#128178;</span>
         Rates
@@ -362,6 +366,62 @@
       <div id="salesLoadingOverlay" class="loading-overlay" style="display: none;">
         <div class="loading-spinner"></div>
         <div class="loading-text">Generating script...</div>
+      </div>
+    </div>
+
+    <!-- ==================== LIVE TIPS TAB ==================== -->
+    <div id="tipsTab" class="tab-content" style="display: none;">
+      <div class="tips-section">
+        <div class="section-header">
+          <span class="section-icon">&#128161;</span>
+          <span>Live Call Tips</span>
+          <button id="refreshTipsBtn" class="refresh-btn" title="Shuffle Tips">&#8635;</button>
+        </div>
+        <p class="tips-description">
+          Quick reminders to help you during customer calls. Use these tips to improve your service.
+        </p>
+
+        <!-- Current Tip Highlight -->
+        <div id="currentTipHighlight" class="current-tip-highlight">
+          <div class="tip-highlight-label">Focus on this:</div>
+          <div id="highlightedTip" class="highlighted-tip">Loading...</div>
+        </div>
+
+        <!-- Tips List -->
+        <div id="tipsListContainer" class="tips-list-container">
+          <div class="tips-list-header">
+            <span>All Coaching Tips</span>
+            <span id="tipsCount" class="tips-count">0 tips</span>
+          </div>
+          <div id="tipsList" class="tips-list">
+            <div class="loading-tips">Loading tips...</div>
+          </div>
+        </div>
+
+        <!-- HEART 9-Point Method Quick Reference -->
+        <div class="heart-method-section">
+          <div class="method-header">
+            <span class="method-icon">&#10084;</span>
+            <span>HEART 9-Point Sales Method</span>
+          </div>
+          <div class="method-steps">
+            <div class="method-step"><span class="step-num">1</span>Build Rapport</div>
+            <div class="method-step"><span class="step-num">2</span>Inspection Credentials</div>
+            <div class="method-step"><span class="step-num">3</span>Digital Resources</div>
+            <div class="method-step"><span class="step-num">4</span>Good-Good-Bad</div>
+            <div class="method-step"><span class="step-num">5</span>Safety Urgency</div>
+            <div class="method-step"><span class="step-num">6</span>Warranty Value</div>
+            <div class="method-step"><span class="step-num">7</span>Price as Investment</div>
+            <div class="method-step"><span class="step-num">8</span>Permission to Inspect</div>
+            <div class="method-step"><span class="step-num">9</span>Follow-up Commitment</div>
+          </div>
+        </div>
+
+        <!-- No Tips State -->
+        <div id="noTipsMessage" class="no-tips-message" style="display: none;">
+          <p>No coaching tips available.</p>
+          <p class="help-text">Ask your admin to configure coaching criteria in the HEART Helper app.</p>
+        </div>
       </div>
     </div>
 
