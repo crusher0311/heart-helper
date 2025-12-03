@@ -12,6 +12,7 @@ import AdminCoachingCriteria from "@/pages/admin-coaching-criteria";
 import AdminExtensionMapping from "@/pages/admin-extension-mapping";
 import Calls from "@/pages/calls";
 import CallDetail from "@/pages/call-detail";
+import CoachingDashboard from "@/pages/coaching-dashboard";
 import Landing from "@/pages/landing";
 import NotFound from "@/pages/not-found";
 
@@ -47,6 +48,7 @@ function Router() {
       <Route path="/admin/extension-mapping" component={AdminExtensionMapping}/>
       <Route path="/calls" component={Calls}/>
       <Route path="/calls/:id" component={CallDetail}/>
+      <Route path="/coaching" component={CoachingDashboard}/>
       <Route component={NotFound} />
     </Switch>
   );

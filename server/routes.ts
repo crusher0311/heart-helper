@@ -1677,6 +1677,76 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Coaching Dashboard - Team Overview (admin/manager only)
+  app.get("/api/coaching/dashboard", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const user = req.user;
+      const prefs = await storage.getUserPreferences(user.id);
+      
+      // Only admins and managers can view dashboard
+      if (!user.isAdmin && !prefs?.isManager) {
+        return res.status(403).json({ message: "Access denied. Admin or manager role required." });
+      }
+      
+      const { dateFrom, dateTo } = req.query;
+      const fromDate = dateFrom ? new Date(dateFrom as string) : undefined;
+      const toDate = dateTo ? new Date(dateTo as string) : undefined;
+      
+      const stats = await storage.getTeamDashboardStats(fromDate, toDate);
+      res.json(stats);
+    } catch (error: any) {
+      console.error("Dashboard error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Coaching Dashboard - Individual User Stats (admin/manager or self)
+  app.get("/api/coaching/dashboard/user/:userId", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const user = req.user;
+      const { userId } = req.params;
+      const prefs = await storage.getUserPreferences(user.id);
+      
+      // Users can view their own stats, admins/managers can view anyone's
+      if (userId !== user.id && !user.isAdmin && !prefs?.isManager) {
+        return res.status(403).json({ message: "Access denied." });
+      }
+      
+      const { dateFrom, dateTo } = req.query;
+      const fromDate = dateFrom ? new Date(dateFrom as string) : undefined;
+      const toDate = dateTo ? new Date(dateTo as string) : undefined;
+      
+      const stats = await storage.getUserDashboardStats(userId, fromDate, toDate);
+      res.json(stats);
+    } catch (error: any) {
+      console.error("User dashboard error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Coaching Dashboard - Criteria Performance (admin/manager only)
+  app.get("/api/coaching/dashboard/criteria", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const user = req.user;
+      const prefs = await storage.getUserPreferences(user.id);
+      
+      // Only admins and managers can view criteria breakdown
+      if (!user.isAdmin && !prefs?.isManager) {
+        return res.status(403).json({ message: "Access denied. Admin or manager role required." });
+      }
+      
+      const { dateFrom, dateTo } = req.query;
+      const fromDate = dateFrom ? new Date(dateFrom as string) : undefined;
+      const toDate = dateTo ? new Date(dateTo as string) : undefined;
+      
+      const stats = await storage.getCriteriaDashboardStats(fromDate, toDate);
+      res.json(stats);
+    } catch (error: any) {
+      console.error("Criteria dashboard error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;

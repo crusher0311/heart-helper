@@ -41,6 +41,7 @@ Key pages:
 - `/admin/coaching-criteria` - Call coaching 10-point grading system configuration (admin only)
 - `/calls` - Call history with date/direction filters and recording status (role-based access)
 - `/calls/:id` - Individual call detail with AI scoring, transcript, and coaching feedback
+- `/coaching` - Coaching dashboard with team leaderboard, criteria performance charts, and individual drill-down (admin/manager only)
 
 ### Backend Architecture
 
@@ -55,9 +56,13 @@ Key API endpoints:
 - `/api/admin/*` - Admin user management, approvals, training data
 - `/api/ringcentral/*` - RingCentral integration (test, sync, extensions, mappings)
 - `/api/coaching/criteria` - Coaching criteria CRUD and seed-defaults
+- `/api/coaching/dashboard` - Team dashboard stats with leaderboard (admin/manager only)
+- `/api/coaching/dashboard/user/:userId` - Individual user performance stats (self or admin/manager)
+- `/api/coaching/dashboard/criteria` - Criteria breakdown across all calls (admin/manager only)
 - `/api/calls` - Call recordings with role-based access and direction filtering (admin/manager/user)
 - `/api/calls/:id` - Single call with AI score, criteria breakdown, and transcript
 - `/api/calls/:id/score` - Trigger AI scoring of call transcript (admin only)
+- `/api/calls/score-batch` - Batch score unscored sales calls (admin only, max 10 at a time)
 
 All protected routes require both authentication and approval status check.
 

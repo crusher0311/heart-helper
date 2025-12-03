@@ -139,6 +139,41 @@ export interface IStorage {
   getCallScore(callId: string): Promise<CallScore | undefined>;
   createCallScore(data: InsertCallScore): Promise<CallScore>;
   updateCallScore(id: string, data: Partial<InsertCallScore>): Promise<CallScore>;
+  
+  // Dashboard statistics
+  getTeamDashboardStats(dateFrom?: Date, dateTo?: Date): Promise<{
+    totalCalls: number;
+    scoredCalls: number;
+    averageScore: number;
+    teamMembers: Array<{
+      userId: string;
+      userName: string;
+      callCount: number;
+      scoredCount: number;
+      averageScore: number;
+    }>;
+  }>;
+  getUserDashboardStats(userId: string, dateFrom?: Date, dateTo?: Date): Promise<{
+    callCount: number;
+    scoredCount: number;
+    averageScore: number;
+    recentScores: Array<{
+      callId: string;
+      score: number;
+      callDate: Date;
+      customerName: string | null;
+    }>;
+    criteriaAverages: Record<string, { name: string; average: number; count: number }>;
+  }>;
+  getCriteriaDashboardStats(dateFrom?: Date, dateTo?: Date): Promise<{
+    criteria: Array<{
+      id: string;
+      name: string;
+      category: string | null;
+      averageScore: number;
+      totalEvaluations: number;
+    }>;
+  }>;
 }
 
 export class DatabaseStorage implements IStorage {

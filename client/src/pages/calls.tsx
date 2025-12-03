@@ -1,4 +1,4 @@
-import { ArrowLeft, Phone, Clock, Calendar, User, ChevronRight, Loader2, PhoneIncoming, PhoneOutgoing, Star, Filter, RefreshCw, Search, X, Sparkles } from "lucide-react";
+import { ArrowLeft, Phone, Clock, Calendar, User, ChevronRight, Loader2, PhoneIncoming, PhoneOutgoing, Star, Filter, RefreshCw, Search, X, Sparkles, BarChart3 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -224,6 +224,14 @@ export default function Calls() {
           </div>
           
           <div className="flex items-center gap-2">
+            {isAdmin && (
+              <Link href="/coaching">
+                <Button variant="outline" data-testid="button-dashboard">
+                  <BarChart3 className="h-4 w-4 mr-2" />
+                  Dashboard
+                </Button>
+              </Link>
+            )}
             {isAdmin && unscoredCount && unscoredCount.count > 0 && (
               <Button
                 variant="default"
