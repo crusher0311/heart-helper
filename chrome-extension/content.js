@@ -1,4 +1,4 @@
-console.log("Tekmetric Job Importer: Content script loaded (v3.14.6)");
+console.log("Tekmetric Job Importer: Content script loaded (v3.14.7)");
 
 let checkHistoryButton = null;
 let injectedIcons = new Set(); // Track which textareas already have icons
@@ -1319,10 +1319,12 @@ if (document.readyState === 'loading') {
 // Side Panel Message Handlers
 // ==========================================
 
+console.warn('[Content] Registering side panel message handler...');
+
 // Listen for messages from side panel
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Use alert-style logging that can't be filtered
-  console.warn('[Content v3.14.6] MESSAGE RECEIVED:', message.type);
+  console.warn('[Content v3.14.7] MESSAGE RECEIVED:', message.type);
   
   // Get current vehicle info for side panel
   if (message.type === 'GET_VEHICLE_INFO') {
