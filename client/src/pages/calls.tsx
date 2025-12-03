@@ -1,13 +1,14 @@
-import { ArrowLeft, Phone, Clock, Calendar, User, ChevronRight, Loader2, PhoneIncoming, PhoneOutgoing, Star, Filter, RefreshCw } from "lucide-react";
+import { ArrowLeft, Phone, Clock, Calendar, User, ChevronRight, Loader2, PhoneIncoming, PhoneOutgoing, Star, Filter, RefreshCw, Search, X } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { format, formatDistanceToNow } from "date-fns";
 
 type CallRecording = {
@@ -23,6 +24,7 @@ type CallRecording = {
   recordingUrl: string | null;
   recordingStatus: string | null;
   transcript: string | null;
+  transcriptText: string | null;
   callStartTime: string;
   callEndTime: string | null;
   createdAt: string;
@@ -51,6 +53,13 @@ function formatPhoneNumber(phone: string | null): string {
   return phone;
 }
 
+type TeamMember = {
+  id: string;
+  email: string;
+  firstName: string | null;
+  lastName: string | null;
+};
+
 export default function Calls() {
   const { toast } = useToast();
   const [dateFrom, setDateFrom] = useState<string>(() => {
@@ -62,15 +71,45 @@ export default function Calls() {
     return new Date().toISOString().split('T')[0];
   });
   const [directionFilter, setDirectionFilter] = useState<string>("all");
+  const [userFilter, setUserFilter] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchInput, setSearchInput] = useState<string>("");
 
+  // Check if user is admin
+  const { data: adminCheck } = useQuery<{ isAdmin: boolean }>({
+    queryKey: ["/api/admin/check"],
+  });
+  const isAdmin = adminCheck?.isAdmin || false;
+
+  // Get team members for user filter (admins and managers only)
+  const { data: teamMembers } = useQuery<TeamMember[]>({
+    queryKey: ["/api/admin/users"],
+    queryFn: async () => {
+      const response = await fetch("/api/admin/users", { credentials: "include" });
+      if (!response.ok) return [];
+      const users = await response.json();
+      return users.map((u: any) => ({
+        id: u.id,
+        email: u.email,
+        firstName: u.preferences?.firstName || u.firstName,
+        lastName: u.preferences?.lastName || u.lastName,
+      }));
+    },
+    enabled: isAdmin,
+  });
+
+  // Regular calls query (when not searching)
   const { data: calls, isLoading, refetch, isFetching } = useQuery<CallRecording[]>({
-    queryKey: ["/api/calls", dateFrom, dateTo, directionFilter],
+    queryKey: ["/api/calls", dateFrom, dateTo, directionFilter, userFilter],
     queryFn: async () => {
       const params = new URLSearchParams();
       if (dateFrom) params.set("dateFrom", new Date(dateFrom).toISOString());
       if (dateTo) params.set("dateTo", new Date(dateTo + "T23:59:59").toISOString());
       if (directionFilter !== "all") {
         params.set("direction", directionFilter === "inbound" ? "Inbound" : "Outbound");
+      }
+      if (userFilter !== "all") {
+        params.set("userId", userFilter);
       }
       params.set("limit", "100");
       
@@ -80,10 +119,47 @@ export default function Calls() {
       if (!response.ok) throw new Error("Failed to fetch calls");
       return response.json();
     },
+    enabled: !searchQuery,
   });
 
-  // Calls are already filtered by the backend now
-  const filteredCalls = calls;
+  // Search query (when searching)
+  const { data: searchResults, isLoading: isSearching } = useQuery<CallRecording[]>({
+    queryKey: ["/api/calls/search", searchQuery, dateFrom, dateTo, directionFilter, userFilter],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      params.set("query", searchQuery);
+      if (dateFrom) params.set("dateFrom", new Date(dateFrom).toISOString());
+      if (dateTo) params.set("dateTo", new Date(dateTo + "T23:59:59").toISOString());
+      if (directionFilter !== "all") {
+        params.set("direction", directionFilter === "inbound" ? "Inbound" : "Outbound");
+      }
+      if (userFilter !== "all") {
+        params.set("userId", userFilter);
+      }
+      params.set("limit", "100");
+      
+      const response = await fetch(`/api/calls/search?${params}`, {
+        credentials: "include",
+      });
+      if (!response.ok) throw new Error("Failed to search calls");
+      return response.json();
+    },
+    enabled: !!searchQuery,
+  });
+
+  const handleSearch = () => {
+    if (searchInput.trim().length >= 2) {
+      setSearchQuery(searchInput.trim());
+    }
+  };
+
+  const clearSearch = () => {
+    setSearchInput("");
+    setSearchQuery("");
+  };
+
+  // Use search results if searching, otherwise use regular calls
+  const filteredCalls = searchQuery ? searchResults : calls;
 
   const inboundCount = calls?.filter(c => c.direction?.toLowerCase() === "inbound").length || 0;
   const outboundCount = calls?.filter(c => c.direction?.toLowerCase() === "outbound").length || 0;
@@ -123,16 +199,49 @@ export default function Calls() {
       </header>
 
       <div className="container mx-auto max-w-6xl py-8 px-4">
-        {/* Filters */}
+        {/* Search & Filters */}
         <Card className="mb-6">
           <CardHeader className="pb-3">
             <div className="flex items-center gap-2">
-              <Filter className="h-4 w-4 text-muted-foreground" />
-              <CardTitle className="text-base">Filters</CardTitle>
+              <Search className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-base">Search & Filters</CardTitle>
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <CardContent className="space-y-4">
+            {/* Transcript Search */}
+            <div className="space-y-2">
+              <Label htmlFor="search">Search Transcripts</Label>
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="search"
+                    placeholder="Search by transcript content, customer name, or phone..."
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                    className="pl-9"
+                    data-testid="input-search"
+                  />
+                </div>
+                <Button onClick={handleSearch} disabled={searchInput.trim().length < 2} data-testid="button-search">
+                  Search
+                </Button>
+                {searchQuery && (
+                  <Button variant="outline" onClick={clearSearch} data-testid="button-clear-search">
+                    <X className="h-4 w-4" />
+                  </Button>
+                )}
+              </div>
+              {searchQuery && (
+                <p className="text-sm text-muted-foreground">
+                  Showing results for: <span className="font-medium">"{searchQuery}"</span>
+                </p>
+              )}
+            </div>
+
+            {/* Date, Direction, and User Filters */}
+            <div className={`grid grid-cols-1 gap-4 ${isAdmin && teamMembers?.length ? 'md:grid-cols-4' : 'md:grid-cols-3'}`}>
               <div className="space-y-2">
                 <Label htmlFor="date-from">From Date</Label>
                 <input
@@ -168,6 +277,26 @@ export default function Calls() {
                   </SelectContent>
                 </Select>
               </div>
+              {isAdmin && teamMembers && teamMembers.length > 0 && (
+                <div className="space-y-2">
+                  <Label htmlFor="user-filter">Team Member</Label>
+                  <Select value={userFilter} onValueChange={setUserFilter}>
+                    <SelectTrigger id="user-filter" data-testid="select-user-filter">
+                      <SelectValue placeholder="All Team Members" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Team Members</SelectItem>
+                      {teamMembers.map((member) => (
+                        <SelectItem key={member.id} value={member.id}>
+                          {member.firstName && member.lastName 
+                            ? `${member.firstName} ${member.lastName}`
+                            : member.email}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -220,13 +349,13 @@ export default function Calls() {
         {/* Call List */}
         <Card>
           <CardHeader>
-            <CardTitle>Call Recordings</CardTitle>
+            <CardTitle>{searchQuery ? "Search Results" : "Call Recordings"}</CardTitle>
             <CardDescription>
-              {filteredCalls?.length || 0} calls found
+              {filteredCalls?.length || 0} {searchQuery ? "matching calls" : "calls"} found
             </CardDescription>
           </CardHeader>
           <CardContent>
-            {isLoading ? (
+            {(isLoading || isSearching) ? (
               <div className="flex items-center justify-center py-12">
                 <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
               </div>

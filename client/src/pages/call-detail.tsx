@@ -21,7 +21,8 @@ type CallRecording = {
   durationSeconds: number | null;
   recordingUrl: string | null;
   recordingStatus: string | null;
-  transcript: string | null;
+  transcript: unknown | null;
+  transcriptText: string | null;
   callStartTime: string;
   callEndTime: string | null;
   createdAt: string;
@@ -173,7 +174,7 @@ export default function CallDetail() {
               </div>
             )}
             
-            {adminCheck?.isAdmin && call.transcript && (
+            {adminCheck?.isAdmin && call.transcriptText && (
               <Button
                 onClick={() => scoreMutation.mutate()}
                 disabled={scoreMutation.isPending}
@@ -238,14 +239,22 @@ export default function CallDetail() {
               </div>
             </div>
 
-            {call.recordingStatus === 'available' && call.recordingUrl && (
+            {call.ringcentralRecordingId && (
               <div className="mt-6 pt-6 border-t">
-                <Button variant="outline" asChild>
-                  <a href={call.recordingUrl} target="_blank" rel="noopener noreferrer">
-                    <Play className="h-4 w-4 mr-2" />
-                    Play Recording
-                  </a>
-                </Button>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Play className="h-4 w-4 text-muted-foreground" />
+                    <span className="font-medium text-sm">Call Recording</span>
+                  </div>
+                  <audio 
+                    controls 
+                    className="w-full"
+                    src={`/api/calls/${call.id}/recording`}
+                    data-testid="audio-player"
+                  >
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
               </div>
             )}
           </CardContent>
@@ -329,7 +338,7 @@ export default function CallDetail() {
         )}
 
         {/* Transcript */}
-        {call.transcript && (
+        {call.transcriptText && (
           <Card>
             <CardHeader>
               <div className="flex items-center gap-2">
@@ -340,7 +349,7 @@ export default function CallDetail() {
             <CardContent>
               <div className="prose prose-sm max-w-none dark:prose-invert">
                 <pre className="whitespace-pre-wrap text-sm font-sans bg-muted/50 p-4 rounded-lg">
-                  {call.transcript}
+                  {call.transcriptText}
                 </pre>
               </div>
             </CardContent>
@@ -355,7 +364,7 @@ export default function CallDetail() {
               <h3 className="font-medium mb-2">Not Scored Yet</h3>
               <p className="text-sm text-muted-foreground">
                 This call has not been scored by the AI coaching system yet.
-                {!call.transcript && " A transcript is required for scoring."}
+                {!call.transcriptText && " A transcript is required for scoring."}
               </p>
             </CardContent>
           </Card>

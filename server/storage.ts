@@ -123,6 +123,8 @@ export interface IStorage {
   getCallRecordingsForUser(userId: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string): Promise<CallRecording[]>;
   getCallRecordingsForShop(shopId: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string): Promise<CallRecording[]>;
   getAllCallRecordings(dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string): Promise<CallRecording[]>;
+  searchCallRecordings(query: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string, shopId?: string, userId?: string): Promise<CallRecording[]>;
+  getUnscoredCallRecordings(limit?: number): Promise<CallRecording[]>;
   
   // Coaching criteria
   getActiveCoachingCriteria(shopId?: string): Promise<CoachingCriteria[]>;
@@ -1077,6 +1079,68 @@ export class DatabaseStorage implements IStorage {
       : db.select().from(callRecordings);
     
     return await query
+      .orderBy(desc(callRecordings.callStartTime))
+      .limit(limit);
+  }
+
+  async searchCallRecordings(
+    query: string,
+    dateFrom?: Date,
+    dateTo?: Date,
+    limit: number = 100,
+    direction?: string,
+    shopId?: string,
+    userId?: string
+  ): Promise<CallRecording[]> {
+    const searchPattern = `%${query.toLowerCase()}%`;
+    const conditions = [
+      or(
+        ilike(callRecordings.transcriptText, searchPattern),
+        ilike(callRecordings.customerName, searchPattern),
+        ilike(callRecordings.customerPhone, searchPattern)
+      )
+    ];
+    
+    if (dateFrom) {
+      conditions.push(gte(callRecordings.callStartTime, dateFrom));
+    }
+    if (dateTo) {
+      conditions.push(lte(callRecordings.callStartTime, dateTo));
+    }
+    if (direction) {
+      conditions.push(eq(callRecordings.direction, direction));
+    }
+    if (shopId) {
+      conditions.push(eq(callRecordings.shopId, shopId));
+    }
+    if (userId) {
+      conditions.push(eq(callRecordings.userId, userId));
+    }
+    
+    return await db
+      .select()
+      .from(callRecordings)
+      .where(and(...conditions))
+      .orderBy(desc(callRecordings.callStartTime))
+      .limit(limit);
+  }
+
+  async getUnscoredCallRecordings(limit: number = 50): Promise<CallRecording[]> {
+    // Get calls that have transcripts but haven't been scored yet
+    const scoredCallIds = db
+      .select({ callId: callScores.callId })
+      .from(callScores);
+    
+    return await db
+      .select()
+      .from(callRecordings)
+      .where(
+        and(
+          sql`${callRecordings.transcriptText} IS NOT NULL`,
+          sql`LENGTH(${callRecordings.transcriptText}) > 50`,
+          sql`${callRecordings.id} NOT IN (${scoredCallIds})`
+        )
+      )
       .orderBy(desc(callRecordings.callStartTime))
       .limit(limit);
   }

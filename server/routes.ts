@@ -1113,6 +1113,7 @@ export async function registerRoutes(app: Express) {
       const dateFrom = req.query.dateFrom ? new Date(req.query.dateFrom as string) : undefined;
       const dateTo = req.query.dateTo ? new Date(req.query.dateTo as string) : undefined;
       const direction = req.query.direction as string | undefined;
+      const filterUserId = req.query.userId as string | undefined;
       
       // Validate direction if provided
       const validDirections = ['Inbound', 'Outbound'];
@@ -1125,13 +1126,17 @@ export async function registerRoutes(app: Express) {
       
       let calls;
       if (isAdminUser) {
-        // Admins see all calls
-        calls = await storage.getAllCallRecordings(dateFrom, dateTo, limit, normalizedDirection);
+        // Admins see all calls, can optionally filter by user
+        if (filterUserId) {
+          calls = await storage.getCallRecordingsForUser(filterUserId, dateFrom, dateTo, limit, normalizedDirection);
+        } else {
+          calls = await storage.getAllCallRecordings(dateFrom, dateTo, limit, normalizedDirection);
+        }
       } else if (managedShopId) {
-        // Managers see calls for their shop
+        // Managers see calls for their shop (user filter not supported for managers without shop membership verification)
         calls = await storage.getCallRecordingsForShop(managedShopId, dateFrom, dateTo, limit, normalizedDirection);
       } else {
-        // Regular users see only their calls
+        // Regular users see only their calls (ignore filterUserId)
         calls = await storage.getCallRecordingsForUser(userId, dateFrom, dateTo, limit, normalizedDirection);
       }
       
@@ -1142,7 +1147,48 @@ export async function registerRoutes(app: Express) {
     }
   });
 
-  // Get single call recording with score (requires approval)
+  // Search call transcripts (requires approval, role-based access)
+  app.get("/api/calls/search", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const query = req.query.query as string;
+      
+      if (!query || query.trim().length < 2) {
+        return res.status(400).json({ message: "Search query must be at least 2 characters" });
+      }
+      
+      const dateFrom = req.query.dateFrom ? new Date(req.query.dateFrom as string) : undefined;
+      const dateTo = req.query.dateTo ? new Date(req.query.dateTo as string) : undefined;
+      const direction = req.query.direction as string | undefined;
+      const filterUserId = req.query.userId as string | undefined;
+      const limit = parseInt(req.query.limit as string) || 50;
+      
+      const user = req.user;
+      let calls;
+      
+      // Role-based access: admin sees all, manager sees shop, user sees own
+      if (user.isAdmin) {
+        // Admin can filter by any user, or see all if no filter
+        calls = await storage.searchCallRecordings(query.trim(), dateFrom, dateTo, limit, direction, undefined, filterUserId);
+      } else {
+        // Get user preferences for shop access
+        const prefs = await storage.getUserPreferences(user.id);
+        if (prefs?.managedShopId) {
+          // Manager: search within their shop (user filter not supported without shop membership verification)
+          calls = await storage.searchCallRecordings(query.trim(), dateFrom, dateTo, limit, direction, prefs.managedShopId, undefined);
+        } else {
+          // Regular user: search only their own calls (cannot filter by other users)
+          calls = await storage.searchCallRecordings(query.trim(), dateFrom, dateTo, limit, direction, undefined, user.id);
+        }
+      }
+      
+      res.json(calls);
+    } catch (error: any) {
+      console.error("Search calls error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Get single call recording with score (requires approval, role-based access)
   app.get("/api/calls/:id", isAuthenticated, isApproved, async (req: any, res) => {
     try {
       const callId = req.params.id;
@@ -1150,6 +1196,23 @@ export async function registerRoutes(app: Express) {
       
       if (!call) {
         return res.status(404).json({ message: "Call not found" });
+      }
+      
+      // Role-based access control: admin sees all, manager sees shop, user sees own
+      const user = req.user;
+      if (!user.isAdmin) {
+        const prefs = await storage.getUserPreferences(user.id);
+        if (prefs?.managedShopId) {
+          // Manager: can only access calls from their shop
+          if (call.shopId !== prefs.managedShopId) {
+            return res.status(403).json({ message: "Access denied: this call is not from your shop" });
+          }
+        } else {
+          // Regular user: can only access their own calls
+          if (call.userId !== user.id) {
+            return res.status(403).json({ message: "Access denied: you can only access your own calls" });
+          }
+        }
       }
       
       // Get call score if exists
@@ -1208,7 +1271,9 @@ export async function registerRoutes(app: Express) {
         return res.status(404).json({ message: "Call not found" });
       }
       
-      if (!call.transcript || call.transcript.trim().length < 50) {
+      // Use transcriptText (plain text version) for scoring
+      const transcriptText = call.transcriptText as string | null;
+      if (!transcriptText || transcriptText.trim().length < 50) {
         return res.status(400).json({ message: "Call does not have a transcript to score" });
       }
       
@@ -1220,7 +1285,7 @@ export async function registerRoutes(app: Express) {
       }
       
       // Score the transcript with AI
-      const scoringResult = await scoreCallTranscript(call.transcript, criteria.map(c => ({
+      const scoringResult = await scoreCallTranscript(transcriptText, criteria.map(c => ({
         id: c.id,
         name: c.name,
         description: c.description,
@@ -1275,6 +1340,54 @@ export async function registerRoutes(app: Express) {
     } catch (error: any) {
       console.error("Score call error:", error);
       res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Stream call recording audio (requires approval)
+  app.get("/api/calls/:id/recording", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const callId = req.params.id;
+      const call = await storage.getCallRecordingById(callId);
+      
+      if (!call) {
+        return res.status(404).json({ message: "Call not found" });
+      }
+      
+      // Role-based access control: admin sees all, manager sees shop, user sees own
+      const user = req.user;
+      if (!user.isAdmin) {
+        const prefs = await storage.getUserPreferences(user.id);
+        if (prefs?.managedShopId) {
+          // Manager: can only access recordings from their shop
+          if (call.shopId !== prefs.managedShopId) {
+            return res.status(403).json({ message: "Access denied: this recording is not from your shop" });
+          }
+        } else {
+          // Regular user: can only access their own recordings
+          if (call.userId !== user.id) {
+            return res.status(403).json({ message: "Access denied: you can only access your own recordings" });
+          }
+        }
+      }
+      
+      if (!call.ringcentralRecordingId) {
+        return res.status(404).json({ message: "No recording available for this call" });
+      }
+      
+      // Fetch recording content from RingCentral
+      const { fetchRecordingContent } = await import("./ringcentral");
+      const audioBuffer = await fetchRecordingContent(call.ringcentralRecordingId);
+      
+      // Set appropriate headers for audio streaming
+      res.setHeader("Content-Type", "audio/mpeg");
+      res.setHeader("Content-Length", audioBuffer.length);
+      res.setHeader("Accept-Ranges", "bytes");
+      res.setHeader("Cache-Control", "private, max-age=3600");
+      
+      res.send(audioBuffer);
+    } catch (error: any) {
+      console.error("Get recording error:", error);
+      res.status(500).json({ message: error.message || "Failed to fetch recording" });
     }
   });
 
