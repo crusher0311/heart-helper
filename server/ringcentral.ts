@@ -4,6 +4,7 @@ import { db } from "./db";
 import { callRecordings, type InsertCallRecording, type InsertRingcentralUser } from "@shared/schema";
 import { isNull, isNotNull } from "drizzle-orm";
 import OpenAI from "openai";
+import { AssemblyAI } from "assemblyai";
 import { exec } from "child_process";
 import { promisify } from "util";
 import * as fs from "fs";
@@ -12,11 +13,15 @@ import * as os from "os";
 
 const execAsync = promisify(exec);
 
-// OpenAI client for Whisper transcription - uses direct OpenAI API (not Replit integration)
-// because Replit's AI integration doesn't support the /audio/transcriptions endpoint
+// OpenAI client for Whisper transcription (fallback)
 const whisperClient = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY  // Direct OpenAI API key for Whisper
+  apiKey: process.env.OPENAI_API_KEY
 });
+
+// AssemblyAI client for high-quality transcription (primary)
+const assemblyClient = process.env.ASSEMBLYAI_API_KEY 
+  ? new AssemblyAI({ apiKey: process.env.ASSEMBLYAI_API_KEY })
+  : null;
 
 const RC_SERVER = process.env.RINGCENTRAL_SERVER || "https://platform.ringcentral.com";
 const RC_CLIENT_ID = process.env.RINGCENTRAL_CLIENT_ID;
@@ -744,7 +749,51 @@ async function trimAudio(inputPath: string, durationSeconds: number): Promise<st
 }
 
 /**
- * Transcribe audio file using OpenAI Whisper API
+ * Transcribe audio file using AssemblyAI (primary, high quality)
+ */
+async function transcribeWithAssemblyAI(audioPath: string): Promise<{
+  text: string | null;
+  utterances?: Array<{ speaker: string; text: string }>;
+}> {
+  if (!assemblyClient) {
+    console.log(`[AssemblyAI] Client not configured, skipping`);
+    return { text: null };
+  }
+  
+  try {
+    console.log(`[AssemblyAI] Transcribing ${audioPath}...`);
+    
+    const transcript = await assemblyClient.transcripts.transcribe({
+      audio: audioPath,
+      speaker_labels: true,  // Enable speaker diarization
+      punctuate: true,
+      format_text: true,
+    });
+    
+    if (transcript.status === 'error') {
+      console.error(`[AssemblyAI] Transcription failed:`, transcript.error);
+      return { text: null };
+    }
+    
+    // Build utterances array for speaker diarization
+    const utterances = transcript.utterances?.map(u => ({
+      speaker: `Speaker ${u.speaker}`,
+      text: u.text
+    })) || [];
+    
+    console.log(`[AssemblyAI] Transcribed successfully: ${transcript.text?.substring(0, 100)}...`);
+    return { 
+      text: transcript.text || null,
+      utterances: utterances.length > 0 ? utterances : undefined
+    };
+  } catch (error: any) {
+    console.error(`[AssemblyAI] Transcription failed:`, error.message);
+    return { text: null };
+  }
+}
+
+/**
+ * Transcribe audio file using OpenAI Whisper API (fallback)
  */
 async function transcribeWithWhisper(audioPath: string): Promise<string | null> {
   try {
@@ -785,6 +834,8 @@ export interface SmartTranscriptionResult {
   callId: string;
   isSalesCall: boolean;
   transcriptText: string | null;
+  transcriptSource?: string;  // 'assemblyai' or 'whisper'
+  utterances?: Array<{ speaker: string; text: string }>;  // Speaker diarization
   sampleOnly: boolean;  // true if we only transcribed the sample
   skipped: boolean;     // true if skipped due to vendor/duration
   skipReason?: string;
@@ -792,8 +843,8 @@ export interface SmartTranscriptionResult {
 }
 
 /**
- * Transcribe call recording - transcribes ALL calls to build training dataset
- * Users can mark non-sales calls manually, which helps train future AI detection
+ * Transcribe call recording using AssemblyAI (primary) or Whisper (fallback)
+ * AssemblyAI provides higher accuracy and speaker diarization
  */
 export async function smartTranscribeCall(
   callId: string,
@@ -811,18 +862,13 @@ export async function smartTranscribeCall(
   };
   
   // Pre-filter: Skip very short calls (under 10 seconds - these are typically hang-ups)
-  // Treat unknown duration as "try it anyway"
   const actualDuration = durationSeconds ?? 60; // Assume 60s if unknown
   if (actualDuration < 10) {
     result.skipped = true;
     result.skipReason = "Call too short (under 10 seconds)";
-    console.log(`[Whisper] Skipping call ${callId}: too short (${actualDuration}s)`);
+    console.log(`[Transcribe] Skipping call ${callId}: too short (${actualDuration}s)`);
     return result;
   }
-  
-  // NOTE: We intentionally do NOT filter by vendor name anymore
-  // We want to transcribe everything to build training data
-  // Users will mark non-sales calls manually
   
   // Download the recording
   const audioPath = await downloadRecording(recordingId);
@@ -831,28 +877,42 @@ export async function smartTranscribeCall(
     return result;
   }
   
-  let trimmedPath: string | null = null;
-  
   try {
-    // Transcribe the full recording - we'll let users mark non-sales calls manually
-    // This builds training data for future AI learning
-    console.log(`[Whisper] Transcribing full ${durationSeconds}s recording...`);
-    const fullTranscript = await transcribeWithWhisper(audioPath);
+    console.log(`[Transcribe] Processing ${durationSeconds}s recording for call ${callId}...`);
     
-    if (fullTranscript) {
+    // Try AssemblyAI first (higher quality, speaker diarization)
+    if (assemblyClient) {
+      const assemblyResult = await transcribeWithAssemblyAI(audioPath);
+      if (assemblyResult.text) {
+        result.success = true;
+        result.transcriptText = assemblyResult.text;
+        result.transcriptSource = 'assemblyai';
+        result.utterances = assemblyResult.utterances;
+        result.isSalesCall = isSalesCall(assemblyResult.text);
+        result.sampleOnly = false;
+        console.log(`[Transcribe] AssemblyAI succeeded for call ${callId}`);
+        return result;
+      }
+      console.log(`[Transcribe] AssemblyAI failed for call ${callId}, trying Whisper fallback...`);
+    }
+    
+    // Fallback to Whisper if AssemblyAI fails or not configured
+    const whisperTranscript = await transcribeWithWhisper(audioPath);
+    if (whisperTranscript) {
       result.success = true;
-      result.transcriptText = fullTranscript;
-      // Still detect if it looks like a sales call for stats, but transcribe everything
-      result.isSalesCall = isSalesCall(fullTranscript);
+      result.transcriptText = whisperTranscript;
+      result.transcriptSource = 'whisper';
+      result.isSalesCall = isSalesCall(whisperTranscript);
       result.sampleOnly = false;
+      console.log(`[Transcribe] Whisper succeeded for call ${callId}`);
     } else {
-      result.skipReason = "Failed to transcribe recording";
+      result.skipReason = "Both AssemblyAI and Whisper transcription failed";
     }
     
     return result;
   } finally {
     // Clean up temp files
-    await cleanupTempFiles(audioPath, trimmedPath || "");
+    await cleanupTempFiles(audioPath, "");
   }
 }
 
@@ -880,7 +940,7 @@ export async function batchSmartTranscribe(
   
   // Get calls that need transcription
   const calls = await storage.getCallsNeedingTranscription(limit);
-  console.log(`[Whisper] Processing ${calls.length} calls for smart transcription`);
+  console.log(`[Transcribe] Processing ${calls.length} calls for transcription`);
   
   for (const call of calls) {
     if (!call.ringcentralRecordingId) {
@@ -892,7 +952,7 @@ export async function batchSmartTranscribe(
       const result = await smartTranscribeCall(
         call.id,
         call.ringcentralRecordingId,
-        call.durationSeconds, // Pass null if undefined, function will handle it
+        call.durationSeconds,
         call.customerName || null
       );
       
@@ -911,32 +971,31 @@ export async function batchSmartTranscribe(
         if (result.isSalesCall) stats.salesCalls++;
         if (result.costSaved) stats.totalCostSaved += result.costSaved;
         
-        // Save the transcript
+        // Save the transcript with source and utterances
         await storage.updateCallTranscript(call.id, {
           transcript: result.transcriptText,
           transcriptJson: { 
-            source: "whisper", 
+            source: result.transcriptSource || "unknown", 
             sampleOnly: result.sampleOnly,
             isSalesCall: result.isSalesCall,
+            utterances: result.utterances,  // Speaker diarization from AssemblyAI
           },
           isSalesCall: result.isSalesCall,
         });
       } else {
         stats.errors++;
-        console.error(`[Whisper] Failed to transcribe call ${call.id}: ${result.skipReason}`);
+        console.error(`[Transcribe] Failed to transcribe call ${call.id}: ${result.skipReason}`);
       }
     } catch (error: any) {
       stats.errors++;
-      console.error(`[Whisper] Error processing call ${call.id}:`, error.message);
+      console.error(`[Transcribe] Error processing call ${call.id}:`, error.message);
     }
     
-    // Longer delay between calls to avoid RingCentral rate limiting
-    // RingCentral has strict rate limits on recording downloads
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    // Delay between calls to avoid RingCentral rate limiting
+    await new Promise(resolve => setTimeout(resolve, 2000));
   }
   
-  console.log(`[Whisper] Batch complete: ${stats.processed} processed, ${stats.salesCalls} sales calls, ${stats.skipped} skipped, ${stats.errors} errors`);
-  console.log(`[Whisper] Estimated savings: $${(stats.totalCostSaved / 100).toFixed(2)}`);
+  console.log(`[Transcribe] Batch complete: ${stats.processed} processed, ${stats.salesCalls} sales calls, ${stats.skipped} skipped, ${stats.errors} errors`);
   
   return stats;
 }

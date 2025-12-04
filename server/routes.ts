@@ -1096,21 +1096,25 @@ export async function registerRoutes(app: Express) {
       const { fetchTranscript, smartTranscribeCall } = await import("./ringcentral");
       let result = await fetchTranscript(call.ringcentralRecordingId);
       
-      // If RingCentral methods failed, try Whisper
+      // If RingCentral methods failed, try AssemblyAI/Whisper
       if (!result.transcriptText) {
-        console.log(`[Transcribe] RingCentral methods failed for ${callId}, trying Whisper...`);
+        console.log(`[Transcribe] RingCentral methods failed for ${callId}, trying AssemblyAI/Whisper...`);
         
-        const whisperResult = await smartTranscribeCall(
+        const transcribeResult = await smartTranscribeCall(
           callId,
           call.ringcentralRecordingId,
           call.durationSeconds ?? null,
           call.customerName ?? null
         );
         
-        if (whisperResult.success && whisperResult.transcriptText) {
+        if (transcribeResult.success && transcribeResult.transcriptText) {
           result = {
-            transcriptText: whisperResult.transcriptText,
-            transcriptJson: { source: "whisper", isSalesCall: whisperResult.isSalesCall },
+            transcriptText: transcribeResult.transcriptText,
+            transcriptJson: { 
+              source: transcribeResult.transcriptSource || "unknown", 
+              isSalesCall: transcribeResult.isSalesCall,
+              utterances: transcribeResult.utterances,
+            },
             summary: null,
           };
         }
@@ -1118,7 +1122,7 @@ export async function registerRoutes(app: Express) {
       
       if (!result.transcriptText) {
         return res.status(400).json({ 
-          message: "Could not fetch transcript. Both RingCentral and Whisper transcription failed. Check OpenAI API quota."
+          message: "Could not fetch transcript. RingCentral, AssemblyAI, and Whisper transcription all failed."
         });
       }
       
