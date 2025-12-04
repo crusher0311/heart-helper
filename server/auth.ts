@@ -222,7 +222,10 @@ export async function setupAuth(app: Express) {
         return res.status(401).json({ message: "User not found" });
       }
 
-      return res.json(user);
+      // Include isAdmin from user preferences
+      const isAdmin = await storage.isUserAdmin(userId);
+
+      return res.json({ ...user, isAdmin });
     } catch (error) {
       console.error("Get user error:", error);
       return res.status(500).json({ message: "Failed to get user" });
