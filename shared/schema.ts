@@ -251,6 +251,8 @@ export const callRecordings = pgTable("call_recordings", {
   transcriptText: text("transcript_text"), // Plain text version for search
   aiSummary: text("ai_summary"), // AI-generated call summary
   detectedSpeakerName: text("detected_speaker_name"), // Name detected from "Hi, this is [Name]..."
+  isNotSalesCall: boolean("is_not_sales_call").default(false), // User-marked as not a sales call (wrong number, scheduling only, etc.)
+  notSalesCallReason: text("not_sales_call_reason"), // Why it's not a sales call: "wrong_number", "scheduling", "vendor", "internal", "other"
   callStartTime: timestamp("call_start_time"),
   callEndTime: timestamp("call_end_time"),
   processedAt: timestamp("processed_at"), // When transcription/scoring completed

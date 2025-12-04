@@ -1470,6 +1470,48 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Mark call as "not a sales call" (requires approval)
+  app.patch("/api/calls/:id/not-sales-call", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const callId = req.params.id;
+      const { isNotSalesCall, reason } = req.body;
+      
+      const call = await storage.getCallRecordingById(callId);
+      if (!call) {
+        return res.status(404).json({ message: "Call not found" });
+      }
+      
+      // Role-based access control: admin/manager can mark any, user can mark their own
+      const user = req.user;
+      if (!user.isAdmin && user.role !== 'manager') {
+        if (call.userId !== user.id) {
+          return res.status(403).json({ message: "You can only mark your own calls" });
+        }
+      }
+      
+      // Valid reasons for marking as not a sales call
+      const validReasons = ['wrong_number', 'scheduling', 'vendor', 'internal', 'personal', 'other'];
+      if (isNotSalesCall && reason && !validReasons.includes(reason)) {
+        return res.status(400).json({ message: "Invalid reason. Must be one of: " + validReasons.join(', ') });
+      }
+      
+      // Update the call record using storage method
+      await storage.updateCallRecording(callId, {
+        isNotSalesCall: isNotSalesCall === true,
+        notSalesCallReason: isNotSalesCall ? (reason || 'other') : null,
+      } as any);
+      
+      res.json({ 
+        success: true, 
+        isNotSalesCall: isNotSalesCall === true,
+        reason: isNotSalesCall ? (reason || 'other') : null
+      });
+    } catch (error: any) {
+      console.error("Mark not-sales-call error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
   // Score a call transcript with AI (admin only)
   app.post("/api/calls/:id/score", isAuthenticated, isAdmin, async (req: any, res) => {
     try {

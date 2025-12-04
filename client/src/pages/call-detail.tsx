@@ -1,4 +1,4 @@
-import { Phone, Clock, Calendar, User, Star, PhoneIncoming, PhoneOutgoing, Loader2, Play, FileText, AlertCircle, Sparkles } from "lucide-react";
+import { Phone, Clock, Calendar, User, Star, PhoneIncoming, PhoneOutgoing, Loader2, Play, FileText, AlertCircle, Sparkles, Ban, Check } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -24,6 +24,8 @@ type CallRecording = {
   recordingStatus: string | null;
   transcript: unknown | null;
   transcriptText: string | null;
+  isNotSalesCall: boolean | null;
+  notSalesCallReason: string | null;
   callStartTime: string;
   callEndTime: string | null;
   createdAt: string;
@@ -109,6 +111,30 @@ export default function CallDetail() {
     },
   });
 
+  const markNotSalesCallMutation = useMutation({
+    mutationFn: async ({ isNotSalesCall, reason }: { isNotSalesCall: boolean; reason?: string }) => {
+      const res = await apiRequest("PATCH", `/api/calls/${id}/not-sales-call`, { isNotSalesCall, reason });
+      return res.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: data.isNotSalesCall ? "Marked as Not Sales Call" : "Marked as Sales Call",
+        description: data.isNotSalesCall 
+          ? "This call won't be used for AI training or scoring." 
+          : "This call is now available for AI training.",
+      });
+      refetch();
+      queryClient.invalidateQueries({ queryKey: ["/api/calls", id] });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Update Failed",
+        description: error.message || "Failed to update call status",
+        variant: "destructive",
+      });
+    },
+  });
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -161,6 +187,30 @@ export default function CallDetail() {
               <span className="hidden sm:inline">{call.score ? "Re-score" : "Score"}</span>
             </Button>
           )}
+          
+          {/* Mark as Not Sales Call button */}
+          <Button
+            size="sm"
+            onClick={() => markNotSalesCallMutation.mutate({ 
+              isNotSalesCall: !call.isNotSalesCall,
+              reason: 'other'
+            })}
+            disabled={markNotSalesCallMutation.isPending}
+            variant={call.isNotSalesCall ? "default" : "outline"}
+            className={call.isNotSalesCall ? "bg-amber-600 hover:bg-amber-700" : ""}
+            data-testid="button-not-sales-call"
+          >
+            {markNotSalesCallMutation.isPending ? (
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+            ) : call.isNotSalesCall ? (
+              <Check className="h-4 w-4 mr-2" />
+            ) : (
+              <Ban className="h-4 w-4 mr-2" />
+            )}
+            <span className="hidden sm:inline">
+              {call.isNotSalesCall ? "Is Not Sales" : "Not Sales?"}
+            </span>
+          </Button>
         </div>
       </Navigation>
 
