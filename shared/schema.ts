@@ -241,6 +241,7 @@ export const callRecordings = pgTable("call_recordings", {
   userId: varchar("user_id").references(() => users.id), // Service advisor who handled the call
   shopId: text("shop_id"), // Shop location ("NB", "WM", "EV")
   direction: text("direction"), // "inbound" or "outbound"
+  callType: text("call_type").default("sales"), // "sales", "appointment_request", "other"
   customerPhone: text("customer_phone"), // Customer's phone number
   customerName: text("customer_name"), // Customer name if matched from Tekmetric
   tekmetricCustomerId: integer("tekmetric_customer_id"), // Link to Tekmetric customer
@@ -262,6 +263,7 @@ export const callRecordings = pgTable("call_recordings", {
   index("idx_call_recordings_user").on(table.userId),
   index("idx_call_recordings_shop").on(table.shopId),
   index("idx_call_recordings_date").on(table.callStartTime),
+  index("idx_call_recordings_type").on(table.callType),
 ]);
 
 // Coaching criteria - admin-configurable grading points
@@ -273,6 +275,7 @@ export const coachingCriteria = pgTable("coaching_criteria", {
   aiPrompt: text("ai_prompt"), // Custom AI prompt for scoring this criterion
   weight: integer("weight").default(10), // Weight for overall score calculation
   category: text("category"), // Optional grouping: "greeting", "sales", "closing"
+  callType: text("call_type").default("sales"), // "sales", "appointment_request", or "all" for universal criteria
   sortOrder: integer("sort_order").default(0), // Display order
   isActive: boolean("is_active").default(true),
   shopId: text("shop_id"), // null = applies to all shops, or specific shop
@@ -300,6 +303,24 @@ export const callScores = pgTable("call_scores", {
   updatedAt: timestamp("updated_at").defaultNow(),
 }, (table) => [
   index("idx_call_scores_call").on(table.callId),
+]);
+
+// Transcript annotations - coaching notes linked to specific text in transcripts
+export const transcriptAnnotations = pgTable("transcript_annotations", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  callId: varchar("call_id").notNull().references(() => callRecordings.id),
+  startOffset: integer("start_offset").notNull(), // Character position where highlight starts
+  endOffset: integer("end_offset").notNull(), // Character position where highlight ends
+  selectedText: text("selected_text").notNull(), // The actual highlighted text
+  note: text("note").notNull(), // Coach's note/feedback about this text
+  annotationType: text("annotation_type").default("coaching"), // "coaching", "positive", "needs_improvement", "question"
+  criterionId: varchar("criterion_id").references(() => coachingCriteria.id), // Optional link to a coaching criterion
+  createdBy: varchar("created_by").notNull().references(() => users.id), // Manager who created annotation
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+}, (table) => [
+  index("idx_transcript_annotations_call").on(table.callId),
+  index("idx_transcript_annotations_creator").on(table.createdBy),
 ]);
 
 // Relations
@@ -336,6 +357,7 @@ export const insertRingcentralUserSchema = createInsertSchema(ringcentralUsers).
 export const insertCallRecordingSchema = createInsertSchema(callRecordings).omit({ id: true, createdAt: true, updatedAt: true });
 export const insertCoachingCriteriaSchema = createInsertSchema(coachingCriteria).omit({ id: true, createdAt: true, updatedAt: true });
 export const insertCallScoreSchema = createInsertSchema(callScores).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertTranscriptAnnotationSchema = createInsertSchema(transcriptAnnotations).omit({ id: true, createdAt: true, updatedAt: true });
 
 // Search request schema
 export const searchJobSchema = z.object({
@@ -390,6 +412,9 @@ export type InsertCoachingCriteria = z.infer<typeof insertCoachingCriteriaSchema
 
 export type CallScore = typeof callScores.$inferSelect;
 export type InsertCallScore = z.infer<typeof insertCallScoreSchema>;
+
+export type TranscriptAnnotation = typeof transcriptAnnotations.$inferSelect;
+export type InsertTranscriptAnnotation = z.infer<typeof insertTranscriptAnnotationSchema>;
 
 // Criteria score detail for a single criterion
 export type CriteriaScoreDetail = {
