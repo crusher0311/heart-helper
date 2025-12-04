@@ -27,6 +27,7 @@ type CallRecording = {
   recordingStatus: string | null;
   transcript: string | null;
   transcriptText: string | null;
+  callType: string | null;
   isNotSalesCall: boolean | null;
   notSalesCallReason: string | null;
   callStartTime: string;
@@ -79,6 +80,7 @@ export default function Calls() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchInput, setSearchInput] = useState<string>("");
   const [transcribedFilter, setTranscribedFilter] = useState<string>("transcribed"); // Default to showing transcribed calls
+  const [callTypeFilter, setCallTypeFilter] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const pageSize = 50;
 
@@ -218,22 +220,42 @@ export default function Calls() {
   };
 
   // Use search results if searching, otherwise use regular calls
-  // Apply transcribed filter and sort by date (newest first)
+  // Apply transcribed filter and call type filter, sort by date (newest first)
   const filteredCalls = useMemo(() => {
     let result = searchQuery ? searchResults : calls;
     if (!result) return [];
     
     // Apply transcribed filter
     if (transcribedFilter === "transcribed") {
-      // Show transcribed calls that are NOT marked as non-sales (hide archived)
-      result = result.filter(c => c.transcriptText && c.transcriptText.length > 10 && !c.isNotSalesCall);
+      // "Ready for Review" - transcribed calls that are NOT scored and NOT archived
+      result = result.filter(c => 
+        c.transcriptText && 
+        c.transcriptText.length > 10 && 
+        !c.isNotSalesCall && 
+        !c.score
+      );
+    } else if (transcribedFilter === "scored") {
+      // "Scored" - calls that have been scored (have a score)
+      result = result.filter(c => 
+        c.score && 
+        !c.isNotSalesCall
+      );
     } else if (transcribedFilter === "not-transcribed") {
+      // "Needs Transcription" - calls without transcripts
       result = result.filter(c => !c.transcriptText || c.transcriptText.length <= 10);
     } else if (transcribedFilter === "archived") {
-      // Show only calls marked as "not a sales call"
+      // "Archived (Not Sales)" - calls marked as not a sales call
       result = result.filter(c => c.isNotSalesCall === true);
     }
     // "all" shows everything including archived
+    
+    // Apply call type filter
+    if (callTypeFilter !== "all") {
+      result = result.filter(c => {
+        const type = c.callType || "sales"; // Default to sales if not set
+        return type === callTypeFilter;
+      });
+    }
     
     // Sort by date (newest first)
     return [...result].sort((a, b) => {
@@ -241,7 +263,7 @@ export default function Calls() {
       const dateB = new Date(b.callStartTime).getTime();
       return dateB - dateA;
     });
-  }, [searchQuery, searchResults, calls, transcribedFilter]);
+  }, [searchQuery, searchResults, calls, transcribedFilter, callTypeFilter]);
 
   const inboundCount = calls?.filter(c => c.direction?.toLowerCase() === "inbound").length || 0;
   const outboundCount = calls?.filter(c => c.direction?.toLowerCase() === "outbound").length || 0;
@@ -322,8 +344,8 @@ export default function Calls() {
               )}
             </div>
 
-            {/* Date, Direction, Transcript, and User Filters */}
-            <div className={`grid grid-cols-1 gap-4 ${isAdmin && teamMembers?.length ? 'md:grid-cols-5' : 'md:grid-cols-4'}`}>
+            {/* Date, Direction, Transcript, Call Type, and User Filters */}
+            <div className={`grid grid-cols-1 gap-4 ${isAdmin && teamMembers?.length ? 'md:grid-cols-6' : 'md:grid-cols-5'}`}>
               <div className="space-y-2">
                 <Label htmlFor="date-from">From Date</Label>
                 <input
@@ -371,6 +393,19 @@ export default function Calls() {
                     <SelectItem value="not-transcribed">Needs Transcription</SelectItem>
                     <SelectItem value="archived">Archived (Not Sales)</SelectItem>
                     <SelectItem value="all">All Calls</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="call-type">Call Type</Label>
+                <Select value={callTypeFilter} onValueChange={handleFilterChange(setCallTypeFilter)}>
+                  <SelectTrigger id="call-type" data-testid="select-call-type">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Types</SelectItem>
+                    <SelectItem value="sales">Sales</SelectItem>
+                    <SelectItem value="appointment_request">Appointment Request</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -480,12 +515,19 @@ export default function Calls() {
                           )}
                         </div>
                         <div>
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-2 flex-wrap">
                             <span className="font-medium">
                               {call.customerName || formatPhoneNumber(call.customerPhone)}
                             </span>
                             <Badge variant="outline" className="text-xs">
                               {call.direction?.toLowerCase() === 'inbound' ? 'Inbound' : 'Outbound'}
+                            </Badge>
+                            <Badge variant="outline" className={`text-xs ${
+                              (call.callType || 'sales') === 'appointment_request' 
+                                ? 'bg-purple-500/10 text-purple-700 border-purple-200'
+                                : 'bg-blue-500/10 text-blue-700 border-blue-200'
+                            }`}>
+                              {(call.callType || 'sales') === 'appointment_request' ? 'Appointment' : 'Sales'}
                             </Badge>
                             {call.recordingStatus === 'available' && (
                               <Badge variant="secondary" className="text-xs">

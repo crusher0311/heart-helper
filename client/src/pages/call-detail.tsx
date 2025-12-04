@@ -25,6 +25,7 @@ type CallRecording = {
   recordingStatus: string | null;
   transcript: unknown | null;
   transcriptText: string | null;
+  callType: string | null;
   isNotSalesCall: boolean | null;
   notSalesCallReason: string | null;
   callStartTime: string;
@@ -278,6 +279,19 @@ export default function CallDetail() {
                   {call.recordingStatus === 'available' ? 'Available' : 'Not Available'}
                 </Badge>
               </div>
+              {call.callType && (
+                <div className="space-y-1">
+                  <p className="text-sm text-muted-foreground">Call Type</p>
+                  <Badge variant="outline" className={
+                    call.callType === 'appointment_request' 
+                      ? 'bg-purple-500/10 text-purple-700 border-purple-200'
+                      : 'bg-blue-500/10 text-blue-700 border-blue-200'
+                  }>
+                    {call.callType === 'appointment_request' ? 'Appointment Request' : 
+                     call.callType === 'sales' ? 'Sales' : call.callType}
+                  </Badge>
+                </div>
+              )}
             </div>
 
             {call.ringcentralRecordingId && (
