@@ -29,9 +29,11 @@ import type {
   InsertCoachingCriteria,
   CallScore,
   InsertCallScore,
+  TranscriptAnnotation,
+  InsertTranscriptAnnotation,
 } from "@shared/schema";
 import { db } from "./db";
-import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache, users, userPreferences, scriptFeedback, laborRateGroups, ringcentralUsers, callRecordings, coachingCriteria, callScores } from "@shared/schema";
+import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache, users, userPreferences, scriptFeedback, laborRateGroups, ringcentralUsers, callRecordings, coachingCriteria, callScores, transcriptAnnotations } from "@shared/schema";
 import { eq, and, or, like, ilike, sql, desc, gte, lte, isNull, isNotNull } from "drizzle-orm";
 import crypto from "crypto";
 import { getModelVariations } from "./vehicle-utils";
@@ -186,6 +188,12 @@ export interface IStorage {
       totalEvaluations: number;
     }>;
   }>;
+  
+  // Transcript annotations
+  getAnnotationsForCall(callId: string): Promise<TranscriptAnnotation[]>;
+  createTranscriptAnnotation(data: InsertTranscriptAnnotation): Promise<TranscriptAnnotation>;
+  updateTranscriptAnnotation(id: string, data: Partial<InsertTranscriptAnnotation>): Promise<TranscriptAnnotation>;
+  deleteTranscriptAnnotation(id: string): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -1648,6 +1656,38 @@ export class DatabaseStorage implements IStorage {
     })).sort((a, b) => a.averageScore - b.averageScore); // Lowest first (needs improvement)
 
     return { criteria };
+  }
+  
+  // Transcript annotations
+  async getAnnotationsForCall(callId: string): Promise<TranscriptAnnotation[]> {
+    return await db
+      .select()
+      .from(transcriptAnnotations)
+      .where(eq(transcriptAnnotations.callId, callId))
+      .orderBy(transcriptAnnotations.startOffset);
+  }
+  
+  async createTranscriptAnnotation(data: InsertTranscriptAnnotation): Promise<TranscriptAnnotation> {
+    const [annotation] = await db
+      .insert(transcriptAnnotations)
+      .values(data)
+      .returning();
+    return annotation;
+  }
+  
+  async updateTranscriptAnnotation(id: string, data: Partial<InsertTranscriptAnnotation>): Promise<TranscriptAnnotation> {
+    const [annotation] = await db
+      .update(transcriptAnnotations)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(transcriptAnnotations.id, id))
+      .returning();
+    return annotation;
+  }
+  
+  async deleteTranscriptAnnotation(id: string): Promise<void> {
+    await db
+      .delete(transcriptAnnotations)
+      .where(eq(transcriptAnnotations.id, id));
   }
 }
 

@@ -1938,6 +1938,89 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // ==========================================
+  // Transcript Annotation Routes (Admin/Manager only)
+  // ==========================================
+  
+  // Get annotations for a call
+  app.get("/api/calls/:id/annotations", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const callId = req.params.id;
+      const annotations = await storage.getAnnotationsForCall(callId);
+      res.json(annotations);
+    } catch (error: any) {
+      console.error("Get annotations error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+  
+  // Create a transcript annotation
+  app.post("/api/calls/:id/annotations", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const user = req.user;
+      const prefs = await storage.getUserPreferences(user.id);
+      const isAdminUser = await storage.isUserAdmin(user.id);
+      
+      // Only admins and managers can add annotations
+      if (!isAdminUser && !prefs?.isManager) {
+        return res.status(403).json({ message: "Access denied. Admin or manager role required to add annotations." });
+      }
+      
+      const callId = req.params.id;
+      const data = {
+        ...req.body,
+        callId,
+        createdBy: user.id,
+      };
+      
+      const annotation = await storage.createTranscriptAnnotation(data);
+      res.json(annotation);
+    } catch (error: any) {
+      console.error("Create annotation error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+  
+  // Update a transcript annotation
+  app.patch("/api/calls/:callId/annotations/:id", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const user = req.user;
+      const prefs = await storage.getUserPreferences(user.id);
+      const isAdminUser = await storage.isUserAdmin(user.id);
+      
+      // Only admins and managers can update annotations
+      if (!isAdminUser && !prefs?.isManager) {
+        return res.status(403).json({ message: "Access denied. Admin or manager role required." });
+      }
+      
+      const annotation = await storage.updateTranscriptAnnotation(req.params.id, req.body);
+      res.json(annotation);
+    } catch (error: any) {
+      console.error("Update annotation error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+  
+  // Delete a transcript annotation
+  app.delete("/api/calls/:callId/annotations/:id", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const user = req.user;
+      const prefs = await storage.getUserPreferences(user.id);
+      const isAdminUser = await storage.isUserAdmin(user.id);
+      
+      // Only admins and managers can delete annotations
+      if (!isAdminUser && !prefs?.isManager) {
+        return res.status(403).json({ message: "Access denied. Admin or manager role required." });
+      }
+      
+      await storage.deleteTranscriptAnnotation(req.params.id);
+      res.json({ success: true });
+    } catch (error: any) {
+      console.error("Delete annotation error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
   // Coaching Dashboard - Team Overview (admin/manager only)
   app.get("/api/coaching/dashboard", isAuthenticated, isApproved, async (req: any, res) => {
     try {
