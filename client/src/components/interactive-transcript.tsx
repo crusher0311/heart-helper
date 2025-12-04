@@ -24,9 +24,15 @@ type TranscriptAnnotation = {
   updatedAt: string;
 };
 
+type Utterance = {
+  speaker: string;
+  text: string;
+};
+
 type Props = {
   callId: string;
   transcriptText: string;
+  utterances?: Utterance[];  // Speaker diarization from AssemblyAI
   isAdminOrManager: boolean;
 };
 
@@ -37,7 +43,7 @@ const ANNOTATION_TYPES = [
   { value: "question", label: "Question/Discussion", icon: HelpCircle, color: "bg-purple-500/10 text-purple-700 border-purple-200" },
 ];
 
-export function InteractiveTranscript({ callId, transcriptText, isAdminOrManager }: Props) {
+export function InteractiveTranscript({ callId, transcriptText, utterances, isAdminOrManager }: Props) {
   const { toast } = useToast();
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -184,6 +190,35 @@ export function InteractiveTranscript({ callId, transcriptText, isAdminOrManager
     });
   };
 
+  // Render transcript with speaker diarization (when available from AssemblyAI)
+  const renderDiarizedTranscript = () => {
+    if (!utterances || utterances.length === 0) return null;
+    
+    // Speaker colors for visual distinction
+    const speakerColors: Record<string, string> = {
+      "Speaker A": "text-blue-600 dark:text-blue-400",
+      "Speaker B": "text-green-600 dark:text-green-400", 
+      "Speaker C": "text-purple-600 dark:text-purple-400",
+      "Speaker D": "text-orange-600 dark:text-orange-400",
+    };
+    
+    return (
+      <div className="space-y-3">
+        {utterances.map((utterance, idx) => {
+          const colorClass = speakerColors[utterance.speaker] || "text-primary";
+          return (
+            <div key={idx} className="flex gap-3">
+              <span className={`font-semibold shrink-0 min-w-[90px] ${colorClass}`}>
+                {utterance.speaker}:
+              </span>
+              <span className="text-foreground">{utterance.text}</span>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
   const renderAnnotatedText = () => {
     if (!transcriptText) return null;
 
@@ -319,6 +354,8 @@ export function InteractiveTranscript({ callId, transcriptText, isAdminOrManager
           <div className="flex items-center justify-center py-8">
             <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
           </div>
+        ) : utterances && utterances.length > 0 ? (
+          renderDiarizedTranscript()
         ) : (
           <div className="whitespace-pre-wrap">{renderAnnotatedText()}</div>
         )}

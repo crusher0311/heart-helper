@@ -525,9 +525,21 @@ export default function CallDetail() {
           <Card>
             <CardHeader>
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <FileText className="h-5 w-5 text-muted-foreground" />
                   <CardTitle>Transcript</CardTitle>
+                  {(call.transcript as { source?: string })?.source && (
+                    <Badge variant="outline" className="text-xs">
+                      {(call.transcript as { source?: string }).source === "assemblyai" ? "AssemblyAI" : 
+                       (call.transcript as { source?: string }).source === "whisper" ? "Whisper" : 
+                       (call.transcript as { source?: string }).source}
+                    </Badge>
+                  )}
+                  {(call.transcript as { utterances?: unknown[] })?.utterances?.length && (
+                    <Badge variant="secondary" className="text-xs">
+                      Speaker Labels
+                    </Badge>
+                  )}
                 </div>
                 <div className="flex items-center gap-2">
                   {adminCheck?.isAdmin && (
@@ -567,6 +579,7 @@ export default function CallDetail() {
               <InteractiveTranscript 
                 callId={call.id}
                 transcriptText={call.transcriptText}
+                utterances={(call.transcript as { utterances?: Array<{speaker: string; text: string}> })?.utterances}
                 isAdminOrManager={isAdminOrManager}
               />
             </CardContent>

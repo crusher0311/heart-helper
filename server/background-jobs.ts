@@ -51,20 +51,21 @@ async function syncAndTranscribe() {
           );
           
           if (result.transcriptText) {
-            // Determine if it's a sales call
-            const salesCall = isSalesCall(result.transcriptText);
+            // Use the sales call detection from the transcription result
+            const salesCall = result.isSalesCall || isSalesCall(result.transcriptText);
             
             await storage.updateCallRecording(call.id, {
               transcriptText: result.transcriptText,
               transcript: {
                 transcribedAt: new Date().toISOString(),
-                source: "whisper",
+                source: result.transcriptSource || "unknown",
                 durationSeconds: call.durationSeconds,
-                isSalesCall: salesCall
+                isSalesCall: salesCall,
+                utterances: result.utterances,  // Speaker diarization from AssemblyAI
               }
             });
             transcribed++;
-            console.log(`[Background] Transcribed call ${call.id.slice(0, 8)}... (${result.transcriptText.length} chars, sales: ${salesCall})`);
+            console.log(`[Background] Transcribed call ${call.id.slice(0, 8)}... (${result.transcriptText.length} chars, sales: ${salesCall}, source: ${result.transcriptSource})`);
           } else if (result.skipReason) {
             await storage.updateCallRecording(call.id, {
               transcript: { skipped: true, reason: result.skipReason }
