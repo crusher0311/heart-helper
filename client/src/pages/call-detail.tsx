@@ -1,4 +1,4 @@
-import { Phone, Clock, Calendar, User, Star, PhoneIncoming, PhoneOutgoing, Loader2, Play, FileText, AlertCircle, Sparkles, Ban, Check, RefreshCw } from "lucide-react";
+import { Phone, Clock, Calendar, User, Star, PhoneIncoming, PhoneOutgoing, Loader2, Play, FileText, AlertCircle, Sparkles, Ban, Check, RefreshCw, Link2, ChevronRight } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,10 +12,20 @@ import { format } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 
+type RelatedLeg = {
+  id: string;
+  direction: string | null;
+  durationSeconds: number | null;
+  callStartTime: string | null;
+  hasTranscript: boolean;
+  transcriptPreview: string | null;
+};
+
 type CallRecording = {
   id: string;
   ringcentralCallId: string;
   ringcentralRecordingId: string | null;
+  ringcentralSessionId: string | null;
   userId: string | null;
   shopId: string | null;
   direction: string | null;
@@ -32,6 +42,9 @@ type CallRecording = {
   callStartTime: string;
   callEndTime: string | null;
   createdAt: string;
+  isMultiLeg?: boolean;
+  legCount?: number;
+  relatedLegs?: RelatedLeg[];
   score?: {
     id: string;
     overallScore: number;
@@ -377,6 +390,54 @@ export default function CallDetail() {
                     Your browser does not support the audio element.
                   </audio>
                 </div>
+              </div>
+            )}
+
+            {/* Multi-leg call indicator */}
+            {call.isMultiLeg && (
+              <div className="mt-6 pt-6 border-t">
+                <div className="flex items-center gap-2 mb-3">
+                  <Link2 className="h-4 w-4 text-muted-foreground" />
+                  <span className="font-medium text-sm">Multi-Leg Call</span>
+                  <Badge variant="outline" className="text-xs bg-amber-500/10 text-amber-700 border-amber-200">
+                    {call.legCount} legs
+                  </Badge>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  This call is part of a session with multiple segments (e.g., customer was put on hold or transferred).
+                </p>
+                {call.relatedLegs && call.relatedLegs.length > 0 && (
+                  <div className="space-y-2">
+                    <p className="text-xs text-muted-foreground uppercase tracking-wide">Related Call Legs</p>
+                    {call.relatedLegs.map((leg) => (
+                      <Link key={leg.id} href={`/calls/${leg.id}`}>
+                        <div className="flex items-center justify-between p-3 border rounded-lg hover-elevate cursor-pointer" data-testid={`related-leg-${leg.id}`}>
+                          <div className="flex items-center gap-3">
+                            {leg.direction?.toLowerCase() === 'inbound' ? (
+                              <PhoneIncoming className="h-4 w-4 text-green-600" />
+                            ) : (
+                              <PhoneOutgoing className="h-4 w-4 text-blue-600" />
+                            )}
+                            <div>
+                              <span className="text-sm font-medium">
+                                {leg.callStartTime ? format(new Date(leg.callStartTime), 'h:mm a') : 'Unknown time'}
+                              </span>
+                              <span className="text-sm text-muted-foreground ml-2">
+                                ({formatDuration(leg.durationSeconds)})
+                              </span>
+                            </div>
+                            {leg.hasTranscript ? (
+                              <Badge variant="secondary" className="text-xs">Transcribed</Badge>
+                            ) : (
+                              <Badge variant="outline" className="text-xs">No Transcript</Badge>
+                            )}
+                          </div>
+                          <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </CardContent>
