@@ -1317,6 +1317,7 @@ export async function registerRoutes(app: Express) {
     try {
       const userId = req.user.id;
       const limit = parseInt(req.query.limit as string) || 50;
+      const offset = parseInt(req.query.offset as string) || 0;
       const dateFrom = req.query.dateFrom ? new Date(req.query.dateFrom as string) : undefined;
       const dateTo = req.query.dateTo ? new Date(req.query.dateTo as string) : undefined;
       const direction = req.query.direction as string | undefined;
@@ -1331,23 +1332,26 @@ export async function registerRoutes(app: Express) {
       const userPrefs = await storage.getUserPreferences(userId);
       const managedShopId = userPrefs?.managedShopId;
       
-      let calls;
+      let result;
       if (isAdminUser) {
         // Admins see all calls, can optionally filter by user
         if (filterUserId) {
-          calls = await storage.getCallRecordingsForUser(filterUserId, dateFrom, dateTo, limit, normalizedDirection);
+          const calls = await storage.getCallRecordingsForUser(filterUserId, dateFrom, dateTo, limit, normalizedDirection, offset);
+          result = { calls, total: calls.length + offset }; // Approximate for user filter
         } else {
-          calls = await storage.getAllCallRecordings(dateFrom, dateTo, limit, normalizedDirection);
+          result = await storage.getAllCallRecordings(dateFrom, dateTo, limit, normalizedDirection, offset);
         }
       } else if (managedShopId) {
-        // Managers see calls for their shop (user filter not supported for managers without shop membership verification)
-        calls = await storage.getCallRecordingsForShop(managedShopId, dateFrom, dateTo, limit, normalizedDirection);
+        // Managers see calls for their shop
+        const calls = await storage.getCallRecordingsForShop(managedShopId, dateFrom, dateTo, limit, normalizedDirection, offset);
+        result = { calls, total: calls.length + offset }; // Approximate for shop filter
       } else {
-        // Regular users see only their calls (ignore filterUserId)
-        calls = await storage.getCallRecordingsForUser(userId, dateFrom, dateTo, limit, normalizedDirection);
+        // Regular users see only their calls
+        const calls = await storage.getCallRecordingsForUser(userId, dateFrom, dateTo, limit, normalizedDirection, offset);
+        result = { calls, total: calls.length + offset }; // Approximate for user filter
       }
       
-      res.json(calls);
+      res.json(result);
     } catch (error: any) {
       console.error("Get calls error:", error);
       res.status(500).json({ message: error.message });

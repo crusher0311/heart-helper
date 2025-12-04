@@ -120,9 +120,9 @@ export interface IStorage {
   getCallRecordingById(id: string): Promise<CallRecording | undefined>;
   createCallRecording(data: InsertCallRecording): Promise<CallRecording>;
   updateCallRecording(id: string, data: Partial<InsertCallRecording>): Promise<CallRecording>;
-  getCallRecordingsForUser(userId: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string): Promise<CallRecording[]>;
-  getCallRecordingsForShop(shopId: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string): Promise<CallRecording[]>;
-  getAllCallRecordings(dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string): Promise<CallRecording[]>;
+  getCallRecordingsForUser(userId: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string, offset?: number): Promise<CallRecording[]>;
+  getCallRecordingsForShop(shopId: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string, offset?: number): Promise<CallRecording[]>;
+  getAllCallRecordings(dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string, offset?: number): Promise<{ calls: CallRecording[]; total: number }>;
   searchCallRecordings(query: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string, shopId?: string, userId?: string): Promise<CallRecording[]>;
   getUnscoredCallRecordings(limit?: number, salesOnly?: boolean): Promise<CallRecording[]>;
   isSalesCall(transcriptText: string | null): boolean;
@@ -1055,7 +1055,8 @@ export class DatabaseStorage implements IStorage {
     dateFrom?: Date, 
     dateTo?: Date, 
     limit: number = 100,
-    direction?: string
+    direction?: string,
+    offset: number = 0
   ): Promise<CallRecording[]> {
     const conditions = [eq(callRecordings.userId, userId)];
     
@@ -1074,6 +1075,7 @@ export class DatabaseStorage implements IStorage {
       .from(callRecordings)
       .where(and(...conditions))
       .orderBy(desc(callRecordings.callStartTime))
+      .offset(offset)
       .limit(limit);
   }
 
@@ -1082,7 +1084,8 @@ export class DatabaseStorage implements IStorage {
     dateFrom?: Date, 
     dateTo?: Date, 
     limit: number = 100,
-    direction?: string
+    direction?: string,
+    offset: number = 0
   ): Promise<CallRecording[]> {
     const conditions = [eq(callRecordings.shopId, shopId)];
     
@@ -1101,6 +1104,7 @@ export class DatabaseStorage implements IStorage {
       .from(callRecordings)
       .where(and(...conditions))
       .orderBy(desc(callRecordings.callStartTime))
+      .offset(offset)
       .limit(limit);
   }
 
@@ -1108,8 +1112,9 @@ export class DatabaseStorage implements IStorage {
     dateFrom?: Date, 
     dateTo?: Date, 
     limit: number = 100,
-    direction?: string
-  ): Promise<CallRecording[]> {
+    direction?: string,
+    offset: number = 0
+  ): Promise<{ calls: CallRecording[]; total: number }> {
     const conditions = [];
     
     if (dateFrom) {
@@ -1122,13 +1127,23 @@ export class DatabaseStorage implements IStorage {
       conditions.push(eq(callRecordings.direction, direction));
     }
     
+    // Get total count first
+    const countQuery = conditions.length > 0
+      ? db.select({ count: sql<number>`count(*)::int` }).from(callRecordings).where(and(...conditions))
+      : db.select({ count: sql<number>`count(*)::int` }).from(callRecordings);
+    const [{ count: total }] = await countQuery;
+    
+    // Then get paginated results
     const query = conditions.length > 0 
       ? db.select().from(callRecordings).where(and(...conditions))
       : db.select().from(callRecordings);
     
-    return await query
+    const calls = await query
       .orderBy(desc(callRecordings.callStartTime))
+      .offset(offset)
       .limit(limit);
+    
+    return { calls, total };
   }
 
   async searchCallRecordings(

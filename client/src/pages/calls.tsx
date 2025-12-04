@@ -1,4 +1,4 @@
-import { Phone, Clock, Calendar, User, ChevronRight, Loader2, PhoneIncoming, PhoneOutgoing, Star, Filter, RefreshCw, Search, X, Sparkles } from "lucide-react";
+import { Phone, Clock, Calendar, User, ChevronRight, Loader2, PhoneIncoming, PhoneOutgoing, Star, Filter, RefreshCw, Search, X, Sparkles, ChevronLeft } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -79,6 +79,8 @@ export default function Calls() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchInput, setSearchInput] = useState<string>("");
   const [transcribedFilter, setTranscribedFilter] = useState<string>("transcribed"); // Default to showing transcribed calls
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const pageSize = 50;
 
   // Check if user is admin
   const { data: adminCheck } = useQuery<{ isAdmin: boolean }>({
@@ -140,8 +142,8 @@ export default function Calls() {
   });
 
   // Regular calls query (when not searching)
-  const { data: calls, isLoading, refetch, isFetching } = useQuery<CallRecording[]>({
-    queryKey: ["/api/calls", dateFrom, dateTo, directionFilter, userFilter],
+  const { data: callsData, isLoading, refetch, isFetching } = useQuery<{ calls: CallRecording[]; total: number }>({
+    queryKey: ["/api/calls", dateFrom, dateTo, directionFilter, userFilter, currentPage],
     queryFn: async () => {
       const params = new URLSearchParams();
       if (dateFrom) params.set("dateFrom", new Date(dateFrom).toISOString());
@@ -152,7 +154,8 @@ export default function Calls() {
       if (userFilter !== "all") {
         params.set("userId", userFilter);
       }
-      params.set("limit", "500");
+      params.set("limit", String(pageSize));
+      params.set("offset", String((currentPage - 1) * pageSize));
       
       const response = await fetch(`/api/calls?${params}`, {
         credentials: "include",
@@ -162,6 +165,10 @@ export default function Calls() {
     },
     enabled: !searchQuery,
   });
+  
+  const calls = callsData?.calls;
+  const totalCalls = callsData?.total || 0;
+  const totalPages = Math.ceil(totalCalls / pageSize);
 
   // Search query (when searching)
   const { data: searchResults, isLoading: isSearching } = useQuery<CallRecording[]>({
@@ -191,12 +198,20 @@ export default function Calls() {
   const handleSearch = () => {
     if (searchInput.trim().length >= 2) {
       setSearchQuery(searchInput.trim());
+      setCurrentPage(1);
     }
   };
 
   const clearSearch = () => {
     setSearchInput("");
     setSearchQuery("");
+    setCurrentPage(1);
+  };
+  
+  // Reset to page 1 when filters change
+  const handleFilterChange = (setter: (value: string) => void) => (value: string) => {
+    setter(value);
+    setCurrentPage(1);
   };
 
   // Use search results if searching, otherwise use regular calls
@@ -330,7 +345,7 @@ export default function Calls() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="direction">Direction</Label>
-                <Select value={directionFilter} onValueChange={setDirectionFilter}>
+                <Select value={directionFilter} onValueChange={handleFilterChange(setDirectionFilter)}>
                   <SelectTrigger id="direction" data-testid="select-direction">
                     <SelectValue />
                   </SelectTrigger>
@@ -343,7 +358,7 @@ export default function Calls() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="transcribed">Status</Label>
-                <Select value={transcribedFilter} onValueChange={setTranscribedFilter}>
+                <Select value={transcribedFilter} onValueChange={handleFilterChange(setTranscribedFilter)}>
                   <SelectTrigger id="transcribed" data-testid="select-transcribed">
                     <SelectValue />
                   </SelectTrigger>
@@ -358,7 +373,7 @@ export default function Calls() {
               {isAdmin && teamMembers && teamMembers.length > 0 && (
                 <div className="space-y-2">
                   <Label htmlFor="user-filter">Team Member</Label>
-                  <Select value={userFilter} onValueChange={setUserFilter}>
+                  <Select value={userFilter} onValueChange={handleFilterChange(setUserFilter)}>
                     <SelectTrigger id="user-filter" data-testid="select-user-filter">
                       <SelectValue placeholder="All Team Members" />
                     </SelectTrigger>
@@ -429,7 +444,10 @@ export default function Calls() {
           <CardHeader>
             <CardTitle>{searchQuery ? "Search Results" : "Call Recordings"}</CardTitle>
             <CardDescription>
-              {filteredCalls?.length || 0} {searchQuery ? "matching calls" : "calls"} found
+              {searchQuery 
+                ? `${filteredCalls?.length || 0} matching calls`
+                : `Showing ${filteredCalls?.length || 0} of ${totalCalls} calls (Page ${currentPage} of ${totalPages || 1})`
+              }
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -508,6 +526,55 @@ export default function Calls() {
                     ? "No calls have been synced yet. Use the Settings page to sync calls from RingCentral."
                     : "No calls match your current filters."}
                 </p>
+              </div>
+            )}
+            
+            {/* Pagination Controls */}
+            {!searchQuery && totalPages > 1 && (
+              <div className="flex items-center justify-between pt-4 border-t mt-4">
+                <div className="text-sm text-muted-foreground">
+                  Page {currentPage} of {totalPages}
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setCurrentPage(1)}
+                    disabled={currentPage === 1 || isFetching}
+                    data-testid="button-first-page"
+                  >
+                    First
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                    disabled={currentPage === 1 || isFetching}
+                    data-testid="button-prev-page"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                    Previous
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                    disabled={currentPage === totalPages || isFetching}
+                    data-testid="button-next-page"
+                  >
+                    Next
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setCurrentPage(totalPages)}
+                    disabled={currentPage === totalPages || isFetching}
+                    data-testid="button-last-page"
+                  >
+                    Last
+                  </Button>
+                </div>
               </div>
             )}
           </CardContent>
