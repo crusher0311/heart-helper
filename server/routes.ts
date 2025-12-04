@@ -1483,7 +1483,11 @@ export async function registerRoutes(app: Express) {
       
       // Role-based access control: admin/manager can mark any, user can mark their own
       const user = req.user;
-      if (!user.isAdmin && user.role !== 'manager') {
+      const isAdminUser = await storage.isUserAdmin(user.id);
+      const userPrefs = await storage.getUserPreferences(user.id);
+      const isManager = userPrefs?.role === 'manager';
+      
+      if (!isAdminUser && !isManager) {
         if (call.userId !== user.id) {
           return res.status(403).json({ message: "You can only mark your own calls" });
         }
