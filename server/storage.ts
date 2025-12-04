@@ -126,6 +126,13 @@ export interface IStorage {
   searchCallRecordings(query: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string, shopId?: string, userId?: string): Promise<CallRecording[]>;
   getUnscoredCallRecordings(limit?: number, salesOnly?: boolean): Promise<CallRecording[]>;
   isSalesCall(transcriptText: string | null): boolean;
+  getCallsNeedingTranscription(limit?: number): Promise<CallRecording[]>;
+  getTranscriptionStats(): Promise<{
+    totalCalls: number;
+    withRecording: number;
+    withTranscript: number;
+    needingTranscription: number;
+  }>;
   
   // Coaching criteria
   getActiveCoachingCriteria(shopId?: string): Promise<CoachingCriteria[]>;
@@ -1213,6 +1220,42 @@ export class DatabaseStorage implements IStorage {
     
     const lowerText = transcriptText.toLowerCase();
     return salesKeywords.some(keyword => lowerText.includes(keyword.toLowerCase()));
+  }
+
+  // Get calls that have recordings but no transcripts yet
+  async getCallsNeedingTranscription(limit: number = 25): Promise<CallRecording[]> {
+    return await db
+      .select()
+      .from(callRecordings)
+      .where(and(
+        sql`${callRecordings.ringcentralRecordingId} IS NOT NULL`,
+        sql`(${callRecordings.transcriptText} IS NULL OR LENGTH(${callRecordings.transcriptText}) < 50)`
+      ))
+      .orderBy(desc(callRecordings.callStartTime))
+      .limit(limit);
+  }
+
+  // Get transcription statistics
+  async getTranscriptionStats(): Promise<{
+    totalCalls: number;
+    withRecording: number;
+    withTranscript: number;
+    needingTranscription: number;
+  }> {
+    const [stats] = await db
+      .select({
+        totalCalls: sql<number>`COUNT(*)`,
+        withRecording: sql<number>`COUNT(CASE WHEN ${callRecordings.ringcentralRecordingId} IS NOT NULL THEN 1 END)`,
+        withTranscript: sql<number>`COUNT(CASE WHEN ${callRecordings.transcriptText} IS NOT NULL AND LENGTH(${callRecordings.transcriptText}) > 50 THEN 1 END)`,
+      })
+      .from(callRecordings);
+    
+    return {
+      totalCalls: Number(stats.totalCalls) || 0,
+      withRecording: Number(stats.withRecording) || 0,
+      withTranscript: Number(stats.withTranscript) || 0,
+      needingTranscription: (Number(stats.withRecording) || 0) - (Number(stats.withTranscript) || 0),
+    };
   }
 
   // Coaching criteria

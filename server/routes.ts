@@ -1021,6 +1021,127 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Transcribe a single call (admin only)
+  app.post("/api/calls/:id/transcribe", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const callId = req.params.id;
+      const call = await storage.getCallRecordingById(callId);
+      
+      if (!call) {
+        return res.status(404).json({ message: "Call not found" });
+      }
+      
+      if (!call.ringcentralRecordingId) {
+        return res.status(400).json({ message: "No recording available for this call" });
+      }
+      
+      // Check if already transcribed
+      if (call.transcriptText && call.transcriptText.length > 50) {
+        return res.json({ 
+          success: true, 
+          message: "Call already has transcript",
+          transcriptLength: call.transcriptText.length,
+        });
+      }
+      
+      const { fetchTranscript } = await import("./ringcentral");
+      const result = await fetchTranscript(call.ringcentralRecordingId);
+      
+      if (!result.transcriptText) {
+        return res.status(400).json({ 
+          message: "Could not fetch transcript. RingSense may not be available for this recording." 
+        });
+      }
+      
+      // Update the call record with transcript
+      await storage.updateCallRecording(callId, {
+        transcriptText: result.transcriptText,
+        transcript: result.transcriptJson,
+      });
+      
+      res.json({ 
+        success: true, 
+        message: "Transcript fetched successfully",
+        transcriptLength: result.transcriptText.length,
+        source: result.transcriptJson?.source || "unknown",
+      });
+    } catch (error: any) {
+      console.error("Transcribe call error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Batch transcribe calls without transcripts (admin only)
+  app.post("/api/ringcentral/transcribe-batch", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const limit = Math.min(parseInt(req.body.limit) || 10, 25); // Max 25 at a time
+      
+      // Get calls with recordings but no transcripts
+      const callsToTranscribe = await storage.getCallsNeedingTranscription(limit);
+      
+      if (callsToTranscribe.length === 0) {
+        return res.json({ 
+          success: true, 
+          message: "No calls need transcription",
+          transcribed: 0,
+          failed: 0,
+        });
+      }
+      
+      const { fetchTranscript } = await import("./ringcentral");
+      const results = { transcribed: 0, failed: 0, errors: [] as string[] };
+      
+      for (const call of callsToTranscribe) {
+        try {
+          if (!call.ringcentralRecordingId) {
+            results.failed++;
+            continue;
+          }
+          
+          const result = await fetchTranscript(call.ringcentralRecordingId);
+          
+          if (result.transcriptText) {
+            await storage.updateCallRecording(call.id, {
+              transcriptText: result.transcriptText,
+              transcript: result.transcriptJson,
+            });
+            results.transcribed++;
+            console.log(`[Transcribe] Successfully transcribed call ${call.id}`);
+          } else {
+            results.failed++;
+            console.log(`[Transcribe] No transcript available for call ${call.id}`);
+          }
+        } catch (err: any) {
+          results.failed++;
+          results.errors.push(`Call ${call.id}: ${err.message}`);
+          console.error(`[Transcribe] Error transcribing call ${call.id}:`, err.message);
+        }
+      }
+      
+      res.json({
+        success: true,
+        message: `Transcribed ${results.transcribed} of ${callsToTranscribe.length} calls`,
+        transcribed: results.transcribed,
+        failed: results.failed,
+        errors: results.errors.slice(0, 5),
+      });
+    } catch (error: any) {
+      console.error("Batch transcribe error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Get count of calls needing transcription (admin only)
+  app.get("/api/ringcentral/transcription-status", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const stats = await storage.getTranscriptionStats();
+      res.json(stats);
+    } catch (error: any) {
+      console.error("Transcription status error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
   // Fetch RingCentral extensions (admin only)
   app.get("/api/ringcentral/extensions", isAuthenticated, isAdmin, async (req: any, res) => {
     try {

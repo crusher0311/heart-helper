@@ -149,7 +149,7 @@ export default function Calls() {
       if (userFilter !== "all") {
         params.set("userId", userFilter);
       }
-      params.set("limit", "100");
+      params.set("limit", "500");
       
       const response = await fetch(`/api/calls?${params}`, {
         credentials: "include",
@@ -174,7 +174,7 @@ export default function Calls() {
       if (userFilter !== "all") {
         params.set("userId", userFilter);
       }
-      params.set("limit", "100");
+      params.set("limit", "500");
       
       const response = await fetch(`/api/calls/search?${params}`, {
         credentials: "include",

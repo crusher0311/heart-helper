@@ -161,6 +161,155 @@ export async function fetchRecordingContent(recordingId: string): Promise<Buffer
   }
 }
 
+// Fetch transcript from RingSense API (if available)
+export async function fetchRingSenseTranscript(recordingId: string): Promise<{
+  transcript: string | null;
+  summary: string | null;
+  speakers: Array<{ name: string; text: string }>;
+} | null> {
+  const platform = await getRingCentralPlatform();
+  
+  try {
+    // Try RingSense API for AI-generated transcript
+    const response = await platform.get(
+      `/ai/ringsense/v1/public/accounts/~/domains/pbx/records/${recordingId}/insights`
+    );
+    
+    const data = await response.json();
+    
+    // Extract transcript text from RingSense response
+    let transcriptText = "";
+    const speakers: Array<{ name: string; text: string }> = [];
+    
+    if (data.transcript && Array.isArray(data.transcript)) {
+      // RingSense returns transcript as array of utterances
+      transcriptText = data.transcript.map((u: any) => {
+        const speaker = u.speakerName || u.speaker || "Unknown";
+        const text = u.text || u.content || "";
+        speakers.push({ name: speaker, text });
+        return `${speaker}: ${text}`;
+      }).join("\n");
+    } else if (data.transcription) {
+      transcriptText = data.transcription;
+    }
+    
+    console.log(`[RingCentral] Fetched RingSense transcript for recording ${recordingId}`);
+    
+    return {
+      transcript: transcriptText || null,
+      summary: data.summary || data.abstractiveSummary || null,
+      speakers,
+    };
+  } catch (error: any) {
+    // RingSense might not be available - this is expected for some accounts
+    if (error.message?.includes("404") || error.message?.includes("403")) {
+      console.log(`[RingCentral] RingSense not available for recording ${recordingId}`);
+    } else {
+      console.log(`[RingCentral] RingSense error for ${recordingId}:`, error.message);
+    }
+    return null;
+  }
+}
+
+// Fetch transcript using RingCentral's AI Speech-to-Text API (fallback)
+export async function fetchSpeechToTextTranscript(recordingId: string): Promise<string | null> {
+  const platform = await getRingCentralPlatform();
+  
+  try {
+    // Get the recording content URI first
+    const recordingResponse = await platform.get(
+      `/restapi/v1.0/account/~/recording/${recordingId}`
+    );
+    const recordingData = await recordingResponse.json();
+    const contentUri = recordingData.contentUri;
+    
+    if (!contentUri) {
+      console.log(`[RingCentral] No content URI for recording ${recordingId}`);
+      return null;
+    }
+    
+    // Submit for async transcription
+    const transcribeResponse = await platform.post(
+      "/ai/audio/v1/async/speech-to-text",
+      {
+        contentUri: contentUri,
+        encoding: "Mpeg",
+        languageCode: "en-US",
+        enableSpeakerDiarization: true,
+        enablePunctuation: true,
+      }
+    );
+    
+    const jobData = await transcribeResponse.json();
+    const jobId = jobData.jobId;
+    
+    if (!jobId) {
+      console.log(`[RingCentral] No job ID returned for transcription`);
+      return null;
+    }
+    
+    // Poll for completion (max 60 seconds)
+    for (let i = 0; i < 12; i++) {
+      await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
+      
+      const statusResponse = await platform.get(`/ai/audio/v1/async/speech-to-text/${jobId}`);
+      const statusData = await statusResponse.json();
+      
+      if (statusData.status === "completed" || statusData.status === "Completed") {
+        // Build transcript from utterances
+        if (statusData.utterances && Array.isArray(statusData.utterances)) {
+          const transcriptText = statusData.utterances.map((u: any) => {
+            const speaker = u.speakerId ? `Speaker ${u.speakerId}` : "Speaker";
+            return `${speaker}: ${u.text}`;
+          }).join("\n");
+          
+          console.log(`[RingCentral] Speech-to-text completed for recording ${recordingId}`);
+          return transcriptText;
+        }
+        return statusData.transcript || null;
+      } else if (statusData.status === "failed" || statusData.status === "Failed") {
+        console.log(`[RingCentral] Speech-to-text failed for recording ${recordingId}`);
+        return null;
+      }
+    }
+    
+    console.log(`[RingCentral] Speech-to-text timeout for recording ${recordingId}`);
+    return null;
+  } catch (error: any) {
+    console.log(`[RingCentral] Speech-to-text error for ${recordingId}:`, error.message);
+    return null;
+  }
+}
+
+// Main function to get transcript - tries RingSense first, then Speech-to-Text
+export async function fetchTranscript(recordingId: string): Promise<{
+  transcriptText: string | null;
+  transcriptJson: any | null;
+  summary: string | null;
+}> {
+  // Try RingSense first (fastest if available)
+  const ringSenseResult = await fetchRingSenseTranscript(recordingId);
+  if (ringSenseResult?.transcript) {
+    return {
+      transcriptText: ringSenseResult.transcript,
+      transcriptJson: { speakers: ringSenseResult.speakers, source: "ringsense" },
+      summary: ringSenseResult.summary,
+    };
+  }
+  
+  // Fall back to Speech-to-Text API
+  const sttTranscript = await fetchSpeechToTextTranscript(recordingId);
+  if (sttTranscript) {
+    return {
+      transcriptText: sttTranscript,
+      transcriptJson: { source: "speech-to-text" },
+      summary: null,
+    };
+  }
+  
+  return { transcriptText: null, transcriptJson: null, summary: null };
+}
+
 export async function fetchCallRecordingUri(recordingId: string): Promise<string | null> {
   const platform = await getRingCentralPlatform();
   
