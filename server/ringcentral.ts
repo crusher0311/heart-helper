@@ -632,12 +632,13 @@ export interface SmartTranscriptionResult {
 }
 
 /**
- * Smart transcription: Sample first 30s, only transcribe full call if it's sales-related
+ * Transcribe call recording - transcribes ALL calls to build training dataset
+ * Users can mark non-sales calls manually, which helps train future AI detection
  */
 export async function smartTranscribeCall(
   callId: string,
   recordingId: string,
-  durationSeconds: number,
+  durationSeconds: number | null,
   customerName: string | null
 ): Promise<SmartTranscriptionResult> {
   const result: SmartTranscriptionResult = {
@@ -649,19 +650,19 @@ export async function smartTranscribeCall(
     skipped: false,
   };
   
-  // Pre-filter: Skip very short calls
-  if (durationSeconds < 30) {
+  // Pre-filter: Skip very short calls (under 10 seconds - these are typically hang-ups)
+  // Treat unknown duration as "try it anyway"
+  const actualDuration = durationSeconds ?? 60; // Assume 60s if unknown
+  if (actualDuration < 10) {
     result.skipped = true;
-    result.skipReason = "Call too short (under 30 seconds)";
+    result.skipReason = "Call too short (under 10 seconds)";
+    console.log(`[Whisper] Skipping call ${callId}: too short (${actualDuration}s)`);
     return result;
   }
   
-  // Pre-filter: Skip likely vendor calls based on name
-  if (isLikelyVendorCall(customerName)) {
-    result.skipped = true;
-    result.skipReason = `Likely vendor call: ${customerName}`;
-    return result;
-  }
+  // NOTE: We intentionally do NOT filter by vendor name anymore
+  // We want to transcribe everything to build training data
+  // Users will mark non-sales calls manually
   
   // Download the recording
   const audioPath = await downloadRecording(recordingId);
@@ -731,7 +732,7 @@ export async function batchSmartTranscribe(
       const result = await smartTranscribeCall(
         call.id,
         call.ringcentralRecordingId,
-        call.durationSeconds || 0,
+        call.durationSeconds, // Pass null if undefined, function will handle it
         call.customerName || null
       );
       
@@ -769,8 +770,9 @@ export async function batchSmartTranscribe(
       console.error(`[Whisper] Error processing call ${call.id}:`, error.message);
     }
     
-    // Small delay between calls to avoid rate limiting
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // Longer delay between calls to avoid RingCentral rate limiting
+    // RingCentral has strict rate limits on recording downloads
+    await new Promise(resolve => setTimeout(resolve, 3000));
   }
   
   console.log(`[Whisper] Batch complete: ${stats.processed} processed, ${stats.salesCalls} sales calls, ${stats.skipped} skipped, ${stats.errors} errors`);

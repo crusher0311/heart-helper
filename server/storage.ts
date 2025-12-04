@@ -32,7 +32,7 @@ import type {
 } from "@shared/schema";
 import { db } from "./db";
 import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache, users, userPreferences, scriptFeedback, laborRateGroups, ringcentralUsers, callRecordings, coachingCriteria, callScores } from "@shared/schema";
-import { eq, and, or, like, ilike, sql, desc, gte, lte } from "drizzle-orm";
+import { eq, and, or, like, ilike, sql, desc, gte, lte, isNull, isNotNull } from "drizzle-orm";
 import crypto from "crypto";
 import { getModelVariations } from "./vehicle-utils";
 
@@ -1227,14 +1227,23 @@ export class DatabaseStorage implements IStorage {
     return salesKeywords.some(keyword => lowerText.includes(keyword.toLowerCase()));
   }
 
-  // Get calls that have recordings but no transcripts yet
+  // Get calls that have recordings but no transcripts yet (excludes skipped/failed calls)
   async getCallsNeedingTranscription(limit: number = 25): Promise<CallRecording[]> {
+    // Use Drizzle query builder with raw SQL for the jsonb filtering part
     return await db
       .select()
       .from(callRecordings)
       .where(and(
-        sql`${callRecordings.ringcentralRecordingId} IS NOT NULL`,
-        sql`(${callRecordings.transcriptText} IS NULL OR LENGTH(${callRecordings.transcriptText}) < 50)`
+        isNotNull(callRecordings.ringcentralRecordingId),
+        or(
+          isNull(callRecordings.transcriptText),
+          sql`LENGTH(${callRecordings.transcriptText}) < 20`
+        ),
+        // Exclude calls that have already been marked as skipped or failed via transcript jsonb
+        or(
+          isNull(callRecordings.transcript),
+          sql`(${callRecordings.transcript}->>'skipped' IS NULL AND ${callRecordings.transcript}->>'failed' IS NULL)`
+        )
       ))
       .orderBy(desc(callRecordings.callStartTime))
       .limit(limit);
@@ -1273,8 +1282,9 @@ export class DatabaseStorage implements IStorage {
       transcriptText: data.transcript,
     };
     
+    // Note: The schema has 'transcript' (jsonb) not 'transcriptJson'
     if (data.transcriptJson !== undefined) {
-      updateData.transcriptJson = data.transcriptJson;
+      updateData.transcript = data.transcriptJson;
     }
     
     if (data.isSalesCall !== undefined) {
