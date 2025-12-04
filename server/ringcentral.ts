@@ -10,10 +10,10 @@ import * as os from "os";
 
 const execAsync = promisify(exec);
 
-// OpenAI client for Whisper transcription
-const openai = new OpenAI({
-  baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
-  apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY
+// OpenAI client for Whisper transcription - uses direct OpenAI API (not Replit integration)
+// because Replit's AI integration doesn't support the /audio/transcriptions endpoint
+const whisperClient = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY  // Direct OpenAI API key for Whisper
 });
 
 const RC_SERVER = process.env.RINGCENTRAL_SERVER || "https://platform.ringcentral.com";
@@ -590,7 +590,7 @@ async function transcribeWithWhisper(audioPath: string): Promise<string | null> 
   try {
     const audioFile = fs.createReadStream(audioPath);
     
-    const transcription = await openai.audio.transcriptions.create({
+    const transcription = await whisperClient.audio.transcriptions.create({
       file: audioFile,
       model: "whisper-1",
       language: "en",
