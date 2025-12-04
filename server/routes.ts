@@ -1068,6 +1068,7 @@ export async function registerRoutes(app: Express) {
 
   // Transcribe a single call (admin only)
   // Supports ?force=true to re-fetch even if transcript exists
+  // Tries RingCentral methods first, then falls back to Whisper
   app.post("/api/calls/:id/transcribe", isAuthenticated, isAdmin, async (req: any, res) => {
     try {
       const callId = req.params.id;
@@ -1091,12 +1092,33 @@ export async function registerRoutes(app: Express) {
         });
       }
       
-      const { fetchTranscript } = await import("./ringcentral");
-      const result = await fetchTranscript(call.ringcentralRecordingId);
+      // Try RingCentral methods first (RingSense, Speech-to-Text)
+      const { fetchTranscript, smartTranscribeCall } = await import("./ringcentral");
+      let result = await fetchTranscript(call.ringcentralRecordingId);
+      
+      // If RingCentral methods failed, try Whisper
+      if (!result.transcriptText) {
+        console.log(`[Transcribe] RingCentral methods failed for ${callId}, trying Whisper...`);
+        
+        const whisperResult = await smartTranscribeCall(
+          callId,
+          call.ringcentralRecordingId,
+          call.durationSeconds ?? null,
+          call.customerName ?? null
+        );
+        
+        if (whisperResult.success && whisperResult.transcriptText) {
+          result = {
+            transcriptText: whisperResult.transcriptText,
+            transcriptJson: { source: "whisper", isSalesCall: whisperResult.isSalesCall },
+            summary: null,
+          };
+        }
+      }
       
       if (!result.transcriptText) {
         return res.status(400).json({ 
-          message: "Could not fetch transcript. RingSense may not be available for this recording." 
+          message: "Could not fetch transcript. Both RingCentral and Whisper transcription failed. Check OpenAI API quota."
         });
       }
       
