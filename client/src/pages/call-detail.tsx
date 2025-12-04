@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Navigation } from "@/components/navigation";
+import { InteractiveTranscript } from "@/components/interactive-transcript";
 import { Link, useParams, useLocation } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -89,6 +90,17 @@ export default function CallDetail() {
       return response.json();
     },
   });
+
+  const { data: userPrefs } = useQuery<{ isManager?: boolean }>({
+    queryKey: ["/api/user/preferences"],
+    queryFn: async () => {
+      const response = await fetch("/api/user/preferences", { credentials: "include" });
+      if (!response.ok) return {};
+      return response.json();
+    },
+  });
+
+  const isAdminOrManager = adminCheck?.isAdmin || userPrefs?.isManager || false;
 
   const scoreMutation = useMutation({
     mutationFn: async () => {
@@ -366,7 +378,7 @@ export default function CallDetail() {
           </Card>
         )}
 
-        {/* Transcript */}
+        {/* Transcript with Interactive Annotations */}
         {call.transcriptText && (
           <Card>
             <CardHeader>
@@ -392,17 +404,11 @@ export default function CallDetail() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="bg-muted/30 rounded-lg p-4 space-y-3 text-sm leading-relaxed">
-                {call.transcriptText.split(/(?<=[.!?])\s+(?=[A-Z])|(?<=\.\s*)\n|(?:(?<=\?)\s+)|(?:(?<=!)\s+)/).map((paragraph, index) => {
-                  const trimmed = paragraph.trim();
-                  if (!trimmed) return null;
-                  return (
-                    <p key={index} className="text-foreground">
-                      {trimmed}
-                    </p>
-                  );
-                })}
-              </div>
+              <InteractiveTranscript 
+                callId={call.id}
+                transcriptText={call.transcriptText}
+                isAdminOrManager={isAdminOrManager}
+              />
             </CardContent>
           </Card>
         )}
