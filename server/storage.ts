@@ -122,7 +122,7 @@ export interface IStorage {
   updateCallRecording(id: string, data: Partial<InsertCallRecording>): Promise<CallRecording>;
   getCallRecordingsForUser(userId: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string, offset?: number): Promise<CallRecording[]>;
   getCallRecordingsForShop(shopId: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string, offset?: number): Promise<CallRecording[]>;
-  getAllCallRecordings(dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string, offset?: number): Promise<{ calls: CallRecording[]; total: number }>;
+  getAllCallRecordings(dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string, offset?: number, transcribedFilter?: string): Promise<{ calls: CallRecording[]; total: number }>;
   searchCallRecordings(query: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string, shopId?: string, userId?: string): Promise<CallRecording[]>;
   getUnscoredCallRecordings(limit?: number, salesOnly?: boolean): Promise<CallRecording[]>;
   isSalesCall(transcriptText: string | null): boolean;
@@ -1113,7 +1113,8 @@ export class DatabaseStorage implements IStorage {
     dateTo?: Date, 
     limit: number = 100,
     direction?: string,
-    offset: number = 0
+    offset: number = 0,
+    transcribedFilter?: string
   ): Promise<{ calls: CallRecording[]; total: number }> {
     const conditions = [];
     
@@ -1126,6 +1127,29 @@ export class DatabaseStorage implements IStorage {
     if (direction) {
       conditions.push(eq(callRecordings.direction, direction));
     }
+    
+    // Handle transcribed/scored/archived filter
+    if (transcribedFilter === 'transcribed') {
+      // Ready for review: has transcript, NOT scored, NOT archived
+      conditions.push(isNotNull(callRecordings.transcriptText));
+      conditions.push(or(eq(callRecordings.isNotSalesCall, false), isNull(callRecordings.isNotSalesCall)));
+      // Exclude scored calls using subquery
+      conditions.push(
+        sql`${callRecordings.id} NOT IN (SELECT call_id FROM call_scores)`
+      );
+    } else if (transcribedFilter === 'scored') {
+      // Scored calls: exists in call_scores table
+      conditions.push(
+        sql`${callRecordings.id} IN (SELECT call_id FROM call_scores)`
+      );
+    } else if (transcribedFilter === 'archived') {
+      // Archived (not sales) calls
+      conditions.push(eq(callRecordings.isNotSalesCall, true));
+    } else if (transcribedFilter === 'not-transcribed') {
+      // Needs transcription
+      conditions.push(isNull(callRecordings.transcriptText));
+    }
+    // 'all' - no additional filter
     
     // Get total count first
     const countQuery = conditions.length > 0

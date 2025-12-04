@@ -143,7 +143,7 @@ export default function Calls() {
 
   // Regular calls query (when not searching)
   const { data: callsData, isLoading, refetch, isFetching } = useQuery<{ calls: CallRecording[]; total: number }>({
-    queryKey: ["/api/calls", dateFrom, dateTo, directionFilter, userFilter, currentPage],
+    queryKey: ["/api/calls", dateFrom, dateTo, directionFilter, userFilter, transcribedFilter, currentPage],
     queryFn: async () => {
       const params = new URLSearchParams();
       if (dateFrom) params.set("dateFrom", new Date(dateFrom).toISOString());
@@ -153,6 +153,9 @@ export default function Calls() {
       }
       if (userFilter !== "all") {
         params.set("userId", userFilter);
+      }
+      if (transcribedFilter !== "all") {
+        params.set("transcribedFilter", transcribedFilter);
       }
       params.set("limit", String(pageSize));
       params.set("offset", String((currentPage - 1) * pageSize));
@@ -364,6 +367,7 @@ export default function Calls() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="transcribed">Ready for Review</SelectItem>
+                    <SelectItem value="scored">Scored</SelectItem>
                     <SelectItem value="not-transcribed">Needs Transcription</SelectItem>
                     <SelectItem value="archived">Archived (Not Sales)</SelectItem>
                     <SelectItem value="all">All Calls</SelectItem>

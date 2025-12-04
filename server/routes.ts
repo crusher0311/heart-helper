@@ -1322,6 +1322,7 @@ export async function registerRoutes(app: Express) {
       const dateTo = req.query.dateTo ? new Date(req.query.dateTo as string) : undefined;
       const direction = req.query.direction as string | undefined;
       const filterUserId = req.query.userId as string | undefined;
+      const transcribedFilter = req.query.transcribedFilter as string | undefined;
       
       // Validate direction if provided
       const validDirections = ['Inbound', 'Outbound'];
@@ -1339,7 +1340,7 @@ export async function registerRoutes(app: Express) {
           const calls = await storage.getCallRecordingsForUser(filterUserId, dateFrom, dateTo, limit, normalizedDirection, offset);
           result = { calls, total: calls.length + offset }; // Approximate for user filter
         } else {
-          result = await storage.getAllCallRecordings(dateFrom, dateTo, limit, normalizedDirection, offset);
+          result = await storage.getAllCallRecordings(dateFrom, dateTo, limit, normalizedDirection, offset, transcribedFilter);
         }
       } else if (managedShopId) {
         // Managers see calls for their shop
