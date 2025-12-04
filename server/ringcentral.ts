@@ -1,6 +1,8 @@
 import { SDK } from "@ringcentral/sdk";
 import { storage } from "./storage";
-import type { InsertCallRecording, InsertRingcentralUser } from "@shared/schema";
+import { db } from "./db";
+import { callRecordings, type InsertCallRecording, type InsertRingcentralUser } from "@shared/schema";
+import { isNull, isNotNull } from "drizzle-orm";
 import OpenAI from "openai";
 import { exec } from "child_process";
 import { promisify } from "util";
@@ -410,6 +412,75 @@ export async function syncCallRecords(
   }
 
   console.log(`[RingCentral] Sync complete: ${stats.synced} synced, ${stats.skipped} skipped, ${stats.errors} errors`);
+  return stats;
+}
+
+export async function backfillSessionIds(
+  daysBack: number = 90
+): Promise<{ updated: number; notFound: number; alreadySet: number; errors: number }> {
+  const stats = { updated: 0, notFound: 0, alreadySet: 0, errors: 0 };
+  
+  try {
+    // Fetch call logs from RingCentral for the specified period
+    const dateFrom = new Date();
+    dateFrom.setDate(dateFrom.getDate() - daysBack);
+    
+    console.log(`[RingCentral] Backfilling sessionIds for calls from last ${daysBack} days...`);
+    const callLogs = await fetchCallLogs(dateFrom);
+    
+    // Build a map of ringcentral_call_id -> sessionId
+    const sessionMap = new Map<string, string>();
+    for (const call of callLogs) {
+      if (call.sessionId) {
+        sessionMap.set(call.id, call.sessionId);
+      }
+    }
+    
+    console.log(`[RingCentral] Found ${sessionMap.size} calls with sessionIds from RingCentral`);
+    
+    // Get all calls without sessionId from our database
+    const callsWithoutSession = await db
+      .select({ id: callRecordings.id, ringcentralCallId: callRecordings.ringcentralCallId, ringcentralSessionId: callRecordings.ringcentralSessionId })
+      .from(callRecordings)
+      .where(isNull(callRecordings.ringcentralSessionId));
+    
+    console.log(`[RingCentral] Found ${callsWithoutSession.length} calls in DB without sessionId`);
+    
+    for (const call of callsWithoutSession) {
+      try {
+        if (!call.ringcentralCallId) {
+          stats.notFound++;
+          continue;
+        }
+        const sessionId = sessionMap.get(call.ringcentralCallId);
+        
+        if (sessionId) {
+          await storage.updateCallRecording(call.id, {
+            ringcentralSessionId: sessionId
+          });
+          stats.updated++;
+        } else {
+          stats.notFound++;
+        }
+      } catch (error: any) {
+        console.error(`[RingCentral] Error updating call ${call.id}:`, error.message);
+        stats.errors++;
+      }
+    }
+    
+    // Also count calls that already have sessionId
+    const callsWithSession = await db
+      .select({ id: callRecordings.id })
+      .from(callRecordings)
+      .where(isNotNull(callRecordings.ringcentralSessionId));
+    stats.alreadySet = callsWithSession.length;
+    
+  } catch (error: any) {
+    console.error("[RingCentral] Error in backfillSessionIds:", error.message);
+    throw error;
+  }
+
+  console.log(`[RingCentral] Backfill complete: ${stats.updated} updated, ${stats.notFound} not found in RC, ${stats.alreadySet} already had sessionId, ${stats.errors} errors`);
   return stats;
 }
 

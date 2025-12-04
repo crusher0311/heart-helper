@@ -1021,6 +1021,23 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  app.post("/api/ringcentral/backfill-session-ids", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { backfillSessionIds } = await import("./ringcentral");
+      const daysBack = parseInt(req.body.daysBack) || 90;
+      
+      const stats = await backfillSessionIds(daysBack);
+      res.json({ 
+        success: true, 
+        message: `Backfill complete: ${stats.updated} updated, ${stats.notFound} not found in RingCentral, ${stats.alreadySet} already had sessionId`,
+        stats 
+      });
+    } catch (error: any) {
+      console.error("Backfill sessionIds error:", error);
+      res.status(500).json({ success: false, message: error.message });
+    }
+  });
+
   // Update call type (admin/manager only)
   app.patch("/api/calls/:id/type", isAuthenticated, isApproved, async (req: any, res) => {
     try {

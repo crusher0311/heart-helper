@@ -134,6 +134,31 @@ export default function Settings() {
     },
   });
 
+  const backfillSessionIdsMutation = useMutation({
+    mutationFn: async (daysBack: number = 90) => {
+      const response = await apiRequest("POST", "/api/ringcentral/backfill-session-ids", { daysBack });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Failed to backfill session IDs");
+      }
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Backfill complete",
+        description: data.message,
+      });
+      queryClient.invalidateQueries({ queryKey: ["/api/calls"] });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Backfill failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
   useEffect(() => {
     if (settings?.phoneAnswerScript) {
       setPhoneScript(settings.phoneAnswerScript);
@@ -850,6 +875,28 @@ Guidelines:
                         Transcribe 25 Calls
                       </Button>
                     </div>
+                  </div>
+
+                  {/* Multi-Leg Call Linking */}
+                  <div className="border rounded-lg p-4 space-y-4">
+                    <h4 className="font-medium">Link Multi-Leg Calls</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Backfill session IDs for existing calls to link related call segments together 
+                      (holds, transfers). This enables viewing all parts of a conversation as a connected session.
+                    </p>
+                    <Button
+                      onClick={() => backfillSessionIdsMutation.mutate(90)}
+                      disabled={backfillSessionIdsMutation.isPending}
+                      variant="outline"
+                      data-testid="button-backfill-session-ids"
+                    >
+                      {backfillSessionIdsMutation.isPending ? (
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      ) : (
+                        <RefreshCw className="h-4 w-4 mr-2" />
+                      )}
+                      Link Calls from Last 90 Days
+                    </Button>
                   </div>
 
                   {/* Extension Mapping Link */}
