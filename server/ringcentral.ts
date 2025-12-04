@@ -776,10 +776,15 @@ async function transcribeWithAssemblyAI(audioPath: string): Promise<{
     }
     
     // Build utterances array for speaker diarization
-    const utterances = transcript.utterances?.map(u => ({
+    // AssemblyAI returns speaker as a string like "A", "B", etc.
+    const rawUtterances = transcript.utterances || [];
+    const uniqueSpeakers = Array.from(new Set(rawUtterances.map(u => u.speaker)));
+    console.log(`[AssemblyAI] Found ${rawUtterances.length} utterances with ${uniqueSpeakers.length} unique speakers: ${uniqueSpeakers.join(', ')}`);
+    
+    const utterances = rawUtterances.map(u => ({
       speaker: `Speaker ${u.speaker}`,
       text: u.text
-    })) || [];
+    }));
     
     console.log(`[AssemblyAI] Transcribed successfully: ${transcript.text?.substring(0, 100)}...`);
     return { 
