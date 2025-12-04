@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Navigation } from "@/components/navigation";
-import { Link, useParams } from "wouter";
+import { Link, useParams, useLocation } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
@@ -68,6 +68,7 @@ function formatPhoneNumber(phone: string | null): string {
 export default function CallDetail() {
   const { id } = useParams<{ id: string }>();
   const { toast } = useToast();
+  const [, setLocation] = useLocation();
 
   const { data: call, isLoading, error, refetch } = useQuery<CallRecording>({
     queryKey: ["/api/calls", id],
@@ -123,8 +124,15 @@ export default function CallDetail() {
           ? "This call won't be used for AI training or scoring." 
           : "This call is now available for AI training.",
       });
-      refetch();
-      queryClient.invalidateQueries({ queryKey: ["/api/calls", id] });
+      // Invalidate the calls list so it refreshes without this call
+      queryClient.invalidateQueries({ queryKey: ["/api/calls"] });
+      // If marking as NOT sales, redirect back to calls list
+      if (data.isNotSalesCall) {
+        setLocation("/calls");
+      } else {
+        refetch();
+        queryClient.invalidateQueries({ queryKey: ["/api/calls", id] });
+      }
     },
     onError: (error: any) => {
       toast({
