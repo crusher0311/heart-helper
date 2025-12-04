@@ -129,7 +129,23 @@ export function InteractiveTranscript({ callId, transcriptText, isAdminOrManager
 
     const range = selection.getRangeAt(0);
     const container = containerRef.current;
-    if (!container || !container.contains(range.commonAncestorContainer)) {
+    if (!container) {
+      return;
+    }
+    
+    // Walk up from the selection's start container to check if it's inside our container
+    // This fixes issues with Popover-wrapped annotation spans
+    let node: Node | null = range.startContainer;
+    let isInsideContainer = false;
+    while (node) {
+      if (node === container) {
+        isInsideContainer = true;
+        break;
+      }
+      node = node.parentNode;
+    }
+    
+    if (!isInsideContainer) {
       return;
     }
 
