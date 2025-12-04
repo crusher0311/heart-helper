@@ -133,6 +133,11 @@ export interface IStorage {
     withTranscript: number;
     needingTranscription: number;
   }>;
+  updateCallTranscript(callId: string, data: {
+    transcript: string | null;
+    transcriptJson?: any;
+    isSalesCall?: boolean;
+  }): Promise<CallRecording>;
   
   // Coaching criteria
   getActiveCoachingCriteria(shopId?: string): Promise<CoachingCriteria[]>;
@@ -1256,6 +1261,34 @@ export class DatabaseStorage implements IStorage {
       withTranscript: Number(stats.withTranscript) || 0,
       needingTranscription: (Number(stats.withRecording) || 0) - (Number(stats.withTranscript) || 0),
     };
+  }
+
+  // Update call transcript (for smart transcription)
+  async updateCallTranscript(callId: string, data: {
+    transcript: string | null;
+    transcriptJson?: any;
+    isSalesCall?: boolean;
+  }): Promise<CallRecording> {
+    const updateData: any = {
+      transcriptText: data.transcript,
+    };
+    
+    if (data.transcriptJson !== undefined) {
+      updateData.transcriptJson = data.transcriptJson;
+    }
+    
+    if (data.isSalesCall !== undefined) {
+      updateData.isSalesCall = data.isSalesCall;
+    }
+    
+    const [updated] = await db
+      .update(callRecordings)
+      .set(updateData)
+      .where(eq(callRecordings.id, callId))
+      .returning();
+    
+    if (!updated) throw new Error("Call recording not found");
+    return updated;
   }
 
   // Coaching criteria

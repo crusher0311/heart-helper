@@ -1142,6 +1142,91 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Smart transcription using OpenAI Whisper (admin only)
+  // This uses sample-first approach to save costs
+  app.post("/api/ringcentral/smart-transcribe", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const limit = Math.min(parseInt(req.body.limit) || 10, 25); // Max 25 at a time
+      
+      const { batchSmartTranscribe } = await import("./ringcentral");
+      const result = await batchSmartTranscribe(limit);
+      
+      res.json({
+        success: true,
+        message: `Processed ${result.processed} calls, found ${result.salesCalls} sales calls, skipped ${result.skipped}`,
+        processed: result.processed,
+        salesCalls: result.salesCalls,
+        skipped: result.skipped,
+        errors: result.errors,
+        costSaved: `$${(result.totalCostSaved / 100).toFixed(2)}`,
+      });
+    } catch (error: any) {
+      console.error("Smart transcribe error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Smart transcribe single call (admin only)
+  app.post("/api/calls/:id/smart-transcribe", isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const callId = req.params.id;
+      const call = await storage.getCallRecordingById(callId);
+      
+      if (!call) {
+        return res.status(404).json({ message: "Call not found" });
+      }
+      
+      if (!call.ringcentralRecordingId) {
+        return res.status(400).json({ message: "Call has no recording" });
+      }
+      
+      const { smartTranscribeCall } = await import("./ringcentral");
+      const result = await smartTranscribeCall(
+        call.id,
+        call.ringcentralRecordingId,
+        call.durationSeconds || 0,
+        call.customerName || null
+      );
+      
+      if (result.skipped) {
+        return res.json({
+          success: true,
+          skipped: true,
+          reason: result.skipReason,
+        });
+      }
+      
+      if (result.success) {
+        // Save the transcript
+        await storage.updateCallTranscript(call.id, {
+          transcript: result.transcriptText,
+          transcriptJson: { 
+            source: "whisper", 
+            sampleOnly: result.sampleOnly,
+            isSalesCall: result.isSalesCall,
+          },
+          isSalesCall: result.isSalesCall,
+        });
+        
+        return res.json({
+          success: true,
+          isSalesCall: result.isSalesCall,
+          sampleOnly: result.sampleOnly,
+          transcriptLength: result.transcriptText?.length || 0,
+          costSaved: result.costSaved ? `$${(result.costSaved / 100).toFixed(3)}` : undefined,
+        });
+      }
+      
+      res.status(400).json({ 
+        success: false, 
+        message: result.skipReason || "Failed to transcribe" 
+      });
+    } catch (error: any) {
+      console.error("Smart transcribe call error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
   // Fetch RingCentral extensions (admin only)
   app.get("/api/ringcentral/extensions", isAuthenticated, isAdmin, async (req: any, res) => {
     try {

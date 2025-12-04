@@ -1,6 +1,20 @@
 import { SDK } from "@ringcentral/sdk";
 import { storage } from "./storage";
 import type { InsertCallRecording, InsertRingcentralUser } from "@shared/schema";
+import OpenAI from "openai";
+import { exec } from "child_process";
+import { promisify } from "util";
+import * as fs from "fs";
+import * as path from "path";
+import * as os from "os";
+
+const execAsync = promisify(exec);
+
+// OpenAI client for Whisper transcription
+const openai = new OpenAI({
+  baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
+  apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY
+});
 
 const RC_SERVER = process.env.RINGCENTRAL_SERVER || "https://platform.ringcentral.com";
 const RC_CLIENT_ID = process.env.RINGCENTRAL_CLIENT_ID;
@@ -474,4 +488,327 @@ export async function getAllCalls(
   limit?: number
 ) {
   return storage.getAllCallRecordings(dateFrom, dateTo, limit);
+}
+
+// =====================================================
+// SMART TRANSCRIPTION WITH OPENAI WHISPER
+// =====================================================
+
+// Keywords that indicate a sales/customer call worth coaching
+const SALES_KEYWORDS = [
+  'inspection', 'repair', 'estimate', 'warranty', 'brake', 'oil change',
+  'appointment', 'vehicle', 'car', 'truck', 'service', 'maintenance',
+  'diagnostic', 'check engine', 'tire', 'alignment', 'transmission',
+  'engine', 'customer', 'price', 'cost', 'quote', 'authorize', 'approval',
+  'pick up', 'drop off', 'ready', 'parts', 'labor', 'technician', 'mechanic',
+  'schedule', 'bring it in', 'look at it', 'fix', 'problem', 'noise', 'issue'
+];
+
+// Keywords that indicate non-coaching calls (vendors, spam, etc)
+const SKIP_KEYWORDS = [
+  'parts order', 'delivery', 'fedex', 'ups', 'vendor', 'supplier',
+  'sales call', 'solicitation', 'insurance', 'warranty company',
+  'wrong number', 'robo', 'press 1', 'survey', 'political'
+];
+
+// Customer name patterns that suggest vendor/spam calls
+const VENDOR_NAME_PATTERNS = [
+  /zone\s*(il|in|wi|oh|mi)/i,  // Chicago Zone IL, etc.
+  /parts\s*(plus|authority|source)/i,
+  /napa/i, /autozone/i, /o'reilly/i, /advance\s*auto/i,
+  /worldpac/i, /carquest/i,
+  /insurance/i, /warranty/i, /solicitor/i
+];
+
+export function isLikelyVendorCall(customerName: string | null): boolean {
+  if (!customerName) return false;
+  return VENDOR_NAME_PATTERNS.some(pattern => pattern.test(customerName));
+}
+
+export function isSalesCall(transcript: string): boolean {
+  const lowerTranscript = transcript.toLowerCase();
+  
+  // Check for skip keywords first
+  const hasSkipKeyword = SKIP_KEYWORDS.some(kw => lowerTranscript.includes(kw));
+  if (hasSkipKeyword) return false;
+  
+  // Count sales keywords - need at least 2 to be considered a sales call
+  const salesKeywordCount = SALES_KEYWORDS.filter(kw => 
+    lowerTranscript.includes(kw)
+  ).length;
+  
+  return salesKeywordCount >= 2;
+}
+
+/**
+ * Download recording from RingCentral and save to temp file
+ */
+async function downloadRecording(recordingId: string): Promise<string | null> {
+  try {
+    const buffer = await fetchRecordingContent(recordingId);
+    const tempDir = os.tmpdir();
+    const tempFile = path.join(tempDir, `rc_recording_${recordingId}.mp3`);
+    await fs.promises.writeFile(tempFile, buffer);
+    console.log(`[Whisper] Downloaded recording to ${tempFile} (${buffer.length} bytes)`);
+    return tempFile;
+  } catch (error: any) {
+    console.error(`[Whisper] Failed to download recording ${recordingId}:`, error.message);
+    return null;
+  }
+}
+
+/**
+ * Trim audio file to first N seconds using ffmpeg
+ */
+async function trimAudio(inputPath: string, durationSeconds: number): Promise<string> {
+  const outputPath = inputPath.replace('.mp3', `_trimmed_${durationSeconds}s.mp3`);
+  
+  try {
+    await execAsync(
+      `ffmpeg -y -i "${inputPath}" -t ${durationSeconds} -acodec copy "${outputPath}" 2>/dev/null`
+    );
+    console.log(`[Whisper] Trimmed audio to ${durationSeconds}s: ${outputPath}`);
+    return outputPath;
+  } catch (error: any) {
+    // If copy fails, try re-encoding
+    try {
+      await execAsync(
+        `ffmpeg -y -i "${inputPath}" -t ${durationSeconds} -acodec libmp3lame -q:a 4 "${outputPath}" 2>/dev/null`
+      );
+      return outputPath;
+    } catch (e: any) {
+      console.error(`[Whisper] Failed to trim audio:`, e.message);
+      throw e;
+    }
+  }
+}
+
+/**
+ * Transcribe audio file using OpenAI Whisper API
+ */
+async function transcribeWithWhisper(audioPath: string): Promise<string | null> {
+  try {
+    const audioFile = fs.createReadStream(audioPath);
+    
+    const transcription = await openai.audio.transcriptions.create({
+      file: audioFile,
+      model: "whisper-1",
+      language: "en",
+      response_format: "text",
+    });
+    
+    console.log(`[Whisper] Transcribed ${audioPath}: ${transcription.substring(0, 100)}...`);
+    return transcription;
+  } catch (error: any) {
+    console.error(`[Whisper] Transcription failed:`, error.message);
+    return null;
+  }
+}
+
+/**
+ * Clean up temp files
+ */
+async function cleanupTempFiles(...files: string[]) {
+  for (const file of files) {
+    try {
+      if (file && fs.existsSync(file)) {
+        await fs.promises.unlink(file);
+      }
+    } catch (e) {
+      // Ignore cleanup errors
+    }
+  }
+}
+
+export interface SmartTranscriptionResult {
+  success: boolean;
+  callId: string;
+  isSalesCall: boolean;
+  transcriptText: string | null;
+  sampleOnly: boolean;  // true if we only transcribed the sample
+  skipped: boolean;     // true if skipped due to vendor/duration
+  skipReason?: string;
+  costSaved?: number;   // estimated cents saved by not transcribing full call
+}
+
+/**
+ * Smart transcription: Sample first 30s, only transcribe full call if it's sales-related
+ */
+export async function smartTranscribeCall(
+  callId: string,
+  recordingId: string,
+  durationSeconds: number,
+  customerName: string | null
+): Promise<SmartTranscriptionResult> {
+  const result: SmartTranscriptionResult = {
+    success: false,
+    callId,
+    isSalesCall: false,
+    transcriptText: null,
+    sampleOnly: false,
+    skipped: false,
+  };
+  
+  // Pre-filter: Skip very short calls
+  if (durationSeconds < 30) {
+    result.skipped = true;
+    result.skipReason = "Call too short (under 30 seconds)";
+    return result;
+  }
+  
+  // Pre-filter: Skip likely vendor calls based on name
+  if (isLikelyVendorCall(customerName)) {
+    result.skipped = true;
+    result.skipReason = `Likely vendor call: ${customerName}`;
+    return result;
+  }
+  
+  // Download the recording
+  const audioPath = await downloadRecording(recordingId);
+  if (!audioPath) {
+    result.skipReason = "Failed to download recording";
+    return result;
+  }
+  
+  let trimmedPath: string | null = null;
+  
+  try {
+    // For short calls (30-90 seconds), just transcribe the whole thing
+    if (durationSeconds <= 90) {
+      const fullTranscript = await transcribeWithWhisper(audioPath);
+      if (fullTranscript) {
+        result.success = true;
+        result.transcriptText = fullTranscript;
+        result.isSalesCall = isSalesCall(fullTranscript);
+        result.sampleOnly = false;
+      }
+      return result;
+    }
+    
+    // For longer calls, sample first 30 seconds
+    trimmedPath = await trimAudio(audioPath, 30);
+    const sampleTranscript = await transcribeWithWhisper(trimmedPath);
+    
+    if (!sampleTranscript) {
+      result.skipReason = "Failed to transcribe sample";
+      return result;
+    }
+    
+    // Check if this is a sales call based on the sample
+    if (!isSalesCall(sampleTranscript)) {
+      result.success = true;
+      result.transcriptText = sampleTranscript + "\n\n[Sample only - not a sales call]";
+      result.isSalesCall = false;
+      result.sampleOnly = true;
+      result.costSaved = Math.round((durationSeconds - 30) * 0.6); // ~$0.006/min = $0.0001/sec
+      console.log(`[Whisper] Not a sales call, saved ~$${(result.costSaved / 100).toFixed(3)} by stopping early`);
+      return result;
+    }
+    
+    // It's a sales call - transcribe the full recording
+    console.log(`[Whisper] Detected sales call, transcribing full ${durationSeconds}s recording...`);
+    const fullTranscript = await transcribeWithWhisper(audioPath);
+    
+    if (fullTranscript) {
+      result.success = true;
+      result.transcriptText = fullTranscript;
+      result.isSalesCall = true;
+      result.sampleOnly = false;
+    } else {
+      // Fall back to sample if full transcription fails
+      result.success = true;
+      result.transcriptText = sampleTranscript + "\n\n[Full transcription failed - sample only]";
+      result.isSalesCall = true;
+      result.sampleOnly = true;
+    }
+    
+    return result;
+  } finally {
+    // Clean up temp files
+    await cleanupTempFiles(audioPath, trimmedPath || "");
+  }
+}
+
+/**
+ * Batch smart transcription for multiple calls
+ */
+export async function batchSmartTranscribe(
+  limit: number = 25
+): Promise<{
+  processed: number;
+  salesCalls: number;
+  skipped: number;
+  errors: number;
+  totalCostSaved: number;
+  results: SmartTranscriptionResult[];
+}> {
+  const stats = {
+    processed: 0,
+    salesCalls: 0,
+    skipped: 0,
+    errors: 0,
+    totalCostSaved: 0,
+    results: [] as SmartTranscriptionResult[],
+  };
+  
+  // Get calls that need transcription
+  const calls = await storage.getCallsNeedingTranscription(limit);
+  console.log(`[Whisper] Processing ${calls.length} calls for smart transcription`);
+  
+  for (const call of calls) {
+    if (!call.ringcentralRecordingId) {
+      stats.skipped++;
+      continue;
+    }
+    
+    try {
+      const result = await smartTranscribeCall(
+        call.id,
+        call.ringcentralRecordingId,
+        call.durationSeconds || 0,
+        call.customerName || null
+      );
+      
+      stats.results.push(result);
+      
+      if (result.skipped) {
+        stats.skipped++;
+        // Mark as processed but not a sales call
+        await storage.updateCallTranscript(call.id, {
+          transcript: null,
+          transcriptJson: { skipped: true, reason: result.skipReason },
+          isSalesCall: false,
+        });
+      } else if (result.success) {
+        stats.processed++;
+        if (result.isSalesCall) stats.salesCalls++;
+        if (result.costSaved) stats.totalCostSaved += result.costSaved;
+        
+        // Save the transcript
+        await storage.updateCallTranscript(call.id, {
+          transcript: result.transcriptText,
+          transcriptJson: { 
+            source: "whisper", 
+            sampleOnly: result.sampleOnly,
+            isSalesCall: result.isSalesCall,
+          },
+          isSalesCall: result.isSalesCall,
+        });
+      } else {
+        stats.errors++;
+        console.error(`[Whisper] Failed to transcribe call ${call.id}: ${result.skipReason}`);
+      }
+    } catch (error: any) {
+      stats.errors++;
+      console.error(`[Whisper] Error processing call ${call.id}:`, error.message);
+    }
+    
+    // Small delay between calls to avoid rate limiting
+    await new Promise(resolve => setTimeout(resolve, 500));
+  }
+  
+  console.log(`[Whisper] Batch complete: ${stats.processed} processed, ${stats.salesCalls} sales calls, ${stats.skipped} skipped, ${stats.errors} errors`);
+  console.log(`[Whisper] Estimated savings: $${(stats.totalCostSaved / 100).toFixed(2)}`);
+  
+  return stats;
 }
