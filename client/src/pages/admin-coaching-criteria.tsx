@@ -53,7 +53,7 @@ export default function AdminCoachingCriteriaPage() {
     name: "",
     description: "",
     category: "sales",
-    callTypes: ["all"] as string[],
+    callTypes: [] as string[],
     weight: 10,
     keywords: "",
     aiPrompt: "",
@@ -94,7 +94,7 @@ export default function AdminCoachingCriteriaPage() {
       queryClient.invalidateQueries({ queryKey: ["/api/coaching/criteria"] });
       toast({ title: "Criteria created", description: "New criterion added successfully" });
       setIsAddingNew(false);
-      setNewCriteria({ name: "", description: "", category: "sales", callTypes: ["all"], weight: 10, keywords: "", aiPrompt: "" });
+      setNewCriteria({ name: "", description: "", category: "sales", callTypes: [], weight: 10, keywords: "", aiPrompt: "" });
     },
     onError: (error: Error) => {
       toast({ title: "Error", description: error.message, variant: "destructive" });
@@ -215,7 +215,7 @@ export default function AdminCoachingCriteriaPage() {
                               {CATEGORIES.find(c => c.value === criterion.category)?.label || criterion.category}
                             </Badge>
                           )}
-                          {(criterion.callTypes?.includes('all') || !criterion.callTypes?.length) ? (
+                          {!criterion.callTypes?.length ? (
                             <Badge variant="outline" className="text-xs bg-gray-500/10 text-gray-700 dark:text-gray-300 border-gray-200">
                               All Types
                             </Badge>
@@ -368,43 +368,25 @@ export default function AdminCoachingCriteriaPage() {
               </div>
               <div className="space-y-2">
                 <Label>Applies to Call Types</Label>
+                <p className="text-xs text-muted-foreground">Leave all unchecked to apply to all call types</p>
                 <div className="flex flex-wrap gap-4 pt-1">
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="edit-all-types"
-                      checked={editingCriteria.callTypes?.includes('all') || !editingCriteria.callTypes?.length}
-                      onCheckedChange={(checked) => {
-                        if (checked) {
-                          setEditingCriteria({ ...editingCriteria, callTypes: ['all'] });
-                        } else {
-                          setEditingCriteria({ ...editingCriteria, callTypes: ['sales'] });
-                        }
-                      }}
-                      data-testid="checkbox-edit-all-types"
-                    />
-                    <Label htmlFor="edit-all-types" className="text-sm font-normal cursor-pointer">All Types</Label>
-                  </div>
-                  {!(editingCriteria.callTypes?.includes('all') || !editingCriteria.callTypes?.length) && (
-                    <>
-                      {CALL_TYPES.map((type) => (
-                        <div key={type.value} className="flex items-center gap-2">
-                          <Checkbox
-                            id={`edit-type-${type.value}`}
-                            checked={editingCriteria.callTypes?.includes(type.value) || false}
-                            onCheckedChange={(checked) => {
-                              const current = editingCriteria.callTypes || [];
-                              const newTypes = checked 
-                                ? [...current.filter(t => t !== 'all'), type.value]
-                                : current.filter(t => t !== type.value);
-                              setEditingCriteria({ ...editingCriteria, callTypes: newTypes.length ? newTypes : ['all'] });
-                            }}
-                            data-testid={`checkbox-edit-${type.value}`}
-                          />
-                          <Label htmlFor={`edit-type-${type.value}`} className="text-sm font-normal cursor-pointer">{type.label}</Label>
-                        </div>
-                      ))}
-                    </>
-                  )}
+                  {CALL_TYPES.map((type) => (
+                    <div key={type.value} className="flex items-center gap-2">
+                      <Checkbox
+                        id={`edit-type-${type.value}`}
+                        checked={editingCriteria.callTypes?.includes(type.value) || false}
+                        onCheckedChange={(checked) => {
+                          const current = editingCriteria.callTypes || [];
+                          const newTypes = checked 
+                            ? [...current, type.value]
+                            : current.filter(t => t !== type.value);
+                          setEditingCriteria({ ...editingCriteria, callTypes: newTypes });
+                        }}
+                        data-testid={`checkbox-edit-${type.value}`}
+                      />
+                      <Label htmlFor={`edit-type-${type.value}`} className="text-sm font-normal cursor-pointer">{type.label}</Label>
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className="space-y-2">
@@ -520,43 +502,25 @@ export default function AdminCoachingCriteriaPage() {
             </div>
             <div className="space-y-2">
               <Label>Applies to Call Types</Label>
+              <p className="text-xs text-muted-foreground">Leave all unchecked to apply to all call types</p>
               <div className="flex flex-wrap gap-4 pt-1">
-                <div className="flex items-center gap-2">
-                  <Checkbox
-                    id="new-all-types"
-                    checked={newCriteria.callTypes.includes('all')}
-                    onCheckedChange={(checked) => {
-                      if (checked) {
-                        setNewCriteria({ ...newCriteria, callTypes: ['all'] });
-                      } else {
-                        setNewCriteria({ ...newCriteria, callTypes: ['sales'] });
-                      }
-                    }}
-                    data-testid="checkbox-new-all-types"
-                  />
-                  <Label htmlFor="new-all-types" className="text-sm font-normal cursor-pointer">All Types</Label>
-                </div>
-                {!newCriteria.callTypes.includes('all') && (
-                  <>
-                    {CALL_TYPES.map((type) => (
-                      <div key={type.value} className="flex items-center gap-2">
-                        <Checkbox
-                          id={`new-type-${type.value}`}
-                          checked={newCriteria.callTypes.includes(type.value)}
-                          onCheckedChange={(checked) => {
-                            const current = newCriteria.callTypes;
-                            const newTypes = checked 
-                              ? [...current.filter(t => t !== 'all'), type.value]
-                              : current.filter(t => t !== type.value);
-                            setNewCriteria({ ...newCriteria, callTypes: newTypes.length ? newTypes : ['all'] });
-                          }}
-                          data-testid={`checkbox-new-${type.value}`}
-                        />
-                        <Label htmlFor={`new-type-${type.value}`} className="text-sm font-normal cursor-pointer">{type.label}</Label>
-                      </div>
-                    ))}
-                  </>
-                )}
+                {CALL_TYPES.map((type) => (
+                  <div key={type.value} className="flex items-center gap-2">
+                    <Checkbox
+                      id={`new-type-${type.value}`}
+                      checked={newCriteria.callTypes.includes(type.value)}
+                      onCheckedChange={(checked) => {
+                        const current = newCriteria.callTypes;
+                        const newTypes = checked 
+                          ? [...current, type.value]
+                          : current.filter(t => t !== type.value);
+                        setNewCriteria({ ...newCriteria, callTypes: newTypes });
+                      }}
+                      data-testid={`checkbox-new-${type.value}`}
+                    />
+                    <Label htmlFor={`new-type-${type.value}`} className="text-sm font-normal cursor-pointer">{type.label}</Label>
+                  </div>
+                ))}
               </div>
             </div>
             <div className="space-y-2">
