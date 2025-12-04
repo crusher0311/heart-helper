@@ -1164,10 +1164,11 @@ export async function registerRoutes(app: Express) {
       const limit = parseInt(req.query.limit as string) || 50;
       
       const user = req.user;
+      const isAdminUser = await storage.isUserAdmin(user.id);
       let calls;
       
       // Role-based access: admin sees all, manager sees shop, user sees own
-      if (user.isAdmin) {
+      if (isAdminUser) {
         // Admin can filter by any user, or see all if no filter
         calls = await storage.searchCallRecordings(query.trim(), dateFrom, dateTo, limit, direction, undefined, filterUserId);
       } else {
@@ -1201,7 +1202,8 @@ export async function registerRoutes(app: Express) {
       
       // Role-based access control: admin sees all, manager sees shop, user sees own
       const user = req.user;
-      if (!user.isAdmin) {
+      const isAdminUser = await storage.isUserAdmin(user.id);
+      if (!isAdminUser) {
         const prefs = await storage.getUserPreferences(user.id);
         if (prefs?.managedShopId) {
           // Manager: can only access calls from their shop
@@ -1452,7 +1454,8 @@ export async function registerRoutes(app: Express) {
       
       // Role-based access control: admin sees all, manager sees shop, user sees own
       const user = req.user;
-      if (!user.isAdmin) {
+      const isAdminUser = await storage.isUserAdmin(user.id);
+      if (!isAdminUser) {
         const prefs = await storage.getUserPreferences(user.id);
         if (prefs?.managedShopId) {
           // Manager: can only access recordings from their shop
