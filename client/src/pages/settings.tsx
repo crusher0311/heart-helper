@@ -109,6 +109,31 @@ export default function Settings() {
     },
   });
 
+  const transcribeMutation = useMutation({
+    mutationFn: async (limit: number = 25) => {
+      const response = await apiRequest("POST", "/api/ringcentral/smart-transcribe", { limit });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Failed to transcribe calls");
+      }
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Transcription complete",
+        description: `${data.processed} calls processed, ${data.salesCalls} sales calls found. ${data.costSaved} saved.`,
+      });
+      queryClient.invalidateQueries({ queryKey: ["/api/calls"] });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Transcription failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
   useEffect(() => {
     if (settings?.phoneAnswerScript) {
       setPhoneScript(settings.phoneAnswerScript);
@@ -789,6 +814,42 @@ Guidelines:
                       )}
                       Sync Calls from RingCentral
                     </Button>
+                  </div>
+
+                  {/* Transcribe Controls */}
+                  <div className="border rounded-lg p-4 space-y-4">
+                    <h4 className="font-medium">Smart Transcription (Whisper AI)</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Transcribe call recordings using OpenAI Whisper. Uses smart sampling to detect sales calls 
+                      and only fully transcribe customer conversations, saving ~80% on transcription costs.
+                    </p>
+                    <div className="flex gap-2">
+                      <Button
+                        onClick={() => transcribeMutation.mutate(10)}
+                        disabled={transcribeMutation.isPending}
+                        variant="outline"
+                        data-testid="button-transcribe-10"
+                      >
+                        {transcribeMutation.isPending ? (
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        ) : (
+                          <FileText className="h-4 w-4 mr-2" />
+                        )}
+                        Transcribe 10 Calls
+                      </Button>
+                      <Button
+                        onClick={() => transcribeMutation.mutate(25)}
+                        disabled={transcribeMutation.isPending}
+                        data-testid="button-transcribe-25"
+                      >
+                        {transcribeMutation.isPending ? (
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        ) : (
+                          <FileText className="h-4 w-4 mr-2" />
+                        )}
+                        Transcribe 25 Calls
+                      </Button>
+                    </div>
                   </div>
 
                   {/* Extension Mapping Link */}
