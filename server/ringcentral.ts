@@ -673,53 +673,19 @@ export async function smartTranscribeCall(
   let trimmedPath: string | null = null;
   
   try {
-    // For short calls (30-90 seconds), just transcribe the whole thing
-    if (durationSeconds <= 90) {
-      const fullTranscript = await transcribeWithWhisper(audioPath);
-      if (fullTranscript) {
-        result.success = true;
-        result.transcriptText = fullTranscript;
-        result.isSalesCall = isSalesCall(fullTranscript);
-        result.sampleOnly = false;
-      }
-      return result;
-    }
-    
-    // For longer calls, sample first 30 seconds
-    trimmedPath = await trimAudio(audioPath, 30);
-    const sampleTranscript = await transcribeWithWhisper(trimmedPath);
-    
-    if (!sampleTranscript) {
-      result.skipReason = "Failed to transcribe sample";
-      return result;
-    }
-    
-    // Check if this is a sales call based on the sample
-    if (!isSalesCall(sampleTranscript)) {
-      result.success = true;
-      result.transcriptText = sampleTranscript + "\n\n[Sample only - not a sales call]";
-      result.isSalesCall = false;
-      result.sampleOnly = true;
-      result.costSaved = Math.round((durationSeconds - 30) * 0.6); // ~$0.006/min = $0.0001/sec
-      console.log(`[Whisper] Not a sales call, saved ~$${(result.costSaved / 100).toFixed(3)} by stopping early`);
-      return result;
-    }
-    
-    // It's a sales call - transcribe the full recording
-    console.log(`[Whisper] Detected sales call, transcribing full ${durationSeconds}s recording...`);
+    // Transcribe the full recording - we'll let users mark non-sales calls manually
+    // This builds training data for future AI learning
+    console.log(`[Whisper] Transcribing full ${durationSeconds}s recording...`);
     const fullTranscript = await transcribeWithWhisper(audioPath);
     
     if (fullTranscript) {
       result.success = true;
       result.transcriptText = fullTranscript;
-      result.isSalesCall = true;
+      // Still detect if it looks like a sales call for stats, but transcribe everything
+      result.isSalesCall = isSalesCall(fullTranscript);
       result.sampleOnly = false;
     } else {
-      // Fall back to sample if full transcription fails
-      result.success = true;
-      result.transcriptText = sampleTranscript + "\n\n[Full transcription failed - sample only]";
-      result.isSalesCall = true;
-      result.sampleOnly = true;
+      result.skipReason = "Failed to transcribe recording";
     }
     
     return result;

@@ -27,6 +27,8 @@ type CallRecording = {
   recordingStatus: string | null;
   transcript: string | null;
   transcriptText: string | null;
+  isNotSalesCall: boolean | null;
+  notSalesCallReason: string | null;
   callStartTime: string;
   callEndTime: string | null;
   createdAt: string;
@@ -76,7 +78,7 @@ export default function Calls() {
   const [userFilter, setUserFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchInput, setSearchInput] = useState<string>("");
-  const [transcribedFilter, setTranscribedFilter] = useState<string>("all");
+  const [transcribedFilter, setTranscribedFilter] = useState<string>("transcribed"); // Default to showing transcribed calls
 
   // Check if user is admin
   const { data: adminCheck } = useQuery<{ isAdmin: boolean }>({
@@ -205,10 +207,15 @@ export default function Calls() {
     
     // Apply transcribed filter
     if (transcribedFilter === "transcribed") {
-      result = result.filter(c => c.transcriptText && c.transcriptText.length > 10);
+      // Show transcribed calls that are NOT marked as non-sales (hide archived)
+      result = result.filter(c => c.transcriptText && c.transcriptText.length > 10 && !c.isNotSalesCall);
     } else if (transcribedFilter === "not-transcribed") {
       result = result.filter(c => !c.transcriptText || c.transcriptText.length <= 10);
+    } else if (transcribedFilter === "archived") {
+      // Show only calls marked as "not a sales call"
+      result = result.filter(c => c.isNotSalesCall === true);
     }
+    // "all" shows everything including archived
     
     // Sort by date (newest first)
     return [...result].sort((a, b) => {
@@ -335,15 +342,16 @@ export default function Calls() {
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="transcribed">Transcript</Label>
+                <Label htmlFor="transcribed">Status</Label>
                 <Select value={transcribedFilter} onValueChange={setTranscribedFilter}>
                   <SelectTrigger id="transcribed" data-testid="select-transcribed">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
+                    <SelectItem value="transcribed">Ready for Review</SelectItem>
+                    <SelectItem value="not-transcribed">Needs Transcription</SelectItem>
+                    <SelectItem value="archived">Archived (Not Sales)</SelectItem>
                     <SelectItem value="all">All Calls</SelectItem>
-                    <SelectItem value="transcribed">Has Transcript</SelectItem>
-                    <SelectItem value="not-transcribed">No Transcript</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
