@@ -120,6 +120,7 @@ export interface IStorage {
   // Call recordings
   getCallRecordingByRingcentralId(callId: string): Promise<CallRecording | undefined>;
   getCallRecordingById(id: string): Promise<CallRecording | undefined>;
+  getCallRecordingsBySessionId(sessionId: string): Promise<CallRecording[]>;
   createCallRecording(data: InsertCallRecording): Promise<CallRecording>;
   updateCallRecording(id: string, data: Partial<InsertCallRecording>): Promise<CallRecording>;
   getCallRecordingsForUser(userId: string, dateFrom?: Date, dateTo?: Date, limit?: number, direction?: string, offset?: number): Promise<CallRecording[]>;
@@ -1038,6 +1039,14 @@ export class DatabaseStorage implements IStorage {
       .from(callRecordings)
       .where(eq(callRecordings.id, id));
     return recording;
+  }
+
+  async getCallRecordingsBySessionId(sessionId: string): Promise<CallRecording[]> {
+    return await db
+      .select()
+      .from(callRecordings)
+      .where(eq(callRecordings.ringcentralSessionId, sessionId))
+      .orderBy(callRecordings.callStartTime);
   }
 
   async createCallRecording(data: InsertCallRecording): Promise<CallRecording> {

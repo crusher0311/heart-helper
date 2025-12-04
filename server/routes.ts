@@ -1498,9 +1498,85 @@ export async function registerRoutes(app: Express) {
         };
       }
       
-      res.json({ ...call, score });
+      // Get related call legs if this call is part of a multi-leg session
+      let relatedLegs: any[] = [];
+      if (call.ringcentralSessionId) {
+        const allLegs = await storage.getCallRecordingsBySessionId(call.ringcentralSessionId);
+        // Filter out the current call and format for frontend
+        relatedLegs = allLegs
+          .filter(leg => leg.id !== call.id)
+          .map(leg => ({
+            id: leg.id,
+            direction: leg.direction,
+            durationSeconds: leg.durationSeconds,
+            callStartTime: leg.callStartTime?.toISOString(),
+            hasTranscript: !!leg.transcriptText,
+            transcriptPreview: leg.transcriptText ? leg.transcriptText.substring(0, 100) + '...' : null,
+          }));
+      }
+      
+      res.json({ ...call, score, relatedLegs, isMultiLeg: relatedLegs.length > 0, legCount: relatedLegs.length + 1 });
     } catch (error: any) {
       console.error("Get call error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Get merged transcript for all legs of a multi-leg call session
+  app.get("/api/calls/:id/merged-transcript", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const callId = req.params.id;
+      const call = await storage.getCallRecordingById(callId);
+      
+      if (!call) {
+        return res.status(404).json({ message: "Call not found" });
+      }
+      
+      if (!call.ringcentralSessionId) {
+        return res.status(400).json({ message: "This call does not have a session ID for linking" });
+      }
+      
+      // Role-based access control
+      const user = req.user;
+      const isAdminUser = await storage.isUserAdmin(user.id);
+      if (!isAdminUser) {
+        const prefs = await storage.getUserPreferences(user.id);
+        if (prefs?.managedShopId) {
+          if (call.shopId !== prefs.managedShopId) {
+            return res.status(403).json({ message: "Access denied" });
+          }
+        } else {
+          if (call.userId !== user.id) {
+            return res.status(403).json({ message: "Access denied" });
+          }
+        }
+      }
+      
+      // Get all legs for this session
+      const allLegs = await storage.getCallRecordingsBySessionId(call.ringcentralSessionId);
+      
+      // Merge transcripts chronologically
+      const mergedTranscript = allLegs
+        .filter(leg => leg.transcriptText)
+        .map((leg, index) => ({
+          legNumber: index + 1,
+          callId: leg.id,
+          direction: leg.direction,
+          startTime: leg.callStartTime?.toISOString(),
+          durationSeconds: leg.durationSeconds,
+          transcript: leg.transcriptText,
+        }));
+      
+      res.json({
+        sessionId: call.ringcentralSessionId,
+        legCount: allLegs.length,
+        legs: mergedTranscript,
+        fullTranscript: mergedTranscript.map(leg => 
+          `--- Leg ${leg.legNumber} (${leg.direction}) ---\n${leg.transcript}`
+        ).join('\n\n'),
+      });
+    } catch (error: any) {
+      console.error("Get merged transcript error:", error);
       res.status(500).json({ message: error.message });
     }
   });
@@ -1520,7 +1596,7 @@ export async function registerRoutes(app: Express) {
       const user = req.user;
       const isAdminUser = await storage.isUserAdmin(user.id);
       const userPrefs = await storage.getUserPreferences(user.id);
-      const isManager = userPrefs?.role === 'manager';
+      const isManager = userPrefs?.isManager === true;
       
       if (!isAdminUser && !isManager) {
         if (call.userId !== user.id) {
