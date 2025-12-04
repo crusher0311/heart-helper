@@ -76,6 +76,7 @@ export default function Calls() {
   const [userFilter, setUserFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchInput, setSearchInput] = useState<string>("");
+  const [transcribedFilter, setTranscribedFilter] = useState<string>("all");
 
   // Check if user is admin
   const { data: adminCheck } = useQuery<{ isAdmin: boolean }>({
@@ -197,7 +198,25 @@ export default function Calls() {
   };
 
   // Use search results if searching, otherwise use regular calls
-  const filteredCalls = searchQuery ? searchResults : calls;
+  // Apply transcribed filter and sort by date (newest first)
+  const filteredCalls = useMemo(() => {
+    let result = searchQuery ? searchResults : calls;
+    if (!result) return [];
+    
+    // Apply transcribed filter
+    if (transcribedFilter === "transcribed") {
+      result = result.filter(c => c.transcriptText && c.transcriptText.length > 10);
+    } else if (transcribedFilter === "not-transcribed") {
+      result = result.filter(c => !c.transcriptText || c.transcriptText.length <= 10);
+    }
+    
+    // Sort by date (newest first)
+    return [...result].sort((a, b) => {
+      const dateA = new Date(a.callStartTime).getTime();
+      const dateB = new Date(b.callStartTime).getTime();
+      return dateB - dateA;
+    });
+  }, [searchQuery, searchResults, calls, transcribedFilter]);
 
   const inboundCount = calls?.filter(c => c.direction?.toLowerCase() === "inbound").length || 0;
   const outboundCount = calls?.filter(c => c.direction?.toLowerCase() === "outbound").length || 0;
@@ -237,8 +256,8 @@ export default function Calls() {
       </Navigation>
 
       <div className="container mx-auto max-w-6xl py-8 px-4">
-        {/* Search & Filters */}
-        <Card className="mb-6">
+        {/* Search & Filters - Sticky */}
+        <Card className="mb-6 sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <CardHeader className="pb-3">
             <div className="flex items-center gap-2">
               <Search className="h-4 w-4 text-muted-foreground" />
@@ -278,8 +297,8 @@ export default function Calls() {
               )}
             </div>
 
-            {/* Date, Direction, and User Filters */}
-            <div className={`grid grid-cols-1 gap-4 ${isAdmin && teamMembers?.length ? 'md:grid-cols-4' : 'md:grid-cols-3'}`}>
+            {/* Date, Direction, Transcript, and User Filters */}
+            <div className={`grid grid-cols-1 gap-4 ${isAdmin && teamMembers?.length ? 'md:grid-cols-5' : 'md:grid-cols-4'}`}>
               <div className="space-y-2">
                 <Label htmlFor="date-from">From Date</Label>
                 <input
@@ -312,6 +331,19 @@ export default function Calls() {
                     <SelectItem value="all">All Calls</SelectItem>
                     <SelectItem value="inbound">Inbound Only</SelectItem>
                     <SelectItem value="outbound">Outbound Only</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="transcribed">Transcript</Label>
+                <Select value={transcribedFilter} onValueChange={setTranscribedFilter}>
+                  <SelectTrigger id="transcribed" data-testid="select-transcribed">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Calls</SelectItem>
+                    <SelectItem value="transcribed">Has Transcript</SelectItem>
+                    <SelectItem value="not-transcribed">No Transcript</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

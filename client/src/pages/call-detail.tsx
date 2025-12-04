@@ -312,16 +312,38 @@ export default function CallDetail() {
         {call.transcriptText && (
           <Card>
             <CardHeader>
-              <div className="flex items-center gap-2">
-                <FileText className="h-5 w-5 text-muted-foreground" />
-                <CardTitle>Transcript</CardTitle>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-muted-foreground" />
+                  <CardTitle>Transcript</CardTitle>
+                </div>
+                {adminCheck?.isAdmin && !call.score && (
+                  <Button
+                    onClick={() => scoreMutation.mutate()}
+                    disabled={scoreMutation.isPending}
+                    data-testid="button-score-transcript"
+                  >
+                    {scoreMutation.isPending ? (
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    ) : (
+                      <Sparkles className="h-4 w-4 mr-2" />
+                    )}
+                    Score This Call
+                  </Button>
+                )}
               </div>
             </CardHeader>
             <CardContent>
-              <div className="prose prose-sm max-w-none dark:prose-invert">
-                <pre className="whitespace-pre-wrap text-sm font-sans bg-muted/50 p-4 rounded-lg">
-                  {call.transcriptText}
-                </pre>
+              <div className="bg-muted/30 rounded-lg p-4 space-y-3 text-sm leading-relaxed">
+                {call.transcriptText.split(/(?<=[.!?])\s+(?=[A-Z])|(?<=\.\s*)\n|(?:(?<=\?)\s+)|(?:(?<=!)\s+)/).map((paragraph, index) => {
+                  const trimmed = paragraph.trim();
+                  if (!trimmed) return null;
+                  return (
+                    <p key={index} className="text-foreground">
+                      {trimmed}
+                    </p>
+                  );
+                })}
               </div>
             </CardContent>
           </Card>
@@ -333,10 +355,25 @@ export default function CallDetail() {
             <CardContent className="py-8 text-center">
               <Star className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
               <h3 className="font-medium mb-2">Not Scored Yet</h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground mb-4">
                 This call has not been scored by the AI coaching system yet.
                 {!call.transcriptText && " A transcript is required for scoring."}
               </p>
+              {adminCheck?.isAdmin && call.transcriptText && (
+                <Button
+                  onClick={() => scoreMutation.mutate()}
+                  disabled={scoreMutation.isPending}
+                  size="lg"
+                  data-testid="button-score-now"
+                >
+                  {scoreMutation.isPending ? (
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  ) : (
+                    <Sparkles className="h-4 w-4 mr-2" />
+                  )}
+                  Score This Call Now
+                </Button>
+              )}
             </CardContent>
           </Card>
         )}
