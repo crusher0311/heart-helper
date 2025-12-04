@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
@@ -38,10 +39,10 @@ const CATEGORIES = [
 ];
 
 const CALL_TYPES = [
-  { value: "all", label: "All Call Types", color: "bg-gray-500/10 text-gray-700 border-gray-200" },
-  { value: "sales", label: "Sales", color: "bg-blue-500/10 text-blue-700 border-blue-200" },
-  { value: "price_shopper", label: "Price Shopper", color: "bg-teal-500/10 text-teal-700 border-teal-200" },
-  { value: "appointment_request", label: "Appointment Request", color: "bg-purple-500/10 text-purple-700 border-purple-200" },
+  { value: "sales", label: "Sales", color: "bg-blue-500/10 text-blue-700 border-blue-200 dark:text-blue-300" },
+  { value: "price_shopper", label: "Price Shopper", color: "bg-teal-500/10 text-teal-700 border-teal-200 dark:text-teal-300" },
+  { value: "appointment_request", label: "Appointment", color: "bg-purple-500/10 text-purple-700 border-purple-200 dark:text-purple-300" },
+  { value: "transfer", label: "Transfer", color: "bg-orange-500/10 text-orange-700 border-orange-200 dark:text-orange-300" },
 ];
 
 export default function AdminCoachingCriteriaPage() {
@@ -52,7 +53,7 @@ export default function AdminCoachingCriteriaPage() {
     name: "",
     description: "",
     category: "sales",
-    callType: "sales",
+    callTypes: ["all"] as string[],
     weight: 10,
     keywords: "",
     aiPrompt: "",
@@ -93,7 +94,7 @@ export default function AdminCoachingCriteriaPage() {
       queryClient.invalidateQueries({ queryKey: ["/api/coaching/criteria"] });
       toast({ title: "Criteria created", description: "New criterion added successfully" });
       setIsAddingNew(false);
-      setNewCriteria({ name: "", description: "", category: "sales", callType: "sales", weight: 10, keywords: "", aiPrompt: "" });
+      setNewCriteria({ name: "", description: "", category: "sales", callTypes: ["all"], weight: 10, keywords: "", aiPrompt: "" });
     },
     onError: (error: Error) => {
       toast({ title: "Error", description: error.message, variant: "destructive" });
@@ -207,19 +208,27 @@ export default function AdminCoachingCriteriaPage() {
                         <span className="font-mono text-sm w-6">{index + 1}.</span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className="flex items-center gap-2 mb-1 flex-wrap">
                           <h3 className="font-semibold truncate">{criterion.name}</h3>
                           {criterion.category && (
                             <Badge variant="secondary" className="text-xs">
                               {CATEGORIES.find(c => c.value === criterion.category)?.label || criterion.category}
                             </Badge>
                           )}
-                          <Badge 
-                            variant="outline" 
-                            className={`text-xs ${CALL_TYPES.find(t => t.value === (criterion.callType || 'sales'))?.color || ''}`}
-                          >
-                            {CALL_TYPES.find(t => t.value === (criterion.callType || 'sales'))?.label || 'Sales'}
-                          </Badge>
+                          {(criterion.callTypes?.includes('all') || !criterion.callTypes?.length) ? (
+                            <Badge variant="outline" className="text-xs bg-gray-500/10 text-gray-700 dark:text-gray-300 border-gray-200">
+                              All Types
+                            </Badge>
+                          ) : (
+                            criterion.callTypes?.map(ct => {
+                              const typeConfig = CALL_TYPES.find(t => t.value === ct);
+                              return typeConfig ? (
+                                <Badge key={ct} variant="outline" className={`text-xs ${typeConfig.color}`}>
+                                  {typeConfig.label}
+                                </Badge>
+                              ) : null;
+                            })
+                          )}
                           <Badge variant="outline" className="text-xs">
                             {criterion.weight} pts
                           </Badge>
@@ -345,33 +354,58 @@ export default function AdminCoachingCriteriaPage() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="edit-call-type">Call Type</Label>
-                  <Select
-                    value={editingCriteria.callType || "sales"}
-                    onValueChange={(value) => setEditingCriteria({ ...editingCriteria, callType: value })}
-                  >
-                    <SelectTrigger id="edit-call-type" data-testid="select-edit-call-type">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {CALL_TYPES.map((type) => (
-                        <SelectItem key={type.value} value={type.value}>{type.label}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <Label htmlFor="edit-weight">Weight (Points)</Label>
+                  <Input
+                    id="edit-weight"
+                    type="number"
+                    min={1}
+                    max={20}
+                    value={editingCriteria.weight || 10}
+                    onChange={(e) => setEditingCriteria({ ...editingCriteria, weight: parseInt(e.target.value) || 10 })}
+                    data-testid="input-edit-weight"
+                  />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="edit-weight">Weight (Points)</Label>
-                <Input
-                  id="edit-weight"
-                  type="number"
-                  min={1}
-                  max={20}
-                  value={editingCriteria.weight || 10}
-                  onChange={(e) => setEditingCriteria({ ...editingCriteria, weight: parseInt(e.target.value) || 10 })}
-                  data-testid="input-edit-weight"
-                />
+                <Label>Applies to Call Types</Label>
+                <div className="flex flex-wrap gap-4 pt-1">
+                  <div className="flex items-center gap-2">
+                    <Checkbox
+                      id="edit-all-types"
+                      checked={editingCriteria.callTypes?.includes('all') || !editingCriteria.callTypes?.length}
+                      onCheckedChange={(checked) => {
+                        if (checked) {
+                          setEditingCriteria({ ...editingCriteria, callTypes: ['all'] });
+                        } else {
+                          setEditingCriteria({ ...editingCriteria, callTypes: ['sales'] });
+                        }
+                      }}
+                      data-testid="checkbox-edit-all-types"
+                    />
+                    <Label htmlFor="edit-all-types" className="text-sm font-normal cursor-pointer">All Types</Label>
+                  </div>
+                  {!(editingCriteria.callTypes?.includes('all') || !editingCriteria.callTypes?.length) && (
+                    <>
+                      {CALL_TYPES.map((type) => (
+                        <div key={type.value} className="flex items-center gap-2">
+                          <Checkbox
+                            id={`edit-type-${type.value}`}
+                            checked={editingCriteria.callTypes?.includes(type.value) || false}
+                            onCheckedChange={(checked) => {
+                              const current = editingCriteria.callTypes || [];
+                              const newTypes = checked 
+                                ? [...current.filter(t => t !== 'all'), type.value]
+                                : current.filter(t => t !== type.value);
+                              setEditingCriteria({ ...editingCriteria, callTypes: newTypes.length ? newTypes : ['all'] });
+                            }}
+                            data-testid={`checkbox-edit-${type.value}`}
+                          />
+                          <Label htmlFor={`edit-type-${type.value}`} className="text-sm font-normal cursor-pointer">{type.label}</Label>
+                        </div>
+                      ))}
+                    </>
+                  )}
+                </div>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="edit-keywords">Keywords (comma-separated)</Label>
@@ -407,7 +441,7 @@ export default function AdminCoachingCriteriaPage() {
                       name: editingCriteria.name,
                       description: editingCriteria.description,
                       category: editingCriteria.category,
-                      callType: editingCriteria.callType,
+                      callTypes: editingCriteria.callTypes,
                       weight: editingCriteria.weight,
                       keywords: editingCriteria.keywords,
                       aiPrompt: editingCriteria.aiPrompt,
@@ -472,33 +506,58 @@ export default function AdminCoachingCriteriaPage() {
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="new-call-type">Call Type</Label>
-                <Select
-                  value={newCriteria.callType}
-                  onValueChange={(value) => setNewCriteria({ ...newCriteria, callType: value })}
-                >
-                  <SelectTrigger id="new-call-type" data-testid="select-new-call-type">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {CALL_TYPES.map((type) => (
-                      <SelectItem key={type.value} value={type.value}>{type.label}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <Label htmlFor="new-weight">Weight (Points)</Label>
+                <Input
+                  id="new-weight"
+                  type="number"
+                  min={1}
+                  max={20}
+                  value={newCriteria.weight}
+                  onChange={(e) => setNewCriteria({ ...newCriteria, weight: parseInt(e.target.value) || 10 })}
+                  data-testid="input-new-weight"
+                />
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="new-weight">Weight (Points)</Label>
-              <Input
-                id="new-weight"
-                type="number"
-                min={1}
-                max={20}
-                value={newCriteria.weight}
-                onChange={(e) => setNewCriteria({ ...newCriteria, weight: parseInt(e.target.value) || 10 })}
-                data-testid="input-new-weight"
-              />
+              <Label>Applies to Call Types</Label>
+              <div className="flex flex-wrap gap-4 pt-1">
+                <div className="flex items-center gap-2">
+                  <Checkbox
+                    id="new-all-types"
+                    checked={newCriteria.callTypes.includes('all')}
+                    onCheckedChange={(checked) => {
+                      if (checked) {
+                        setNewCriteria({ ...newCriteria, callTypes: ['all'] });
+                      } else {
+                        setNewCriteria({ ...newCriteria, callTypes: ['sales'] });
+                      }
+                    }}
+                    data-testid="checkbox-new-all-types"
+                  />
+                  <Label htmlFor="new-all-types" className="text-sm font-normal cursor-pointer">All Types</Label>
+                </div>
+                {!newCriteria.callTypes.includes('all') && (
+                  <>
+                    {CALL_TYPES.map((type) => (
+                      <div key={type.value} className="flex items-center gap-2">
+                        <Checkbox
+                          id={`new-type-${type.value}`}
+                          checked={newCriteria.callTypes.includes(type.value)}
+                          onCheckedChange={(checked) => {
+                            const current = newCriteria.callTypes;
+                            const newTypes = checked 
+                              ? [...current.filter(t => t !== 'all'), type.value]
+                              : current.filter(t => t !== type.value);
+                            setNewCriteria({ ...newCriteria, callTypes: newTypes.length ? newTypes : ['all'] });
+                          }}
+                          data-testid={`checkbox-new-${type.value}`}
+                        />
+                        <Label htmlFor={`new-type-${type.value}`} className="text-sm font-normal cursor-pointer">{type.label}</Label>
+                      </div>
+                    ))}
+                  </>
+                )}
+              </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="new-keywords">Keywords (comma-separated)</Label>
