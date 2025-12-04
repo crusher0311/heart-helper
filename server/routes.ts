@@ -1021,6 +1021,34 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Update call type (admin/manager only)
+  app.patch("/api/calls/:id/type", isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const user = req.user;
+      const prefs = await storage.getUserPreferences(user.id);
+      const isAdminUser = await storage.isUserAdmin(user.id);
+      
+      // Only admins and managers can change call type
+      if (!isAdminUser && !prefs?.isManager) {
+        return res.status(403).json({ message: "Access denied. Admin or manager role required." });
+      }
+      
+      const callId = req.params.id;
+      const { callType } = req.body;
+      
+      if (!callType || !['sales', 'appointment_request'].includes(callType)) {
+        return res.status(400).json({ message: "Invalid call type. Must be 'sales' or 'appointment_request'." });
+      }
+      
+      await storage.updateCallRecording(callId, { callType });
+      
+      res.json({ success: true, callType });
+    } catch (error: any) {
+      console.error("Update call type error:", error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
   // Transcribe a single call (admin only)
   app.post("/api/calls/:id/transcribe", isAuthenticated, isAdmin, async (req: any, res) => {
     try {

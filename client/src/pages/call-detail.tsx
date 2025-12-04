@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Navigation } from "@/components/navigation";
 import { InteractiveTranscript } from "@/components/interactive-transcript";
 import { Link, useParams, useLocation } from "wouter";
@@ -156,6 +157,28 @@ export default function CallDetail() {
     },
   });
 
+  const updateCallTypeMutation = useMutation({
+    mutationFn: async (callType: string) => {
+      const res = await apiRequest("PATCH", `/api/calls/${id}/type`, { callType });
+      return res.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Call Type Updated",
+        description: `Call categorized as ${data.callType === 'appointment_request' ? 'Appointment Request' : 'Sales'}.`,
+      });
+      refetch();
+      queryClient.invalidateQueries({ queryKey: ["/api/calls"] });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Update Failed",
+        description: error.message || "Failed to update call type",
+        variant: "destructive",
+      });
+    },
+  });
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -279,19 +302,32 @@ export default function CallDetail() {
                   {call.recordingStatus === 'available' ? 'Available' : 'Not Available'}
                 </Badge>
               </div>
-              {call.callType && (
-                <div className="space-y-1">
-                  <p className="text-sm text-muted-foreground">Call Type</p>
+              <div className="space-y-1">
+                <p className="text-sm text-muted-foreground">Call Type</p>
+                {isAdminOrManager ? (
+                  <Select
+                    value={call.callType || 'sales'}
+                    onValueChange={(value) => updateCallTypeMutation.mutate(value)}
+                    disabled={updateCallTypeMutation.isPending}
+                  >
+                    <SelectTrigger className="w-[180px] h-8" data-testid="select-call-type">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="sales">Sales</SelectItem>
+                      <SelectItem value="appointment_request">Appointment Request</SelectItem>
+                    </SelectContent>
+                  </Select>
+                ) : (
                   <Badge variant="outline" className={
-                    call.callType === 'appointment_request' 
+                    (call.callType || 'sales') === 'appointment_request' 
                       ? 'bg-purple-500/10 text-purple-700 border-purple-200'
                       : 'bg-blue-500/10 text-blue-700 border-blue-200'
                   }>
-                    {call.callType === 'appointment_request' ? 'Appointment Request' : 
-                     call.callType === 'sales' ? 'Sales' : call.callType}
+                    {(call.callType || 'sales') === 'appointment_request' ? 'Appointment Request' : 'Sales'}
                   </Badge>
-                </div>
-              )}
+                )}
+              </div>
             </div>
 
             {call.ringcentralRecordingId && (
