@@ -94,6 +94,10 @@ export interface RCExtension {
   };
 }
 
+async function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export async function fetchCallLogs(
   dateFrom?: Date,
   dateTo?: Date,
@@ -118,14 +122,40 @@ export async function fetchCallLogs(
 
   const allRecords: RCCallRecord[] = [];
   let page = 1;
+  const maxRetries = 3;
 
   try {
     while (true) {
-      const response = await platform.get(endpoint, { ...params, page });
+      let retries = 0;
+      let response;
+      
+      while (retries < maxRetries) {
+        try {
+          response = await platform.get(endpoint, { ...params, page });
+          break; // Success, exit retry loop
+        } catch (error: any) {
+          if (error.response?.status === 429 || error.message?.includes('rate exceeded')) {
+            const retryAfter = error.retryAfter || 60000;
+            console.log(`[RingCentral] Rate limited on page ${page}, waiting ${retryAfter/1000}s before retry ${retries + 1}/${maxRetries}...`);
+            await sleep(retryAfter);
+            retries++;
+          } else {
+            throw error;
+          }
+        }
+      }
+      
+      if (!response) {
+        throw new Error(`Failed to fetch page ${page} after ${maxRetries} retries`);
+      }
+      
       const data = await response.json();
       
       if (data.records && data.records.length > 0) {
         allRecords.push(...data.records);
+        if (page % 5 === 0) {
+          console.log(`[RingCentral] Fetched ${allRecords.length} records so far (page ${page})...`);
+        }
       }
 
       if (!data.navigation?.nextPage) {
@@ -417,69 +447,127 @@ export async function syncCallRecords(
 
 export async function backfillSessionIds(
   daysBack: number = 90
-): Promise<{ updated: number; notFound: number; alreadySet: number; errors: number }> {
-  const stats = { updated: 0, notFound: 0, alreadySet: 0, errors: 0 };
+): Promise<{ updated: number; notFound: number; alreadySet: number; errors: number; message: string }> {
+  const stats = { updated: 0, notFound: 0, alreadySet: 0, errors: 0, message: '' };
   
-  try {
-    // Fetch call logs from RingCentral for the specified period
-    const dateFrom = new Date();
-    dateFrom.setDate(dateFrom.getDate() - daysBack);
-    
-    console.log(`[RingCentral] Backfilling sessionIds for calls from last ${daysBack} days...`);
-    const callLogs = await fetchCallLogs(dateFrom);
-    
-    // Build a map of ringcentral_call_id -> sessionId
-    const sessionMap = new Map<string, string>();
-    for (const call of callLogs) {
-      if (call.sessionId) {
-        sessionMap.set(call.id, call.sessionId);
-      }
-    }
-    
-    console.log(`[RingCentral] Found ${sessionMap.size} calls with sessionIds from RingCentral`);
-    
-    // Get all calls without sessionId from our database
-    const callsWithoutSession = await db
-      .select({ id: callRecordings.id, ringcentralCallId: callRecordings.ringcentralCallId, ringcentralSessionId: callRecordings.ringcentralSessionId })
-      .from(callRecordings)
-      .where(isNull(callRecordings.ringcentralSessionId));
-    
-    console.log(`[RingCentral] Found ${callsWithoutSession.length} calls in DB without sessionId`);
-    
-    for (const call of callsWithoutSession) {
-      try {
-        if (!call.ringcentralCallId) {
-          stats.notFound++;
-          continue;
-        }
-        const sessionId = sessionMap.get(call.ringcentralCallId);
-        
-        if (sessionId) {
-          await storage.updateCallRecording(call.id, {
-            ringcentralSessionId: sessionId
-          });
-          stats.updated++;
-        } else {
-          stats.notFound++;
-        }
-      } catch (error: any) {
-        console.error(`[RingCentral] Error updating call ${call.id}:`, error.message);
-        stats.errors++;
-      }
-    }
-    
-    // Also count calls that already have sessionId
+  // Process in 7-day chunks to avoid rate limits
+  const chunkDays = 7;
+  const now = new Date();
+  
+  // Get all calls without sessionId from our database first
+  const callsWithoutSession = await db
+    .select({ 
+      id: callRecordings.id, 
+      ringcentralCallId: callRecordings.ringcentralCallId,
+      callStartTime: callRecordings.callStartTime 
+    })
+    .from(callRecordings)
+    .where(isNull(callRecordings.ringcentralSessionId));
+  
+  console.log(`[RingCentral] Found ${callsWithoutSession.length} calls in DB without sessionId`);
+  
+  if (callsWithoutSession.length === 0) {
+    // Count already-set calls
     const callsWithSession = await db
       .select({ id: callRecordings.id })
       .from(callRecordings)
       .where(isNotNull(callRecordings.ringcentralSessionId));
     stats.alreadySet = callsWithSession.length;
-    
-  } catch (error: any) {
-    console.error("[RingCentral] Error in backfillSessionIds:", error.message);
-    throw error;
+    stats.message = `All ${stats.alreadySet} calls already have session IDs linked.`;
+    return stats;
   }
-
+  
+  // Build a set of ringcentralCallIds we need to find
+  const neededCallIds = new Set<string>();
+  for (const call of callsWithoutSession) {
+    if (call.ringcentralCallId) {
+      neededCallIds.add(call.ringcentralCallId);
+    }
+  }
+  
+  console.log(`[RingCentral] Need to find sessionIds for ${neededCallIds.size} unique RingCentral call IDs`);
+  
+  // Build sessionId map by fetching in chunks
+  const sessionMap = new Map<string, string>();
+  let chunksProcessed = 0;
+  let rateLimitHits = 0;
+  
+  for (let daysAgo = 0; daysAgo < daysBack; daysAgo += chunkDays) {
+    const dateTo = new Date(now);
+    dateTo.setDate(dateTo.getDate() - daysAgo);
+    
+    const dateFrom = new Date(now);
+    dateFrom.setDate(dateFrom.getDate() - Math.min(daysAgo + chunkDays, daysBack));
+    
+    try {
+      console.log(`[RingCentral] Fetching calls from ${dateFrom.toLocaleDateString()} to ${dateTo.toLocaleDateString()}...`);
+      const callLogs = await fetchCallLogs(dateFrom, dateTo);
+      
+      for (const call of callLogs) {
+        if (call.sessionId && neededCallIds.has(call.id)) {
+          sessionMap.set(call.id, call.sessionId);
+        }
+      }
+      
+      chunksProcessed++;
+      console.log(`[RingCentral] Chunk ${chunksProcessed}: Found ${sessionMap.size} matching sessionIds so far`);
+      
+      // Small delay between chunks to avoid rate limiting
+      await sleep(1000);
+      
+    } catch (error: any) {
+      if (error.message?.includes('rate') || error.message?.includes('Rate')) {
+        rateLimitHits++;
+        console.log(`[RingCentral] Rate limit hit on chunk ${chunksProcessed + 1}, continuing with data collected so far...`);
+        // Wait 2 minutes before trying next chunk
+        if (rateLimitHits < 2) {
+          console.log(`[RingCentral] Waiting 2 minutes before continuing...`);
+          await sleep(120000);
+        } else {
+          console.log(`[RingCentral] Multiple rate limits, stopping fetch and processing what we have...`);
+          break;
+        }
+      } else {
+        console.error(`[RingCentral] Error fetching chunk: ${error.message}`);
+        break;
+      }
+    }
+  }
+  
+  console.log(`[RingCentral] Total: Found ${sessionMap.size} sessionIds from RingCentral`);
+  
+  // Update calls with the sessionIds we found
+  for (const call of callsWithoutSession) {
+    try {
+      if (!call.ringcentralCallId) {
+        stats.notFound++;
+        continue;
+      }
+      const sessionId = sessionMap.get(call.ringcentralCallId);
+      
+      if (sessionId) {
+        await storage.updateCallRecording(call.id, {
+          ringcentralSessionId: sessionId
+        });
+        stats.updated++;
+      } else {
+        stats.notFound++;
+      }
+    } catch (error: any) {
+      console.error(`[RingCentral] Error updating call ${call.id}:`, error.message);
+      stats.errors++;
+    }
+  }
+  
+  // Count calls that already have sessionId
+  const callsWithSession = await db
+    .select({ id: callRecordings.id })
+    .from(callRecordings)
+    .where(isNotNull(callRecordings.ringcentralSessionId));
+  stats.alreadySet = callsWithSession.length;
+  
+  stats.message = `Updated ${stats.updated} calls with session IDs. ${stats.notFound} not found in RingCentral (may be older than 90 days). ${stats.alreadySet} total calls now have session IDs.`;
+  
   console.log(`[RingCentral] Backfill complete: ${stats.updated} updated, ${stats.notFound} not found in RC, ${stats.alreadySet} already had sessionId, ${stats.errors} errors`);
   return stats;
 }
