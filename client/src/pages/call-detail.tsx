@@ -357,6 +357,7 @@ export default function CallDetail() {
                       <SelectItem value="sales">Sales</SelectItem>
                       <SelectItem value="appointment_request">Appointment Request</SelectItem>
                       <SelectItem value="transfer">Transfer</SelectItem>
+                      <SelectItem value="price_shopper">Price Shopper</SelectItem>
                     </SelectContent>
                   </Select>
                 ) : (
@@ -365,10 +366,13 @@ export default function CallDetail() {
                       ? 'bg-purple-500/10 text-purple-700 border-purple-200'
                       : (call.callType || 'sales') === 'transfer'
                         ? 'bg-orange-500/10 text-orange-700 border-orange-200'
-                        : 'bg-blue-500/10 text-blue-700 border-blue-200'
+                        : (call.callType || 'sales') === 'price_shopper'
+                          ? 'bg-teal-500/10 text-teal-700 border-teal-200'
+                          : 'bg-blue-500/10 text-blue-700 border-blue-200'
                   }>
                     {(call.callType || 'sales') === 'appointment_request' ? 'Appointment Request' : 
-                     (call.callType || 'sales') === 'transfer' ? 'Transfer' : 'Sales'}
+                     (call.callType || 'sales') === 'transfer' ? 'Transfer' : 
+                     (call.callType || 'sales') === 'price_shopper' ? 'Price Shopper' : 'Sales'}
                   </Badge>
                 )}
               </div>

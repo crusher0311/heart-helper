@@ -1053,8 +1053,8 @@ export async function registerRoutes(app: Express) {
       const callId = req.params.id;
       const { callType } = req.body;
       
-      if (!callType || !['sales', 'appointment_request', 'transfer'].includes(callType)) {
-        return res.status(400).json({ message: "Invalid call type. Must be 'sales', 'appointment_request', or 'transfer'." });
+      if (!callType || !['sales', 'appointment_request', 'transfer', 'price_shopper'].includes(callType)) {
+        return res.status(400).json({ message: "Invalid call type. Must be 'sales', 'appointment_request', 'transfer', or 'price_shopper'." });
       }
       
       await storage.updateCallRecording(callId, { callType });
@@ -1686,11 +1686,12 @@ export async function registerRoutes(app: Express) {
         return res.status(400).json({ message: "Call does not have a transcript to score" });
       }
       
-      // Get active coaching criteria
-      const criteria = await storage.getActiveCoachingCriteria();
+      // Get active coaching criteria for this call type
+      const callType = call.callType || 'sales';
+      const criteria = await storage.getActiveCoachingCriteria(undefined, callType);
       
       if (criteria.length === 0) {
-        return res.status(400).json({ message: "No active coaching criteria defined" });
+        return res.status(400).json({ message: `No active coaching criteria defined for ${callType} calls` });
       }
       
       // Score the transcript with AI
@@ -1785,13 +1786,6 @@ export async function registerRoutes(app: Express) {
         });
       }
       
-      // Get active coaching criteria
-      const criteria = await storage.getActiveCoachingCriteria();
-      
-      if (criteria.length === 0) {
-        return res.status(400).json({ message: "No active coaching criteria defined" });
-      }
-      
       const results = {
         scored: 0,
         failed: 0,
@@ -1802,6 +1796,16 @@ export async function registerRoutes(app: Express) {
       for (const call of unscoredCalls) {
         try {
           const transcriptText = call.transcriptText as string;
+          
+          // Get active coaching criteria for this call's type
+          const callType = call.callType || 'sales';
+          const criteria = await storage.getActiveCoachingCriteria(undefined, callType);
+          
+          if (criteria.length === 0) {
+            results.failed++;
+            results.errors.push(`Call ${call.id}: No criteria defined for ${callType} calls`);
+            continue;
+          }
           
           // Score the transcript with AI
           const scoringResult = await scoreCallTranscript(transcriptText, criteria.map(c => ({

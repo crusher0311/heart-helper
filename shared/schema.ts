@@ -243,7 +243,7 @@ export const callRecordings = pgTable("call_recordings", {
   userId: varchar("user_id").references(() => users.id), // Service advisor who handled the call
   shopId: text("shop_id"), // Shop location ("NB", "WM", "EV")
   direction: text("direction"), // "inbound" or "outbound"
-  callType: text("call_type").default("sales"), // "sales", "appointment_request", "transfer"
+  callType: text("call_type").default("sales"), // "sales", "appointment_request", "transfer", "price_shopper"
   customerPhone: text("customer_phone"), // Customer's phone number
   customerName: text("customer_name"), // Customer name if matched from Tekmetric
   tekmetricCustomerId: integer("tekmetric_customer_id"), // Link to Tekmetric customer
@@ -278,7 +278,7 @@ export const coachingCriteria = pgTable("coaching_criteria", {
   aiPrompt: text("ai_prompt"), // Custom AI prompt for scoring this criterion
   weight: integer("weight").default(10), // Weight for overall score calculation
   category: text("category"), // Optional grouping: "greeting", "sales", "closing"
-  callType: text("call_type").default("sales"), // "sales", "appointment_request", or "all" for universal criteria
+  callType: text("call_type").default("sales"), // "sales", "appointment_request", "price_shopper", or "all" for universal criteria
   sortOrder: integer("sort_order").default(0), // Display order
   isActive: boolean("is_active").default(true),
   shopId: text("shop_id"), // null = applies to all shops, or specific shop

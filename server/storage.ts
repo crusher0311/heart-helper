@@ -143,7 +143,7 @@ export interface IStorage {
   }): Promise<CallRecording>;
   
   // Coaching criteria
-  getActiveCoachingCriteria(shopId?: string): Promise<CoachingCriteria[]>;
+  getActiveCoachingCriteria(shopId?: string, callType?: string): Promise<CoachingCriteria[]>;
   getAllCoachingCriteria(): Promise<CoachingCriteria[]>;
   getCoachingCriteriaById(id: string): Promise<CoachingCriteria | undefined>;
   createCoachingCriteria(data: InsertCoachingCriteria): Promise<CoachingCriteria>;
@@ -1358,13 +1358,21 @@ export class DatabaseStorage implements IStorage {
   }
 
   // Coaching criteria
-  async getActiveCoachingCriteria(shopId?: string): Promise<CoachingCriteria[]> {
+  async getActiveCoachingCriteria(shopId?: string, callType?: string): Promise<CoachingCriteria[]> {
     const conditions = [eq(coachingCriteria.isActive, true)];
     
     if (shopId) {
       conditions.push(or(
         eq(coachingCriteria.shopId, shopId),
         sql`${coachingCriteria.shopId} IS NULL`
+      )!);
+    }
+    
+    // Filter by call type: include criteria for the specific type OR 'all' (universal criteria)
+    if (callType) {
+      conditions.push(or(
+        eq(coachingCriteria.callType, callType),
+        eq(coachingCriteria.callType, 'all')
       )!);
     }
     

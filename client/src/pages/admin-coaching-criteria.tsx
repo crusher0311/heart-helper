@@ -37,6 +37,13 @@ const CATEGORIES = [
   { value: "objections", label: "Objection Handling" },
 ];
 
+const CALL_TYPES = [
+  { value: "all", label: "All Call Types", color: "bg-gray-500/10 text-gray-700 border-gray-200" },
+  { value: "sales", label: "Sales", color: "bg-blue-500/10 text-blue-700 border-blue-200" },
+  { value: "price_shopper", label: "Price Shopper", color: "bg-teal-500/10 text-teal-700 border-teal-200" },
+  { value: "appointment_request", label: "Appointment Request", color: "bg-purple-500/10 text-purple-700 border-purple-200" },
+];
+
 export default function AdminCoachingCriteriaPage() {
   const { toast } = useToast();
   const [editingCriteria, setEditingCriteria] = useState<CoachingCriteria | null>(null);
@@ -45,6 +52,7 @@ export default function AdminCoachingCriteriaPage() {
     name: "",
     description: "",
     category: "sales",
+    callType: "sales",
     weight: 10,
     keywords: "",
     aiPrompt: "",
@@ -85,7 +93,7 @@ export default function AdminCoachingCriteriaPage() {
       queryClient.invalidateQueries({ queryKey: ["/api/coaching/criteria"] });
       toast({ title: "Criteria created", description: "New criterion added successfully" });
       setIsAddingNew(false);
-      setNewCriteria({ name: "", description: "", category: "sales", weight: 10, keywords: "", aiPrompt: "" });
+      setNewCriteria({ name: "", description: "", category: "sales", callType: "sales", weight: 10, keywords: "", aiPrompt: "" });
     },
     onError: (error: Error) => {
       toast({ title: "Error", description: error.message, variant: "destructive" });
@@ -206,6 +214,12 @@ export default function AdminCoachingCriteriaPage() {
                               {CATEGORIES.find(c => c.value === criterion.category)?.label || criterion.category}
                             </Badge>
                           )}
+                          <Badge 
+                            variant="outline" 
+                            className={`text-xs ${CALL_TYPES.find(t => t.value === (criterion.callType || 'sales'))?.color || ''}`}
+                          >
+                            {CALL_TYPES.find(t => t.value === (criterion.callType || 'sales'))?.label || 'Sales'}
+                          </Badge>
                           <Badge variant="outline" className="text-xs">
                             {criterion.weight} pts
                           </Badge>
@@ -331,17 +345,33 @@ export default function AdminCoachingCriteriaPage() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="edit-weight">Weight (Points)</Label>
-                  <Input
-                    id="edit-weight"
-                    type="number"
-                    min={1}
-                    max={20}
-                    value={editingCriteria.weight || 10}
-                    onChange={(e) => setEditingCriteria({ ...editingCriteria, weight: parseInt(e.target.value) || 10 })}
-                    data-testid="input-edit-weight"
-                  />
+                  <Label htmlFor="edit-call-type">Call Type</Label>
+                  <Select
+                    value={editingCriteria.callType || "sales"}
+                    onValueChange={(value) => setEditingCriteria({ ...editingCriteria, callType: value })}
+                  >
+                    <SelectTrigger id="edit-call-type" data-testid="select-edit-call-type">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {CALL_TYPES.map((type) => (
+                        <SelectItem key={type.value} value={type.value}>{type.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="edit-weight">Weight (Points)</Label>
+                <Input
+                  id="edit-weight"
+                  type="number"
+                  min={1}
+                  max={20}
+                  value={editingCriteria.weight || 10}
+                  onChange={(e) => setEditingCriteria({ ...editingCriteria, weight: parseInt(e.target.value) || 10 })}
+                  data-testid="input-edit-weight"
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="edit-keywords">Keywords (comma-separated)</Label>
@@ -377,6 +407,7 @@ export default function AdminCoachingCriteriaPage() {
                       name: editingCriteria.name,
                       description: editingCriteria.description,
                       category: editingCriteria.category,
+                      callType: editingCriteria.callType,
                       weight: editingCriteria.weight,
                       keywords: editingCriteria.keywords,
                       aiPrompt: editingCriteria.aiPrompt,
@@ -441,17 +472,33 @@ export default function AdminCoachingCriteriaPage() {
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="new-weight">Weight (Points)</Label>
-                <Input
-                  id="new-weight"
-                  type="number"
-                  min={1}
-                  max={20}
-                  value={newCriteria.weight}
-                  onChange={(e) => setNewCriteria({ ...newCriteria, weight: parseInt(e.target.value) || 10 })}
-                  data-testid="input-new-weight"
-                />
+                <Label htmlFor="new-call-type">Call Type</Label>
+                <Select
+                  value={newCriteria.callType}
+                  onValueChange={(value) => setNewCriteria({ ...newCriteria, callType: value })}
+                >
+                  <SelectTrigger id="new-call-type" data-testid="select-new-call-type">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {CALL_TYPES.map((type) => (
+                      <SelectItem key={type.value} value={type.value}>{type.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="new-weight">Weight (Points)</Label>
+              <Input
+                id="new-weight"
+                type="number"
+                min={1}
+                max={20}
+                value={newCriteria.weight}
+                onChange={(e) => setNewCriteria({ ...newCriteria, weight: parseInt(e.target.value) || 10 })}
+                data-testid="input-new-weight"
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="new-keywords">Keywords (comma-separated)</Label>
