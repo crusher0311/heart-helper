@@ -1368,11 +1368,11 @@ export class DatabaseStorage implements IStorage {
       )!);
     }
     
-    // Filter by call type: include criteria for the specific type OR 'all' (universal criteria)
+    // Filter by call type: include criteria where callTypes array contains the specific type OR contains 'all' (universal)
     if (callType) {
       conditions.push(or(
-        eq(coachingCriteria.callType, callType),
-        eq(coachingCriteria.callType, 'all')
+        sql`${callType} = ANY(${coachingCriteria.callTypes})`,
+        sql`'all' = ANY(${coachingCriteria.callTypes})`
       )!);
     }
     

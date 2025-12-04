@@ -278,7 +278,7 @@ export const coachingCriteria = pgTable("coaching_criteria", {
   aiPrompt: text("ai_prompt"), // Custom AI prompt for scoring this criterion
   weight: integer("weight").default(10), // Weight for overall score calculation
   category: text("category"), // Optional grouping: "greeting", "sales", "closing"
-  callType: text("call_type").default("sales"), // "sales", "appointment_request", "price_shopper", or "all" for universal criteria
+  callTypes: text("call_types").array().default(sql`ARRAY['all']::text[]`), // Array of call types this applies to: "sales", "appointment_request", "price_shopper", "transfer", or "all" for universal
   sortOrder: integer("sort_order").default(0), // Display order
   isActive: boolean("is_active").default(true),
   shopId: text("shop_id"), // null = applies to all shops, or specific shop
