@@ -406,6 +406,7 @@ export default function Calls() {
                     <SelectItem value="all">All Types</SelectItem>
                     <SelectItem value="sales">Sales</SelectItem>
                     <SelectItem value="appointment_request">Appointment Request</SelectItem>
+                    <SelectItem value="transfer">Transfer</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -525,9 +526,12 @@ export default function Calls() {
                             <Badge variant="outline" className={`text-xs ${
                               (call.callType || 'sales') === 'appointment_request' 
                                 ? 'bg-purple-500/10 text-purple-700 border-purple-200'
-                                : 'bg-blue-500/10 text-blue-700 border-blue-200'
+                                : (call.callType || 'sales') === 'transfer'
+                                  ? 'bg-orange-500/10 text-orange-700 border-orange-200'
+                                  : 'bg-blue-500/10 text-blue-700 border-blue-200'
                             }`}>
-                              {(call.callType || 'sales') === 'appointment_request' ? 'Appointment' : 'Sales'}
+                              {(call.callType || 'sales') === 'appointment_request' ? 'Appointment' : 
+                               (call.callType || 'sales') === 'transfer' ? 'Transfer' : 'Sales'}
                             </Badge>
                             {call.recordingStatus === 'available' && (
                               <Badge variant="secondary" className="text-xs">

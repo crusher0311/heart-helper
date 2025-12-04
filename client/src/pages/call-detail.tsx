@@ -1,4 +1,4 @@
-import { Phone, Clock, Calendar, User, Star, PhoneIncoming, PhoneOutgoing, Loader2, Play, FileText, AlertCircle, Sparkles, Ban, Check } from "lucide-react";
+import { Phone, Clock, Calendar, User, Star, PhoneIncoming, PhoneOutgoing, Loader2, Play, FileText, AlertCircle, Sparkles, Ban, Check, RefreshCw } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -163,9 +163,14 @@ export default function CallDetail() {
       return res.json();
     },
     onSuccess: (data) => {
+      const typeLabels: Record<string, string> = {
+        sales: 'Sales',
+        appointment_request: 'Appointment Request',
+        transfer: 'Transfer'
+      };
       toast({
         title: "Call Type Updated",
-        description: `Call categorized as ${data.callType === 'appointment_request' ? 'Appointment Request' : 'Sales'}.`,
+        description: `Call categorized as ${typeLabels[data.callType] || data.callType}.`,
       });
       refetch();
       queryClient.invalidateQueries({ queryKey: ["/api/calls"] });
@@ -174,6 +179,28 @@ export default function CallDetail() {
       toast({
         title: "Update Failed",
         description: error.message || "Failed to update call type",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const retranscribeMutation = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest("POST", `/api/calls/${id}/transcribe?force=true`);
+      return res.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Transcript Updated",
+        description: `New transcript fetched (${data.transcriptLength} characters).`,
+      });
+      refetch();
+      queryClient.invalidateQueries({ queryKey: ["/api/calls", id] });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Re-transcription Failed",
+        description: error.message || "Failed to re-fetch transcript",
         variant: "destructive",
       });
     },
@@ -316,15 +343,19 @@ export default function CallDetail() {
                     <SelectContent>
                       <SelectItem value="sales">Sales</SelectItem>
                       <SelectItem value="appointment_request">Appointment Request</SelectItem>
+                      <SelectItem value="transfer">Transfer</SelectItem>
                     </SelectContent>
                   </Select>
                 ) : (
                   <Badge variant="outline" className={
                     (call.callType || 'sales') === 'appointment_request' 
                       ? 'bg-purple-500/10 text-purple-700 border-purple-200'
-                      : 'bg-blue-500/10 text-blue-700 border-blue-200'
+                      : (call.callType || 'sales') === 'transfer'
+                        ? 'bg-orange-500/10 text-orange-700 border-orange-200'
+                        : 'bg-blue-500/10 text-blue-700 border-blue-200'
                   }>
-                    {(call.callType || 'sales') === 'appointment_request' ? 'Appointment Request' : 'Sales'}
+                    {(call.callType || 'sales') === 'appointment_request' ? 'Appointment Request' : 
+                     (call.callType || 'sales') === 'transfer' ? 'Transfer' : 'Sales'}
                   </Badge>
                 )}
               </div>
@@ -437,20 +468,38 @@ export default function CallDetail() {
                   <FileText className="h-5 w-5 text-muted-foreground" />
                   <CardTitle>Transcript</CardTitle>
                 </div>
-                {adminCheck?.isAdmin && !call.score && (
-                  <Button
-                    onClick={() => scoreMutation.mutate()}
-                    disabled={scoreMutation.isPending}
-                    data-testid="button-score-transcript"
-                  >
-                    {scoreMutation.isPending ? (
-                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    ) : (
-                      <Sparkles className="h-4 w-4 mr-2" />
-                    )}
-                    Score This Call
-                  </Button>
-                )}
+                <div className="flex items-center gap-2">
+                  {adminCheck?.isAdmin && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => retranscribeMutation.mutate()}
+                      disabled={retranscribeMutation.isPending}
+                      data-testid="button-retranscribe"
+                    >
+                      {retranscribeMutation.isPending ? (
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      ) : (
+                        <RefreshCw className="h-4 w-4 mr-2" />
+                      )}
+                      Re-transcribe
+                    </Button>
+                  )}
+                  {adminCheck?.isAdmin && !call.score && (
+                    <Button
+                      onClick={() => scoreMutation.mutate()}
+                      disabled={scoreMutation.isPending}
+                      data-testid="button-score-transcript"
+                    >
+                      {scoreMutation.isPending ? (
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      ) : (
+                        <Sparkles className="h-4 w-4 mr-2" />
+                      )}
+                      Score This Call
+                    </Button>
+                  )}
+                </div>
               </div>
             </CardHeader>
             <CardContent>

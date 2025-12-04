@@ -1036,8 +1036,8 @@ export async function registerRoutes(app: Express) {
       const callId = req.params.id;
       const { callType } = req.body;
       
-      if (!callType || !['sales', 'appointment_request'].includes(callType)) {
-        return res.status(400).json({ message: "Invalid call type. Must be 'sales' or 'appointment_request'." });
+      if (!callType || !['sales', 'appointment_request', 'transfer'].includes(callType)) {
+        return res.status(400).json({ message: "Invalid call type. Must be 'sales', 'appointment_request', or 'transfer'." });
       }
       
       await storage.updateCallRecording(callId, { callType });
@@ -1050,9 +1050,11 @@ export async function registerRoutes(app: Express) {
   });
 
   // Transcribe a single call (admin only)
+  // Supports ?force=true to re-fetch even if transcript exists
   app.post("/api/calls/:id/transcribe", isAuthenticated, isAdmin, async (req: any, res) => {
     try {
       const callId = req.params.id;
+      const force = req.query.force === 'true' || req.body.force === true;
       const call = await storage.getCallRecordingById(callId);
       
       if (!call) {
@@ -1063,8 +1065,8 @@ export async function registerRoutes(app: Express) {
         return res.status(400).json({ message: "No recording available for this call" });
       }
       
-      // Check if already transcribed
-      if (call.transcriptText && call.transcriptText.length > 50) {
+      // Check if already transcribed (unless force is true)
+      if (!force && call.transcriptText && call.transcriptText.length > 50) {
         return res.json({ 
           success: true, 
           message: "Call already has transcript",
@@ -1089,7 +1091,7 @@ export async function registerRoutes(app: Express) {
       
       res.json({ 
         success: true, 
-        message: "Transcript fetched successfully",
+        message: force ? "Transcript re-fetched successfully" : "Transcript fetched successfully",
         transcriptLength: result.transcriptText.length,
         source: result.transcriptJson?.source || "unknown",
       });
