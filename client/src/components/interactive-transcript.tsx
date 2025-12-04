@@ -54,6 +54,7 @@ export function InteractiveTranscript({ callId, transcriptText, utterances, isAd
   const [annotationType, setAnnotationType] = useState("coaching");
   const [editingAnnotation, setEditingAnnotation] = useState<TranscriptAnnotation | null>(null);
   const [activeAnnotation, setActiveAnnotation] = useState<string | null>(null);
+  const [viewingAnnotation, setViewingAnnotation] = useState<TranscriptAnnotation | null>(null);
 
   const { data: annotations = [], isLoading: annotationsLoading } = useQuery<TranscriptAnnotation[]>({
     queryKey: ["/api/calls", callId, "annotations"],
@@ -334,7 +335,14 @@ export function InteractiveTranscript({ callId, transcriptText, utterances, isAd
                 key={annotation.id} 
                 variant="outline" 
                 className={`${typeConfig.color} cursor-pointer`}
-                onClick={() => setActiveAnnotation(annotation.id)}
+                onClick={() => {
+                  // For diarized view, show in dialog. For plain text, trigger popover.
+                  if (utterances && utterances.length > 0) {
+                    setViewingAnnotation(annotation);
+                  } else {
+                    setActiveAnnotation(annotation.id);
+                  }
+                }}
                 data-testid={`badge-annotation-${annotation.id}`}
               >
                 {annotation.selectedText.slice(0, 20)}{annotation.selectedText.length > 20 ? "..." : ""}
@@ -486,6 +494,71 @@ export function InteractiveTranscript({ callId, transcriptText, utterances, isAd
               Update Note
             </Button>
           </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* View Annotation Dialog (for diarized transcripts) */}
+      <Dialog open={!!viewingAnnotation} onOpenChange={(open) => !open && setViewingAnnotation(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Coaching Note</DialogTitle>
+          </DialogHeader>
+          {viewingAnnotation && (() => {
+            const typeConfig = ANNOTATION_TYPES.find(t => t.value === viewingAnnotation.annotationType) || ANNOTATION_TYPES[0];
+            const Icon = typeConfig.icon;
+            return (
+              <div className="space-y-4">
+                <div className="flex items-center gap-2">
+                  <Icon className="h-4 w-4" />
+                  <Badge variant="outline" className={typeConfig.color}>
+                    {typeConfig.label}
+                  </Badge>
+                </div>
+                <div className="bg-muted/50 rounded-lg p-3">
+                  <p className="text-sm font-medium text-muted-foreground mb-1">Selected Text:</p>
+                  <p className="text-sm italic">"{viewingAnnotation.selectedText}"</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground mb-1">Note:</p>
+                  <p className="text-sm">{viewingAnnotation.note}</p>
+                </div>
+                {isAdminOrManager && (
+                  <div className="flex gap-2 pt-2 border-t">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        setEditingAnnotation(viewingAnnotation);
+                        setViewingAnnotation(null);
+                      }}
+                      data-testid="button-edit-from-view"
+                    >
+                      <Edit2 className="h-3 w-3 mr-1" />
+                      Edit
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-destructive"
+                      onClick={() => {
+                        deleteAnnotationMutation.mutate(viewingAnnotation.id);
+                        setViewingAnnotation(null);
+                      }}
+                      disabled={deleteAnnotationMutation.isPending}
+                      data-testid="button-delete-from-view"
+                    >
+                      {deleteAnnotationMutation.isPending ? (
+                        <Loader2 className="h-3 w-3 animate-spin" />
+                      ) : (
+                        <Trash2 className="h-3 w-3 mr-1" />
+                      )}
+                      Delete
+                    </Button>
+                  </div>
+                )}
+              </div>
+            );
+          })()}
         </DialogContent>
       </Dialog>
     </div>
