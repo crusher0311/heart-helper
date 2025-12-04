@@ -238,10 +238,12 @@ export const callRecordings = pgTable("call_recordings", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   ringcentralCallId: text("ringcentral_call_id").unique(), // RC's unique call identifier
   ringcentralRecordingId: text("ringcentral_recording_id"), // RC's recording ID
+  ringcentralSessionId: text("ringcentral_session_id"), // RC session ID - links multiple call legs (holds, transfers) together
+  legIndex: integer("leg_index"), // Order of this leg within the session (0, 1, 2...)
   userId: varchar("user_id").references(() => users.id), // Service advisor who handled the call
   shopId: text("shop_id"), // Shop location ("NB", "WM", "EV")
   direction: text("direction"), // "inbound" or "outbound"
-  callType: text("call_type").default("sales"), // "sales", "appointment_request", "other"
+  callType: text("call_type").default("sales"), // "sales", "appointment_request", "transfer"
   customerPhone: text("customer_phone"), // Customer's phone number
   customerName: text("customer_name"), // Customer name if matched from Tekmetric
   tekmetricCustomerId: integer("tekmetric_customer_id"), // Link to Tekmetric customer
@@ -264,6 +266,7 @@ export const callRecordings = pgTable("call_recordings", {
   index("idx_call_recordings_shop").on(table.shopId),
   index("idx_call_recordings_date").on(table.callStartTime),
   index("idx_call_recordings_type").on(table.callType),
+  index("idx_call_recordings_session").on(table.ringcentralSessionId),
 ]);
 
 // Coaching criteria - admin-configurable grading points

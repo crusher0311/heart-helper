@@ -386,6 +386,7 @@ export async function syncCallRecords(
         const callRecord: InsertCallRecording = {
           ringcentralCallId: call.id,
           ringcentralRecordingId: call.recording?.id || null,
+          ringcentralSessionId: call.sessionId || null,
           direction: call.direction.toLowerCase(),
           customerPhone: customerPhone || null,
           customerName: call.direction === "Inbound" ? call.from.name : call.to.name,
