@@ -114,11 +114,13 @@ Tekmetric's external IDs are used as primary keys for vehicle/RO data.
 
 ### Transcription Configuration
 
-Call recordings are transcribed using configurable providers. Set `TRANSCRIPTION_PROVIDER` environment variable to control the primary transcription service:
+Call recordings are transcribed using configurable providers. Admins can select the transcription provider from the Settings page under "Transcription Provider". Alternatively, set `TRANSCRIPTION_PROVIDER` environment variable as a default:
 
 - `deepgram` (default): Deepgram Nova-2 model with speaker diarization → AssemblyAI fallback → Whisper fallback
 - `assemblyai`: AssemblyAI with speaker diarization → Whisper fallback
 - `whisper`: OpenAI Whisper only (no speaker diarization)
+
+The database setting takes priority over the environment variable, allowing runtime configuration changes without restart.
 
 Required secrets per provider:
 - Deepgram: `DEEPGRAM_API_KEY`
