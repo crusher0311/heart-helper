@@ -5,6 +5,7 @@ import { callRecordings, type InsertCallRecording, type InsertRingcentralUser } 
 import { isNull, isNotNull } from "drizzle-orm";
 import OpenAI from "openai";
 import { AssemblyAI } from "assemblyai";
+import { createClient as createDeepgramClient } from "@deepgram/sdk";
 import { exec } from "child_process";
 import { promisify } from "util";
 import * as fs from "fs";
@@ -18,10 +19,18 @@ const whisperClient = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
-// AssemblyAI client for high-quality transcription (primary)
+// AssemblyAI client for high-quality transcription
 const assemblyClient = process.env.ASSEMBLYAI_API_KEY 
   ? new AssemblyAI({ apiKey: process.env.ASSEMBLYAI_API_KEY })
   : null;
+
+// Deepgram client for high-quality transcription
+const deepgramClient = process.env.DEEPGRAM_API_KEY
+  ? createDeepgramClient(process.env.DEEPGRAM_API_KEY)
+  : null;
+
+// Transcription provider: 'deepgram', 'assemblyai', or 'whisper'
+const TRANSCRIPTION_PROVIDER = process.env.TRANSCRIPTION_PROVIDER || 'deepgram';
 
 const RC_SERVER = process.env.RINGCENTRAL_SERVER || "https://platform.ringcentral.com";
 const RC_CLIENT_ID = process.env.RINGCENTRAL_CLIENT_ID;
@@ -798,6 +807,63 @@ async function transcribeWithAssemblyAI(audioPath: string): Promise<{
 }
 
 /**
+ * Transcribe audio file using Deepgram (high accuracy with speaker diarization)
+ */
+async function transcribeWithDeepgram(audioPath: string): Promise<{
+  text: string | null;
+  utterances?: Array<{ speaker: string; text: string }>;
+}> {
+  if (!deepgramClient) {
+    console.log(`[Deepgram] Client not configured, skipping`);
+    return { text: null };
+  }
+  
+  try {
+    console.log(`[Deepgram] Transcribing ${audioPath}...`);
+    
+    const audioBuffer = fs.readFileSync(audioPath);
+    
+    const { result, error } = await deepgramClient.listen.prerecorded.transcribeFile(
+      audioBuffer,
+      {
+        model: "nova-2",
+        smart_format: true,
+        punctuate: true,
+        diarize: true,
+        utterances: true,
+        language: "en",
+      }
+    );
+    
+    if (error) {
+      console.error(`[Deepgram] Transcription failed:`, error);
+      return { text: null };
+    }
+    
+    const transcript = result?.results?.channels?.[0]?.alternatives?.[0]?.transcript;
+    const rawUtterances = result?.results?.utterances || [];
+    
+    // Build utterances array for speaker diarization
+    const uniqueSpeakers = Array.from(new Set(rawUtterances.map((u: any) => u.speaker)));
+    console.log(`[Deepgram] Found ${rawUtterances.length} utterances with ${uniqueSpeakers.length} unique speakers: ${uniqueSpeakers.join(', ')}`);
+    
+    const utterances = rawUtterances.map((u: any) => ({
+      speaker: `Speaker ${u.speaker}`,
+      text: u.transcript
+    }));
+    
+    console.log(`[Deepgram] Transcribed successfully: ${transcript?.substring(0, 100)}...`);
+    return { 
+      text: transcript || null,
+      utterances: utterances.length > 0 ? utterances : undefined
+    };
+  } catch (error: any) {
+    console.error(`[Deepgram] Transcription failed:`, error.message);
+    return { text: null };
+  }
+}
+
+/**
  * Transcribe audio file using OpenAI Whisper API (fallback)
  */
 async function transcribeWithWhisper(audioPath: string): Promise<string | null> {
@@ -848,8 +914,8 @@ export interface SmartTranscriptionResult {
 }
 
 /**
- * Transcribe call recording using AssemblyAI (primary) or Whisper (fallback)
- * AssemblyAI provides higher accuracy and speaker diarization
+ * Transcribe call recording using configured provider (deepgram, assemblyai, or whisper)
+ * Deepgram and AssemblyAI provide higher accuracy and speaker diarization
  */
 export async function smartTranscribeCall(
   callId: string,
@@ -883,37 +949,66 @@ export async function smartTranscribeCall(
   }
   
   try {
-    console.log(`[Transcribe] Processing ${durationSeconds}s recording for call ${callId}...`);
+    console.log(`[Transcribe] Processing ${durationSeconds}s recording for call ${callId} using ${TRANSCRIPTION_PROVIDER}...`);
     
-    // Try AssemblyAI first (higher quality, speaker diarization)
-    if (assemblyClient) {
-      const assemblyResult = await transcribeWithAssemblyAI(audioPath);
-      if (assemblyResult.text) {
-        result.success = true;
-        result.transcriptText = assemblyResult.text;
-        result.transcriptSource = 'assemblyai';
-        result.utterances = assemblyResult.utterances;
-        result.isSalesCall = isSalesCall(assemblyResult.text);
-        result.sampleOnly = false;
-        console.log(`[Transcribe] AssemblyAI succeeded for call ${callId}`);
-        return result;
-      }
-      console.log(`[Transcribe] AssemblyAI failed for call ${callId}, trying Whisper fallback...`);
-    }
+    // Build provider chain based on configured primary provider
+    const providerChain: Array<'deepgram' | 'assemblyai' | 'whisper'> = [];
     
-    // Fallback to Whisper if AssemblyAI fails or not configured
-    const whisperTranscript = await transcribeWithWhisper(audioPath);
-    if (whisperTranscript) {
-      result.success = true;
-      result.transcriptText = whisperTranscript;
-      result.transcriptSource = 'whisper';
-      result.isSalesCall = isSalesCall(whisperTranscript);
-      result.sampleOnly = false;
-      console.log(`[Transcribe] Whisper succeeded for call ${callId}`);
+    if (TRANSCRIPTION_PROVIDER === 'deepgram') {
+      providerChain.push('deepgram', 'assemblyai', 'whisper');
+    } else if (TRANSCRIPTION_PROVIDER === 'assemblyai') {
+      providerChain.push('assemblyai', 'whisper');
     } else {
-      result.skipReason = "Both AssemblyAI and Whisper transcription failed";
+      providerChain.push('whisper');
     }
     
+    for (const provider of providerChain) {
+      if (provider === 'deepgram' && deepgramClient) {
+        const deepgramResult = await transcribeWithDeepgram(audioPath);
+        if (deepgramResult.text) {
+          result.success = true;
+          result.transcriptText = deepgramResult.text;
+          result.transcriptSource = 'deepgram';
+          result.utterances = deepgramResult.utterances;
+          result.isSalesCall = isSalesCall(deepgramResult.text);
+          result.sampleOnly = false;
+          console.log(`[Transcribe] Deepgram succeeded for call ${callId}`);
+          return result;
+        }
+        console.log(`[Transcribe] Deepgram failed for call ${callId}, trying next provider...`);
+      }
+      
+      if (provider === 'assemblyai' && assemblyClient) {
+        const assemblyResult = await transcribeWithAssemblyAI(audioPath);
+        if (assemblyResult.text) {
+          result.success = true;
+          result.transcriptText = assemblyResult.text;
+          result.transcriptSource = 'assemblyai';
+          result.utterances = assemblyResult.utterances;
+          result.isSalesCall = isSalesCall(assemblyResult.text);
+          result.sampleOnly = false;
+          console.log(`[Transcribe] AssemblyAI succeeded for call ${callId}`);
+          return result;
+        }
+        console.log(`[Transcribe] AssemblyAI failed for call ${callId}, trying next provider...`);
+      }
+      
+      if (provider === 'whisper') {
+        const whisperTranscript = await transcribeWithWhisper(audioPath);
+        if (whisperTranscript) {
+          result.success = true;
+          result.transcriptText = whisperTranscript;
+          result.transcriptSource = 'whisper';
+          result.isSalesCall = isSalesCall(whisperTranscript);
+          result.sampleOnly = false;
+          console.log(`[Transcribe] Whisper succeeded for call ${callId}`);
+          return result;
+        }
+        console.log(`[Transcribe] Whisper failed for call ${callId}`);
+      }
+    }
+    
+    result.skipReason = "All transcription providers failed";
     return result;
   } finally {
     // Clean up temp files
