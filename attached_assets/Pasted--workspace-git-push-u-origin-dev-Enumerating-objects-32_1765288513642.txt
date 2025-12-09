@@ -1,0 +1,38 @@
+~/workspace$ git push -u origin dev
+Enumerating objects: 3250, done.
+Counting objects: 100% (3250/3250), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3177/3177), done.
+Writing objects: 100% (3250/3250), 92.53 MiB | 5.31 MiB/s, done.
+Total 3250 (delta 2463), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2463/2463), done.
+remote: warning: See https://gh.io/lfs for more information.
+remote: warning: File attached_assets/SAVA_1764108834777.zip is 51.09 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB
+remote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.
+remote: error: GH013: Repository rule violations found for refs/heads/dev.
+remote: 
+remote: - GITHUB PUSH PROTECTION
+remote:   —————————————————————————————————————————
+remote:     Resolve the following violations before pushing again
+remote: 
+remote:     - Push cannot contain secrets
+remote: 
+remote:     
+remote:      (?) Learn how to resolve a blocked push
+remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push
+remote:     
+remote:     
+remote:       —— OpenAI API Key ————————————————————————————————————
+remote:        locations:
+remote:          - commit: 8cd98fdd29dfc1dc4804a422cdf49bc4e6632bb5
+remote:            path: attached_assets/aiInteraction_1764468120688.js:5
+remote:     
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.
+remote:        https://github.com/crusher0311/heart-helper/security/secret-scanning/unblock-secret/36bwEHmX2tpLm9JOn29qPUQCtN0
+remote:     
+remote: 
+remote: 
+To https://github.com/crusher0311/heart-helper.git
+ ! [remote rejected] dev -> dev (push declined due to repository rule violations)
+error: failed to push some refs to 'https://github.com/crusher0311/heart-helper.git'
+~/workspace$ 
