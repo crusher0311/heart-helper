@@ -112,10 +112,28 @@ Tekmetric's external IDs are used as primary keys for vehicle/RO data.
 
 **Service Writer Lookup**: The Tekmetric `/employees` list only returns current employees (~30), but `/employees/{id}` returns any employee by ID including former staff. Employee names are cached in-memory and persisted to the `employees` table for fast lookups.
 
+### Transcription Configuration
+
+Call recordings are transcribed using configurable providers. Set `TRANSCRIPTION_PROVIDER` environment variable to control the primary transcription service:
+
+- `deepgram` (default): Deepgram Nova-2 model with speaker diarization → AssemblyAI fallback → Whisper fallback
+- `assemblyai`: AssemblyAI with speaker diarization → Whisper fallback
+- `whisper`: OpenAI Whisper only (no speaker diarization)
+
+Required secrets per provider:
+- Deepgram: `DEEPGRAM_API_KEY`
+- AssemblyAI: `ASSEMBLYAI_API_KEY`
+- Whisper: `OPENAI_API_KEY` (shared with other OpenAI features)
+
+If the configured primary provider fails or its API key is missing, the system automatically falls back to the next provider in the chain.
+
 ## External Dependencies
 
 - **Tekmetric API**: Shop management system for repair order, vehicle, and customer data.
-- **OpenAI API**: Large Language Model for semantic job matching and scoring.
+- **OpenAI API**: Large Language Model for semantic job matching, scoring, and Whisper transcription.
+- **Deepgram API**: Speech-to-text transcription with speaker diarization (Nova-2 model).
+- **AssemblyAI API**: Alternative speech-to-text with speaker diarization.
+- **RingCentral API**: Phone call recordings sync for coaching.
 - **Neon Database**: Serverless PostgreSQL hosting.
 - **Google Fonts**: Inter and JetBrains Mono typefaces.
-- **Key npm Packages**: `@neondatabase/serverless`, `drizzle-orm`, `openai`, `@tanstack/react-query`, `@radix-ui/*`, `tailwindcss`, `zod`, `wouter`, `bcryptjs`, `express-session`.
+- **Key npm Packages**: `@neondatabase/serverless`, `drizzle-orm`, `openai`, `@deepgram/sdk`, `assemblyai`, `@ringcentral/sdk`, `@tanstack/react-query`, `@radix-ui/*`, `tailwindcss`, `zod`, `wouter`, `bcryptjs`, `express-session`.
