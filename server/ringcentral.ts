@@ -30,7 +30,19 @@ const deepgramClient = process.env.DEEPGRAM_API_KEY
   : null;
 
 // Transcription provider: 'deepgram', 'assemblyai', or 'whisper'
-const TRANSCRIPTION_PROVIDER = process.env.TRANSCRIPTION_PROVIDER || 'deepgram';
+// Default from env, but can be overridden by database settings
+const DEFAULT_TRANSCRIPTION_PROVIDER = process.env.TRANSCRIPTION_PROVIDER || 'deepgram';
+
+// Get transcription provider from database settings with env fallback
+async function getTranscriptionProvider(): Promise<string> {
+  try {
+    const settings = await storage.getSettings();
+    return settings?.transcriptionProvider || DEFAULT_TRANSCRIPTION_PROVIDER;
+  } catch (error) {
+    console.log(`[Transcribe] Failed to get settings, using default provider: ${DEFAULT_TRANSCRIPTION_PROVIDER}`);
+    return DEFAULT_TRANSCRIPTION_PROVIDER;
+  }
+}
 
 const RC_SERVER = process.env.RINGCENTRAL_SERVER || "https://platform.ringcentral.com";
 const RC_CLIENT_ID = process.env.RINGCENTRAL_CLIENT_ID;
@@ -949,14 +961,16 @@ export async function smartTranscribeCall(
   }
   
   try {
-    console.log(`[Transcribe] Processing ${durationSeconds}s recording for call ${callId} using ${TRANSCRIPTION_PROVIDER}...`);
+    // Get the configured transcription provider from DB settings
+    const transcriptionProvider = await getTranscriptionProvider();
+    console.log(`[Transcribe] Processing ${durationSeconds}s recording for call ${callId} using ${transcriptionProvider}...`);
     
     // Build provider chain based on configured primary provider
     const providerChain: Array<'deepgram' | 'assemblyai' | 'whisper'> = [];
     
-    if (TRANSCRIPTION_PROVIDER === 'deepgram') {
+    if (transcriptionProvider === 'deepgram') {
       providerChain.push('deepgram', 'assemblyai', 'whisper');
-    } else if (TRANSCRIPTION_PROVIDER === 'assemblyai') {
+    } else if (transcriptionProvider === 'assemblyai') {
       providerChain.push('assemblyai', 'whisper');
     } else {
       providerChain.push('whisper');

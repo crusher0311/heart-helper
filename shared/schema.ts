@@ -199,6 +199,7 @@ export const settings = pgTable("settings", {
   defaultShopId: text("default_shop_id"), // "NB", "WM", or "EV"
   phoneAnswerScript: text("phone_answer_script"), // Custom phone greeting script
   salesScriptTraining: text("sales_script_training"), // Example scripts and guidelines for AI
+  transcriptionProvider: text("transcription_provider"), // "deepgram", "assemblyai", or "whisper"
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 

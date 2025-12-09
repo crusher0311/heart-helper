@@ -30,6 +30,7 @@ type Settings = {
   defaultShopId: ShopLocation | null;
   phoneAnswerScript: string | null;
   salesScriptTraining: string | null;
+  transcriptionProvider: string | null;
   updatedAt: string;
 };
 
@@ -153,6 +154,31 @@ export default function Settings() {
     onError: (error: Error) => {
       toast({
         title: "Backfill failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const transcriptionProviderMutation = useMutation({
+    mutationFn: async (provider: string) => {
+      const response = await apiRequest("POST", "/api/admin/settings/transcription-provider", { provider });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Failed to update transcription provider");
+      }
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Transcription provider updated",
+        description: `Now using ${data.provider} for call transcriptions.`,
+      });
+      queryClient.invalidateQueries({ queryKey: ["/api/settings"] });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Update failed",
         description: error.message,
         variant: "destructive",
       });
@@ -841,11 +867,39 @@ Guidelines:
                     </Button>
                   </div>
 
+                  {/* Transcription Provider Selection */}
+                  <div className="border rounded-lg p-4 space-y-4">
+                    <h4 className="font-medium">Transcription Provider</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Select which AI service to use for transcribing call recordings. Deepgram and AssemblyAI 
+                      provide speaker diarization (identifying who said what).
+                    </p>
+                    <div className="flex items-center gap-4">
+                      <Select
+                        value={settings?.transcriptionProvider || 'deepgram'}
+                        onValueChange={(value) => transcriptionProviderMutation.mutate(value)}
+                        disabled={transcriptionProviderMutation.isPending}
+                      >
+                        <SelectTrigger className="w-48" data-testid="select-transcription-provider">
+                          <SelectValue placeholder="Select provider" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="deepgram">Deepgram (Nova-2)</SelectItem>
+                          <SelectItem value="assemblyai">AssemblyAI</SelectItem>
+                          <SelectItem value="whisper">OpenAI Whisper</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      {transcriptionProviderMutation.isPending && (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      )}
+                    </div>
+                  </div>
+
                   {/* Transcribe Controls */}
                   <div className="border rounded-lg p-4 space-y-4">
-                    <h4 className="font-medium">Smart Transcription (Whisper AI)</h4>
+                    <h4 className="font-medium">Smart Transcription</h4>
                     <p className="text-sm text-muted-foreground">
-                      Transcribe call recordings using OpenAI Whisper. Uses smart sampling to detect sales calls 
+                      Transcribe call recordings using the selected provider. Uses smart sampling to detect sales calls 
                       and only fully transcribe customer conversations, saving ~80% on transcription costs.
                     </p>
                     <div className="flex gap-2">

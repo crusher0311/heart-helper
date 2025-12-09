@@ -886,6 +886,25 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Update transcription provider (admin only)
+  app.post("/api/admin/settings/transcription-provider", isAuthenticated, isApproved, isAdmin, async (req: any, res) => {
+    try {
+      const { provider } = req.body;
+      const validProviders = ['deepgram', 'assemblyai', 'whisper'];
+      if (!validProviders.includes(provider)) {
+        return res.status(400).json({ 
+          error: "Invalid provider", 
+          message: `Provider must be one of: ${validProviders.join(', ')}` 
+        });
+      }
+      const settings = await storage.updateSettings({ transcriptionProvider: provider });
+      res.json({ success: true, provider: settings.transcriptionProvider });
+    } catch (error: any) {
+      console.error("Update transcription provider error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
   // ==========================================
   // Concern Intake API Routes
   // ==========================================
