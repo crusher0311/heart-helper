@@ -441,6 +441,24 @@ export async function syncCallRecords(
           ? call.from.phoneNumber 
           : call.to.phoneNumber;
 
+        // Determine the HEART employee's extension ID based on call direction
+        // Inbound: employee is the recipient (to.extensionId)
+        // Outbound: employee is the caller (from.extensionId)
+        const employeeExtensionId = call.direction === "Inbound" 
+          ? call.to.extensionId 
+          : call.from.extensionId;
+
+        // Look up the user ID from our RingCentral extension mappings
+        let userId: string | null = null;
+        let shopId: string | null = null;
+        if (employeeExtensionId) {
+          const rcUser = await storage.getRingcentralUserByExtensionId(employeeExtensionId);
+          if (rcUser) {
+            userId = rcUser.userId;
+            shopId = rcUser.shopId || null;
+          }
+        }
+
         const callRecord: InsertCallRecording = {
           ringcentralCallId: call.id,
           ringcentralRecordingId: call.recording?.id || null,
@@ -453,6 +471,8 @@ export async function syncCallRecords(
           recordingStatus: call.recording ? "available" : "none",
           callStartTime: new Date(call.startTime),
           callEndTime: new Date(new Date(call.startTime).getTime() + call.duration * 1000),
+          userId: userId,
+          shopId: shopId,
         };
 
         await storage.createCallRecording(callRecord);
@@ -724,6 +744,227 @@ export function isSalesCall(transcript: string): boolean {
   ).length;
   
   return salesKeywordCount >= 2;
+}
+
+// =====================================================
+// SPEAKER PERSONALIZATION
+// =====================================================
+
+// Patterns to detect employee name from greeting phrases
+const NAME_DETECTION_PATTERNS = [
+  /(?:hi|hello|hey|good\s+(?:morning|afternoon|evening))[\s,!.]*(?:this\s+is|i'm|my\s+name\s+is|it's)\s+([a-z]+)/i,
+  /(?:thank\s+you\s+for\s+calling|thanks\s+for\s+calling)[^,]*,?\s*(?:this\s+is|i'm|my\s+name\s+is)\s+([a-z]+)/i,
+  /heart\s+(?:certified\s+)?(?:auto\s+)?(?:care)?[^,]*,?\s*(?:this\s+is|i'm)\s+([a-z]+)/i,
+  /^(?:this\s+is|i'm)\s+([a-z]+)(?:\s+(?:with|at|from)\s+heart)?/i,
+];
+
+/**
+ * Detect speaker name from greeting phrases in transcript
+ */
+export function detectSpeakerNameFromTranscript(
+  utterances: Array<{ speaker: string; text: string }>
+): { detectedName: string | null; speakerLabel: string | null } {
+  // Check the first few utterances for greeting patterns
+  const firstUtterances = utterances.slice(0, 6);
+  
+  for (const utterance of firstUtterances) {
+    const text = utterance.text || '';
+    
+    for (const pattern of NAME_DETECTION_PATTERNS) {
+      const match = text.match(pattern);
+      if (match && match[1]) {
+        const name = match[1].trim();
+        // Validate it looks like a name (2-15 chars, starts with letter)
+        if (name.length >= 2 && name.length <= 15 && /^[a-z]/i.test(name)) {
+          // Capitalize first letter
+          const formattedName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+          console.log(`[Speaker] Detected name "${formattedName}" from phrase: "${text.substring(0, 50)}..."`);
+          return { detectedName: formattedName, speakerLabel: utterance.speaker };
+        }
+      }
+    }
+  }
+  
+  return { detectedName: null, speakerLabel: null };
+}
+
+/**
+ * Determine which speaker is the HEART employee based on:
+ * 1. Name detection from greeting (most reliable)
+ * 2. Keyword analysis of what each speaker says
+ * 3. Call direction heuristics as last resort
+ */
+export function identifyEmployeeSpeaker(
+  utterances: Array<{ speaker: string; text: string }>,
+  direction: string,
+  detectedSpeakerLabel: string | null
+): string | null {
+  if (!utterances || utterances.length === 0) return null;
+  
+  // If we detected a name from greeting, that's the employee speaker - most reliable
+  if (detectedSpeakerLabel) {
+    return detectedSpeakerLabel;
+  }
+  
+  // Get unique speaker labels
+  const uniqueSpeakers = Array.from(new Set(utterances.map(u => u.speaker)));
+  if (uniqueSpeakers.length < 2) {
+    // Only one speaker, can't reliably differentiate - don't guess
+    return null;
+  }
+  
+  // Build text corpus for each speaker
+  const speakerTexts = new Map<string, string[]>();
+  for (const u of utterances) {
+    if (!speakerTexts.has(u.speaker)) {
+      speakerTexts.set(u.speaker, []);
+    }
+    speakerTexts.get(u.speaker)!.push(u.text);
+  }
+  
+  // Look for HEART-specific professional language patterns
+  const employeeKeywords = [
+    'heart', 'certified', 'auto care', 'appointment', 'inspection',
+    'bring it in', 'drop off', 'pick up', 'estimate', 'authorize',
+    'technician', 'mechanic', 'service advisor', 'shop', 'bay',
+    'parts', 'labor', 'warranty', 'we can', 'we\'ll', 'our technician'
+  ];
+  
+  // Customer-like patterns
+  const customerKeywords = [
+    'my car', 'my vehicle', 'my truck', 'how much', 'when can',
+    'can you', 'do you', 'is it ready', 'what\'s wrong'
+  ];
+  
+  let bestEmployee: string | null = null;
+  let bestEmployeeScore = 0;
+  
+  for (const [speaker, texts] of Array.from(speakerTexts.entries())) {
+    const allText = texts.join(' ').toLowerCase();
+    
+    // Count employee-like vs customer-like keywords
+    const employeeScore = employeeKeywords.filter(kw => allText.includes(kw)).length;
+    const customerScore = customerKeywords.filter(kw => allText.includes(kw)).length;
+    
+    // Net score: positive = likely employee, negative = likely customer
+    const netScore = employeeScore - customerScore;
+    
+    if (netScore > bestEmployeeScore) {
+      bestEmployeeScore = netScore;
+      bestEmployee = speaker;
+    }
+  }
+  
+  // Only return if we have reasonable confidence (at least 2 employee keywords matched)
+  if (bestEmployeeScore >= 2) {
+    return bestEmployee;
+  }
+  
+  // Last resort: use call direction heuristic
+  // Inbound: Customer calls, so customer speaks first → employee is second speaker
+  // Outbound: Employee calls, so employee speaks first → employee is first speaker
+  const sortedSpeakers = Array.from(speakerTexts.keys());
+  
+  if (direction === 'outbound' && sortedSpeakers.length >= 1) {
+    // On outbound, employee is likely first speaker
+    return sortedSpeakers[0];
+  } else if (direction === 'inbound' && sortedSpeakers.length >= 2) {
+    // On inbound, customer calls first, so employee is likely second speaker
+    // But only if we can clearly identify two distinct speakers
+    return sortedSpeakers[1];
+  }
+  
+  // If uncertain, return null - better to not label than label wrong
+  return null;
+}
+
+/**
+ * Personalize speaker labels in transcript, replacing generic labels with actual names.
+ * Only returns personalized utterances if we successfully identify the employee speaker.
+ * Returns wasPersonalized flag to indicate if labels were actually changed.
+ */
+export async function personalizeSpeakerLabels(
+  utterances: Array<{ speaker: string; text: string }>,
+  callId: string,
+  direction: string
+): Promise<{
+  personalizedUtterances: Array<{ speaker: string; text: string }>;
+  detectedEmployeeName: string | null;
+  employeeSpeakerLabel: string | null;
+  wasPersonalized: boolean;
+}> {
+  if (!utterances || utterances.length === 0) {
+    return { 
+      personalizedUtterances: utterances, 
+      detectedEmployeeName: null,
+      employeeSpeakerLabel: null,
+      wasPersonalized: false
+    };
+  }
+  
+  // Get the call record to find the userId
+  const call = await storage.getCallRecordingById(callId);
+  let employeeName: string | null = null;
+  
+  // Try to get employee name from user record (via RingCentral extension mapping)
+  if (call?.userId) {
+    const user = await storage.getUser(call.userId);
+    if (user) {
+      // Use first name only for cleaner display
+      const firstName = user.firstName || user.email?.split('@')[0] || null;
+      employeeName = firstName;
+      console.log(`[Speaker] Found employee name from user record: ${employeeName}`);
+    }
+  }
+  
+  // Try to detect name from transcript greeting
+  const { detectedName, speakerLabel: detectedSpeakerLabel } = detectSpeakerNameFromTranscript(utterances);
+  
+  // If we detected a name from audio and don't have one from user record, use detected
+  if (detectedName && !employeeName) {
+    employeeName = detectedName;
+  }
+  
+  // Identify which speaker label corresponds to the employee
+  const employeeSpeakerLabel = identifyEmployeeSpeaker(utterances, direction, detectedSpeakerLabel);
+  
+  if (!employeeSpeakerLabel) {
+    console.log(`[Speaker] Could not confidently identify employee speaker for call ${callId} - keeping original labels`);
+    return { 
+      personalizedUtterances: utterances, 
+      detectedEmployeeName: null,  // Don't persist if we didn't personalize
+      employeeSpeakerLabel: null,
+      wasPersonalized: false
+    };
+  }
+  
+  // Get unique speakers to verify we have two distinct speakers
+  const uniqueSpeakers = Array.from(new Set(utterances.map(u => u.speaker)));
+  if (uniqueSpeakers.length < 2) {
+    console.log(`[Speaker] Only ${uniqueSpeakers.length} speaker(s) detected - cannot personalize`);
+    return { 
+      personalizedUtterances: utterances, 
+      detectedEmployeeName: null,
+      employeeSpeakerLabel: null,
+      wasPersonalized: false
+    };
+  }
+  
+  // Replace speaker labels
+  const finalEmployeeName = employeeName || "Advisor";
+  const personalizedUtterances = utterances.map(u => ({
+    ...u,
+    speaker: u.speaker === employeeSpeakerLabel ? finalEmployeeName : "Customer"
+  }));
+  
+  console.log(`[Speaker] Personalized transcript: ${employeeSpeakerLabel} → ${finalEmployeeName}, others → Customer`);
+  
+  return { 
+    personalizedUtterances, 
+    detectedEmployeeName: detectedName,  // Only persist if we successfully personalized
+    employeeSpeakerLabel,
+    wasPersonalized: true
+  };
 }
 
 /**
@@ -1085,16 +1326,37 @@ export async function batchSmartTranscribe(
         if (result.isSalesCall) stats.salesCalls++;
         if (result.costSaved) stats.totalCostSaved += result.costSaved;
         
-        // Save the transcript with source and utterances
+        // Personalize speaker labels if we have utterances (diarization data)
+        let finalUtterances = result.utterances;
+        let detectedSpeakerName: string | null = null;
+        let wasPersonalized = false;
+        
+        if (result.utterances && result.utterances.length > 0) {
+          const personalizationResult = await personalizeSpeakerLabels(
+            result.utterances,
+            call.id,
+            call.direction || 'inbound'
+          );
+          finalUtterances = personalizationResult.personalizedUtterances;
+          wasPersonalized = personalizationResult.wasPersonalized;
+          // Only store detected name if personalization was successful
+          if (wasPersonalized) {
+            detectedSpeakerName = personalizationResult.detectedEmployeeName;
+          }
+        }
+        
+        // Save the transcript with personalized utterances (or original if personalization failed)
         await storage.updateCallTranscript(call.id, {
           transcript: result.transcriptText,
           transcriptJson: { 
             source: result.transcriptSource || "unknown", 
             sampleOnly: result.sampleOnly,
             isSalesCall: result.isSalesCall,
-            utterances: result.utterances,  // Speaker diarization from AssemblyAI
+            utterances: finalUtterances,
+            wasPersonalized: wasPersonalized,  // Track if we successfully personalized
           },
           isSalesCall: result.isSalesCall,
+          detectedSpeakerName: detectedSpeakerName,  // Only set if personalization succeeded
         });
       } else {
         stats.errors++;

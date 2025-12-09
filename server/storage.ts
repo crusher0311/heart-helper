@@ -140,6 +140,7 @@ export interface IStorage {
     transcript: string | null;
     transcriptJson?: any;
     isSalesCall?: boolean;
+    detectedSpeakerName?: string | null;
   }): Promise<CallRecording>;
   
   // Coaching criteria
@@ -1333,6 +1334,7 @@ export class DatabaseStorage implements IStorage {
     transcript: string | null;
     transcriptJson?: any;
     isSalesCall?: boolean;
+    detectedSpeakerName?: string | null;
   }): Promise<CallRecording> {
     const updateData: any = {
       transcriptText: data.transcript,
@@ -1345,6 +1347,11 @@ export class DatabaseStorage implements IStorage {
     
     if (data.isSalesCall !== undefined) {
       updateData.isSalesCall = data.isSalesCall;
+    }
+    
+    // Store detected speaker name from greeting detection
+    if (data.detectedSpeakerName !== undefined) {
+      updateData.detectedSpeakerName = data.detectedSpeakerName;
     }
     
     const [updated] = await db
