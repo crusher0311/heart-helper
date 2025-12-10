@@ -216,6 +216,21 @@ export const laborRateGroups = pgTable("labor_rate_groups", {
   createdBy: varchar("created_by").references(() => users.id), // Admin who created this
 });
 
+// Job-based labor rates - fixed rates for specific job types (e.g., Cabin Filter = $100)
+// Applies a flat labor charge instead of hourly rate when job name matches keywords
+export const jobLaborRates = pgTable("job_labor_rates", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(), // Display name, e.g., "Cabin Air Filter"
+  keywords: text("keywords").array().notNull(), // Job name keywords to match (case-insensitive), e.g., ["cabin filter", "cabin air filter"]
+  defaultRate: integer("default_rate").notNull(), // Default rate in cents (e.g., 10000 = $100.00)
+  shopOverrides: jsonb("shop_overrides").default('{}'), // Per-shop rate overrides: { "NB": 12000, "WM": 11000 }
+  isActive: boolean("is_active").default(true), // Whether this rate is currently active
+  sortOrder: integer("sort_order").default(0), // Display order in admin UI
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: varchar("created_by").references(() => users.id), // Admin who created this
+});
+
 // ==========================================
 // Call Coaching Tables (RingCentral Integration)
 // ==========================================
@@ -355,6 +370,7 @@ export const insertSearchRequestSchema = createInsertSchema(searchRequests).omit
 export const insertSearchCacheSchema = createInsertSchema(searchCache).omit({ id: true, createdAt: true });
 export const insertSettingsSchema = createInsertSchema(settings).omit({ id: true, updatedAt: true });
 export const insertLaborRateGroupSchema = createInsertSchema(laborRateGroups).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertJobLaborRateSchema = createInsertSchema(jobLaborRates).omit({ id: true, createdAt: true, updatedAt: true });
 
 // Call Coaching insert schemas
 export const insertRingcentralUserSchema = createInsertSchema(ringcentralUsers).omit({ id: true, createdAt: true, updatedAt: true });
@@ -403,6 +419,8 @@ export type InsertSettings = z.infer<typeof insertSettingsSchema>;
 
 export type LaborRateGroup = typeof laborRateGroups.$inferSelect;
 export type InsertLaborRateGroup = z.infer<typeof insertLaborRateGroupSchema>;
+export type JobLaborRate = typeof jobLaborRates.$inferSelect;
+export type InsertJobLaborRate = z.infer<typeof insertJobLaborRateSchema>;
 
 // Call Coaching types
 export type RingcentralUser = typeof ringcentralUsers.$inferSelect;
