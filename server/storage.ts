@@ -21,6 +21,8 @@ import type {
   UserWithPreferences,
   LaborRateGroup,
   InsertLaborRateGroup,
+  JobLaborRate,
+  InsertJobLaborRate,
   RingcentralUser,
   InsertRingcentralUser,
   CallRecording,
@@ -33,7 +35,7 @@ import type {
   InsertTranscriptAnnotation,
 } from "@shared/schema";
 import { db } from "./db";
-import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache, users, userPreferences, scriptFeedback, laborRateGroups, ringcentralUsers, callRecordings, coachingCriteria, callScores, transcriptAnnotations } from "@shared/schema";
+import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache, users, userPreferences, scriptFeedback, laborRateGroups, jobLaborRates, ringcentralUsers, callRecordings, coachingCriteria, callScores, transcriptAnnotations } from "@shared/schema";
 import { eq, and, or, like, ilike, sql, desc, gte, lte, isNull, isNotNull } from "drizzle-orm";
 import crypto from "crypto";
 import { getModelVariations } from "./vehicle-utils";
@@ -107,6 +109,14 @@ export interface IStorage {
   createLaborRateGroup(data: InsertLaborRateGroup): Promise<LaborRateGroup>;
   updateLaborRateGroup(id: string, data: Partial<InsertLaborRateGroup>): Promise<LaborRateGroup>;
   deleteLaborRateGroup(id: string): Promise<void>;
+  
+  // Job-based labor rates (fixed rates for specific job types)
+  getJobLaborRates(activeOnly?: boolean): Promise<JobLaborRate[]>;
+  getJobLaborRateById(id: string): Promise<JobLaborRate | undefined>;
+  createJobLaborRate(data: InsertJobLaborRate): Promise<JobLaborRate>;
+  updateJobLaborRate(id: string, data: Partial<InsertJobLaborRate>): Promise<JobLaborRate>;
+  deleteJobLaborRate(id: string): Promise<void>;
+  findMatchingJobLaborRate(jobName: string, shopId?: string): Promise<{ rate: number; jobLaborRate: JobLaborRate } | null>;
   
   // RingCentral user mappings
   getAllRingcentralUsers(): Promise<RingcentralUser[]>;
@@ -953,6 +963,90 @@ export class DatabaseStorage implements IStorage {
     await db
       .delete(laborRateGroups)
       .where(eq(laborRateGroups.id, id));
+  }
+  
+  // Job-based labor rates (fixed rates for specific job types)
+  async getJobLaborRates(activeOnly: boolean = false): Promise<JobLaborRate[]> {
+    if (activeOnly) {
+      return await db
+        .select()
+        .from(jobLaborRates)
+        .where(eq(jobLaborRates.isActive, true))
+        .orderBy(jobLaborRates.sortOrder, jobLaborRates.name);
+    }
+    return await db
+      .select()
+      .from(jobLaborRates)
+      .orderBy(jobLaborRates.sortOrder, jobLaborRates.name);
+  }
+  
+  async getJobLaborRateById(id: string): Promise<JobLaborRate | undefined> {
+    const [rate] = await db
+      .select()
+      .from(jobLaborRates)
+      .where(eq(jobLaborRates.id, id));
+    return rate;
+  }
+  
+  async createJobLaborRate(data: InsertJobLaborRate): Promise<JobLaborRate> {
+    const [rate] = await db
+      .insert(jobLaborRates)
+      .values(data)
+      .returning();
+    return rate;
+  }
+  
+  async updateJobLaborRate(id: string, data: Partial<InsertJobLaborRate>): Promise<JobLaborRate> {
+    const [rate] = await db
+      .update(jobLaborRates)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(jobLaborRates.id, id))
+      .returning();
+    
+    if (!rate) {
+      throw new Error("Job labor rate not found");
+    }
+    return rate;
+  }
+  
+  async deleteJobLaborRate(id: string): Promise<void> {
+    await db
+      .delete(jobLaborRates)
+      .where(eq(jobLaborRates.id, id));
+  }
+  
+  /**
+   * Find a matching job labor rate for a given job name.
+   * Uses case-insensitive keyword matching.
+   * Returns the rate amount (with shop override if applicable) and the rate record.
+   */
+  async findMatchingJobLaborRate(jobName: string, shopId?: string): Promise<{ rate: number; jobLaborRate: JobLaborRate } | null> {
+    const allRates = await this.getJobLaborRates(true); // Only active rates
+    const normalizedJobName = jobName.toLowerCase().trim();
+    
+    for (const rate of allRates) {
+      // Check if any keyword matches the job name
+      const matches = rate.keywords.some(keyword => {
+        const normalizedKeyword = keyword.toLowerCase().trim();
+        return normalizedJobName.includes(normalizedKeyword);
+      });
+      
+      if (matches) {
+        // Determine the applicable rate (shop override or default)
+        let applicableRate = rate.defaultRate;
+        
+        if (shopId && rate.shopOverrides && typeof rate.shopOverrides === 'object') {
+          const overrides = rate.shopOverrides as Record<string, number>;
+          if (overrides[shopId] !== undefined) {
+            applicableRate = overrides[shopId];
+          }
+        }
+        
+        return { rate: applicableRate, jobLaborRate: rate };
+      }
+    }
+    
+    return null;
   }
   
   // RingCentral user mappings
