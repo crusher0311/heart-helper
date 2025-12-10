@@ -2,6 +2,22 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [3.20.0] - 2025-12-10
+
+### ✨ NEW FEATURE: Job-Based Labor Rates
+- **Added**: New "Job-Based Labor Rates" section in the Rates tab
+- **Purpose**: Display fixed labor charges for specific job types (e.g., Cabin Filter = $100)
+- **Syncing**: Job rates are synced from server on login alongside make-based rates
+- **Display**: Shows job name, keywords for matching, and effective rate
+- **Shop-specific rates**: Displays ★ indicator when shop has a custom override
+- **Storage**: Job rates cached in chrome.storage.local for future job creation use
+
+### Technical Details
+- New `loadJobLaborRates()` function fetches from `/api/job-labor-rates`
+- New `syncJobLaborRates()` function syncs on auth check, login, and registration
+- Updated HTML with job rates list container in Rates tab
+- Rates display with keyword-based fuzzy matching info
+
 ## [2.3.0] - 2025-11-25
 
 ### 🎯 MAJOR IMPROVEMENT: Only Inject Hearts in Concern Sections

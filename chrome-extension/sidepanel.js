@@ -114,8 +114,9 @@ async function checkAuthStatus() {
       updateUserDisplay(currentUser);
       console.log('Auth check successful:', currentUser.email);
       
-      // Sync labor rate groups on successful auth check
+      // Sync labor rates on successful auth check
       await syncLaborRateGroups();
+      await syncJobLaborRates();
     } else {
       console.log('Auth check failed:', response.status);
       currentUser = null;
@@ -230,8 +231,9 @@ async function handleLogin(e) {
       // Update display
       updateUserDisplay(currentUser);
       
-      // Sync labor rate groups after login
+      // Sync labor rates after login
       await syncLaborRateGroups();
+      await syncJobLaborRates();
       
       // Show default tab
       switchTab('incoming');
@@ -304,8 +306,9 @@ async function handleRegister(e) {
       // Update display
       updateUserDisplay(currentUser);
       
-      // Sync labor rate groups after login
+      // Sync labor rates after login
       await syncLaborRateGroups();
+      await syncJobLaborRates();
       
       // Show default tab
       switchTab('incoming');
@@ -358,6 +361,23 @@ async function syncLaborRateGroups() {
     }
   } catch (error) {
     console.error('Failed to sync labor rate groups:', error);
+  }
+}
+
+// Sync job-based labor rates from server to local storage
+async function syncJobLaborRates() {
+  if (!appUrl || !isAuthenticated) return;
+  
+  try {
+    const response = await authenticatedFetch(`${appUrl}/api/job-labor-rates`);
+    if (response.ok) {
+      const rates = await response.json();
+      // Store in chrome.storage.local for background.js to use
+      chrome.storage.local.set({ jobLaborRates: rates });
+      console.log('Job labor rates synced:', rates.length, 'rates');
+    }
+  } catch (error) {
+    console.error('Failed to sync job labor rates:', error);
   }
 }
 
@@ -697,9 +717,10 @@ function switchTab(tab) {
     autoFillSearchVehicle();
   }
   
-  // Load labor rate groups when switching to rates tab
+  // Load labor rate groups and job rates when switching to rates tab
   if (tab === 'rates') {
     loadLaborRateGroups();
+    loadJobLaborRates();
   }
   
   // Load coaching tips when switching to tips tab
@@ -2047,6 +2068,89 @@ function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
+}
+
+// ==================== JOB-BASED LABOR RATES ====================
+
+async function loadJobLaborRates() {
+  const container = document.getElementById("jobLaborRatesList");
+  
+  if (!container) return;
+  
+  // Show loading state
+  container.innerHTML = '<div class="no-groups-message">Loading job rates...</div>';
+  
+  if (!appUrl) {
+    container.innerHTML = `
+      <div class="no-groups-message">
+        Connect to the HEART Helper app to view job rates.
+      </div>
+    `;
+    return;
+  }
+  
+  // Get current shop ID
+  const shopId = await getCurrentTekmetricShopId();
+  
+  try {
+    // Fetch job rates from server
+    const response = await authenticatedFetch(`${appUrl}/api/job-labor-rates${shopId ? `?shopId=${shopId}` : ''}`);
+    
+    if (!response.ok) {
+      if (response.status === 401) {
+        container.innerHTML = `
+          <div class="no-groups-message">
+            Sign in to view job labor rates.
+          </div>
+        `;
+        return;
+      }
+      throw new Error(`Server error: ${response.status}`);
+    }
+    
+    const rates = await response.json();
+    
+    // Store in chrome.storage.local for use when creating jobs
+    await chrome.storage.local.set({ jobLaborRates: rates });
+    
+    if (rates.length === 0) {
+      container.innerHTML = `
+        <div class="no-groups-message">
+          No job-based labor rates configured.
+          ${currentUser?.isAdmin ? '<br><br>Click "Manage Labor Rates" below to add job rates.' : ''}
+        </div>
+      `;
+      return;
+    }
+    
+    // Render job rates
+    container.innerHTML = rates.map(rate => {
+      // Determine the effective rate for current shop
+      const shopRate = shopId && rate.shopRates && rate.shopRates[shopId];
+      const effectiveRate = shopRate !== undefined ? shopRate : rate.defaultRate;
+      const isShopSpecific = shopRate !== undefined;
+      
+      return `
+        <div class="labor-rate-group-card">
+          <div class="labor-rate-group-header">
+            <span class="labor-rate-group-name">${escapeHtml(rate.jobName)}</span>
+            <span class="labor-rate-group-rate">${isShopSpecific ? '★ ' : ''}$${(effectiveRate / 100).toFixed(2)}</span>
+          </div>
+          <div class="labor-rate-group-makes">
+            <strong>Keywords:</strong> ${rate.keywords.map(k => escapeHtml(k)).join(", ")}
+          </div>
+        </div>
+      `;
+    }).join("");
+    
+  } catch (error) {
+    console.error('Error loading job labor rates:', error);
+    container.innerHTML = `
+      <div class="no-groups-message error">
+        Failed to load job rates. Check your connection.
+      </div>
+    `;
+  }
 }
 
 // ==================== LIVE COACHING TIPS ====================

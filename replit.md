@@ -69,7 +69,7 @@ All protected routes require both authentication and approval status check.
 
 CORS is configured to allow Chrome extension origins (chrome-extension://), *.replit.dev, *.replit.app, and localhost with credentials support for cross-origin authentication.
 
-### Chrome Extension (v3.19.0)
+### Chrome Extension (v3.20.0)
 
 Located in `/chrome-extension/`, provides:
 - **Built-in Login/Registration**: Users can sign in or create accounts directly in the extension side panel - no need to visit the web app
@@ -78,10 +78,10 @@ Located in `/chrome-extension/`, provides:
   - **Search**: Native repair order search with job details, pricing, and "Create Job in Tekmetric" button
   - **Sales Script**: AI-generated sales scripts with feedback tracking
   - **Tips**: Live coaching tips based on configured coaching criteria, with HEART 9-Point Method quick reference
-  - **Rates**: View labor rate groups configured by admins
+  - **Rates**: View make-based hourly labor rate groups AND job-based fixed labor rates configured by admins
 - **API-based vehicle data extraction**: Uses Tekmetric API via `/api/tekmetric/ro/:shopId/:roId` for accurate vehicle info (year, make, model, engine) instead of DOM scraping. Falls back to DOM parsing if API unavailable.
 - **Create Job functionality**: From search results, users can click "Create Job in Tekmetric" to prepare job data for import
-- **Labor Rate Sync**: Automatically syncs labor rate groups from server after login
+- **Labor Rate Sync**: Automatically syncs both make-based labor rate groups and job-based labor rates from server after login
 - Tekmetric page integration for repair order and vehicle data
 - AI sales script generation with personalization indicator
 - Feedback submission (thumbs up/down) synced to server
@@ -103,6 +103,7 @@ The PostgreSQL database (Neon serverless) stores:
 - `user_preferences` - Per-user settings and AI training data (includes managedShopId for location-based access)
 - `script_feedback` - User feedback on generated scripts
 - `labor_rate_groups` - Centralized labor rate configuration by vehicle make and shop location
+- `job_labor_rates` - Fixed labor rates for specific job types with keyword matching and shop-specific overrides
 - `ringcentral_users` - RingCentral extension mappings to app users
 - `call_recordings` - Call log data synced from RingCentral with transcripts
 - `coaching_criteria` - Configurable 10-point grading system for call scoring
