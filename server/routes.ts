@@ -366,6 +366,133 @@ export async function registerRoutes(app: Express) {
     }
   });
   
+  // ==================== JOB LABOR RATES (ADMIN) ====================
+  // Fixed rates for specific job types (e.g., Cabin Filter = $100)
+  
+  // Get all job labor rates (admin view - sees all)
+  app.get('/api/admin/job-labor-rates', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const rates = await storage.getJobLaborRates(false); // Include inactive
+      res.json(rates);
+    } catch (error) {
+      console.error("Error fetching job labor rates:", error);
+      res.status(500).json({ message: "Failed to fetch job labor rates" });
+    }
+  });
+  
+  // Create job labor rate (admin only)
+  app.post('/api/admin/job-labor-rates', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { name, keywords, defaultRate, shopOverrides, isActive, sortOrder } = req.body;
+      
+      if (!name || !keywords || !Array.isArray(keywords) || keywords.length === 0 || defaultRate === undefined) {
+        return res.status(400).json({ error: "name, keywords (non-empty array), and defaultRate are required" });
+      }
+      
+      const rate = await storage.createJobLaborRate({
+        name,
+        keywords,
+        defaultRate: Math.round(defaultRate),
+        shopOverrides: shopOverrides || {},
+        isActive: isActive !== false,
+        sortOrder: sortOrder || 0,
+        createdBy: req.user.id,
+      });
+      res.json(rate);
+    } catch (error) {
+      console.error("Error creating job labor rate:", error);
+      res.status(500).json({ message: "Failed to create job labor rate" });
+    }
+  });
+  
+  // Update job labor rate (admin only)
+  app.put('/api/admin/job-labor-rates/:id', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { id } = req.params;
+      const { name, keywords, defaultRate, shopOverrides, isActive, sortOrder } = req.body;
+      
+      const updateData: any = {};
+      if (name !== undefined) updateData.name = name;
+      if (keywords !== undefined) {
+        if (!Array.isArray(keywords) || keywords.length === 0) {
+          return res.status(400).json({ error: "keywords must be a non-empty array" });
+        }
+        updateData.keywords = keywords;
+      }
+      if (defaultRate !== undefined) updateData.defaultRate = Math.round(defaultRate);
+      if (shopOverrides !== undefined) updateData.shopOverrides = shopOverrides;
+      if (isActive !== undefined) updateData.isActive = isActive;
+      if (sortOrder !== undefined) updateData.sortOrder = sortOrder;
+      
+      const rate = await storage.updateJobLaborRate(id, updateData);
+      res.json(rate);
+    } catch (error: any) {
+      console.error("Error updating job labor rate:", error);
+      if (error.message === "Job labor rate not found") {
+        return res.status(404).json({ error: "Job labor rate not found" });
+      }
+      res.status(500).json({ message: "Failed to update job labor rate" });
+    }
+  });
+  
+  // Delete job labor rate (admin only)
+  app.delete('/api/admin/job-labor-rates/:id', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { id } = req.params;
+      await storage.deleteJobLaborRate(id);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error deleting job labor rate:", error);
+      res.status(500).json({ message: "Failed to delete job labor rate" });
+    }
+  });
+  
+  // ==================== JOB LABOR RATES (USER) ====================
+  
+  // Get active job labor rates (authenticated users)
+  // The extension uses this to lookup rates for specific job types
+  app.get('/api/job-labor-rates', isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const rates = await storage.getJobLaborRates(true); // Only active
+      res.json(rates);
+    } catch (error) {
+      console.error("Error fetching job labor rates:", error);
+      res.status(500).json({ message: "Failed to fetch job labor rates" });
+    }
+  });
+  
+  // Find matching job labor rate for a given job name
+  // Returns the rate amount and matched rule
+  app.post('/api/job-labor-rates/match', isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const { jobName, shopId } = req.body;
+      
+      if (!jobName) {
+        return res.status(400).json({ error: "jobName is required" });
+      }
+      
+      const match = await storage.findMatchingJobLaborRate(jobName, shopId);
+      
+      if (!match) {
+        return res.json({ matched: false });
+      }
+      
+      res.json({
+        matched: true,
+        rate: match.rate,
+        rateFormatted: `$${(match.rate / 100).toFixed(2)}`,
+        matchedRule: {
+          id: match.jobLaborRate.id,
+          name: match.jobLaborRate.name,
+          keywords: match.jobLaborRate.keywords,
+        },
+      });
+    } catch (error) {
+      console.error("Error matching job labor rate:", error);
+      res.status(500).json({ message: "Failed to match job labor rate" });
+    }
+  });
+  
   // ==================== LABOR RATE GROUPS (USER) ====================
   
   // Get labor rate groups for a specific shop (authenticated users)
