@@ -10,6 +10,7 @@ import Admin from "@/pages/admin";
 import AdminLaborRates from "@/pages/admin-labor-rates";
 import AdminCoachingCriteria from "@/pages/admin-coaching-criteria";
 import AdminExtensionMapping from "@/pages/admin-extension-mapping";
+import AdminJobLaborRates from "@/pages/admin-job-labor-rates";
 import Calls from "@/pages/calls";
 import CallDetail from "@/pages/call-detail";
 import CoachingDashboard from "@/pages/coaching-dashboard";
@@ -44,6 +45,7 @@ function Router() {
       <Route path="/settings" component={Settings}/>
       <Route path="/admin" component={Admin}/>
       <Route path="/admin/labor-rates" component={AdminLaborRates}/>
+      <Route path="/admin/job-labor-rates" component={AdminJobLaborRates}/>
       <Route path="/admin/coaching-criteria" component={AdminCoachingCriteria}/>
       <Route path="/admin/extension-mapping" component={AdminExtensionMapping}/>
       <Route path="/calls" component={Calls}/>

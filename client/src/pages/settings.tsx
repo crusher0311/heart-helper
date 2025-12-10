@@ -1,4 +1,4 @@
-import { Download, Chrome, CheckCircle2, Circle, Sparkles, Search, Send, Zap, Settings as SettingsIcon, XCircle, Loader2, Phone, MessageSquare, FileText, DollarSign, ExternalLink, Headphones, PhoneCall, RefreshCw, Users } from "lucide-react";
+import { Download, Chrome, CheckCircle2, Circle, Sparkles, Search, Send, Zap, Settings as SettingsIcon, XCircle, Loader2, Phone, MessageSquare, FileText, DollarSign, ExternalLink, Headphones, PhoneCall, RefreshCw, Users, Tag } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -728,6 +728,40 @@ Guidelines:
                 <Button data-testid="button-manage-labor-rates">
                   <DollarSign className="w-4 h-4 mr-2" />
                   Manage Labor Rates
+                  <ExternalLink className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Job-Based Labor Rates Section - Admin Only */}
+        {adminCheck?.isAdmin && (
+          <Card className="mb-6">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Tag className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <CardTitle>Job-Based Labor Rates</CardTitle>
+                  <CardDescription>
+                    Set fixed labor charges for specific job types
+                  </CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Alert>
+                <AlertDescription>
+                  Job-based rates apply fixed labor charges to specific job types (e.g., Cabin Filter = $100). Unlike make-based rates that use hourly pricing, these are flat rates matched by job name keywords.
+                </AlertDescription>
+              </Alert>
+
+              <Link href="/admin/job-labor-rates">
+                <Button data-testid="button-manage-job-labor-rates">
+                  <Tag className="w-4 h-4 mr-2" />
+                  Manage Job Rates
                   <ExternalLink className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
