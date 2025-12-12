@@ -486,3 +486,73 @@ export async function getEmployeeName(employeeId: number, shopLocation?: ShopLoc
   // Employee not found anywhere
   return null;
 }
+
+// Carfax history record type
+export interface CarfaxHistoryRecord {
+  date: string;
+  odometer: number | null;
+  description: string;
+}
+
+// Fetch Carfax vehicle history via Tekmetric's internal API
+// This uses Tekmetric's shop portal endpoint which proxies to Carfax
+export async function fetchCarfaxHistory(shopLocation: ShopLocation, vin: string): Promise<CarfaxHistoryRecord[]> {
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    throw new Error("Tekmetric API key not configured");
+  }
+
+  const shopId = getShopId(shopLocation);
+  if (!shopId) {
+    throw new Error(`Shop ${shopLocation} not configured`);
+  }
+
+  // Use Tekmetric's internal Carfax endpoint
+  // URL pattern: https://shop.tekmetric.com/api/shop/{shopId}/carfax/history/{vin}
+  const url = `https://shop.tekmetric.com/api/shop/${shopId}/carfax/history/${vin}`;
+  
+  const headers: Record<string, string> = {
+    "Authorization": `Bearer ${apiKey}`,
+    "Content-Type": "application/json",
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers,
+    });
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        // No Carfax history found - not an error, just empty
+        return [];
+      }
+      const errorText = await response.text();
+      console.error(`Carfax API error (${response.status}): ${errorText}`);
+      return [];
+    }
+
+    const data = await response.json();
+    
+    // Parse Carfax response - it may be an array of records
+    // Each record typically has: date, odometer, description
+    if (Array.isArray(data)) {
+      return data.map((record: any) => ({
+        date: record.date || record.serviceDate || '',
+        odometer: record.odometer || record.mileage || null,
+        description: record.description || record.service || record.text || '',
+      }));
+    }
+    
+    // Handle if data.records or data.history is the array
+    const records = data.records || data.history || data.items || [];
+    return records.map((record: any) => ({
+      date: record.date || record.serviceDate || '',
+      odometer: record.odometer || record.mileage || null,
+      description: record.description || record.service || record.text || '',
+    }));
+  } catch (error) {
+    console.error(`Failed to fetch Carfax history for VIN ${vin}:`, error);
+    return [];
+  }
+}

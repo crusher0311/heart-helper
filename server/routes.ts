@@ -493,6 +493,151 @@ export async function registerRoutes(app: Express) {
     }
   });
   
+  // ==================== VEHICLE HISTORY & WARRANTY ANALYSIS ====================
+  
+  // Get vehicle service history by VIN with warranty analysis
+  // Returns HEART shop history with warranty calculations + Carfax history (if available)
+  app.get('/api/vehicle-history/:vin', isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const { vin } = req.params;
+      const currentMileage = req.query.mileage ? parseInt(req.query.mileage as string) : undefined;
+      const includeCarfax = req.query.includeCarfax !== 'false';
+      const shopId = req.query.shopId as string | undefined;
+      
+      if (!vin || vin.length < 11) {
+        return res.status(400).json({ error: "Valid VIN is required" });
+      }
+      
+      // Get HEART shop history with warranty calculations
+      const history = await storage.getVehicleHistoryByVin(vin, currentMileage);
+      
+      // Optionally fetch Carfax history
+      if (includeCarfax) {
+        try {
+          const { fetchCarfaxHistory, getAvailableShops } = await import("./tekmetric");
+          const shops = getAvailableShops();
+          const targetShop = shopId && ['NB', 'WM', 'EV'].includes(shopId) 
+            ? shopId as 'NB' | 'WM' | 'EV' 
+            : shops[0];
+          
+          if (targetShop) {
+            const carfaxHistory = await fetchCarfaxHistory(targetShop, vin);
+            history.carfaxHistory = carfaxHistory;
+          }
+        } catch (carfaxError) {
+          console.error("Failed to fetch Carfax history:", carfaxError);
+          // Continue without Carfax data
+        }
+      }
+      
+      res.json(history);
+    } catch (error) {
+      console.error("Error fetching vehicle history:", error);
+      res.status(500).json({ message: "Failed to fetch vehicle history" });
+    }
+  });
+  
+  // Cross-reference recommended jobs against vehicle history
+  // Used by Chrome extension to flag warranty/recently-serviced items
+  app.post('/api/vehicle-history/check-recommendations', isAuthenticated, isApproved, async (req: any, res) => {
+    try {
+      const schema = z.object({
+        vin: z.string().min(11),
+        currentMileage: z.number().optional(),
+        recommendedJobs: z.array(z.string()), // Array of job names to check
+        shopId: z.string().optional(),
+      });
+      
+      const { vin, currentMileage, recommendedJobs, shopId } = schema.parse(req.body);
+      
+      // Get vehicle history
+      const history = await storage.getVehicleHistoryByVin(vin, currentMileage);
+      
+      // Optionally fetch Carfax history
+      try {
+        const { fetchCarfaxHistory, getAvailableShops } = await import("./tekmetric");
+        const shops = getAvailableShops();
+        const targetShop = shopId && ['NB', 'WM', 'EV'].includes(shopId) 
+          ? shopId as 'NB' | 'WM' | 'EV' 
+          : shops[0];
+        
+        if (targetShop) {
+          const carfaxHistory = await fetchCarfaxHistory(targetShop, vin);
+          history.carfaxHistory = carfaxHistory;
+        }
+      } catch (carfaxError) {
+        console.error("Failed to fetch Carfax for recommendations:", carfaxError);
+      }
+      
+      // Cross-reference each recommended job against history
+      const results = recommendedJobs.map(jobName => {
+        const lowerJobName = jobName.toLowerCase();
+        
+        // Check HEART history first
+        const heartMatch = history.heartHistory.find(item => 
+          item.jobName.toLowerCase().includes(lowerJobName) || 
+          lowerJobName.includes(item.jobName.toLowerCase())
+        );
+        
+        if (heartMatch) {
+          return {
+            jobName,
+            status: heartMatch.warrantyStatus,
+            source: 'heart' as const,
+            lastServiceDate: heartMatch.serviceDate,
+            lastServiceMileage: heartMatch.mileage,
+            daysRemaining: heartMatch.daysRemaining,
+            milesRemaining: heartMatch.milesRemaining,
+            shopName: heartMatch.shopName,
+            warrantyExpiresDate: heartMatch.warrantyExpiresDate,
+            warrantyExpiresMileage: heartMatch.warrantyExpiresMileage,
+          };
+        }
+        
+        // Check Carfax history
+        if (history.carfaxHistory) {
+          const carfaxMatch = history.carfaxHistory.find(record => 
+            record.description.toLowerCase().includes(lowerJobName) ||
+            lowerJobName.includes(record.description.toLowerCase())
+          );
+          
+          if (carfaxMatch) {
+            const serviceDate = new Date(carfaxMatch.date);
+            const today = new Date();
+            const daysSince = Math.ceil((today.getTime() - serviceDate.getTime()) / (1000 * 60 * 60 * 24));
+            
+            return {
+              jobName,
+              status: daysSince <= 180 ? 'serviced_elsewhere' as const : 'due_for_service' as const,
+              source: 'carfax' as const,
+              lastServiceDate: carfaxMatch.date,
+              lastServiceMileage: carfaxMatch.odometer,
+              daysSinceService: daysSince,
+            };
+          }
+        }
+        
+        // No history found - recommend it
+        return {
+          jobName,
+          status: 'due_for_service' as const,
+          source: null,
+          message: 'No service history found',
+        };
+      });
+      
+      res.json({
+        vin,
+        vehicle: history.vehicle,
+        currentMileage,
+        recommendations: results,
+      });
+    } catch (error) {
+      console.error("Error checking recommendations:", error);
+      res.status(500).json({ message: "Failed to check recommendations" });
+    }
+  });
+  
   // ==================== LABOR RATE GROUPS (USER) ====================
   
   // Get labor rate groups for a specific shop (authenticated users)

@@ -573,3 +573,51 @@ export type CleanConversationRequest = z.infer<typeof cleanConversationRequestSc
 export type CleanConversationResponse = {
   cleanedText: string;
 };
+
+// ==========================================
+// Vehicle History & Warranty Analysis Types
+// ==========================================
+
+// Warranty status for a service item
+export type WarrantyStatus = 
+  | "under_warranty"      // Still covered - don't recommend
+  | "serviced_elsewhere"  // Done at another shop (Carfax) - caution
+  | "due_for_service"     // Outside warranty/interval - recommend
+  | "recently_serviced";  // Done within 3 months - may not need yet
+
+// Individual service record from our history
+export type ServiceHistoryItem = {
+  id: number;
+  jobName: string;
+  serviceDate: string;          // ISO date string
+  mileage: number;              // Odometer at service
+  shopLocation: string;         // "NB", "WM", "EV"
+  shopName: string;             // "Northbrook", "Wilmette", "Evanston"
+  repairOrderId: number;
+  laborCost: number;            // In cents
+  partsCost: number;            // In cents
+  totalCost: number;            // In cents
+  source: "heart" | "carfax";   // Where this record came from
+  warrantyStatus: WarrantyStatus;
+  warrantyExpiresDate?: string; // When warranty expires (ISO date)
+  warrantyExpiresMileage?: number; // Mileage when warranty expires
+  daysRemaining?: number;       // Days left on warranty (negative if expired)
+  milesRemaining?: number;      // Miles left on warranty (negative if expired)
+  serviceWriterName?: string;   // Who wrote the RO
+};
+
+// Carfax service record (from Tekmetric API proxy)
+export type CarfaxServiceRecord = {
+  date: string;
+  odometer: number | null;
+  description: string;
+};
+
+// Combined vehicle service history
+export type VehicleServiceHistory = {
+  vin: string;
+  vehicle?: VehicleInfo;
+  heartHistory: ServiceHistoryItem[];      // Services at our shops
+  carfaxHistory?: CarfaxServiceRecord[];   // External services (if available)
+  currentMileage?: number;                 // Current odometer for calculations
+};

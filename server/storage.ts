@@ -33,9 +33,12 @@ import type {
   InsertCallScore,
   TranscriptAnnotation,
   InsertTranscriptAnnotation,
+  VehicleServiceHistory,
+  ServiceHistoryItem,
+  WarrantyStatus,
 } from "@shared/schema";
 import { db } from "./db";
-import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache, users, userPreferences, scriptFeedback, laborRateGroups, jobLaborRates, ringcentralUsers, callRecordings, coachingCriteria, callScores, transcriptAnnotations } from "@shared/schema";
+import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache, users, userPreferences, scriptFeedback, laborRateGroups, jobLaborRates, ringcentralUsers, callRecordings, coachingCriteria, callScores, transcriptAnnotations, SHOP_NAMES } from "@shared/schema";
 import { eq, and, or, like, ilike, sql, desc, gte, lte, isNull, isNotNull } from "drizzle-orm";
 import crypto from "crypto";
 import { getModelVariations } from "./vehicle-utils";
@@ -206,6 +209,9 @@ export interface IStorage {
   createTranscriptAnnotation(data: InsertTranscriptAnnotation): Promise<TranscriptAnnotation>;
   updateTranscriptAnnotation(id: string, data: Partial<InsertTranscriptAnnotation>): Promise<TranscriptAnnotation>;
   deleteTranscriptAnnotation(id: string): Promise<void>;
+  
+  // Vehicle history with warranty analysis
+  getVehicleHistoryByVin(vin: string, currentMileage?: number): Promise<VehicleServiceHistory>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -1807,6 +1813,134 @@ export class DatabaseStorage implements IStorage {
     await db
       .delete(transcriptAnnotations)
       .where(eq(transcriptAnnotations.id, id));
+  }
+
+  // Vehicle history with warranty analysis
+  async getVehicleHistoryByVin(vin: string, currentMileage?: number): Promise<VehicleServiceHistory> {
+    // Find the vehicle by VIN
+    const [vehicle] = await db
+      .select()
+      .from(vehicles)
+      .where(eq(vehicles.vin, vin))
+      .limit(1);
+
+    // Get all repair orders for this vehicle via rawData or vehicleId join
+    // First, find all ROs that have this vehicle
+    const vehicleRos = vehicle ? await db
+      .select({
+        ro: repairOrders,
+      })
+      .from(repairOrders)
+      .where(
+        sql`${repairOrders.rawData}->>'vehicleId' = ${vehicle.id.toString()}`
+      ) : [];
+
+    // Get all jobs for those ROs
+    const roIds = vehicleRos.map(r => r.ro.id);
+    
+    let allJobs: Array<typeof repairOrderJobs.$inferSelect & { 
+      repairOrder: typeof repairOrders.$inferSelect 
+    }> = [];
+    
+    if (roIds.length > 0) {
+      const jobs = await db
+        .select()
+        .from(repairOrderJobs)
+        .innerJoin(repairOrders, eq(repairOrderJobs.repairOrderId, repairOrders.id))
+        .where(sql`${repairOrderJobs.repairOrderId} = ANY(${sql.raw(`ARRAY[${roIds.join(',')}]`)})`);
+      
+      allJobs = jobs.map(j => ({
+        ...j.repair_order_jobs,
+        repairOrder: j.repair_orders,
+      }));
+    }
+
+    // Calculate warranty status for each job
+    const heartHistory: ServiceHistoryItem[] = [];
+    const warrantyBreakpointDate = new Date('2025-01-01');
+    const today = new Date();
+
+    for (const job of allJobs) {
+      const ro = job.repairOrder;
+      const serviceDate = ro.completedDate || ro.postedDate || ro.createdDate;
+      if (!serviceDate) continue;
+
+      // Get mileage from raw_data (usually stored as mileageIn or odometer)
+      const rawData = ro.rawData as any;
+      const mileage = rawData?.mileageIn || rawData?.mileageOut || rawData?.odometer || 0;
+      
+      // Determine shop location from shopId
+      const shopLocation = (ro.shopId || 'NB') as 'NB' | 'WM' | 'EV';
+      const shopName = SHOP_NAMES[shopLocation] || shopLocation;
+
+      // Calculate warranty based on service date
+      // Before 1/1/25: 2 years / 24,000 miles
+      // On/After 1/1/25: 3 years / 36,000 miles
+      const serviceDateObj = new Date(serviceDate);
+      const isNewWarranty = serviceDateObj >= warrantyBreakpointDate;
+      const warrantyYears = isNewWarranty ? 3 : 2;
+      const warrantyMiles = isNewWarranty ? 36000 : 24000;
+
+      // Calculate warranty expiration
+      const warrantyExpiresDate = new Date(serviceDateObj);
+      warrantyExpiresDate.setFullYear(warrantyExpiresDate.getFullYear() + warrantyYears);
+      const warrantyExpiresMileage = mileage + warrantyMiles;
+
+      // Calculate days and miles remaining
+      const daysRemaining = Math.ceil((warrantyExpiresDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+      const milesRemaining = currentMileage ? warrantyExpiresMileage - currentMileage : undefined;
+
+      // Determine warranty status
+      let warrantyStatus: WarrantyStatus;
+      const daysSinceService = Math.ceil((today.getTime() - serviceDateObj.getTime()) / (1000 * 60 * 60 * 24));
+      
+      if (daysRemaining > 0 && (milesRemaining === undefined || milesRemaining > 0)) {
+        // Still under warranty (both time and mileage if available)
+        warrantyStatus = 'under_warranty';
+      } else if (daysSinceService <= 90) {
+        // Done within last 3 months - recently serviced
+        warrantyStatus = 'recently_serviced';
+      } else {
+        // Outside warranty - due for service
+        warrantyStatus = 'due_for_service';
+      }
+
+      heartHistory.push({
+        id: job.id,
+        jobName: job.name || 'Unknown Service',
+        serviceDate: serviceDateObj.toISOString(),
+        mileage,
+        shopLocation,
+        shopName,
+        repairOrderId: ro.id,
+        laborCost: job.laborCost || 0,
+        partsCost: job.partsCost || 0,
+        totalCost: (job.laborCost || 0) + (job.partsCost || 0),
+        source: 'heart',
+        warrantyStatus,
+        warrantyExpiresDate: warrantyExpiresDate.toISOString(),
+        warrantyExpiresMileage,
+        daysRemaining,
+        milesRemaining,
+        serviceWriterName: ro.serviceWriterName || undefined,
+      });
+    }
+
+    // Sort by service date descending (newest first)
+    heartHistory.sort((a, b) => new Date(b.serviceDate).getTime() - new Date(a.serviceDate).getTime());
+
+    return {
+      vin,
+      vehicle: vehicle ? {
+        id: vehicle.id,
+        make: vehicle.make || undefined,
+        model: vehicle.model || undefined,
+        year: vehicle.year || undefined,
+        vin: vehicle.vin || undefined,
+      } : undefined,
+      heartHistory,
+      currentMileage,
+    };
   }
 }
 
