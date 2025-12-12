@@ -1866,8 +1866,10 @@ export class DatabaseStorage implements IStorage {
       if (!serviceDate) continue;
 
       // Get mileage from raw_data (usually stored as mileageIn or odometer)
+      // Treat 0 as "unknown" since it means mileage wasn't recorded
       const rawData = ro.rawData as any;
-      const mileage = rawData?.mileageIn || rawData?.mileageOut || rawData?.odometer || 0;
+      const rawMileage = rawData?.mileageIn || rawData?.mileageOut || rawData?.odometer;
+      const mileage = rawMileage && rawMileage > 0 ? rawMileage : undefined;
       
       // Determine shop location from shopId
       const shopLocation = (ro.shopId || 'NB') as 'NB' | 'WM' | 'EV';
@@ -1884,13 +1886,18 @@ export class DatabaseStorage implements IStorage {
       // Calculate warranty expiration
       const warrantyExpiresDate = new Date(serviceDateObj);
       warrantyExpiresDate.setFullYear(warrantyExpiresDate.getFullYear() + warrantyYears);
-      const warrantyExpiresMileage = mileage + warrantyMiles;
+      // Only calculate mileage-based warranty if we have the service mileage
+      const warrantyExpiresMileage = mileage ? mileage + warrantyMiles : undefined;
 
       // Calculate days and miles remaining
       const daysRemaining = Math.ceil((warrantyExpiresDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-      const milesRemaining = currentMileage ? warrantyExpiresMileage - currentMileage : undefined;
+      // Only calculate miles remaining if we have both service mileage and current mileage
+      const milesRemaining = (warrantyExpiresMileage && currentMileage) 
+        ? warrantyExpiresMileage - currentMileage 
+        : undefined;
 
       // Determine warranty status
+      // If we don't have mileage data, rely on time-based warranty only
       let warrantyStatus: WarrantyStatus;
       const daysSinceService = Math.ceil((today.getTime() - serviceDateObj.getTime()) / (1000 * 60 * 60 * 24));
       
@@ -1926,8 +1933,13 @@ export class DatabaseStorage implements IStorage {
       });
     }
 
+    // Deduplicate by job ID (in case of duplicate records in database)
+    const uniqueHistory = heartHistory.filter((item, index, self) =>
+      index === self.findIndex(t => t.id === item.id)
+    );
+    
     // Sort by service date descending (newest first)
-    heartHistory.sort((a, b) => new Date(b.serviceDate).getTime() - new Date(a.serviceDate).getTime());
+    uniqueHistory.sort((a, b) => new Date(b.serviceDate).getTime() - new Date(a.serviceDate).getTime());
 
     return {
       vin,
@@ -1938,7 +1950,7 @@ export class DatabaseStorage implements IStorage {
         year: vehicle.year || undefined,
         vin: vehicle.vin || undefined,
       } : undefined,
-      heartHistory,
+      heartHistory: uniqueHistory,
       currentMileage,
     };
   }
