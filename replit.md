@@ -69,7 +69,7 @@ All protected routes require both authentication and approval status check.
 
 CORS is configured to allow Chrome extension origins (chrome-extension://), *.replit.dev, *.replit.app, and localhost with credentials support for cross-origin authentication.
 
-### Chrome Extension (v3.21.0)
+### Chrome Extension (v3.22.0)
 
 Located in `/chrome-extension/`, provides:
 - **Built-in Login/Registration**: Users can sign in or create accounts directly in the extension side panel - no need to visit the web app

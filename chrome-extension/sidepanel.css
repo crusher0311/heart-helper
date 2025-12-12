@@ -484,6 +484,121 @@ textarea {
   color: #999;
 }
 
+/* RO Jobs Section with Warranty Status */
+.ro-jobs-section {
+  padding: 12px 16px;
+  background: #f9fafb;
+  border-bottom: 1px solid #eee;
+}
+
+.ro-jobs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 10px;
+}
+
+.ro-jobs-count {
+  background: #e5e7eb;
+  color: #4b5563;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.ro-jobs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ro-job-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 10px 12px;
+  gap: 8px;
+}
+
+.ro-job-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ro-job-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 4px;
+  word-break: break-word;
+}
+
+.ro-job-price {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.ro-job-badges {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.ro-job-badge {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.ro-job-badge.under-warranty {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.ro-job-badge.recently-serviced {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.ro-job-badge.serviced-elsewhere {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.ro-job-badge.due-for-service {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.ro-jobs-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #6b7280;
+  padding: 8px 0;
+}
+
+.small-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #e5e7eb;
+  border-top-color: #ED1C24;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
 .sales-script-section {
   padding: 16px;
   background: white;

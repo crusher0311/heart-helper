@@ -1049,11 +1049,13 @@ function updateRODisplay() {
   const details = document.getElementById('roDetails');
   const noRoMessage = document.getElementById('noRoMessage');
   const scriptSection = document.getElementById('salesScriptSection');
+  const jobsSection = document.getElementById('roJobsSection');
   
   if (!currentRO || !currentRO.jobs || currentRO.jobs.length === 0) {
     details.innerHTML = '';
     noRoMessage.style.display = 'block';
     scriptSection.style.display = 'none';
+    if (jobsSection) jobsSection.style.display = 'none';
     return;
   }
   
@@ -1069,10 +1071,169 @@ function updateRODisplay() {
   
   details.innerHTML = html;
   
+  // Display jobs list with warranty status
+  displayROJobs(currentRO.jobs);
+  
+  // Fetch warranty status for jobs if we have VIN
+  if (currentRO.vehicle && currentRO.vehicle.vin && appUrl) {
+    fetchJobsWarrantyStatus();
+  }
+  
   // Auto-generate sales script when RO is loaded and we're on the sales tab
   if (currentTab === 'sales' && appUrl) {
     generateSalesScript();
   }
+}
+
+// Cache for job warranty status (keyed by index to avoid name collision issues)
+let jobWarrantyCache = [];  // Array indexed by job position
+let lastWarrantyCacheVin = null;
+
+function displayROJobs(jobs) {
+  const jobsSection = document.getElementById('roJobsSection');
+  const jobsList = document.getElementById('roJobsList');
+  const jobsCount = document.getElementById('roJobsCount');
+  
+  if (!jobsSection || !jobs || jobs.length === 0) {
+    if (jobsSection) jobsSection.style.display = 'none';
+    return;
+  }
+  
+  jobsSection.style.display = 'block';
+  jobsCount.textContent = jobs.length;
+  
+  const html = jobs.map((job, index) => {
+    const jobName = job.name || job.jobName || 'Unknown Service';
+    const price = job.totalAmount || job.total || 0;
+    const priceDisplay = price > 0 ? `$${(price / 100).toFixed(2)}` : '';
+    
+    // Check cache for warranty status by index
+    const warrantyInfo = jobWarrantyCache[index] || null;
+    
+    let badgesHtml = '';
+    if (warrantyInfo) {
+      badgesHtml = renderWarrantyBadges(warrantyInfo);
+    }
+    
+    return `
+      <div class="ro-job-item" data-job-index="${index}" data-job-name="${escapeHtml(jobName)}">
+        <div class="ro-job-info">
+          <div class="ro-job-name">${escapeHtml(jobName)}</div>
+          ${priceDisplay ? `<div class="ro-job-price">${priceDisplay}</div>` : ''}
+        </div>
+        <div class="ro-job-badges" id="job-badges-${index}">
+          ${badgesHtml}
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  jobsList.innerHTML = html;
+}
+
+function renderWarrantyBadges(warrantyInfo) {
+  let badges = [];
+  
+  if (warrantyInfo.underWarranty) {
+    badges.push('<span class="ro-job-badge under-warranty">Under Warranty</span>');
+  }
+  if (warrantyInfo.recentlyServiced) {
+    badges.push('<span class="ro-job-badge recently-serviced">Recently Serviced</span>');
+  }
+  if (warrantyInfo.servicedElsewhere) {
+    badges.push('<span class="ro-job-badge serviced-elsewhere">Done Elsewhere</span>');
+  }
+  if (warrantyInfo.dueForService) {
+    badges.push('<span class="ro-job-badge due-for-service">Due</span>');
+  }
+  
+  return badges.join('');
+}
+
+async function fetchJobsWarrantyStatus() {
+  if (!currentRO || !currentRO.vehicle || !currentRO.vehicle.vin || !appUrl) return;
+  if (!currentRO.jobs || currentRO.jobs.length === 0) return;
+  
+  const vin = currentRO.vehicle.vin;
+  
+  // Clear cache if VIN changed to avoid cross-RO contamination
+  if (lastWarrantyCacheVin !== vin) {
+    jobWarrantyCache = [];
+    lastWarrantyCacheVin = vin;
+  }
+  
+  const loadingEl = document.getElementById('roJobsLoading');
+  if (loadingEl) loadingEl.style.display = 'flex';
+  
+  try {
+    const mileage = currentRO.mileage || currentRO.mileageIn || (currentRO.rawData && currentRO.rawData.mileageIn);
+    const recommendedJobs = currentRO.jobs.map(j => j.name || j.jobName).filter(Boolean);
+    
+    if (recommendedJobs.length === 0) {
+      if (loadingEl) loadingEl.style.display = 'none';
+      return;
+    }
+    
+    const response = await fetch(`${appUrl}/api/vehicle-history/check-recommendations`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({
+        vin,
+        currentMileage: mileage ? parseInt(mileage) : undefined,
+        recommendedJobs,
+        shopId: currentShopId
+      })
+    });
+    
+    if (!response.ok) {
+      console.error('Failed to fetch warranty status:', response.status);
+      showToast('Could not check warranty status');
+      return;
+    }
+    
+    const data = await response.json();
+    
+    // Update cache with results (index-based to match job order)
+    if (data.recommendations && Array.isArray(data.recommendations)) {
+      // API returns recommendations in same order as sent
+      data.recommendations.forEach((result, index) => {
+        jobWarrantyCache[index] = {
+          underWarranty: result.status === 'under_warranty',
+          recentlyServiced: result.status === 'recently_serviced',
+          servicedElsewhere: result.status === 'serviced_elsewhere',
+          dueForService: result.status === 'due_for_service',
+          source: result.source,
+          lastServiceDate: result.lastServiceDate,
+          lastServiceMileage: result.lastServiceMileage,
+          daysRemaining: result.daysRemaining,
+          milesRemaining: result.milesRemaining
+        };
+      });
+      
+      // Re-render job badges with warranty info
+      updateJobBadges();
+    }
+    
+  } catch (error) {
+    console.error('Error fetching warranty status:', error);
+    showToast('Could not check warranty status');
+  } finally {
+    if (loadingEl) loadingEl.style.display = 'none';
+  }
+}
+
+function updateJobBadges() {
+  const jobs = currentRO?.jobs || [];
+  
+  jobs.forEach((job, index) => {
+    const warrantyInfo = jobWarrantyCache[index];
+    
+    const badgesEl = document.getElementById(`job-badges-${index}`);
+    if (badgesEl && warrantyInfo) {
+      badgesEl.innerHTML = renderWarrantyBadges(warrantyInfo);
+    }
+  });
 }
 
 async function generateSalesScript() {
