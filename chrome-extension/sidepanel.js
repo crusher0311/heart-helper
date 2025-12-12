@@ -4,6 +4,7 @@
 let appUrl = '';
 let phoneScript = 'Thank you for calling HEART Certified Auto Care, this is [Name], how may I help you?';
 let currentTab = 'incoming';
+let currentShopId = null;
 
 // User Authentication State
 let currentUser = null;
@@ -558,6 +559,11 @@ function requestCurrentROInfo() {
           document.getElementById('searchYear').value = response.year || '';
           document.getElementById('searchMake').value = response.make || '';
           document.getElementById('searchModel').value = response.model || '';
+          
+          // Store shop ID for API calls
+          if (response.shopId) {
+            currentShopId = response.shopId;
+          }
           
           // Store VIN and mileage for History tab auto-fill
           if (response.vin) {

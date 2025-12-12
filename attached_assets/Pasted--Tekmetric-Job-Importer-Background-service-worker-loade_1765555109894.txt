@@ -1,0 +1,189 @@
+ Tekmetric Job Importer: Background service worker loaded (v3.15.0)
+ [Background] Restored auth token from storage
+ [Background] Restored shop ID from storage: 469
+ [Background] Restored base URL from storage: https://shop.tekmetric.com
+ Side panel behavior set: opens on action click
+ Side panel enabled for all tabs
+ Context menu created: Open HEART Helper
+ [Labor Rate] Auth token captured and persisted
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Auth token captured and persisted
+ Background: Retrieved from storage: No job
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ Background: Retrieved from storage: No job
+ [Labor Rate] Repair order detected: 281170381 Shop: 469
+ [Labor Rate] Using base URL: https://shop.tekmetric.com
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Auth token captured and persisted
+ Background: Retrieved from storage: No job
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Current rate: 22987, Vehicle make: honda
+ [Labor Rate] Skipping duplicate RO: 281170381
+ [Labor Rate] No matching group found for make: honda
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ Background: Retrieved from storage: No job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Auth token captured and persisted
+ Background: Retrieved from storage: No job
+ Background: Retrieved from storage: No job
+ [Labor Rate] Skipping duplicate RO: 281170381
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ 📨 Message received: GET_PENDING_JOB from tab: 959692998
+ Background: Content script requesting pending job
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+background.js:45 [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:45 [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:502 Background: Retrieved from storage: No job
+background.js:502 Background: Retrieved from storage: No job
+background.js:502 Background: Retrieved from storage: No job
+background.js:437 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:499 Background: Content script requesting pending job
+background.js:45 [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:502 Background: Retrieved from storage: No job
+background.js:437 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:499 Background: Content script requesting pending job
+background.js:502 Background: Retrieved from storage: No job
+background.js:437 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:499 Background: Content script requesting pending job
+background.js:502 Background: Retrieved from storage: No job
+background.js:437 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:499 Background: Content script requesting pending job
+background.js:502 Background: Retrieved from storage: No job
+background.js:437 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:499 Background: Content script requesting pending job
+background.js:502 Background: Retrieved from storage: No job
+background.js:437 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:499 Background: Content script requesting pending job
+background.js:502 Background: Retrieved from storage: No job
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:45 [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:437 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:499 Background: Content script requesting pending job
+background.js:502 Background: Retrieved from storage: No job
+background.js:437 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:499 Background: Content script requesting pending job
+background.js:502 Background: Retrieved from storage: No job
+background.js:437 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:499 Background: Content script requesting pending job
+background.js:502 Background: Retrieved from storage: No job
+background.js:437 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:499 Background: Content script requesting pending job
+background.js:502 Background: Retrieved from storage: No job
+background.js:437 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:499 Background: Content script requesting pending job
+background.js:437 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:499 Background: Content script requesting pending job
+background.js:502 Background: Retrieved from storage: No job
+background.js:502 Background: Retrieved from storage: No job
+background.js:437 📨 Message received: GET_PENDING_JOB from tab: 959692998
+background.js:499 Background: Content script requesting pending job
+background.js:502 Background: Retrieved from storage: No job
+sidepanel.js:19 All cookies for https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev : Array(1)
+sidepanel.js:26 Session cookie found: connect.sid value length: 80
+sidepanel.js:19 All cookies for https://fe013a54-45e5-4610-8172-209cc43b68a7-00-dqp5pb42o8cr.janeway.replit.dev : Array(1)
+sidepanel.js:26 Session cookie found: connect.sid value length: 80
+sidepanel.js:115 Auth check successful: brandoncrusha@gmail.com
+sidepanel.js:360 Labor rate groups synced: 1 groups
+sidepanel.js:377 Job labor rates synced: 0 rates
+sidepanel.js:523 [SidePanel] requestCurrentROInfo called
+sidepanel.js:525 [SidePanel] Active tab: https://shop.tekmetric.com/admin/shop/469/repair-orders/281170381/estimate
+sidepanel.js:537 [SidePanel] Extracted from URL: Object
+sidepanel.js:540 [SidePanel] Sending GET_VEHICLE_INFO to background
+background.js:437 📨 Message received: GET_VEHICLE_INFO from tab: undefined
+background.js:588 [Background] GET_VEHICLE_INFO received: Object
+background.js:45 [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:625 [Background] Vehicle info from API: Object
+background.js:118 [Labor Rate] Skipping duplicate RO: 281170381
+sidepanel.js:546 [SidePanel] GET_VEHICLE_INFO response: {"year":2017,"make":"Honda","model":"Civic","engine":"1.5L 4Cyl GAS L15B7 Turbocharged","vin":"19XFC1F31HE013366","mileageIn":83625,"shopId":"469","roId":"281170381"}
+sidepanel.js:552 [SidePanel] Updating fields with: {"year":2017,"make":"Honda","model":"Civic","engine":"1.5L 4Cyl GAS L15B7 Turbocharged","vin":"19XFC1F31HE013366","mileageIn":83625,"shopId":"469","roId":"281170381"}
+sidepanel.js:2573 Error fetching vehicle history: ReferenceError: currentShopId is not defined
+    at fetchVehicleHistory (sidepanel.js:2558:5)
+    at autoFillHistoryVehicle (sidepanel.js:2531:5)
+    at switchTab (sidepanel.js:760:5)
+    at HTMLButtonElement.<anonymous> (sidepanel.js:627:41)
+fetchVehicleHistory @ sidepanel.js:2573
+sidepanel.js:2573 Error fetching vehicle history: ReferenceError: currentShopId is not defined
+    at HTMLButtonElement.fetchVehicleHistory (sidepanel.js:2558:5)
+fetchVehicleHistory @ sidepanel.js:2573
+sidepanel.js:2573 Error fetching vehicle history: ReferenceError: currentShopId is not defined
+    at HTMLButtonElement.fetchVehicleHistory (sidepanel.js:2558:5)
+fetchVehicleHistory @ sidepanel.js:2573
+sidepanel.js:2573 Error fetching vehicle history: ReferenceError: currentShopId is not defined
+    at HTMLButtonElement.fetchVehicleHistory (sidepanel.js:2558:5)
+fetchVehicleHistory @ sidepanel.js:2573
+sidepanel.js:2573 Error fetching vehicle history: ReferenceError: currentShopId is not defined
+    at HTMLButtonElement.fetchVehicleHistory (sidepanel.js:2558:5)
+fetchVehicleHistory @ sidepanel.js:2573
