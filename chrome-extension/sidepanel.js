@@ -558,6 +558,18 @@ function requestCurrentROInfo() {
           document.getElementById('searchYear').value = response.year || '';
           document.getElementById('searchMake').value = response.make || '';
           document.getElementById('searchModel').value = response.model || '';
+          
+          // Store VIN and mileage for History tab auto-fill
+          if (response.vin) {
+            cachedVehicleVin = response.vin;
+            const historyVinInput = document.getElementById('historyVin');
+            if (historyVinInput) historyVinInput.value = response.vin;
+          }
+          if (response.mileageIn) {
+            cachedVehicleMileage = response.mileageIn;
+            const historyMileageInput = document.getElementById('historyMileage');
+            if (historyMileageInput) historyMileageInput.value = response.mileageIn;
+          }
         } else {
           console.log('[SidePanel] No vehicle info in response:', response?.error || 'unknown');
         }
@@ -2480,26 +2492,43 @@ function getCategoryIcon(category) {
 // ==================== VEHICLE HISTORY TAB ====================
 
 let cachedVehicleHistory = null;
+let cachedVehicleVin = null;
+let cachedVehicleMileage = null;
 
 function autoFillHistoryVehicle() {
-  // Auto-fill VIN from current RO if available
+  const vinInput = document.getElementById('historyVin');
+  const mileageInput = document.getElementById('historyMileage');
+  
+  // Try multiple sources for VIN: currentRO, cached API response
+  let vin = null;
   if (currentRO && currentRO.vehicle && currentRO.vehicle.vin) {
-    const vinInput = document.getElementById('historyVin');
-    if (vinInput && !vinInput.value) {
-      vinInput.value = currentRO.vehicle.vin;
-    }
-    
-    // Also auto-fill mileage if available
-    const mileageInput = document.getElementById('historyMileage');
-    const mileage = currentRO.mileage || currentRO.mileageIn || (currentRO.rawData && currentRO.rawData.mileageIn);
-    if (mileageInput && !mileageInput.value && mileage) {
-      mileageInput.value = mileage;
-    }
-    
-    // Auto-fetch if VIN is present
-    if (vinInput.value && vinInput.value.length >= 11) {
-      fetchVehicleHistory();
-    }
+    vin = currentRO.vehicle.vin;
+  } else if (cachedVehicleVin) {
+    vin = cachedVehicleVin;
+  }
+  
+  // Auto-fill VIN if available and field is empty
+  if (vinInput && !vinInput.value && vin) {
+    vinInput.value = vin;
+  }
+  
+  // Try multiple sources for mileage: currentRO, cached API response
+  let mileage = null;
+  if (currentRO) {
+    mileage = currentRO.mileage || currentRO.mileageIn || (currentRO.rawData && currentRO.rawData.mileageIn);
+  }
+  if (!mileage && cachedVehicleMileage) {
+    mileage = cachedVehicleMileage;
+  }
+  
+  // Auto-fill mileage if available and field is empty
+  if (mileageInput && !mileageInput.value && mileage) {
+    mileageInput.value = mileage;
+  }
+  
+  // Auto-fetch if VIN is present
+  if (vinInput && vinInput.value && vinInput.value.length >= 11) {
+    fetchVehicleHistory();
   }
 }
 

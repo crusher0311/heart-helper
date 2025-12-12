@@ -626,13 +626,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         year: vehicle.year,
         make: vehicle.make,
         model: vehicle.model,
-        engine: vehicle.engineDescription || vehicle.engine
+        engine: vehicle.engineDescription || vehicle.engine,
+        vin: vehicle.vin,
+        mileageIn: roData.milesIn || roData.mileageIn
       });
       sendResponse({
         year: vehicle.year || null,
         make: vehicle.make || null,
         model: vehicle.model || null,
         engine: vehicle.engineDescription || vehicle.engine || null,
+        vin: vehicle.vin || null,
+        mileageIn: roData.milesIn || roData.mileageIn || null,
         shopId: shopId,
         roId: roId
       });
