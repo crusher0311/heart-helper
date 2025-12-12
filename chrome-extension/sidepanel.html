@@ -110,6 +110,10 @@
         <span class="tab-icon">&#128178;</span>
         Rates
       </button>
+      <button class="tab-btn" data-tab="history">
+        <span class="tab-icon">&#128218;</span>
+        History
+      </button>
     </div>
 
     <!-- ==================== INCOMING CALLER TAB ==================== -->
@@ -470,6 +474,97 @@
               &#9881; Manage Labor Rates (Admin)
             </a>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== VEHICLE HISTORY TAB ==================== -->
+    <div id="historyTab" class="tab-content" style="display: none;">
+      <div class="history-section">
+        <div class="section-header">
+          <span class="section-icon">&#128218;</span>
+          <span>Vehicle Service History</span>
+        </div>
+        
+        <!-- VIN Input (when no vehicle detected) -->
+        <div id="historyVinInput" class="history-vin-input">
+          <div class="form-group">
+            <label for="historyVin">Enter VIN</label>
+            <input type="text" id="historyVin" placeholder="Enter 17-character VIN..." maxlength="17" />
+          </div>
+          <div class="form-group">
+            <label for="historyMileage">Current Mileage (optional)</label>
+            <input type="number" id="historyMileage" placeholder="e.g., 85000" />
+          </div>
+          <button id="fetchHistoryBtn" class="btn btn-primary">
+            <span class="btn-icon">&#128218;</span>
+            Check History
+          </button>
+        </div>
+
+        <!-- Vehicle Summary (when vehicle detected) -->
+        <div id="historyVehicleSummary" class="history-vehicle-summary" style="display: none;">
+          <div class="vehicle-badge">
+            <span id="historyVehicleInfo">Loading...</span>
+          </div>
+          <div class="vin-display">
+            <span class="vin-label">VIN:</span>
+            <span id="historyVinDisplay" class="vin-value"></span>
+          </div>
+          <button id="refreshHistoryBtn" class="btn btn-secondary btn-sm">
+            &#8635; Refresh
+          </button>
+        </div>
+
+        <!-- Loading State -->
+        <div id="historyLoading" class="history-loading" style="display: none;">
+          <div class="loading-spinner"></div>
+          <span>Checking service history...</span>
+        </div>
+
+        <!-- Service History List -->
+        <div id="historyResults" class="history-results" style="display: none;">
+          <!-- Warranty Summary -->
+          <div id="warrantySummary" class="warranty-summary">
+            <div class="warranty-header">
+              <span class="warranty-icon">&#128737;</span>
+              <span>Warranty Status</span>
+            </div>
+            <div id="warrantyDetails" class="warranty-details"></div>
+          </div>
+
+          <!-- HEART Shop History -->
+          <div class="history-source-section">
+            <div class="source-header heart-source">
+              <span class="heart-icon">&#10084;</span>
+              <span>HEART Service History</span>
+              <span id="heartHistoryCount" class="history-count"></span>
+            </div>
+            <div id="heartHistoryList" class="history-list"></div>
+          </div>
+
+          <!-- Carfax History (if available) -->
+          <div id="carfaxSection" class="history-source-section" style="display: none;">
+            <div class="source-header carfax-source">
+              <span class="carfax-icon">&#128663;</span>
+              <span>External Service History</span>
+              <span id="carfaxHistoryCount" class="history-count"></span>
+            </div>
+            <div id="carfaxHistoryList" class="history-list"></div>
+          </div>
+        </div>
+
+        <!-- No History State -->
+        <div id="historyEmpty" class="history-empty" style="display: none;">
+          <div class="empty-icon">&#128218;</div>
+          <p>No service history found for this vehicle.</p>
+          <p class="help-text">This may be a new customer or the VIN wasn't found in our records.</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="historyError" class="history-error" style="display: none;">
+          <p id="historyErrorMessage">Unable to fetch history.</p>
+          <button id="retryHistoryBtn" class="btn btn-secondary">Try Again</button>
         </div>
       </div>
     </div>

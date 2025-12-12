@@ -695,6 +695,11 @@ function setupEventListeners() {
   document.getElementById('settingsModal').addEventListener('click', (e) => {
     if (e.target.id === 'settingsModal') closeSettings();
   });
+  
+  // Vehicle History
+  document.getElementById('fetchHistoryBtn').addEventListener('click', fetchVehicleHistory);
+  document.getElementById('refreshHistoryBtn').addEventListener('click', fetchVehicleHistory);
+  document.getElementById('retryHistoryBtn').addEventListener('click', fetchVehicleHistory);
 }
 
 // ==================== TAB SWITCHING ====================
@@ -711,6 +716,7 @@ function switchTab(tab) {
   document.getElementById('salesTab').style.display = tab === 'sales' ? 'flex' : 'none';
   document.getElementById('tipsTab').style.display = tab === 'tips' ? 'flex' : 'none';
   document.getElementById('ratesTab').style.display = tab === 'rates' ? 'flex' : 'none';
+  document.getElementById('historyTab').style.display = tab === 'history' ? 'flex' : 'none';
   
   // Auto-fill vehicle info when switching to search tab
   if (tab === 'search') {
@@ -735,6 +741,11 @@ function switchTab(tab) {
     if (scriptSection.style.display === 'none') {
       generateSalesScript();
     }
+  }
+  
+  // Auto-fill VIN and load history when switching to history tab
+  if (tab === 'history') {
+    autoFillHistoryVehicle();
   }
 }
 
@@ -2303,4 +2314,293 @@ function getCategoryIcon(category) {
     default: '&#128161;'       // lightbulb
   };
   return icons[category] || icons.default;
+}
+
+// ==================== VEHICLE HISTORY TAB ====================
+
+let cachedVehicleHistory = null;
+
+function autoFillHistoryVehicle() {
+  // Auto-fill VIN from current RO if available
+  if (currentRO && currentRO.vehicle && currentRO.vehicle.vin) {
+    const vinInput = document.getElementById('historyVin');
+    if (vinInput && !vinInput.value) {
+      vinInput.value = currentRO.vehicle.vin;
+    }
+    
+    // Also auto-fill mileage if available
+    const mileageInput = document.getElementById('historyMileage');
+    const mileage = currentRO.mileage || currentRO.mileageIn || (currentRO.rawData && currentRO.rawData.mileageIn);
+    if (mileageInput && !mileageInput.value && mileage) {
+      mileageInput.value = mileage;
+    }
+    
+    // Auto-fetch if VIN is present
+    if (vinInput.value && vinInput.value.length >= 11) {
+      fetchVehicleHistory();
+    }
+  }
+}
+
+async function fetchVehicleHistory() {
+  if (!appUrl) {
+    showHistoryError('Please configure the app URL in settings.');
+    return;
+  }
+  
+  const vinInput = document.getElementById('historyVin');
+  const mileageInput = document.getElementById('historyMileage');
+  const vin = vinInput ? vinInput.value.trim().toUpperCase() : '';
+  const mileage = mileageInput ? parseInt(mileageInput.value) || undefined : undefined;
+  
+  if (!vin || vin.length < 11) {
+    showHistoryError('Please enter a valid VIN (at least 11 characters).');
+    return;
+  }
+  
+  // Show loading state
+  showHistoryLoading();
+  
+  try {
+    // Build query params
+    let url = `${appUrl}/api/vehicle-history/${encodeURIComponent(vin)}?includeCarfax=true`;
+    if (mileage) url += `&mileage=${mileage}`;
+    if (currentShopId) url += `&shopId=${currentShopId}`;
+    
+    const response = await fetch(url, { credentials: 'include' });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error ${response.status}`);
+    }
+    
+    const history = await response.json();
+    cachedVehicleHistory = history;
+    
+    // Display results
+    displayVehicleHistory(history);
+    
+  } catch (error) {
+    console.error('Error fetching vehicle history:', error);
+    showHistoryError('Unable to fetch vehicle history. Please try again.');
+  }
+}
+
+function showHistoryLoading() {
+  document.getElementById('historyVinInput').style.display = 'none';
+  document.getElementById('historyVehicleSummary').style.display = 'none';
+  document.getElementById('historyLoading').style.display = 'flex';
+  document.getElementById('historyResults').style.display = 'none';
+  document.getElementById('historyEmpty').style.display = 'none';
+  document.getElementById('historyError').style.display = 'none';
+}
+
+function showHistoryError(message) {
+  document.getElementById('historyVinInput').style.display = 'block';
+  document.getElementById('historyVehicleSummary').style.display = 'none';
+  document.getElementById('historyLoading').style.display = 'none';
+  document.getElementById('historyResults').style.display = 'none';
+  document.getElementById('historyEmpty').style.display = 'none';
+  document.getElementById('historyError').style.display = 'block';
+  document.getElementById('historyErrorMessage').textContent = message;
+}
+
+function displayVehicleHistory(history) {
+  // Hide loading, show results
+  document.getElementById('historyLoading').style.display = 'none';
+  document.getElementById('historyVinInput').style.display = 'none';
+  document.getElementById('historyError').style.display = 'none';
+  
+  // Show vehicle summary
+  const summary = document.getElementById('historyVehicleSummary');
+  summary.style.display = 'block';
+  
+  if (history.vehicle) {
+    document.getElementById('historyVehicleInfo').textContent = 
+      `${history.vehicle.year || ''} ${history.vehicle.make || ''} ${history.vehicle.model || ''}`.trim() || 'Unknown Vehicle';
+  } else {
+    document.getElementById('historyVehicleInfo').textContent = 'Vehicle Info Unavailable';
+  }
+  document.getElementById('historyVinDisplay').textContent = history.vin;
+  
+  // Check if we have any history
+  const hasHeartHistory = history.heartHistory && history.heartHistory.length > 0;
+  const hasCarfaxHistory = history.carfaxHistory && history.carfaxHistory.length > 0;
+  
+  if (!hasHeartHistory && !hasCarfaxHistory) {
+    document.getElementById('historyResults').style.display = 'none';
+    document.getElementById('historyEmpty').style.display = 'block';
+    return;
+  }
+  
+  // Show results
+  document.getElementById('historyResults').style.display = 'block';
+  document.getElementById('historyEmpty').style.display = 'none';
+  
+  // Render warranty summary
+  renderWarrantySummary(history.heartHistory);
+  
+  // Render HEART history
+  renderHeartHistory(history.heartHistory);
+  
+  // Render Carfax history
+  renderCarfaxHistory(history.carfaxHistory);
+}
+
+function renderWarrantySummary(heartHistory) {
+  const container = document.getElementById('warrantyDetails');
+  
+  if (!heartHistory || heartHistory.length === 0) {
+    container.innerHTML = '<p class="warranty-empty">No HEART service history to analyze.</p>';
+    return;
+  }
+  
+  // Find items under warranty
+  const underWarranty = heartHistory.filter(h => h.warrantyStatus === 'under_warranty');
+  const recentlyServiced = heartHistory.filter(h => h.warrantyStatus === 'recently_serviced');
+  
+  let html = '';
+  
+  if (underWarranty.length > 0) {
+    html += '<div class="warranty-group">';
+    html += '<div class="warranty-group-header"><span class="warranty-status-badge under-warranty">Under Warranty</span></div>';
+    underWarranty.slice(0, 3).forEach(item => {
+      html += renderWarrantyItem(item);
+    });
+    if (underWarranty.length > 3) {
+      html += `<div class="warranty-more">+ ${underWarranty.length - 3} more items under warranty</div>`;
+    }
+    html += '</div>';
+  }
+  
+  if (recentlyServiced.length > 0) {
+    html += '<div class="warranty-group">';
+    html += '<div class="warranty-group-header"><span class="warranty-status-badge recently-serviced">Recently Serviced</span></div>';
+    recentlyServiced.slice(0, 3).forEach(item => {
+      html += renderWarrantyItem(item);
+    });
+    if (recentlyServiced.length > 3) {
+      html += `<div class="warranty-more">+ ${recentlyServiced.length - 3} more recently serviced</div>`;
+    }
+    html += '</div>';
+  }
+  
+  if (!underWarranty.length && !recentlyServiced.length) {
+    html = '<p class="warranty-none">No items currently under warranty.</p>';
+  }
+  
+  container.innerHTML = html;
+}
+
+function renderWarrantyItem(item) {
+  const date = new Date(item.serviceDate).toLocaleDateString();
+  let meta = `${date}`;
+  if (item.mileage) meta += ` at ${item.mileage.toLocaleString()} mi`;
+  if (item.shopName) meta += ` - ${item.shopName}`;
+  
+  let expiryInfo = '';
+  if (item.warrantyExpiresDate) {
+    const expiryDate = new Date(item.warrantyExpiresDate).toLocaleDateString();
+    expiryInfo = `Expires: ${expiryDate}`;
+    if (item.warrantyExpiresMileage) {
+      expiryInfo += ` or ${item.warrantyExpiresMileage.toLocaleString()} mi`;
+    }
+    if (item.daysRemaining !== undefined) {
+      expiryInfo += ` (${item.daysRemaining} days remaining)`;
+    }
+  }
+  
+  return `
+    <div class="warranty-item">
+      <div class="warranty-item-details">
+        <div class="warranty-item-name">${escapeHtml(item.jobName)}</div>
+        <div class="warranty-item-meta">${meta}</div>
+        ${expiryInfo ? `<div class="warranty-item-meta warranty-expiry">${expiryInfo}</div>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function renderHeartHistory(heartHistory) {
+  const list = document.getElementById('heartHistoryList');
+  const count = document.getElementById('heartHistoryCount');
+  
+  if (!heartHistory || heartHistory.length === 0) {
+    list.innerHTML = '<div class="history-empty-inline">No HEART service records found.</div>';
+    count.textContent = '0';
+    return;
+  }
+  
+  count.textContent = heartHistory.length;
+  
+  const html = heartHistory.map(item => {
+    const date = new Date(item.serviceDate).toLocaleDateString();
+    const statusClass = item.warrantyStatus.replace(/_/g, '-');
+    const statusLabel = formatWarrantyStatus(item.warrantyStatus);
+    
+    return `
+      <div class="history-item">
+        <div class="history-item-icon heart">&#10084;</div>
+        <div class="history-item-content">
+          <div class="history-item-title">${escapeHtml(item.jobName)}</div>
+          <div class="history-item-info">
+            <span>${date}</span>
+            ${item.mileage ? `<span>${item.mileage.toLocaleString()} mi</span>` : ''}
+            ${item.shopName ? `<span class="history-item-shop">${item.shopName}</span>` : ''}
+            ${item.totalCost ? `<span class="history-item-cost">$${(item.totalCost / 100).toFixed(2)}</span>` : ''}
+          </div>
+        </div>
+        <div class="history-item-status">
+          <span class="warranty-status-badge ${statusClass}">${statusLabel}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  list.innerHTML = html;
+}
+
+function renderCarfaxHistory(carfaxHistory) {
+  const section = document.getElementById('carfaxSection');
+  const list = document.getElementById('carfaxHistoryList');
+  const count = document.getElementById('carfaxHistoryCount');
+  
+  if (!carfaxHistory || carfaxHistory.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+  
+  section.style.display = 'block';
+  count.textContent = carfaxHistory.length;
+  
+  const html = carfaxHistory.map(item => {
+    const date = item.date ? new Date(item.date).toLocaleDateString() : 'Unknown date';
+    
+    return `
+      <div class="history-item">
+        <div class="history-item-icon carfax">&#128663;</div>
+        <div class="history-item-content">
+          <div class="history-item-title">${escapeHtml(item.description)}</div>
+          <div class="history-item-info">
+            <span>${date}</span>
+            ${item.odometer ? `<span>${item.odometer.toLocaleString()} mi</span>` : ''}
+          </div>
+        </div>
+        <div class="history-item-status">
+          <span class="warranty-status-badge serviced-elsewhere">External</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  list.innerHTML = html;
+}
+
+function formatWarrantyStatus(status) {
+  const labels = {
+    'under_warranty': 'Warranty',
+    'recently_serviced': 'Recent',
+    'due_for_service': 'Due',
+    'serviced_elsewhere': 'External'
+  };
+  return labels[status] || status;
 }

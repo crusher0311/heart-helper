@@ -1848,3 +1848,315 @@ textarea {
   font-size: 12px;
   color: #aaa;
 }
+
+/* ==================== VEHICLE HISTORY TAB ==================== */
+.history-section {
+  padding: 16px;
+}
+
+.history-vin-input {
+  margin-top: 12px;
+}
+
+.history-vin-input .form-group {
+  margin-bottom: 12px;
+}
+
+.history-vehicle-summary {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 12px 0;
+}
+
+.vehicle-badge {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.vin-display {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #666;
+}
+
+.vin-label {
+  font-weight: 500;
+}
+
+.vin-value {
+  font-family: monospace;
+  background: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.history-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  gap: 12px;
+  color: #666;
+}
+
+.history-results {
+  margin-top: 16px;
+}
+
+/* Warranty Summary */
+.warranty-summary {
+  background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.warranty-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.warranty-icon {
+  font-size: 16px;
+}
+
+.warranty-details {
+  padding: 12px 14px;
+}
+
+.warranty-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.warranty-item:last-child {
+  border-bottom: none;
+}
+
+.warranty-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 12px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.warranty-status-badge.under-warranty {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+.warranty-status-badge.recently-serviced {
+  background: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #90caf9;
+}
+
+.warranty-status-badge.due-for-service {
+  background: #fff3e0;
+  color: #e65100;
+  border: 1px solid #ffcc80;
+}
+
+.warranty-status-badge.serviced-elsewhere {
+  background: #f3e5f5;
+  color: #7b1fa2;
+  border: 1px solid #ce93d8;
+}
+
+.warranty-item-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.warranty-item-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.warranty-item-meta {
+  font-size: 11px;
+  color: #888;
+}
+
+/* History Source Sections */
+.history-source-section {
+  margin-bottom: 16px;
+}
+
+.source-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px 8px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.source-header.heart-source {
+  background: #fff3f3;
+  border-color: #f8d7d7;
+  color: #ED1C24;
+}
+
+.source-header.carfax-source {
+  background: #e8f4fd;
+  border-color: #cce4f7;
+  color: #1565c0;
+}
+
+.heart-icon {
+  color: #ED1C24;
+}
+
+.carfax-icon {
+  color: #1565c0;
+}
+
+.history-count {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+.history-list {
+  border: 1px solid #e0e0e0;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  background: white;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.history-item {
+  display: flex;
+  padding: 12px 14px;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-item:hover {
+  background: #fafafa;
+}
+
+.history-item-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.history-item-icon.heart {
+  background: #fff3f3;
+  color: #ED1C24;
+}
+
+.history-item-icon.carfax {
+  background: #e8f4fd;
+  color: #1565c0;
+}
+
+.history-item-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.history-item-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.history-item-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 11px;
+  color: #888;
+}
+
+.history-item-info span {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.history-item-shop {
+  color: #ED1C24;
+  font-weight: 500;
+}
+
+.history-item-cost {
+  font-weight: 600;
+  color: #333;
+}
+
+.history-item-status {
+  margin-left: auto;
+}
+
+/* Empty and Error States */
+.history-empty, .history-error {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+}
+
+.history-empty .empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.history-empty p, .history-error p {
+  margin: 0 0 8px 0;
+}
+
+.history-error {
+  color: #d32f2f;
+}
+
+.history-error button {
+  margin-top: 12px;
+}
