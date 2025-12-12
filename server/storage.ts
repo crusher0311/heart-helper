@@ -1872,8 +1872,21 @@ export class DatabaseStorage implements IStorage {
       const mileage = rawMileage && rawMileage > 0 ? rawMileage : undefined;
       
       // Determine shop location from shopId
-      const shopLocation = (ro.shopId || 'NB') as 'NB' | 'WM' | 'EV';
-      const shopName = SHOP_NAMES[shopLocation] || shopLocation;
+      // shopId is stored as Tekmetric's UUID, so we try to look up from raw data or use default
+      let shopName = 'HEART';  // Default fallback
+      const rawShopName = rawData?.shop?.name || rawData?.shopName;
+      if (rawShopName) {
+        shopName = rawShopName;
+      } else if (ro.shopId) {
+        // Try to match against known shop codes
+        const shopIdStr = String(ro.shopId);
+        if (shopIdStr === 'NB' || SHOP_NAMES['NB']) {
+          // Check if it's our internal code
+          shopName = SHOP_NAMES[shopIdStr as keyof typeof SHOP_NAMES] || 'HEART';
+        }
+        // Otherwise keep default 'HEART'
+      }
+      const shopLocation = 'NB' as 'NB' | 'WM' | 'EV';  // Default location for typing
 
       // Calculate warranty based on service date
       // Before 1/1/25: 2 years / 24,000 miles
