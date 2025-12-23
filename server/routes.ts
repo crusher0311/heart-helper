@@ -285,6 +285,32 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  // Reset user's password (admin only)
+  app.put('/api/admin/users/:userId/password', isAuthenticated, isAdmin, async (req: any, res) => {
+    try {
+      const { userId } = req.params;
+      const { password } = req.body;
+      
+      // Validate password - must be at least 8 characters
+      if (!password || typeof password !== 'string' || password.length < 8) {
+        return res.status(400).json({ error: "Password must be at least 8 characters" });
+      }
+      
+      // Hash password
+      const bcrypt = await import('bcryptjs');
+      const passwordHash = await bcrypt.hash(password, 12);
+      
+      await storage.updateUserPassword(userId, passwordHash);
+      res.json({ success: true });
+    } catch (error: any) {
+      console.error("Error resetting user password:", error);
+      if (error.message === "User not found") {
+        return res.status(404).json({ error: "User not found" });
+      }
+      res.status(500).json({ message: "Failed to reset password" });
+    }
+  });
+
   // ==================== LABOR RATE GROUPS (ADMIN) ====================
   
   // Get all labor rate groups (admin only - sees all shops)

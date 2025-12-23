@@ -106,6 +106,7 @@ export interface IStorage {
   isUserApproved(userId: string): Promise<boolean>;
   getPendingApprovalUsers(): Promise<UserWithPreferences[]>;
   updateUserApprovalStatus(userId: string, status: 'approved' | 'rejected'): Promise<UserPreferences>;
+  updateUserPassword(userId: string, passwordHash: string): Promise<void>;
   
   // Labor rate groups (admin-managed, per-shop configuration)
   getLaborRateGroups(shopId?: string): Promise<LaborRateGroup[]>;
@@ -701,16 +702,6 @@ export class DatabaseStorage implements IStorage {
       .where(eq(users.id, userId));
   }
 
-  async updateUserPassword(userId: string, passwordHash: string): Promise<void> {
-    await db
-      .update(users)
-      .set({ 
-        passwordHash,
-        updatedAt: new Date(),
-      })
-      .where(eq(users.id, userId));
-  }
-
   // User preferences
   async getUserPreferences(userId: string): Promise<UserPreferences | undefined> {
     const [prefs] = await db
@@ -921,6 +912,19 @@ export class DatabaseStorage implements IStorage {
     }
     
     return await this.upsertUserPreferences(userId, { approvalStatus: status });
+  }
+
+  async updateUserPassword(userId: string, passwordHash: string): Promise<void> {
+    // Verify user exists
+    const existingUser = await this.getUser(userId);
+    if (!existingUser) {
+      throw new Error("User not found");
+    }
+    
+    await db
+      .update(users)
+      .set({ passwordHash })
+      .where(eq(users.id, userId));
   }
 
   // Labor rate groups (admin-managed, per-shop configuration)
