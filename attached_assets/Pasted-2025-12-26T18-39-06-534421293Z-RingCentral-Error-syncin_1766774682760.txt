@@ -1,0 +1,350 @@
+2025-12-26T18:39:06.534421293Z [RingCentral] Error syncing call AsuWg0LV3j6OzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:06.81161469Z [RingCentral] Error syncing call Ast7w_XoA2zSzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:07.09783379Z [RingCentral] Error syncing call AstmU0uldlHUzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:07.377066863Z [RingCentral] Error syncing call AstiPOkI8tFgzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:07.655224035Z [RingCentral] Error syncing call Astfe-suGTOIzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:07.934278456Z [RingCentral] Error syncing call AstY4v3s5IZ-zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:08.20948121Z [RingCentral] Error syncing call AstSm_GubWhCzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:08.489131242Z [RingCentral] Error syncing call AstQfVKTlop8zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:08.767222999Z [RingCentral] Error syncing call AsssF8ac0VU4zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:09.048360339Z [RingCentral] Error syncing call AssYFBi47FMAzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:09.324877761Z [RingCentral] Error syncing call AssHgwtsD7OgzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:09.601766908Z [RingCentral] Error syncing call Asr7mLT0nJTEzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:09.878327543Z [RingCentral] Error syncing call Asr5JtGRj8qmzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:10.154558336Z [RingCentral] Error syncing call AsrtxHuyMHqezUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:10.435399326Z [RingCentral] Error syncing call AsrqXPVG6wQWzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:10.710608251Z [RingCentral] Error syncing call AsrcTQ9ZRzPCzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:10.985970585Z [RingCentral] Error syncing call Asqxodppgz3MzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:11.260641064Z [RingCentral] Error syncing call Asqruo_kfVXCzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:11.533872656Z [RingCentral] Error syncing call AsqkPKbctF7GzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:11.808538305Z [RingCentral] Error syncing call AsqXRRXACl1WzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:12.085423331Z [RingCentral] Error syncing call AsqPODvE08PUzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:12.361529845Z [RingCentral] Error syncing call Asp8K5Qun8uQzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:12.639669195Z [RingCentral] Error syncing call AspMxjqc3TeKzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:12.918902279Z [RingCentral] Error syncing call AspKOfkR4XwuzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:13.194639809Z [RingCentral] Error syncing call Aso5TVPb_L86zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:13.470978579Z [RingCentral] Error syncing call Aso4l4dPZOGczUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:13.746470562Z [RingCentral] Error syncing call Asosbr2hyVF-zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:14.023757835Z [RingCentral] Error syncing call AsoqsqbLVGT-zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:14.302971117Z [RingCentral] Error syncing call Asoe1M3FHI_8zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:14.57905054Z [RingCentral] Error syncing call AsoM7778DmuKzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:14.854874815Z [RingCentral] Error syncing call AsoGFDS0SDSgzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:15.130643167Z [RingCentral] Error syncing call Asn6TJAFljg-zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:15.411049379Z [RingCentral] Error syncing call AsntQC3W3ru4zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:15.68801228Z [RingCentral] Error syncing call AsnpBFLmqV22zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:15.965058948Z [RingCentral] Error syncing call AsnlDHhCfecezUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:16.24113773Z [RingCentral] Error syncing call Asni6xKctk5EzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:16.515150604Z [RingCentral] Error syncing call Asne8zf4iteszUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:16.789415016Z [RingCentral] Error syncing call AsnWfkijENa8zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:17.066488394Z [RingCentral] Error syncing call AsnSQQptYxswzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:17.34456823Z [RingCentral] Error syncing call AsnLdMQhyOk0zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:17.619181765Z [RingCentral] Error syncing call AsnCrfPJkVl2zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:17.894536799Z [RingCentral] Error syncing call Asm9mDc-ip3SzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:18.170765412Z [RingCentral] Error syncing call Asm4Ueg0DxhQzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:18.44632765Z [RingCentral] Error syncing call Asm1VT2t_cRKzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:18.724893488Z [RingCentral] Error syncing call Asm0MGtryKuMzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:19.004318754Z [RingCentral] Error syncing call AsmzReKPUutyzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:19.280569528Z [RingCentral] Error syncing call AsmxzGi_b4jSzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:19.550459517Z [RingCentral] Error syncing call Asmv91cGhAiezUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:19.826202977Z [RingCentral] Error syncing call Asmt6sJyyerazUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:20.104851632Z [RingCentral] Error syncing call Asmt4QuMf1wUzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:20.381691755Z [RingCentral] Error syncing call Asmq987TAyWazUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:20.657695152Z [RingCentral] Error syncing call Asmn8W1mp0LOzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:20.934088266Z [RingCentral] Error syncing call Asmno7Y0UsyezUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:21.208709991Z [RingCentral] Error syncing call Asmk5uIp4kdkzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:21.487650454Z [RingCentral] Error syncing call AsmeUh65FrL4zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:21.764580704Z [RingCentral] Error syncing call AsmZNXHStiOizUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:22.042595686Z [RingCentral] Error syncing call AsmA6AhH6BwEzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:22.32140283Z [RingCentral] Error syncing call Asl5d__20sxszUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:22.597603191Z [RingCentral] Error syncing call AsliMOC14dOwzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:22.874322836Z [RingCentral] Error syncing call Aslg_5ECcXEYzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:23.149198678Z [RingCentral] Error syncing call AslekHQqVWIOzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:23.426783981Z [RingCentral] Error syncing call AslO2Uh4SiBQzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:23.702039199Z [RingCentral] Error syncing call AslITjvtyRqqzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:23.975691439Z [RingCentral] Error syncing call AslDvFYqbRU8zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:24.248291159Z [RingCentral] Error syncing call Ask7vVzl6iMezUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:24.523560527Z [RingCentral] Error syncing call Ask0Ik8rQX_QzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:24.799504201Z [RingCentral] Error syncing call Asky75wyWL-uzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:25.07464159Z [RingCentral] Error syncing call Askx10dhXvDKzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:25.368729006Z [RingCentral] Error syncing call AskirEYX0JZ-zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:25.644724563Z [RingCentral] Error syncing call AskSozljB8XyzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:25.920155582Z [RingCentral] Error syncing call AskJ0rIkhaduzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:26.196706176Z [RingCentral] Error syncing call Asj60VL_EkNOzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:26.475469437Z [RingCentral] Error syncing call AsjW5ebprTV6zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:26.75214712Z [RingCentral] Error syncing call AsjUtqCNMfU8zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:27.026741523Z [RingCentral] Error syncing call AseDBFX1-IrgzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:27.302978966Z [RingCentral] Error syncing call AsdhauIFz9_EzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:27.580721939Z [RingCentral] Error syncing call AsdNM9sXhViazUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:27.858175044Z [RingCentral] Error syncing call AsdMo4ben1iKzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:28.135953719Z [RingCentral] Error syncing call AsdKznUls9hWzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:28.415974425Z [RingCentral] Error syncing call AsdBDdf02oOQzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:28.691060481Z [RingCentral] Error syncing call AscaPrw72rVqzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:28.969611419Z [RingCentral] Error syncing call AscSyooaXE00zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:29.245337027Z [RingCentral] Error syncing call Asbn_2nsx-_YzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:29.520319066Z [RingCentral] Error syncing call AsbXwwQtmZpazUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:29.7955103Z [RingCentral] Error syncing call AsbP7xBSqfvyzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:30.073391322Z [RingCentral] Error syncing call AsbPsJ0cgYqwzUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:30.350020091Z [RingCentral] Error syncing call AsbKWabQYaK2zUA: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:30.350055584Z [RingCentral] Sync complete: 0 synced, 0 skipped, 109 errors
+2025-12-26T18:39:30.350063084Z [Background] Synced: 0 new, 0 existing, 109 errors
+2025-12-26T18:39:30.620900626Z [Background] Job error: column "ringcentral_session_id" does not exist
+2025-12-26T18:39:30.620928998Z [Background] Job completed in 31s
+2025-12-26T18:43:16.525207119Z ==> Running 'npm run start'
+2025-12-26T18:43:16.80839334Z 
+2025-12-26T18:43:16.808419661Z > rest-express@1.0.0 start
+2025-12-26T18:43:16.808424241Z > NODE_ENV=production node dist/index.js
+2025-12-26T18:43:16.808426411Z 
+2025-12-26T18:43:19.34343372Z 6:43:19 PM [express] serving on port 10000
+2025-12-26T18:43:19.343639775Z [Background] Starting background jobs (sync every 5 minutes)
+2025-12-26T18:43:29.391260421Z ==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+2025-12-26T18:43:29.41493341Z ==> Deploying...
+2025-12-26T18:43:52.077046997Z [RingCentral] Error syncing call Asxliohf8F9azUA: column "shop_id" does not exist
+2025-12-26T18:43:52.356560716Z [RingCentral] Error syncing call AsxPmM3gqUk6zUA: column "shop_id" does not exist
+2025-12-26T18:43:52.635113582Z [RingCentral] Error syncing call AsxLx87VqA26zUA: column "shop_id" does not exist
+2025-12-26T18:43:52.911951952Z [RingCentral] Error syncing call AsxLN3qcwg2qzUA: column "shop_id" does not exist
+2025-12-26T18:43:53.186161306Z [RingCentral] Error syncing call AsxFqmS7S-WqzUA: column "shop_id" does not exist
+2025-12-26T18:43:53.46275034Z [RingCentral] Error syncing call AsxCbIB0IWVOzUA: column "shop_id" does not exist
+2025-12-26T18:43:53.73944477Z [RingCentral] Error syncing call AswxKzOwjl54zUA: column "shop_id" does not exist
+2025-12-26T18:43:54.014942391Z [RingCentral] Error syncing call AswurjYhvqgKzUA: column "shop_id" does not exist
+2025-12-26T18:43:54.295261594Z [RingCentral] Error syncing call AswoxYhXQGJ2zUA: column "shop_id" does not exist
+2025-12-26T18:43:54.575668843Z [RingCentral] Error syncing call Aswm4pXnoTrezUA: column "shop_id" does not exist
+2025-12-26T18:43:54.851390888Z [RingCentral] Error syncing call AswYvHuid5HqzUA: column "shop_id" does not exist
+2025-12-26T18:43:55.127159587Z [RingCentral] Error syncing call AswWjTVF_FGszUA: column "shop_id" does not exist
+2025-12-26T18:43:55.401728486Z [RingCentral] Error syncing call AswIgtxuOfeAzUA: column "shop_id" does not exist
+2025-12-26T18:43:55.676585753Z [RingCentral] Error syncing call AsvU-T-JQDuizUA: column "shop_id" does not exist
+2025-12-26T18:43:55.949411915Z [RingCentral] Error syncing call AsvSIKoRaGegzUA: column "shop_id" does not exist
+2025-12-26T18:43:55.593516431Z [RingCentral] Error syncing call Asj60VL_EkNOzUA: column "shop_id" does not exist
+2025-12-26T18:43:55.874309716Z [RingCentral] Error syncing call AsjW5ebprTV6zUA: column "shop_id" does not exist
+2025-12-26T18:43:56.155193874Z [RingCentral] Error syncing call AsjUtqCNMfU8zUA: column "shop_id" does not exist
+2025-12-26T18:43:56.421872715Z [RingCentral] Error syncing call AseDBFX1-IrgzUA: column "shop_id" does not exist
+2025-12-26T18:43:56.229405766Z [RingCentral] Error syncing call Asu07hZ7CG48zUA: column "shop_id" does not exist
+2025-12-26T18:43:56.504459577Z [RingCentral] Error syncing call AsuWg0LV3j6OzUA: column "shop_id" does not exist
+2025-12-26T18:43:56.778470478Z [RingCentral] Error syncing call Ast7w_XoA2zSzUA: column "shop_id" does not exist
+2025-12-26T18:43:57.056427083Z [RingCentral] Error syncing call AstmU0uldlHUzUA: column "shop_id" does not exist
+2025-12-26T18:43:56.700046398Z [RingCentral] Error syncing call AsdhauIFz9_EzUA: column "shop_id" does not exist
+2025-12-26T18:43:56.97479447Z [RingCentral] Error syncing call AsdNM9sXhViazUA: column "shop_id" does not exist
+2025-12-26T18:43:57.249244976Z [RingCentral] Error syncing call AsdMo4ben1iKzUA: column "shop_id" does not exist
+2025-12-26T18:43:57.534874895Z [RingCentral] Error syncing call AsdKznUls9hWzUA: column "shop_id" does not exist
+2025-12-26T18:43:57.333578034Z [RingCentral] Error syncing call AstiPOkI8tFgzUA: column "shop_id" does not exist
+2025-12-26T18:43:57.610662711Z [RingCentral] Error syncing call Astfe-suGTOIzUA: column "shop_id" does not exist
+2025-12-26T18:43:57.887879736Z [RingCentral] Error syncing call AstY4v3s5IZ-zUA: column "shop_id" does not exist
+2025-12-26T18:43:58.164591478Z [RingCentral] Error syncing call AstSm_GubWhCzUA: column "shop_id" does not exist
+2025-12-26T18:43:57.808622964Z [RingCentral] Error syncing call AsdBDdf02oOQzUA: column "shop_id" does not exist
+2025-12-26T18:43:58.081958993Z [RingCentral] Error syncing call AscaPrw72rVqzUA: column "shop_id" does not exist
+2025-12-26T18:43:58.363562187Z [RingCentral] Error syncing call AscSyooaXE00zUA: column "shop_id" does not exist
+2025-12-26T18:43:58.639216051Z [RingCentral] Error syncing call Asbn_2nsx-_YzUA: column "shop_id" does not exist
+2025-12-26T18:43:58.919746529Z [RingCentral] Error syncing call AsbXwwQtmZpazUA: column "shop_id" does not exist
+2025-12-26T18:43:58.442556844Z [RingCentral] Error syncing call AstQfVKTlop8zUA: column "shop_id" does not exist
+2025-12-26T18:43:58.722244974Z [RingCentral] Error syncing call AsssF8ac0VU4zUA: column "shop_id" does not exist
+2025-12-26T18:43:58.999448939Z [RingCentral] Error syncing call AssYFBi47FMAzUA: column "shop_id" does not exist
+2025-12-26T18:43:59.273193422Z [RingCentral] Error syncing call AssHgwtsD7OgzUA: column "shop_id" does not exist
+2025-12-26T18:43:59.19482704Z [RingCentral] Error syncing call AsbP7xBSqfvyzUA: column "shop_id" does not exist
+2025-12-26T18:43:59.475688146Z [RingCentral] Error syncing call AsbPsJ0cgYqwzUA: column "shop_id" does not exist
+2025-12-26T18:43:59.475728647Z [RingCentral] Sync complete: 0 synced, 0 skipped, 108 errors
+2025-12-26T18:43:59.475736278Z [Background] Synced: 0 new, 0 existing, 108 errors
+2025-12-26T18:43:59.749068066Z [Background] Job error: column "shop_id" does not exist
+2025-12-26T18:43:59.749095637Z [Background] Job completed in 30s
+2025-12-26T18:43:59.553854538Z [RingCentral] Error syncing call Asr7mLT0nJTEzUA: column "shop_id" does not exist
+2025-12-26T18:43:59.829902575Z [RingCentral] Error syncing call Asr5JtGRj8qmzUA: column "shop_id" does not exist
+2025-12-26T18:44:00.106828731Z [RingCentral] Error syncing call AsrtxHuyMHqezUA: column "shop_id" does not exist
+2025-12-26T18:44:00.398166651Z [RingCentral] Error syncing call AsrqXPVG6wQWzUA: column "shop_id" does not exist
+2025-12-26T18:44:00.806427762Z ==> Your service is live 🎉
+2025-12-26T18:44:01.080331732Z ==> 
+2025-12-26T18:44:01.1215875Z ==> ///////////////////////////////////////////////////////////
+2025-12-26T18:44:01.182651568Z ==> 
+2025-12-26T18:44:01.263628735Z ==> Available at your primary URL https://heart-helper.onrender.com
+2025-12-26T18:44:01.522212145Z ==> 
+2025-12-26T18:44:01.564725143Z ==> ///////////////////////////////////////////////////////////
+2025-12-26T18:44:00.672731179Z [RingCentral] Error syncing call AsrcTQ9ZRzPCzUA: column "shop_id" does not exist
+2025-12-26T18:44:00.949075317Z [RingCentral] Error syncing call Asqxodppgz3MzUA: column "shop_id" does not exist
+2025-12-26T18:44:01.226308923Z [RingCentral] Error syncing call Asqruo_kfVXCzUA: column "shop_id" does not exist
+2025-12-26T18:44:01.504342563Z [RingCentral] Error syncing call AsqkPKbctF7GzUA: column "shop_id" does not exist
+2025-12-26T18:44:01.773255653Z [RingCentral] Error syncing call AsqXRRXACl1WzUA: column "shop_id" does not exist
+2025-12-26T18:44:02.051205798Z [RingCentral] Error syncing call AsqPODvE08PUzUA: column "shop_id" does not exist
+2025-12-26T18:44:02.324562375Z [RingCentral] Error syncing call Asp8K5Qun8uQzUA: column "shop_id" does not exist
+2025-12-26T18:44:02.602282404Z [RingCentral] Error syncing call AspMxjqc3TeKzUA: column "shop_id" does not exist
+2025-12-26T18:44:02.876831471Z [RingCentral] Error syncing call AspKOfkR4XwuzUA: column "shop_id" does not exist
+2025-12-26T18:44:03.156463778Z [RingCentral] Error syncing call Aso5TVPb_L86zUA: column "shop_id" does not exist
+2025-12-26T18:44:02Z clientIP="34.82.57.203" requestID="8c4a522e-9310-45a7" responseTimeMS=32 responseBytes=828 userAgent="Go-http-client/2.0"
+2025-12-26T18:44:03.43377084Z [RingCentral] Error syncing call Aso4l4dPZOGczUA: column "shop_id" does not exist
+2025-12-26T18:44:03.710119517Z [RingCentral] Error syncing call Asosbr2hyVF-zUA: column "shop_id" does not exist
+2025-12-26T18:44:03.986291892Z [RingCentral] Error syncing call AsoqsqbLVGT-zUA: column "shop_id" does not exist
+2025-12-26T18:44:04.262328859Z [RingCentral] Error syncing call Asoe1M3FHI_8zUA: column "shop_id" does not exist
+2025-12-26T18:44:04.536554144Z [RingCentral] Error syncing call AsoM7778DmuKzUA: column "shop_id" does not exist
+2025-12-26T18:44:04.810441187Z [RingCentral] Error syncing call AsoGFDS0SDSgzUA: column "shop_id" does not exist
+2025-12-26T18:44:05.092746192Z [RingCentral] Error syncing call Asn6TJAFljg-zUA: column "shop_id" does not exist
+2025-12-26T18:44:05.37179528Z [RingCentral] Error syncing call AsntQC3W3ru4zUA: column "shop_id" does not exist
+2025-12-26T18:44:05.648645671Z [RingCentral] Error syncing call AsnpBFLmqV22zUA: column "shop_id" does not exist
+2025-12-26T18:44:05.924903373Z [RingCentral] Error syncing call AsnlDHhCfecezUA: column "shop_id" does not exist
+2025-12-26T18:44:06.202114767Z [RingCentral] Error syncing call Asni6xKctk5EzUA: column "shop_id" does not exist
+2025-12-26T18:44:06.477472169Z [RingCentral] Error syncing call Asne8zf4iteszUA: column "shop_id" does not exist
+2025-12-26T18:44:06.758387792Z [RingCentral] Error syncing call AsnWfkijENa8zUA: column "shop_id" does not exist
+2025-12-26T18:44:07.035087532Z [RingCentral] Error syncing call AsnSQQptYxswzUA: column "shop_id" does not exist
+2025-12-26T18:44:07.310815888Z [RingCentral] Error syncing call AsnLdMQhyOk0zUA: column "shop_id" does not exist
+2025-12-26T18:44:07.588345474Z [RingCentral] Error syncing call AsnCrfPJkVl2zUA: column "shop_id" does not exist
+2025-12-26T18:44:07.864510939Z [RingCentral] Error syncing call Asm9mDc-ip3SzUA: column "shop_id" does not exist
+2025-12-26T18:44:08.139700269Z [RingCentral] Error syncing call Asm4Ueg0DxhQzUA: column "shop_id" does not exist
+2025-12-26T18:44:08.416822758Z [RingCentral] Error syncing call Asm1VT2t_cRKzUA: column "shop_id" does not exist
+2025-12-26T18:44:08.684638115Z [RingCentral] Error syncing call Asm0MGtryKuMzUA: column "shop_id" does not exist
+2025-12-26T18:44:08.961143582Z [RingCentral] Error syncing call AsmzReKPUutyzUA: column "shop_id" does not exist
+2025-12-26T18:44:09.24093812Z [RingCentral] Error syncing call AsmxzGi_b4jSzUA: column "shop_id" does not exist
+2025-12-26T18:44:09.517246055Z [RingCentral] Error syncing call Asmv91cGhAiezUA: column "shop_id" does not exist
+2025-12-26T18:44:09.792509179Z [RingCentral] Error syncing call Asmt6sJyyerazUA: column "shop_id" does not exist
+2025-12-26T18:44:10.069022028Z [RingCentral] Error syncing call Asmt4QuMf1wUzUA: column "shop_id" does not exist
+2025-12-26T18:44:10.344064357Z [RingCentral] Error syncing call Asmq987TAyWazUA: column "shop_id" does not exist
+2025-12-26T18:44:10.621561151Z [RingCentral] Error syncing call Asmn8W1mp0LOzUA: column "shop_id" does not exist
+2025-12-26T18:44:10.896491054Z [RingCentral] Error syncing call Asmno7Y0UsyezUA: column "shop_id" does not exist
+2025-12-26T18:44:11.172115143Z [RingCentral] Error syncing call Asmk5uIp4kdkzUA: column "shop_id" does not exist
+2025-12-26T18:44:11.447437941Z [RingCentral] Error syncing call AsmeUh65FrL4zUA: column "shop_id" does not exist
+2025-12-26T18:44:11.724270171Z [RingCentral] Error syncing call AsmZNXHStiOizUA: column "shop_id" does not exist
+2025-12-26T18:44:11.99870156Z [RingCentral] Error syncing call AsmA6AhH6BwEzUA: column "shop_id" does not exist
+2025-12-26T18:44:12.275736173Z [RingCentral] Error syncing call Asl5d__20sxszUA: column "shop_id" does not exist
+2025-12-26T18:44:12.553954725Z [RingCentral] Error syncing call AsliMOC14dOwzUA: column "shop_id" does not exist
+2025-12-26T18:44:12.828797012Z [RingCentral] Error syncing call Aslg_5ECcXEYzUA: column "shop_id" does not exist
+2025-12-26T18:44:03.480044095Z [Background] Running initial sync...
+2025-12-26T18:44:03.48012477Z [Background] Starting sync job at 6:44:03 PM
+2025-12-26T18:44:03.695025627Z [RingCentral] Successfully authenticated
+2025-12-26T18:44:03.818277363Z [RingCentral] Fetched 109 call records
+2025-12-26T18:44:04.109073036Z [RingCentral] Error syncing call Asyy7nZsMKMCzUA: column "shop_id" does not exist
+2025-12-26T18:44:04.388985762Z [RingCentral] Error syncing call AsyakywqrvQAzUA: column "shop_id" does not exist
+2025-12-26T18:44:04.665724205Z [RingCentral] Error syncing call AsyZeBDOxGoIzUA: column "shop_id" does not exist
+2025-12-26T18:44:04.941865089Z [RingCentral] Error syncing call AsyW-a_6fFYQzUA: column "shop_id" does not exist
+2025-12-26T18:44:05.215931353Z [RingCentral] Error syncing call AsySvdUKRvgOzUA: column "shop_id" does not exist
+2025-12-26T18:44:05.492628074Z [RingCentral] Error syncing call AsyRulFLWqRAzUA: column "shop_id" does not exist
+2025-12-26T18:44:05.768138115Z [RingCentral] Error syncing call AsyOmvT8iC3AzUA: column "shop_id" does not exist
+2025-12-26T18:44:06.045861234Z [RingCentral] Error syncing call Asxliohf8F9azUA: column "shop_id" does not exist
+2025-12-26T18:44:06.322503972Z [RingCentral] Error syncing call AsxPmM3gqUk6zUA: column "shop_id" does not exist
+2025-12-26T18:44:06.611823096Z [RingCentral] Error syncing call AsxLx87VqA26zUA: column "shop_id" does not exist
+2025-12-26T18:44:06.889577868Z [RingCentral] Error syncing call AsxLN3qcwg2qzUA: column "shop_id" does not exist
+2025-12-26T18:44:07.167912768Z [RingCentral] Error syncing call AsxFqmS7S-WqzUA: column "shop_id" does not exist
+2025-12-26T18:44:07.449838258Z [RingCentral] Error syncing call AsxCbIB0IWVOzUA: column "shop_id" does not exist
+2025-12-26T18:44:07.726925945Z [RingCentral] Error syncing call AswxKzOwjl54zUA: column "shop_id" does not exist
+2025-12-26T18:44:08.002560345Z [RingCentral] Error syncing call AswurjYhvqgKzUA: column "shop_id" does not exist
+2025-12-26T18:44:08.303723712Z [RingCentral] Error syncing call AswoxYhXQGJ2zUA: column "shop_id" does not exist
+2025-12-26T18:44:08.578617362Z [RingCentral] Error syncing call Aswm4pXnoTrezUA: column "shop_id" does not exist
+2025-12-26T18:44:08.854495558Z [RingCentral] Error syncing call AswYvHuid5HqzUA: column "shop_id" does not exist
+2025-12-26T18:44:09.129904182Z [RingCentral] Error syncing call AswWjTVF_FGszUA: column "shop_id" does not exist
+2025-12-26T18:44:09.407416777Z [RingCentral] Error syncing call AswIgtxuOfeAzUA: column "shop_id" does not exist
+2025-12-26T18:44:09.68743026Z [RingCentral] Error syncing call AsvU-T-JQDuizUA: column "shop_id" does not exist
+2025-12-26T18:44:09.978410126Z [RingCentral] Error syncing call AsvSIKoRaGegzUA: column "shop_id" does not exist
+2025-12-26T18:44:10.256274194Z [RingCentral] Error syncing call Asu07hZ7CG48zUA: column "shop_id" does not exist
+2025-12-26T18:44:10.531175775Z [RingCentral] Error syncing call AsuWg0LV3j6OzUA: column "shop_id" does not exist
+2025-12-26T18:44:10.810669923Z [RingCentral] Error syncing call Ast7w_XoA2zSzUA: column "shop_id" does not exist
+2025-12-26T18:44:11.08717815Z [RingCentral] Error syncing call AstmU0uldlHUzUA: column "shop_id" does not exist
+2025-12-26T18:44:11.363939015Z [RingCentral] Error syncing call AstiPOkI8tFgzUA: column "shop_id" does not exist
+2025-12-26T18:44:11.63890492Z [RingCentral] Error syncing call Astfe-suGTOIzUA: column "shop_id" does not exist
+2025-12-26T18:44:11.914768365Z [RingCentral] Error syncing call AstY4v3s5IZ-zUA: column "shop_id" does not exist
+2025-12-26T18:44:12.19257989Z [RingCentral] Error syncing call AstSm_GubWhCzUA: column "shop_id" does not exist
+2025-12-26T18:44:12.469147232Z [RingCentral] Error syncing call AstQfVKTlop8zUA: column "shop_id" does not exist
+2025-12-26T18:44:12.746997169Z [RingCentral] Error syncing call AsssF8ac0VU4zUA: column "shop_id" does not exist
+2025-12-26T18:44:13.024937123Z [RingCentral] Error syncing call AssYFBi47FMAzUA: column "shop_id" does not exist
+2025-12-26T18:44:13.109852174Z [RingCentral] Error syncing call AslekHQqVWIOzUA: column "shop_id" does not exist
+2025-12-26T18:44:13.299398104Z [RingCentral] Error syncing call AssHgwtsD7OgzUA: column "shop_id" does not exist
+2025-12-26T18:44:13.384083119Z [RingCentral] Error syncing call AslO2Uh4SiBQzUA: column "shop_id" does not exist
+2025-12-26T18:44:13.578655116Z [RingCentral] Error syncing call Asr7mLT0nJTEzUA: column "shop_id" does not exist
+2025-12-26T18:44:13.662329803Z [RingCentral] Error syncing call AslITjvtyRqqzUA: column "shop_id" does not exist
+2025-12-26T18:44:13.857637389Z [RingCentral] Error syncing call Asr5JtGRj8qmzUA: column "shop_id" does not exist
+2025-12-26T18:44:13.942217027Z [RingCentral] Error syncing call AslDvFYqbRU8zUA: column "shop_id" does not exist
+2025-12-26T18:44:14.13239204Z [RingCentral] Error syncing call AsrtxHuyMHqezUA: column "shop_id" does not exist
+2025-12-26T18:44:14.217383975Z [RingCentral] Error syncing call Ask7vVzl6iMezUA: column "shop_id" does not exist
+2025-12-26T18:44:14.409609215Z [RingCentral] Error syncing call AsrqXPVG6wQWzUA: column "shop_id" does not exist
+2025-12-26T18:44:14.492148027Z [RingCentral] Error syncing call Ask0Ik8rQX_QzUA: column "shop_id" does not exist
+2025-12-26T18:44:14.684159222Z [RingCentral] Error syncing call AsrcTQ9ZRzPCzUA: column "shop_id" does not exist
+2025-12-26T18:44:14.765945053Z [RingCentral] Error syncing call Asky75wyWL-uzUA: column "shop_id" does not exist
+2025-12-26T18:44:14.959421416Z [RingCentral] Error syncing call Asqxodppgz3MzUA: column "shop_id" does not exist
+2025-12-26T18:44:15.041197397Z [RingCentral] Error syncing call Askx10dhXvDKzUA: column "shop_id" does not exist
+2025-12-26T18:44:15.235320473Z [RingCentral] Error syncing call Asqruo_kfVXCzUA: column "shop_id" does not exist
+2025-12-26T18:44:15.319174173Z [RingCentral] Error syncing call AskirEYX0JZ-zUA: column "shop_id" does not exist
+2025-12-26T18:44:15.510110986Z [RingCentral] Error syncing call AsqkPKbctF7GzUA: column "shop_id" does not exist
+2025-12-26T18:44:15.598103973Z [RingCentral] Error syncing call AskSozljB8XyzUA: column "shop_id" does not exist
+2025-12-26T18:44:15.78745406Z [RingCentral] Error syncing call AsqXRRXACl1WzUA: column "shop_id" does not exist
+2025-12-26T18:44:15.873120001Z [RingCentral] Error syncing call AskJ0rIkhaduzUA: column "shop_id" does not exist
+2025-12-26T18:44:16.065772319Z [RingCentral] Error syncing call AsqPODvE08PUzUA: column "shop_id" does not exist
+2025-12-26T18:44:16.147497506Z [RingCentral] Error syncing call Asj60VL_EkNOzUA: column "shop_id" does not exist
+2025-12-26T18:44:16.344137861Z [RingCentral] Error syncing call Asp8K5Qun8uQzUA: column "shop_id" does not exist
+2025-12-26T18:44:16.430213669Z [RingCentral] Error syncing call AsjW5ebprTV6zUA: column "shop_id" does not exist
+2025-12-26T18:44:16.620791429Z [RingCentral] Error syncing call AspMxjqc3TeKzUA: column "shop_id" does not exist
+2025-12-26T18:44:16.703846765Z [RingCentral] Error syncing call AsjUtqCNMfU8zUA: column "shop_id" does not exist
+2025-12-26T18:44:16.897191329Z [RingCentral] Error syncing call AspKOfkR4XwuzUA: column "shop_id" does not exist
+2025-12-26T18:44:16.98000638Z [RingCentral] Error syncing call AseDBFX1-IrgzUA: column "shop_id" does not exist
+2025-12-26T18:44:17.174474699Z [RingCentral] Error syncing call Aso5TVPb_L86zUA: column "shop_id" does not exist
+2025-12-26T18:44:17.25774604Z [RingCentral] Error syncing call AsdhauIFz9_EzUA: column "shop_id" does not exist
+2025-12-26T18:44:17.453889991Z [RingCentral] Error syncing call Aso4l4dPZOGczUA: column "shop_id" does not exist
+2025-12-26T18:44:17.53189718Z [RingCentral] Error syncing call AsdNM9sXhViazUA: column "shop_id" does not exist
+2025-12-26T18:44:17.730174664Z [RingCentral] Error syncing call Asosbr2hyVF-zUA: column "shop_id" does not exist
+2025-12-26T18:44:17.812308089Z [RingCentral] Error syncing call AsdMo4ben1iKzUA: column "shop_id" does not exist
+2025-12-26T18:44:18.00501001Z [RingCentral] Error syncing call AsoqsqbLVGT-zUA: column "shop_id" does not exist
+2025-12-26T18:44:18.091716091Z [RingCentral] Error syncing call AsdKznUls9hWzUA: column "shop_id" does not exist
+2025-12-26T18:44:18.28588197Z [RingCentral] Error syncing call Asoe1M3FHI_8zUA: column "shop_id" does not exist
+2025-12-26T18:44:18.368566071Z [RingCentral] Error syncing call AsdBDdf02oOQzUA: column "shop_id" does not exist
+2025-12-26T18:44:18.563523154Z [RingCentral] Error syncing call AsoM7778DmuKzUA: column "shop_id" does not exist
+2025-12-26T18:44:18.643220185Z [RingCentral] Error syncing call AscaPrw72rVqzUA: column "shop_id" does not exist
+2025-12-26T18:44:18.843046693Z [RingCentral] Error syncing call AsoGFDS0SDSgzUA: column "shop_id" does not exist
+2025-12-26T18:44:18.925805699Z [RingCentral] Error syncing call AscSyooaXE00zUA: column "shop_id" does not exist
+2025-12-26T18:44:19.12103747Z [RingCentral] Error syncing call Asn6TJAFljg-zUA: column "shop_id" does not exist
+2025-12-26T18:44:19.203918075Z [RingCentral] Error syncing call Asbn_2nsx-_YzUA: column "shop_id" does not exist
+2025-12-26T18:44:19.398715606Z [RingCentral] Error syncing call AsntQC3W3ru4zUA: column "shop_id" does not exist
+2025-12-26T18:44:19.479140616Z [RingCentral] Error syncing call AsbXwwQtmZpazUA: column "shop_id" does not exist
+2025-12-26T18:44:19.673700602Z [RingCentral] Error syncing call AsnpBFLmqV22zUA: column "shop_id" does not exist
+2025-12-26T18:44:19.755871559Z [RingCentral] Error syncing call AsbP7xBSqfvyzUA: column "shop_id" does not exist
+2025-12-26T18:44:19.949209893Z [RingCentral] Error syncing call AsnlDHhCfecezUA: column "shop_id" does not exist
+2025-12-26T18:44:20.028606975Z [RingCentral] Error syncing call AsbPsJ0cgYqwzUA: column "shop_id" does not exist
+2025-12-26T18:44:20.028634227Z [RingCentral] Sync complete: 0 synced, 0 skipped, 109 errors
+2025-12-26T18:44:20.028640027Z [Background] Synced: 0 new, 0 existing, 109 errors
+2025-12-26T18:44:20.225144593Z [RingCentral] Error syncing call Asni6xKctk5EzUA: column "shop_id" does not exist
+2025-12-26T18:44:20.303144461Z [Background] Job error: column "shop_id" does not exist
+2025-12-26T18:44:20.303171133Z [Background] Job completed in 31s
+2025-12-26T18:44:20.499950326Z [RingCentral] Error syncing call Asne8zf4iteszUA: column "shop_id" does not exist
+2025-12-26T18:44:20.777226006Z [RingCentral] Error syncing call AsnWfkijENa8zUA: column "shop_id" does not exist
+2025-12-26T18:44:21.052718065Z [RingCentral] Error syncing call AsnSQQptYxswzUA: column "shop_id" does not exist
+2025-12-26T18:44:21.332829124Z [RingCentral] Error syncing call AsnLdMQhyOk0zUA: column "shop_id" does not exist
+2025-12-26T18:44:21.612796044Z [RingCentral] Error syncing call AsnCrfPJkVl2zUA: column "shop_id" does not exist
+2025-12-26T18:44:21.885296813Z [RingCentral] Error syncing call Asm9mDc-ip3SzUA: column "shop_id" does not exist
+2025-12-26T18:44:22.160455361Z [RingCentral] Error syncing call Asm4Ueg0DxhQzUA: column "shop_id" does not exist
+2025-12-26T18:44:22.435279446Z [RingCentral] Error syncing call Asm1VT2t_cRKzUA: column "shop_id" does not exist
+2025-12-26T18:44:22.712154408Z [RingCentral] Error syncing call Asm0MGtryKuMzUA: column "shop_id" does not exist
+2025-12-26T18:44:22.988737811Z [RingCentral] Error syncing call AsmzReKPUutyzUA: column "shop_id" does not exist
+2025-12-26T18:44:23.26557108Z [RingCentral] Error syncing call AsmxzGi_b4jSzUA: column "shop_id" does not exist
+2025-12-26T18:44:23.539639595Z [RingCentral] Error syncing call Asmv91cGhAiezUA: column "shop_id" does not exist
+2025-12-26T18:44:23.820258347Z [RingCentral] Error syncing call Asmt6sJyyerazUA: column "shop_id" does not exist
+2025-12-26T18:44:24.092706034Z [RingCentral] Error syncing call Asmt4QuMf1wUzUA: column "shop_id" does not exist
+2025-12-26T18:44:24.402431514Z [RingCentral] Error syncing call Asmq987TAyWazUA: column "shop_id" does not exist
+2025-12-26T18:44:24.681362463Z [RingCentral] Error syncing call Asmn8W1mp0LOzUA: column "shop_id" does not exist
+2025-12-26T18:44:24.955960223Z [RingCentral] Error syncing call Asmno7Y0UsyezUA: column "shop_id" does not exist
+2025-12-26T18:44:25.228968527Z [RingCentral] Error syncing call Asmk5uIp4kdkzUA: column "shop_id" does not exist
+2025-12-26T18:44:25.505895743Z [RingCentral] Error syncing call AsmeUh65FrL4zUA: column "shop_id" does not exist
+2025-12-26T18:44:25.780427358Z [RingCentral] Error syncing call AsmZNXHStiOizUA: column "shop_id" does not exist
+2025-12-26T18:44:26.05385593Z [RingCentral] Error syncing call AsmA6AhH6BwEzUA: column "shop_id" does not exist
+2025-12-26T18:44:26.332002107Z [RingCentral] Error syncing call Asl5d__20sxszUA: column "shop_id" does not exist
+2025-12-26T18:44:26.607739133Z [RingCentral] Error syncing call AsliMOC14dOwzUA: column "shop_id" does not exist
+2025-12-26T18:44:26.885651625Z [RingCentral] Error syncing call Aslg_5ECcXEYzUA: column "shop_id" does not exist
+2025-12-26T18:44:27.160378073Z [RingCentral] Error syncing call AslekHQqVWIOzUA: column "shop_id" does not exist
+2025-12-26T18:44:27.431878366Z [RingCentral] Error syncing call AslO2Uh4SiBQzUA: column "shop_id" does not exist
+2025-12-26T18:44:27.71101896Z [RingCentral] Error syncing call AslITjvtyRqqzUA: column "shop_id" does not exist
+2025-12-26T18:44:27.988440479Z [RingCentral] Error syncing call AslDvFYqbRU8zUA: column "shop_id" does not exist
+2025-12-26T18:44:28.265798433Z [RingCentral] Error syncing call Ask7vVzl6iMezUA: column "shop_id" does not exist
+2025-12-26T18:44:28.541818288Z [RingCentral] Error syncing call Ask0Ik8rQX_QzUA: column "shop_id" does not exist
+2025-12-26T18:44:28.817716385Z [RingCentral] Error syncing call Asky75wyWL-uzUA: column "shop_id" does not exist
+2025-12-26T18:44:29.092295614Z [RingCentral] Error syncing call Askx10dhXvDKzUA: column "shop_id" does not exist
+2025-12-26T18:44:29.368280576Z [RingCentral] Error syncing call AskirEYX0JZ-zUA: column "shop_id" does not exist
+2025-12-26T18:44:29.641904661Z [RingCentral] Error syncing call AskSozljB8XyzUA: column "shop_id" does not exist
+2025-12-26T18:44:29.921793315Z [RingCentral] Error syncing call AskJ0rIkhaduzUA: column "shop_id" does not exist
+2025-12-26T18:44:30.198815047Z [RingCentral] Error syncing call Asj60VL_EkNOzUA: column "shop_id" does not exist
+2025-12-26T18:44:30.472720921Z [RingCentral] Error syncing call AsjW5ebprTV6zUA: column "shop_id" does not exist
+2025-12-26T18:44:30.747130998Z [RingCentral] Error syncing call AsjUtqCNMfU8zUA: column "shop_id" does not exist
+2025-12-26T18:44:31.02325368Z [RingCentral] Error syncing call AseDBFX1-IrgzUA: column "shop_id" does not exist
+2025-12-26T18:44:31.314236656Z [RingCentral] Error syncing call AsdhauIFz9_EzUA: column "shop_id" does not exist
+2025-12-26T18:44:31.59055188Z [RingCentral] Error syncing call AsdNM9sXhViazUA: column "shop_id" does not exist
+2025-12-26T18:44:31.868561478Z [RingCentral] Error syncing call AsdMo4ben1iKzUA: column "shop_id" does not exist
+2025-12-26T18:44:32.148008033Z [RingCentral] Error syncing call AsdKznUls9hWzUA: column "shop_id" does not exist
+2025-12-26T18:44:32.420493031Z [RingCentral] Error syncing call AsdBDdf02oOQzUA: column "shop_id" does not exist
+2025-12-26T18:44:32.698116024Z [RingCentral] Error syncing call AscaPrw72rVqzUA: column "shop_id" does not exist
+2025-12-26T18:44:32.974243376Z [RingCentral] Error syncing call AscSyooaXE00zUA: column "shop_id" does not exist
+2025-12-26T18:44:33.247847309Z [RingCentral] Error syncing call Asbn_2nsx-_YzUA: column "shop_id" does not exist
+2025-12-26T18:44:33.522885878Z [RingCentral] Error syncing call AsbXwwQtmZpazUA: column "shop_id" does not exist
+2025-12-26T18:44:33.798808657Z [RingCentral] Error syncing call AsbP7xBSqfvyzUA: column "shop_id" does not exist
+2025-12-26T18:44:34.074374941Z [RingCentral] Error syncing call AsbPsJ0cgYqwzUA: column "shop_id" does not exist
+2025-12-26T18:44:34.074394002Z [RingCentral] Sync complete: 0 synced, 0 skipped, 109 errors
+2025-12-26T18:44:34.074407214Z [Background] Synced: 0 new, 0 existing, 109 errors
+2025-12-26T18:44:34.351068681Z [Background] Job error: column "shop_id" does not exist
+2025-12-26T18:44:34.351099333Z [Background] Job completed in 31s
