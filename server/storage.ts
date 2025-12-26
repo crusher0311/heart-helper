@@ -108,6 +108,12 @@ export interface IStorage {
   updateUserApprovalStatus(userId: string, status: 'approved' | 'rejected'): Promise<UserPreferences>;
   updateUserPassword(userId: string, passwordHash: string): Promise<void>;
   
+  // Password reset tokens
+  createPasswordResetToken(userId: string): Promise<PasswordResetToken>;
+  getPasswordResetToken(token: string): Promise<PasswordResetToken | undefined>;
+  markPasswordResetTokenUsed(tokenId: string): Promise<void>;
+  invalidateUserPasswordResetTokens(userId: string): Promise<void>;
+  
   // Labor rate groups (admin-managed, per-shop configuration)
   getLaborRateGroups(shopId?: string): Promise<LaborRateGroup[]>;
   createLaborRateGroup(data: InsertLaborRateGroup): Promise<LaborRateGroup>;

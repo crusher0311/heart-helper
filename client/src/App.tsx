@@ -15,6 +15,7 @@ import Calls from "@/pages/calls";
 import CallDetail from "@/pages/call-detail";
 import CoachingDashboard from "@/pages/coaching-dashboard";
 import Landing from "@/pages/landing";
+import ResetPassword from "@/pages/reset-password";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -32,6 +33,7 @@ function Router() {
     return (
       <Switch>
         <Route path="/" component={Landing} />
+        <Route path="/reset-password" component={ResetPassword} />
         <Route>
           <Redirect to="/" />
         </Route>

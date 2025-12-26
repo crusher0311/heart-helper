@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { Heart, Sparkles, Phone, FileText, TrendingUp, Users, Loader2 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
@@ -18,6 +19,8 @@ export default function Landing() {
   const [registerConfirmPassword, setRegisterConfirmPassword] = useState("");
   const [registerFirstName, setRegisterFirstName] = useState("");
   const [registerLastName, setRegisterLastName] = useState("");
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
+  const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
 
   const loginMutation = useMutation({
     mutationFn: async (data: { email: string; password: string }) => {
@@ -71,6 +74,41 @@ export default function Landing() {
       });
     },
   });
+
+  const forgotPasswordMutation = useMutation({
+    mutationFn: async (data: { email: string }) => {
+      const response = await apiRequest("POST", "/api/auth/forgot-password", data);
+      return await response.json();
+    },
+    onSuccess: (data: { message: string }) => {
+      toast({
+        title: "Check your email",
+        description: data.message || "If an account exists, a password reset link has been sent.",
+      });
+      setForgotPasswordOpen(false);
+      setForgotPasswordEmail("");
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Request failed",
+        description: error.message || "Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleForgotPassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!forgotPasswordEmail) {
+      toast({
+        title: "Missing information",
+        description: "Please enter your email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+    forgotPasswordMutation.mutate({ email: forgotPasswordEmail });
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -242,6 +280,70 @@ export default function Landing() {
                           "Sign In"
                         )}
                       </Button>
+                      <div className="text-center mt-2">
+                        <Dialog open={forgotPasswordOpen} onOpenChange={setForgotPasswordOpen}>
+                          <DialogTrigger asChild>
+                            <Button 
+                              variant="ghost" 
+                              className="text-sm text-muted-foreground underline-offset-4 hover:underline p-0 h-auto"
+                              type="button"
+                              data-testid="link-forgot-password"
+                            >
+                              Forgot your password?
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent>
+                            <form onSubmit={handleForgotPassword}>
+                              <DialogHeader>
+                                <DialogTitle>Reset Password</DialogTitle>
+                                <DialogDescription>
+                                  Enter your email address and we'll send you a link to reset your password.
+                                </DialogDescription>
+                              </DialogHeader>
+                              <div className="space-y-4 py-4">
+                                <div className="space-y-2">
+                                  <Label htmlFor="forgot-email">Email</Label>
+                                  <Input
+                                    id="forgot-email"
+                                    type="email"
+                                    placeholder="you@example.com"
+                                    value={forgotPasswordEmail}
+                                    onChange={(e) => setForgotPasswordEmail(e.target.value)}
+                                    disabled={forgotPasswordMutation.isPending}
+                                    data-testid="input-forgot-email"
+                                  />
+                                </div>
+                              </div>
+                              <DialogFooter>
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  onClick={() => {
+                                    setForgotPasswordOpen(false);
+                                    setForgotPasswordEmail("");
+                                  }}
+                                >
+                                  Cancel
+                                </Button>
+                                <Button
+                                  type="submit"
+                                  disabled={forgotPasswordMutation.isPending}
+                                  data-testid="button-send-reset-link"
+                                >
+                                  {forgotPasswordMutation.isPending ? (
+                                    <>
+                                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                      Sending...
+                                    </>
+                                  ) : (
+                                    "Send Reset Link"
+                                  )}
+                                </Button>
+                              </DialogFooter>
+                            </form>
+                          </DialogContent>
+                        </Dialog>
+                      </div>
                     </form>
                   </TabsContent>
                   
