@@ -141,3 +141,35 @@ If the configured primary provider fails or its API key is missing, the system a
 - **Neon Database**: Serverless PostgreSQL hosting.
 - **Google Fonts**: Inter and JetBrains Mono typefaces.
 - **Key npm Packages**: `@neondatabase/serverless`, `drizzle-orm`, `openai`, `@deepgram/sdk`, `assemblyai`, `@ringcentral/sdk`, `@tanstack/react-query`, `@radix-ui/*`, `tailwindcss`, `zod`, `wouter`, `bcryptjs`, `express-session`.
+- **Resend**: Transactional email service for password reset emails.
+
+## Deployment
+
+### Build Commands
+
+- `npm run build` - Builds frontend (Vite → `dist/public`) and backend (esbuild → `dist/index.js`)
+- `npm run start` - Starts production server on PORT (default 5000)
+- `npm run db:push` - Pushes Drizzle schema to PostgreSQL
+
+### Health Check
+
+`GET /api/health` returns `{ status: 'healthy', timestamp: '...', version: '1.0.0' }` for load balancer monitoring.
+
+### Render Deployment
+
+Configuration is in `render.yaml`. See `docs/DEPLOYMENT.md` for detailed instructions.
+
+Required environment variables:
+- `DATABASE_URL` - PostgreSQL connection string
+- `SESSION_SECRET` - Random string for session encryption
+- `TEKMETRIC_API_KEY` - Tekmetric API access
+- `OPENAI_API_KEY` - AI features
+- `RESEND_API_KEY` - Password reset emails
+
+### GitHub Setup
+
+Use `.gitignore` to exclude:
+- `node_modules/`, `dist/` - Build artifacts
+- `.env*` - Environment secrets
+- `*.zip`, `*.tar.gz` - Extension packages
+- `.replit`, `replit.nix` - Replit-specific files
