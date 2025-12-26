@@ -303,8 +303,9 @@ export async function setupAuth(app: Express) {
       const passwordHash = await hashPassword(password);
       await storage.updateUserPassword(resetToken.userId, passwordHash);
 
-      // Mark the token as used
-      await storage.markPasswordResetTokenUsed(resetToken.id);
+      // Invalidate ALL tokens for this user (not just the one used)
+      // This ensures any other outstanding tokens are also revoked
+      await storage.invalidateUserPasswordResetTokens(resetToken.userId);
 
       console.log(`[Reset Password] Password reset successful for user ${resetToken.userId}`);
       return res.json({ message: "Password reset successful. You can now log in with your new password." });
