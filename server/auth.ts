@@ -232,9 +232,10 @@ export async function setupAuth(app: Express) {
 
       // Send the email using Resend
       const resend = new Resend(process.env.RESEND_API_KEY);
+      const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
       
       await resend.emails.send({
-        from: 'HEART Helper <noreply@heartautocare.com>',
+        from: `HEART Helper <${fromEmail}>`,
         to: user.email!,
         subject: 'Reset Your Password - HEART Helper',
         html: `
