@@ -437,6 +437,12 @@ import type {
 } from "@shared/schema";
 
 import { getSymptomQuestionsContext, matchSymptomCategory } from "./symptom-questions";
+import { 
+  getPriceShopperGuidance, 
+  getAppointmentSettingGuidance, 
+  getPricePresentationGuidance, 
+  getObjectionHandlingGuidance 
+} from "./training-scripts";
 
 /**
  * Generates diagnostic follow-up questions based on customer's initial concern
@@ -459,12 +465,21 @@ export async function generateConcernFollowUpQuestions(
     ? `\nDetected Issue Category: ${matchedCategory.category}` 
     : '';
 
+  // Get training script guidance for price shoppers
+  const priceShopperContext = getPriceShopperGuidance();
+  const appointmentContext = getAppointmentSettingGuidance();
+
   const prompt = `You are an experienced automotive service advisor at HEART Certified Auto Care. A customer has called with a concern and you need to ask follow-up questions to gather complete diagnostic information.
 
 Customer's Initial Concern: "${customerConcern}"
 ${vehicleContext ? `\n${vehicleContext}` : ''}${categoryInfo}
 
 ${symptomContext}
+
+HEART TRAINING PLAYBOOK REFERENCE:
+${priceShopperContext}
+
+${appointmentContext}
 
 Generate 5 diagnostic follow-up questions that will help:
 1. Pinpoint the exact symptom (when, where, how often)
@@ -845,6 +860,10 @@ ${hasWarrantyServices
 - ${isInShop ? 'Let them know we\'ll have updates by end of day (around 4:30-5pm) depending on the work involved' : 'Commit to a specific follow-up time (typically end of day 4:30-5pm)'}
 - This builds trust by setting clear expectations for communication`;
 
+  // Get training playbook guidance
+  const pricePresentationContext = getPricePresentationGuidance();
+  const objectionContext = getObjectionHandlingGuidance();
+
   const prompt = `You are a friendly service advisor at HEART Certified Auto Care. Write a structured sales script following our proven 9-point format.
 
 CONTEXT: ${context}
@@ -855,6 +874,12 @@ Services: ${jobsList}
 ${totalAmount > 0 ? `Total: $${totalAmount.toFixed(2)}` : 'Total: Check the repair order for final amount'}
 ${salesKeyPoints}
 ${trainingContext}
+
+HEART TRAINING PLAYBOOK - PRICE PRESENTATION:
+${pricePresentationContext}
+
+HEART TRAINING PLAYBOOK - OBJECTION HANDLING:
+${objectionContext}
 
 FORMAT YOUR RESPONSE with clear section labels for each point. Each section should be 1-2 sentences. Write naturally as if speaking to the customer.
 
