@@ -1,0 +1,50 @@
+2025-12-26T18:46:59.872479122Z [RingCentral] Error syncing call AsmZNXHStiOizUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:00.215087666Z [RingCentral] Error syncing call AsmA6AhH6BwEzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:00.558437928Z [RingCentral] Error syncing call Asl5d__20sxszUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:00.911353222Z [RingCentral] Error syncing call AsliMOC14dOwzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:01.255375841Z [RingCentral] Error syncing call Aslg_5ECcXEYzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:01.593144662Z [RingCentral] Error syncing call AslekHQqVWIOzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:01.935796407Z [RingCentral] Error syncing call AslO2Uh4SiBQzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:02.288095665Z [RingCentral] Error syncing call AslITjvtyRqqzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:02.638625999Z [RingCentral] Error syncing call AslDvFYqbRU8zUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:02.980662008Z [RingCentral] Error syncing call Ask7vVzl6iMezUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:03.332063693Z [RingCentral] Error syncing call Ask0Ik8rQX_QzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:03.67597267Z [RingCentral] Error syncing call Asky75wyWL-uzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:04.025790335Z [RingCentral] Error syncing call Askx10dhXvDKzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:04.376214646Z [RingCentral] Error syncing call AskirEYX0JZ-zUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:04.712249234Z [RingCentral] Error syncing call AskSozljB8XyzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:05.056855128Z [RingCentral] Error syncing call AskJ0rIkhaduzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:05.405648357Z [RingCentral] Error syncing call Asj60VL_EkNOzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:05.7490331Z [RingCentral] Error syncing call AsjW5ebprTV6zUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:06.098001504Z [RingCentral] Error syncing call AsjUtqCNMfU8zUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:06.433662913Z [RingCentral] Error syncing call AseDBFX1-IrgzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:06.769944797Z [RingCentral] Error syncing call AsdhauIFz9_EzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:07.121785163Z [RingCentral] Error syncing call AsdNM9sXhViazUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:07.467729361Z [RingCentral] Error syncing call AsdMo4ben1iKzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:07.810464468Z [RingCentral] Error syncing call AsdKznUls9hWzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:08.161989456Z [RingCentral] Error syncing call AsdBDdf02oOQzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:08.506352474Z [RingCentral] Error syncing call AscaPrw72rVqzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:08.839520069Z [RingCentral] Error syncing call AscSyooaXE00zUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:09.188367301Z [RingCentral] Error syncing call Asbn_2nsx-_YzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:09.538835462Z [RingCentral] Error syncing call AsbXwwQtmZpazUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:09.880498782Z [RingCentral] Error syncing call AsbP7xBSqfvyzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:10.225986338Z [RingCentral] Error syncing call AsbPsJ0cgYqwzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:47:10.226010099Z [RingCentral] Sync complete: 0 synced, 0 skipped, 110 errors
+2025-12-26T18:47:10.226020609Z [Background] Synced: 0 new, 0 existing, 110 errors
+2025-12-26T18:47:10.504249238Z [Background] Job error: operator does not exist: text ->> unknown
+2025-12-26T18:47:10.504275089Z [Background] Job completed in 39s
+2025-12-26T18:48:10.667406826Z ==> Running 'npm run start'
+2025-12-26T18:48:10.896773777Z 
+2025-12-26T18:48:10.896797677Z > rest-express@1.0.0 start
+2025-12-26T18:48:10.896803848Z > NODE_ENV=production node dist/index.js
+2025-12-26T18:48:10.896806508Z 
+2025-12-26T18:48:13.578905007Z 6:48:13 PM [express] serving on port 10000
+2025-12-26T18:48:13.579203892Z [Background] Starting background jobs (sync every 5 minutes)
+2025-12-26T18:48:23.579786117Z [Background] Running initial sync...
+2025-12-26T18:48:23.580377858Z [Background] Starting sync job at 6:48:23 PM
+2025-12-26T18:48:23.723017668Z [RingCentral] Successfully authenticated
+2025-12-26T18:48:23.857835343Z [RingCentral] Fetched 110 call records
+2025-12-26T18:48:39.359854461Z [RingCentral] Sync complete: 110 synced, 0 skipped, 0 errors
+2025-12-26T18:48:39.359882041Z [Background] Synced: 110 new, 0 existing, 0 errors
+2025-12-26T18:48:39.42978817Z [Background] Job error: operator does not exist: text ->> unknown
+2025-12-26T18:48:39.429809921Z [Background] Job completed in 16s
