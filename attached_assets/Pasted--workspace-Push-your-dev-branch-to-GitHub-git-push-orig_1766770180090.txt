@@ -1,0 +1,71 @@
+~/workspace$ # Push your dev branch to GitHub
+git push origin dev
+
+# If you want dev changes merged into main:
+git checkout main
+git merge dev
+git push origin main
+Enumerating objects: 169, done.
+Counting objects: 100% (169/169), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (135/135), done.
+Writing objects: 100% (140/140), 1.03 MiB | 23.91 MiB/s, done.
+Total 140 (delta 114), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (114/114), completed with 26 local objects.
+To https://github.com/crusher0311/heart-helper.git
+   62358f9..6128130  dev -> dev
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+Updating d3e2cec..6128130
+Fast-forward
+ .gitignore                                                                                       |  56 +++++++++++-
+ .replit                                                                                          |  52 -----------
+ README.md                                                                                        | 123 ++++++++++++++++++++++++++
+ attached_assets/2025-12-12_08-34-46_1765550147670.PNG                                            | Bin 0 -> 238750 bytes
+ attached_assets/2025-12-12_08-34-56_1765550151096.PNG                                            | Bin 0 -> 278727 bytes
+ attached_assets/2025-12-12_09-51-42_1765554721137.PNG                                            | Bin 0 -> 329473 bytes
+ attached_assets/2025-12-12_10-07-10_1765555640601.PNG                                            | Bin 0 -> 202091 bytes
+ attached_assets/Pasted--LOFS-FULL-SYNTHETIC-OIL-CHANGE-3-21-2025-f3f884d3-9f65_1765555670582.txt | 250 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ attached_assets/Pasted--Tekmetric-Job-Importer-Background-service-worker-loade_1765555109894.txt | 189 +++++++++++++++++++++++++++++++++++++++
+ attached_assets/Pasted--workspace-git-push-u-origin-dev-Enumerating-objects-32_1765288513642.txt |  38 ++++++++
+ chrome-extension.tar.gz                                                                          | Bin 0 -> 79648 bytes
+ chrome-extension/CHANGELOG.md                                                                    |  16 ++++
+ chrome-extension/VERSION                                                                         |   2 +-
+ chrome-extension/background.js                                                                   |   8 +-
+ chrome-extension/manifest.json                                                                   |   4 +-
+ chrome-extension/sidepanel.css                                                                   | 427 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ chrome-extension/sidepanel.html                                                                  | 117 +++++++++++++++++++++++++
+ chrome-extension/sidepanel.js                                                                    | 608 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ client/src/App.tsx                                                                               |   4 +
+ client/src/pages/admin-job-labor-rates.tsx                                                       | 491 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ client/src/pages/admin.tsx                                                                       | 104 +++++++++++++++++++++-
+ client/src/pages/landing.tsx                                                                     | 102 +++++++++++++++++++++
+ client/src/pages/reset-password.tsx                                                              | 204 ++++++++++++++++++++++++++++++++++++++++++
+ client/src/pages/settings.tsx                                                                    |  36 +++++++-
+ docs/DEPLOYMENT.md                                                                               | 281 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ package-lock.json                                                                                | 103 ++++++++++++++++++++++
+ package.json                                                                                     |   1 +
+ render.yaml                                                                                      |  57 ++++++++++++
+ replit.md                                                                                        |  44 ++++++++--
+ server/auth.ts                                                                                   | 119 +++++++++++++++++++++++++
+ server/routes.ts                                                                                 | 307 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ server/storage.ts                                                                                | 330 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++---
+ server/tekmetric.ts                                                                              |  70 +++++++++++++++
+ shared/schema.ts                                                                                 |  79 +++++++++++++++++
+ 34 files changed, 4139 insertions(+), 83 deletions(-)
+ create mode 100644 README.md
+ create mode 100644 attached_assets/2025-12-12_08-34-46_1765550147670.PNG
+ create mode 100644 attached_assets/2025-12-12_08-34-56_1765550151096.PNG
+ create mode 100644 attached_assets/2025-12-12_09-51-42_1765554721137.PNG
+ create mode 100644 attached_assets/2025-12-12_10-07-10_1765555640601.PNG
+ create mode 100644 attached_assets/Pasted--LOFS-FULL-SYNTHETIC-OIL-CHANGE-3-21-2025-f3f884d3-9f65_1765555670582.txt
+ create mode 100644 attached_assets/Pasted--Tekmetric-Job-Importer-Background-service-worker-loade_1765555109894.txt
+ create mode 100644 attached_assets/Pasted--workspace-git-push-u-origin-dev-Enumerating-objects-32_1765288513642.txt
+ create mode 100644 chrome-extension.tar.gz
+ create mode 100644 client/src/pages/admin-job-labor-rates.tsx
+ create mode 100644 client/src/pages/reset-password.tsx
+ create mode 100644 docs/DEPLOYMENT.md
+ create mode 100644 render.yaml
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/crusher0311/heart-helper.git
+   d3e2cec..6128130  main -> main
