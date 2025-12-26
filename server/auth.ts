@@ -234,7 +234,7 @@ export async function setupAuth(app: Express) {
       const resend = new Resend(process.env.RESEND_API_KEY);
       const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
       
-      await resend.emails.send({
+      const emailResult = await resend.emails.send({
         from: `HEART Helper <${fromEmail}>`,
         to: user.email!,
         subject: 'Reset Your Password - HEART Helper',
@@ -262,7 +262,14 @@ export async function setupAuth(app: Express) {
         `,
       });
 
-      console.log(`[Forgot Password] Reset email sent to ${user.email}`);
+      console.log(`[Forgot Password] Resend API response:`, JSON.stringify(emailResult));
+      
+      if (emailResult.error) {
+        console.error(`[Forgot Password] Email failed:`, emailResult.error);
+        return res.status(500).json({ message: "Failed to send email. Please try again." });
+      }
+      
+      console.log(`[Forgot Password] Reset email sent to ${user.email}, ID: ${emailResult.data?.id}`);
       return res.json({ message: "If an account with that email exists, a password reset link has been sent." });
     } catch (error) {
       console.error("Forgot password error:", error);
