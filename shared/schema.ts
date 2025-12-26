@@ -64,6 +64,19 @@ export const scriptFeedback = pgTable("script_feedback", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// Password reset tokens for forgot password flow
+export const passwordResetTokens = pgTable("password_reset_tokens", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  token: varchar("token").notNull().unique(), // Secure random token
+  expiresAt: timestamp("expires_at").notNull(), // Token expiration (1 hour)
+  usedAt: timestamp("used_at"), // When the token was used (null if unused)
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export type PasswordResetToken = typeof passwordResetTokens.$inferSelect;
+export type InsertPasswordResetToken = typeof passwordResetTokens.$inferInsert;
+
 // Types for auth
 export type UpsertUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
