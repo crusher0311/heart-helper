@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import session from "express-session";
 import type { Express, RequestHandler } from "express";
 import connectPg from "connect-pg-simple";
+import { Resend } from "resend";
 import { storage } from "./storage";
 
 declare module "express-session" {
@@ -193,6 +194,123 @@ export async function setupAuth(app: Express) {
     } catch (error) {
       console.error("Registration error:", error);
       return res.status(500).json({ message: "Registration failed" });
+    }
+  });
+
+  // Forgot password endpoint - sends reset email
+  app.post("/api/auth/forgot-password", async (req, res) => {
+    try {
+      const { email } = req.body;
+      
+      if (!email) {
+        return res.status(400).json({ message: "Email is required" });
+      }
+
+      const user = await storage.getUserByEmail(email.toLowerCase().trim());
+      
+      // Always return success to prevent email enumeration attacks
+      if (!user) {
+        console.log(`[Forgot Password] No user found for email: ${email}`);
+        return res.json({ message: "If an account with that email exists, a password reset link has been sent." });
+      }
+
+      // Check if RESEND_API_KEY is configured
+      if (!process.env.RESEND_API_KEY) {
+        console.error("[Forgot Password] RESEND_API_KEY not configured");
+        return res.status(500).json({ message: "Email service not configured. Please contact an administrator." });
+      }
+
+      // Invalidate any existing tokens for this user
+      await storage.invalidateUserPasswordResetTokens(user.id);
+
+      // Create a new reset token
+      const resetToken = await storage.createPasswordResetToken(user.id);
+
+      // Build the reset URL
+      const baseUrl = process.env.APP_URL || `https://${req.get('host')}`;
+      const resetUrl = `${baseUrl}/reset-password?token=${resetToken.token}`;
+
+      // Send the email using Resend
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      
+      await resend.emails.send({
+        from: 'HEART Helper <noreply@heartautocare.com>',
+        to: user.email!,
+        subject: 'Reset Your Password - HEART Helper',
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #1e3a5f;">Reset Your Password</h2>
+            <p>Hi ${user.firstName || 'there'},</p>
+            <p>We received a request to reset your password for your HEART Helper account.</p>
+            <p>Click the button below to set a new password:</p>
+            <p style="margin: 30px 0;">
+              <a href="${resetUrl}" 
+                 style="background-color: #1e3a5f; color: white; padding: 12px 24px; 
+                        text-decoration: none; border-radius: 4px; display: inline-block;">
+                Reset Password
+              </a>
+            </p>
+            <p style="color: #666; font-size: 14px;">
+              This link will expire in 1 hour. If you didn't request this, you can safely ignore this email.
+            </p>
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+            <p style="color: #999; font-size: 12px;">
+              HEART Certified Auto Care
+            </p>
+          </div>
+        `,
+      });
+
+      console.log(`[Forgot Password] Reset email sent to ${user.email}`);
+      return res.json({ message: "If an account with that email exists, a password reset link has been sent." });
+    } catch (error) {
+      console.error("Forgot password error:", error);
+      return res.status(500).json({ message: "Failed to process request" });
+    }
+  });
+
+  // Reset password endpoint - validates token and updates password
+  app.post("/api/auth/reset-password", async (req, res) => {
+    try {
+      const { token, password } = req.body;
+      
+      if (!token || !password) {
+        return res.status(400).json({ message: "Token and password are required" });
+      }
+
+      if (password.length < 8) {
+        return res.status(400).json({ message: "Password must be at least 8 characters" });
+      }
+
+      // Get the reset token
+      const resetToken = await storage.getPasswordResetToken(token);
+      
+      if (!resetToken) {
+        return res.status(400).json({ message: "Invalid or expired reset link" });
+      }
+
+      // Check if token has been used
+      if (resetToken.usedAt) {
+        return res.status(400).json({ message: "This reset link has already been used" });
+      }
+
+      // Check if token is expired
+      if (new Date() > resetToken.expiresAt) {
+        return res.status(400).json({ message: "This reset link has expired" });
+      }
+
+      // Hash the new password and update
+      const passwordHash = await hashPassword(password);
+      await storage.updateUserPassword(resetToken.userId, passwordHash);
+
+      // Mark the token as used
+      await storage.markPasswordResetTokenUsed(resetToken.id);
+
+      console.log(`[Reset Password] Password reset successful for user ${resetToken.userId}`);
+      return res.json({ message: "Password reset successful. You can now log in with your new password." });
+    } catch (error) {
+      console.error("Reset password error:", error);
+      return res.status(500).json({ message: "Failed to reset password" });
     }
   });
 

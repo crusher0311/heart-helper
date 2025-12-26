@@ -38,7 +38,7 @@ import type {
   WarrantyStatus,
 } from "@shared/schema";
 import { db } from "./db";
-import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache, users, userPreferences, scriptFeedback, laborRateGroups, jobLaborRates, ringcentralUsers, callRecordings, coachingCriteria, callScores, transcriptAnnotations, SHOP_NAMES } from "@shared/schema";
+import { repairOrders, repairOrderJobs, repairOrderJobParts, searchRequests, vehicles, settings, searchCache, users, userPreferences, scriptFeedback, laborRateGroups, jobLaborRates, ringcentralUsers, callRecordings, coachingCriteria, callScores, transcriptAnnotations, passwordResetTokens, SHOP_NAMES, PasswordResetToken } from "@shared/schema";
 import { eq, and, or, like, ilike, sql, desc, gte, lte, isNull, isNotNull } from "drizzle-orm";
 import crypto from "crypto";
 import { getModelVariations } from "./vehicle-utils";
@@ -925,6 +925,51 @@ export class DatabaseStorage implements IStorage {
       .update(users)
       .set({ passwordHash })
       .where(eq(users.id, userId));
+  }
+
+  // Password reset tokens
+  async createPasswordResetToken(userId: string): Promise<PasswordResetToken> {
+    // Generate a secure random token
+    const token = crypto.randomBytes(32).toString('hex');
+    // Token expires in 1 hour
+    const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
+    
+    const [resetToken] = await db
+      .insert(passwordResetTokens)
+      .values({
+        userId,
+        token,
+        expiresAt,
+      })
+      .returning();
+    
+    return resetToken;
+  }
+
+  async getPasswordResetToken(token: string): Promise<PasswordResetToken | undefined> {
+    const [resetToken] = await db
+      .select()
+      .from(passwordResetTokens)
+      .where(eq(passwordResetTokens.token, token));
+    return resetToken;
+  }
+
+  async markPasswordResetTokenUsed(tokenId: string): Promise<void> {
+    await db
+      .update(passwordResetTokens)
+      .set({ usedAt: new Date() })
+      .where(eq(passwordResetTokens.id, tokenId));
+  }
+
+  async invalidateUserPasswordResetTokens(userId: string): Promise<void> {
+    // Mark all existing tokens for this user as used
+    await db
+      .update(passwordResetTokens)
+      .set({ usedAt: new Date() })
+      .where(and(
+        eq(passwordResetTokens.userId, userId),
+        isNull(passwordResetTokens.usedAt)
+      ));
   }
 
   // Labor rate groups (admin-managed, per-shop configuration)
