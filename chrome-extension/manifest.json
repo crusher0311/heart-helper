@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "HEART Helper - Tekmetric Integration",
   "version": "3.23.0",
-  "description": "HEART Certified Auto Care repair history search, concern intake, sales scripts with feedback, live coaching tips, auto labor rates, vehicle service history with warranty analysis, and Tekmetric integration",
+  "description": "HEART Certified Auto Care - Helper",
   "permissions": [
     "storage",
     "activeTab",
