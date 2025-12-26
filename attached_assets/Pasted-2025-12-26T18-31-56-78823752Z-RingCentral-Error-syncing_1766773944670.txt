@@ -1,0 +1,50 @@
+2025-12-26T18:31:56.78823752Z [RingCentral] Error syncing call Asm1VT2t_cRKzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:31:57.056849722Z [RingCentral] Error syncing call Asm0MGtryKuMzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:31:57.325773515Z [RingCentral] Error syncing call AsmzReKPUutyzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:31:57.594269784Z [RingCentral] Error syncing call AsmxzGi_b4jSzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:31:57.863905217Z [RingCentral] Error syncing call Asmv91cGhAiezUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:31:58.134566531Z [RingCentral] Error syncing call Asmt6sJyyerazUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:31:58.405400629Z [RingCentral] Error syncing call Asmt4QuMf1wUzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:31:58.675675691Z [RingCentral] Error syncing call Asmq987TAyWazUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:31:58.941343788Z [RingCentral] Error syncing call Asmn8W1mp0LOzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:31:59.211315381Z [RingCentral] Error syncing call Asmno7Y0UsyezUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:31:59.482604282Z [RingCentral] Error syncing call Asmk5uIp4kdkzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:31:59.75273553Z [RingCentral] Error syncing call AsmeUh65FrL4zUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:00.021081915Z [RingCentral] Error syncing call AsmZNXHStiOizUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:00.28939709Z [RingCentral] Error syncing call AsmA6AhH6BwEzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:00.55792392Z [RingCentral] Error syncing call Asl5d__20sxszUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:00.824240076Z [RingCentral] Error syncing call AsliMOC14dOwzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:01.093087096Z [RingCentral] Error syncing call Aslg_5ECcXEYzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:01.36413853Z [RingCentral] Error syncing call AslekHQqVWIOzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:01.63467322Z [RingCentral] Error syncing call AslO2Uh4SiBQzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:01.903426447Z [RingCentral] Error syncing call AslITjvtyRqqzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:02.176165132Z [RingCentral] Error syncing call AslDvFYqbRU8zUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:02.444299501Z [RingCentral] Error syncing call Ask7vVzl6iMezUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:02.714732437Z [RingCentral] Error syncing call Ask0Ik8rQX_QzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:02.980850567Z [RingCentral] Error syncing call Asky75wyWL-uzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:03.249159181Z [RingCentral] Error syncing call Askx10dhXvDKzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:03.514623481Z [RingCentral] Error syncing call AskirEYX0JZ-zUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:03.785075288Z [RingCentral] Error syncing call AskSozljB8XyzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:04.053899498Z [RingCentral] Error syncing call AskJ0rIkhaduzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:04.319623186Z [RingCentral] Error syncing call Asj60VL_EkNOzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:04.588061994Z [RingCentral] Error syncing call AsjW5ebprTV6zUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:04.863076455Z [RingCentral] Error syncing call AsjUtqCNMfU8zUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:05.130276346Z [RingCentral] Error syncing call AseDBFX1-IrgzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:05.399783736Z [RingCentral] Error syncing call AsdhauIFz9_EzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:05.672628164Z [RingCentral] Error syncing call AsdNM9sXhViazUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:05.944273146Z [RingCentral] Error syncing call AsdMo4ben1iKzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:06.219288568Z [RingCentral] Error syncing call AsdKznUls9hWzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:06.488833928Z [RingCentral] Error syncing call AsdBDdf02oOQzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:06.75774572Z [RingCentral] Error syncing call AscaPrw72rVqzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:07.02695218Z [RingCentral] Error syncing call AscSyooaXE00zUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:07.295064809Z [RingCentral] Error syncing call Asbn_2nsx-_YzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:07.56668185Z [RingCentral] Error syncing call AsbXwwQtmZpazUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:07.836795847Z [RingCentral] Error syncing call AsbP7xBSqfvyzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:08.116090835Z [RingCentral] Error syncing call AsbPsJ0cgYqwzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:08.389997044Z [RingCentral] Error syncing call AsbKWabQYaK2zUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:08.657803413Z [RingCentral] Error syncing call AsbI6ePmyM7czUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:08.926111097Z [RingCentral] Error syncing call AsbINXqfqU7IzUA: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:08.926147329Z [RingCentral] Sync complete: 0 synced, 0 skipped, 105 errors
+2025-12-26T18:32:08.926154609Z [Background] Synced: 0 new, 0 existing, 105 errors
+2025-12-26T18:32:09.195878624Z [Background] Job error: column "ringcentral_recording_id" does not exist
+2025-12-26T18:32:09.195910025Z [Background] Job completed in 29s
