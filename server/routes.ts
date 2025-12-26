@@ -42,6 +42,15 @@ export async function registerRoutes(app: Express) {
   // Set up username/password authentication
   await setupAuth(app);
 
+  // Health check endpoint for monitoring and load balancers
+  app.get('/api/health', (req, res) => {
+    res.json({ 
+      status: 'healthy', 
+      timestamp: new Date().toISOString(),
+      version: process.env.npm_package_version || '1.0.0'
+    });
+  });
+
   // Get user preferences (requires approval)
   app.get('/api/user/preferences', isAuthenticated, isApproved, async (req: any, res) => {
     try {

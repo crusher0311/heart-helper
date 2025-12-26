@@ -1,0 +1,57 @@
+# Render Blueprint - HEART Helper
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: heart-helper
+    runtime: node
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      # Database - Use your Neon PostgreSQL connection string
+      - key: DATABASE_URL
+        sync: false
+      - key: PGHOST
+        sync: false
+      - key: PGPORT
+        sync: false
+      - key: PGUSER
+        sync: false
+      - key: PGPASSWORD
+        sync: false
+      - key: PGDATABASE
+        sync: false
+      # Session secret - generate a secure random string
+      - key: SESSION_SECRET
+        generateValue: true
+      # Tekmetric API
+      - key: TEKMETRIC_API_KEY
+        sync: false
+      - key: TEKMETRIC_SHOP_ID
+        sync: false
+      # AI Services
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: DEEPGRAM_API_KEY
+        sync: false
+      - key: ASSEMBLYAI_API_KEY
+        sync: false
+      # RingCentral Integration
+      - key: RINGCENTRAL_CLIENT_ID
+        sync: false
+      - key: RINGCENTRAL_CLIENT_SECRET
+        sync: false
+      - key: RINGCENTRAL_JWT_TOKEN
+        sync: false
+      # Email Service
+      - key: RESEND_API_KEY
+        sync: false
+      # Optional: Override app URL for password reset emails
+      - key: APP_URL
+        sync: false

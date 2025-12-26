@@ -1,7 +1,54 @@
-node_modules
-dist
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+server/public/
+
+# Environment files (contain secrets)
+.env
+.env.local
+.env.production
+.env.*.local
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
 .DS_Store
-server/public
+Thumbs.db
+
+# Replit-specific (not needed for external deployment)
+.replit
+replit.nix
+.cache/
+.upm/
+
+# Temporary and log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/tmp/
+
+# Vite temp files
 vite.config.ts.*
-*.tar.gzattached_assets/*.js
+
+# Test files
+test-import.json
+
+# Chrome extension build artifacts
+*.zip
+*.tar.gz
+chrome-extension/*.zip
+
+# Generated assets that shouldn't be committed
+attached_assets/generated_images/
+attached_assets/generated_videos/
 attached_assets/*.js
+
+# Drizzle temp files
+migrations/.temp/
