@@ -1,0 +1,106 @@
+2025-12-26T18:44:22.988737811Z [RingCentral] Error syncing call AsmzReKPUutyzUA: column "shop_id" does not exist
+2025-12-26T18:44:23.26557108Z [RingCentral] Error syncing call AsmxzGi_b4jSzUA: column "shop_id" does not exist
+2025-12-26T18:44:23.539639595Z [RingCentral] Error syncing call Asmv91cGhAiezUA: column "shop_id" does not exist
+2025-12-26T18:44:23.820258347Z [RingCentral] Error syncing call Asmt6sJyyerazUA: column "shop_id" does not exist
+2025-12-26T18:44:24.092706034Z [RingCentral] Error syncing call Asmt4QuMf1wUzUA: column "shop_id" does not exist
+2025-12-26T18:44:24.402431514Z [RingCentral] Error syncing call Asmq987TAyWazUA: column "shop_id" does not exist
+2025-12-26T18:44:24.681362463Z [RingCentral] Error syncing call Asmn8W1mp0LOzUA: column "shop_id" does not exist
+2025-12-26T18:44:24.955960223Z [RingCentral] Error syncing call Asmno7Y0UsyezUA: column "shop_id" does not exist
+2025-12-26T18:44:25.228968527Z [RingCentral] Error syncing call Asmk5uIp4kdkzUA: column "shop_id" does not exist
+2025-12-26T18:44:25.505895743Z [RingCentral] Error syncing call AsmeUh65FrL4zUA: column "shop_id" does not exist
+2025-12-26T18:44:25.780427358Z [RingCentral] Error syncing call AsmZNXHStiOizUA: column "shop_id" does not exist
+2025-12-26T18:44:26.05385593Z [RingCentral] Error syncing call AsmA6AhH6BwEzUA: column "shop_id" does not exist
+2025-12-26T18:44:26.332002107Z [RingCentral] Error syncing call Asl5d__20sxszUA: column "shop_id" does not exist
+2025-12-26T18:44:26.607739133Z [RingCentral] Error syncing call AsliMOC14dOwzUA: column "shop_id" does not exist
+2025-12-26T18:44:26.885651625Z [RingCentral] Error syncing call Aslg_5ECcXEYzUA: column "shop_id" does not exist
+2025-12-26T18:44:27.160378073Z [RingCentral] Error syncing call AslekHQqVWIOzUA: column "shop_id" does not exist
+2025-12-26T18:44:27.431878366Z [RingCentral] Error syncing call AslO2Uh4SiBQzUA: column "shop_id" does not exist
+2025-12-26T18:44:27.71101896Z [RingCentral] Error syncing call AslITjvtyRqqzUA: column "shop_id" does not exist
+2025-12-26T18:44:27.988440479Z [RingCentral] Error syncing call AslDvFYqbRU8zUA: column "shop_id" does not exist
+2025-12-26T18:44:28.265798433Z [RingCentral] Error syncing call Ask7vVzl6iMezUA: column "shop_id" does not exist
+2025-12-26T18:44:28.541818288Z [RingCentral] Error syncing call Ask0Ik8rQX_QzUA: column "shop_id" does not exist
+2025-12-26T18:44:28.817716385Z [RingCentral] Error syncing call Asky75wyWL-uzUA: column "shop_id" does not exist
+2025-12-26T18:44:29.092295614Z [RingCentral] Error syncing call Askx10dhXvDKzUA: column "shop_id" does not exist
+2025-12-26T18:44:29.368280576Z [RingCentral] Error syncing call AskirEYX0JZ-zUA: column "shop_id" does not exist
+2025-12-26T18:44:29.641904661Z [RingCentral] Error syncing call AskSozljB8XyzUA: column "shop_id" does not exist
+2025-12-26T18:44:29.921793315Z [RingCentral] Error syncing call AskJ0rIkhaduzUA: column "shop_id" does not exist
+2025-12-26T18:44:30.198815047Z [RingCentral] Error syncing call Asj60VL_EkNOzUA: column "shop_id" does not exist
+2025-12-26T18:44:30.472720921Z [RingCentral] Error syncing call AsjW5ebprTV6zUA: column "shop_id" does not exist
+2025-12-26T18:44:30.747130998Z [RingCentral] Error syncing call AsjUtqCNMfU8zUA: column "shop_id" does not exist
+2025-12-26T18:44:31.02325368Z [RingCentral] Error syncing call AseDBFX1-IrgzUA: column "shop_id" does not exist
+2025-12-26T18:44:31.314236656Z [RingCentral] Error syncing call AsdhauIFz9_EzUA: column "shop_id" does not exist
+2025-12-26T18:44:31.59055188Z [RingCentral] Error syncing call AsdNM9sXhViazUA: column "shop_id" does not exist
+2025-12-26T18:44:31.868561478Z [RingCentral] Error syncing call AsdMo4ben1iKzUA: column "shop_id" does not exist
+2025-12-26T18:44:32.148008033Z [RingCentral] Error syncing call AsdKznUls9hWzUA: column "shop_id" does not exist
+2025-12-26T18:44:32.420493031Z [RingCentral] Error syncing call AsdBDdf02oOQzUA: column "shop_id" does not exist
+2025-12-26T18:44:32.698116024Z [RingCentral] Error syncing call AscaPrw72rVqzUA: column "shop_id" does not exist
+2025-12-26T18:44:32.974243376Z [RingCentral] Error syncing call AscSyooaXE00zUA: column "shop_id" does not exist
+2025-12-26T18:44:33.247847309Z [RingCentral] Error syncing call Asbn_2nsx-_YzUA: column "shop_id" does not exist
+2025-12-26T18:44:33.522885878Z [RingCentral] Error syncing call AsbXwwQtmZpazUA: column "shop_id" does not exist
+2025-12-26T18:44:33.798808657Z [RingCentral] Error syncing call AsbP7xBSqfvyzUA: column "shop_id" does not exist
+2025-12-26T18:44:34.074374941Z [RingCentral] Error syncing call AsbPsJ0cgYqwzUA: column "shop_id" does not exist
+2025-12-26T18:44:34.074394002Z [RingCentral] Sync complete: 0 synced, 0 skipped, 109 errors
+2025-12-26T18:44:34.074407214Z [Background] Synced: 0 new, 0 existing, 109 errors
+2025-12-26T18:44:34.351068681Z [Background] Job error: column "shop_id" does not exist
+2025-12-26T18:44:34.351099333Z [Background] Job completed in 31s
+2025-12-26T18:46:18.780684759Z ==> Running 'npm run start'
+2025-12-26T18:46:19.062253342Z 
+2025-12-26T18:46:19.062278583Z > rest-express@1.0.0 start
+2025-12-26T18:46:19.062307954Z > NODE_ENV=production node dist/index.js
+2025-12-26T18:46:19.062317614Z 
+2025-12-26T18:46:21.763122954Z 6:46:21 PM [express] serving on port 10000
+2025-12-26T18:46:21.763406501Z [Background] Starting background jobs (sync every 5 minutes)
+2025-12-26T18:46:31.765677303Z [Background] Running initial sync...
+2025-12-26T18:46:31.766146915Z [Background] Starting sync job at 6:46:31 PM
+2025-12-26T18:46:31.980996066Z [RingCentral] Successfully authenticated
+2025-12-26T18:46:32.115183551Z [RingCentral] Fetched 110 call records
+2025-12-26T18:46:32.477674496Z [RingCentral] Error syncing call Asy3a4sdfy1azUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:32.829671657Z [RingCentral] Error syncing call Asyy7nZsMKMCzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:33.17262845Z [RingCentral] Error syncing call AsyakywqrvQAzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:33.508843742Z [RingCentral] Error syncing call AsyZeBDOxGoIzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:33.859248183Z [RingCentral] Error syncing call AsyW-a_6fFYQzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:34.213695834Z [RingCentral] Error syncing call AsySvdUKRvgOzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:34.563717465Z [RingCentral] Error syncing call AsyRulFLWqRAzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:34.915989663Z [RingCentral] Error syncing call AsyOmvT8iC3AzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:35.267200224Z [RingCentral] Error syncing call Asxliohf8F9azUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:35.621188424Z [RingCentral] Error syncing call AsxPmM3gqUk6zUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:36.03839649Z [RingCentral] Error syncing call AsxLx87VqA26zUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:36.392978906Z [RingCentral] Error syncing call AsxLN3qcwg2qzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:36.745407408Z [RingCentral] Error syncing call AsxFqmS7S-WqzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:37.091985002Z [RingCentral] Error syncing call AsxCbIB0IWVOzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:37.43635555Z [RingCentral] Error syncing call AswxKzOwjl54zUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:37.789736425Z [RingCentral] Error syncing call AswurjYhvqgKzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:38.142111276Z [RingCentral] Error syncing call AswoxYhXQGJ2zUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:38.477250041Z [RingCentral] Error syncing call Aswm4pXnoTrezUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:38.825337643Z [RingCentral] Error syncing call AswYvHuid5HqzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:39.167103915Z [RingCentral] Error syncing call AswWjTVF_FGszUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:39.502806705Z [RingCentral] Error syncing call AswIgtxuOfeAzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:39.837064508Z [RingCentral] Error syncing call AsvU-T-JQDuizUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:40.185098519Z [RingCentral] Error syncing call AsvSIKoRaGegzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:40.53712105Z [RingCentral] Error syncing call Asu07hZ7CG48zUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:40.87997398Z [RingCentral] Error syncing call AsuWg0LV3j6OzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:41.216793337Z [RingCentral] Error syncing call Ast7w_XoA2zSzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:41.566783097Z [RingCentral] Error syncing call AstmU0uldlHUzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:41.91726456Z [RingCentral] Error syncing call AstiPOkI8tFgzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:42.266223164Z [RingCentral] Error syncing call Astfe-suGTOIzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:42.60020369Z [RingCentral] Error syncing call AstY4v3s5IZ-zUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:42.954883238Z [RingCentral] Error syncing call AstSm_GubWhCzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:43.307214667Z [RingCentral] Error syncing call AstQfVKTlop8zUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:43.644234739Z [RingCentral] Error syncing call AsssF8ac0VU4zUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:43.982182926Z [RingCentral] Error syncing call AssYFBi47FMAzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:44.32363605Z [RingCentral] Error syncing call AssHgwtsD7OgzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:44.669115396Z [RingCentral] Error syncing call Asr7mLT0nJTEzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:45.020565203Z [RingCentral] Error syncing call Asr5JtGRj8qmzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:45.363377072Z [RingCentral] Error syncing call AsrtxHuyMHqezUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:45.69942801Z [RingCentral] Error syncing call AsrqXPVG6wQWzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:46.051054742Z [RingCentral] Error syncing call AsrcTQ9ZRzPCzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:46.394561878Z [RingCentral] Error syncing call Asqxodppgz3MzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:46.737825198Z [RingCentral] Error syncing call Asqruo_kfVXCzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:47.081522219Z [RingCentral] Error syncing call AsqkPKbctF7GzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:47.422141193Z [RingCentral] Error syncing call AsqXRRXACl1WzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:47.763437563Z [RingCentral] Error syncing call AsqPODvE08PUzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:48.113826703Z [RingCentral] Error syncing call Asp8K5Qun8uQzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:48.466586353Z [RingCentral] Error syncing call AspMxjqc3TeKzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:48.809414532Z [RingCentral] Error syncing call AspKOfkR4XwuzUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:49.151879143Z [RingCentral] Error syncing call Aso5TVPb_L86zUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
+2025-12-26T18:46:49.506478569Z [RingCentral] Error syncing call Aso4l4dPZOGczUA: null value in column "started_at" of relation "call_recordings" violates not-null constraint
