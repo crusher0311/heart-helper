@@ -2,6 +2,44 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [3.26.0] - 2025-12-29
+
+### 🎨 UI IMPROVEMENT: Icon-Only Tab Navigation
+- **Changed**: Replaced text+icon tabs with circular icon-only buttons
+- **Benefits**:
+  - All 6 tabs now fit without horizontal overflow
+  - Cleaner, more modern appearance matching header button style
+  - No more horizontal scrolling on narrow sidebar widths
+- **Tooltips**: Hover over any tab icon to see the full name (e.g., "Incoming Caller", "Search Jobs")
+- **Styling**: 
+  - Inactive tabs: Light gray circular buttons with colored icon on hover
+  - Active tab: HEART Red filled circle with white icon and subtle shadow
+
+### Technical Details
+- Tab buttons are now 38px circular buttons with centered 16px icons
+- Removed text labels, added `title` attributes for accessibility tooltips
+- Tab navigation uses `justify-content: space-evenly` to span full width
+- Active state includes box-shadow for visual depth
+
+## [3.25.0] - 2025-12-29
+
+### 🚀 Production URL Auto-Fill
+- **Added**: Chrome Web Store installs now auto-configure production URL
+- **URL**: `https://heart-helper.onrender.com` is set by default for new users
+- **Benefit**: Users no longer need to manually configure the app URL in settings
+
+### Technical Details
+- Added `PRODUCTION_URL` constant in sidepanel.js
+- `loadSettings()` now defaults to production URL if no URL is configured
+- "Open App" button uses production URL as fallback
+
+## [3.24.0] - 2025-12-29
+
+### 📚 Training Playbook Integration
+- **Added**: HEART training scripts integrated into AI prompts
+- **Categories**: Price shoppers, appointment setting, price presentation, objection handling
+- **Impact**: AI-generated scripts and concern intake now use official HEART training methodology
+
 ## [3.20.0] - 2025-12-10
 
 ### ✨ NEW FEATURE: Job-Based Labor Rates
