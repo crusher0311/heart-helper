@@ -173,3 +173,19 @@ Use `.gitignore` to exclude:
 - `.env*` - Environment secrets
 - `*.zip`, `*.tar.gz` - Extension packages
 - `.replit`, `replit.nix` - Replit-specific files
+
+## Reference Data
+
+### Standard Labor Rate Groups
+
+Configure these in `/admin/labor-rates`:
+
+| Group Name | Rate/hr | Makes |
+|------------|---------|-------|
+| Euro Labor Rate | $273.22 | Alfa Romeo, Aston Martin, Audi, Bentley, BMW, Bugatti, Ferrari, Fiat, Jaguar, Lamborghini, Land Rover, Lotus, Maserati, McLaren, Mercedes-Benz, Mini, Polestar, Porsche, Rolls-Royce, Volkswagen, Volvo |
+
+### Chrome Extension
+
+- **Published**: [Chrome Web Store](https://chrome.google.com/webstore/detail/iakembjgfndohijdnlldkgfjokcakona)
+- **Production URL**: https://heart-helper.onrender.com
+- **Current Version**: 3.26.0
