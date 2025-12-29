@@ -283,11 +283,7 @@ export default function Settings() {
   const currentShop = selectedShop || settings?.defaultShopId;
 
   const handleDownloadExtension = () => {
-    window.location.href = "/api/download-extension";
-    toast({
-      title: "Download Started",
-      description: "The Chrome extension is downloading. Follow the installation steps below.",
-    });
+    window.open("https://chrome.google.com/webstore/detail/iakembjgfndohijdnlldkgfjokcakona", "_blank");
   };
 
   return (
@@ -555,7 +551,7 @@ Guidelines:
         <CardContent className="space-y-4">
           <Alert>
             <AlertDescription>
-              The Chrome extension adds two powerful features: (1) A "Check History" button on Tekmetric repair orders that instantly searches for similar jobs, and (2) Auto-fill for estimate forms with labor items and parts from your search results.
+              The Chrome extension adds powerful features: live call coaching, AI sales scripts, instant job history search, and auto-fill for Tekmetric estimates.
             </AlertDescription>
           </Alert>
 
@@ -565,8 +561,8 @@ Guidelines:
             className="w-full sm:w-auto"
             data-testid="button-download-extension"
           >
-            <Download className="w-4 h-4 mr-2" />
-            Download Chrome Extension
+            <Chrome className="w-4 h-4 mr-2" />
+            Install from Chrome Web Store
           </Button>
 
           <div className="pt-4 border-t">
@@ -574,16 +570,16 @@ Guidelines:
               <span className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold">
                 1
               </span>
-              Installation Steps
+              Quick Setup
             </h3>
             
             <div className="space-y-3 ml-8">
               <div className="flex items-start gap-3">
                 <Circle className="w-4 h-4 mt-1 text-muted-foreground" />
                 <div>
-                  <p className="font-medium">Download the extension</p>
+                  <p className="font-medium">Install from Chrome Web Store</p>
                   <p className="text-sm text-muted-foreground">
-                    Click the download button above to get the extension zip file
+                    Click the button above to open the Chrome Web Store and add the extension
                   </p>
                 </div>
               </div>
@@ -591,9 +587,9 @@ Guidelines:
               <div className="flex items-start gap-3">
                 <Circle className="w-4 h-4 mt-1 text-muted-foreground" />
                 <div>
-                  <p className="font-medium">Extract the zip file</p>
+                  <p className="font-medium">Pin the extension</p>
                   <p className="text-sm text-muted-foreground">
-                    Unzip the downloaded file to a folder on your computer
+                    Click the puzzle piece icon in Chrome and pin HEART Helper for quick access
                   </p>
                 </div>
               </div>
@@ -601,39 +597,9 @@ Guidelines:
               <div className="flex items-start gap-3">
                 <Circle className="w-4 h-4 mt-1 text-muted-foreground" />
                 <div>
-                  <p className="font-medium">Open Chrome Extensions</p>
+                  <p className="font-medium">Sign in</p>
                   <p className="text-sm text-muted-foreground">
-                    Go to <code className="px-1 py-0.5 bg-muted rounded text-xs">chrome://extensions/</code> in your browser
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Circle className="w-4 h-4 mt-1 text-muted-foreground" />
-                <div>
-                  <p className="font-medium">Enable Developer Mode</p>
-                  <p className="text-sm text-muted-foreground">
-                    Toggle "Developer mode" in the top right corner
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Circle className="w-4 h-4 mt-1 text-muted-foreground" />
-                <div>
-                  <p className="font-medium">Load unpacked extension</p>
-                  <p className="text-sm text-muted-foreground">
-                    Click "Load unpacked" and select the extracted folder
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Circle className="w-4 h-4 mt-1 text-muted-foreground" />
-                <div>
-                  <p className="font-medium">Configure app URL</p>
-                  <p className="text-sm text-muted-foreground">
-                    Click the extension icon, copy this page's URL from your browser, paste it in the Settings section, and click Save
+                    Click the extension icon, then sign in with your HEART Helper account
                   </p>
                 </div>
               </div>
@@ -643,7 +609,7 @@ Guidelines:
                 <div>
                   <p className="font-medium text-green-600">You're all set!</p>
                   <p className="text-sm text-muted-foreground">
-                    You'll see "Tekmetric Job Importer" in your extensions list
+                    Open any Tekmetric repair order and click the extension to access HEART Helper
                   </p>
                 </div>
               </div>

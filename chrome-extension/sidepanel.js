@@ -436,6 +436,9 @@ function normalizeUrl(url) {
   }
 }
 
+// Production URL for Chrome Web Store version
+const PRODUCTION_URL = 'https://heart-helper.onrender.com';
+
 async function loadSettings() {
   return new Promise((resolve) => {
     // Check sync storage first (user-configured), then local storage (auto-detected from app visit)
@@ -447,7 +450,15 @@ async function loadSettings() {
       } else {
         // Fallback to local storage (set by inject.js when visiting the app)
         chrome.storage.local.get(['appUrl'], (localData) => {
-          appUrl = normalizeUrl(localData.appUrl || '');
+          if (localData.appUrl) {
+            appUrl = normalizeUrl(localData.appUrl);
+          } else {
+            // Default to production URL for Chrome Web Store installs
+            appUrl = PRODUCTION_URL;
+            // Save it so it persists
+            chrome.storage.sync.set({ heartHelperUrl: PRODUCTION_URL });
+            chrome.storage.local.set({ appUrl: PRODUCTION_URL });
+          }
           updateConnectionStatus();
           resolve();
         });
@@ -635,22 +646,9 @@ function setupEventListeners() {
   
   // Open full app button
   document.getElementById('openAppBtn').addEventListener('click', () => {
-    // Use the global appUrl that was loaded from settings, or fallback
-    if (appUrl) {
-      chrome.tabs.create({ url: appUrl });
-    } else {
-      // Try to get from storage as fallback
-      chrome.storage.sync.get(['heartHelperUrl'], (syncData) => {
-        if (syncData.heartHelperUrl) {
-          chrome.tabs.create({ url: syncData.heartHelperUrl });
-        } else {
-          chrome.storage.local.get(['appUrl'], (localData) => {
-            const url = localData.appUrl || 'https://heart-helper.replit.app';
-            chrome.tabs.create({ url: url });
-          });
-        }
-      });
-    }
+    // Use the global appUrl that was loaded from settings, or fallback to production
+    const url = appUrl || PRODUCTION_URL;
+    chrome.tabs.create({ url: url });
   });
   
   // Settings button
