@@ -583,6 +583,139 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return false;
   }
 
+  // FETCH_RO_DETAILS - Fetch RO details for Job Board enhancement
+  if (message.action === "FETCH_RO_DETAILS") {
+    const roId = message.roId;
+    const shopId = currentTekmetricShopId;
+    
+    if (!tekmetricAuthToken) {
+      console.warn("[Background] FETCH_RO_DETAILS: No auth token");
+      sendResponse({ success: false, error: "No auth token" });
+      return false;
+    }
+    
+    if (!shopId || !roId) {
+      console.warn("[Background] FETCH_RO_DETAILS: Missing shopId or roId:", { shopId, roId });
+      sendResponse({ success: false, error: "Missing shopId or roId" });
+      return false;
+    }
+    
+    const baseUrl = currentTekmetricBaseUrl || "https://shop.tekmetric.com";
+    
+    // Fetch RO data from Tekmetric API
+    fetch(`${baseUrl}/api/shop/${shopId}/repair-order/${roId}`, {
+      headers: {
+        "x-auth-token": tekmetricAuthToken,
+        "content-type": "application/json"
+      }
+    })
+    .then(res => {
+      if (!res.ok) throw new Error(`API returned ${res.status}`);
+      return res.json();
+    })
+    .then(roData => {
+      // Log full response structure for debugging
+      console.log(`[Background] RO ${roId} API response keys:`, Object.keys(roData));
+      
+      // Extract customer concern from multiple possible locations
+      let customerConcern = null;
+      
+      // 1. Check RO-level concern field (various naming conventions)
+      customerConcern = roData.customerConcern || roData.concern || roData.customerComplaint || null;
+      
+      // 2. Check jobs for concerns
+      if (!customerConcern && roData.jobs && roData.jobs.length > 0) {
+        for (const job of roData.jobs) {
+          // Check various job-level concern fields
+          const jobConcern = job.customerConcern || job.concern || job.complaint || job.note;
+          if (jobConcern && typeof jobConcern === 'string' && jobConcern.trim().length > 0) {
+            customerConcern = jobConcern.trim();
+            break;
+          }
+        }
+        // Fallback: use first job name if it looks like a description
+        if (!customerConcern && roData.jobs[0]?.name) {
+          const name = roData.jobs[0].name;
+          if (name.length > 5 && name.length < 150) {
+            customerConcern = name;
+          }
+        }
+      }
+      
+      // 3. Check RO note as fallback
+      if (!customerConcern && roData.note && roData.note.trim().length > 0) {
+        customerConcern = roData.note.trim();
+      }
+      
+      // Extract inspection status - try multiple field paths
+      // Tekmetric may use different structures: direct fields, nested objects, or arrays
+      let inspectionSentAt = null;
+      let inspectionViewedAt = null;
+      
+      // Try direct fields
+      inspectionSentAt = roData.inspectionSentAt || roData.inspectionSentDate || null;
+      inspectionViewedAt = roData.inspectionViewedAt || roData.inspectionViewedDate || null;
+      
+      // Try nested inspection object
+      if (roData.inspection) {
+        inspectionSentAt = inspectionSentAt || roData.inspection.sentAt || roData.inspection.sentDate || null;
+        inspectionViewedAt = inspectionViewedAt || roData.inspection.viewedAt || roData.inspection.viewedDate || null;
+      }
+      
+      // Try digitalInspection object
+      if (roData.digitalInspection) {
+        inspectionSentAt = inspectionSentAt || roData.digitalInspection.sentAt || roData.digitalInspection.sentDate || null;
+        inspectionViewedAt = inspectionViewedAt || roData.digitalInspection.viewedAt || roData.digitalInspection.viewedDate || null;
+      }
+      
+      // Extract estimate status - try multiple field paths
+      let estimateSentAt = null;
+      let estimateViewedAt = null;
+      
+      // Try direct fields
+      estimateSentAt = roData.estimateSentAt || roData.estimateSentDate || null;
+      estimateViewedAt = roData.estimateViewedAt || roData.estimateViewedDate || null;
+      
+      // Try nested estimate object
+      if (roData.estimate) {
+        estimateSentAt = estimateSentAt || roData.estimate.sentAt || roData.estimate.sentDate || null;
+        estimateViewedAt = estimateViewedAt || roData.estimate.viewedAt || roData.estimate.viewedDate || null;
+      }
+      
+      // Build result with extracted data
+      const result = {
+        success: true,
+        data: {
+          roId: roId,
+          roNumber: roData.repairOrderNumber,
+          customerConcern: customerConcern,
+          inspectionSentAt: inspectionSentAt,
+          inspectionViewedAt: inspectionViewedAt,
+          estimateSentAt: estimateSentAt,
+          estimateViewedAt: estimateViewedAt,
+          status: roData.status,
+          customer: roData.customer ? `${roData.customer.firstName || ''} ${roData.customer.lastName || ''}`.trim() : null
+        }
+      };
+      
+      // Log what we extracted for debugging
+      console.log(`[Background] FETCH_RO_DETAILS for RO ${roId}:`, {
+        hasConcern: !!customerConcern,
+        hasInspection: !!(inspectionSentAt || inspectionViewedAt),
+        hasEstimate: !!(estimateSentAt || estimateViewedAt),
+        status: roData.status
+      });
+      
+      sendResponse(result);
+    })
+    .catch(err => {
+      console.error("[Background] FETCH_RO_DETAILS error:", err);
+      sendResponse({ success: false, error: err.message });
+    });
+    
+    return true; // Async response
+  }
+
   // GET_VEHICLE_INFO - Fetch vehicle data from Tekmetric API (same pattern as labor rate)
   if (message.action === "GET_VEHICLE_INFO" || message.type === "GET_VEHICLE_INFO") {
     console.log("[Background] GET_VEHICLE_INFO received:", { 

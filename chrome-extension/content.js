@@ -1316,6 +1316,409 @@ if (document.readyState === 'loading') {
 }
 
 // ==========================================
+// Job Board Enhancement - Show customer concerns and inspection/estimate status
+// ==========================================
+
+let jobBoardEnhancedRows = new Set(); // Track which rows have been enhanced
+let jobBoardCache = {}; // Cache RO data to avoid duplicate API calls
+
+// Detect if we're on the Job Board page
+function isJobBoardPage() {
+  return window.location.href.includes('/job-board') || 
+         window.location.href.includes('/jobBoard') ||
+         document.querySelector('h1, h2')?.textContent?.toLowerCase().includes('job board');
+}
+
+// Extract RO ID from a row element
+function extractRoIdFromRow(row) {
+  // Look for the RO number link (e.g., "#142273")
+  const roLink = row.querySelector('a[href*="/repair-orders/"]');
+  if (roLink) {
+    const match = roLink.href.match(/\/repair-orders\/(\d+)/);
+    if (match) {
+      return match[1];
+    }
+  }
+  
+  // Alternative: look for text content with RO number pattern
+  const roText = row.textContent.match(/#(\d{5,7})/);
+  if (roText) {
+    return roText[1];
+  }
+  
+  return null;
+}
+
+// Fetch RO details from Tekmetric API via background script
+async function fetchRODetailsForJobBoard(roId) {
+  // Check cache first
+  if (jobBoardCache[roId]) {
+    return jobBoardCache[roId];
+  }
+  
+  return new Promise((resolve) => {
+    chrome.runtime.sendMessage(
+      { action: "FETCH_RO_DETAILS", roId: roId },
+      (response) => {
+        if (response && response.success && response.data) {
+          jobBoardCache[roId] = response.data;
+          resolve(response.data);
+        } else {
+          console.log(`[JobBoard] Failed to fetch RO ${roId}:`, response?.error);
+          resolve(null);
+        }
+      }
+    );
+  });
+}
+
+// Format timestamp to relative time (e.g., "16h ago", "4d ago")
+function formatRelativeTime(dateString) {
+  if (!dateString) return '';
+  
+  try {
+    // Handle ISO strings - ensure UTC interpretation if no timezone specified
+    let date;
+    if (typeof dateString === 'string') {
+      // If no timezone info, treat as UTC
+      if (!dateString.includes('Z') && !dateString.includes('+') && !dateString.includes('-', 10)) {
+        date = new Date(dateString + 'Z');
+      } else {
+        date = new Date(dateString);
+      }
+    } else {
+      date = new Date(dateString);
+    }
+    
+    if (isNaN(date.getTime())) {
+      console.warn('[JobBoard] Invalid date:', dateString);
+      return '';
+    }
+    
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    
+    if (diffMs < 0) return 'just now'; // Future date edge case
+    
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    return `${diffDays}d ago`;
+  } catch (e) {
+    console.warn('[JobBoard] Error formatting date:', dateString, e);
+    return '';
+  }
+}
+
+// Create the concern display element
+function createConcernElement(concern) {
+  const el = document.createElement('div');
+  el.className = 'heart-job-board-concern';
+  el.style.cssText = `
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    background: #FEF3C7;
+    border: 1px solid #F59E0B;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #92400E;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 8px;
+  `;
+  el.textContent = concern.length > 40 ? concern.substring(0, 40) + '...' : concern;
+  el.title = concern; // Full text on hover
+  return el;
+}
+
+// Create the inspection/estimate status display
+function createStatusElement(label, timestamp, isViewed) {
+  const el = document.createElement('div');
+  el.className = 'heart-job-board-status';
+  el.style.cssText = `
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    background: ${isViewed ? '#D1FAE5' : '#DBEAFE'};
+    border: 1px solid ${isViewed ? '#10B981' : '#3B82F6'};
+    border-radius: 4px;
+    font-size: 11px;
+    color: ${isViewed ? '#065F46' : '#1E40AF'};
+    margin-right: 6px;
+  `;
+  
+  el.textContent = `${label} ${timestamp || ''}`;
+  return el;
+}
+
+// Create a container for WIP row extras
+function createWIPExtrasContainer(roData) {
+  const container = document.createElement('div');
+  container.className = 'heart-job-board-wip-extras';
+  container.style.cssText = `
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px 8px;
+    margin-left: auto;
+    min-width: 200px;
+  `;
+  
+  let hasContent = false;
+  
+  // Add inspection status if available
+  if (roData.inspectionSentAt || roData.inspectionViewedAt) {
+    const row = document.createElement('div');
+    row.style.cssText = 'display: flex; gap: 8px; align-items: center; flex-wrap: wrap;';
+    
+    if (roData.inspectionSentAt) {
+      const time = formatRelativeTime(roData.inspectionSentAt);
+      row.appendChild(createStatusElement('Insp. sent', time, false));
+      hasContent = true;
+    }
+    if (roData.inspectionViewedAt) {
+      const time = formatRelativeTime(roData.inspectionViewedAt);
+      row.appendChild(createStatusElement('Insp. viewed', time, true));
+      hasContent = true;
+    }
+    container.appendChild(row);
+  }
+  
+  // Add estimate status if available
+  if (roData.estimateSentAt || roData.estimateViewedAt) {
+    const row = document.createElement('div');
+    row.style.cssText = 'display: flex; gap: 8px; align-items: center; flex-wrap: wrap;';
+    
+    if (roData.estimateSentAt) {
+      const time = formatRelativeTime(roData.estimateSentAt);
+      row.appendChild(createStatusElement('Est. sent', time, false));
+      hasContent = true;
+    }
+    if (roData.estimateViewedAt) {
+      const time = formatRelativeTime(roData.estimateViewedAt);
+      row.appendChild(createStatusElement('Est. viewed', time, true));
+      hasContent = true;
+    }
+    container.appendChild(row);
+  }
+  
+  // Add customer concern if available
+  if (roData.customerConcern) {
+    container.appendChild(createConcernElement(roData.customerConcern));
+    hasContent = true;
+  }
+  
+  // If no content was added, return null to avoid empty container
+  if (!hasContent) {
+    return null;
+  }
+  
+  return container;
+}
+
+// Determine which section (Estimates or WIP) a row belongs to
+function getRowSection(row) {
+  // Walk up to find section header
+  let current = row;
+  while (current && current !== document.body) {
+    // Look for section header text
+    const prevSiblings = [];
+    let sibling = current.previousElementSibling;
+    while (sibling) {
+      prevSiblings.push(sibling);
+      sibling = sibling.previousElementSibling;
+    }
+    
+    for (const sib of prevSiblings) {
+      const text = sib.textContent?.toLowerCase() || '';
+      if (text.includes('estimates') && !text.includes('work')) {
+        return 'estimates';
+      }
+      if (text.includes('work-in-progress') || text.includes('work in progress') || text.includes('wip')) {
+        return 'wip';
+      }
+    }
+    
+    current = current.parentElement;
+  }
+  
+  // Fallback: check row's position on the page
+  const rowTop = row.getBoundingClientRect().top;
+  const estimatesHeader = Array.from(document.querySelectorAll('*')).find(el => 
+    el.textContent?.toLowerCase().includes('estimates (') && el.textContent?.length < 50
+  );
+  const wipHeader = Array.from(document.querySelectorAll('*')).find(el => 
+    (el.textContent?.toLowerCase().includes('work-in-progress') || 
+     el.textContent?.toLowerCase().includes('work in progress')) && 
+    el.textContent?.length < 50
+  );
+  
+  if (wipHeader && rowTop > wipHeader.getBoundingClientRect().top) {
+    return 'wip';
+  }
+  
+  return 'estimates';
+}
+
+// Enhance a single Job Board row
+async function enhanceJobBoardRow(row) {
+  const rowId = row.getAttribute('data-row-id') || row.id || row.textContent?.substring(0, 50);
+  if (jobBoardEnhancedRows.has(rowId)) {
+    return;
+  }
+  
+  const roId = extractRoIdFromRow(row);
+  if (!roId) {
+    return;
+  }
+  
+  // Mark as processed early to prevent duplicate processing
+  jobBoardEnhancedRows.add(rowId);
+  
+  // Fetch RO details
+  const roData = await fetchRODetailsForJobBoard(roId);
+  if (!roData) {
+    return;
+  }
+  
+  const section = getRowSection(row);
+  console.log(`[JobBoard] Enhancing row for RO ${roId} in ${section} section`);
+  
+  if (section === 'estimates') {
+    // For Estimates: just add customer concern on the right
+    if (roData.customerConcern) {
+      const concernEl = createConcernElement(roData.customerConcern);
+      
+      // Find a good place to insert - after the last cell or at the end of the row
+      const lastCell = row.querySelector('td:last-child, [class*="cell"]:last-child');
+      if (lastCell && lastCell.parentElement === row) {
+        lastCell.style.display = 'flex';
+        lastCell.style.alignItems = 'center';
+        lastCell.appendChild(concernEl);
+      } else {
+        row.appendChild(concernEl);
+      }
+    }
+  } else if (section === 'wip') {
+    // For WIP: add inspection/estimate status and concern
+    const extrasContainer = createWIPExtrasContainer(roData);
+    
+    if (extrasContainer) {
+      // Find a good place to insert
+      const lastCell = row.querySelector('td:last-child, [class*="cell"]:last-child');
+      if (lastCell && lastCell.parentElement === row) {
+        lastCell.style.display = 'flex';
+        lastCell.style.alignItems = 'center';
+        lastCell.appendChild(extrasContainer);
+      } else {
+        row.appendChild(extrasContainer);
+      }
+    }
+  }
+}
+
+// Scan and enhance all Job Board rows
+async function enhanceJobBoard() {
+  if (!isJobBoardPage()) {
+    return;
+  }
+  
+  console.log('[JobBoard] Enhancing Job Board page...');
+  
+  // Find all rows that contain RO links
+  const allRows = document.querySelectorAll('tr, [class*="Row"], [class*="row"]');
+  const roRows = Array.from(allRows).filter(row => {
+    const hasRoLink = row.querySelector('a[href*="/repair-orders/"]');
+    const hasRoNumber = /#\d{5,7}/.test(row.textContent || '');
+    return hasRoLink || hasRoNumber;
+  });
+  
+  console.log(`[JobBoard] Found ${roRows.length} RO rows to enhance`);
+  
+  // Process rows in batches to avoid overwhelming the API
+  const batchSize = 5;
+  for (let i = 0; i < roRows.length; i += batchSize) {
+    const batch = roRows.slice(i, i + batchSize);
+    await Promise.all(batch.map(row => enhanceJobBoardRow(row)));
+    
+    // Small delay between batches
+    if (i + batchSize < roRows.length) {
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+  }
+}
+
+// Set up Job Board observer
+function observeJobBoard() {
+  let lastJobBoardCheck = 0;
+  let jobBoardCheckTimeout = null;
+  
+  const checkJobBoard = () => {
+    const now = Date.now();
+    // Throttle checks to once per second
+    if (now - lastJobBoardCheck < 1000) {
+      if (!jobBoardCheckTimeout) {
+        jobBoardCheckTimeout = setTimeout(() => {
+          jobBoardCheckTimeout = null;
+          checkJobBoard();
+        }, 1000);
+      }
+      return;
+    }
+    lastJobBoardCheck = now;
+    
+    if (isJobBoardPage()) {
+      enhanceJobBoard();
+    } else {
+      // Clear cache and tracking when leaving job board
+      jobBoardEnhancedRows.clear();
+      jobBoardCache = {};
+    }
+  };
+  
+  // Initial check
+  setTimeout(checkJobBoard, 1000);
+  
+  // Watch for page changes
+  const observer = new MutationObserver(() => {
+    if (isJobBoardPage()) {
+      checkJobBoard();
+    }
+  });
+  
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+  
+  // Also check on URL changes
+  let lastUrl = window.location.href;
+  setInterval(() => {
+    if (lastUrl !== window.location.href) {
+      lastUrl = window.location.href;
+      jobBoardEnhancedRows.clear();
+      jobBoardCache = {};
+      setTimeout(checkJobBoard, 500);
+    }
+  }, 500);
+}
+
+// Initialize Job Board enhancement
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', observeJobBoard);
+} else {
+  observeJobBoard();
+}
+
+// ==========================================
 // Side Panel Message Handlers
 // ==========================================
 

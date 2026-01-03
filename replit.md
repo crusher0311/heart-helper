@@ -69,7 +69,7 @@ All protected routes require both authentication and approval status check.
 
 CORS is configured to allow Chrome extension origins (chrome-extension://), *.replit.dev, *.replit.app, and localhost with credentials support for cross-origin authentication.
 
-### Chrome Extension (v3.22.0)
+### Chrome Extension (v3.27.0)
 
 Located in `/chrome-extension/`, provides:
 - **Built-in Login/Registration**: Users can sign in or create accounts directly in the extension side panel - no need to visit the web app
@@ -80,6 +80,9 @@ Located in `/chrome-extension/`, provides:
   - **Tips**: Live coaching tips based on configured coaching criteria, with HEART 9-Point Method quick reference
   - **Rates**: View make-based hourly labor rate groups AND job-based fixed labor rates configured by admins
   - **History**: Vehicle service history with warranty analysis - shows HEART service records with warranty status (under warranty, recently serviced) and Carfax external service history
+- **Job Board Enhancement**: Automatically injects additional info into Tekmetric's Job Board page:
+  - **Estimates section**: Shows customer concern on the right side of each RO row
+  - **Work in Progress section**: Shows inspection sent/viewed status, estimate sent/viewed status, and customer concern
 - **API-based vehicle data extraction**: Uses Tekmetric API via `/api/tekmetric/ro/:shopId/:roId` for accurate vehicle info (year, make, model, engine) instead of DOM scraping. Falls back to DOM parsing if API unavailable.
 - **Create Job functionality**: From search results, users can click "Create Job in Tekmetric" to prepare job data for import
 - **Labor Rate Sync**: Automatically syncs both make-based labor rate groups and job-based labor rates from server after login
@@ -188,4 +191,4 @@ Configure these in `/admin/labor-rates`:
 
 - **Published**: [Chrome Web Store](https://chrome.google.com/webstore/detail/iakembjgfndohijdnlldkgfjokcakona)
 - **Production URL**: https://heart-helper.onrender.com
-- **Current Version**: 3.26.0
+- **Current Version**: 3.27.0
