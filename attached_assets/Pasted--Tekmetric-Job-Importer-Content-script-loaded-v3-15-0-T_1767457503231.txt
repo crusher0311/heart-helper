@@ -1,0 +1,176 @@
+
+ Tekmetric Job Importer: Content script loaded (v3.15.0)
+ 📋 Tekmetric Job Importer initialized, document ready state: interactive
+ 📄 Document already loaded - checking for pending jobs in 2s...
+ [Content] Main frame detected - registering side panel message handler...
+(anonymous) @ content.js:1739
+ [TekmetricStorageModule] Initializing...
+ 📬 Received window message: setImmediate$0.8643306921118504$3
+ 📬 Received window message: Object
+ 
+a7 @ handle.2fe6b368.js:1
+handle.2fe6b368.js:1 Uncaught 
+ 📬 Received window message: 
+ [JobBoard] Enhancing Job Board page...
+ [JobBoard] Found 0 RO rows to enhance
+ [Settings] No generalSettings settings found, using defaults
+ss @ content.js:9
+ [OutboundCall] Menu state changed: false
+ 
+a7 @ handle.2fe6b368.js:1
+handle.2fe6b368.js:1 Uncaught 
+ Creating handle element
+ [Handle] Updating badge: Object
+ [Handle] Badge hidden (count is 0)
+ 📬 Received window message: setImmediate$0.8643306921118504$4
+repair-orders?view=list&board=ACTIVE&page=0:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+ [Handle] Updating unread data: Object
+ [Handle] Updating badge: Object
+ [Handle] Badge hidden (count is 0)
+ [Handle] Shop data changed in storage: Object
+ 📬 Received window message: Object
+ 📬 Received window message: Object
+ 📬 Received window message: Object
+ 📬 Received window message: setImmediate$0.8643306921118504$5
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$6
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$7
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$8
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$9
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$10
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$11
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$12
+handle.2fe6b368.js:24 [Handle] Shop data changed in storage: Object
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8231","controllerAppFrameId":"__privateStripeController8231","message":{"action":"stripe-controller-load","payload":{"controllerMetrics":{"resource_timings":{"shared.js":{"raw_size":845563,"transfer_size":0,"duration":0},"controller-with-preconnect.js":{"raw_size":1111527,"transfer_size":0,"duration":0}}}}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8231","controllerAppFrameId":"__privateStripeController8231","message":{"action":"stripe-controller-action-response","payload":{"nonce":"52765a36-b730-4d3a-b7f2-42fe42ed4d5f"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+main-DJwJvRZO.js:262 Event "payments_service_status" doesn't have any listeners. Putting it in the stack.
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$13
+handle.2fe6b368.js:24 [Handle] Updating phone list after URL change
+handle.2fe6b368.js:23 [Handle] No customer ID in appfueled_shop_data, trying other methods
+handle.2fe6b368.js:23 [Handle] Could not extract customer ID from any source
+handle.2fe6b368.js:23 customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: null
+index-CR2sJhaX.js:1 MUI: The SpeedDial component was moved from the lab to the core.
+
+You should use `import { SpeedDial } from '@mui/material'`
+or `import SpeedDial from '@mui/material/SpeedDial'`
+eo @ index-CR2sJhaX.js:1
+index-CR2sJhaX.js:3 MUI: The SpeedDialIcon component was moved from the lab to the core.
+
+You should use `import { SpeedDialIcon } from '@mui/material'`
+or `import SpeedDialIcon from '@mui/material/SpeedDialIcon'`
+ho @ index-CR2sJhaX.js:3
+index-CR2sJhaX.js:2 MUI: The SpeedDialAction component was moved from the lab to the core.
+
+You should use `import { SpeedDialAction } from '@mui/material'`
+or `import SpeedDialAction from '@mui/material/SpeedDialAction'`
+co @ index-CR2sJhaX.js:2
+handle.2fe6b368.js:24 [Handle] Shop data changed in storage: Object
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$14
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8231","controllerAppFrameId":"__privateStripeController8231","message":{"action":"stripe-controller-action-response","payload":{"nonce":"4e873e54-82fa-4b2d-b699-063d899ef241"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$15
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$16
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$17
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$18
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$19
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$20
+4Yjyb9HQOQbQcUBPskIm9XnMfNE.guide.js?sha256=5-gC8qvTauZEUKSXP84SK7uqzMwGsCZDsIXSLRzSVWQ:6 [Pendo] advanceGuideOnClick init
+4Yjyb9HQOQbQcUBPskIm9XnMfNE.guide.js?sha256=5-gC8qvTauZEUKSXP84SK7uqzMwGsCZDsIXSLRzSVWQ:30 [Pendo] buttons found: Q
+4Yjyb9HQOQbQcUBPskIm9XnMfNE.guide.js?sha256=5-gC8qvTauZEUKSXP84SK7uqzMwGsCZDsIXSLRzSVWQ:31 [Pendo] buttons length: 0
+4Yjyb9HQOQbQcUBPskIm9XnMfNE.guide.js?sha256=5-gC8qvTauZEUKSXP84SK7uqzMwGsCZDsIXSLRzSVWQ:38 [Pendo] elements used for listeners: Array(0)
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8231","controllerAppFrameId":"__privateStripeController8231","message":{"action":"stripe-controller-action-response","payload":{"nonce":"bb8d5ee0-cf31-4f17-beb1-43ebd6739a87"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$21
+handle.2fe6b368.js:23 [Handle] No customer ID in appfueled_shop_data, trying other methods
+handle.2fe6b368.js:23 [Handle] Could not extract customer ID from any source
+handle.2fe6b368.js:23 customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+content.js:1646 [JobBoard] Enhancing Job Board page...
+content.js:1656 [JobBoard] Found 1 RO rows to enhance
+content.js:1605 [JobBoard] Enhancing row for RO 286370983 in estimates section
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8231","controllerAppFrameId":"__privateStripeController8231","message":{"action":"stripe-controller-action-response","payload":{"nonce":"780a7f34-bfbf-4d86-b215-0854d5e7e133"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:975 📬 Received window message: {"originatingScript":"m2","payload":{"guid":"cb64f5f7-386b-46b0-948b-ec66ed5d6999ea1d00","muid":"e6189d69-2dd3-464e-ac58-bec4d81089bf27571d","sid":"756f552f-aa3a-4cb9-a675-1d38ac40869b5685e2"}}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8231","controllerAppFrameId":"__privateStripeController8231","message":{"action":"stripe-controller-action-response","payload":{"nonce":"6ab5c274-ee4d-4b7e-8ab3-91bced80476c"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8231","controllerAppFrameId":"__privateStripeController8231","message":{"action":"stripe-controller-action-response","payload":{"nonce":"6ccf9737-bb4d-49ea-86b7-ce74ea5b4988"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+handle.2fe6b368.js:23 [Handle] No customer ID in appfueled_shop_data, trying other methods
+handle.2fe6b368.js:23 [Handle] Could not extract customer ID from any source
+handle.2fe6b368.js:23 customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$22
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$23
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$24
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$25
+content.js:949 🔍 Checking for pending job data...
+content.js:951 📬 GET_PENDING_JOB response: Object
+content.js:957 ⚠️ No pending job data found
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$26
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$27
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$28
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$29
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$30
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$31
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$32
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$33
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$34
+handle.2fe6b368.js:23 [Handle] No customer ID in appfueled_shop_data, trying other methods
+handle.2fe6b368.js:23 [Handle] Could not extract customer ID from any source
+handle.2fe6b368.js:23 customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$35
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$36
+content.js:1646 [JobBoard] Enhancing Job Board page...
+content.js:1656 [JobBoard] Found 1 RO rows to enhance
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8231","controllerAppFrameId":"__privateStripeController8231","message":{"action":"stripe-controller-action-response","payload":{"nonce":"2a3fe5b8-ca45-4367-b953-5d7df85255ab"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1744 [Content v3.14.8] MESSAGE RECEIVED: GET_RO_INFO
+(anonymous) @ content.js:1744
+content.js:1956 [Content] Could not extract IDs from URL: https://shop.tekmetric.com/admin/shop/469/repair-orders?view=list&board=ACTIVE&page=0
+content.js:1968 Not on a Tekmetric RO page, cannot fetch from API
+content.js:1800 API failed, using DOM scraping for RO info
+content.js:2240 RO status detection - hasWIP: true isEstimate: false isInShop: true
+content.js:2370 Extracted RO info: Object
+content.js:975 📬 Received window message: setImmediate$0.32345655779467564$4
+content.js:975 📬 Received window message: setImmediate$0.32345655779467564$5
+handle.2fe6b368.js:24 [Handle] Shop data changed in storage: Object
+content.js:975 📬 Received window message: setImmediate$0.32345655779467564$6
+content.js:975 📬 Received window message: setImmediate$0.32345655779467564$7
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$37
+content.js:975 📬 Received window message: setImmediate$0.32345655779467564$8
+content.js:975 📬 Received window message: setImmediate$0.32345655779467564$9
+content.js:1646 [JobBoard] Enhancing Job Board page...
+content.js:1656 [JobBoard] Found 1 RO rows to enhance
+content.js:975 📬 Received window message: setImmediate$0.8643306921118504$38
+handle.2fe6b368.js:23 [Handle] No customer ID in appfueled_shop_data, trying other methods
+handle.2fe6b368.js:23 [Handle] Could not extract customer ID from any source
+handle.2fe6b368.js:23 customerId:", null,shopId: 469,
+        previousCustomerId: null, previousShopId: 469
+content.js:975 📬 Received window message: {"type":"parent","sourceFrameId":"__privateStripeController8231","controllerAppFrameId":"__privateStripeController8231","message":{"action":"stripe-controller-action-response","payload":{"nonce":"67dae056-38ac-4ca1-be97-13075971e409"}},"__stripeJsV3":true}
+content.js:979 ⚠️ Ignoring message from different origin: https://js.stripe.com
+content.js:1646 [JobBoard] Enhancing Job Board page...
+content.js:1656 [JobBoard] Found 1 RO rows to enhance
+content.js:975 📬 Received window message: setImmediate$0.32345655779467564$10
+repair-orders?view=l…ard=ACTIVE&page=0:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+repair-orders?view=l…ard=ACTIVE&page=0:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+repair-orders?view=l…ard=ACTIVE&page=0:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+repair-orders?view=l…ard=ACTIVE&page=0:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+repair-orders?view=l…ard=ACTIVE&page=0:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+repair-orders?view=l…ard=ACTIVE&page=0:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+repair-orders?view=l…ard=ACTIVE&page=0:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+repair-orders?view=l…ard=ACTIVE&page=0:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+repair-orders?view=l…ard=ACTIVE&page=0:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+repair-orders?view=l…ard=ACTIVE&page=0:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+repair-orders?view=l…ard=ACTIVE&page=0:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+repair-orders?view=l…ard=ACTIVE&page=0:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+repair-orders?view=l…ard=ACTIVE&page=0:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received

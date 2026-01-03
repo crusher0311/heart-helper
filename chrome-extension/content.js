@@ -1,4 +1,4 @@
-console.log("Tekmetric Job Importer: Content script loaded (v3.15.0)");
+console.log("Tekmetric Job Importer: Content script loaded (v3.28.0)");
 
 let checkHistoryButton = null;
 let injectedIcons = new Set(); // Track which textareas already have icons
@@ -1645,13 +1645,47 @@ async function enhanceJobBoard() {
   
   console.log('[JobBoard] Enhancing Job Board page...');
   
-  // Find all rows that contain RO links
-  const allRows = document.querySelectorAll('tr, [class*="Row"], [class*="row"]');
-  const roRows = Array.from(allRows).filter(row => {
+  // Find all rows that contain RO links - Tekmetric uses virtualized grid with div-based rows
+  // Look for rows with RO links or data attributes, supporting both table and div-based layouts
+  const allRows = document.querySelectorAll([
+    'tr[data-repair-order-id]',           // Table row with data attribute
+    'div[data-repair-order-id]',          // Div row with data attribute  
+    '[role="row"]',                        // Virtualized grid rows
+    'a[href*="/repair-orders/"]',          // Direct RO links (we'll find parent row)
+    '[class*="RepairOrder"]',              // Class-based selectors
+    '[class*="repair-order"]',
+    '[data-testid*="repair-order"]',       // Test ID based
+    '.job-board-row',                      // Specific job board class if exists
+  ].join(', '));
+  
+  // Build unique set of row elements (dedupe by finding parent rows of RO links)
+  const rowSet = new Set();
+  allRows.forEach(el => {
+    // If it's an anchor, find its row parent
+    if (el.tagName === 'A') {
+      const parent = el.closest('tr, [role="row"], [class*="Row"], div[class*="row"]');
+      if (parent) rowSet.add(parent);
+    } else {
+      rowSet.add(el);
+    }
+  });
+  
+  // Filter to only rows that actually have RO info
+  const roRows = Array.from(rowSet).filter(row => {
     const hasRoLink = row.querySelector('a[href*="/repair-orders/"]');
     const hasRoNumber = /#\d{5,7}/.test(row.textContent || '');
     return hasRoLink || hasRoNumber;
   });
+  
+  // Log what we found for debugging
+  if (roRows.length === 0) {
+    console.log('[JobBoard] No RO rows found. Checking DOM structure...');
+    const links = document.querySelectorAll('a[href*="/repair-orders/"]');
+    console.log(`[JobBoard] Found ${links.length} RO links on page`);
+    if (links.length > 0) {
+      console.log('[JobBoard] First RO link parent structure:', links[0].parentElement?.outerHTML?.substring(0, 200));
+    }
+  }
   
   console.log(`[JobBoard] Found ${roRows.length} RO rows to enhance`);
   
@@ -1741,7 +1775,7 @@ if (window.self === window.top) {
   // Listen for messages from side panel
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // Use alert-style logging that can't be filtered
-    console.warn('[Content v3.14.8] MESSAGE RECEIVED:', message.type);
+    console.warn('[Content v3.28.0] MESSAGE RECEIVED:', message.type);
   
   // Get current vehicle info for side panel
   if (message.type === 'GET_VEHICLE_INFO') {
