@@ -783,4 +783,4 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-console.log("Tekmetric Job Importer: Background service worker loaded (v3.28.0)");
+console.log("Tekmetric Job Importer: Background service worker loaded (v3.28.1)");
