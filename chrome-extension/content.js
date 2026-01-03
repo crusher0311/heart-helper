@@ -1324,9 +1324,21 @@ let jobBoardCache = {}; // Cache RO data to avoid duplicate API calls
 
 // Detect if we're on the Job Board page
 function isJobBoardPage() {
-  return window.location.href.includes('/job-board') || 
-         window.location.href.includes('/jobBoard') ||
-         document.querySelector('h1, h2')?.textContent?.toLowerCase().includes('job board');
+  const url = window.location.href;
+  // Check for Job Board URL patterns - Tekmetric uses /repair-orders?view=list&board=
+  if (url.includes('/repair-orders') && url.includes('view=list') && url.includes('board=')) {
+    return true;
+  }
+  // Also check for explicit job-board paths
+  if (url.includes('/job-board') || url.includes('/jobBoard')) {
+    return true;
+  }
+  // Check page heading
+  const heading = document.querySelector('h1, h2, [class*="title"], [class*="header"]');
+  if (heading && heading.textContent?.toLowerCase().includes('job board')) {
+    return true;
+  }
+  return false;
 }
 
 // Extract RO ID from a row element

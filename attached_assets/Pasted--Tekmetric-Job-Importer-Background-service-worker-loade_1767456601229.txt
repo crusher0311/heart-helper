@@ -1,0 +1,96 @@
+ Tekmetric Job Importer: Background service worker loaded (v3.23.0)
+ [Background] Restored auth token from storage
+ [Background] Restored shop ID from storage: 470
+ [Background] Restored base URL from storage: https://shop.tekmetric.com
+ Side panel behavior set: opens on action click
+ Side panel enabled for all tabs
+ Context menu created: Open HEART Helper
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+ [Labor Rate] Auth token captured and persisted
+ [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:45 [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:45 [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:45 [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:45 [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:45 [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:437 📨 Message received: FETCH_RO_DETAILS from tab: 1498370410
+background.js:45 [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:618 [Background] RO 286370983 API response keys: Array(55)
+background.js:702 [Background] FETCH_RO_DETAILS for RO 286370983: Object
+background.js:123 [Labor Rate] Repair order detected: 286370983 Shop: 469
+background.js:143 [Labor Rate] Using base URL: https://shop.tekmetric.com
+background.js:45 [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:437 📨 Message received: GET_PENDING_JOB from tab: 1498370410
+background.js:499 Background: Content script requesting pending job
+background.js:502 Background: Retrieved from storage: No job
+background.js:162 [Labor Rate] Current rate: 22987, Vehicle make: chrysler
+background.js:118 [Labor Rate] Skipping duplicate RO: 286370983
+background.js:192 [Labor Rate] No matching group found for make: chrysler
+sidepanel.js:20 All cookies for https://heart-helper.onrender.com : Array(0)
+sidepanel.js:36 Error getting session cookie: Error: No host permissions for cookies at url: "https://heart-helper.onrender.com/".
+getSessionCookie @ sidepanel.js:36
+sidepanel.js:20 All cookies for https://heart-helper.onrender.com : Array(0)
+sidepanel.js:36 Error getting session cookie: Error: No host permissions for cookies at url: "https://heart-helper.onrender.com/".
+getSessionCookie @ sidepanel.js:36
+sidepanel.js:20 All cookies for https://heart-helper.onrender.com : Array(0)
+sidepanel.js:36 Error getting session cookie: Error: No host permissions for cookies at url: "https://heart-helper.onrender.com/".
+getSessionCookie @ sidepanel.js:36
+sidepanel.js:116 Auth check successful: brandoncrusha@gmail.com
+sidepanel.js:20 All cookies for https://heart-helper.onrender.com : Array(0)
+sidepanel.js:36 Error getting session cookie: Error: No host permissions for cookies at url: "https://heart-helper.onrender.com/".
+getSessionCookie @ sidepanel.js:36
+sidepanel.js:361 Labor rate groups synced: 1 groups
+sidepanel.js:20 All cookies for https://heart-helper.onrender.com : Array(0)
+sidepanel.js:36 Error getting session cookie: Error: No host permissions for cookies at url: "https://heart-helper.onrender.com/".
+getSessionCookie @ sidepanel.js:36
+heart-helper.onrender.com/api/job-labor-rates:1  Failed to load resource: the server responded with a status of 500 ()
+sidepanel.js:535 [SidePanel] requestCurrentROInfo called
+sidepanel.js:537 [SidePanel] Active tab: https://shop.tekmetric.com/admin/shop/469/repair-orders?view=list&board=ACTIVE&page=0
+sidepanel.js:549 [SidePanel] Extracted from URL: Object
+sidepanel.js:552 [SidePanel] Sending GET_VEHICLE_INFO to background
+background.js:437 📨 Message received: GET_VEHICLE_INFO from tab: undefined
+background.js:721 [Background] GET_VEHICLE_INFO received: Object
+background.js:45 [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:758 [Background] Vehicle info from API: Object
+background.js:118 [Labor Rate] Skipping duplicate RO: 286370983
+sidepanel.js:558 [SidePanel] GET_VEHICLE_INFO response: {"year":2017,"make":"Chrysler","model":"Pacifica","engine":"3.6L 6Cyl FLEX ERF Naturally Aspirated","vin":"2C4RC1DG1HR553382","mileageIn":157072,"shopId":"469","roId":"286370983"}
+sidepanel.js:564 [SidePanel] Updating fields with: {"year":2017,"make":"Chrysler","model":"Pacifica","engine":"3.6L 6Cyl FLEX ERF Naturally Aspirated","vin":"2C4RC1DG1HR553382","mileageIn":157072,"shopId":"469","roId":"286370983"}
+sidepanel.js:501 Could not sync settings: TypeError: Cannot read properties of null (reading 'phoneAnswerScript')
+    at syncSettingsFromApp (sidepanel.js:491:20)
+    at async HTMLDocument.<anonymous> (sidepanel.js:91:3)
+sidepanel.js:535 [SidePanel] requestCurrentROInfo called
+sidepanel.js:537 [SidePanel] Active tab: https://shop.tekmetric.com/admin/shop/469/repair-orders?view=list&board=ACTIVE&page=0
+sidepanel.js:549 [SidePanel] Extracted from URL: Object
+sidepanel.js:552 [SidePanel] Sending GET_VEHICLE_INFO to background
+background.js:437 📨 Message received: GET_VEHICLE_INFO from tab: undefined
+background.js:721 [Background] GET_VEHICLE_INFO received: Object
+background.js:45 [Labor Rate] Shop ID captured: 469
+background.js:56 [Labor Rate] Auth token captured and persisted
+background.js:758 [Background] Vehicle info from API: Object
+background.js:118 [Labor Rate] Skipping duplicate RO: 286370983
+sidepanel.js:558 [SidePanel] GET_VEHICLE_INFO response: {"year":2017,"make":"Chrysler","model":"Pacifica","engine":"3.6L 6Cyl FLEX ERF Naturally Aspirated","vin":"2C4RC1DG1HR553382","mileageIn":157072,"shopId":"469","roId":"286370983"}
+sidepanel.js:564 [SidePanel] Updating fields with: {"year":2017,"make":"Chrysler","model":"Pacifica","engine":"3.6L 6Cyl FLEX ERF Naturally Aspirated","vin":"2C4RC1DG1HR553382","mileageIn":157072,"shopId":"469","roId":"286370983"}
+sidepanel.js:501 Could not sync settings: TypeError: Cannot read properties of null (reading 'phoneAnswerScript')
+    at syncSettingsFromApp (sidepanel.js:491:20)
